@@ -1,0 +1,117 @@
+.Rj-c {
+	@extend .Ta-c, .Jc-c;
+}
+
+.Rj-e {
+	@extend .Ta-r, .Jc-fe;
+}
+
+.Rj-sa {
+	@extend .Ta-c, .Jc-sa;
+}
+
+.Rj-sb {
+	@extend .Ta-c, .Jc-sb;
+}
+
+.Rai-fs {
+	@extend .Ai-fs;
+}
+
+// Progressive enhancement from inline-blocks to flex
+.Rai-c {
+	@extend .Ai-c;
+
+	> .row__col,
+	> .row__card,
+	> .row__item,
+	> .row__cell {
+		vertical-align: middle;
+	}
+}
+
+.Rai-fe {
+	@extend .Ai-fe;
+
+	> .row__col,
+	> .row__card,
+	> .row__item,
+	> .row__cell {
+		vertical-align: bottom;
+	}
+}
+
+@each $key, $value in $mlu-grid-cols {
+	$mq: ($key, mlu-breakpoint-next($key));
+
+	@if index($mlu-grid-cols, ($key $value)) == length($mlu-grid-cols) {
+		$mq: $key;
+	}
+
+	@include mlu-bpm($mq...) {
+		//	@if $key != $mlu-bp-lg {
+		@if $value > mlu-grid-cols-count($mlu-bp-sm) {
+			/// Justify content modifiers
+			.Rj-sa_#{$key} {
+				text-align: center;
+				justify-content: space-around;
+			}
+		}
+
+		.Rj-s_#{$key} {
+			text-align: left;
+			justify-content: flex-start;
+		}
+
+		.Rj-c_#{$key} {
+			text-align: center;
+			justify-content: center;
+		}
+
+		.Rj-e_#{$key} {
+			text-align: right;
+			justify-content: flex-end;
+		}
+
+		.Rj-sb_#{$key} {
+			text-align: center;
+			justify-content: space-between;
+		}
+
+		@if $MLU-FLAG-EXTENDED {
+			.Rai-fs_#{$key} {
+				align-items: flex-start;
+
+				> .row__col,
+				> .row__card,
+				> .row__item,
+				> .row__cell {
+					vertical-align: top;
+				}
+			}
+
+			.Rai-c_#{$key} {
+				align-items: center;
+
+				> .row__col,
+				> .row__card,
+				> .row__item,
+				> .row__cell {
+					vertical-align: middle;
+				}
+			}
+
+			.Rai-fe_#{$key} {
+				align-items: flex-end;
+
+				> .row__col,
+				> .row__card,
+				> .row__item,
+				> .row__cell {
+					vertical-align: bottom;
+				}
+			}
+		}
+		//}
+	}
+}

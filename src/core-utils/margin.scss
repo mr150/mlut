@@ -1,0 +1,66 @@
+.Ml-a {
+	margin-left: auto;
+}
+
+.Mr-a {
+	margin-right: auto;
+}
+
+.Mx-a {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.M-a {
+	margin: auto;
+}
+
+.M0 {
+	margin: 0px;
+}
+
+// Adaptive utils because otherwise indent looks like too big
+.Mt4r {
+	margin-top: 3rem;
+
+	@include mlu-bpm($mlu-bp-md) {
+		margin-top: 4rem;
+	}
+}
+
+.Mb4r {
+	margin-bottom: 3rem;
+
+	@include mlu-bpm($mlu-bp-md) {
+		margin-bottom: 4rem;
+	}
+}
+
+.Mt3r {
+	margin-top: 2rem;
+
+	@include mlu-bpm($mlu-bp-md) {
+		margin-top: 3rem;
+	}
+}
+
+.Mb3r {
+	margin-bottom: 2rem;
+
+	@include mlu-bpm($mlu-bp-md) {
+		margin-bottom: 3rem;
+	}
+}
+
+.Mt2r {
+	margin-top: 2rem;
+}
+
+.Mb2r {
+	margin-bottom: 2rem;
+}
+
+// Complex utils reuse existing that DRY
+.My2r {
+	@extend .Mt2r, .Mb2r;
+}

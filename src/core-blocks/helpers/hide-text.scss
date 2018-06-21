@@ -1,0 +1,12 @@
+// A11y hide text only
+.hide-text {
+	color: transparent;
+	text-indent: 100%;
+	white-space: nowrap;
+	font-size: 0px;
+	overflow: hidden;
+
+	&::selection {
+		color: transparent;
+	}
+}

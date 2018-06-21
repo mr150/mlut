@@ -1,0 +1,45 @@
+/***
+* Wrapper:
+*/
+
+/**
+* wrapper:
+* Блок-контейнер для основного содержимого страницы. Максимальная ширина по умолчанию - 1200px.
+* У контейнера есть поля, чтобы контент не прилипал на маленьких экранах.
+* На широких экранах контейнер располагается по центру
+*
+*		@example
+*		.wrapper
+*			h2 Заголовок
+*			p Любой контент
+*			p Еще один абзац с контентом
+*/
+
+/**
+* wrapper__row:
+* Элемент, который накладывает левый и правый отступы у крайних колонок на поля блока `wrapper`.
+* Такое поведение нужно, чтобы в раскладке не возникало двойных полей. Этот элемент опционален, потому что в разных ситуациях может понадобиться разное поведение полей.
+*
+*		@example
+*		.wrapper
+*			.row.wrapper__row
+*				.row__col.test-content.W7c Колонка 0
+*				.row__col.test-content.W5c Колонка 1
+*/
+
+.wrapper {
+	display: block;
+	max-width: $mlu-wrapper-max-width;
+	margin: auto;
+	box-sizing: border-box;
+	@include mlu-generate-grid-gutter($type: "padding");
+}
+
+.wrapper__row {
+	margin-right: - $mlu-grid-gutter-fallback;
+	margin-left: - $mlu-grid-gutter-fallback;
+	margin-right: calc(-#{mlu-grid-gutter($mlu-bp-sm)});
+	margin-left: calc(-#{mlu-grid-gutter($mlu-bp-sm)});
+
+	@include mlu-generate-grid-gutter(-1, $coef: -1);
+}

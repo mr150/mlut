@@ -1,0 +1,113 @@
+/// Flags for core compilation
+
+/// Turn on additional features but increases final CSS size
+$MLU-FLAG-EXTENDED: false !default;
+/// Turn on CSS calc() fallback for grid utils on large breakpoints
+$MLU-FLAG-CALC-LG-FALLBACK: false !default;
+/// Turn on generation grid col offset utils (Ml)
+$MLU-FLAG-COL-OFFSET: true !default;
+
+/// 16px used because is default font size in settings of most browsers.
+$MLU-BROWSER-FONT-SIZE: 16px !default;
+
+/// Wrapper block max width 
+$mlu-wrapper-max-width: 1200px !default;
+
+/// Breakpoints names
+$mlu-bp-xs: "xs" !default;
+$mlu-bp-sm: "sm" !default;
+$mlu-bp-md: "md" !default;
+$mlu-bp-lg: "lg" !default;
+$mlu-bp-xl: "xl" !default;
+
+/// Base font size on website.
+/// Is used for rems fallback in 'row' elements
+/// and in mlu-px2em default font size
+$mlu-base-font-size: $MLU-BROWSER-FONT-SIZE !default;
+
+/// Sans serif font stack contains default fonts on different OS 
+// stylelint-disable
+$mlu-font-family: (
+	-apple-system,
+	BlinkMacSystemFont,
+	"Segoe UI",
+	Roboto,
+	Oxygen,
+	Cantarell,
+	Ubuntu,
+	"Fira Sans",
+	"Droid Sans",
+	"Helvetica Neue",
+	Arial,
+	sans-serif
+) !default;
+
+
+/// Monospace font stack contains default fonts on different OS 
+$mlu-font-family-mono: (
+	SFMono-Regular,
+	Menlo,
+	Monaco,
+	Consolas,
+	"Liberation Mono",
+	"Courier New",
+	monospace
+) !default;
+
+// stylelint-enable
+
+/// Background colors for 'grid-debug' helper.
+/// Col (column) background-color
+$mlu-debug-col-color: #60f !default;
+/// Gutter background-color
+$mlu-debug-gutter-color: #ddf !default;
+
+/// Map with main breakpoints
+$mlu-breakpoints: (
+	$mlu-bp-sm: 520px,
+	$mlu-bp-md: 760px,
+	$mlu-bp-lg: 960px,
+	$mlu-bp-xl: 1168px,
+) !default;
+
+/// Default cols count on large width screen (>960px).
+/// Based on this value, the grid utils are proportionally generated
+/// at breakpoints with fewer cols count.
+$mlu-grid-default-cols: 12 !default;
+
+/// Cols count on breakpoints
+$mlu-grid-cols: (
+	$mlu-bp-sm: 4,
+	$mlu-bp-md: 12,
+	$mlu-bp-lg: $mlu-grid-default-cols,
+	$mlu-bp-xl: $mlu-grid-default-cols,
+) !default;
+
+/// Fallback for grid gutter's width if CSS calc()
+/// not supported
+$mlu-grid-gutter-fallback: 1.5% !default;
+
+/// Map with grid gutters on breakpoints
+$mlu-grid-gutters: (
+	$mlu-bp-sm: 12px,
+	$mlu-bp-md: 12px,
+	$mlu-bp-lg: 16px,
+	$mlu-bp-xl: 16px,
+) !default;
+
+/// Map with grid cols and gutters width on all
+/// breakpoints. Is filled during grid utils (W, Ml) generation
+$mlu-grid-cols-data: ();
+
+/// Default fix width for cards.
+/// This is value for 'W-card' utility
+$mlu-row-card-default-width: 288px !default;
+
+/// Map with directions for css properties generation.
+/// Is used in 'mlu-generate-grid-gutter' mixin
+$mlu-main-directions: (
+	"top",
+	"left",
+	"right",
+	"bottom",
+) !default;

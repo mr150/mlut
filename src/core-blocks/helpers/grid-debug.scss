@@ -1,0 +1,33 @@
+// Generation linear gradient which show cols and gutters on breakpoints
+@each $key, $value in $mlu-grid-gutters {
+	$item-index: index($mlu-grid-gutters, ($key $value));
+
+	@include mlu-bpm($key) {
+		.grid-debug {
+			$col-width: mlu-decimal-floor(1 / mlu-grid-cols-count($key) * 100%, 3);
+			$prev-col-width: 0;
+			$prev-col-gutter: 0;
+
+			@if $item-index == 1 {
+				padding: ($value * 4) 0px;
+			} @else {
+				$prev-col-width: nth(nth(map-get($mlu-grid-cols-data, mlu-breakpoint-prev-name($key)), 1), 1);
+				$prev-col-gutter: nth(nth(map-get($mlu-grid-cols-data, mlu-breakpoint-prev-name($key)), 1), 2);
+			}
+
+			@if $value != $prev-col-gutter {
+				$debug-col: calc(100% - #{$value});
+				/* autoprefixer: off */
+				background-image: linear-gradient(90deg,
+				$mlu-debug-gutter-color $value,
+				$mlu-debug-col-color $value,
+				$mlu-debug-col-color $debug-col,
+				$mlu-debug-gutter-color 0);
+			}
+
+			@if $col-width != $prev-col-width {
+				background-size: $col-width;
+			}
+		}
+	}
+}

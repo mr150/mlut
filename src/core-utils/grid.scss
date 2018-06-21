@@ -1,0 +1,218 @@
+/***
+* Утилиты:
+*/
+
+/**
+* W - width:
+* `W` - утилита, которая управляет шириной компонента.
+*
+*		@example
+*		div.W4c
+*			.test-content
+*				h3 Просто текст в контейнере
+*				p
+*					Aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl. Suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet eget sit amet tellus cras adipiscing enim eu turpis egestas pretium aenean pharetra, magna ac placerat.
+*/
+
+/**
+* Ml - margin left:
+* `Ml` задает компонентам отступ слева.
+*
+*		@example
+*		.Ml3c.test-content
+*			h3 Контейнер с отступом
+*			p Aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl. Suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet eget sit amet tellus cras adipiscing enim eu turpis egestas pretium aenean pharetra, magna ac placerat.
+*/
+
+/**
+* Rj - row justify:
+* Утилита распределяющая колонки по горизонтали.
+*
+*		@example
+*		.row.Rj-c
+*			.row__col.W5c: .test-content Текст в колонке
+*			.row__col.W3c: .test-content 3/12
+*/
+
+/**
+* Rai - row align items:
+* Утилита, которая выравнивает колонки по вертикали.
+*
+*		@example
+*		.row.Rai-fe
+*			.row__col.W4c.test-content
+*				h4 Текст в колонке
+*				p Et molestie ac, feugiat sed lectus
+*				p Текст в колонке
+*			- for(var i = 0; i < 3; i++)
+*				.row__col.W2c.test-content
+*					p Текст в колонке
+*
+*/
+
+.W-card {
+	max-width: $mlu-row-card-default-width;
+}
+
+.Maw100p {
+	max-width: 100%;
+}
+
+.W1c_xs {
+	width: 50% - ($mlu-grid-gutter-fallback * 2);
+	width: calc(50% - #{mlu-grid-gutter($mlu-bp-sm) * 2});
+}
+
+@include mlu-bpm($mlu-bp-sm) {
+	.W#{$mlu-grid-default-cols}c\+ {
+		width: 100%;
+	}
+
+	.W#{$mlu-grid-default-cols}c {
+		width: 100% - ($mlu-grid-gutter-fallback * 2);
+		width: calc(100% - #{mlu-grid-gutter($mlu-bp-sm) * 2});
+	}
+}
+
+@each $key, $value in $mlu-grid-cols {
+	$mq: ($key, mlu-breakpoint-next($key));
+	$prev-cols-list: ();
+	$col-gutter: mlu-grid-gutter($key);
+	$bp-less-lg: false;
+
+	@if mlu-breakpoint($key) < mlu-breakpoint($mlu-bp-lg) {
+		$bp-less-lg: true;
+	}
+
+	// Calculation widths and offsets on default cols count and less.
+	// Default is $mlu-grid-default-cols.
+	@if $value <= $mlu-grid-default-cols {
+		@if index($mlu-grid-cols, ($key $value)) > 1 {
+			$prev-cols-list: map-get($mlu-grid-cols-data, mlu-breakpoint-prev-name($key));
+		}
+
+		@include mlu-bpm($key) {
+
+			@for $i from 1 to $mlu-grid-default-cols {
+				$col-width: mlu-decimal-floor($i / $value * 100%, 3);
+
+				@if index($mlu-grid-cols, ($key $value)) == 1 {
+					$prev-cols-list: append($prev-cols-list, (0, 0));
+				}
+
+				$prev-col-width: nth(nth($prev-cols-list, $i), 1);
+				$prev-col-gutter: nth(nth($prev-cols-list, $i), 2);
+
+				// Proportionally calculation widths and offsets
+				// on cols count fewer than default.
+				@if $value < $mlu-grid-default-cols {
+					$step: 1 / $value;
+					$part: $i / $mlu-grid-default-cols / $step;
+
+					@if $part < 1 {
+						$part: 1;
+					} @else if $part < 2 {
+						$part: 2;
+					} @else {
+						$part: floor($part);
+					}
+
+					$col-width: mlu-decimal-floor($part / $value * 100%, 3);
+				}
+
+				// Generate offset dependending on the count and width
+				// of cols in the grid at different breakpoints.
+
+				// Offsets start generate from $mlu-bp-md and continues
+				// if current width and gutter != previous cols width and gutter
+				// '$i < $mlu-grid-default-cols - 1' because offset 'Ml11c' makes no sense
+				@if $MLU-FLAG-COL-OFFSET and
+					($value >= mlu-grid-cols-count($mlu-bp-md) and $i < $mlu-grid-default-cols - 1) {
+
+					@if $col-width != $prev-col-width or $key == $mlu-bp-md {
+						// '+' on grid utils means that width includes gutter
+						.Ml#{$i}c\+ {
+							margin-left: $col-width;
+						}
+					}
+
+					@if ($col-width != $prev-col-width or $col-gutter != $prev-col-gutter) or
+						$key == $mlu-bp-md {
+						// Generation calc() fallback if flag turn on or
+						// current breakpoint less that lg
+						.Ml#{$i}c {
+							@if $MLU-FLAG-CALC-LG-FALLBACK or $bp-less-lg {
+								margin-left: mlu-decimal-floor($col-width, 2) + $mlu-grid-gutter-fallback;
+							}
+
+							margin-left: calc(#{$col-width} + #{$col-gutter});
+						}
+					}
+				}
+
+				@if $col-width != $prev-col-width {
+					.W#{$i}c\+ {
+						width: $col-width;
+					}
+				}
+
+				@if $col-width != $prev-col-width or $col-gutter != $prev-col-gutter {
+					.W#{$i}c {
+						@if $MLU-FLAG-CALC-LG-FALLBACK or $bp-less-lg {
+							width: mlu-decimal-floor($col-width, 2) - ($mlu-grid-gutter-fallback * 2);
+						}
+
+						width: calc(#{$col-width} - #{$col-gutter * 2});
+					}
+				}
+
+				$prev-cols-list: set-nth($prev-cols-list, $i, ($col-width, $col-gutter));
+			}
+
+			// Push list with all cols width and gutter on current breakpoint
+			// in map with all data about grid cols
+			$mlu-grid-cols-data: map-merge($mlu-grid-cols-data, ($key: $prev-cols-list));
+		}
+	}
+
+	@if index($mlu-grid-cols, ($key $value)) == length($mlu-grid-cols) {
+		$mq: $key;
+	}
+
+	@include mlu-bpm($mq...) {
+		// Generating utils that work only on breakpoints
+		@for $i from 1 through mlu-grid-cols-count($key) {
+			$col-width: mlu-decimal-floor($i / $value * 100%, 3);
+
+			@if $key != $mlu-bp-lg {
+				.W#{$i}c_#{$key} {
+					@if $MLU-FLAG-CALC-LG-FALLBACK or $bp-less-lg {
+						width: mlu-decimal-floor($col-width, 2) - ($mlu-grid-gutter-fallback * 2);
+					}
+
+					width: calc(#{$col-width} - #{$col-gutter * 2});
+				}
+
+				.W#{$i}c\+_#{$key} {
+					width: $col-width;
+				}
+			}
+
+			@if $MLU-FLAG-COL-OFFSET and
+				mlu-breakpoint($key) > mlu-breakpoint($mlu-bp-sm) and
+				$i < mlu-grid-cols-count($key) - 1 {
+				.Ml#{$i}c\+_#{$key} {
+					margin-left: $col-width;
+				}
+
+				.Ml#{$i}c_#{$key} {
+					@if $MLU-FLAG-CALC-LG-FALLBACK or $bp-less-lg {
+						margin-left: mlu-decimal-floor($col-width, 2) + $mlu-grid-gutter-fallback;
+					}
+
+					margin-left: calc(#{$col-width} + #{$col-gutter});
+				}
+			}
+		}
+	}
+}

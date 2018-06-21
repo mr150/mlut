@@ -1,0 +1,20 @@
+// System-font set native font family on user's OS.
+// Use it for safety in font-family with custom web font:
+// font-family: "PT Sans", system-font, Arial, sans-serif;
+@font-face {
+	font-family: system-font;
+	font-weight: 400;
+	font-style: normal;
+	src:
+		local(".SFNSText-Regular"),
+		local(".HelveticaNeueDeskInterface-Regular"),
+		local(".LucidaGrandeUI"),
+		local("Segoe UI"),
+		local("Roboto"),
+		local("Oxygen"),
+		local("Cantarell"),
+		local("Ubuntu"),
+		local("Fira Sans"),
+		local("Helvetica Neue"),
+		local("Droid Sans");
+}

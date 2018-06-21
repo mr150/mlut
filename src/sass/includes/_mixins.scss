@@ -1,0 +1,177 @@
+/// bpm - breakpoint manager
+
+/// $from and $to is breakpoints. They can be keyword (string) or number.
+/// $from generate to 'min-width' mediaquery, and $to to 'max-width' - 1.
+/// Together they generate to 'min-width and max-width - 1'. 
+
+/// In $opt you can pass string with additional features or device to check.
+/// For example:
+/// '(orientation: landscape)',
+/// 'screen and (aspect-ratio: 11/5)',
+/// 'print'.
+
+/// $prop is property in mediaquery. Property generate like '#{$type}-#{$prop}',
+/// where $type can be 'min' or 'max'. By default $prop is 'width'.
+/// $type depends on availability $from and $to
+
+@mixin mlu-bpm($from: false, $to: false, $opt: false, $prop: "width") {
+	$type: "min";
+	$bp-val: ();
+
+	@if $from and $to {
+		$type: "range";
+	} @else if $to {
+		$type: "max";
+	} @else if not $from {
+		@error "Breakpoint value must be not null.";
+	}
+
+	@each $item in ($from, $to) {
+		@if type-of($item) == "string" {
+			$bp-val: append($bp-val,
+			if($item == $to,
+			mlu-breakpoint($item) - 1,
+			mlu-breakpoint($item)));
+		} @else if type-of($item) == "number" and not unitless($item) {
+			$item-to: $item;
+
+			@if unit($item) == "em" {
+				$item-to: mlu-px2em((($item / 1em) * $MLU-BROWSER-FONT-SIZE) - 1, $MLU-BROWSER-FONT-SIZE);
+			} @else if unit($item) == "rem" {
+				$item-to: mlu-px2rem((($item / 1rem) * $MLU-BROWSER-FONT-SIZE) - 1, $MLU-BROWSER-FONT-SIZE);
+			} @else if unit($item) == "px" {
+				$item-to: $item - 1;
+			}
+
+			$bp-val: append($bp-val,
+			if($item == $to, $item-to, $item));
+		} @else if type-of($item) != "bool" or (type-of($item) == "bool" and $item) {
+			@error "Invalid breakpoint type - '#{type-of($item)}' or value - '#{$item}'";
+		}
+	}
+
+	$opt: if($opt, $opt + " and ", "");
+	$media-str: "";
+
+	@if $type == "range" {
+		$media-str: $opt + "(min-" + $prop + ":" + nth($bp-val, 1) + ") and (max-" + $prop + ":" + nth($bp-val, 2) + ")";
+	} @else {
+		$bp-val: nth($bp-val, 1);
+		$media-str: $opt + "(" + $type + "-" + $prop + ":" + $bp-val + ")";
+	}
+
+	@media #{$media-str} {
+		@content;
+	}
+}
+
+/// Generator BEM modifiers for block with icon.
+
+/// $block is block's name.
+/// $sprite is map with icons data.
+/// Icon rendered as a $pseudo element. Default is 'before'
+
+/// $sprite example
+/// $icons: (
+///		modifier-name: (width, height, bgpx, bgpy),
+///		car: (208px, 90px, -767px, -5px),
+///	);
+
+@mixin mlu-mods-from-sprite($block, $sprite, $pseudo: "before") {
+	@if type-of($sprite) == "map" {
+		@at-root {
+			@each $key, $value in $sprite {
+				#{$block}--#{$key}:#{$pseudo} {
+					width: nth($value, 1);
+					height: nth($value, 2);
+					background-position: nth($value, 3) nth($value, 4);
+				}
+			}
+		}
+	} @else {
+		@error "Sprite isn't map but a '#{type-of($sprite)}'";
+	}
+}
+
+/// simple hover wich change color
+/// to lighter on hover and darker on active
+
+/// $color is init color that will change.
+/// $prop is CSS property that will change. Default is background-color
+
+/// $lighten is percent on which the $color will become lighten
+/// with sass function 'lighten' on :hover.
+
+/// $darken is the same at $lighten but $color will change
+/// on :active
+
+@mixin mlu-def-hover($color, $prop: "bgc", $lighten: 8%, $darken: ($lighten - 3)) {
+	$prop: if($prop == "bgc", "background-color", $prop);
+
+	&:hover,
+	&:focus {
+		#{$prop}: lighten($color, $lighten);
+	}
+
+	&:active {
+		#{$prop}: darken($color, $darken);
+	}
+}
+
+/// For generate clearfix
+@mixin clearfix {
+	&:after {
+		display: table;
+		content: "";
+		clear: both;
+	}
+}
+
+/// Generate grid gutter on different breakpoints.
+
+/// Gutter $type can be margin or padding in different directions.
+/// $direction can take 4 main directions from $mlu-main-directions
+/// and 1 additional - 'lr'(left right). 
+/// You can pass map with custom gutters value in $gutters.
+/// $calc is fallback for old browsers. It need if your cols work this calc() width.
+/// $coef is coefficient by which the gutter value is multiplied
+
+@mixin mlu-generate-grid-gutter($init-gutter: mlu-grid-gutter($mlu-bp-sm), $type: "margin",
+$gutters: $mlu-grid-gutters, $calc: 1, $direction: "lr", $coef: 1) {
+	$prev-value: $init-gutter;
+
+	@if not ($type == "margin" or $type == "padding") {
+		@error "Invalid gutter type - '#{$type}'! Allowable margin or padding";
+	}
+
+	@if $init-gutter and $init-gutter != -1 {
+
+		@if $calc and $direction == "lr" {
+			#{$type}: 0px ($mlu-grid-gutter-fallback * $coef);
+			#{$type}: 0px calc(#{$init-gutter * $coef});
+		} @else if index($mlu-main-directions, $direction) {
+			#{$type}-#{$direction}: $init-gutter * $coef;
+		} @else {
+			#{$type}: 0px ($init-gutter * $coef);
+		}
+	}
+
+	@each $key, $value in $gutters {
+		@if $prev-value != -1 and $value != $prev-value {
+			@include mlu-bpm($key) {
+				$tmp-val: if($calc, calc(#{$value * $coef}), $value * $coef);
+
+				@if $direction == "lr" {
+					#{$type}-left: $tmp-val;
+					#{$type}-right: $tmp-val;
+				} @else if index($mlu-main-directions, $direction) {
+					#{$type}-#{$direction}: $tmp-val;
+				} @else {
+					@error "Invalid gutter direction - '#{$direction}'";
+				}
+			}
+		}
+
+		$prev-value: $value;
+	}
+}

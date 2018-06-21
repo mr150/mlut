@@ -1,0 +1,48 @@
+/**
+* D - display:
+* Утилита `D` управляет отображением компонента на странице.
+*
+*		@example
+*		h4 D-n - скрывает компонент
+*		p В разметке есть скрытый абзац
+*		p.D-n
+*			Этот абзац скрыт, как будто его нет
+*		.D-n_sm.test-content
+*			h3 Этот компонент будет скрыт на брейкпоинте sm
+*			p
+*				Значение утилиты D - n_sm
+*/
+
+.D {
+	display: block;
+}
+
+.D-f {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.D-n {
+	display: none !important;
+}
+
+@include mlu-bpm($to: mlu-breakpoint-next()) {
+	.D-n_#{$mlu-bp-xs} {
+		display: none;
+	}
+}
+
+// Generating utils that work only on breakpoints
+@each $key, $value in $mlu-grid-cols {
+	$mq: ($key, mlu-breakpoint-next($key));
+
+	@if index($mlu-grid-cols, ($key $value)) == length($mlu-grid-cols) {
+		$mq: $key;
+	}
+
+	@include mlu-bpm($mq...) {
+		.D-n_#{$key} {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,46 @@
+.As-s {
+	align-self: stretch;
+}
+
+.As-fs {
+	vertical-align: top;
+	align-self: flex-start;
+}
+
+.As-c {
+	vertical-align: middle;
+	align-self: center;
+}
+
+.As-fe {
+	vertical-align: bottom;
+	align-self: flex-end;
+}
+
+.Jc-fe {
+	justify-content: flex-end;
+}
+
+.Jc-c {
+	justify-content: center;
+}
+
+.Jc-sa {
+	justify-content: space-around;
+}
+
+.Jc-sb {
+	justify-content: space-between;
+}
+
+.Ai-fs {
+	align-items: flex-start;
+}
+
+.Ai-fe {
+	align-items: flex-end;
+}
+
+.Ai-c {
+	align-items: center;
+}

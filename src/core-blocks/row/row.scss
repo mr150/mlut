@@ -1,0 +1,140 @@
+/***
+* Row:
+*/
+
+/**
+* row:
+* Блок для создания раскладок из колонок или карточек.
+*
+*		@example
+*		.row
+*			.row__col.test-content.W3c 3/12
+*			.row__col.test-content.W3c 3/12
+*			.row__col.test-content.W6c 6/12
+*/
+
+/**
+* row__col:
+* Элемент для создания колонок. По умолчанию растягивается под ширину контента.
+* Размеры колонкам задаются с помощью утилит.
+*
+*		@example
+*		.row
+*			- for(var i = 0; i < 3; i++)
+*				.row__col.test-content
+*					p Текст в колонке
+*			.row__col.test-content
+*				p Et molestie ac, feugiat sed lectus
+*				p Текст в колонке
+*
+*/
+
+.row {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	font-size: 0px;
+	list-style: none;
+}
+
+.row__col,
+.row__card,
+.row__cell,
+.row__item {
+	display: inline-block;
+	text-align: left;
+	vertical-align: top;
+	font-size: $mlu-base-font-size;
+	font-size: 1rem;
+	direction: ltr;
+}
+
+.row__col,
+.row__card {
+	@include mlu-generate-grid-gutter();
+	box-sizing: border-box;
+}
+
+.row__col,
+.row__cell,
+.row__card {
+	width: 100% - ($mlu-grid-gutter-fallback * 2);
+	width: calc(100% - #{mlu-grid-gutter($mlu-bp-sm) * 2});
+	@include mlu-generate-grid-gutter($direction: "bottom", $coef: 2, $calc: false);
+
+	& > :first-child:not([class]) {
+		margin-top: 0px;
+	}
+
+	& > :last-child:not([class]) {
+		margin-bottom: 0px;
+	}
+}
+
+.row__card {
+	padding: mlu-grid-gutter($mlu-bp-sm);
+}
+
+.row__cell {
+	@include mlu-generate-grid-gutter($type: "padding");
+}
+
+.row__item {
+	box-sizing: border-box;
+}
+
+.row.row__col,
+.row.row__cell,
+.row.row__card,
+.row__row {
+	font-size: 0px;
+	margin-bottom: 0px;
+}
+
+.row--no-gtr {
+	@include mlu-bpm($to: $mlu-bp-sm) {
+		> .row__col,
+		> .row__cell {
+			width: 100%;
+		}
+	}
+
+	> .row__col {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
+	> .row__cell {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+}
+
+@include mlu-bpm($mlu-bp-sm) {
+	.row__col,
+	.row__cell,
+	.row__card {
+		width: auto;
+	}
+}
+
+/// row__row for mix with row__col for nested row without html nesting
+.row__row {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+
+	@include mlu-bpm($mlu-bp-lg) {
+		margin: 0px;
+		padding: 0px;
+	}
+}
+
+/// row__sub for nested row without bottom margin inside row__col
+.row__sub {
+	@include mlu-generate-grid-gutter($direction: "bottom", $coef: -2, $calc: false);
+}
+
+// for moving down during build
+@media (min-height: 0px) {
+}
