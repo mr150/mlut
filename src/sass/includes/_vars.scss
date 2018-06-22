@@ -10,7 +10,7 @@ $MLU-FLAG-COL-OFFSET: true !default;
 /// 16px used because is default font size in settings of most browsers.
 $MLU-BROWSER-FONT-SIZE: 16px !default;
 
-/// Wrapper block max width 
+/// Wrapper block max width
 $mlu-wrapper-max-width: 1200px !default;
 
 /// Breakpoints names
@@ -25,7 +25,7 @@ $mlu-bp-xl: "xl" !default;
 /// and in mlu-px2em default font size
 $mlu-base-font-size: $MLU-BROWSER-FONT-SIZE !default;
 
-/// Sans serif font stack contains default fonts on different OS 
+/// Sans serif font stack contains default fonts on different OS
 // stylelint-disable
 $mlu-font-family: (
 	-apple-system,

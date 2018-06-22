@@ -2,7 +2,7 @@
 
 /// $from and $to is breakpoints. They can be keyword (string) or number.
 /// $from generate to 'min-width' mediaquery, and $to to 'max-width' - 1.
-/// Together they generate to 'min-width and max-width - 1'. 
+/// Together they generate to 'min-width and max-width - 1'.
 
 /// In $opt you can pass string with additional features or device to check.
 /// For example:
@@ -131,7 +131,7 @@
 
 /// Gutter $type can be margin or padding in different directions.
 /// $direction can take 4 main directions from $mlu-main-directions
-/// and 1 additional - 'lr'(left right). 
+/// and 1 additional - 'lr'(left right).
 /// You can pass map with custom gutters value in $gutters.
 /// $calc is fallback for old browsers. It need if your cols work this calc() width.
 /// $coef is coefficient by which the gutter value is multiplied

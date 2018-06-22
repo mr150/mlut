@@ -8,7 +8,7 @@
 	@error "Invalid breakpoint name - '#{$name}' in mlu-breakpoint. '#{$name}' is not defined in $mlu-breakpoints";
 }
 
-/// Get next breakpoint. By default return value in px 
+/// Get next breakpoint. By default return value in px
 /// but can return name if use function wrapper
 /// 'mlu-breakpoint-next-name'.
 /// If pass last breakpoint it return 0.
