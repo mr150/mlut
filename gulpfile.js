@@ -137,16 +137,19 @@ gulp.task("scripts", function(){
 // Pug used only for mlut examples so it's not in the dependencies
 gulp.task("pug", function(){
 	if(pug){
-		return gulp.src(path.demo.pug + "*.pug")
+		return gulp.src(path.src.pug + "*.pug")
 			.pipe(plumber())
 			.pipe(pug({"pretty": "\t"}))
-			.pipe(gulp.dest(dirs.src))
 			.pipe(gulp.dest(dirs.demo));
 	} else console.log("pug is not installed");
 });
 
 gulp.task("server", function(){
 	browserSync(servConfig);
+});
+
+gulp.task("html", function(){
+	browserSync.reload();
 });
 
 gulp.task("file-size", function(){
@@ -161,18 +164,10 @@ gulp.task("file-size", function(){
 		}));
 });
 
-/*
-gulp.task("watch", ["server", "style", "scripts"], function(){
-	gulp.watch(path.watch.styles, ["style", "file-size"]);
-	gulp.watch(path.watch.html, browserSync.reload);
-	gulp.watch(path.watch.js, ["scripts", "file-size"]);
-});
-*/
-
 gulp.task("default", ["server", "style", "pug", "scripts"], function(){
 	gulp.watch(path.watch.styles, ["style", "file-size"]);
-	gulp.watch(path.watch.pug, ["pug", "file-size"]);
-	gulp.watch(path.watch.html, browserSync.reload);
+	gulp.watch(path.watch.pug, ["pug"]);
+	gulp.watch(path.watch.html, ["html", "file-size"]);
 	gulp.watch(path.watch.js, ["scripts", "file-size"]);
 });
 
