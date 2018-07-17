@@ -1,9 +1,9 @@
-src/css/style.css
+demo/css/style.css
 
-src/**/*.map
+demo/**/*.map
 
-src/js/scripts.js
+demo/js/scripts.js
 
-src/libs/**/*
+demo/libs/**/*
 
 node_modules

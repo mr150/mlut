@@ -32,14 +32,17 @@ var path = {
 	src: {
 		blocks: dirs.src + "core-blocks/",
 		utils: dirs.src + "core-utils/",
-		css: dirs.src + "css/",
 		sass: dirs.src + "sass/",
-		js: dirs.src + "js/",
-		pug: dirs.demo + "pug/"
+		js: dirs.src + "js/"
 	},
 	build: {
 		css: dirs.build + "css/",
 		js: dirs.build + "js/"
+	},
+	demo: {
+		css: dirs.demo + "css/",
+		js: dirs.demo + "js/",
+		pug: dirs.demo + "pug/"
 	}
 };
 
@@ -94,7 +97,7 @@ gulp.task("style", ["css-lint"], function(){
 			flexbox: "no-2009"
 		}))
 		.pipe(tabify(2, false))
-		.pipe(gulp.dest(path.src.css))
+		.pipe(gulp.dest(path.demo.css))
 		.pipe(cleancss({
 			level: 2,
 			compatibility: "ie8"
@@ -102,7 +105,7 @@ gulp.task("style", ["css-lint"], function(){
 		.pipe(rename(files.distCss))
 		.pipe(gulp.dest(path.build.css))
 		.pipe(sourcemaps.write(""))
-		.pipe(gulp.dest(path.src.css))
+		.pipe(gulp.dest(path.demo.css))
 		.pipe(browserSync.stream());
 });
 
@@ -125,19 +128,19 @@ gulp.task("scripts", function(){
 		.pipe(rigger())
 		.pipe(sourcemaps.init())
 		.pipe(rename("scripts.js"))
-		.pipe(gulp.dest(path.src.js))
+		.pipe(gulp.dest(path.demo.js))
 		.pipe(uglify())
 		.pipe(rename(files.distJs))
 		.pipe(gulp.dest(path.build.js))
 		.pipe(sourcemaps.write(""))
-		.pipe(gulp.dest(path.src.js))
+		.pipe(gulp.dest(path.demo.js))
 		.pipe(browserSync.stream());
 });
 
 // Pug used only for mlut examples so it's not in the dependencies
 gulp.task("pug", function(){
 	if(pug){
-		return gulp.src(path.src.pug + "*.pug")
+		return gulp.src(path.demo.pug + "*.pug")
 			.pipe(plumber())
 			.pipe(pug({"pretty": "\t"}))
 			.pipe(gulp.dest(dirs.demo));
