@@ -1,0 +1,19 @@
+.test-row {
+	background-color: #ccc;
+}
+
+.test-content {
+	padding: 10px;
+	color: #dddd77;
+	font-size: 1.2rem;
+	background-color: #77d;
+}
+
+.test-cell {
+	color: #dddd77;
+	background-color: #77d;
+}
+
+.test-card {
+	border: 1px #ccc solid;
+}

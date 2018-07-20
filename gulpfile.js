@@ -12,7 +12,7 @@ var gulp = require("gulp"),
 		tabify = require("gulp-tabify"),
 		sourcemaps = require("gulp-sourcemaps"),
 		pkg = require("./package.json"),
-		size = require("gulp-size"),
+		fileSize = require("gulp-size"),
 		autoprefixer = require("gulp-autoprefixer");
 
 try {
@@ -23,8 +23,8 @@ try {
 
 var dirs = {
 	src: "src/",
-	demo: "demo/",
-	libs: "src/libs/",
+	test: "test/",
+	libs: "test/libs/",
 	build: "dist/"
 };
 
@@ -39,10 +39,10 @@ var path = {
 		css: dirs.build + "css/",
 		js: dirs.build + "js/"
 	},
-	demo: {
-		css: dirs.demo + "css/",
-		js: dirs.demo + "js/",
-		pug: dirs.demo + "pug/"
+	test: {
+		css: dirs.test + "css/",
+		js: dirs.test + "js/",
+		pug: dirs.test + "pug/"
 	}
 };
 
@@ -64,8 +64,8 @@ path = Object.assign({
 			dirs.libs + files.styles,
 			path.src.sass + files.styles
 		],
-		pug: dirs.demo + files.pug,
-		html: dirs.demo + files.html,
+		pug: dirs.test + files.pug,
+		html: dirs.test + files.html,
 		js: [
 			path.src.js + "mlut.js",
 			path.src.blocks + files.js,
@@ -76,11 +76,16 @@ path = Object.assign({
 
 var servConfig = {
 		server: {
-			baseDir: "demo"
+			baseDir: "test"
 		},
 		notify: false,
 		open: false
-};
+},
+		sizeConfig = {
+			gzip: true,
+			pretty: false,
+			showFiles: true
+		};
 
 gulp.task("style", ["css-lint"], function(){
 	return gulp.src(path.src.sass + "mlut.scss")
@@ -97,15 +102,16 @@ gulp.task("style", ["css-lint"], function(){
 			flexbox: "no-2009"
 		}))
 		.pipe(tabify(2, false))
-		.pipe(gulp.dest(path.demo.css))
+		.pipe(gulp.dest(path.test.css))
 		.pipe(cleancss({
 			level: 2,
 			compatibility: "ie8"
 		}))
 		.pipe(rename(files.distCss))
+		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build.css))
 		.pipe(sourcemaps.write(""))
-		.pipe(gulp.dest(path.demo.css))
+		.pipe(gulp.dest(path.test.css))
 		.pipe(browserSync.stream());
 });
 
@@ -128,22 +134,23 @@ gulp.task("scripts", function(){
 		.pipe(rigger())
 		.pipe(sourcemaps.init())
 		.pipe(rename("scripts.js"))
-		.pipe(gulp.dest(path.demo.js))
+		.pipe(gulp.dest(path.test.js))
 		.pipe(uglify())
 		.pipe(rename(files.distJs))
+		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build.js))
 		.pipe(sourcemaps.write(""))
-		.pipe(gulp.dest(path.demo.js))
+		.pipe(gulp.dest(path.test.js))
 		.pipe(browserSync.stream());
 });
 
 // Pug used only for mlut examples so it's not in the dependencies
 gulp.task("pug", function(){
 	if(pug){
-		return gulp.src(path.demo.pug + "*.pug")
+		return gulp.src(path.test.pug + "*.pug")
 			.pipe(plumber())
 			.pipe(pug({"pretty": "\t"}))
-			.pipe(gulp.dest(dirs.demo));
+			.pipe(gulp.dest(dirs.test));
 	} else console.log("pug is not installed");
 });
 
@@ -152,32 +159,22 @@ gulp.task("server", function(){
 });
 
 gulp.task("html", function(){
-	browserSync.reload();
-});
-
-gulp.task("file-size", function(){
-	return gulp.src([
-		path.build.css + files.styles,
-		path.build.js + files.js,
-		dirs.demo + files.html
-	])
-		.pipe(size({
-			gzip: true,
-			showFiles: true
-		}));
+	return gulp.src(dirs.test + files.html)
+		.pipe(fileSize(sizeConfig))
+		.pipe(browserSync.stream());
 });
 
 gulp.task("default", ["server", "style", "pug", "scripts"], function(){
-	gulp.watch(path.watch.styles, ["style", "file-size"]);
+	gulp.watch(path.watch.styles, ["style"]);
 	gulp.watch(path.watch.pug, ["pug"]);
-	gulp.watch(path.watch.html, ["html", "file-size"]);
-	gulp.watch(path.watch.js, ["scripts", "file-size"]);
+	gulp.watch(path.watch.html, ["html"]);
+	gulp.watch(path.watch.js, ["scripts"]);
 });
 
 gulp.task("clear", function(){
 	return del.sync(dirs.build);
 });
 
-gulp.task("build", ["clear", "style", "pug", "scripts", "file-size"], function(){
+gulp.task("build", ["clear", "style", "pug", "scripts"], function(){
 });
 

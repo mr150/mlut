@@ -1,0 +1,76 @@
+include includes/vars.pug
+doctype html
+html(lang="ru")
+	head
+		- pageTitle = "Set of ready layouts";
+		include includes/head.pug
+	body.page
+		include includes/header.pug
+		main
+			.wrapper
+				h1.title-h1 Set of ready layouts
+				h2 Раскладка 1
+				.row
+					- for(i = 0; i < 3; i++)
+						.row__col.W4c
+							h3 Колонка №#{i}
+							p Et molestie ac, feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa, eget egestas purus viverra?
+				h2 Раскладка 2
+				.row.D-f
+					.row__col.test-content.W6c.W4c_sm
+						h3 Контент 
+					.row__col.row__row(class="W6c+ W4c+_sm")
+						- for(i = 0; i < 4; i++)
+							.row__col.W6c
+								h3 Контент
+								p Колонка внутри другой колонки
+				h2 Раскладка 3
+				.row.D-f
+					.row__col.W6c
+						h3 Контент 
+					.row__col.row__row(class="W6c+")
+						- for(i = 0; i < 2; i++)
+							.row__col.W12c
+								p Какой то контент #{i}
+				h2 Раскладка 4
+				.row.D-f
+					.row__col.row__row(class="W6c+")
+						- for(i = 0; i < 2; i++)
+							.row__col.W12c
+								p Колонка #{i}
+					.row__col.W6c
+						h3 Контент 
+				h2 Раскладка 5
+				.row
+					- for(i = 0; i < 3; i++)
+						.row__col.row__row(class="W4c+ W4c+_sm")
+							- for(var j = 0; j < 3; j++)
+								.row__col.W12c.W2c_sm
+									p Подколонка #{j} <br> в колонке #{i}
+				h2 Раскладка 6
+				.row
+					.row__col.W12c
+						h3 Контент 
+					.row.D-f
+						- for(i = 0; i < 2; i++)
+							.row__col.W6c
+								p Колонка #{i}
+					.row__col.W12c
+						h3 Контент 
+				h2 Раскладка 7
+				.row.D-f
+					.row__col.W6c
+						h3 Контент 
+					.row__col.row__row(class="W6c+")
+						- for(i = 0; i < 4; i++)
+							.row__col.W12c
+								p Колонка #{i}
+				h2 Раскладка 8
+				.row.Rj-c
+					- for(i = 0; i < 3; i++)
+						.row__card.W-card
+							h3 Карточка #{i}
+							p с фиксированной шириной
+
+		include includes/footer.pug
+		include includes/scripts.pug

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Nested rows examples</title>
+		<link href="css/mlut.min.css" rel="stylesheet">
+		<link href="css/test.css" rel="stylesheet">
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<![endif]
+		-->
+	</head>
+	<body class="page">
+		<main>
+			<div class="wrapper">
+				<h1 class="title-h1">Nested rows examples</h1>
+				<h2>Row mixed in col without gutter left, right, bottom</h2>
+				<div class="row wrapper__row">
+					<div class="row__col row__row test-row W9c+">
+						<div class="row__col test-content W3c">
+							<h3>Parent .W9c</h3>
+							<p>this .W3c</p>
+						</div>
+						<div class="row__col test-content W4c">
+							<h3>Parent .W9c</h3>
+							<p>this .W4c</p>
+						</div>
+						<div class="row__col test-content W5c">
+							<h3>Parent .W9c</h3>
+							<p>this .W5c</p>
+						</div>
+					</div>
+					<div class="row__col W3c">
+						<div class="test-content">
+							<h3>.W3c</h3>
+						</div>
+					</div>
+				</div>
+				<h2>Row mixed in col with gutter left, right</h2>
+				<div class="row wrapper__row">
+					<div class="row__col row test-row W9c">
+						<div class="row__col test-content W3c">
+							<h3>Parent .W9c</h3>
+							<p>this .W3c</p>
+						</div>
+						<div class="row__col test-content W4c">
+							<h3>Parent .W9c</h3>
+							<p>this .W4c</p>
+						</div>
+						<div class="row__col test-content W5c">
+							<h3>Parent .W9c</h3>
+							<p>this .W5c</p>
+						</div>
+					</div>
+					<div class="row__col W3c">
+						<div class="test-content">
+							<h3>.W3c</h3>
+						</div>
+					</div>
+				</div>
+				<h2>Row nested in col with gutter left, right, bottom</h2>
+				<div class="row wrapper__row">
+					<div class="row__col test-row W9c">
+						<div class="row">
+							<div class="row__col test-content W3c">
+								<h3>Parent .W9c</h3>
+								<p>this .W3c</p>
+							</div>
+							<div class="row__col test-content W4c">
+								<h3>Parent .W9c</h3>
+								<p>this .W4c</p>
+							</div>
+							<div class="row__col test-content W5c">
+								<h3>Parent .W9c</h3>
+								<p>this .W5c</p>
+							</div>
+						</div>
+					</div>
+					<div class="row__col test-content W3c">
+						<h3>.W3c</h3>
+					</div>
+				</div>
+				<h2>Row nested in col with gutter bottom only</h2>
+				<div class="row wrapper__row">
+					<div class="row__col test-row W9c">
+						<div class="row wrapper__row">
+							<div class="row__col test-content W3c">
+								<h3>Parent .W9c</h3>
+								<p>this .W3c</p>
+							</div>
+							<div class="row__col test-content W4c">
+								<h3>Parent .W9c</h3>
+								<p>this .W4c</p>
+							</div>
+							<div class="row__col test-content W5c">
+								<h3>Parent .W9c</h3>
+								<p>this .W5c</p>
+							</div>
+						</div>
+					</div>
+					<div class="row__col test-content W3c">
+						<h3>.W3c</h3>
+					</div>
+				</div>
+				<h2>Row nested in col with gutter left, rigth</h2>
+				<div class="row wrapper__row">
+					<div class="row__col test-row W9c">
+						<div class="row row__sub">
+							<div class="row__col test-content W3c">
+								<h3>Parent .W9c</h3>
+								<p>this .W3c</p>
+							</div>
+							<div class="row__col test-content W4c">
+								<h3>Parent .W9c</h3>
+								<p>this .W4c</p>
+							</div>
+							<div class="row__col test-content W5c">
+								<h3>Parent .W9c</h3>
+								<p>this .W5c</p>
+							</div>
+						</div>
+					</div>
+					<div class="row__col test-content W3c">
+						<h3>.W3c</h3>
+					</div>
+				</div>
+				<h2>Row nested in col minus gutter</h2>
+				<div class="row wrapper__row">
+					<div class="row__col test-row W9c">
+						<div class="row row__sub wrapper__row">
+							<div class="row__col test-content W3c">
+								<h3>Parent .W9c</h3>
+								<p>this .W3c</p>
+							</div>
+							<div class="row__col test-content W4c">
+								<h3>Parent .W9c</h3>
+								<p>this .W4c</p>
+							</div>
+							<div class="row__col test-content W5c">
+								<h3>Parent .W9c</h3>
+								<p>this .W5c</p>
+							</div>
+						</div>
+					</div>
+					<div class="row__col test-content W3c">
+						<h3>.W3c</h3>
+					</div>
+				</div>
+				<h2>Row nested in col without gutter</h2>
+				<div class="row wrapper__row">
+					<div class="row__col row test-row W9c">
+						<div class="row wrapper__row">
+							<div class="row__col test-content W3c">
+								<h3>Parent .W9c</h3>
+								<p>this .W3c</p>
+							</div>
+							<div class="row__col test-content W4c">
+								<h3>Parent .W9c</h3>
+								<p>this .W4c</p>
+							</div>
+							<div class="row__col test-content W5c">
+								<h3>Parent .W9c</h3>
+								<p>this .W5c</p>
+							</div>
+						</div>
+					</div>
+					<div class="row__col test-content W3c">
+						<h3>.W3c</h3>
+					</div>
+				</div>
+			</div>
+		</main>
+		<script src="js/mlut.min.js"></script>
+	</body>
+</html>
