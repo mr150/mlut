@@ -68,6 +68,7 @@ path = Object.assign({
 		html: dirs.test + files.html,
 		js: [
 			path.src.js + "mlut.js",
+			path.src.js + "includes/" + files.js,
 			path.src.blocks + files.js,
 			dirs.libs + files.js
 		]
@@ -99,7 +100,7 @@ gulp.task("style", ["css-lint"], function(){
 		.pipe(groupMedia())
 		.pipe(autoprefixer({
 			cascade: false,
-			flexbox: "no-2009"
+			flexbox: false
 		}))
 		.pipe(tabify(2, false))
 		.pipe(gulp.dest(path.test.css))

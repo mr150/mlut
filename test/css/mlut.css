@@ -219,11 +219,7 @@ img {
 }
 
 .D-f {
-	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-flex-wrap: wrap;
-	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
 }
 
@@ -260,78 +256,56 @@ img {
 }
 
 .As-s {
-	-webkit-align-self: stretch;
-	-ms-flex-item-align: stretch;
 	align-self: stretch;
 }
 
 .As-fs {
 	vertical-align: top;
-	-webkit-align-self: flex-start;
-	-ms-flex-item-align: start;
 	align-self: flex-start;
 }
 
 .As-c {
 	vertical-align: middle;
-	-webkit-align-self: center;
-	-ms-flex-item-align: center;
 	align-self: center;
 }
 
 .As-fe {
 	vertical-align: bottom;
-	-webkit-align-self: flex-end;
-	-ms-flex-item-align: end;
 	align-self: flex-end;
 }
 
 .Jc-fe,
 .Rj-e {
-	-webkit-justify-content: flex-end;
-	-ms-flex-pack: end;
 	justify-content: flex-end;
 }
 
 .Jc-c,
 .Rj-c {
-	-webkit-justify-content: center;
-	-ms-flex-pack: center;
 	justify-content: center;
 }
 
 .Jc-sa,
 .Rj-sa {
-	-webkit-justify-content: space-around;
-	-ms-flex-pack: distribute;
 	justify-content: space-around;
 }
 
 .Jc-sb,
 .Rj-sb {
-	-webkit-justify-content: space-between;
-	-ms-flex-pack: justify;
 	justify-content: space-between;
 }
 
 .Ai-fs,
 .Rai-fs {
-	-webkit-align-items: flex-start;
-	-ms-flex-align: start;
 	align-items: flex-start;
 }
 
 .Ai-fe,
 .Rai-fe {
-	-webkit-align-items: flex-end;
-	-ms-flex-align: end;
 	align-items: flex-end;
 }
 
 .Ai-c,
 .Rai-c {
-	-webkit-align-items: center;
-	-ms-flex-align: center;
 	align-items: center;
 }
 
@@ -1123,36 +1097,26 @@ img {
 
 	.Rj-sa_xl {
 		text-align: center;
-		-webkit-justify-content: space-around;
-		-ms-flex-pack: distribute;
 		justify-content: space-around;
 	}
 
 	.Rj-s_xl {
 		text-align: left;
-		-webkit-justify-content: flex-start;
-		-ms-flex-pack: start;
 		justify-content: flex-start;
 	}
 
 	.Rj-c_xl {
 		text-align: center;
-		-webkit-justify-content: center;
-		-ms-flex-pack: center;
 		justify-content: center;
 	}
 
 	.Rj-e_xl {
 		text-align: right;
-		-webkit-justify-content: flex-end;
-		-ms-flex-pack: end;
 		justify-content: flex-end;
 	}
 
 	.Rj-sb_xl {
 		text-align: center;
-		-webkit-justify-content: space-between;
-		-ms-flex-pack: justify;
 		justify-content: space-between;
 	}
 }
@@ -1215,29 +1179,21 @@ img {
 
 	.Rj-s_sm {
 		text-align: left;
-		-webkit-justify-content: flex-start;
-		-ms-flex-pack: start;
 		justify-content: flex-start;
 	}
 
 	.Rj-c_sm {
 		text-align: center;
-		-webkit-justify-content: center;
-		-ms-flex-pack: center;
 		justify-content: center;
 	}
 
 	.Rj-e_sm {
 		text-align: right;
-		-webkit-justify-content: flex-end;
-		-ms-flex-pack: end;
 		justify-content: flex-end;
 	}
 
 	.Rj-sb_sm {
 		text-align: center;
-		-webkit-justify-content: space-between;
-		-ms-flex-pack: justify;
 		justify-content: space-between;
 	}
 }
@@ -1451,36 +1407,26 @@ img {
 
 	.Rj-sa_md {
 		text-align: center;
-		-webkit-justify-content: space-around;
-		-ms-flex-pack: distribute;
 		justify-content: space-around;
 	}
 
 	.Rj-s_md {
 		text-align: left;
-		-webkit-justify-content: flex-start;
-		-ms-flex-pack: start;
 		justify-content: flex-start;
 	}
 
 	.Rj-c_md {
 		text-align: center;
-		-webkit-justify-content: center;
-		-ms-flex-pack: center;
 		justify-content: center;
 	}
 
 	.Rj-e_md {
 		text-align: right;
-		-webkit-justify-content: flex-end;
-		-ms-flex-pack: end;
 		justify-content: flex-end;
 	}
 
 	.Rj-sb_md {
 		text-align: center;
-		-webkit-justify-content: space-between;
-		-ms-flex-pack: justify;
 		justify-content: space-between;
 	}
 }
@@ -1576,36 +1522,26 @@ img {
 
 	.Rj-sa_lg {
 		text-align: center;
-		-webkit-justify-content: space-around;
-		-ms-flex-pack: distribute;
 		justify-content: space-around;
 	}
 
 	.Rj-s_lg {
 		text-align: left;
-		-webkit-justify-content: flex-start;
-		-ms-flex-pack: start;
 		justify-content: flex-start;
 	}
 
 	.Rj-c_lg {
 		text-align: center;
-		-webkit-justify-content: center;
-		-ms-flex-pack: center;
 		justify-content: center;
 	}
 
 	.Rj-e_lg {
 		text-align: right;
-		-webkit-justify-content: flex-end;
-		-ms-flex-pack: end;
 		justify-content: flex-end;
 	}
 
 	.Rj-sb_lg {
 		text-align: center;
-		-webkit-justify-content: space-between;
-		-ms-flex-pack: justify;
 		justify-content: space-between;
 	}
 }

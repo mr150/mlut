@@ -1,0 +1,5 @@
+mixin formInputs(inputs, inputClass = "input input--common", labelClass = "sr-only", groupClass = "")
+	- for(var i = 0; i < inputs.length; i++)
+		p(class=groupClass)
+			label(class=labelClass for=inputs[i].id)= inputs[i].label
+			input(class=inputClass)&attributes(inputs[i])
