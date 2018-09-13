@@ -1,0 +1,14 @@
+/// Base block for buttons and links.
+/// Stylize it with modifiers like .btn--common
+
+.btn {
+	display: inline-block;
+	border: none;
+	box-sizing: border-box;
+	font: inherit;
+	font-size: mlu-px2rem($mlu-base-font-size);
+	vertical-align: top;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+}

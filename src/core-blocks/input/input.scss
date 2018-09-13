@@ -1,0 +1,9 @@
+/// Base block for text inputs.
+/// Stylize it with modifiers like .input--common
+
+.input {
+	display: inline-block;
+	border: none;
+	box-sizing: border-box;
+	font: inherit;
+}
