@@ -45,7 +45,7 @@
 	text-align: left;
 	vertical-align: top;
 	font-size: $mlu-base-font-size;
-	font-size: 1rem;
+	font-size: mlu-px2rem($mlu-base-font-size);
 	direction: ltr;
 }
 

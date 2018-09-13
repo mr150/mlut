@@ -152,6 +152,6 @@
 
 /// Wrapper on 'mlu-px2em' for converting to rems
 
-@function mlu-px2rem($number, $divider: $mlu-base-font-size) {
+@function mlu-px2rem($number, $divider: $MLU-BROWSER-FONT-SIZE) {
 	@return mlu-px2em($number, $divider, "rem");
 }

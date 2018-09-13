@@ -50,7 +50,7 @@
 		}
 	}
 
-	$opt: if($opt, $opt + " and ", "");
+	$opt: if($opt, $opt + " ", "");
 	$media-str: "";
 
 	@if $type == "range" {
