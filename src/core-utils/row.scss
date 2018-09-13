@@ -1,26 +1,16 @@
 .Rj-c {
-	@extend .Ta-c, .Jc-c;
+	@extend .Ta-c;
+	@extend .Jc-c !optional;
 }
 
 .Rj-e {
-	@extend .Ta-r, .Jc-fe;
-}
-
-.Rj-sa {
-	@extend .Ta-c, .Jc-sa;
-}
-
-.Rj-sb {
-	@extend .Ta-c, .Jc-sb;
-}
-
-.Rai-fs {
-	@extend .Ai-fs;
+	@extend .Ta-r;
+	@extend .Jc-fe !optional;
 }
 
 // Progressive enhancement from inline-blocks to flex
 .Rai-c {
-	@extend .Ai-c;
+	@extend .Ai-c !optional;
 
 	> .row__col,
 	> .row__card,
@@ -31,7 +21,7 @@
 }
 
 .Rai-fe {
-	@extend .Ai-fe;
+	@extend .Ai-fe !optional;
 
 	> .row__col,
 	> .row__card,
@@ -39,6 +29,10 @@
 	> .row__cell {
 		vertical-align: bottom;
 	}
+}
+
+.Rfx {
+	@extend .D-f, .Fxw-w !optional;
 }
 
 @each $key, $value in $mlu-grid-cols {

@@ -178,6 +178,25 @@ img {
 	margin-left: calc(-12px);
 }
 
+.btn {
+	display: inline-block;
+	border: none;
+	box-sizing: border-box;
+	font: inherit;
+	font-size: 1rem;
+	vertical-align: top;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.input {
+	display: inline-block;
+	border: none;
+	box-sizing: border-box;
+	font: inherit;
+}
+
 /*===DESIGN BLOCKS===*/
 
 /*===CORE-UTILS AND HELPRES===*/
@@ -201,9 +220,21 @@ img {
 	display: block;
 }
 
-.D-f {
+.D-tb {
+	display: table;
+}
+
+.D-tbfg {
+	display: table-footer-group;
+}
+
+.D-f,
+.Rfx {
 	display: flex;
-	flex-wrap: wrap;
+}
+
+.D-if {
+	display: inline-flex;
 }
 
 .D-n {
@@ -219,9 +250,7 @@ img {
 }
 
 .Ta-c,
-.Rj-c,
-.Rj-sa,
-.Rj-sb {
+.Rj-c {
 	text-align: center;
 }
 
@@ -236,6 +265,17 @@ img {
 
 .Dir-r {
 	direction: rtl;
+}
+
+.Tov {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.Fxw-w,
+.Rfx {
+	flex-wrap: wrap;
 }
 
 .As-s {
@@ -267,18 +307,15 @@ img {
 	justify-content: center;
 }
 
-.Jc-sa,
-.Rj-sa {
+.Jc-sa {
 	justify-content: space-around;
 }
 
-.Jc-sb,
-.Rj-sb {
+.Jc-sb {
 	justify-content: space-between;
 }
 
-.Ai-fs,
-.Rai-fs {
+.Ai-fs {
 	align-items: flex-start;
 }
 

@@ -17,9 +17,20 @@
 	display: block;
 }
 
+.D-tb {
+	display: table;
+}
+
+.D-tbfg {
+	display: table-footer-group;
+}
+
 .D-f {
 	display: flex;
-	flex-wrap: wrap;
+}
+
+.D-if {
+	display: inline-flex;
 }
 
 .D-n {

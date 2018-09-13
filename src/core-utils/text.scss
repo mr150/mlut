@@ -22,6 +22,12 @@
 	direction: rtl;
 }
 
+.Tov {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 @each $key, $value in $mlu-grid-cols {
 	$mq: ($key, mlu-breakpoint-next($key));
 
