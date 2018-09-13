@@ -164,7 +164,7 @@ img {
 
 .wrapper {
 	display: block;
-	max-width: 1200px;
+	max-width: 1224px;
 	margin: auto;
 	box-sizing: border-box;
 	padding: 0px 1.5%;
@@ -357,6 +357,10 @@ img {
 	width: calc(50% - 24px);
 }
 
+.W12c {
+	width: 97%;
+}
+
 .Ml-a {
 	margin-left: auto;
 }
@@ -481,7 +485,6 @@ img {
 	}
 
 	.W12c {
-		width: 97%;
 		width: calc(100% - 24px);
 	}
 
@@ -804,9 +807,17 @@ img {
 		padding-right: calc(16px);
 	}
 
+	.wrapper {
+		max-width: 1232px;
+	}
+
 	.wrapper__row {
 		margin-left: calc(-16px);
 		margin-right: calc(-16px);
+	}
+
+	.W12c {
+		width: calc(100% - 32px);
 	}
 
 	.Ml1c {

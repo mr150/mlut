@@ -20,6 +20,12 @@ $mlu-bp-md: "md" !default;
 $mlu-bp-lg: "lg" !default;
 $mlu-bp-xl: "xl" !default;
 
+/// Gutter value on different breakpoints
+$mlu-gtr-sm: 12px !default;
+$mlu-gtr-md: $mlu-gtr-sm !default;
+$mlu-gtr-lg: 16px !default;
+$mlu-gtr-xl: $mlu-gtr-lg !default;
+
 /// Base font size on website.
 /// Is used for rems fallback in 'row' elements
 /// and in mlu-px2em default font size
@@ -89,10 +95,10 @@ $mlu-grid-gutter-fallback: 1.5% !default;
 
 /// Map with grid gutters on breakpoints
 $mlu-grid-gutters: (
-	$mlu-bp-sm: 12px,
-	$mlu-bp-md: 12px,
-	$mlu-bp-lg: 16px,
-	$mlu-bp-xl: 16px,
+	$mlu-bp-sm: $mlu-gtr-sm,
+	$mlu-bp-md: $mlu-gtr-md,
+	$mlu-bp-lg: $mlu-gtr-lg,
+	$mlu-bp-xl: $mlu-gtr-xl,
 ) !default;
 
 /// Map with grid cols and gutters width on all

@@ -28,18 +28,30 @@
 */
 
 .wrapper {
+	$prev-gtr: $mlu-gtr-sm;
+
 	display: block;
-	max-width: $mlu-wrapper-max-width;
+	max-width: $mlu-wrapper-max-width + ($mlu-gtr-sm * 2);
 	margin: auto;
 	box-sizing: border-box;
 	@include mlu-generate-grid-gutter($type: "padding");
+
+	@each $key, $value in $mlu-grid-gutters {
+		@if $value != $prev-gtr {
+			@include mlu-bpm($key) {
+				max-width: $mlu-wrapper-max-width + $value * 2;
+			}
+		}
+
+		$prev-gtr: $value;
+	}
 }
 
 .wrapper__row {
 	margin-right: - $mlu-grid-gutter-fallback;
 	margin-left: - $mlu-grid-gutter-fallback;
-	margin-right: calc(-#{mlu-grid-gutter($mlu-bp-sm)});
-	margin-left: calc(-#{mlu-grid-gutter($mlu-bp-sm)});
+	margin-right: calc(-#{$mlu-gtr-sm});
+	margin-left: calc(-#{$mlu-gtr-sm});
 
 	@include mlu-generate-grid-gutter(-1, $coef: -1);
 }
