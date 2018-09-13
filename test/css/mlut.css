@@ -5,6 +5,7 @@ html {
 }
 
 img {
+	vertical-align: top;
 	max-width: 100%;
 	border: none;
 }
@@ -461,7 +462,7 @@ img {
 
 .hide-text {
 	color: transparent;
-	text-indent: 100%;
+	text-indent: 120%;
 	white-space: nowrap;
 	font-size: 0px;
 	overflow: hidden;

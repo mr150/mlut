@@ -67,7 +67,6 @@
 
 /// Generator BEM modifiers for block with icon.
 
-/// $block is block's name.
 /// $sprite is map with icons data.
 /// Icon rendered as a $pseudo element. Default is 'before'
 
@@ -77,11 +76,11 @@
 ///		car: (208px, 90px, -767px, -5px),
 ///	);
 
-@mixin mlu-mods-from-sprite($block, $sprite, $pseudo: "before") {
+@mixin mlu-mods-from-sprite($sprite, $pseudo: "before") {
 	@if type-of($sprite) == "map" {
 		@at-root {
 			@each $key, $value in $sprite {
-				#{$block}--#{$key}:#{$pseudo} {
+				&--#{$key}:#{$pseudo} {
 					width: nth($value, 1);
 					height: nth($value, 2);
 					background-position: nth($value, 3) nth($value, 4);
@@ -173,5 +172,20 @@ $gutters: $mlu-grid-gutters, $calc: 1, $direction: "lr", $coef: 1) {
 		}
 
 		$prev-value: $value;
+	}
+}
+
+/// Generate block with icon form css-$sprite in $pseudo element.
+
+@mixin mlu-icon($sprite: "../img/css_sprites.png", $pseudo: "before") {
+	position: relative;
+
+	&:#{$pseudo} {
+		position: absolute;
+		background-image: url($sprite);
+		background-repeat: no-repeat;
+		content: "";
+
+		@content;
 	}
 }
