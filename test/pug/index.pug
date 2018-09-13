@@ -43,13 +43,7 @@ html(lang="ru")
 				h2 Cards
 				.row.wrapper__row
 					- for(i = 3; i < 6; i++)
-						.row__card.test-card.W-card
-							h3 Карточка #{i}
-							p Описание карточки в несколько строчек с подробностями
-				h2 Responsive cards
-				.row.wrapper__row
-					- for(i = 3; i < 6; i++)
-						.row__card.test-card(class="W" + i + "c")
+						.row__col.test-card.W-card.P8
 							h3 Карточка #{i}
 							p Описание карточки в несколько строчек с подробностями
 				hr
@@ -71,6 +65,12 @@ html(lang="ru")
 				p
 					b Set of ready layouts 
 					a(href="layouts.html") here.
+				h2 Items
+				.row
+					- for(i = 0; i < 3; i++)
+						.row__item.test-row.W3c
+							h3 Элемент #{i}
+							p элемент без отступов
 
 		include includes/footer.pug
 		include includes/scripts.pug

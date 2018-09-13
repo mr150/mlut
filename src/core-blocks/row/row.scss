@@ -38,7 +38,6 @@
 }
 
 .row__col,
-.row__card,
 .row__cell,
 .row__item {
 	display: inline-block;
@@ -47,20 +46,6 @@
 	font-size: $mlu-base-font-size;
 	font-size: mlu-px2rem($mlu-base-font-size);
 	direction: ltr;
-}
-
-.row__col,
-.row__card {
-	@include mlu-generate-grid-gutter();
-	box-sizing: border-box;
-}
-
-.row__col,
-.row__cell,
-.row__card {
-	width: 100% - ($mlu-grid-gutter-fallback * 2);
-	width: calc(100% - #{mlu-grid-gutter($mlu-bp-sm) * 2});
-	@include mlu-generate-grid-gutter($direction: "bottom", $coef: 2, $calc: false);
 
 	& > :first-child:not([class]) {
 		margin-top: 0px;
@@ -71,8 +56,16 @@
 	}
 }
 
-.row__card {
-	padding: mlu-grid-gutter($mlu-bp-sm);
+.row__col {
+	@include mlu-generate-grid-gutter();
+	box-sizing: border-box;
+}
+
+.row__col,
+.row__cell {
+	width: 100% - ($mlu-grid-gutter-fallback * 2);
+	width: calc(100% - #{mlu-grid-gutter($mlu-bp-sm) * 2});
+	@include mlu-generate-grid-gutter($direction: "bottom", $coef: 2, $calc: false);
 }
 
 .row__cell {
@@ -85,35 +78,14 @@
 
 .row.row__col,
 .row.row__cell,
-.row.row__card,
 .row__row {
 	font-size: 0px;
 	margin-bottom: 0px;
 }
 
-.row--no-gtr {
-	@include mlu-bpm($to: $mlu-bp-sm) {
-		> .row__col,
-		> .row__cell {
-			width: 100%;
-		}
-	}
-
-	> .row__col {
-		margin-left: 0px;
-		margin-right: 0px;
-	}
-
-	> .row__cell {
-		padding-left: 0px;
-		padding-right: 0px;
-	}
-}
-
 @include mlu-bpm($mlu-bp-sm) {
 	.row__col,
-	.row__cell,
-	.row__card {
+	.row__cell {
 		width: auto;
 	}
 }
