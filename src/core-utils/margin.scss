@@ -1,3 +1,5 @@
+$mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
+
 .Ml-a {
 	margin-left: auto;
 }
@@ -6,9 +8,9 @@
 	margin-right: auto;
 }
 
+// Complex utils reuse existing that DRY
 .Mx-a {
-	margin-left: auto;
-	margin-right: auto;
+	@extend .Mr-a, .Ml-a;
 }
 
 .M-a {
@@ -19,48 +21,39 @@
 	margin: 0px;
 }
 
-// Adaptive utils because otherwise indent looks like too big
-.Mt4r {
-	margin-top: 3rem;
-
-	@include mlu-bpm($mlu-bp-md) {
-		margin-top: 4rem;
-	}
+/// g - gutter from $mlu-grid-gutters
+.Mt4g {
+	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 4, $direct: "top");
 }
 
-.Mb4r {
-	margin-bottom: 3rem;
-
-	@include mlu-bpm($mlu-bp-md) {
-		margin-bottom: 4rem;
-	}
+.Mb4g {
+	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 4, $direct: "bottom");
 }
 
-.Mt3r {
-	margin-top: 2rem;
-
-	@include mlu-bpm($mlu-bp-md) {
-		margin-top: 3rem;
-	}
+.Mt3g {
+	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 3, $direct: "top");
 }
 
-.Mb3r {
-	margin-bottom: 2rem;
-
-	@include mlu-bpm($mlu-bp-md) {
-		margin-bottom: 3rem;
-	}
+.Mb3g {
+	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 3, $direct: "bottom");
 }
 
-.Mt2r {
-	margin-top: 2rem;
+.Mt2g {
+	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 2, $direct: "top");
 }
 
-.Mb2r {
-	margin-bottom: 2rem;
+.Mb2g {
+	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 2, $direct: "bottom");
 }
 
-// Complex utils reuse existing that DRY
-.My2r {
-	@extend .Mt2r, .Mb2r;
+.Mb1g {
+	@include mlu-generate-gutter($mlu-gtr-sm-rem, $direct: "bottom");
+}
+
+.Ml-1g {
+	@include mlu-generate-gutter($coef: -1, $direct: "left");
+}
+
+.Ml1g {
+	@include mlu-generate-gutter($direct: "left");
 }

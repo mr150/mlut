@@ -34,7 +34,7 @@
 	max-width: $mlu-wrapper-max-width + ($mlu-gtr-sm * 2);
 	margin: auto;
 	box-sizing: border-box;
-	@include mlu-generate-grid-gutter($type: "padding");
+	@include mlu-generate-gutter($type: "padding", $calc: 1);
 
 	@each $key, $value in $mlu-grid-gutters {
 		@if $value != $prev-gtr {
@@ -53,5 +53,5 @@
 	margin-right: calc(-#{$mlu-gtr-sm});
 	margin-left: calc(-#{$mlu-gtr-sm});
 
-	@include mlu-generate-grid-gutter(-1, $coef: -1);
+	@include mlu-generate-gutter(-1, $coef: -1, $calc: 1);
 }

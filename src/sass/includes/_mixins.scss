@@ -129,14 +129,14 @@
 /// Generate grid gutter on different breakpoints.
 
 /// Gutter $type can be margin or padding in different directions.
-/// $direction can take 4 main directions from $mlu-main-directions
-/// and 1 additional - 'lr'(left right).
+/// $direct can take 4 main directions from $mlu-main-directions
+/// and 1 additional - 'x'(left right).
 /// You can pass map with custom gutters value in $gutters.
 /// $calc is fallback for old browsers. It need if your cols work this calc() width.
 /// $coef is coefficient by which the gutter value is multiplied
 
-@mixin mlu-generate-grid-gutter($init-gutter: mlu-grid-gutter($mlu-bp-sm), $type: "margin",
-$gutters: $mlu-grid-gutters, $calc: 1, $direction: "lr", $coef: 1) {
+@mixin mlu-generate-gutter($init-gutter: $mlu-gtr-sm, $type: "margin",
+$gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 	$prev-value: $init-gutter;
 
 	@if not ($type == "margin" or $type == "padding") {
@@ -145,33 +145,35 @@ $gutters: $mlu-grid-gutters, $calc: 1, $direction: "lr", $coef: 1) {
 
 	@if $init-gutter and $init-gutter != -1 {
 
-		@if $calc and $direction == "lr" {
+		@if $calc and $direct == "x" {
 			#{$type}: 0px ($mlu-grid-gutter-fallback * $coef);
 			#{$type}: 0px calc(#{$init-gutter * $coef});
-		} @else if index($mlu-main-directions, $direction) {
-			#{$type}-#{$direction}: $init-gutter * $coef;
+		} @else if index($mlu-main-directions, $direct) {
+			#{$type}-#{$direct}: $init-gutter * $coef;
 		} @else {
 			#{$type}: 0px ($init-gutter * $coef);
 		}
 	}
 
 	@each $key, $value in $gutters {
-		@if $prev-value != -1 and $value != $prev-value {
-			@include mlu-bpm($key) {
-				$tmp-val: if($calc, calc(#{$value * $coef}), $value * $coef);
+		$cur-val: if(unit($init-gutter) == "rem", mlu-px2rem($value), $value);
 
-				@if $direction == "lr" {
+		@if $prev-value != -1 and $cur-val != $prev-value {
+			@include mlu-bpm($key) {
+				$tmp-val: if($calc, calc(#{$cur-val * $coef}), $cur-val * $coef);
+
+				@if $direct == "x" {
 					#{$type}-left: $tmp-val;
 					#{$type}-right: $tmp-val;
-				} @else if index($mlu-main-directions, $direction) {
-					#{$type}-#{$direction}: $tmp-val;
+				} @else if index($mlu-main-directions, $direct) {
+					#{$type}-#{$direct}: $tmp-val;
 				} @else {
-					@error "Invalid gutter direction - '#{$direction}'";
+					@error "Invalid gutter direction - '#{$direct}'";
 				}
 			}
 		}
 
-		$prev-value: $value;
+		$prev-value: $cur-val;
 	}
 }
 

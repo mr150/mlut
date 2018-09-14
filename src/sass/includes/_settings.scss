@@ -110,7 +110,7 @@ $mlu-grid-cols-data: ();
 $mlu-row-card-default-width: 288px !default;
 
 /// Map with directions for css properties generation.
-/// Is used in 'mlu-generate-grid-gutter' mixin
+/// Is used in 'mlu-generate-gutter' mixin
 $mlu-main-directions: (
 	"top",
 	"left",

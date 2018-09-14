@@ -57,7 +57,7 @@
 }
 
 .row__col {
-	@include mlu-generate-grid-gutter();
+	@include mlu-generate-gutter($calc: 1);
 	box-sizing: border-box;
 }
 
@@ -65,11 +65,11 @@
 .row__cell {
 	width: 100% - ($mlu-grid-gutter-fallback * 2);
 	width: calc(100% - #{mlu-grid-gutter($mlu-bp-sm) * 2});
-	@include mlu-generate-grid-gutter($direction: "bottom", $coef: 2, $calc: false);
+	@include mlu-generate-gutter($direct: "bottom", $coef: 2);
 }
 
 .row__cell {
-	@include mlu-generate-grid-gutter($type: "padding");
+	@include mlu-generate-gutter($type: "padding", $calc: 1);
 }
 
 .row__item {
@@ -104,7 +104,7 @@
 
 /// row__sub for nested row without bottom margin inside row__col
 .row__sub {
-	@include mlu-generate-grid-gutter($direction: "bottom", $coef: -2, $calc: false);
+	@include mlu-generate-gutter($direct: "bottom", $coef: -2);
 }
 
 // for moving down during build
