@@ -130,7 +130,8 @@
 
 /// Gutter $type can be margin or padding in different directions.
 /// $direct can take 4 main directions from $mlu-main-directions
-/// and 1 additional - 'x'(left right).
+/// or combined direction - 'x'(left right), 'y'(top bottom)
+/// and 'xy'(left right top bottom).
 /// You can pass map with custom gutters value in $gutters.
 /// $calc is fallback for old browsers. It need if your cols work this calc() width.
 /// $coef is coefficient by which the gutter value is multiplied
@@ -144,14 +145,21 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 	}
 
 	@if $init-gutter and $init-gutter != -1 {
+		$tmp-val: if($calc, calc(#{$init-gutter * $coef}), $init-gutter * $coef);
 
-		@if $calc and $direct == "x" {
+		@if $direct == "x" {
 			#{$type}: 0px ($mlu-grid-gutter-fallback * $coef);
-			#{$type}: 0px calc(#{$init-gutter * $coef});
+			#{$type}: 0px $tmp-val;
+		} @else if $direct == "y" {
+			#{$type}: ($mlu-grid-gutter-fallback * $coef) 0px;
+			#{$type}: $tmp-val 0px;
+		} @else if $direct == "xy" {
+			#{$type}: ($mlu-grid-gutter-fallback * $coef);
+			#{$type}: $tmp-val;
 		} @else if index($mlu-main-directions, $direct) {
-			#{$type}-#{$direct}: $init-gutter * $coef;
+			#{$type}-#{$direct}: $tmp-val;
 		} @else {
-			#{$type}: 0px ($init-gutter * $coef);
+			@error "Invalid gutter direction - '#{$direct}'";
 		}
 	}
 
@@ -165,6 +173,11 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 				@if $direct == "x" {
 					#{$type}-left: $tmp-val;
 					#{$type}-right: $tmp-val;
+				} @else if $direct == "y" {
+					#{$type}-top: $tmp-val;
+					#{$type}-bottom: $tmp-val;
+				} @else if $direct == "xy" {
+					#{$type}: $tmp-val;
 				} @else if index($mlu-main-directions, $direct) {
 					#{$type}-#{$direct}: $tmp-val;
 				} @else {
@@ -178,6 +191,8 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 }
 
 /// Generate block with icon form css-$sprite in $pseudo element.
+/// $sprite is path to css-sprite in png.
+/// $pseudo is type of pseudo element: before or after.
 
 @mixin mlu-icon($sprite: "../img/css_sprites.png", $pseudo: "before") {
 	position: relative;
