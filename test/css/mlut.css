@@ -69,12 +69,16 @@ img {
 	padding: 0px;
 	font-size: 0px;
 	list-style: none;
+	counter-reset: mlu-row-item;
 }
 
 .row__col,
 .row__cell,
 .row__item {
+	position: relative;
 	display: inline-block;
+	max-width: 100%;
+	box-sizing: border-box;
 	text-align: left;
 	vertical-align: top;
 	font-size: 16px;
@@ -97,36 +101,25 @@ img {
 .row__col {
 	margin: 0px 1.5%;
 	margin: 0px calc(12px);
-	box-sizing: border-box;
-}
-
-.row__col,
-.row__cell {
+	margin-bottom: 24px;
 	width: 97%;
 	width: calc(100% - 24px);
-	margin-bottom: 24px;
+}
+
+.row__col.row {
+	margin-bottom: 0px;
 }
 
 .row__cell {
+	width: 100%;
 	padding: 0px 1.5%;
-	padding: 0px calc(12px);
-}
-
-.row__item {
-	box-sizing: border-box;
+	padding: 0px 12px;
 }
 
 .row.row__col,
 .row.row__cell,
-.row__row {
+.row.row__item {
 	font-size: 0px;
-	margin-bottom: 0px;
-}
-
-.row__row {
-	width: 100%;
-	margin: 0px;
-	padding: 0px;
 }
 
 .row__sub {
@@ -811,19 +804,13 @@ img {
 		margin-right: calc(16px);
 	}
 
-	.row__col,
-	.row__cell {
+	.row__col {
 		margin-bottom: 32px;
 	}
 
 	.row__cell {
-		padding-left: calc(16px);
-		padding-right: calc(16px);
-	}
-
-	.row__row {
-		margin: 0px;
-		padding: 0px;
+		padding-left: 16px;
+		padding-right: 16px;
 	}
 
 	.row__sub {

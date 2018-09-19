@@ -20,7 +20,7 @@ html(lang="ru")
 				.row.D-f
 					.row__col.test-content.W6c.W4c_sm
 						h3 Контент 
-					.row__col.row__row(class="W6s W4s_sm")
+					.row__item.row(class="W6s W4s_sm")
 						- for(i = 0; i < 4; i++)
 							.row__col.W6c
 								h3 Контент
@@ -29,13 +29,13 @@ html(lang="ru")
 				.row.D-f
 					.row__col.W6c
 						h3 Контент 
-					.row__col.row__row(class="W6s")
+					.row__item.row(class="W6s")
 						- for(i = 0; i < 2; i++)
 							.row__col.W12c
 								p Какой то контент #{i}
 				h2 Раскладка 4
 				.row.D-f
-					.row__col.row__row(class="W6s")
+					.row__item.row(class="W6s")
 						- for(i = 0; i < 2; i++)
 							.row__col.W12c
 								p Колонка #{i}
@@ -44,7 +44,7 @@ html(lang="ru")
 				h2 Раскладка 5
 				.row
 					- for(i = 0; i < 3; i++)
-						.row__col.row__row(class="W4s W4s_sm")
+						.row__item.row(class="W4s W4s_sm")
 							- for(var j = 0; j < 3; j++)
 								.row__col.W12c.W2c_sm
 									p Подколонка #{j} <br> в колонке #{i}
@@ -62,7 +62,7 @@ html(lang="ru")
 				.row.D-f
 					.row__col.W6c
 						h3 Контент 
-					.row__col.row__row(class="W6s")
+					.row__item.row(class="W6s")
 						- for(i = 0; i < 4; i++)
 							.row__col.W12c
 								p Колонка #{i}
