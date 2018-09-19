@@ -64,7 +64,7 @@
 }
 
 @include mlu-bpm($mlu-bp-sm) {
-	.W#{$mlu-grid-default-cols}c\+ {
+	.W#{$mlu-grid-default-cols}s {
 		width: 100%;
 	}
 }
@@ -143,7 +143,7 @@
 
 					@if $col-width != $prev-col-width or $key == $mlu-bp-md {
 						// '+' on grid utils means that width includes gutter
-						.Ml#{$i}c\+ {
+						.Ml#{$i}s {
 							margin-left: $col-width;
 						}
 					}
@@ -163,7 +163,7 @@
 				}
 
 				@if $col-width != $prev-col-width {
-					.W#{$i}c\+ {
+					.W#{$i}s {
 						width: $col-width;
 					}
 				}
@@ -205,7 +205,7 @@
 					width: calc(#{$col-width} - #{$col-gutter * 2});
 				}
 
-				.W#{$i}c\+_#{$key} {
+				.W#{$i}s_#{$key} {
 					width: $col-width;
 				}
 			}
@@ -213,7 +213,7 @@
 			@if $MLU-FLAG-COL-OFFSET and
 				mlu-breakpoint($key) > mlu-breakpoint($mlu-bp-sm) and
 				$i < mlu-grid-cols-count($key) - 1 {
-				.Ml#{$i}c\+_#{$key} {
+				.Ml#{$i}s_#{$key} {
 					margin-left: $col-width;
 				}
 

@@ -8,72 +8,11 @@ html(lang="ru")
 		include includes/header.pug
 		main
 			.wrapper
-				h1.title-h1 Grid test
-				h2 3 cols
-				.row.wrapper__row
-					- for(i = 3; i < 6; i++)
-						.test-content.row__col(class="W" + i + "c")
-							h3 .W#{i}c
-							p Et molestie ac, feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa, eget egestas purus viverra?
-				section
-					h2 12 cols
-					.row.wrapper__row.grid-debug
-						- for(i = 0; i < 12; i++)
-							.row__col(class="W1c")
-								.test-content
-									h3 1
-				h2 Wrapper
-				.M-a(class="W7c")
-					h3 Просто текст в контейнере
-					p Aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl. Suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet eget sit amet tellus cras adipiscing enim eu turpis egestas pretium aenean pharetra, magna ac placerat.
-				h2 Row mixed in col without gutter left, right, bottom
-				.row.wrapper__row
-					.row__col.row__row.test-row(class="W9c+")
-						- for(i = 3; i < 6; i++)
-							.row__col.test-content(class="W" + i + "c")
-								h3 Parent .W9c
-								p this .W#{i}c
-					.row__col(class="W3c")
-						.test-content
-							h3 .W3c
-				p
-					b All 7 nested rows examples 
-					a(href="nested-row.html") here.
-				hr
-				h2 Cards
-				.row.wrapper__row
-					- for(i = 3; i < 6; i++)
-						.row__col.test-card.W-card.P8
-							h3 Карточка #{i}
-							p Описание карточки в несколько строчек с подробностями
-				hr
-				h2 Cells
-				.row
-					- for(i = 3; i < 6; i++)
-						.row__cell.test-cell(class="W" + i + "c")
-							h3 Ячейка #{i}
-							p Текст внутри ячейки
-				h2 Row in cell without double gutter
-				.row
-					.row__cell.row__row.test-row(class="W9c+")
-						- for(i = 3; i < 6; i++)
-							.row__cell(class="W" + i + "c")
-								h3 Parent .W9c
-								p this .W#{i}c
-					.row__cell.test-cell(class="W3c")
-						h3 .W3c
-				p
-					b Set of ready layouts 
-					a(href="layouts.html") here.
-				h2 Items
-				.row
-					- for(i = 0; i < 3; i++)
-						.row__item.test-row.W3c
-							h3 Элемент #{i}
-							p элемент без отступов
-					.row__item.test-row.W3c.Ml1g
-						h3 Последний элемент
-						p с внешним отступом
+				h1.title-h1 MLUT tests
+				ul
+					li: a(href="grid.html") Grid tests
+					li: a(href="nested-row.html") Nested rows
+					li: a(href="layouts.html") Set of ready layouts
 
 		include includes/footer.pug
 		include includes/scripts.pug
