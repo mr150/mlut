@@ -58,102 +58,67 @@
 	max-width: 100%;
 }
 
-.W1c_xs {
+.W1c {
 	width: 50% - ($mlu-grid-gutter-fallback * 2);
 	width: calc(50% - #{$mlu-gtr-sm * 2});
 }
 
-@include mlu-bpm($mlu-bp-sm) {
-	.W#{$mlu-grid-default-cols}s {
-		width: 100%;
-	}
+.W50p {
+	width: 50%;
 }
 
-.W#{$mlu-grid-default-cols}c {
-	$prev-gtr: 0;
+@each $key, $value in $mlu-grid-cols {
+	//$mq: ($key, mlu-breakpoint-next($key));
+	$mq: $key;
+	$col-gutter: mlu-grid-gutter($key);
+	$prev-col-gutter: 0;
 
-	width: 100% - ($mlu-grid-gutter-fallback * 2);
+	@if index($mlu-grid-cols, ($key $value)) > 1 {
+		$prev-col-gutter: mlu-grid-gutter(mlu-breakpoint-prev-name($key));
+	}
 
-	@each $key, $value in $mlu-grid-gutters {
-		@if $value != $prev-gtr {
-			@include mlu-bpm($key) {
-				width: calc(100% - #{$value * 2});
+	@include mlu-bpm($mq...) {
+		// Generating utils that work only on breakpoints
+
+		@if $col-gutter != $prev-col-gutter and $key != $mlu-bp-sm {
+			.W1c {
+				width: calc(50% - #{$col-gutter * 2});
 			}
 		}
 
-		$prev-gtr: $value;
-	}
-}
-
-
-@each $key, $value in $mlu-grid-cols {
-	$mq: ($key, mlu-breakpoint-next($key));
-	$prev-cols-list: ();
-	$col-gutter: mlu-grid-gutter($key);
-	$bp-less-lg: false;
-
-	@if mlu-breakpoint($key) < mlu-breakpoint($mlu-bp-lg) {
-		$bp-less-lg: true;
-	}
-
-	// Calculation widths and offsets on default cols count and less.
-	// Default is $mlu-grid-default-cols.
-	@if $value <= $mlu-grid-default-cols {
-		@if index($mlu-grid-cols, ($key $value)) > 1 {
-			$prev-cols-list: map-get($mlu-grid-cols-data, mlu-breakpoint-prev-name($key));
+		.W-a_#{$key} {
+			width: auto;
 		}
 
-		@include mlu-bpm($key) {
+		@each $gtr-key, $gtr-value in $mlu-grid-gutters {
+			$cols-count: mlu-grid-cols-count($gtr-key);
 
-			@for $i from 1 to $mlu-grid-default-cols {
-				$col-width: mlu-decimal-floor($i / $value * 100%, 3);
+			@for $i from 1 through mlu-grid-cols-count($key) {
+				$col-width: mlu-decimal-floor($i / $cols-count * 100%, 3);
 
-				@if index($mlu-grid-cols, ($key $value)) == 1 {
-					$prev-cols-list: append($prev-cols-list, (0, 0));
-				}
+				@if $i <= $cols-count and
+					($gtr-key == $key or ($gtr-value < $col-gutter and $col-gutter != $prev-col-gutter)) {
+					.W#{$i}c_#{$gtr-key} {
+						@if $MLU-FLAG-CALC-FALLBACK or $gtr-key == $mlu-bp-sm {
+							width: mlu-decimal-floor($col-width, 2) - ($mlu-grid-gutter-fallback * 2);
+						}
 
-				$prev-col-width: nth(nth($prev-cols-list, $i), 1);
-				$prev-col-gutter: nth(nth($prev-cols-list, $i), 2);
-
-				// Proportionally calculation widths and offsets
-				// on cols count fewer than default.
-				@if $value < $mlu-grid-default-cols {
-					$step: 1 / $value;
-					$part: $i / $mlu-grid-default-cols / $step;
-
-					@if $part < 1 {
-						$part: 1;
-					} @else if $part < 2 {
-						$part: 2;
-					} @else {
-						$part: floor($part);
+						width: calc(#{$col-width} - #{$col-gutter * 2});
 					}
 
-					$col-width: mlu-decimal-floor($part / $value * 100%, 3);
-				}
+					.W#{$i}s_#{$gtr-key} {
+						width: $col-width;
+					}
 
-				// Generate offset dependending on the count and width
-				// of cols in the grid at different breakpoints.
-
-				// Offsets start generate from $mlu-bp-md and continues
-				// if current width and gutter != previous cols width and gutter
-				// '$i < $mlu-grid-default-cols - 1' because offset 'Ml11c' makes no sense
-				@if $MLU-FLAG-COL-OFFSET and
-					($value >= mlu-grid-cols-count($mlu-bp-md) and $i < $mlu-grid-default-cols - 1) {
-
-					@if $col-width != $prev-col-width or $key == $mlu-bp-md {
-						// '+' on grid utils means that width includes gutter
-						.Ml#{$i}s {
+					@if $MLU-FLAG-COL-OFFSET and
+						mlu-breakpoint($gtr-key) > mlu-breakpoint($mlu-bp-sm) and
+						$i < mlu-grid-cols-count($gtr-key) - 1 {
+						.Ml#{$i}s_#{$gtr-key} {
 							margin-left: $col-width;
 						}
-					}
 
-					@if ($col-width != $prev-col-width or $col-gutter != $prev-col-gutter) or
-						$key == $mlu-bp-md {
-						// Generation calc() fallback if flag turn on or
-						// current breakpoint less that lg
-						.Ml#{$i}c {
-							@if $MLU-FLAG-CALC-LG-FALLBACK or $bp-less-lg {
+						.Ml#{$i}c_#{$gtr-key} {
+							@if $MLU-FLAG-CALC-FALLBACK {
 								margin-left: mlu-decimal-floor($col-width, 2) + $mlu-grid-gutter-fallback;
 							}
 
@@ -161,69 +126,12 @@
 						}
 					}
 				}
-
-				@if $col-width != $prev-col-width {
-					.W#{$i}s {
-						width: $col-width;
-					}
-				}
-
-				@if $col-width != $prev-col-width or $col-gutter != $prev-col-gutter {
-					.W#{$i}c {
-						@if $MLU-FLAG-CALC-LG-FALLBACK or $bp-less-lg {
-							width: mlu-decimal-floor($col-width, 2) - ($mlu-grid-gutter-fallback * 2);
-						}
-
-						width: calc(#{$col-width} - #{$col-gutter * 2});
-					}
-				}
-
-				$prev-cols-list: set-nth($prev-cols-list, $i, ($col-width, $col-gutter));
 			}
-
-			// Push list with all cols width and gutter on current breakpoint
-			// in map with all data about grid cols
-			$mlu-grid-cols-data: map-merge($mlu-grid-cols-data, ($key: $prev-cols-list));
 		}
-	}
 
-	@if index($mlu-grid-cols, ($key $value)) == length($mlu-grid-cols) {
-		$mq: $key;
-	}
-
-	@include mlu-bpm($mq...) {
-		// Generating utils that work only on breakpoints
-		@for $i from 1 through mlu-grid-cols-count($key) {
-			$col-width: mlu-decimal-floor($i / $value * 100%, 3);
-
-			@if $key != $mlu-bp-lg {
-				.W#{$i}c_#{$key} {
-					@if $MLU-FLAG-CALC-LG-FALLBACK or $bp-less-lg {
-						width: mlu-decimal-floor($col-width, 2) - ($mlu-grid-gutter-fallback * 2);
-					}
-
-					width: calc(#{$col-width} - #{$col-gutter * 2});
-				}
-
-				.W#{$i}s_#{$key} {
-					width: $col-width;
-				}
-			}
-
-			@if $MLU-FLAG-COL-OFFSET and
-				mlu-breakpoint($key) > mlu-breakpoint($mlu-bp-sm) and
-				$i < mlu-grid-cols-count($key) - 1 {
-				.Ml#{$i}s_#{$key} {
-					margin-left: $col-width;
-				}
-
-				.Ml#{$i}c_#{$key} {
-					@if $MLU-FLAG-CALC-LG-FALLBACK or $bp-less-lg {
-						margin-left: mlu-decimal-floor($col-width, 2) + $mlu-grid-gutter-fallback;
-					}
-
-					margin-left: calc(#{$col-width} + #{$col-gutter});
-				}
+		@if mlu-breakpoint($key) > mlu-breakpoint($mlu-bp-md) {
+			.Ml0c_#{$key} {
+				margin-left: mlu-grid-gutter($key);
 			}
 		}
 	}

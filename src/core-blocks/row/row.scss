@@ -82,13 +82,6 @@
 	font-size: 0px;
 }
 
-@include mlu-bpm($mlu-bp-sm) {
-	.row__col,
-	.row__cell {
-		width: auto;
-	}
-}
-
 /// row__sub for nested row without bottom margin inside row__col
 .row__sub {
 	@include mlu-generate-gutter($direct: "bottom", $coef: -2);

@@ -11,8 +11,9 @@
 			@if $item-index == 1 {
 				padding: ($value * 4) 0px;
 			} @else {
-				$prev-col-width: nth(nth(map-get($mlu-grid-cols-data, mlu-breakpoint-prev-name($key)), 1), 1);
-				$prev-col-gutter: nth(nth(map-get($mlu-grid-cols-data, mlu-breakpoint-prev-name($key)), 1), 2);
+				$prev-bp-name: mlu-breakpoint-prev-name($key);
+				$prev-col-width: mlu-decimal-floor(1 / mlu-grid-cols-count($prev-bp-name) * 100%, 3);
+				$prev-col-gutter: mlu-grid-gutter($prev-bp-name);
 			}
 
 			@if $value != $prev-col-gutter {

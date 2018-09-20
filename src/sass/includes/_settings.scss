@@ -2,8 +2,8 @@
 
 /// Turn on additional features but increases final CSS size
 $MLU-FLAG-EXTENDED: false !default;
-/// Turn on CSS calc() fallback for grid utils on large breakpoints
-$MLU-FLAG-CALC-LG-FALLBACK: false !default;
+/// Turn on CSS calc() fallback for grid utils on md+ breakpoints
+$MLU-FLAG-CALC-FALLBACK: false !default;
 /// Turn on generation grid col offset utils (Ml)
 $MLU-FLAG-COL-OFFSET: true !default;
 
