@@ -12,73 +12,73 @@ html(lang="ru")
 				h1.title-h1 Nested rows examples
 				h2 Row mixed in col without gutter left, right, bottom
 				.row.wrapper__row
-					.row__item.row.test-row(class="W9s")
+					.row__item.row.test-row.W4s_sm.W9s_md
 						- for(i = 3; i < 6; i++)
-							.row__col.test-content(class="W" + i + "c")
+							.row__col.test-content.W2c_sm(class="W" + i + "c_md")
 								h3 Parent .W9c
 								p this .W#{i}c
-					.row__col(class="W3c")
+					.row__col.W2c_sm.W3c_md
 						.test-content
 							h3 .W3c
 				h2 Row mixed in col with gutter left, right
 				.row.wrapper__row
-					.row__col.row.test-row(class="W9c")
+					.row__col.row.test-row.W9c_md
 						- for(i = 3; i < 6; i++)
-							.row__col.test-content(class="W" + i + "c")
+							.row__col.test-content.W2c_sm(class="W" + i + "c_md")
 								h3 Parent .W9c
 								p this .W#{i}c
-					.row__col(class="W3c")
+					.row__col.W2c_sm.W3c_md
 						.test-content
 							h3 .W3c
 				h2 Row nested in col with gutter left, right, bottom
 				.row.wrapper__row
-					.row__col.test-row(class="W9c")
+					.row__col.test-row.W9c_md
 						.row
 							- for(i = 3; i < 6; i++)
-								.row__col.test-content(class="W" + i + "c")
+								.row__col.test-content.W2c_sm(class="W" + i + "c_md")
 									h3 Parent .W9c
 									p this .W#{i}c
-					.row__col.test-content(class="W3c")
+					.row__col.test-content.W2c_sm.W3c_md
 						h3 .W3c
 				h2 Row nested in col with gutter bottom only
 				.row.wrapper__row
-					.row__col.test-row(class="W9c")
+					.row__col.test-row.W9c_md
 						.row.wrapper__row
 							- for(i = 3; i < 6; i++)
-								.row__col.test-content(class="W" + i + "c")
+								.row__col.test-content.W2c_sm(class="W" + i + "c_md")
 									h3 Parent .W9c
 									p this .W#{i}c
-					.row__col.test-content(class="W3c")
+					.row__col.test-content.W2c_sm.W3c_md
 						h3 .W3c
 				h2 Row nested in col with gutter left, rigth
 				.row.wrapper__row
-					.row__col.test-row(class="W9c")
+					.row__col.test-row.W9c_md
 						.row.row__sub
 							- for(i = 3; i < 6; i++)
-								.row__col.test-content(class="W" + i + "c")
+								.row__col.test-content.W2c_sm(class="W" + i + "c_md")
 									h3 Parent .W9c
 									p this .W#{i}c
-					.row__col.test-content(class="W3c")
+					.row__col.test-content.W2c_sm.W3c_md
 						h3 .W3c
 				h2 Row nested in col minus gutter
 				.row.wrapper__row
-					.row__col.test-row(class="W9c")
+					.row__col.test-row.W9c_md
 						.row.row__sub.wrapper__row
 							- for(i = 3; i < 6; i++)
-								.row__col.test-content(class="W" + i + "c")
+								.row__col.test-content.W2c_sm(class="W" + i + "c_md")
 									h3 Parent .W9c
 									p this .W#{i}c
-					.row__col.test-content(class="W3c")
+					.row__col.test-content.W2c_sm.W3c_md
 						h3 .W3c
 				h2 Row nested in col without gutter
 				.row.wrapper__row
-					.row__col.row.test-row(class="W9c")
+					.row__col.row.test-row.W9c_md
 						.row.wrapper__row
 							- for(i = 3; i < 6; i++)
-								.row__col.test-content(class="W" + i + "c")
+								.row__col.test-content.W2c_sm(class="W" + i + "c_md")
 									h3 Parent .W9c
 									p this .W#{i}c
-					.row__col.test-content(class="W3c")
+					.row__col.test-content.W2c_sm.W3c_md
 						h3 .W3c
 
 		include includes/footer.pug

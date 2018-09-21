@@ -1168,6 +1168,10 @@ img {
 		margin-left: 16px;
 	}
 
+	.Ml0_lg {
+		margin-left: 0;
+	}
+
 	.Mt4g {
 		margin-top: 4rem;
 	}
@@ -1396,6 +1400,10 @@ img {
 
 	.Ml0c_xl {
 		margin-left: 16px;
+	}
+
+	.Ml0_xl {
+		margin-left: 0;
 	}
 
 	.Rj-sa_xl {
