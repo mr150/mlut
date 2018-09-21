@@ -222,7 +222,7 @@ img {
 }
 
 .D-f,
-.Rfx {
+.mRfx {
 	display: flex;
 }
 
@@ -243,7 +243,7 @@ img {
 }
 
 .Ta-c,
-.Rj-c {
+.mRj-c {
 	text-align: center;
 }
 
@@ -252,7 +252,7 @@ img {
 }
 
 .Ta-r,
-.Rj-e {
+.mRj-e {
 	text-align: right;
 }
 
@@ -260,15 +260,14 @@ img {
 	direction: rtl;
 }
 
-.Tov {
+.mTov {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
-.Fxw-w,
-.Rfx {
-	flex-wrap: wrap;
+.Fxw-wr {
+	flex-wrap: wrap-reverse;
 }
 
 .As-s {
@@ -291,12 +290,12 @@ img {
 }
 
 .Jc-fe,
-.Rj-e {
+.mRj-e {
 	justify-content: flex-end;
 }
 
 .Jc-c,
-.Rj-c {
+.mRj-c {
 	justify-content: center;
 }
 
@@ -313,12 +312,12 @@ img {
 }
 
 .Ai-fe,
-.Rai-fe {
+.mRai-fe {
 	align-items: flex-end;
 }
 
 .Ai-c,
-.Rai-c {
+.mRai-c {
 	align-items: center;
 }
 
@@ -450,7 +449,7 @@ img {
 }
 
 .P8 {
-	padding: 8px;
+	padding: 0.5em 8px;
 }
 
 .Ov {
@@ -461,18 +460,20 @@ img {
 	overflow: auto;
 }
 
-.Rai-c > .row__col,
-.Rai-c > .row__card,
-.Rai-c > .row__item,
-.Rai-c > .row__cell {
+.mRai-c > .row__col,
+.mRai-c > .row__item,
+.mRai-c > .row__cell {
 	vertical-align: middle;
 }
 
-.Rai-fe > .row__col,
-.Rai-fe > .row__card,
-.Rai-fe > .row__item,
-.Rai-fe > .row__cell {
+.mRai-fe > .row__col,
+.mRai-fe > .row__item,
+.mRai-fe > .row__cell {
 	vertical-align: bottom;
+}
+
+.mRfx {
+	flex-wrap: wrap;
 }
 
 .sr-only {
@@ -1406,27 +1407,27 @@ img {
 		margin-left: 0;
 	}
 
-	.Rj-sa_xl {
+	.mRj-sa_xl {
 		text-align: center;
 		justify-content: space-around;
 	}
 
-	.Rj-s_xl {
+	.mRj-s_xl {
 		text-align: left;
 		justify-content: flex-start;
 	}
 
-	.Rj-c_xl {
+	.mRj-c_xl {
 		text-align: center;
 		justify-content: center;
 	}
 
-	.Rj-e_xl {
+	.mRj-e_xl {
 		text-align: right;
 		justify-content: flex-end;
 	}
 
-	.Rj-sb_xl {
+	.mRj-sb_xl {
 		text-align: center;
 		justify-content: space-between;
 	}
@@ -1447,22 +1448,22 @@ img {
 		direction: rtl;
 	}
 
-	.Rj-s_sm {
+	.mRj-s_sm {
 		text-align: left;
 		justify-content: flex-start;
 	}
 
-	.Rj-c_sm {
+	.mRj-c_sm {
 		text-align: center;
 		justify-content: center;
 	}
 
-	.Rj-e_sm {
+	.mRj-e_sm {
 		text-align: right;
 		justify-content: flex-end;
 	}
 
-	.Rj-sb_sm {
+	.mRj-sb_sm {
 		text-align: center;
 		justify-content: space-between;
 	}
@@ -1477,27 +1478,27 @@ img {
 		direction: rtl;
 	}
 
-	.Rj-sa_md {
+	.mRj-sa_md {
 		text-align: center;
 		justify-content: space-around;
 	}
 
-	.Rj-s_md {
+	.mRj-s_md {
 		text-align: left;
 		justify-content: flex-start;
 	}
 
-	.Rj-c_md {
+	.mRj-c_md {
 		text-align: center;
 		justify-content: center;
 	}
 
-	.Rj-e_md {
+	.mRj-e_md {
 		text-align: right;
 		justify-content: flex-end;
 	}
 
-	.Rj-sb_md {
+	.mRj-sb_md {
 		text-align: center;
 		justify-content: space-between;
 	}
@@ -1512,27 +1513,27 @@ img {
 		direction: rtl;
 	}
 
-	.Rj-sa_lg {
+	.mRj-sa_lg {
 		text-align: center;
 		justify-content: space-around;
 	}
 
-	.Rj-s_lg {
+	.mRj-s_lg {
 		text-align: left;
 		justify-content: flex-start;
 	}
 
-	.Rj-c_lg {
+	.mRj-c_lg {
 		text-align: center;
 		justify-content: center;
 	}
 
-	.Rj-e_lg {
+	.mRj-e_lg {
 		text-align: right;
 		justify-content: flex-end;
 	}
 
-	.Rj-sb_lg {
+	.mRj-sb_lg {
 		text-align: center;
 		justify-content: space-between;
 	}
