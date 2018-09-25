@@ -122,10 +122,6 @@ img {
 	font-size: 0px;
 }
 
-.row__sub {
-	margin-bottom: -24px;
-}
-
 /***
 * Wrapper:
 */
@@ -390,22 +386,21 @@ img {
 	width: 50%;
 }
 
-.Ml-a,
-.Mx-a {
-	margin-left: auto;
-}
-
-.Mr-a,
-.Mx-a {
-	margin-right: auto;
+.M0 {
+	margin: 0px;
 }
 
 .M-a {
 	margin: auto;
 }
 
-.M0 {
-	margin: 0px;
+.Ml-a {
+	margin-left: auto;
+}
+
+.Mx-a {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .Mt4g {
@@ -434,6 +429,10 @@ img {
 
 .Mb1g {
 	margin-bottom: 0.75rem;
+}
+
+.Mb-2g {
+	margin-bottom: -24px;
 }
 
 .Ml-1g {
@@ -749,10 +748,6 @@ img {
 	.row__cell {
 		padding-left: 16px;
 		padding-right: 16px;
-	}
-
-	.row__sub {
-		margin-bottom: -32px;
 	}
 
 	.wrapper {
@@ -1201,6 +1196,10 @@ img {
 		margin-bottom: 1rem;
 	}
 
+	.Mb-2g {
+		margin-bottom: -32px;
+	}
+
 	.Ml-1g {
 		margin-left: -16px;
 	}
@@ -1208,11 +1207,28 @@ img {
 	.Ml1g {
 		margin-left: 16px;
 	}
+
+	.M-a {
+		margin: auto;
+	}
+
+	.Ml-a {
+		margin-left: auto;
+	}
+
+	.Mx-a {
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 @media (min-width: 1168px) {
 	.D-n_xl {
 		display: none;
+	}
+
+	.D_xl {
+		display: block;
 	}
 
 	.Dir-r_xl {
@@ -1407,6 +1423,15 @@ img {
 		margin-left: 0;
 	}
 
+	.Ml-a_xl {
+		margin-left: auto;
+	}
+
+	.Mx-a_xl {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
 	.mRj-sa_xl {
 		text-align: center;
 		justify-content: space-around;
@@ -1444,8 +1469,21 @@ img {
 		display: none;
 	}
 
+	.D_sm {
+		display: block;
+	}
+
 	.Dir-r_sm {
 		direction: rtl;
+	}
+
+	.Ml-a_sm {
+		margin-left: auto;
+	}
+
+	.Mx-a_sm {
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.mRj-s_sm {
@@ -1474,8 +1512,21 @@ img {
 		display: none;
 	}
 
+	.D_md {
+		display: block;
+	}
+
 	.Dir-r_md {
 		direction: rtl;
+	}
+
+	.Ml-a_md {
+		margin-left: auto;
+	}
+
+	.Mx-a_md {
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.mRj-sa_md {
@@ -1509,8 +1560,21 @@ img {
 		display: none;
 	}
 
+	.D_lg {
+		display: block;
+	}
+
 	.Dir-r_lg {
 		direction: rtl;
+	}
+
+	.Ml-a_lg {
+		margin-left: auto;
+	}
+
+	.Mx-a_lg {
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.mRj-sa_lg {

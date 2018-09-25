@@ -55,5 +55,9 @@
 		.D-n_#{$key} {
 			display: none;
 		}
+
+		.D_#{$key} {
+			display: block;
+		}
 	}
 }

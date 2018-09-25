@@ -81,12 +81,3 @@
 .row.row__item {
 	font-size: 0px;
 }
-
-/// row__sub for nested row without bottom margin inside row__col
-.row__sub {
-	@include mlu-generate-gutter($direct: "bottom", $coef: -2);
-}
-
-// for moving down during build
-@media (min-height: 0px) {
-}

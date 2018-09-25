@@ -1,24 +1,20 @@
 $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 
-.Ml-a {
-	margin-left: auto;
-}
-
-.Mr-a {
-	margin-right: auto;
-}
-
-// Complex utils reuse existing that DRY
-.Mx-a {
-	@extend .Mr-a, .Ml-a;
+.M0 {
+	margin: 0px;
 }
 
 .M-a {
 	margin: auto;
 }
 
-.M0 {
-	margin: 0px;
+.Ml-a {
+	margin-left: auto;
+}
+
+.Mx-a {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /// g - gutter from $mlu-grid-gutters
@@ -50,10 +46,59 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 	@include mlu-generate-gutter($mlu-gtr-sm-rem, $direct: "bottom");
 }
 
+.Mb-2g {
+	@include mlu-generate-gutter($direct: "bottom", $coef: -2);
+}
+
 .Ml-1g {
 	@include mlu-generate-gutter($coef: -1, $direct: "left");
 }
 
 .Ml1g {
 	@include mlu-generate-gutter($direct: "left");
+}
+
+@each $key, $value in $mlu-grid-gutters {
+	$prev-col-gutter: 0;
+	$larger-sm: false;
+
+	@if index($mlu-grid-gutters, ($key $value)) > 1 {
+		$prev-col-gutter: mlu-grid-gutter(mlu-breakpoint-prev-name($key));
+		$larger-sm: true;
+	}
+
+	@include mlu-bpm($key) {
+		// Repeat generation utility if gutter changed on breakpoint
+		@if $value != $prev-col-gutter and $larger-sm {
+			.M-a {
+				margin: auto;
+			}
+
+			.Ml-a {
+				margin-left: auto;
+			}
+
+			.Mx-a {
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+	}
+
+	$mq: ($key, mlu-breakpoint-next($key));
+
+	@if index($mlu-grid-gutters, ($key $value)) == length($mlu-grid-gutters) {
+		$mq: $key;
+	}
+
+	@include mlu-bpm($mq...) {
+		.Ml-a_#{$key} {
+			margin-left: auto;
+		}
+
+		.Mx-a_#{$key} {
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
 }
