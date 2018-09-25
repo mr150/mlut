@@ -147,6 +147,10 @@
 		@return mlu-decimal-round($number / $divider, 2) * 1rem;
 	}
 
+	@if $unit == "no" {
+		@return mlu-decimal-round($number / $divider, 2);
+	}
+
 	@return mlu-decimal-round($number / $divider, 2) * 1em;
 }
 
@@ -154,4 +158,10 @@
 
 @function mlu-px2rem($number, $divider: $MLU-BROWSER-FONT-SIZE) {
 	@return mlu-px2em($number, $divider, "rem");
+}
+
+/// Wrapper on 'mlu-px2em' for converting to line-height unit
+
+@function mlu-px2lh($number, $divider: $mlu-base-font-size) {
+	@return mlu-px2em($number, $divider, "no");
 }
