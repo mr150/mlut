@@ -117,7 +117,7 @@
 	}
 }
 
-/// For generate clearfix
+/// Generate clearfix for float layout
 @mixin clearfix {
 	&:after {
 		display: table;
@@ -205,4 +205,30 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 
 		@content;
 	}
+}
+
+/// Generate circle
+
+/// $diametr is circle diametr.
+/// $bgc is circle background-color.
+
+@mixin mlu-circle($diametr, $bgc: transparent) {
+	width: $diametr;
+	height: $diametr;
+	background-color: $bgc;
+	border-radius: 50%;
+}
+
+/// Generate blank for border triangle.
+
+/// $size is triangle size.
+/// For create triangle you need to add border-color for one of side
+/// after this mixin.
+/// For example:
+/// border-top-color: #f00
+
+@mixin mlu-triangle($size) {
+	width: 0px;
+	height: 0px;
+	border: $size transparent solid;
 }
