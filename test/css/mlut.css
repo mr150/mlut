@@ -12,6 +12,14 @@ img {
 
 /*===CORE-BLOCKS===*/
 
+.reset {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	font: inherit;
+	list-style: none;
+}
+
 /***
 * Page:
 */
