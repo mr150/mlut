@@ -232,3 +232,66 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 	height: 0px;
 	border: $size transparent solid;
 }
+
+/// Generate rhomb with css linear-gradient() in background-image.
+
+/// $edge-ang is linear-gradient angle of rhomb edges; Can be only number in deg.
+
+/// $edge-cs is color stop in linear-gradient of rhomb edges; Can be number with unit.
+
+/// $bgc is rhomb color; It can be single color or list in linear-gradient
+/// value format; For example:
+/// $bgc: (167deg, blue 50%, #f0f, #000)
+/// Angle in gradient can be only number in deg; If you pass gradient value
+/// top rhomb edge get first color, bottom edge get last color and
+/// rhomb body get full gradient.
+
+/// $body-size is background-size of linear-gradient of rhomb body.
+
+/// If you already generated rhomb and want to change their color
+/// pass to $change '1'; You also can change $body-size with $change turned on
+
+@mixin mlu-bgi-rhomb($edge-ang: 150deg, $edge-cs: 50%, $bgc: #000,
+$body-size: (100% 48%), $change: false) {
+
+	@if not (type-of($edge-ang) == "number" and unit($edge-ang) == "deg") {
+		@error "Invalid value of argument $edge-and - '#{$edge-ang}'. Expected angle in deg.";
+	}
+
+	$first-color: $bgc;
+	$last-color: $first-color;
+	$body-gradient: ($bgc, $bgc);
+	$edge-ang-bot: $edge-ang + 180;
+
+	@if type-of($bgc) == "list" {
+		$first-color: nth(nth($bgc, 1), 1);
+		$val-type: type-of($first-color);
+
+		@if $val-type == "number" and unit($first-color) == "deg" {
+			$first-color: nth(nth($bgc, 2), 1);
+		} @else if $val-type != "color" or ($val-type == "number" and unitless(nth($bgc, 1))) {
+			@error "Invalid gradient format: first value can be angle in deg or color but now value is '#{$first-color}'";
+		}
+
+		$last-color: nth(nth($bgc, length($bgc)), 1);
+		$body-gradient: $bgc;
+	} @else if type-of($bgc) != "color" {
+		@error "Wrong type of argument $bgc - '#{type-of($bgc)}'. Expected 'color' or 'list'";
+	}
+
+	@if not $change {
+		box-sizing: border-box;
+		background-repeat: no-repeat;
+		background-position: 0px 0px, 100% 0px, 50% 50%, 0px 102%, 100% 102%;
+	}
+
+	@if not $change or $body-size != (100% 48%) {
+		background-size: 51% 27%, 51% 27%, $body-size, 51% 28%, 51% 28%;
+	}
+
+	background-image: linear-gradient($edge-ang, transparent $edge-cs, $first-color $edge-cs),
+		linear-gradient(-$edge-ang, transparent $edge-cs, $first-color $edge-cs),
+		linear-gradient($body-gradient),
+		linear-gradient(-$edge-ang-bot, transparent $edge-cs, $last-color $edge-cs),
+		linear-gradient($edge-ang-bot, transparent $edge-cs, $last-color $edge-cs);
+}
