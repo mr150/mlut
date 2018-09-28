@@ -295,3 +295,12 @@ $body-size: (100% 48%), $change: false) {
 		linear-gradient(-$edge-ang-bot, transparent $edge-cs, $last-color $edge-cs),
 		linear-gradient($edge-ang-bot, transparent $edge-cs, $last-color $edge-cs);
 }
+
+/// Restore default browser outline on focus state
+
+@mixin mlu-restore-outline {
+	&:focus {
+		outline: 1px dotted #212121;
+		outline: -webkit-focus-ring-color auto 5px;
+	}
+}
