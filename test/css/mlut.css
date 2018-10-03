@@ -385,6 +385,10 @@ img {
 	max-width: 100%;
 }
 
+.W-a {
+	width: auto;
+}
+
 .W1c {
 	width: 47%;
 	width: calc(50% - 24px);

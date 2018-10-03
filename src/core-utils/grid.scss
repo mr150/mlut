@@ -58,6 +58,10 @@
 	max-width: 100%;
 }
 
+.W-a {
+	width: auto;
+}
+
 .W1c {
 	width: 50% - ($mlu-grid-gutter-fallback * 2);
 	width: calc(50% - #{$mlu-gtr-sm * 2});
