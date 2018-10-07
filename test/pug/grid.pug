@@ -13,19 +13,19 @@ html(lang="ru")
 				h2 3 cols
 				.row.wrapper__row
 					- for(i = 3; i < 6; i++)
-						.test-content.row__col(class="W2c_sm W" + i + "c_md")
+						.test-content.row__col.W2gc_sm(class="W" + i + "gc_md")
 							h3 .W#{i}c
 							p Et molestie ac, feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa, eget egestas purus viverra?
 				section
 					h2 12 cols
 					.row.wrapper__row.grid-debug
 						- for(i = 0; i < 12; i++)
-							.row__col(class="W1c_sm W1c_md")
+							.row__col.W1gc_sm.W1gc_md
 								.test-content
 									h3 1
 				hr
 				h2 Wrapper
-				.M-a(class="W7c_md")
+				.M-a.W7gc_md
 					h3 Просто текст в контейнере
 					p Aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl. Suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet eget sit amet tellus cras adipiscing enim eu turpis egestas pretium aenean pharetra, magna ac placerat.
 				hr
@@ -39,17 +39,17 @@ html(lang="ru")
 				h2 Cells
 				.row
 					- for(i = 3; i < 6; i++)
-						.row__cell.test-cell(class="W2s_sm W" + i + "s_md")
+						.row__cell.test-cell.W2gs_sm(class="W" + i + "gs_md")
 							h3 Ячейка #{i}
 							p Текст внутри ячейки
 				hr
 				h2 Items
 				.row
 					- for(i = 0; i < 3; i++)
-						.row__item.test-row.W2c_sm.W3c_md
+						.row__item.test-row.W2gc_sm.W3gc_md
 							h3 Элемент #{i}
 							p элемент без отступов
-					.row__item.test-row.W2c_sm.W3c_md.Ml1g
+					.row__item.test-row.W2gc_sm.W3gc_md.Ml1gg
 						h3 Последний элемент
 						p с внешним отступом
 

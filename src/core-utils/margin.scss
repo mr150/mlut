@@ -17,44 +17,44 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 	margin-right: auto;
 }
 
-/// g - gutter from $mlu-grid-gutters
-.Mt4g {
+/// gg - grid gutter from $mlu-grid-gutters
+.Mt4gg {
 	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 4, $direct: "top");
 }
 
-.Mb4g {
+.Mb4gg {
 	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 4, $direct: "bottom");
 }
 
-.Mt3g {
+.Mt3gg {
 	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 3, $direct: "top");
 }
 
-.Mb3g {
+.Mb3gg {
 	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 3, $direct: "bottom");
 }
 
-.Mt2g {
+.Mt2gg {
 	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 2, $direct: "top");
 }
 
-.Mb2g {
+.Mb2gg {
 	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 2, $direct: "bottom");
 }
 
-.Mb1g {
+.Mb1gg {
 	@include mlu-generate-gutter($mlu-gtr-sm-rem, $direct: "bottom");
 }
 
-.Mb-2g {
+.Mb-2gg {
 	@include mlu-generate-gutter($direct: "bottom", $coef: -2);
 }
 
-.Ml-1g {
+.Ml-1gg {
 	@include mlu-generate-gutter($coef: -1, $direct: "left");
 }
 
-.Ml1g {
+.Ml1gg {
 	@include mlu-generate-gutter($direct: "left");
 }
 

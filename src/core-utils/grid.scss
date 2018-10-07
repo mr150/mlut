@@ -62,7 +62,7 @@
 	width: auto;
 }
 
-.W1c {
+.W1gc {
 	width: 50% - ($mlu-grid-gutter-fallback * 2);
 	width: calc(50% - #{$mlu-gtr-sm * 2});
 }
@@ -83,7 +83,7 @@
 	@include mlu-bpm($key) {
 		// Repeat generation utility with new gutter if it changed on breakpoint
 		@if $col-gutter != $prev-col-gutter and $key != $mlu-bp-sm {
-			.W1c {
+			.W1gc {
 				width: calc(50% - #{$col-gutter * 2});
 			}
 		}
@@ -106,7 +106,7 @@
 				// on larger breakpoints with changed gutter
 				@if $i <= $cols-count and
 					($gtr-key == $key or ($gtr-value < $col-gutter and $col-gutter != $prev-col-gutter)) {
-					.W#{$i}c_#{$gtr-key} {
+					.W#{$i}gc_#{$gtr-key} {
 						// Generation calc() fallback if flag turn on or
 						// current breakpoint is $mlu-bp-sm
 						@if $MLU-FLAG-CALC-FALLBACK or $gtr-key == $mlu-bp-sm {
@@ -116,7 +116,7 @@
 						width: calc(#{$col-width} - #{$col-gutter * 2});
 					}
 
-					.W#{$i}s_#{$gtr-key} {
+					.W#{$i}gs_#{$gtr-key} {
 						width: $col-width;
 					}
 
@@ -126,11 +126,11 @@
 					@if $MLU-FLAG-COL-OFFSET and
 						mlu-breakpoint($gtr-key) > mlu-breakpoint($mlu-bp-sm) and
 						$i < mlu-grid-cols-count($gtr-key) - 1 {
-						.Ml#{$i}s_#{$gtr-key} {
+						.Ml#{$i}gs_#{$gtr-key} {
 							margin-left: $col-width;
 						}
 
-						.Ml#{$i}c_#{$gtr-key} {
+						.Ml#{$i}gc_#{$gtr-key} {
 							@if $MLU-FLAG-CALC-FALLBACK {
 								margin-left: mlu-decimal-floor($col-width, 2) + $mlu-grid-gutter-fallback;
 							}
@@ -143,7 +143,7 @@
 		}
 
 		@if $MLU-FLAG-COL-OFFSET and mlu-breakpoint($key) > mlu-breakpoint($mlu-bp-md) {
-			.Ml0c_#{$key} {
+			.Ml0gc_#{$key} {
 				margin-left: mlu-grid-gutter($key);
 			}
 

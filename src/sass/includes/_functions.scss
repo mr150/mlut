@@ -179,7 +179,7 @@
 	}
 
 	@if type-of($str) != "string" {
-		@error "Wrong type of argument: '#{type-of($str)}'. Expected 'string'";
+		@error "Wrong type of argument $str: '#{type-of($str)}'. Expected 'string'";
 	}
 
 	$digits: "0123456789";
