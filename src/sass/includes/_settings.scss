@@ -101,10 +101,6 @@ $mlu-grid-gutters: (
 	$mlu-bp-xl: $mlu-gtr-xl,
 ) !default;
 
-/// Map with grid cols and gutters width on all
-/// breakpoints. Is filled during grid utils (W, Ml) generation
-$mlu-grid-cols-data: ();
-
 /// Default fix width for cards.
 /// This is value for 'W-card' utility
 $mlu-row-card-default-width: 288px !default;

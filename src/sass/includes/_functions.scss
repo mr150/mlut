@@ -5,7 +5,7 @@
 		@return map-get($mlu-breakpoints, $name);
 	}
 
-	@error "Invalid breakpoint name - '#{$name}'. '#{$name}' is not defined in $mlu-breakpoints";
+	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-breakpoints";
 }
 
 /// Get next breakpoint. By default return value in px
@@ -26,7 +26,7 @@
 		}
 	}
 
-	@error "Invalid breakpoint name - '#{$bp}'. '#{$bp}' is not defined in $mlu-breakpoints";
+	@error "Invalid breakpoint name: '#{$bp}'. '#{$bp}' is not defined in $mlu-breakpoints";
 }
 
 /// Wrapper on 'mlu-breakpoint-next' for get breakpoint's name
@@ -51,7 +51,7 @@
 		}
 	}
 
-	@error "Invalid breakpoint name - '#{$bp}'. '#{$bp}' is not defined in $mlu-breakpoints";
+	@error "Invalid breakpoint name: '#{$bp}'. '#{$bp}' is not defined in $mlu-breakpoints";
 }
 
 /// Wrapper on 'mlu-breakpoint-prev' for get breakpoint's name
@@ -67,7 +67,7 @@
 		@return map-get($mlu-grid-gutters, $name);
 	}
 
-	@error "Invalid breakpoint name - '#{$name}'. '#{$name}' is not defined in $mlu-grid-gutters";
+	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-grid-gutters";
 }
 
 /// Get cols count on breakpoint from $mlu-grid-cols map
@@ -77,7 +77,7 @@
 		@return map-get($mlu-grid-cols, $name);
 	}
 
-	@error "Invalid breakpoint name - '#{$name}'. '#{$name}' is not defined in $mlu-grid-cols";
+	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-grid-cols";
 }
 
 /// Round decimal
@@ -92,11 +92,11 @@
 	$n: 1;
 
 	@if type-of($number) != "number" {
-		@error "Wrong type of argument $number - '#{type-of($number)}'. Expected number";
+		@error "Wrong type of argument $number: '#{type-of($number)}'. Expected number";
 	}
 
 	@if type-of($pos) != "number" {
-		@error "Wrong type of argument $pos - '#{type-of($pos)}'. Expected 'number'";
+		@error "Wrong type of argument $pos: '#{type-of($pos)}'. Expected 'number'";
 	}
 
 	@for $i from 0 to $pos {
@@ -110,7 +110,7 @@
 	} @else if $type == "floor" {
 		@return floor($number * $n) / $n;
 	} @else {
-		@error "Invalid round type - '#{$type}'";
+		@error "Invalid round type: '#{$type}'";
 	}
 }
 
