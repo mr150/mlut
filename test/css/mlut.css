@@ -785,7 +785,6 @@ img {
 	}
 
 	.W1gc_sm {
-		width: 22%;
 		width: calc(25% - 32px);
 	}
 
@@ -794,7 +793,6 @@ img {
 	}
 
 	.W2gc_sm {
-		width: 47%;
 		width: calc(50% - 32px);
 	}
 
@@ -803,7 +801,6 @@ img {
 	}
 
 	.W3gc_sm {
-		width: 72%;
 		width: calc(75% - 32px);
 	}
 
@@ -812,7 +809,6 @@ img {
 	}
 
 	.W4gc_sm {
-		width: 97%;
 		width: calc(100% - 32px);
 	}
 

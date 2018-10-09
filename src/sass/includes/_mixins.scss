@@ -286,7 +286,7 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 	border: $size transparent solid;
 }
 
-/// Generate rhomb with css linear-gradient() in background-image.
+/// Generate rhomb with CSS linear-gradient() in background-image.
 
 /// $edge-ang is linear-gradient angle of rhomb edges; Can be only number in deg.
 
@@ -358,7 +358,26 @@ $body-size: (100% 48%), $change: false) {
 	}
 }
 
-@mixin mlu-W($width, $bp: $mlu-bp-xs, $columns: $mlu-grid-default-cols, $calc: false) {
+/// Set $width in grid columns, grid spans or CSS units on different breakpoints;
+/// It works similarly like W utility.
+
+/// $width can be in grid columns(unitless number, or 'gc' unit), grid spans('gs'),
+/// any CSS units('px', 'rem' etc) or 'auto'; Grid units calculated to %
+/// according to the formula 'n / $cols * 100%' and rounded by
+/// 'mlu-decimal-floor'.
+
+/// If $width set in 'gc' or unitless, width will generated with considering
+/// different gutters on breakpoints; Similarly like Wgc_md utility
+/// on $mlu-bp-lg.
+
+/// $bp is breakpoint on which $width will sets.
+
+/// $cols is columns count in grid.
+
+/// $calc is flag for generation CSS 'calc()' fallback; It only needed if
+/// $width set in 'gc' unit.
+
+@mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $calc: false) {
 	$col-width: 0;
 	$calc-fallback: $calc;
 	$custom-unit: "";
@@ -366,7 +385,7 @@ $body-size: (100% 48%), $change: false) {
 	@if type-of($width) == "number" and
 		(unitless($width) or unit($width) == "gc" or unit($width) == "gs") {
 		$tmp-val: mlu-ston($width + "");
-		$col-width: mlu-decimal-floor($tmp-val / $columns * 100%, 3);
+		$col-width: mlu-decimal-floor($tmp-val / $cols * 100%, 3);
 		$custom-unit: if(unit($width) == "gs", "gs", "gc");
 	} @else if type-of($width) == "number" or $width == "auto" {
 		$col-width: $width;
@@ -408,6 +427,8 @@ $body-size: (100% 48%), $change: false) {
 		}
 	}
 }
+
+/// Private mixin for width generation from 'mlu-W'.
 
 @mixin mlu-generate-width($width, $unit, $gutter: $mlu-gtr-sm, $calc: false) {
 	@if $calc and $unit == "gc" {

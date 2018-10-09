@@ -109,7 +109,7 @@
 					.W#{$i}gc_#{$gtr-key} {
 						// Generation calc() fallback if flag turn on or
 						// current breakpoint is $mlu-bp-sm
-						@if $MLU-FLAG-CALC-FALLBACK or $gtr-key == $mlu-bp-sm {
+						@if ($MLU-FLAG-CALC-FALLBACK or $gtr-key == $mlu-bp-sm) and $gtr-key == $key {
 							width: mlu-decimal-floor($col-width, 2) - ($mlu-grid-gutter-fallback * 2);
 						}
 
@@ -131,7 +131,7 @@
 						}
 
 						.Ml#{$i}gc_#{$gtr-key} {
-							@if $MLU-FLAG-CALC-FALLBACK {
+							@if $MLU-FLAG-CALC-FALLBACK and $gtr-key == $key {
 								margin-left: mlu-decimal-floor($col-width, 2) + $mlu-grid-gutter-fallback;
 							}
 
