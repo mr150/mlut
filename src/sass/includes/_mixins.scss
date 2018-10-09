@@ -357,3 +357,66 @@ $body-size: (100% 48%), $change: false) {
 		outline: -webkit-focus-ring-color auto 5px;
 	}
 }
+
+@mixin mlu-W($width, $bp: $mlu-bp-xs, $columns: $mlu-grid-default-cols, $calc: false) {
+	$col-width: 0;
+	$calc-fallback: $calc;
+	$custom-unit: "";
+
+	@if type-of($width) == "number" and
+		(unitless($width) or unit($width) == "gc" or unit($width) == "gs") {
+		$tmp-val: mlu-ston($width + "");
+		$col-width: mlu-decimal-floor($tmp-val / $columns * 100%, 3);
+		$custom-unit: if(unit($width) == "gs", "gs", "gc");
+	} @else if type-of($width) == "number" or $width == "auto" {
+		$col-width: $width;
+	} @else if type-of($width) != "number" {
+		@error "Invalid value of argument $width: '#{$width}'. Expected number value or 'auto'";
+	}
+
+	@if $bp == $mlu-bp-xs {
+		$prev-gutter: $mlu-gtr-sm;
+		@include mlu-generate-width($col-width, $custom-unit, $mlu-gtr-sm, $calc-fallback);
+		$calc-fallback: false;
+
+		@each $key, $value in $mlu-grid-gutters {
+			@if $value != $prev-gutter and $custom-unit == "gc" {
+				@include mlu-bpm($key) {
+					@include mlu-generate-width($col-width, $custom-unit, $value, $calc-fallback);
+				}
+			}
+
+			$prev-gutter: $value;
+		}
+	} @else if $custom-unit == "gc" {
+		$col-gutter: mlu-grid-gutter($bp);
+		$prev-gutter: $col-gutter;
+
+		@each $key, $value in $mlu-grid-gutters {
+			@if $key == $bp or ($value > $col-gutter and $value != $prev-gutter) {
+				@include mlu-bpm($key) {
+					@include mlu-generate-width($col-width, $custom-unit, $value, $calc-fallback);
+					$calc-fallback: false;
+				}
+
+				$prev-gutter: $value;
+			}
+		}
+	} @else {
+		@include mlu-bpm($bp) {
+			@include mlu-generate-width($col-width, $custom-unit);
+		}
+	}
+}
+
+@mixin mlu-generate-width($width, $unit, $gutter: $mlu-gtr-sm, $calc: false) {
+	@if $calc and $unit == "gc" {
+		width: mlu-decimal-floor($width, 2) - ($mlu-grid-gutter-fallback * 2);
+	}
+
+	@if $unit == "gc" {
+		width: calc(#{$width} - #{$gutter * 2});
+	} @else {
+		width: $width;
+	}
+}
