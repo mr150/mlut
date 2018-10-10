@@ -475,3 +475,16 @@ $body-size: (100% 48%), $change: false) {
 		#{$prop}: $width;
 	}
 }
+
+/// Generate styles for 'row' block.
+
+/// $type is display type
+
+@mixin mlu-row($type: block) {
+	display: $type;
+	margin: 0px;
+	padding: 0px;
+	font-size: 0px;
+	list-style: none;
+	counter-reset: mlu-row-item;
+}

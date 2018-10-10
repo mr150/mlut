@@ -30,12 +30,7 @@
 */
 
 .row {
-	display: block;
-	margin: 0px;
-	padding: 0px;
-	font-size: 0px;
-	list-style: none;
-	counter-reset: mlu-row-item;
+	@include mlu-row;
 }
 
 .row__col,
