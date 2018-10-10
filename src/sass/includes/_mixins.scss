@@ -478,13 +478,84 @@ $body-size: (100% 48%), $change: false) {
 
 /// Generate styles for 'row' block.
 
-/// $type is display type
+/// $display is display type
 
-@mixin mlu-row($type: block) {
-	display: $type;
+@mixin mlu-row($display: block) {
+	display: $display;
 	margin: 0px;
 	padding: 0px;
 	font-size: 0px;
 	list-style: none;
 	counter-reset: mlu-row-item;
+}
+
+/// Generate styles for 'row' elements like 'row__col', 'row__cell' etc.
+
+/// $display is display type.
+
+/// $calc is flag for generation CSS 'calc()' fallback. It only needed if
+/// for "col" $type.
+
+/// $type is service argument which used only by mixins-wrappers.
+/// It needed for reusable mlu-row-col for making other,
+/// 'row' elements because the most of styles for them is the same.
+
+@mixin mlu-row-col($display: inline-block, $calc: 1, $type: "col") {
+	position: relative;
+	display: $display;
+	max-width: 100%;
+	box-sizing: border-box;
+	text-align: left;
+	vertical-align: top;
+	font-size: $mlu-base-font-size;
+	font-size: mlu-px2rem($mlu-base-font-size);
+	direction: ltr;
+
+	@if $type == "col" {
+		@if $calc {
+			width: 100% - ($mlu-grid-gutter-fallback * 2);
+		}
+
+		width: calc(100% - #{mlu-grid-gutter($mlu-bp-sm) * 2});
+		@include mlu-generate-gutter($calc: $calc);
+		@include mlu-generate-gutter($direct: "bottom", $coef: 2);
+
+		&.row {
+			margin-bottom: 0px;
+			font-size: 0px;
+		}
+	} @else {
+		@if $type == "cell" {
+			width: 100%;
+			@include mlu-generate-gutter($type: "padding");
+		}
+
+		&.row {
+			font-size: 0px;
+		}
+	}
+
+	& > :first-child:not([class]) {
+		margin-top: 0px;
+	}
+
+	& > :last-child:not([class]) {
+		margin-bottom: 0px;
+	}
+}
+
+/// Generate styles for 'row__cell' element.
+
+/// It mixin-wrapper on 'mlu-row-col' because most of styles the same.
+
+@mixin mlu-row-cell($display: inline-block) {
+	@include mlu-row-col($display, $type: "cell");
+}
+
+/// Generate styles for 'row__item' element.
+
+/// It mixin-wrapper on 'mlu-row-col' because most of styles the same.
+
+@mixin mlu-row-item($display: inline-block) {
+	@include mlu-row-col($display, $type: "item");
 }

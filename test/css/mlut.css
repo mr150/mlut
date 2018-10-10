@@ -94,6 +94,12 @@ img {
 	direction: ltr;
 }
 
+.row__col.row,
+.row__cell.row,
+.row__item.row {
+	font-size: 0px;
+}
+
 .row__col > :first-child:not([class]),
 .row__cell > :first-child:not([class]),
 .row__item > :first-child:not([class]) {
@@ -122,12 +128,6 @@ img {
 	width: 100%;
 	padding: 0px 1.5%;
 	padding: 0px 12px;
-}
-
-.row.row__col,
-.row.row__cell,
-.row.row__item {
-	font-size: 0px;
 }
 
 /***
