@@ -463,6 +463,14 @@ img {
 	padding: 0.5em 8px;
 }
 
+.Fl {
+	float: left;
+}
+
+.Fl-r {
+	float: right;
+}
+
 .Ov {
 	overflow: hidden;
 }
