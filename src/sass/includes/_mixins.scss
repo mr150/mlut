@@ -196,14 +196,18 @@
 
 @mixin mlu-generate-gutter($init-gutter: $mlu-gtr-sm, $type: "margin",
 $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
-	$prev-value: $init-gutter;
-
 	@if not ($type == "margin" or $type == "padding") {
 		@error "Invalid gutter type - '#{$type}'! Allowable margin or padding";
 	}
 
-	@if $init-gutter and $init-gutter != -1 {
-		$tmp-val: if($calc, calc(#{$init-gutter * $coef}), $init-gutter * $coef);
+	@if type-of($gutters) != "map" {
+		@error "Wrong type of argument $gutters: '#{type-of($gutters)}'. Expected 'map'";
+	}
+
+	$prev-value: if(map-has-key($gutters, $mlu-bp-xs), map-get($gutters, $mlu-bp-xs), $init-gutter);
+
+	@if $prev-value and $prev-value != -1 {
+		$tmp-val: if($calc, calc(#{$prev-value * $coef}), $prev-value * $coef);
 
 		@if $direct == "x" {
 			#{$type}: 0px ($mlu-grid-gutter-fallback * $coef);
@@ -222,7 +226,7 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 	}
 
 	@each $key, $value in $gutters {
-		$cur-val: if(unit($init-gutter) == "rem", mlu-px2rem($value), $value);
+		$cur-val: if($prev-value and unit($prev-value) == "rem", mlu-px2rem($value), $value);
 
 		@if $prev-value != -1 and $cur-val != $prev-value {
 			@include mlu-bpm($key) {
@@ -387,9 +391,11 @@ $body-size: (100% 48%), $change: false) {
 /// It needed for reusable mlu-W for generating grid offset,
 /// because the algorithm for generating them is the same.
 
-@mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $calc: false, $type: "width") {
+@mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $calc: false, $type: "width") {
 	$col-width: 0;
 	$columns: $cols;
+	$grid-gutters: $gutters;
+	$xs-gutter: false;
 	$calc-fallback: $calc;
 	$custom-unit: "";
 
@@ -410,12 +416,20 @@ $body-size: (100% 48%), $change: false) {
 		@error "Invalid value of argument $width: '#{$width}'. Expected number value or 'auto'";
 	}
 
+	@if type-of($gutters) == "number" {
+		$grid-gutters: (if($bp == $mlu-bp-xs, $mlu-bp-sm, $bp): $gutters);
+	} @else if type-of($gutters) == "map" {
+		$xs-gutter: map-get($gutters, $mlu-bp-xs);
+	} @else {
+		@error "Wrong type of argument $gutters: '#{type-of($gutters)}'. Expected 'number' or 'map'";
+	}
+
 	@if $bp == $mlu-bp-xs {
-		$prev-gutter: $mlu-gtr-sm;
-		@include mlut-make-width($col-width, $custom-unit, $mlu-gtr-sm, $calc-fallback, $type);
+		$prev-gutter: if($xs-gutter, $xs-gutter, nth(nth($grid-gutters, 1), 2));
+		@include mlut-make-width($col-width, $custom-unit, $prev-gutter, $calc-fallback, $type);
 		$calc-fallback: false;
 
-		@each $key, $value in $mlu-grid-gutters {
+		@each $key, $value in $grid-gutters {
 			@if $value != $prev-gutter and $custom-unit == "gc" {
 				@include mlu-bpm($key) {
 					@include mlut-make-width($col-width, $custom-unit, $value, $calc-fallback, $type);
@@ -425,10 +439,10 @@ $body-size: (100% 48%), $change: false) {
 			$prev-gutter: $value;
 		}
 	} @else if $custom-unit == "gc" {
-		$col-gutter: mlu-grid-gutter($bp);
+		$col-gutter: map-get($grid-gutters, $bp);
 		$prev-gutter: $col-gutter;
 
-		@each $key, $value in $mlu-grid-gutters {
+		@each $key, $value in $grid-gutters {
 			@if $key == $bp or ($value > $col-gutter and $value != $prev-gutter) {
 				@include mlu-bpm($key) {
 					@include mlut-make-width($col-width, $custom-unit, $value, $calc-fallback, $type);
