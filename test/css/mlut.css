@@ -72,6 +72,7 @@ img {
 */
 
 .row {
+	position: relative;
 	display: block;
 	margin: 0px;
 	padding: 0px;
@@ -113,9 +114,8 @@ img {
 }
 
 .row__col {
-	margin: 0px 1.5%;
-	margin: 0px calc(12px);
-	margin-bottom: 24px;
+	margin: 0 1.5% 24px;
+	margin: 0 calc(12px) 24px;
 	width: 97%;
 	width: calc(100% - 24px);
 }
