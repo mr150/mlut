@@ -34,16 +34,14 @@
 	flex-wrap: wrap;
 }
 
+.mRt-if {
+	@extend .D-if, !optional;
+	flex-wrap: wrap;
+}
+
 @each $key, $value in $mlu-grid-cols {
-	$mq: ($key, mlu-breakpoint-next($key));
-
-	@if index($mlu-grid-cols, ($key $value)) == length($mlu-grid-cols) {
-		$mq: $key;
-	}
-
-	@include mlu-bpm($mq...) {
+	@include mlu-bpm($key) {
 		@if $value > mlu-grid-cols-count($mlu-bp-sm) {
-			/// Justify content modifiers
 			.mRj-sa_#{$key} {
 				text-align: center;
 				justify-content: space-around;

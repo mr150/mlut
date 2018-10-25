@@ -63,12 +63,19 @@
 }
 
 .W1gc {
-	width: 50% - ($mlu-grid-gutter-fallback * 2);
-	width: calc(50% - #{$mlu-gtr-sm * 2});
+	@include mlu-W(6, $calc: 1);
+}
+
+.W2gc {
+	@include mlu-W(12, $calc: 1);
 }
 
 .W50p {
 	width: 50%;
+}
+
+.W100p {
+	width: 100%;
 }
 
 // Generate grid utilities W and Ml on breakpoints
@@ -81,13 +88,6 @@
 	}
 
 	@include mlu-bpm($key) {
-		// Repeat generation utility with new gutter if it changed on breakpoint
-		@if $col-gutter != $prev-col-gutter and $key != $mlu-bp-sm {
-			.W1gc {
-				width: calc(50% - #{$col-gutter * 2});
-			}
-		}
-
 		.W-a_#{$key} {
 			width: auto;
 		}
