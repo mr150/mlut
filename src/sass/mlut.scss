@@ -7,7 +7,7 @@
 @import "includes/mixins";
 
 /*===CORE-BLOCKS===*/
-@import "../core-blocks/helpers/reset";
+@import "../core-blocks/reset/reset";
 @import "../core-blocks/page/page";
 @import "../core-blocks/row/row";
 @import "../core-blocks/wrapper/wrapper";
@@ -26,12 +26,9 @@
 @import "../core-utils/padding";
 @import "../core-utils/float";
 @import "../core-utils/overflow";
+@import "../core-utils/visibility";
 @import "../core-utils/row";
 
-//@import "../core-blocks/helpers/grid-debug";
-
-@import "../core-blocks/helpers/sr-only";
-@import "../core-blocks/helpers/hide-text";
-@import "../core-blocks/helpers/clearfix";
+//@import "../core-blocks/grid-debug/grid-debug";
 
 /*===DESIGN-UTILS===*/

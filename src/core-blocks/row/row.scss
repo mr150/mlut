@@ -62,10 +62,11 @@
 .row__col {
 	margin: 0 $mlu-grid-gutter-fallback $mlu-gtr-sm * 2;
 	margin: 0 calc(#{$mlu-gtr-sm}) $mlu-gtr-sm * 2;
-	@include mlu-generate-gutter(-1, $calc: 1);
-	@include mlu-generate-gutter(-1, $direct: "bottom", $coef: 2);
 	width: 100% - ($mlu-grid-gutter-fallback * 2);
 	width: calc(100% - #{mlu-grid-gutter($mlu-bp-sm) * 2});
+
+	@include mlu-generate-gutter(-1, $calc: 1);
+	@include mlu-generate-gutter(-1, $direct: "bottom", $coef: 2);
 
 	&.row {
 		margin-bottom: 0px;

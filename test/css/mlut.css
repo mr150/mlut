@@ -283,6 +283,22 @@ img {
 	direction: rtl;
 }
 
+.mFz0 {
+	color: transparent;
+	text-indent: 120%;
+	white-space: nowrap;
+	font-size: 0px;
+	overflow: hidden;
+}
+
+.mFz0::-moz-selection {
+	color: transparent;
+}
+
+.mFz0::selection {
+	color: transparent;
+}
+
 .mTov {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -499,12 +515,30 @@ img {
 	float: right;
 }
 
+.mCl:after {
+	display: table;
+	clear: both;
+	content: "";
+}
+
 .Ov {
 	overflow: hidden;
 }
 
 .Ov-a {
 	overflow: auto;
+}
+
+.mV-vh {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0px;
+	margin: -1px;
+	white-space: nowrap;
+	border: 0px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
 }
 
 .mRai-c > .row__col,
@@ -525,40 +559,6 @@ img {
 
 .mRt-if {
 	flex-wrap: wrap;
-}
-
-.sr-only {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0px;
-	margin: -1px;
-	white-space: nowrap;
-	border: 0px;
-	overflow: hidden;
-	clip: rect(0 0 0 0);
-}
-
-.hide-text {
-	color: transparent;
-	text-indent: 120%;
-	white-space: nowrap;
-	font-size: 0px;
-	overflow: hidden;
-}
-
-.hide-text::-moz-selection {
-	color: transparent;
-}
-
-.hide-text::selection {
-	color: transparent;
-}
-
-.clearfix:after {
-	display: table;
-	clear: both;
-	content: "";
 }
 
 /*===DESIGN-UTILS===*/

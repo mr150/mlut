@@ -5,3 +5,7 @@
 .Fl-r {
 	float: right;
 }
+
+.mCl {
+	@include mlu-clearfix;
+}

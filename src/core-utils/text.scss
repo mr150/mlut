@@ -22,6 +22,19 @@
 	direction: rtl;
 }
 
+// A11y hide text only
+.mFz0 {
+	color: transparent;
+	text-indent: 120%;
+	white-space: nowrap;
+	font-size: 0px;
+	overflow: hidden;
+
+	&::selection {
+		color: transparent;
+	}
+}
+
 .mTov {
 	overflow: hidden;
 	text-overflow: ellipsis;
