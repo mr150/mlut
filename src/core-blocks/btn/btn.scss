@@ -3,9 +3,10 @@
 
 .btn {
 	display: inline-block;
-	border: none;
+	border: 0;
 	box-sizing: border-box;
-	font: inherit;
+	font-family: inherit;
+	line-height: normal;
 	font-size: mlu-px2rem($mlu-base-font-size);
 	vertical-align: top;
 	text-align: center;

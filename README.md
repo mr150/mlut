@@ -75,14 +75,14 @@ Then link file to your page:
 And just add MLUT classes to markup:
 ``` html
 <div class="row D-f">
-	<div class="row__col W3c">
+	<div class="row__col W3gc_md">
 		<h3>Simple text</h3>
 ```
 
 #### Toolkit ####
 To use all MLUT features you need an assembly. There are 3 ways:
 
-- It's recommended to use [MLUT project template](https://bitbucket.org/MrZidan150/mlut-project/)
+- If you don't want to develop MLUT, it's recommended to use [MLUT project template](https://bitbucket.org/MrZidan150/mlut-project/)
 - [Clone](#git) this repo and use configured assembly from it
 - Setup assembly yourself use [technologies list](#technologies)
 

@@ -34,30 +34,21 @@
 }
 
 .D-n {
-	display: none !important;
+	display: none;
 }
 
-@include mlu-bpm($to: mlu-breakpoint-next()) {
-	.D-n_#{$mlu-bp-xs} {
-		display: none;
-	}
-}
-
-// Generating utils that work only on breakpoints
 @each $key, $value in $mlu-grid-cols {
-	$mq: ($key, mlu-breakpoint-next($key));
-
-	@if index($mlu-grid-cols, ($key $value)) == length($mlu-grid-cols) {
-		$mq: $key;
-	}
-
-	@include mlu-bpm($mq...) {
+	@include mlu-bpm($key) {
 		.D-n_#{$key} {
 			display: none;
 		}
 
 		.D_#{$key} {
 			display: block;
+		}
+
+		.D-ib_#{$key} {
+			display: inline-block;
 		}
 	}
 }
