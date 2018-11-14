@@ -1,0 +1,14 @@
+{
+  "//": "The source and destination paths are relative to this file.",
+  "source": "../src",
+  "destination": "styleguide",
+  "homepage": "../docs/homepage.md",
+
+  "//": "The css and js paths are URLs relative to the style guide destination.",
+  "css": [
+    "../../dist/css/mlut.min.css"
+  ],
+  "js": [],
+
+  "title": "MLUT Style Guide"
+}

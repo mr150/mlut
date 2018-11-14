@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+/*
+Базовые блоки
+
+Тестовое описание
+
+Второй абзац
+
+Styleguide: Core-blocks
+*/
+
 html {
 	height: 100%;
 }
@@ -40,35 +50,31 @@ img {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
-/***
-* Row:
+/*
+Row
+
+Блок для создания раскладок из колонок или карточек.
+
+Markup:
+<div class="row">
+
+Styleguide: Core-blocks.Row
 */
 
-/**
-* row:
-* Блок для создания раскладок из колонок или карточек.
-*
-*		@example
-*		.row
-*			.row__col.test-content.W3c 3/12
-*			.row__col.test-content.W3c 3/12
-*			.row__col.test-content.W6c 6/12
-*/
+/*
+row__col:
+Элемент для создания колонок. По умолчанию растягивается под ширину контента.
+Размеры колонкам задаются с помощью утилит.
 
-/**
-* row__col:
-* Элемент для создания колонок. По умолчанию растягивается под ширину контента.
-* Размеры колонкам задаются с помощью утилит.
-*
-*		@example
-*		.row
-*			- for(var i = 0; i < 3; i++)
-*				.row__col.test-content
-*					p Текст в колонке
-*			.row__col.test-content
-*				p Et molestie ac, feugiat sed lectus
-*				p Текст в колонке
-*
+		@example
+		.row
+			- for(var i = 0; i < 3; i++)
+				.row__col.test-content
+					p Текст в колонке
+			.row__col.test-content
+				p Et molestie ac, feugiat sed lectus
+				p Текст в колонке
+
 */
 
 .row {
@@ -215,7 +221,7 @@ img {
 
 /*===DESIGN BLOCKS===*/
 
-/*===CORE-UTILS AND HELPRES===*/
+/*===CORE-UTILS===*/
 
 /**
 * D - display:

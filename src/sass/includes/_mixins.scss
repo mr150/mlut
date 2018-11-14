@@ -90,6 +90,10 @@
 /// generated in modifiers that DRY. Write repeating
 /// parameter in block class.
 
+// .block {
+//		@include mlu-mods-from-sprite($icons);
+//	}
+
 @mixin mlu-mods-from-sprite($sprite, $pseudo: "before") {
 	@if type-of($sprite) != "map" {
 		@error "Wrong type of argument $sprite: '#{type-of($sprite)}'. Expected 'map'";
@@ -157,6 +161,10 @@
 
 /// $darken is the same at $lighten but $color will change
 /// on :active
+
+// .btn--common {
+//		@include mlu-def-hover(#f00);
+// }
 
 @mixin mlu-def-hover($color, $prop: "bgc", $lighten: 8%, $darken: ($lighten - 3)) {
 	$prop: if($prop == "bgc", "background-color", $prop);
@@ -256,6 +264,12 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 /// $sprite is path to css-sprite in png.
 /// $pseudo is type of pseudo element: before or after.
 
+// .icon {
+//		@include mlu-icon() {
+//			width: 32px
+//		};
+// }
+
 @mixin mlu-icon($sprite: "../img/css_sprites.png", $pseudo: "before") {
 	position: relative;
 
@@ -313,6 +327,12 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 
 /// If you already generated rhomb and want to change their color
 /// pass to $change '1'. You also can change $body-size with $change turned on
+
+// .block {
+//		&:before {
+//			mlu-bgi-rhomb($bgc);
+//		}
+//	}
 
 @mixin mlu-bgi-rhomb($edge-ang: 150deg, $edge-cs: 50%, $bgc: #000,
 $body-size: (100% 48%), $change: false) {
@@ -390,6 +410,11 @@ $body-size: (100% 48%), $change: false) {
 /// $type is service argument which used only by mixins-wrappers.
 /// It needed for reusable mlu-W for generating grid offset,
 /// because the algorithm for generating them is the same.
+
+// .block {
+//		@include mlu-W(2, sm);
+//		@include mlu-W(4, md);
+//}
 
 @mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $calc: false, $type: "width") {
 	$col-width: 0;

@@ -6,4 +6,6 @@ test/js/scripts.js
 
 test/libs/**/*
 
+docs/styleguide
+
 node_modules

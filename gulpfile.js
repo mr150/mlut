@@ -13,6 +13,7 @@ var gulp = require("gulp"),
 		sourcemaps = require("gulp-sourcemaps"),
 		pkg = require("./package.json"),
 		fileSize = require("gulp-size"),
+		shell = require("gulp-shell"),
 		autoprefixer = require("gulp-autoprefixer");
 
 try {
@@ -24,6 +25,7 @@ try {
 var dirs = {
 	src: "src/",
 	test: "test/",
+	docs: "docs/",
 	libs: "test/libs/",
 	build: "dist/"
 };
@@ -165,8 +167,12 @@ gulp.task("html", function(){
 		.pipe(browserSync.stream());
 });
 
+gulp.task("kss", shell.task([
+	"node_modules/.bin/kss --config " + dirs.docs + "kss-config.json"
+]));
+
 gulp.task("default", ["server", "style", "pug", "scripts"], function(){
-	gulp.watch(path.watch.styles, ["style"]);
+	gulp.watch(path.watch.styles, ["style", "kss"]);
 	gulp.watch(path.watch.pug, ["pug"]);
 	gulp.watch(path.watch.html, ["html"]);
 	gulp.watch(path.watch.js, ["scripts"]);
