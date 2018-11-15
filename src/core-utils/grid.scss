@@ -116,8 +116,10 @@
 						width: calc(#{$col-width} - #{$col-gutter * 2});
 					}
 
-					.W#{$i}gs_#{$gtr-key} {
-						width: $col-width;
+					@if $gtr-key == $key {
+						.W#{$i}gs_#{$gtr-key} {
+							width: $col-width;
+						}
 					}
 
 					// Offsets start generate from $mlu-bp-md and if offset flag turn on.
@@ -126,8 +128,11 @@
 					@if $MLU-FLAG-COL-OFFSET and
 						mlu-breakpoint($gtr-key) > mlu-breakpoint($mlu-bp-sm) and
 						$i < mlu-grid-cols-count($gtr-key) - 1 {
-						.Ml#{$i}gs_#{$gtr-key} {
-							margin-left: $col-width;
+
+						@if $gtr-key == $key {
+							.Ml#{$i}gs_#{$gtr-key} {
+								margin-left: $col-width;
+							}
 						}
 
 						.Ml#{$i}gc_#{$gtr-key} {

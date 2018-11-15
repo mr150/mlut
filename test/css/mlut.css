@@ -914,44 +914,20 @@ img {
 		width: calc(25% - 32px);
 	}
 
-	.W1gs_sm {
-		width: 25%;
-	}
-
 	.W2gc_sm {
 		width: calc(50% - 32px);
-	}
-
-	.W2gs_sm {
-		width: 50%;
 	}
 
 	.W3gc_sm {
 		width: calc(75% - 32px);
 	}
 
-	.W3gs_sm {
-		width: 75%;
-	}
-
 	.W4gc_sm {
 		width: calc(100% - 32px);
 	}
 
-	.W4gs_sm {
-		width: 100%;
-	}
-
 	.W1gc_md {
 		width: calc(8.333% - 32px);
-	}
-
-	.W1gs_md {
-		width: 8.333%;
-	}
-
-	.Ml1gs_md {
-		margin-left: 8.333%;
 	}
 
 	.Ml1gc_md {
@@ -962,28 +938,12 @@ img {
 		width: calc(16.666% - 32px);
 	}
 
-	.W2gs_md {
-		width: 16.666%;
-	}
-
-	.Ml2gs_md {
-		margin-left: 16.666%;
-	}
-
 	.Ml2gc_md {
 		margin-left: calc(16.666% + 16px);
 	}
 
 	.W3gc_md {
 		width: calc(25% - 32px);
-	}
-
-	.W3gs_md {
-		width: 25%;
-	}
-
-	.Ml3gs_md {
-		margin-left: 25%;
 	}
 
 	.Ml3gc_md {
@@ -994,28 +954,12 @@ img {
 		width: calc(33.333% - 32px);
 	}
 
-	.W4gs_md {
-		width: 33.333%;
-	}
-
-	.Ml4gs_md {
-		margin-left: 33.333%;
-	}
-
 	.Ml4gc_md {
 		margin-left: calc(33.333% + 16px);
 	}
 
 	.W5gc_md {
 		width: calc(41.666% - 32px);
-	}
-
-	.W5gs_md {
-		width: 41.666%;
-	}
-
-	.Ml5gs_md {
-		margin-left: 41.666%;
 	}
 
 	.Ml5gc_md {
@@ -1026,28 +970,12 @@ img {
 		width: calc(50% - 32px);
 	}
 
-	.W6gs_md {
-		width: 50%;
-	}
-
-	.Ml6gs_md {
-		margin-left: 50%;
-	}
-
 	.Ml6gc_md {
 		margin-left: calc(50% + 16px);
 	}
 
 	.W7gc_md {
 		width: calc(58.333% - 32px);
-	}
-
-	.W7gs_md {
-		width: 58.333%;
-	}
-
-	.Ml7gs_md {
-		margin-left: 58.333%;
 	}
 
 	.Ml7gc_md {
@@ -1058,28 +986,12 @@ img {
 		width: calc(66.666% - 32px);
 	}
 
-	.W8gs_md {
-		width: 66.666%;
-	}
-
-	.Ml8gs_md {
-		margin-left: 66.666%;
-	}
-
 	.Ml8gc_md {
 		margin-left: calc(66.666% + 16px);
 	}
 
 	.W9gc_md {
 		width: calc(75% - 32px);
-	}
-
-	.W9gs_md {
-		width: 75%;
-	}
-
-	.Ml9gs_md {
-		margin-left: 75%;
 	}
 
 	.Ml9gc_md {
@@ -1090,14 +1002,6 @@ img {
 		width: calc(83.333% - 32px);
 	}
 
-	.W10gs_md {
-		width: 83.333%;
-	}
-
-	.Ml10gs_md {
-		margin-left: 83.333%;
-	}
-
 	.Ml10gc_md {
 		margin-left: calc(83.333% + 16px);
 	}
@@ -1106,16 +1010,8 @@ img {
 		width: calc(91.666% - 32px);
 	}
 
-	.W11gs_md {
-		width: 91.666%;
-	}
-
 	.W12gc_md {
 		width: calc(100% - 32px);
-	}
-
-	.W12gs_md {
-		width: 100%;
 	}
 
 	.W1gc_lg {
