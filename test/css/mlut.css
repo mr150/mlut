@@ -15,9 +15,9 @@ img {
 .reset {
 	margin: 0px;
 	padding: 0px;
-	border: 0px;
 	font: inherit;
 	list-style: none;
+	border: 0px;
 }
 
 /***
@@ -88,10 +88,10 @@ img {
 	display: inline-block;
 	max-width: 100%;
 	box-sizing: border-box;
-	text-align: left;
-	vertical-align: top;
 	font-size: 16px;
 	font-size: 1rem;
+	text-align: left;
+	vertical-align: top;
 	direction: ltr;
 }
 
@@ -114,10 +114,10 @@ img {
 }
 
 .row__col {
-	margin: 0 1.5% 24px;
-	margin: 0 calc(12px) 24px;
 	width: 97%;
 	width: calc(100% - 24px);
+	margin: 0 1.5% 24px;
+	margin: 0 calc(12px) 24px;
 }
 
 .row__col.row {
@@ -162,8 +162,8 @@ img {
 .wrapper {
 	display: block;
 	max-width: 1224px;
-	margin: auto;
 	box-sizing: border-box;
+	margin: auto;
 	padding: 0px 1.5%;
 	padding: 0px calc(12px);
 }
@@ -195,27 +195,27 @@ img {
 
 .btn {
 	display: inline-block;
-	border: 0;
 	box-sizing: border-box;
 	font-family: inherit;
-	line-height: normal;
 	font-size: 1rem;
-	vertical-align: top;
+	line-height: normal;
 	text-align: center;
 	text-decoration: none;
+	vertical-align: top;
+	border: 0;
 	cursor: pointer;
 }
 
 .input {
 	display: inline-block;
-	border: none;
 	box-sizing: border-box;
 	font: inherit;
+	border: none;
 }
 
-/*===DESIGN BLOCKS===*/
+/*===DESIGN-BLOCKS===*/
 
-/*===CORE-UTILS AND HELPRES===*/
+/*===CORE-UTILS===*/
 
 /**
 * D - display:
@@ -285,11 +285,11 @@ img {
 }
 
 .mFz0 {
+	overflow: hidden;
 	color: transparent;
 	text-indent: 120%;
 	white-space: nowrap;
 	font-size: 0px;
-	overflow: hidden;
 }
 
 .mFz0::-moz-selection {
@@ -534,11 +534,11 @@ img {
 	position: absolute;
 	width: 1px;
 	height: 1px;
-	padding: 0px;
 	margin: -1px;
+	padding: 0px;
+	overflow: hidden;
 	white-space: nowrap;
 	border: 0px;
-	overflow: hidden;
 	clip: rect(0 0 0 0);
 }
 
@@ -618,23 +618,23 @@ img {
 	}
 
 	.mRj-s_sm {
-		text-align: left;
 		justify-content: flex-start;
+		text-align: left;
 	}
 
 	.mRj-c_sm {
-		text-align: center;
 		justify-content: center;
+		text-align: center;
 	}
 
 	.mRj-e_sm {
-		text-align: right;
 		justify-content: flex-end;
+		text-align: right;
 	}
 
 	.mRj-sb_sm {
-		text-align: center;
 		justify-content: space-between;
+		text-align: center;
 	}
 }
 
@@ -832,28 +832,28 @@ img {
 	}
 
 	.mRj-sa_md {
-		text-align: center;
 		justify-content: space-around;
+		text-align: center;
 	}
 
 	.mRj-s_md {
-		text-align: left;
 		justify-content: flex-start;
+		text-align: left;
 	}
 
 	.mRj-c_md {
-		text-align: center;
 		justify-content: center;
+		text-align: center;
 	}
 
 	.mRj-e_md {
-		text-align: right;
 		justify-content: flex-end;
+		text-align: right;
 	}
 
 	.mRj-sb_md {
-		text-align: center;
 		justify-content: space-between;
+		text-align: center;
 	}
 }
 
@@ -1356,28 +1356,28 @@ img {
 	}
 
 	.mRj-sa_lg {
-		text-align: center;
 		justify-content: space-around;
+		text-align: center;
 	}
 
 	.mRj-s_lg {
-		text-align: left;
 		justify-content: flex-start;
+		text-align: left;
 	}
 
 	.mRj-c_lg {
-		text-align: center;
 		justify-content: center;
+		text-align: center;
 	}
 
 	.mRj-e_lg {
-		text-align: right;
 		justify-content: flex-end;
+		text-align: right;
 	}
 
 	.mRj-sb_lg {
-		text-align: center;
 		justify-content: space-between;
+		text-align: center;
 	}
 }
 
@@ -1596,28 +1596,28 @@ img {
 	}
 
 	.mRj-sa_xl {
-		text-align: center;
 		justify-content: space-around;
+		text-align: center;
 	}
 
 	.mRj-s_xl {
-		text-align: left;
 		justify-content: flex-start;
+		text-align: left;
 	}
 
 	.mRj-c_xl {
-		text-align: center;
 		justify-content: center;
+		text-align: center;
 	}
 
 	.mRj-e_xl {
-		text-align: right;
 		justify-content: flex-end;
+		text-align: right;
 	}
 
 	.mRj-sb_xl {
-		text-align: center;
 		justify-content: space-between;
+		text-align: center;
 	}
 }
 

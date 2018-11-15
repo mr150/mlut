@@ -537,10 +537,10 @@ $body-size: (100% 48%), $change: false) {
 	display: $display;
 	max-width: 100%;
 	box-sizing: border-box;
-	text-align: left;
-	vertical-align: top;
 	font-size: $mlu-base-font-size;
 	font-size: mlu-px2rem($mlu-base-font-size);
+	text-align: left;
+	vertical-align: top;
 	direction: ltr;
 
 	@if $type == "col" {

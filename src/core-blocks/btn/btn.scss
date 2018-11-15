@@ -3,13 +3,13 @@
 
 .btn {
 	display: inline-block;
-	border: 0;
 	box-sizing: border-box;
 	font-family: inherit;
-	line-height: normal;
 	font-size: mlu-px2rem($mlu-base-font-size);
-	vertical-align: top;
+	line-height: normal;
 	text-align: center;
 	text-decoration: none;
+	vertical-align: top;
+	border: 0;
 	cursor: pointer;
 }

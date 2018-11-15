@@ -1,11 +1,11 @@
 .mRj-c {
-	@extend .Ta-c;
 	@extend .Jc-c !optional;
+	@extend .Ta-c;
 }
 
 .mRj-e {
-	@extend .Ta-r;
 	@extend .Jc-fe !optional;
+	@extend .Ta-r;
 }
 
 // Progressive enhancement from inline-blocks to flex
@@ -43,29 +43,29 @@
 	@include mlu-bpm($key) {
 		@if $value > mlu-grid-cols-count($mlu-bp-sm) {
 			.mRj-sa_#{$key} {
-				text-align: center;
 				justify-content: space-around;
+				text-align: center;
 			}
 		}
 
 		.mRj-s_#{$key} {
-			text-align: left;
 			justify-content: flex-start;
+			text-align: left;
 		}
 
 		.mRj-c_#{$key} {
-			text-align: center;
 			justify-content: center;
+			text-align: center;
 		}
 
 		.mRj-e_#{$key} {
-			text-align: right;
 			justify-content: flex-end;
+			text-align: right;
 		}
 
 		.mRj-sb_#{$key} {
-			text-align: center;
 			justify-content: space-between;
+			text-align: center;
 		}
 
 		@if $MLU-FLAG-EXTENDED {
