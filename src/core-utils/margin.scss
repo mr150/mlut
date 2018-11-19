@@ -59,39 +59,7 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 }
 
 @each $key, $value in $mlu-grid-gutters {
-	$prev-col-gutter: 0;
-	$larger-sm: false;
-
-	@if index($mlu-grid-gutters, ($key $value)) > 1 {
-		$prev-col-gutter: mlu-grid-gutter(mlu-breakpoint-prev-name($key));
-		$larger-sm: true;
-	}
-
 	@include mlu-bpm($key) {
-		// Repeat generation utility if gutter changed on breakpoint
-		@if $value != $prev-col-gutter and $larger-sm {
-			.M-a {
-				margin: auto;
-			}
-
-			.Ml-a {
-				margin-left: auto;
-			}
-
-			.Mx-a {
-				margin-left: auto;
-				margin-right: auto;
-			}
-		}
-	}
-
-	$mq: ($key, mlu-breakpoint-next($key));
-
-	@if index($mlu-grid-gutters, ($key $value)) == length($mlu-grid-gutters) {
-		$mq: $key;
-	}
-
-	@include mlu-bpm($mq...) {
 		.Ml-a_#{$key} {
 			margin-left: auto;
 		}
@@ -99,6 +67,16 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 		.Mx-a_#{$key} {
 			margin-left: auto;
 			margin-right: auto;
+		}
+
+		.Mx1gg_#{$key} {
+			margin-left: $value;
+			margin-right: $value;
+		}
+
+		.Mx0_#{$key} {
+			margin-left: 0;
+			margin-right: 0;
 		}
 	}
 }
