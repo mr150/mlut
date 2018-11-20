@@ -32,8 +32,8 @@
 
 	display: block;
 	max-width: $mlu-wrapper-max-width + ($mlu-gtr-sm * 2);
-	margin: auto;
 	box-sizing: border-box;
+	margin: auto;
 	@include mlu-generate-gutter($type: "padding", $calc: 1);
 
 	@each $key, $value in $mlu-grid-gutters {
