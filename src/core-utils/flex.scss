@@ -14,23 +14,35 @@
 	flex-wrap: wrap-reverse;
 }
 
+.Fxw-w {
+	flex-wrap: wrap;
+}
+
 .As-s {
 	align-self: stretch;
 }
 
 .As-fs {
-	vertical-align: top;
 	align-self: flex-start;
 }
 
 .As-c {
-	vertical-align: middle;
 	align-self: center;
 }
 
 .As-fe {
-	vertical-align: bottom;
 	align-self: flex-end;
+}
+
+// Progressive enhancement from inline-blocks to flex
+.mAs-c {
+	align-self: center;
+	vertical-align: middle;
+}
+
+.mAs-fe {
+	align-self: flex-end;
+	vertical-align: bottom;
 }
 
 .Jc-fe {
@@ -49,6 +61,16 @@
 	justify-content: space-between;
 }
 
+.mJc-c {
+	justify-content: center;
+	text-align: center;
+}
+
+.mJc-fe {
+	justify-content: flex-end;
+	text-align: right;
+}
+
 .Ai-fs {
 	align-items: flex-start;
 }
@@ -59,4 +81,75 @@
 
 .Ai-c {
 	align-items: center;
+}
+
+.mAi-c {
+	align-items: center;
+
+	> * {
+		vertical-align: middle;
+	}
+}
+
+.mAi-fe {
+	align-items: flex-end;
+
+	> * {
+		vertical-align: bottom;
+	}
+}
+
+@each $key, $value in $mlu-grid-cols {
+	@include mlu-bpm($key) {
+		.mJc-fs_#{$key} {
+			justify-content: flex-start;
+			text-align: left;
+		}
+
+		.mJc-c_#{$key} {
+			justify-content: center;
+			text-align: center;
+		}
+
+		.mJc-fe_#{$key} {
+			justify-content: flex-end;
+			text-align: right;
+		}
+
+		.mJc-sa_#{$key} {
+			justify-content: space-around;
+			text-align: center;
+		}
+
+		.mJc-sb_#{$key} {
+			justify-content: space-between;
+			text-align: center;
+		}
+
+		@if $MLU-FLAG-EXTENDED {
+			.mAi-fs_#{$key} {
+				align-items: flex-start;
+
+				> * {
+					vertical-align: top;
+				}
+			}
+
+			.mAi-c_#{$key} {
+				align-items: center;
+
+				> * {
+					vertical-align: middle;
+				}
+			}
+
+			.mAi-fe_#{$key} {
+				align-items: flex-end;
+
+				> * {
+					vertical-align: bottom;
+				}
+			}
+		}
+	}
 }

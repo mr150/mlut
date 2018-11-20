@@ -1,5 +1,6 @@
 var gulp = require("gulp"),
 		sass = require("gulp-sass"),
+		pug = require("gulp-pug"),
 		browserSync = require("browser-sync"),
 		rigger = require("gulp-rigger"),
 		cleancss = require("gulp-clean-css"),
@@ -14,12 +15,6 @@ var gulp = require("gulp"),
 		pkg = require("./package.json"),
 		fileSize = require("gulp-size"),
 		autoprefixer = require("gulp-autoprefixer");
-
-try {
-	var pug = require("gulp-pug");
-} catch (error) {
-	console.log("pug is not installed");
-}
 
 var dirs = {
 	src: "src/",
@@ -145,14 +140,12 @@ gulp.task("scripts", function(){
 		.pipe(browserSync.stream());
 });
 
-// Pug used only for mlut examples so it's not in the dependencies
+// Pug used only for mlut examples
 gulp.task("pug", function(){
-	if(pug){
-		return gulp.src(path.test.pug + "*.pug")
-			.pipe(plumber())
-			.pipe(pug({"pretty": "\t"}))
-			.pipe(gulp.dest(dirs.test));
-	} else console.log("pug is not installed");
+	return gulp.src(path.test.pug + "*.pug")
+		.pipe(plumber())
+		.pipe(pug({"pretty": "\t"}))
+		.pipe(gulp.dest(dirs.test));
 });
 
 gulp.task("server", function(){
