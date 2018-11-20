@@ -1,3 +1,4 @@
+// Progressive enhancement from inline-blocks to flex
 .mRj-c {
 	@extend .Jc-c !optional;
 	@extend .Ta-c;
@@ -8,13 +9,10 @@
 	@extend .Ta-r;
 }
 
-// Progressive enhancement from inline-blocks to flex
 .mRai-c {
 	@extend .Ai-c !optional;
 
-	> .row__col,
-	> .row__item,
-	> .row__cell {
+	> * {
 		vertical-align: middle;
 	}
 }
@@ -22,9 +20,7 @@
 .mRai-fe {
 	@extend .Ai-fe !optional;
 
-	> .row__col,
-	> .row__item,
-	> .row__cell {
+	> * {
 		vertical-align: bottom;
 	}
 }
@@ -72,9 +68,7 @@
 			.mRai-fs_#{$key} {
 				align-items: flex-start;
 
-				> .row__col,
-				> .row__item,
-				> .row__cell {
+				> * {
 					vertical-align: top;
 				}
 			}
@@ -82,9 +76,7 @@
 			.mRai-c_#{$key} {
 				align-items: center;
 
-				> .row__col,
-				> .row__item,
-				> .row__cell {
+				> * {
 					vertical-align: middle;
 				}
 			}
@@ -92,9 +84,7 @@
 			.mRai-fe_#{$key} {
 				align-items: flex-end;
 
-				> .row__col,
-				> .row__item,
-				> .row__cell {
+				> * {
 					vertical-align: bottom;
 				}
 			}

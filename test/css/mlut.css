@@ -306,6 +306,18 @@ img {
 	white-space: nowrap;
 }
 
+.Fxd-c {
+	flex-direction: column;
+}
+
+.Fxg1 {
+	flex-grow: 1;
+}
+
+.Fxsh0 {
+	flex-shrink: 0;
+}
+
 .Fxw-wr {
 	flex-wrap: wrap-reverse;
 }
@@ -542,15 +554,11 @@ img {
 	clip: rect(0 0 0 0);
 }
 
-.mRai-c > .row__col,
-.mRai-c > .row__item,
-.mRai-c > .row__cell {
+.mRai-c > * {
 	vertical-align: middle;
 }
 
-.mRai-fe > .row__col,
-.mRai-fe > .row__item,
-.mRai-fe > .row__cell {
+.mRai-fe > * {
 	vertical-align: bottom;
 }
 
