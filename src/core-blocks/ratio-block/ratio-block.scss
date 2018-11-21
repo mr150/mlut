@@ -1,3 +1,33 @@
+/*
+Ratio-block
+
+Блок для создания контейнеров, с пропорциональными шириной и высотой. По умолчанию пропорции 16:9
+
+Markup:
+<div class="ratio-block W2gc_md">
+	<div class="ratio-block__content">
+		<!-- Content here -->
+	</div>
+</div>
+
+Styleguide: core-blocks.ratio-block
+*/
+
+/*
+ratio-block__content
+
+Элемент для вставки содержимого, которое будет пропорционально менять размеры.
+
+Markup:
+<div class="ratio-block W3gc_md">
+	<div class="ratio-block__content">
+		<p>Some more text [12:41:28] Starting 'style'... [12:41:29] mlut.min.css 2699 B (gzipped) [12:41:29] Finished 'style' after 205 ms </p>
+	</div>
+</div>
+
+Styleguide: core-blocks.ratio-block.ratio-block__content
+*/
+
 .ratio-block {
 	position: relative;
 

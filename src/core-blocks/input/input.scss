@@ -1,5 +1,15 @@
-/// Base block for text inputs.
-/// Stylize it with modifiers like .input--common
+/*
+Input
+
+Блок для создания полей ввода. Нормализует стили. Оформление задается с помощью модификаторов и утилит.
+
+Markup:
+<p class="W3gc_md">
+	<input class="input input--common" name="" type="text" value="Some text"/>
+</p>
+
+Styleguide: core-blocks.input
+*/
 
 .input {
 	display: inline-block;

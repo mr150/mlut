@@ -1,5 +1,13 @@
-/// Base block for buttons and links.
-/// Stylize it with modifiers like .btn--common
+/*
+Btn
+
+Блок для создания кнопок. Нормализует стили. Оформление задается с помощью модификаторов и утилит.
+
+Markup:
+<a class="btn btn--common W3gs_md" href="#">Login</a>
+
+Styleguide: core-blocks.btn
+*/
 
 .btn {
 	display: inline-block;

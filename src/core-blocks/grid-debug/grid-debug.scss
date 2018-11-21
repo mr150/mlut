@@ -1,3 +1,19 @@
+/*
+Grid-debug
+
+Блок для отладки раскладок. Отображает модульную сетку в фоне контейнера. На sm брейкпоинте у сетки 4 колонки, а на md и выше \- 12.
+
+Markup:
+<div class="row grid-debug">
+	<div class="test-content row__col W2gc_sm W3gc_md">
+		<h3>W2gc_sm W3gc_md</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-blocks.grid-debug
+*/
+
 // Generation linear gradient which show cols and gutters on breakpoints
 @each $key, $value in $mlu-grid-gutters {
 	$item-index: index($mlu-grid-gutters, ($key $value));

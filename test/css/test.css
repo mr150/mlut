@@ -17,3 +17,23 @@
 .test-card {
 	border: 1px #ccc solid;
 }
+
+@media (min-width: 520px) {
+	.grid-debug {
+		padding: 48px 0px;
+		background-image: linear-gradient(90deg, #ddf 12px, #60f 12px, #60f calc(100% - 12px), #ddf 0);
+		background-size: 25%;
+	}
+}
+
+@media (min-width: 760px) {
+	.grid-debug {
+		background-size: 8.333%;
+	}
+}
+
+@media (min-width: 960px) {
+	.grid-debug {
+		background-image: linear-gradient(90deg, #ddf 16px, #60f 16px, #60f calc(100% - 16px), #ddf 0);
+	}
+}

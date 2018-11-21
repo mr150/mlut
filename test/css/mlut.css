@@ -72,6 +72,21 @@ Styleguide: examples.layouts
 
 /*===CORE-BLOCKS===*/
 
+/*
+Reset
+
+Блок для сброса стилей у компонента.
+
+Markup:
+<ul class="reset">
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+</ul>
+
+Styleguide: core-blocks.reset
+*/
+
 .reset {
 	margin: 0px;
 	padding: 0px;
@@ -232,33 +247,33 @@ Styleguide: core-blocks.row.row__item
 	padding: 0px 12px;
 }
 
-/***
-* Wrapper:
+/*
+Wrapper
+
+Блок-контейнер для основного содержимого страницы. Максимальная ширина по умолчанию \- 1200px. У контейнера есть поля, чтобы контент не прилипал на маленьких экранах. На широких экранах контейнер располагается по центру
+
+Markup:
+<div class="wrapper">
+	<h1>Simple text</h1>
+</div>
+
+Styleguide: core-blocks.wrapper
 */
 
-/**
-* wrapper:
-* Блок-контейнер для основного содержимого страницы. Максимальная ширина по умолчанию - 1200px.
-* У контейнера есть поля, чтобы контент не прилипал на маленьких экранах.
-* На широких экранах контейнер располагается по центру
-*
-*		@example
-*		.wrapper
-*			h2 Заголовок
-*			p Любой контент
-*			p Еще один абзац с контентом
-*/
+/*
+wrapper__row
 
-/**
-* wrapper__row:
-* Элемент, который накладывает левый и правый отступы у крайних колонок на поля блока `wrapper`.
-* Такое поведение нужно, чтобы в раскладке не возникало двойных полей. Этот элемент опционален, потому что в разных ситуациях может понадобиться разное поведение полей.
-*
-*		@example
-*		.wrapper
-*			.row.wrapper__row
-*				.row__col.test-content.W7c Колонка 0
-*				.row__col.test-content.W5c Колонка 1
+Элемент, который накладывает левый и правый отступы у крайних колонок на поля блока wrapper.
+Такое поведение нужно, чтобы в раскладке не возникало двойных полей. Этот элемент опционален, потому что в разных ситуациях может понадобиться разное поведение полей.
+
+Markup:
+<div class="wrapper">
+	<h2>Some cols</h2>
+	<div class="row wrapper__row">
+</div>
+</div>
+
+Styleguide: core-blocks.wrapper.wrapper__row
 */
 
 .wrapper {
@@ -276,6 +291,36 @@ Styleguide: core-blocks.row.row__item
 	margin-right: calc(-12px);
 	margin-left: calc(-12px);
 }
+
+/*
+Ratio-block
+
+Блок для создания контейнеров, с пропорциональными шириной и высотой. По умолчанию пропорции 16:9
+
+Markup:
+<div class="ratio-block W2gc_md">
+	<div class="ratio-block__content">
+		<!-- Content here -->
+	</div>
+</div>
+
+Styleguide: core-blocks.ratio-block
+*/
+
+/*
+ratio-block__content
+
+Элемент для вставки содержимого, которое будет пропорционально менять размеры.
+
+Markup:
+<div class="ratio-block W3gc_md">
+	<div class="ratio-block__content">
+		<p>Some more text [12:41:28] Starting 'style'... [12:41:29] mlut.min.css 2699 B (gzipped) [12:41:29] Finished 'style' after 205 ms </p>
+	</div>
+</div>
+
+Styleguide: core-blocks.ratio-block.ratio-block__content
+*/
 
 .ratio-block {
 	position: relative;
@@ -295,6 +340,17 @@ Styleguide: core-blocks.row.row__item
 	max-height: 100%;
 }
 
+/*
+Btn
+
+Блок для создания кнопок. Нормализует стили. Оформление задается с помощью модификаторов и утилит.
+
+Markup:
+<a class="btn btn--common W3gs_md" href="#">Login</a>
+
+Styleguide: core-blocks.btn
+*/
+
 .btn {
 	display: inline-block;
 	box-sizing: border-box;
@@ -307,6 +363,19 @@ Styleguide: core-blocks.row.row__item
 	border: 0;
 	cursor: pointer;
 }
+
+/*
+Input
+
+Блок для создания полей ввода. Нормализует стили. Оформление задается с помощью модификаторов и утилит.
+
+Markup:
+<p class="W3gc_md">
+	<input class="input input--common" name="" type="text" value="Some text"/>
+</p>
+
+Styleguide: core-blocks.input
+*/
 
 .input {
 	display: inline-block;
