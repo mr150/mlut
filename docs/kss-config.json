@@ -6,9 +6,10 @@
 
   "//": "The css and js paths are URLs relative to the style guide destination.",
   "css": [
-    "../../dist/css/mlut.min.css"
+    "../../dist/css/mlut.min.css",
+    "../../test/css/test.css"
   ],
   "js": [],
 
-  "title": "MLUT Style Guide"
+  "title": "MLUT documentation"
 }

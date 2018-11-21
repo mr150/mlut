@@ -1,28 +1,76 @@
 /*
 Row
 
-Блок для создания раскладок из колонок или карточек.
+Универсальный блок для создания раскладок. Подходит для колонок, карточек и горизонтальных списков. По умолчанию, для раскладок используется технология inline-block. С помощью утилиты D можно поменять технологию раскладки на flexbox.
+
+Части раскладки внутри row создаются с помощью элементов:
+* [row__col](#kssref-core-blocks-row-row__col)
+* [row__cell](#kssref-core-blocks-row-row__cell)
+* [row__item](#kssref-core-blocks-row-row__item)
+
+Раскладки можно вкладывать друг в друга неограниченное количество раз.
+
+../../../test/grid.html
 
 Markup:
 <div class="row">
+</div>
 
-Styleguide: Core-blocks.Row
+Styleguide: core-blocks.row
 */
 
 /*
- row__col:
- Элемент для создания колонок. По умолчанию растягивается под ширину контента.
- Размеры колонкам задаются с помощью утилит.
+row__col
 
-		@example
-		.row
-			- for(var i = 0; i < 3; i++)
-				.row__col.test-content
-					p Текст в колонке
-			.row__col.test-content
-				p Et molestie ac, feugiat sed lectus
-				p Текст в колонке
+Основной элемент для создания колонок. По умолчанию растягивается на всю ширину контейнера. У колонок есть отступы по бокам и снизу.
 
+Размеры колонкам задаются с помощью утилит.
+
+Markup:
+<div class="row">
+	<div class="test-content row__col W2gc_sm W3gc_md">
+		<h3>W2gc_sm W3gc_md</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-blocks.row.row__col
+*/
+
+/*
+row__cell
+
+Альтернативный элемент для создания колонок. По умолчанию растягивается на всю ширину контейнера. У колонок есть отступы по бокам.
+
+Размеры задаются с помощью утилит.
+
+Markup:
+<div class="row">
+	<div class="test-cell row__cell W2gs_sm W3gs_md">
+		<h3>W2gs_sm W3gs_md</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-blocks.row.row__cell
+*/
+
+
+/*
+row__item
+
+Элемент для создания частей раскладки. По умолчанию растягивается по ширине контента.
+
+Размеры и отступы задаются с помощью утилит.
+
+Markup:
+<div class="row">
+	<div class="test-row row__cell W2gs_sm W3gs_md">
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-blocks.row.row__item
 */
 
 .row {

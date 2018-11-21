@@ -5,7 +5,9 @@
 
 Второй абзац
 
-Styleguide: Core-blocks
+Weight: 0
+
+Styleguide: core-blocks
 */
 
 /*
@@ -13,7 +15,19 @@ Styleguide: Core-blocks
 
 Simple text
 
-Styleguide: Core-utils
+Weight: 1
+
+Styleguide: core-utils
+*/
+
+/*
+Базовые стили
+
+Simple text
+
+Weight: 2
+
+Styleguide: sass-base
 */
 
 /*
@@ -21,7 +35,27 @@ Sass инструменты
 
 Simple text
 
-Styleguide: Sass-tools
+Weight: 3
+
+Styleguide: sass-tools
+*/
+
+/*
+Примеры
+
+Дополнительные примеры работы базовых блоков, утилит и готовых компонентов.
+
+Weight: 4
+
+Styleguide: examples
+*/
+
+/*
+Набор готовых раскладок
+
+Simple text
+
+Styleguide: examples.layouts
 */
 
 /// Flags for core compilation
