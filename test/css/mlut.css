@@ -11,7 +11,7 @@ img {
 }
 
 /*
-Базовые блоки
+Core blocks
 
 Тестовое описание
 
@@ -23,7 +23,7 @@ Styleguide: core-blocks
 */
 
 /*
-Базовые утилиты
+Core utilities
 
 Simple text
 
@@ -33,7 +33,7 @@ Styleguide: core-utils
 */
 
 /*
-Базовые стили
+Core styles
 
 Simple text
 
@@ -43,7 +43,7 @@ Styleguide: sass-base
 */
 
 /*
-Sass инструменты
+Sass tools
 
 Simple text
 
@@ -53,7 +53,7 @@ Styleguide: sass-tools
 */
 
 /*
-Примеры
+Examples
 
 Дополнительные примеры работы базовых блоков, утилит и готовых компонентов.
 
@@ -63,7 +63,7 @@ Styleguide: examples
 */
 
 /*
-Набор готовых раскладок
+Set of ready layouts
 
 Simple text
 
@@ -388,19 +388,34 @@ Styleguide: core-blocks.input
 
 /*===CORE-UTILS===*/
 
-/**
-* D - display:
-* Утилита `D` управляет отображением компонента на странице.
-*
-*		@example
-*		h4 D-n - скрывает компонент
-*		p В разметке есть скрытый абзац
-*		p.D-n
-*			Этот абзац скрыт, как будто его нет
-*		.D-n_sm.test-content
-*			h3 Этот компонент будет скрыт на брейкпоинте sm
-*			p
-*				Значение утилиты D - n_sm
+/*
+D
+
+D \- display. Utility sets the display type of component.
+
+Markup:
+<div class="test-content W5gc_md">
+	<h3 class="D-ib_sm">Title</h3>
+	<p class="D-n_xl">Hidden content</p>
+</div>
+
+Styleguide: core-utils.d
+*/
+
+/*
+mD
+
+mD is used for for setting the display type with additional parameters.
+
+Markup:
+<div class="row mD-f">
+	<div class="test-content row__col W2gc_sm W3gc_md">
+		<h3>W2gc_sm W3gc_md</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-utils.d.md
 */
 
 .D {
@@ -436,6 +451,62 @@ Styleguide: core-blocks.input
 	display: inline-flex;
 	flex-wrap: wrap;
 }
+
+/*
+Flex
+
+A group of utilities for managing flex-containers and flex-elements. Custom flex utilities are needed to manage standard [row layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+
+Styleguide: core-utils.flex
+*/
+
+/*
+mAs
+
+mAs \- my align self. Utility for componont vertical alignment.
+
+Markup:
+<div class="row">
+	<div class="test-content row__col W2gc_sm W3gc_md mAs-fe">
+		<h3>W2gc_sm W3gc_md</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-utils.flex.mas
+*/
+
+/*
+mJc
+
+mJc \- my justify content. Utility for horizontal alignment of layout items and text.
+
+Markup:
+<div class="row mJc-c">
+	<div class="test-content row__col W2gc_sm W3gc_md">
+		<h3>Centered</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-utils.flex.mjc
+*/
+
+/*
+mAi
+
+mAi \- my align items. Utility for vertical alignment of layout items.
+
+Markup:
+<div class="row mAi-fe">
+	<div class="test-content row__col W2gc_sm W3gc_md">
+		<h3>Bottom</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-utils.flex.mai
+*/
 
 .Fxd-c {
 	flex-direction: column;
@@ -537,56 +608,18 @@ Styleguide: core-blocks.input
 	vertical-align: bottom;
 }
 
-/***
-* Утилиты:
-*/
+/*
+W
 
-/**
-* W - width:
-* `W` - утилита, которая управляет шириной компонента.
-*
-*		@example
-*		div.W4c
-*			.test-content
-*				h3 Просто текст в контейнере
-*				p
-*					Aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl. Suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet eget sit amet tellus cras adipiscing enim eu turpis egestas pretium aenean pharetra, magna ac placerat.
-*/
+W \- width. This utility sets component width.
 
-/**
-* Ml - margin left:
-* `Ml` задает компонентам отступ слева.
-*
-*		@example
-*		.Ml3c.test-content
-*			h3 Контейнер с отступом
-*			p Aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl. Suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet eget sit amet tellus cras adipiscing enim eu turpis egestas pretium aenean pharetra, magna ac placerat.
-*/
+Markup:
+<div class="test-content W2gc_sm W5gc_md">
+	<h3>Title</h3>
+	<p>Some text</p>
+</div>
 
-/**
-* Rj - row justify:
-* Утилита распределяющая колонки по горизонтали.
-*
-*		@example
-*		.row.Rj-c
-*			.row__col.W5c: .test-content Текст в колонке
-*			.row__col.W3c: .test-content 3/12
-*/
-
-/**
-* Rai - row align items:
-* Утилита, которая выравнивает колонки по вертикали.
-*
-*		@example
-*		.row.Rai-fe
-*			.row__col.W4c.test-content
-*				h4 Текст в колонке
-*				p Et molestie ac, feugiat sed lectus
-*				p Текст в колонке
-*			- for(var i = 0; i < 3; i++)
-*				.row__col.W2c.test-content
-*					p Текст в колонке
-*
+Styleguide: core-utils.w
 */
 
 .W-card {
@@ -618,6 +651,71 @@ Styleguide: core-blocks.input
 .W100p {
 	width: 100%;
 }
+
+/*
+Margin
+
+Group of utilities that sets margin for component.
+
+Styleguide: core-utils.margin
+*/
+
+/*
+Ml
+
+Ml \- margin left. Utility sets left margin.
+
+Markup:
+<div class="test-content Ml3gc_md">
+	<h3>Container</h3>
+	<p>With margin left</p>
+</div>
+
+Styleguide: core-utils.margin.ml
+*/
+
+/*
+Mx
+
+Mx \- margin on X axis. Utility sets left and right margin.
+
+Markup:
+<div class="test-content W3gc_sm Mx-a">
+	<h3>Title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.margin.mx
+*/
+
+/*
+Mt
+
+Mt \- margin top. Utility sets top margin.
+
+Markup:
+<div class="test-content W3gc_md">
+	<h3>Title</h3>
+	<p class="Mt3gg">text</p>
+</div>
+
+Styleguide: core-utils.margin.mt
+*/
+
+/*
+Mb
+
+Mb \- margin bottom. Utility sets bottom margin.
+
+Markup:
+<div class="test-content W3gc_md">
+	<h3>Title</h3>
+	<p class="Mb4gg">text</p>
+	<p>after indent</p>
+</div>
+
+Styleguide: core-utils.margin.mb
+*/
 
 .M0 {
 	margin: 0px;
@@ -676,6 +774,42 @@ Styleguide: core-blocks.input
 	margin-left: 12px;
 }
 
+/*
+Padding
+
+Group of utilities that sets padding for component.
+
+Styleguide: core-utils.padding
+*/
+
+/*
+P
+
+P \- padding. Sets padding from all sides: top, right, bottom and left.
+
+Markup:
+<div class="test-content W2gc_sm W5gc_md P0">
+	<h3>Title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.padding.p
+*/
+
+/*
+Px
+
+Px \- padding on X axis. Sets left and right padding.
+
+Markup:
+<div class="Px1gg W2gc_sm W3gc_md">
+	<h3>Title</h3>
+	<p>[Browsersync] 2 files changed (mlut.min.css.map, mlut.min.css) [12:21:49] Finished 'style' after 212 ms Some text</p>
+</div>
+
+Styleguide: core-utils.padding.px
+*/
+
 .P0 {
 	padding: 0px;
 }
@@ -683,6 +817,42 @@ Styleguide: core-blocks.input
 .P8 {
 	padding: 0.5em 8px;
 }
+
+/*
+Float
+
+Group of utilities for work with float.
+
+Styleguide: core-utils.float
+*/
+
+/*
+Fl
+
+Fl \- float. Sets float to component.
+
+Markup:
+<div class="test-content W2gc_sm mCl">
+	<h3 class="Fl">Title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.float.fl
+*/
+
+/*
+mCl
+
+mCl is clearfix utility.
+
+Markup:
+<div class="test-content W2gc_sm mCl">
+	<h3 class="Fl">Title</h3>
+	<p class="Fl-r">Some text</p>
+</div>
+
+Styleguide: core-utils.float.mcl
+*/
 
 .Fl {
 	float: left;
@@ -698,6 +868,20 @@ Styleguide: core-blocks.input
 	content: "";
 }
 
+/*
+Ov
+
+Ov \- overflow. Sets component overflow.
+
+Markup:
+<div class="test-content W2gc_sm W5gc_md">
+	<h3>Title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.ov
+*/
+
 .Ov {
 	overflow: hidden;
 }
@@ -705,6 +889,58 @@ Styleguide: core-blocks.input
 .Ov-a {
 	overflow: auto;
 }
+
+/*
+Text
+
+Group of utilities that manage the display of text.
+
+Styleguide: core-utils.text
+*/
+
+/*
+Dir
+
+Dir \- direction. Sets direction of text and order items in layout.
+
+Markup:
+<div class="row Dir-r">
+	<div class="test-content row__col W2gc_sm W3gc_md">
+		<h3>Rtl</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-utils.text.dir
+*/
+
+/*
+mFz
+
+mFz \- my font size. Sets font size with additional parameters.
+
+Markup:
+<div class="test-content W2gc_sm W5gc_md">
+	<h3>Hidden text here</h3>
+	<p class="mFz0">Some text</p>
+</div>
+
+Styleguide: core-utils.text.mfz
+*/
+
+/*
+mTov
+
+mTov \- my text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container.
+
+Markup:
+<div class="test-content W2gc_sm W3gc_md">
+	<h3 class="Maw100p mTov">super super long long title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.text.mtov
+*/
 
 .F-i {
 	font: inherit;
@@ -751,6 +987,20 @@ Styleguide: core-blocks.input
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+/*
+mV
+
+mV \- my visibility. Shows and hides component with additional parameters.
+
+Markup:
+<div class="test-content W2gc_sm W4gc_md">
+	<h3 class="mV-vh">Visually hidden title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.mv
+*/
 
 .mV-vh {
 	position: absolute;

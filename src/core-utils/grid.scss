@@ -1,53 +1,15 @@
-/***
-* Утилиты:
-*/
+/*
+W
 
-/**
-* W - width:
-* `W` - утилита, которая управляет шириной компонента.
-*
-*		@example
-*		div.W4c
-*			.test-content
-*				h3 Просто текст в контейнере
-*				p
-*					Aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl. Suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet eget sit amet tellus cras adipiscing enim eu turpis egestas pretium aenean pharetra, magna ac placerat.
-*/
+W \- width. This utility sets component width.
 
-/**
-* Ml - margin left:
-* `Ml` задает компонентам отступ слева.
-*
-*		@example
-*		.Ml3c.test-content
-*			h3 Контейнер с отступом
-*			p Aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl. Suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet eget sit amet tellus cras adipiscing enim eu turpis egestas pretium aenean pharetra, magna ac placerat.
-*/
+Markup:
+<div class="test-content W2gc_sm W5gc_md">
+	<h3>Title</h3>
+	<p>Some text</p>
+</div>
 
-/**
-* Rj - row justify:
-* Утилита распределяющая колонки по горизонтали.
-*
-*		@example
-*		.row.Rj-c
-*			.row__col.W5c: .test-content Текст в колонке
-*			.row__col.W3c: .test-content 3/12
-*/
-
-/**
-* Rai - row align items:
-* Утилита, которая выравнивает колонки по вертикали.
-*
-*		@example
-*		.row.Rai-fe
-*			.row__col.W4c.test-content
-*				h4 Текст в колонке
-*				p Et molestie ac, feugiat sed lectus
-*				p Текст в колонке
-*			- for(var i = 0; i < 3; i++)
-*				.row__col.W2c.test-content
-*					p Текст в колонке
-*
+Styleguide: core-utils.w
 */
 
 .W-card {

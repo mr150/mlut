@@ -1,3 +1,59 @@
+/*
+Flex
+
+A group of utilities for managing flex-containers and flex-elements. Custom flex utilities are needed to manage standard [row layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+
+Styleguide: core-utils.flex
+*/
+
+/*
+mAs
+
+mAs \- my align self. Utility for componont vertical alignment.
+
+Markup:
+<div class="row">
+	<div class="test-content row__col W2gc_sm W3gc_md mAs-fe">
+		<h3>W2gc_sm W3gc_md</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-utils.flex.mas
+*/
+
+/*
+mJc
+
+mJc \- my justify content. Utility for horizontal alignment of layout items and text.
+
+Markup:
+<div class="row mJc-c">
+	<div class="test-content row__col W2gc_sm W3gc_md">
+		<h3>Centered</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-utils.flex.mjc
+*/
+
+/*
+mAi
+
+mAi \- my align items. Utility for vertical alignment of layout items.
+
+Markup:
+<div class="row mAi-fe">
+	<div class="test-content row__col W2gc_sm W3gc_md">
+		<h3>Bottom</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-utils.flex.mai
+*/
+
 .Fxd-c {
 	flex-direction: column;
 }

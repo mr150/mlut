@@ -1,3 +1,55 @@
+/*
+Text
+
+Group of utilities that manage the display of text.
+
+Styleguide: core-utils.text
+*/
+
+/*
+Dir
+
+Dir \- direction. Sets direction of text and order items in layout.
+
+Markup:
+<div class="row Dir-r">
+	<div class="test-content row__col W2gc_sm W3gc_md">
+		<h3>Rtl</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-utils.text.dir
+*/
+
+/*
+mFz
+
+mFz \- my font size. Sets font size with additional parameters.
+
+Markup:
+<div class="test-content W2gc_sm W5gc_md">
+	<h3>Hidden text here</h3>
+	<p class="mFz0">Some text</p>
+</div>
+
+Styleguide: core-utils.text.mfz
+*/
+
+/*
+mTov
+
+mTov \- my text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container.
+
+Markup:
+<div class="test-content W2gc_sm W3gc_md">
+	<h3 class="Maw100p mTov">super super long long title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.text.mtov
+*/
+
 .F-i {
 	font: inherit;
 }

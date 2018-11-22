@@ -1,3 +1,68 @@
+/*
+Margin
+
+Group of utilities that sets margin for component.
+
+Styleguide: core-utils.margin
+*/
+
+/*
+Ml
+
+Ml \- margin left. Utility sets left margin.
+
+Markup:
+<div class="test-content Ml3gc_md">
+	<h3>Container</h3>
+	<p>With margin left</p>
+</div>
+
+Styleguide: core-utils.margin.ml
+*/
+
+/*
+Mx
+
+Mx \- margin on X axis. Utility sets left and right margin.
+
+Markup:
+<div class="test-content W3gc_sm Mx-a">
+	<h3>Title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.margin.mx
+*/
+
+/*
+Mt
+
+Mt \- margin top. Utility sets top margin.
+
+Markup:
+<div class="test-content W3gc_md">
+	<h3>Title</h3>
+	<p class="Mt3gg">text</p>
+</div>
+
+Styleguide: core-utils.margin.mt
+*/
+
+/*
+Mb
+
+Mb \- margin bottom. Utility sets bottom margin.
+
+Markup:
+<div class="test-content W3gc_md">
+	<h3>Title</h3>
+	<p class="Mb4gg">text</p>
+	<p>after indent</p>
+</div>
+
+Styleguide: core-utils.margin.mb
+*/
+
 $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 
 .M0 {

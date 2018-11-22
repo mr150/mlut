@@ -1,16 +1,31 @@
-/**
-* D - display:
-* Утилита `D` управляет отображением компонента на странице.
-*
-*		@example
-*		h4 D-n - скрывает компонент
-*		p В разметке есть скрытый абзац
-*		p.D-n
-*			Этот абзац скрыт, как будто его нет
-*		.D-n_sm.test-content
-*			h3 Этот компонент будет скрыт на брейкпоинте sm
-*			p
-*				Значение утилиты D - n_sm
+/*
+D
+
+D \- display. Utility sets the display type of component.
+
+Markup:
+<div class="test-content W5gc_md">
+	<h3 class="D-ib_sm">Title</h3>
+	<p class="D-n_xl">Hidden content</p>
+</div>
+
+Styleguide: core-utils.d
+*/
+
+/*
+mD
+
+mD is used for for setting the display type with additional parameters.
+
+Markup:
+<div class="row mD-f">
+	<div class="test-content row__col W2gc_sm W3gc_md">
+		<h3>W2gc_sm W3gc_md</h3>
+		<p>Some text</p>
+	</div>
+</div>
+
+Styleguide: core-utils.d.md
 */
 
 .D {
