@@ -1,3 +1,11 @@
+/*
+Functions
+
+Useful functions. All MLUT functions have 'mlu' prefix.
+
+Styleguide: sass-tools.functions
+*/
+
 /// Get breakpoint from $mlu-breakpoints map
 
 @function mlu-breakpoint($name, $error-handler: 1) {

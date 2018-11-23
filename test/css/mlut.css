@@ -13,7 +13,7 @@ img {
 /*
 Core blocks
 
-Тестовое описание
+BEM blocks for using on all sites.
 
 Второй абзац
 
@@ -68,6 +68,22 @@ Set of ready layouts
 Simple text
 
 Styleguide: examples.layouts
+*/
+
+/*
+Functions
+
+Useful functions. All MLUT functions have 'mlu' prefix.
+
+Styleguide: sass-tools.functions
+*/
+
+/*
+Mixins
+
+Useful mixins. All MLUT mixins have 'mlu' prefix.
+
+Styleguide: sass-tools.mixins
 */
 
 /*===CORE-BLOCKS===*/
