@@ -6,7 +6,11 @@ Useful functions. All MLUT functions have 'mlu' prefix.
 Styleguide: sass-tools.functions
 */
 
-/// Get breakpoint from $mlu-breakpoints map
+// mlu-breakpoint
+//
+// Get breakpoint from $mlu-breakpoints map
+//
+// Styleguide: sass-tools.functions.breakpoint
 
 @function mlu-breakpoint($name, $error-handler: 1) {
 	@if map-has-key($mlu-breakpoints, $name) or $error-handler == 0 {
@@ -16,11 +20,16 @@ Styleguide: sass-tools.functions
 	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-breakpoints";
 }
 
-/// Get next breakpoint. By default return value in px
-/// but can return name if use function wrapper
-/// 'mlu-breakpoint-next-name'.
-/// If pass last breakpoint it return 0.
-/// If call without args it return first breakpoint
+// mlu-breakpoint-next
+//
+// Get next breakpoint. By default return value in px
+// but can return name if use function wrapper
+// 'mlu-breakpoint-next-name'.
+//
+// If pass last breakpoint it return 0.
+// If call without args it return first breakpoint
+//
+// Styleguide: sass-tools.functions.breakpoint_next
 
 @function mlu-breakpoint-next($bp: 0, $data-type: "value") {
 	@if $bp == 0 or map-has-key($mlu-breakpoints, $bp) {
@@ -37,15 +46,23 @@ Styleguide: sass-tools.functions
 	@error "Invalid breakpoint name: '#{$bp}'. '#{$bp}' is not defined in $mlu-breakpoints";
 }
 
-/// Wrapper on 'mlu-breakpoint-next' for get breakpoint's name
+// mlu-breakpoint-next-name
+//
+// Wrapper on 'mlu-breakpoint-next' for get breakpoint's name
+//
+// Styleguide: sass-tools.functions.breakpoint_next_name
 
 @function mlu-breakpoint-next-name($bp: 0) {
 	@return mlu-breakpoint-next($bp, "name");
 }
 
-/// As the same as 'mlu-breakpoint-next'.
-/// If pass first breakpoint it return 0.
-/// If call without args it return last breakpoint
+// mlu-breakpoint-prev
+//
+// As the same as 'mlu-breakpoint-next'.
+// If pass first breakpoint it return 0.
+// If call without args it return last breakpoint
+//
+// Styleguide: sass-tools.functions.breakpoint_prev
 
 @function mlu-breakpoint-prev($bp: 0, $data-type: "value") {
 	@if $bp == 0 or map-has-key($mlu-breakpoints, $bp) {
@@ -62,13 +79,22 @@ Styleguide: sass-tools.functions
 	@error "Invalid breakpoint name: '#{$bp}'. '#{$bp}' is not defined in $mlu-breakpoints";
 }
 
-/// Wrapper on 'mlu-breakpoint-prev' for get breakpoint's name
+
+// mlu-breakpoint-prev-name
+//
+// Wrapper on 'mlu-breakpoint-prev' for get breakpoint's name
+//
+// Styleguide: sass-tools.functions.breakpoint_prev_name
 
 @function mlu-breakpoint-prev-name($bp: 0) {
 	@return mlu-breakpoint-prev($bp, "name");
 }
 
-/// Get grid gutter from $mlu-grid-gutters map
+// mlu-grid-gutter
+//
+// Get grid gutter from $mlu-grid-gutters map
+//
+// Styleguide: sass-tools.functions.grid_gutter
 
 @function mlu-grid-gutter($name, $error-handler: 1) {
 	@if map-has-key($mlu-grid-gutters, $name) or $error-handler == 0 {
@@ -78,7 +104,11 @@ Styleguide: sass-tools.functions
 	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-grid-gutters";
 }
 
-/// Get cols count on breakpoint from $mlu-grid-cols map
+// mlu-grid-cols-count
+//
+// Get cols count on breakpoint from $mlu-grid-cols map
+//
+// Styleguide: sass-tools.functions.grid_cols_count
 
 @function mlu-grid-cols-count($name, $error-handler: 1) {
 	@if map-has-key($mlu-grid-cols, $name) or $error-handler == 0 {
@@ -88,13 +118,17 @@ Styleguide: sass-tools.functions
 	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-grid-cols";
 }
 
-/// Round decimal
-/// $number is decimal to be rounded.
-/// $pos is the number of decimal places.
-
-/// $type is round type by analogy with the round functions of sass.
-/// You can use different types off round with functions wrappers
-/// 'mlu-decimal-floor'
+// mlu-decimal-round
+//
+// Round decimal
+// $number is decimal to be rounded.
+// $pos is the number of decimal places.
+//
+// $type is round type by analogy with the round functions of sass.
+// You can use different types off round with functions wrappers
+// 'mlu-decimal-floor'
+//
+// Styleguide: sass-tools.functions.decimal_round
 
 @function mlu-decimal-round($number, $pos, $type: "round") {
 	$n: 1;
@@ -122,26 +156,39 @@ Styleguide: sass-tools.functions
 	}
 }
 
-/// Wrapper on 'mlu-decimal-round' for ceil round
+// mlu-decimal-ceil
+//
+// Wrapper on 'mlu-decimal-round' for ceil round
+//
+// Styleguide: sass-tools.functions.decimal_ceil
 
 @function mlu-decimal-ceil($number, $pos) {
 	@return mlu-decimal-round($number, $pos, "ceil");
 }
 
-/// Wrapper on 'mlu-decimal-round' for floor round
+
+// mlu-decimal-floor
+//
+// Wrapper on 'mlu-decimal-round' for floor round
+//
+// Styleguide: sass-tools.functions.decimal_floor
 
 @function mlu-decimal-floor($number, $pos) {
 	@return mlu-decimal-round($number, $pos, "floor");
 }
 
-/// Convert pixels to ems or rems.
-/// $number is number in px.
-/// $divider is parent or root font size in px.
-/// Converting to rems done using the wrapper function
-/// 'mlu-px2rem'.
-
-/// Final value in ems rounded because accuracy
-/// more than two decimal places does not make sense
+// mlu-px2em
+//
+// Convert pixels to ems or rems.
+// $number is number in px.
+// $divider is parent or root font size in px.
+// Converting to rems done using the wrapper function
+// 'mlu-px2rem'.
+//
+// Final value in ems rounded because accuracy
+// more than two decimal places does not make sense
+//
+// Styleguide: sass-tools.functions.px2em
 
 @function mlu-px2em($number, $divider: $mlu-base-font-size, $unit: "em") {
 	@if unitless($number) {
@@ -162,24 +209,38 @@ Styleguide: sass-tools.functions
 	@return mlu-decimal-round($number / $divider, 2) * 1em;
 }
 
-/// Wrapper on 'mlu-px2em' for converting to rems
+
+// mlu-px2rem
+//
+// Wrapper on 'mlu-px2em' for converting to rems
+//
+// Styleguide: sass-tools.functions.px2rem
 
 @function mlu-px2rem($number, $divider: $MLU-BROWSER-FONT-SIZE) {
 	@return mlu-px2em($number, $divider, "rem");
 }
 
-/// Wrapper on 'mlu-px2em' for converting to line-height unit
+
+// mlu-px2lh
+//
+// Wrapper on 'mlu-px2em' for converting to line-height unit
+//
+// Styleguide: sass-tools.functions.px2lh
 
 @function mlu-px2lh($number, $divider: $mlu-base-font-size) {
 	@return mlu-px2em($number, $divider, "no");
 }
 
-/// Convert string to number.
-/// $str is string to be converted.
-
-/// $strict is flag for stricter conversion; Examples:
-/// mlu-ston(10c) => 10;
-/// mlu-ston(10c, 1) => null;
+// mlu-ston
+//
+// Convert string to number.
+// $str is string to be converted.
+//
+// $strict is flag for stricter conversion; Examples:
+// mlu-ston(10c) => 10;
+// mlu-ston(10c, 1) => null;
+//
+// Styleguide: sass-tools.functions.ston
 
 @function mlu-ston($str, $strict: false) {
 	@if type-of($str) == "number" {
