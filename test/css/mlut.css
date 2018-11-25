@@ -71,6 +71,14 @@ Styleguide: examples.layouts
 */
 
 /*
+Settings
+
+Grid settings, compilation flags, constants and more.
+
+Styleguide: sass-tools.settings
+*/
+
+/*
 Functions
 
 Useful functions. All MLUT functions have 'mlu' prefix.
