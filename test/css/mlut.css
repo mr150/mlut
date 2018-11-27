@@ -1,13 +1,32 @@
 @charset "UTF-8";
 
-html {
-	height: 100%;
+/*
+Normalize
+
+Simple css normalization that correcting old browsers bugs and not affecting other styles.
+
+Styleguide: core-styles.normalize
+*/
+
+main {
+	display: block;
 }
 
 img {
-	vertical-align: top;
 	max-width: 100%;
-	border: none;
+	height: auto;
+	border: 0;
+}
+
+legend {
+	display: table;
+	box-sizing: border-box;
+	max-width: 100%;
+	white-space: normal;
+}
+
+[hidden] {
+	display: none !important;
 }
 
 /*
@@ -39,7 +58,7 @@ Simple text
 
 Weight: 2
 
-Styleguide: sass-base
+Styleguide: core-styles
 */
 
 /*

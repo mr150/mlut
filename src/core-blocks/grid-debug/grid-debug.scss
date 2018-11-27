@@ -2,6 +2,8 @@
 Grid-debug
 
 Блок для отладки раскладок. Отображает модульную сетку в фоне контейнера. На sm брейкпоинте у сетки 4 колонки, а на md и выше \- 12.
+<br>
+It turned off in default MLUT bundle.
 
 Markup:
 <div class="row grid-debug">

@@ -1,10 +1,32 @@
-// Simple normalize which does not affect other styles
-html {
-	height: 100%;
+/*
+Normalize
+
+Simple css normalization that correcting old browsers bugs and not affecting other styles.
+
+Styleguide: core-styles.normalize
+*/
+
+// Render 'main' tag consistently in IE.
+main {
+	display: block;
 }
 
+// Remove the border on images inside links in IE 10.
 img {
-	vertical-align: top;
 	max-width: 100%;
-	border: none;
+	height: auto;
+	border: 0;
+}
+
+// Correct the text wrapping in Edge and IE.
+legend {
+	display: table;
+	box-sizing: border-box;
+	max-width: 100%;
+	white-space: normal;
+}
+
+// Add the correct display in IE 10.
+[hidden] {
+	display: none !important;
 }
