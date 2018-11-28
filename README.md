@@ -1,44 +1,5 @@
 # My little UI toolkit
-Responsive, simple and lightweight toolkit with progressive enhancement for website UI development. MLUT united in itself the [BEM](https://ru.bem.info/) and [Atomic CSS](https://acss.io/) methodologys.
-
-## Structure ##
-- BEM blocks
-- CSS utilities
-- Developer tools
-
-For now MLUT contains only Sass tools and CSS.
-
-### Concept ###
-The library part of toolkit consists of 3 layers:
-
-- Core - all that can be used at each website
-- Theme - something that is only used in specific theme. Theme can be used on different sites
-- Design - parts of UI for a specific website
-
-Each layer consists of BEM blocks and utilities. For more information read [documentation](#documentation)
-
-### Technologies ###
-- [LibSass](https://github.com/sass/libsass)
-#### Assembly ####
-- [Gulp](https://github.com/gulpjs/gulp)
-- [Clean-css](https://github.com/jakubpawlowicz/clean-css)
-- [Autoprefixer](https://github.com/postcss/autoprefixer)
-- [group-css-media-queries](https://github.com/Se7enSky/group-css-media-queries)
-- [Rigger](https://github.com/buildjs/rigger)
-- [UglifyJS](https://github.com/mishoo/UglifyJS2)
-
-### Supported browsers ###
-- Desktop
-	- Firefox
-	- Chrome
-	- Safari
-	- Opera
-	- Edge
-	- IE9+
-	- partial IE8
-- Mobile
-	- Android 4+
-	- IOS
+Responsive, simple and lightweight toolkit with progressive enhancement for website UI development. MLUT united in itself the [Atomic CSS](https://acss.io/) and [BEM](https://bem.info/) methodologies.
 
 ## Getting Started
 There are 2 ways to start using MLUT:
