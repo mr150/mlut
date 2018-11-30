@@ -73,7 +73,6 @@ Styleguide: examples.layouts
 }
 
 .row__col,
-.row__cell,
 .row__item {
 	position: relative;
 	display: inline-block;
@@ -110,9 +109,4 @@ Styleguide: examples.layouts
 	&.row {
 		margin-bottom: 0px;
 	}
-}
-
-.row__cell {
-	width: 100%;
-	@include mlu-generate-gutter($type: "padding");
 }

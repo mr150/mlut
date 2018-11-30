@@ -229,7 +229,6 @@ Styleguide: examples.layouts
 }
 
 .row__col,
-.row__cell,
 .row__item {
 	position: relative;
 	display: inline-block;
@@ -243,19 +242,16 @@ Styleguide: examples.layouts
 }
 
 .row__col.row,
-.row__cell.row,
 .row__item.row {
 	font-size: 0px;
 }
 
 .row__col > :first-child:not([class]),
-.row__cell > :first-child:not([class]),
 .row__item > :first-child:not([class]) {
 	margin-top: 0px;
 }
 
 .row__col > :last-child:not([class]),
-.row__cell > :last-child:not([class]),
 .row__item > :last-child:not([class]) {
 	margin-bottom: 0px;
 }
@@ -271,12 +267,6 @@ Styleguide: examples.layouts
 	margin-bottom: 0px;
 }
 
-.row__cell {
-	width: 100%;
-	padding: 0px 1.5%;
-	padding: 0px 12px;
-}
-
 /*
 Wrapper
 
@@ -288,8 +278,10 @@ The container has sides `padding` that equal to gutters so that the content does
 
 Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `calc()` fallback for fields:
 ```scss
-padding: 0 1.5%;
-padding: 0 calc(12px);
+padding-right: 1.5%;
+padding-left: 1.5%;
+padding-right: calc(12px);
+padding-left: calc(12px);
 ```
 
 Markup: ../../../docs/examples/core-blocks/wrapper/wrapper.html
@@ -326,9 +318,11 @@ Styleguide: core-blocks.wrapper.wrapper__row
 	display: block;
 	max-width: 1224px;
 	box-sizing: border-box;
-	margin: auto;
-	padding: 0px 1.5%;
-	padding: 0px calc(12px);
+	margin: 0 auto;
+	padding-right: 1.5%;
+	padding-left: 1.5%;
+	padding-right: calc(12px);
+	padding-left: calc(12px);
 }
 
 .wrapper__row {
@@ -854,6 +848,13 @@ Styleguide: core-utils.padding.px
 
 .P8 {
 	padding: 0.5em 8px;
+}
+
+.Px1gg {
+	padding-right: 1.5%;
+	padding-left: 1.5%;
+	padding-right: 12px;
+	padding-left: 12px;
 }
 
 /*
@@ -1408,22 +1409,17 @@ Styleguide: core-utils.mv
 
 @media (min-width: 960px) {
 	.row__col {
-		margin-left: calc(16px);
 		margin-right: calc(16px);
+		margin-left: calc(16px);
 	}
 
 	.row__col {
 		margin-bottom: 32px;
 	}
 
-	.row__cell {
-		padding-left: 16px;
-		padding-right: 16px;
-	}
-
 	.wrapper {
-		padding-left: calc(16px);
 		padding-right: calc(16px);
+		padding-left: calc(16px);
 	}
 
 	.wrapper {
@@ -1431,8 +1427,8 @@ Styleguide: core-utils.mv
 	}
 
 	.wrapper__row {
-		margin-left: calc(-16px);
 		margin-right: calc(-16px);
+		margin-left: calc(-16px);
 	}
 
 	.D-n_lg {
@@ -1837,6 +1833,11 @@ Styleguide: core-utils.mv
 	.Mx0_lg {
 		margin-left: 0;
 		margin-right: 0;
+	}
+
+	.Px1gg {
+		padding-right: 16px;
+		padding-left: 16px;
 	}
 }
 

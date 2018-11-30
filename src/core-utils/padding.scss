@@ -41,3 +41,7 @@ Styleguide: core-utils.padding.px
 .P8 {
 	padding: mlu-px2em(8px) 8px;
 }
+
+.Px1gg {
+	@include mlu-generate-gutter($type: "padding");
+}

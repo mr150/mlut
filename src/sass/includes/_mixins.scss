@@ -242,11 +242,15 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 		$tmp-val: if($calc, calc(#{$prev-value * $coef}), $prev-value * $coef);
 
 		@if $direct == "x" {
-			#{$type}: 0px ($mlu-grid-gutter-fallback * $coef);
-			#{$type}: 0px $tmp-val;
+			#{$type}-right: ($mlu-grid-gutter-fallback * $coef);
+			#{$type}-left: ($mlu-grid-gutter-fallback * $coef);
+			#{$type}-right: $tmp-val;
+			#{$type}-left: $tmp-val;
 		} @else if $direct == "y" {
-			#{$type}: ($mlu-grid-gutter-fallback * $coef) 0px;
-			#{$type}: $tmp-val 0px;
+			#{$type}-top: ($mlu-grid-gutter-fallback * $coef);
+			#{$type}-bottom: ($mlu-grid-gutter-fallback * $coef);
+			#{$type}-top: $tmp-val;
+			#{$type}-bottom: $tmp-val;
 		} @else if $direct == "xy" {
 			#{$type}: ($mlu-grid-gutter-fallback * $coef);
 			#{$type}: $tmp-val;
@@ -265,8 +269,8 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 				$tmp-val: if($calc, calc(#{$cur-val * $coef}), $cur-val * $coef);
 
 				@if $direct == "x" {
-					#{$type}-left: $tmp-val;
 					#{$type}-right: $tmp-val;
+					#{$type}-left: $tmp-val;
 				} @else if $direct == "y" {
 					#{$type}-top: $tmp-val;
 					#{$type}-bottom: $tmp-val;
@@ -591,7 +595,7 @@ $body-size: (100% 48%), $change: false) {
 
 // mlu-row-col
 //
-// Generate styles for 'row' elements like 'row__col', 'row__cell' etc.
+// Generate styles for 'row' elements like 'row__col' and 'row__item'.
 //
 // $display is display type.
 //
@@ -645,11 +649,6 @@ $body-size: (100% 48%), $change: false) {
 			font-size: 0px;
 		}
 	} @else {
-		@if $type == "cell" {
-			width: 100%;
-			@include mlu-generate-gutter($gutters: $grid-gutters, $type: "padding");
-		}
-
 		&.row {
 			font-size: 0px;
 		}
@@ -662,18 +661,6 @@ $body-size: (100% 48%), $change: false) {
 	& > :last-child:not([class]) {
 		margin-bottom: 0px;
 	}
-}
-
-// mlu-row-cell
-//
-// Generate styles for 'row__cell' element.
-//
-// It mixin-wrapper on 'mlu-row-col' because most of styles the same.
-//
-// Styleguide: sass-tools.mixins.row_cell
-
-@mixin mlu-row-cell($display: inline-block, $gutters: $mlu-grid-gutters) {
-	@include mlu-row-col($display, $gutters, $type: "cell");
 }
 
 // mlu-row-item

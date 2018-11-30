@@ -9,8 +9,10 @@ The container has sides `padding` that equal to gutters so that the content does
 
 Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `calc()` fallback for fields:
 ```scss
-padding: 0 1.5%;
-padding: 0 calc(12px);
+padding-right: 1.5%;
+padding-left: 1.5%;
+padding-right: calc(12px);
+padding-left: calc(12px);
 ```
 
 Markup: ../../../docs/examples/core-blocks/wrapper/wrapper.html
@@ -49,7 +51,7 @@ Styleguide: core-blocks.wrapper.wrapper__row
 	display: block;
 	max-width: $mlu-wrapper-max-width + ($mlu-gtr-sm * 2);
 	box-sizing: border-box;
-	margin: auto;
+	margin: 0 auto;
 	@include mlu-generate-gutter($type: "padding", $calc: 1);
 
 	@each $key, $value in $mlu-grid-gutters {
@@ -64,10 +66,5 @@ Styleguide: core-blocks.wrapper.wrapper__row
 }
 
 .wrapper__row {
-	margin-right: - $mlu-grid-gutter-fallback;
-	margin-left: - $mlu-grid-gutter-fallback;
-	margin-right: calc(-#{$mlu-gtr-sm});
-	margin-left: calc(-#{$mlu-gtr-sm});
-
-	@include mlu-generate-gutter(-1, $coef: -1, $calc: 1);
+	@include mlu-generate-gutter($coef: -1, $calc: 1);
 }
