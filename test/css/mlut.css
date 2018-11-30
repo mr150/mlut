@@ -29,12 +29,14 @@ legend {
 	display: none !important;
 }
 
+/* This comment needed for add @charset "utf-8"; in source because sass compiler erased this at-rule without it: утф8 */
+
 /*
 Core blocks
 
-BEM blocks for using on all sites.
+Set of universal BEM blocks for using on all sites. Some blocks contain elements.
 
-Второй абзац
+Core blocks don't contain, or almost don't contain styles such as colors, backgrounds, etc. Such styles are set on the 'theme' or 'design' layers. To style blocks or their elements, use utilities or modifiers such as block--mod.
 
 Weight: 0
 
@@ -74,19 +76,11 @@ Styleguide: sass-tools
 /*
 Examples
 
-Дополнительные примеры работы базовых блоков, утилит и готовых компонентов.
+Additional examples of core blocks, utilities, tools and ready-made components.
 
 Weight: 4
 
 Styleguide: examples
-*/
-
-/*
-Set of ready layouts
-
-Simple text
-
-Styleguide: examples.layouts
 */
 
 /*
@@ -118,14 +112,14 @@ Styleguide: sass-tools.mixins
 /*
 Reset
 
-Блок для сброса стилей у компонента.
+Block for reset some default browser styles. It reset:
+* `margin`
+* `padding`
+* `border`
+* `font`
+* `list-style`
 
-Markup:
-<ul class="reset">
-	<li>1</li>
-	<li>2</li>
-	<li>3</li>
-</ul>
+Markup: ../../../docs/examples/core-blocks/reset/reset.html
 
 Styleguide: core-blocks.reset
 */
@@ -141,12 +135,9 @@ Styleguide: core-blocks.reset
 /*
 Page
 
-Блок для нормализации браузерных стилей страницы. Класс .page задается только для тега body. Он убирает внешний отступ по умолчанию и задает системный шрифт.
+Block for normalize browser styles of 'body'. Designed for 'body' tag only.
 
-Класс используется вместо стилизации тега body, чтобы при подключении MLUT на существующий проект не произошло неожиданностей в виде переопределенных стилей.
-
-Markup:
-<body class="page">
+It has `height: 100%` for sticky footer.
 
 Styleguide: core-blocks.page
 */
@@ -160,20 +151,15 @@ Styleguide: core-blocks.page
 /*
 Row
 
-Универсальный блок для создания раскладок. Подходит для колонок, карточек и горизонтальных списков. По умолчанию, для раскладок используется технология inline-block. С помощью утилиты D можно поменять технологию раскладки на flexbox.
+Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-d), you can change the layout technology to flexbox.
 
-Части раскладки внутри row создаются с помощью элементов:
+Parts of the layout within a 'row' are created using the elements:
 * [row__col](#kssref-core-blocks-row-row__col)
-* [row__cell](#kssref-core-blocks-row-row__cell)
 * [row__item](#kssref-core-blocks-row-row__item)
 
-Раскладки можно вкладывать друг в друга неограниченное количество раз.
+'Rows' can be put into each other an unlimited number of times.
 
-../../../test/grid.html
-
-Markup:
-<div class="row">
-</div>
+Markup: ../../../docs/examples/core-blocks/row/row.html
 
 Styleguide: core-blocks.row
 */
@@ -181,54 +167,55 @@ Styleguide: core-blocks.row
 /*
 row__col
 
-Основной элемент для создания колонок. По умолчанию растягивается на всю ширину контейнера. У колонок есть отступы по бокам и снизу.
+The main element for creating columns in layout. By default, it stretches the entire width of the container. The columns have gutters on the sides and bottom.
 
-Размеры колонкам задаются с помощью утилит.
+The gutters are implemented using the `margin` property. For this reason, the percentage width must be specified using the CSS `calc()`. <br>
+If `calc()` is not supported by the browser, then margin is provided in percent as fallback:
+```scss
+margin: 0 1.5% 24px;
+margin: 0 calc(12px) 24px;
+```
+so that the layout does not collapse. Similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields.
 
-Markup:
-<div class="row">
-	<div class="test-content row__col W2gc_sm W3gc_md">
-		<h3>W2gc_sm W3gc_md</h3>
-		<p>Some text</p>
-	</div>
-</div>
+The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-gutter-fallback.`
+
+Column width is set using [W utility](section-core-utils.html#kssref-core-utils-w). See example [above](#kssref-core-blocks-row).
+
+You can create nested layouts with a mix of `row` and `row__col` on the same tag. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
+
+All examples of the work of nested layouts are [here](section-examples.html#kssref-examples-nested_layouts).
+
+Markup: ../../../docs/examples/core-blocks/row/row__col.html
 
 Styleguide: core-blocks.row.row__col
 */
 
 /*
-row__cell
+row__item
 
-Альтернативный элемент для создания колонок. По умолчанию растягивается на всю ширину контейнера. У колонок есть отступы по бокам.
+Element for creating parts of the layout. By default, it stretches across the width of the content.
 
-Размеры задаются с помощью утилит.
+The sizes and offsets are set with help of utilities.
 
-Markup:
-<div class="row">
-	<div class="test-cell row__cell W2gs_sm W3gs_md">
-		<h3>W2gs_sm W3gs_md</h3>
-		<p>Some text</p>
-	</div>
-</div>
+Markup: ../../../docs/examples/core-blocks/row/row__item.html
 
-Styleguide: core-blocks.row.row__cell
+Styleguide: core-blocks.row.row__item
 */
 
 /*
-row__item
+Nested layouts
 
-Элемент для создания частей раскладки. По умолчанию растягивается по ширине контента.
+All variants of nested layouts.
 
-Размеры и отступы задаются с помощью утилит.
+Styleguide: examples.nested_layouts
+*/
 
-Markup:
-<div class="row">
-	<div class="test-row row__cell W2gs_sm W3gs_md">
-		<p>Some text</p>
-	</div>
-</div>
+/*
+Set of ready layouts
 
-Styleguide: core-blocks.row.row__item
+Simple text
+
+Styleguide: examples.layouts
 */
 
 .row {
@@ -293,12 +280,19 @@ Styleguide: core-blocks.row.row__item
 /*
 Wrapper
 
-Блок-контейнер для основного содержимого страницы. Максимальная ширина по умолчанию \- 1200px. У контейнера есть поля, чтобы контент не прилипал на маленьких экранах. На широких экранах контейнер располагается по центру
+The block-container for the main content of the page. The maximum width is set in the [settings](section-sass-tools.html#kssref-sass-tools-settings-blocks). The default is `1200px`.
 
-Markup:
-<div class="wrapper">
-	<h1>Simple text</h1>
-</div>
+Gutters are added up with maximum width so that the width of the contents matches the width from the settings.
+
+The container has sides `padding` that equal to gutters so that the content does not stick to sides on small screens. On wide screens the container is centered.
+
+Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `calc()` fallback for fields:
+```scss
+padding: 0 1.5%;
+padding: 0 calc(12px);
+```
+
+Markup: ../../../docs/examples/core-blocks/wrapper/wrapper.html
 
 Styleguide: core-blocks.wrapper
 */
@@ -306,15 +300,24 @@ Styleguide: core-blocks.wrapper
 /*
 wrapper__row
 
-Элемент, который накладывает левый и правый отступы у крайних колонок на поля блока wrapper.
-Такое поведение нужно, чтобы в раскладке не возникало двойных полей. Этот элемент опционален, потому что в разных ситуациях может понадобиться разное поведение полей.
+An element that imposes left and right margins of the outermost columns on the fields of the wrapper.
 
-Markup:
-<div class="wrapper">
-	<h2>Some cols</h2>
-	<div class="row wrapper__row">
-</div>
-</div>
+This behavior is necessary so that there are no double fields in the layout.
+
+This element is optional, because in different situations different behavior of fields may be needed.
+
+
+Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper__row is used `calc()` fallback for negative `margin`:
+```scss
+margin-right: -1.5%;
+margin-left: -1.5%;
+margin-right: calc(-12px);
+margin-left: calc(-12px);
+```
+
+.wrapper__row - [row](#kssref-core-blocks-row) without double fields
+
+Markup: ../../../docs/examples/core-blocks/wrapper/wrapper__row.hbs
 
 Styleguide: core-blocks.wrapper.wrapper__row
 */
@@ -338,14 +341,13 @@ Styleguide: core-blocks.wrapper.wrapper__row
 /*
 Ratio-block
 
-Блок для создания контейнеров, с пропорциональными шириной и высотой. По умолчанию пропорции 16:9
+Block for creating containers, with proportional width and height. Implemented using a pseudo-element with a `padding-bottom` in %.
 
-Markup:
-<div class="ratio-block W2gc_md">
-	<div class="ratio-block__content">
-		<!-- Content here -->
-	</div>
-</div>
+The default aspect ratio is 16:9.
+
+.ratio-block--4x3 - 4:3 aspect ratio.
+
+Markup: ../../../docs/examples/core-blocks/ratio-block/ratio-block.hbs
 
 Styleguide: core-blocks.ratio-block
 */
@@ -353,14 +355,7 @@ Styleguide: core-blocks.ratio-block
 /*
 ratio-block__content
 
-Элемент для вставки содержимого, которое будет пропорционально менять размеры.
-
-Markup:
-<div class="ratio-block W3gc_md">
-	<div class="ratio-block__content">
-		<p>Some more text [12:41:28] Starting 'style'... [12:41:29] mlut.min.css 2699 B (gzipped) [12:41:29] Finished 'style' after 205 ms </p>
-	</div>
-</div>
+An element for inserting content that will be resize proportionally. See example [above](#kssref-core-blocks-ratio-block)
 
 Styleguide: core-blocks.ratio-block.ratio-block__content
 */
@@ -376,6 +371,10 @@ Styleguide: core-blocks.ratio-block.ratio-block__content
 	content: "";
 }
 
+.ratio-block--4x3:before {
+	padding-bottom: 75%;
+}
+
 .ratio-block__content {
 	position: absolute;
 	top: 0px;
@@ -386,10 +385,9 @@ Styleguide: core-blocks.ratio-block.ratio-block__content
 /*
 Btn
 
-Блок для создания кнопок. Нормализует стили. Оформление задается с помощью модификаторов и утилит.
+Block for creating buttons. It normalizes styles.
 
-Markup:
-<a class="btn btn--common W3gs_md" href="#">Login</a>
+Markup: ../../../docs/examples/core-blocks/btn/btn.html
 
 Styleguide: core-blocks.btn
 */
@@ -410,12 +408,9 @@ Styleguide: core-blocks.btn
 /*
 Input
 
-Блок для создания полей ввода. Нормализует стили. Оформление задается с помощью модификаторов и утилит.
+Block for creating inputs. Normalizes styles.
 
-Markup:
-<p class="W3gc_md">
-	<input class="input input--common" name="" type="text" value="Some text"/>
-</p>
+Markup: ../../../docs/examples/core-blocks/input/input.html
 
 Styleguide: core-blocks.input
 */

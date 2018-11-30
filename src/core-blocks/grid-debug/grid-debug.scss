@@ -1,22 +1,17 @@
 /*
 Grid-debug
 
-Блок для отладки раскладок. Отображает модульную сетку в фоне контейнера. На sm брейкпоинте у сетки 4 колонки, а на md и выше \- 12.
-<br>
+Block for debugging layouts. It displays a modular grid in the background of the container. Modular grid are generated depending on the [settings](section-sass-tools.html#kssref-sass-tools-settings-layout). By default on the 'sm' breakpoint, the grid has 4 columns, on 'md' and above \- 12.
+
+There may be minor inaccuracies in the drawing of the grid, because the grid is generated with CSS `linear-gradient()`.
+
 It turned off in default MLUT bundle.
 
-Markup:
-<div class="row grid-debug">
-	<div class="test-content row__col W2gc_sm W3gc_md">
-		<h3>W2gc_sm W3gc_md</h3>
-		<p>Some text</p>
-	</div>
-</div>
+Markup: ../../../docs/examples/core-blocks/grid-debug/grid-debug.html
 
 Styleguide: core-blocks.grid-debug
 */
 
-// Generation linear gradient which show cols and gutters on breakpoints
 @each $key, $value in $mlu-grid-gutters {
 	$item-index: index($mlu-grid-gutters, ($key $value));
 

@@ -63,6 +63,10 @@ path = Object.assign({
 		],
 		pug: dirs.test + files.pug,
 		html: dirs.test + files.html,
+		docs: [
+			dirs.docs + "examples/" + files.html,
+			dirs.docs + "*.md",
+		],
 		js: [
 			path.src.js + "mlut.js",
 			path.src.js + "includes/" + files.js,
@@ -169,6 +173,7 @@ gulp.task("default", ["server", "style", "pug", "scripts"], function(){
 	gulp.watch(path.watch.pug, ["pug"]);
 	gulp.watch(path.watch.html, ["html"]);
 	gulp.watch(path.watch.js, ["scripts"]);
+	gulp.watch(path.watch.docs, ["kss"]);
 });
 
 gulp.task("clear", function(){

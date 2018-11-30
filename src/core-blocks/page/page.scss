@@ -1,12 +1,9 @@
 /*
 Page
 
-Блок для нормализации браузерных стилей страницы. Класс .page задается только для тега body. Он убирает внешний отступ по умолчанию и задает системный шрифт.
+Block for normalize browser styles of 'body'. Designed for 'body' tag only.
 
-Класс используется вместо стилизации тега body, чтобы при подключении MLUT на существующий проект не произошло неожиданностей в виде переопределенных стилей.
-
-Markup:
-<body class="page">
+It has `height: 100%` for sticky footer.
 
 Styleguide: core-blocks.page
 */

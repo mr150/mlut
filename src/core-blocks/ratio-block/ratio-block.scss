@@ -1,14 +1,13 @@
 /*
 Ratio-block
 
-Блок для создания контейнеров, с пропорциональными шириной и высотой. По умолчанию пропорции 16:9
+Block for creating containers, with proportional width and height. Implemented using a pseudo-element with a `padding-bottom` in %.
 
-Markup:
-<div class="ratio-block W2gc_md">
-	<div class="ratio-block__content">
-		<!-- Content here -->
-	</div>
-</div>
+The default aspect ratio is 16:9.
+
+.ratio-block--4x3 - 4:3 aspect ratio.
+
+Markup: ../../../docs/examples/core-blocks/ratio-block/ratio-block.hbs
 
 Styleguide: core-blocks.ratio-block
 */
@@ -16,14 +15,7 @@ Styleguide: core-blocks.ratio-block
 /*
 ratio-block__content
 
-Элемент для вставки содержимого, которое будет пропорционально менять размеры.
-
-Markup:
-<div class="ratio-block W3gc_md">
-	<div class="ratio-block__content">
-		<p>Some more text [12:41:28] Starting 'style'... [12:41:29] mlut.min.css 2699 B (gzipped) [12:41:29] Finished 'style' after 205 ms </p>
-	</div>
-</div>
+An element for inserting content that will be resize proportionally. See example [above](#kssref-core-blocks-ratio-block)
 
 Styleguide: core-blocks.ratio-block.ratio-block__content
 */
@@ -32,11 +24,14 @@ Styleguide: core-blocks.ratio-block.ratio-block__content
 	position: relative;
 
 	&:before {
-		// By default 16:9 ratio - 100%:56.25%
 		display: block;
 		width: 100%;
 		padding-bottom: 56.25%;
 		content: "";
+	}
+
+	&--4x3:before {
+		padding-bottom: 75%;
 	}
 }
 

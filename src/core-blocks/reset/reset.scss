@@ -1,14 +1,14 @@
 /*
 Reset
 
-Блок для сброса стилей у компонента.
+Block for reset some default browser styles. It reset:
+* `margin`
+* `padding`
+* `border`
+* `font`
+* `list-style`
 
-Markup:
-<ul class="reset">
-	<li>1</li>
-	<li>2</li>
-	<li>3</li>
-</ul>
+Markup: ../../../docs/examples/core-blocks/reset/reset.html
 
 Styleguide: core-blocks.reset
 */

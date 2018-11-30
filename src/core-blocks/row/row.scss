@@ -1,20 +1,15 @@
 /*
 Row
 
-Универсальный блок для создания раскладок. Подходит для колонок, карточек и горизонтальных списков. По умолчанию, для раскладок используется технология inline-block. С помощью утилиты D можно поменять технологию раскладки на flexbox.
+Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-d), you can change the layout technology to flexbox.
 
-Части раскладки внутри row создаются с помощью элементов:
+Parts of the layout within a 'row' are created using the elements:
 * [row__col](#kssref-core-blocks-row-row__col)
-* [row__cell](#kssref-core-blocks-row-row__cell)
 * [row__item](#kssref-core-blocks-row-row__item)
 
-Раскладки можно вкладывать друг в друга неограниченное количество раз.
+'Rows' can be put into each other an unlimited number of times.
 
-../../../test/grid.html
-
-Markup:
-<div class="row">
-</div>
+Markup: ../../../docs/examples/core-blocks/row/row.html
 
 Styleguide: core-blocks.row
 */
@@ -22,55 +17,55 @@ Styleguide: core-blocks.row
 /*
 row__col
 
-Основной элемент для создания колонок. По умолчанию растягивается на всю ширину контейнера. У колонок есть отступы по бокам и снизу.
+The main element for creating columns in layout. By default, it stretches the entire width of the container. The columns have gutters on the sides and bottom.
 
-Размеры колонкам задаются с помощью утилит.
+The gutters are implemented using the `margin` property. For this reason, the percentage width must be specified using the CSS `calc()`. <br>
+If `calc()` is not supported by the browser, then margin is provided in percent as fallback:
+```scss
+margin: 0 1.5% 24px;
+margin: 0 calc(12px) 24px;
+```
+so that the layout does not collapse. Similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields.
 
-Markup:
-<div class="row">
-	<div class="test-content row__col W2gc_sm W3gc_md">
-		<h3>W2gc_sm W3gc_md</h3>
-		<p>Some text</p>
-	</div>
-</div>
+The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-gutter-fallback.`
+
+Column width is set using [W utility](section-core-utils.html#kssref-core-utils-w). See example [above](#kssref-core-blocks-row).
+
+You can create nested layouts with a mix of `row` and `row__col` on the same tag. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
+
+All examples of the work of nested layouts are [here](section-examples.html#kssref-examples-nested_layouts).
+
+Markup: ../../../docs/examples/core-blocks/row/row__col.html
 
 Styleguide: core-blocks.row.row__col
 */
 
 /*
-row__cell
-
-Альтернативный элемент для создания колонок. По умолчанию растягивается на всю ширину контейнера. У колонок есть отступы по бокам.
-
-Размеры задаются с помощью утилит.
-
-Markup:
-<div class="row">
-	<div class="test-cell row__cell W2gs_sm W3gs_md">
-		<h3>W2gs_sm W3gs_md</h3>
-		<p>Some text</p>
-	</div>
-</div>
-
-Styleguide: core-blocks.row.row__cell
-*/
-
-
-/*
 row__item
 
-Элемент для создания частей раскладки. По умолчанию растягивается по ширине контента.
+Element for creating parts of the layout. By default, it stretches across the width of the content.
 
-Размеры и отступы задаются с помощью утилит.
+The sizes and offsets are set with help of utilities.
 
-Markup:
-<div class="row">
-	<div class="test-row row__cell W2gs_sm W3gs_md">
-		<p>Some text</p>
-	</div>
-</div>
+Markup: ../../../docs/examples/core-blocks/row/row__item.html
 
 Styleguide: core-blocks.row.row__item
+*/
+
+/*
+Nested layouts
+
+All variants of nested layouts.
+
+Styleguide: examples.nested_layouts
+*/
+
+/*
+Set of ready layouts
+
+Simple text
+
+Styleguide: examples.layouts
 */
 
 .row {

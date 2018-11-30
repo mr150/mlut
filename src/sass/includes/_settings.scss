@@ -1,9 +1,11 @@
+/* This comment needed for add @charset "utf-8"; in source because sass compiler erased this at-rule without it: утф8 */
+
 /*
 Core blocks
 
-BEM blocks for using on all sites.
+Set of universal BEM blocks for using on all sites. Some blocks contain elements.
 
-Второй абзац
+Core blocks don't contain, or almost don't contain styles such as colors, backgrounds, etc. Such styles are set on the 'theme' or 'design' layers. To style blocks or their elements, use utilities or modifiers such as block--mod.
 
 Weight: 0
 
@@ -43,19 +45,11 @@ Styleguide: sass-tools
 /*
 Examples
 
-Дополнительные примеры работы базовых блоков, утилит и готовых компонентов.
+Additional examples of core blocks, utilities, tools and ready-made components.
 
 Weight: 4
 
 Styleguide: examples
-*/
-
-/*
-Set of ready layouts
-
-Simple text
-
-Styleguide: examples.layouts
 */
 
 /*

@@ -1,12 +1,19 @@
 /*
 Wrapper
 
-Блок-контейнер для основного содержимого страницы. Максимальная ширина по умолчанию \- 1200px. У контейнера есть поля, чтобы контент не прилипал на маленьких экранах. На широких экранах контейнер располагается по центру
+The block-container for the main content of the page. The maximum width is set in the [settings](section-sass-tools.html#kssref-sass-tools-settings-blocks). The default is `1200px`.
 
-Markup:
-<div class="wrapper">
-	<h1>Simple text</h1>
-</div>
+Gutters are added up with maximum width so that the width of the contents matches the width from the settings.
+
+The container has sides `padding` that equal to gutters so that the content does not stick to sides on small screens. On wide screens the container is centered.
+
+Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `calc()` fallback for fields:
+```scss
+padding: 0 1.5%;
+padding: 0 calc(12px);
+```
+
+Markup: ../../../docs/examples/core-blocks/wrapper/wrapper.html
 
 Styleguide: core-blocks.wrapper
 */
@@ -14,15 +21,24 @@ Styleguide: core-blocks.wrapper
 /*
 wrapper__row
 
-Элемент, который накладывает левый и правый отступы у крайних колонок на поля блока wrapper.
-Такое поведение нужно, чтобы в раскладке не возникало двойных полей. Этот элемент опционален, потому что в разных ситуациях может понадобиться разное поведение полей.
+An element that imposes left and right margins of the outermost columns on the fields of the wrapper.
 
-Markup:
-<div class="wrapper">
-	<h2>Some cols</h2>
-	<div class="row wrapper__row">
-</div>
-</div>
+This behavior is necessary so that there are no double fields in the layout.
+
+This element is optional, because in different situations different behavior of fields may be needed.
+
+
+Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper__row is used `calc()` fallback for negative `margin`:
+```scss
+margin-right: -1.5%;
+margin-left: -1.5%;
+margin-right: calc(-12px);
+margin-left: calc(-12px);
+```
+
+.wrapper__row - [row](#kssref-core-blocks-row) without double fields
+
+Markup: ../../../docs/examples/core-blocks/wrapper/wrapper__row.hbs
 
 Styleguide: core-blocks.wrapper.wrapper__row
 */
