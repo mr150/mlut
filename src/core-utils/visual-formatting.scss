@@ -1,0 +1,95 @@
+/*
+Float
+
+Group of utilities for work with float.
+
+Styleguide: core-utils.float
+*/
+
+/*
+Fl
+
+Fl \- float. Sets float to component.
+
+Markup:
+<div class="test-content W2gc_sm mCl">
+	<h3 class="Fl">Title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.float.fl
+*/
+
+/*
+mCl
+
+mCl is clearfix utility.
+
+Markup:
+<div class="test-content W2gc_sm mCl">
+	<h3 class="Fl">Title</h3>
+	<p class="Fl-r">Some text</p>
+</div>
+
+Styleguide: core-utils.float.mcl
+*/
+
+.Fl {
+	float: left;
+}
+
+.Fl-r {
+	float: right;
+}
+
+.mCl {
+	@include mlu-clearfix;
+}
+
+/*
+Ov
+
+Ov \- overflow. Sets component overflow.
+
+Markup:
+<div class="test-content W2gc_sm W5gc_md">
+	<h3>Title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.ov
+*/
+
+.Ov {
+	overflow: hidden;
+}
+
+.Ov-a {
+	overflow: auto;
+}
+
+/*
+mV
+
+mV \- modified visibility. Shows and hides component with additional parameters.
+
+Markup:
+<div class="test-content W2gc_sm W4gc_md">
+	<h3 class="mV-vh">Visually hidden title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.mv
+*/
+
+.mV-vh {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0px;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 0px;
+	clip: rect(0 0 0 0);
+}

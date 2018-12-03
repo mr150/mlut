@@ -654,14 +654,6 @@ Markup:
 Styleguide: core-utils.w
 */
 
-.W-card {
-	max-width: 288px;
-}
-
-.Maw100p {
-	max-width: 100%;
-}
-
 .W-a {
 	width: auto;
 }
@@ -682,6 +674,22 @@ Styleguide: core-utils.w
 
 .W100p {
 	width: 100%;
+}
+
+.W-card {
+	max-width: 288px;
+}
+
+.Maw100p {
+	max-width: 100%;
+}
+
+.H100p {
+	height: 100%;
+}
+
+.Bxz {
+	box-sizing: border-box;
 }
 
 /*
@@ -930,6 +938,32 @@ Styleguide: core-utils.ov
 }
 
 /*
+mV
+
+mV \- modified visibility. Shows and hides component with additional parameters.
+
+Markup:
+<div class="test-content W2gc_sm W4gc_md">
+	<h3 class="mV-vh">Visually hidden title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.mv
+*/
+
+.mV-vh {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0px;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 0px;
+	clip: rect(0 0 0 0);
+}
+
+/*
 Text
 
 Group of utilities that manage the display of text.
@@ -1027,30 +1061,12 @@ Styleguide: core-utils.text.mtov
 	white-space: nowrap;
 }
 
-/*
-mV
+.Bdcl-c {
+	border-collapse: collapse;
+}
 
-mV \- my visibility. Shows and hides component with additional parameters.
-
-Markup:
-<div class="test-content W2gc_sm W4gc_md">
-	<h3 class="mV-vh">Visually hidden title</h3>
-	<p>Some text</p>
-</div>
-
-Styleguide: core-utils.mv
-*/
-
-.mV-vh {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0px;
-	overflow: hidden;
-	white-space: nowrap;
-	border: 0px;
-	clip: rect(0 0 0 0);
+.Bdrs50p {
+	border-radius: 50%;
 }
 
 /*===DESIGN-UTILS===*/
