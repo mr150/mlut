@@ -23,20 +23,6 @@ Styleguide: core-utils.text.dir
 */
 
 /*
-mFz
-
-mFz \- my font size. Sets font size with additional parameters.
-
-Markup:
-<div class="test-content W2gc_sm W5gc_md">
-	<h3>Hidden text here</h3>
-	<p class="mFz0">Some text</p>
-</div>
-
-Styleguide: core-utils.text.mfz
-*/
-
-/*
 mTov
 
 mTov \- my text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container.
@@ -50,47 +36,38 @@ Markup:
 Styleguide: core-utils.text.mtov
 */
 
-.F-i {
-	font: inherit;
-}
-
-.C-i {
-	color: inherit;
+.Ta {
+	text-align: left;
 }
 
 .Ta-c {
 	text-align: center;
 }
 
-.Ta-l {
-	text-align: left;
-}
-
 .Ta-r {
 	text-align: right;
 }
 
-.Dir-r {
-	direction: rtl;
+.Td {
+	text-decoration: none;
 }
 
-// A11y hide text only
-.mFz0 {
-	overflow: hidden;
-	color: transparent;
-	text-indent: 120%;
-	white-space: nowrap;
-	font-size: 0px;
-
-	&::selection {
-		color: transparent;
-	}
+.Tt {
+	text-transform: uppercase;
 }
 
 .mTov {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.C-i {
+	color: inherit;
+}
+
+.Dir-r {
+	direction: rtl;
 }
 
 @each $key, $value in $mlu-grid-cols {

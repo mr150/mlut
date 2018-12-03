@@ -1,0 +1,38 @@
+/*
+mFz
+
+mFz \- my font size. Sets font size with additional parameters.
+
+Markup:
+<div class="test-content W2gc_sm W5gc_md">
+	<h3>Hidden text here</h3>
+	<p class="mFz0">Some text</p>
+</div>
+
+Styleguide: core-utils.text.mfz
+*/
+
+.F-i {
+	font: inherit;
+}
+
+.Fw-b {
+	font-weight: 700;
+}
+
+.Fs {
+	font-style: italic;
+}
+
+// A11y hide text only
+.mFz0 {
+	overflow: hidden;
+	color: transparent;
+	text-indent: 120%;
+	white-space: nowrap;
+	font-size: 0px;
+
+	&::selection {
+		color: transparent;
+	}
+}

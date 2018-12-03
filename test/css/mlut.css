@@ -389,6 +389,7 @@ Styleguide: core-blocks.btn
 .btn {
 	display: inline-block;
 	box-sizing: border-box;
+	margin: 0px;
 	font-family: inherit;
 	font-size: 1rem;
 	line-height: normal;
@@ -412,8 +413,9 @@ Styleguide: core-blocks.input
 .input {
 	display: inline-block;
 	box-sizing: border-box;
+	margin: 0px;
 	font: inherit;
-	border: none;
+	border: 0;
 }
 
 /*===DESIGN-BLOCKS===*/
@@ -964,6 +966,48 @@ Styleguide: core-utils.mv
 }
 
 /*
+mFz
+
+mFz \- my font size. Sets font size with additional parameters.
+
+Markup:
+<div class="test-content W2gc_sm W5gc_md">
+	<h3>Hidden text here</h3>
+	<p class="mFz0">Some text</p>
+</div>
+
+Styleguide: core-utils.text.mfz
+*/
+
+.F-i {
+	font: inherit;
+}
+
+.Fw-b {
+	font-weight: 700;
+}
+
+.Fs {
+	font-style: italic;
+}
+
+.mFz0 {
+	overflow: hidden;
+	color: transparent;
+	text-indent: 120%;
+	white-space: nowrap;
+	font-size: 0px;
+}
+
+.mFz0::-moz-selection {
+	color: transparent;
+}
+
+.mFz0::selection {
+	color: transparent;
+}
+
+/*
 Text
 
 Group of utilities that manage the display of text.
@@ -988,20 +1032,6 @@ Styleguide: core-utils.text.dir
 */
 
 /*
-mFz
-
-mFz \- my font size. Sets font size with additional parameters.
-
-Markup:
-<div class="test-content W2gc_sm W5gc_md">
-	<h3>Hidden text here</h3>
-	<p class="mFz0">Some text</p>
-</div>
-
-Styleguide: core-utils.text.mfz
-*/
-
-/*
 mTov
 
 mTov \- my text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container.
@@ -1015,50 +1045,38 @@ Markup:
 Styleguide: core-utils.text.mtov
 */
 
-.F-i {
-	font: inherit;
-}
-
-.C-i {
-	color: inherit;
+.Ta {
+	text-align: left;
 }
 
 .Ta-c {
 	text-align: center;
 }
 
-.Ta-l {
-	text-align: left;
-}
-
 .Ta-r {
 	text-align: right;
 }
 
-.Dir-r {
-	direction: rtl;
+.Td {
+	text-decoration: none;
 }
 
-.mFz0 {
-	overflow: hidden;
-	color: transparent;
-	text-indent: 120%;
-	white-space: nowrap;
-	font-size: 0px;
-}
-
-.mFz0::-moz-selection {
-	color: transparent;
-}
-
-.mFz0::selection {
-	color: transparent;
+.Tt {
+	text-transform: uppercase;
 }
 
 .mTov {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.C-i {
+	color: inherit;
+}
+
+.Dir-r {
+	direction: rtl;
 }
 
 .Bdcl-c {

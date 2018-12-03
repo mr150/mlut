@@ -11,6 +11,7 @@ Styleguide: core-blocks.btn
 .btn {
 	display: inline-block;
 	box-sizing: border-box;
+	margin: 0px;
 	font-family: inherit;
 	font-size: mlu-px2rem($mlu-base-font-size);
 	line-height: normal;

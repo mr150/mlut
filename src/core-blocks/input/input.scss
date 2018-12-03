@@ -11,6 +11,7 @@ Styleguide: core-blocks.input
 .input {
 	display: inline-block;
 	box-sizing: border-box;
+	margin: 0px;
 	font: inherit;
-	border: none;
+	border: 0;
 }
