@@ -1,0 +1,22 @@
+.Pos {
+	position: relative;
+}
+
+.Pos-a {
+	position: absolute;
+}
+
+.Pos-f {
+	position: fixed;
+}
+
+@for $i from 0 to $mlu-z-index-range {
+	.Z#{$i} {
+		z-index: $i;
+	}
+}
+
+.Z-max {
+	z-index: $mlu-z-index-max;
+}
+

@@ -91,9 +91,9 @@ $MLU-BROWSER-FONT-SIZE: 16px !default;
 
 $mlu-base-font-size: $MLU-BROWSER-FONT-SIZE !default;
 
-$mlu-grid-default-cols: 12 !default;
-
 $mlu-W-card: 288px !default;
+
+$mlu-grid-default-cols: 12 !default;
 
 $mlu-grid-gutter-fallback: 1.5% !default;
 
@@ -103,6 +103,9 @@ $mlu-main-directions: (
 	"right",
 	"bottom",
 ) !default;
+
+$mlu-z-index-max: 9999;
+$mlu-z-index-range: 4;
 
 // Blocks
 //
