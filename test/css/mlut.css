@@ -1021,7 +1021,11 @@ Styleguide: core-utils.text.mfz
 	font: inherit;
 }
 
-.Fw7 {
+.Fw300 {
+	font-weight: 300;
+}
+
+.Fw700 {
 	font-weight: 700;
 }
 
@@ -1115,6 +1119,23 @@ Styleguide: core-utils.text.mtov
 
 .Dir-r {
 	direction: rtl;
+}
+
+.Bgr-n {
+	background-repeat: no-repeat;
+}
+
+.mBgp-cc {
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+.Bgsz-cv {
+	background-size: cover;
+}
+
+.Bgsz-ct {
+	background-size: contain;
 }
 
 .Bdcl-c {
