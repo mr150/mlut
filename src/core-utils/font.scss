@@ -16,8 +16,8 @@ Styleguide: core-utils.text.mfz
 	font: inherit;
 }
 
-.Fw300 {
-	font-weight: 300;
+.Fw400 {
+	font-weight: 400;
 }
 
 .Fw700 {
@@ -26,6 +26,10 @@ Styleguide: core-utils.text.mfz
 
 .Fs {
 	font-style: italic;
+}
+
+.Fs-n {
+	font-style: normal;
 }
 
 // A11y hide text only

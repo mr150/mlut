@@ -97,6 +97,8 @@ $mlu-grid-default-cols: 12 !default;
 
 $mlu-grid-gutter-fallback: 1.5% !default;
 
+$mlu-My-range: 4 !default;
+
 $mlu-main-directions: (
 	"top",
 	"left",
@@ -104,8 +106,8 @@ $mlu-main-directions: (
 	"bottom",
 ) !default;
 
-$mlu-z-index-max: 9999;
-$mlu-z-index-range: 4;
+$mlu-z-index-max: 9999 !default;
+$mlu-z-index-range: 4 !default;
 
 // Blocks
 //

@@ -82,33 +82,14 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 	margin-right: auto;
 }
 
-/// gg - grid gutter from $mlu-grid-gutters
-.Mt4gg {
-	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 4, $direct: "top");
-}
+@for $i from $mlu-My-range through 1 {
+	.Mt#{$i}gg {
+		@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: $i, $direct: "top");
+	}
 
-.Mb4gg {
-	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 4, $direct: "bottom");
-}
-
-.Mt3gg {
-	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 3, $direct: "top");
-}
-
-.Mb3gg {
-	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 3, $direct: "bottom");
-}
-
-.Mt2gg {
-	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 2, $direct: "top");
-}
-
-.Mb2gg {
-	@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: 2, $direct: "bottom");
-}
-
-.Mb1gg {
-	@include mlu-generate-gutter($mlu-gtr-sm-rem, $direct: "bottom");
+	.Mb#{$i}gg {
+		@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: $i, $direct: "bottom");
+	}
 }
 
 .Mb-2gg {

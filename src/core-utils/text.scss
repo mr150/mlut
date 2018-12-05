@@ -52,8 +52,16 @@ Styleguide: core-utils.text.mtov
 	text-decoration: none;
 }
 
+.Td-u {
+	text-decoration: underline;
+}
+
 .Tt {
 	text-transform: uppercase;
+}
+
+.Tt-n {
+	text-transform: none;
 }
 
 .mTov {
