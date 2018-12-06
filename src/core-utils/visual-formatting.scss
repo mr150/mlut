@@ -1,23 +1,9 @@
 /*
-Float
+Visual formatting
 
-Group of utilities for work with float.
+Group of utilities for visual formatting management.
 
-Styleguide: core-utils.float
-*/
-
-/*
-Fl
-
-Fl \- float. Sets float to component.
-
-Markup:
-<div class="test-content W2gc_sm mCl">
-	<h3 class="Fl">Title</h3>
-	<p>Some text</p>
-</div>
-
-Styleguide: core-utils.float.fl
+Styleguide: core-utils.visual
 */
 
 /*
@@ -31,7 +17,21 @@ Markup:
 	<p class="Fl-r">Some text</p>
 </div>
 
-Styleguide: core-utils.float.mcl
+Styleguide: core-utils.visual.mcl
+*/
+
+/*
+mV
+
+mV \- modified visibility. Shows and hides component with additional parameters.
+
+Markup:
+<div class="test-content W2gc_sm W4gc_md">
+	<h3 class="mV-vh">Visually hidden title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.visual.mv
 */
 
 .Fl {
@@ -46,20 +46,6 @@ Styleguide: core-utils.float.mcl
 	@include mlu-clearfix;
 }
 
-/*
-Ov
-
-Ov \- overflow. Sets component overflow.
-
-Markup:
-<div class="test-content W2gc_sm W5gc_md">
-	<h3>Title</h3>
-	<p>Some text</p>
-</div>
-
-Styleguide: core-utils.ov
-*/
-
 .Ov {
 	overflow: hidden;
 }
@@ -67,20 +53,6 @@ Styleguide: core-utils.ov
 .Ov-a {
 	overflow: auto;
 }
-
-/*
-mV
-
-mV \- modified visibility. Shows and hides component with additional parameters.
-
-Markup:
-<div class="test-content W2gc_sm W4gc_md">
-	<h3 class="mV-vh">Visually hidden title</h3>
-	<p>Some text</p>
-</div>
-
-Styleguide: core-utils.mv
-*/
 
 .mV-vh {
 	position: absolute;

@@ -1,7 +1,15 @@
 /*
+Font
+
+Utilities for font management.
+
+Styleguide: core-utils.f
+*/
+
+/*
 mFz
 
-mFz \- my font size. Sets font size with additional parameters.
+mFz \- modified font size. Sets font size with additional parameters.
 
 Markup:
 <div class="test-content W2gc_sm W5gc_md">
@@ -9,7 +17,7 @@ Markup:
 	<p class="mFz0">Some text</p>
 </div>
 
-Styleguide: core-utils.text.mfz
+Styleguide: core-utils.f.mfz
 */
 
 .F-i {
@@ -30,6 +38,10 @@ Styleguide: core-utils.text.mfz
 
 .Fs-n {
 	font-style: normal;
+}
+
+.Fz-i {
+	font-size: inherit;
 }
 
 // A11y hide text only

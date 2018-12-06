@@ -428,6 +428,27 @@ Styleguide: core-blocks.input
 
 /*===CORE-UTILS===*/
 
+/*
+Position
+
+Utilities for position management.
+
+Styleguide: core-utils.pos
+*/
+
+/*
+mXy
+
+mXy \- X and Y coordinate axes.
+
+Markup:
+<div class="test-content W2gc_sm W5gc_md">
+	<h3>Test text</h3>
+</div>
+
+Styleguide: core-utils.pos.xy
+*/
+
 .Pos {
 	position: relative;
 }
@@ -492,7 +513,7 @@ Styleguide: core-blocks.input
 }
 
 /*
-D
+Display
 
 D \- display. Utility sets the display type of component.
 
@@ -695,6 +716,10 @@ Styleguide: core-utils.flex.mai
 	align-items: center;
 }
 
+.Ai-b {
+	align-items: baseline;
+}
+
 .mAi-c {
 	align-items: center;
 }
@@ -712,7 +737,7 @@ Styleguide: core-utils.flex.mai
 }
 
 /*
-W
+Width
 
 W \- width. This utility sets component width.
 
@@ -747,12 +772,24 @@ Styleguide: core-utils.w
 	width: 100%;
 }
 
+/*
+Box-sizing
+
+Utilities for border management.
+
+Styleguide: core-utils.bxz
+*/
+
 .W-card {
 	max-width: 288px;
 }
 
 .Maw100p {
 	max-width: 100%;
+}
+
+.Maw-n {
+	max-width: none;
 }
 
 .H100p {
@@ -949,25 +986,11 @@ Styleguide: core-utils.padding.px
 }
 
 /*
-Float
+Visual formatting
 
-Group of utilities for work with float.
+Group of utilities for visual formatting management.
 
-Styleguide: core-utils.float
-*/
-
-/*
-Fl
-
-Fl \- float. Sets float to component.
-
-Markup:
-<div class="test-content W2gc_sm mCl">
-	<h3 class="Fl">Title</h3>
-	<p>Some text</p>
-</div>
-
-Styleguide: core-utils.float.fl
+Styleguide: core-utils.visual
 */
 
 /*
@@ -981,7 +1004,21 @@ Markup:
 	<p class="Fl-r">Some text</p>
 </div>
 
-Styleguide: core-utils.float.mcl
+Styleguide: core-utils.visual.mcl
+*/
+
+/*
+mV
+
+mV \- modified visibility. Shows and hides component with additional parameters.
+
+Markup:
+<div class="test-content W2gc_sm W4gc_md">
+	<h3 class="mV-vh">Visually hidden title</h3>
+	<p>Some text</p>
+</div>
+
+Styleguide: core-utils.visual.mv
 */
 
 .Fl {
@@ -998,20 +1035,6 @@ Styleguide: core-utils.float.mcl
 	content: "";
 }
 
-/*
-Ov
-
-Ov \- overflow. Sets component overflow.
-
-Markup:
-<div class="test-content W2gc_sm W5gc_md">
-	<h3>Title</h3>
-	<p>Some text</p>
-</div>
-
-Styleguide: core-utils.ov
-*/
-
 .Ov {
 	overflow: hidden;
 }
@@ -1019,20 +1042,6 @@ Styleguide: core-utils.ov
 .Ov-a {
 	overflow: auto;
 }
-
-/*
-mV
-
-mV \- modified visibility. Shows and hides component with additional parameters.
-
-Markup:
-<div class="test-content W2gc_sm W4gc_md">
-	<h3 class="mV-vh">Visually hidden title</h3>
-	<p>Some text</p>
-</div>
-
-Styleguide: core-utils.mv
-*/
 
 .mV-vh {
 	position: absolute;
@@ -1047,9 +1056,17 @@ Styleguide: core-utils.mv
 }
 
 /*
+Font
+
+Utilities for font management.
+
+Styleguide: core-utils.f
+*/
+
+/*
 mFz
 
-mFz \- my font size. Sets font size with additional parameters.
+mFz \- modified font size. Sets font size with additional parameters.
 
 Markup:
 <div class="test-content W2gc_sm W5gc_md">
@@ -1057,7 +1074,7 @@ Markup:
 	<p class="mFz0">Some text</p>
 </div>
 
-Styleguide: core-utils.text.mfz
+Styleguide: core-utils.f.mfz
 */
 
 .F-i {
@@ -1078,6 +1095,10 @@ Styleguide: core-utils.text.mfz
 
 .Fs-n {
 	font-style: normal;
+}
+
+.Fz-i {
+	font-size: inherit;
 }
 
 .mFz0 {
@@ -1172,9 +1193,31 @@ Styleguide: core-utils.text.mtov
 	color: inherit;
 }
 
+.Lh-n {
+	line-height: normal;
+}
+
 .Dir-r {
 	direction: rtl;
 }
+
+/*
+Background
+
+Group of utilities for management of background.
+
+Styleguide: core-utils.bg
+*/
+
+/*
+mBgp
+
+mBgp-cc \- modified background position.
+
+Group of utilities for management of background.
+
+Styleguide: core-utils.bg.mbgp
+*/
 
 .Bgr-n {
 	background-repeat: no-repeat;
@@ -1192,6 +1235,14 @@ Styleguide: core-utils.text.mtov
 .Bgsz-ct {
 	background-size: contain;
 }
+
+/*
+Border
+
+Group of utilities for border management.
+
+Styleguide: core-utils.bd
+*/
 
 .Bdcl-c {
 	border-collapse: collapse;

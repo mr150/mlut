@@ -1,9 +1,21 @@
+/*
+Box-sizing
+
+Utilities for border management.
+
+Styleguide: core-utils.bxz
+*/
+
 .W-card {
 	max-width: $mlu-W-card;
 }
 
 .Maw100p {
 	max-width: 100%;
+}
+
+.Maw-n {
+	max-width: none;
 }
 
 .H100p {

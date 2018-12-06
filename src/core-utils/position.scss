@@ -1,3 +1,24 @@
+/*
+Position
+
+Utilities for position management.
+
+Styleguide: core-utils.pos
+*/
+
+/*
+mXy
+
+mXy \- X and Y coordinate axes.
+
+Markup:
+<div class="test-content W2gc_sm W5gc_md">
+	<h3>Test text</h3>
+</div>
+
+Styleguide: core-utils.pos.xy
+*/
+
 .Pos {
 	position: relative;
 }
