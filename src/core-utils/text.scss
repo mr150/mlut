@@ -3,7 +3,36 @@ Text
 
 Group of utilities that manage the display of text.
 
+* `Tt` \- UPPERCASE.
+* `Tt-n` \- remove text transform.
+* `C-i`
+* `Lh-n` \- line-height normal.
+
 Styleguide: core-utils.text
+*/
+
+/*
+Ta
+
+Text alignment.
+
+initial - left.
+c - center.
+r - right.
+
+Styleguide: core-utils.text.ta
+*/
+
+/*
+Td
+
+Text decoration.
+
+initial - remove text decoration.
+u - <u>underline</u>.
+l - ~~strikethrough~~.
+
+Styleguide: core-utils.text.td
 */
 
 /*
@@ -25,11 +54,11 @@ Styleguide: core-utils.text.dir
 /*
 mTov
 
-mTov \- my text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container.
+mTov \- modified text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container.
 
 Markup:
 <div class="test-content W2gc_sm W3gc_md">
-	<h3 class="Maw100p mTov">super super long long title</h3>
+	<h3 class="Maw100p mTov">super long long [09:03:50] Finished 'style' title</h3>
 	<p>Some text</p>
 </div>
 
@@ -54,6 +83,10 @@ Styleguide: core-utils.text.mtov
 
 .Td-u {
 	text-decoration: underline;
+}
+
+.Td-l {
+	text-decoration: line-through;
 }
 
 .Tt {
@@ -93,5 +126,15 @@ Styleguide: core-utils.text.mtov
 		.Dir-r_#{$key} {
 			direction: rtl;
 		}
+	}
+}
+
+@if $MLU-FLAG-EXTENDED {
+	.Ta-j {
+		text-align: justify;
+	}
+
+	.Td-o {
+		text-decoration: overline;
 	}
 }

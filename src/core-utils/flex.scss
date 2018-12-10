@@ -1,7 +1,16 @@
 /*
 Flex
 
-A group of utilities for managing flex-containers and flex-elements. Custom flex utilities are needed to manage standard [row layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+A group of utilities for managing flex-containers and flex-elements. Modified flex utilities are needed to manage standard [row layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+
+* `Fxd-c`
+* `Fxg1`
+* `Fxsh0`
+* `Fxw-wr`
+* `Fxw-w`
+* `As` \- all values
+* `Jc` \- all values except `flex-start`.
+* `Ai` \- all values except `stretch`.
 
 Styleguide: core-utils.flex
 */
@@ -88,6 +97,10 @@ Styleguide: core-utils.flex.mai
 
 .As-fe {
 	align-self: flex-end;
+}
+
+.As-b {
+	align-self: baseline;
 }
 
 // Progressive enhancement from inline-blocks to flex

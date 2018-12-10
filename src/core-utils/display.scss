@@ -1,43 +1,45 @@
 /*
-Display
+D
 
-D \- display. Utility sets the display type of component.
+D \- display. Sets the display type.
 
-Markup:
-<div class="test-content W5gc_md">
-	<h3 class="D-ib_sm">Title</h3>
-	<p class="D-n_xl">Hidden content</p>
-</div>
+initial - block. The element stretches on the full width of the container and creates line breaks before and after. *Responsive*.
+f - flex. Turns an element into a flex container. Can be used to progressive enhancement the [row](section-core-block.html#kssref-core-blocks-row) layouts. Child elements will be stretched to the full height of the container. *Responsive*.
+if - inline-flex. *Responsive*.
 
-Styleguide: core-utils.d
+Styleguide: core-utils.visual.d
 */
 
 /*
 mD
 
-mD is used for for setting the display type with additional parameters.
+mD-f - D-f with line breaks.
 
-Markup:
-<div class="row mD-f">
-	<div class="test-content row__col W2gc_sm W3gc_md">
-		<h3>W2gc_sm W3gc_md</h3>
-		<p>Some text</p>
-	</div>
-</div>
-
-Styleguide: core-utils.d.md
+Styleguide: core-utils.visual.md
 */
 
 .D {
 	display: block;
 }
 
+.D-ib {
+	display: inline-block;
+}
+
 .D-tb {
 	display: table;
 }
 
-.D-tbfg {
-	display: table-footer-group;
+.D-tbc {
+	display: table-cell;
+}
+
+.D-tbr {
+	display: table-row;
+}
+
+.D-itb {
+	display: inline-table;
 }
 
 .D-f {
@@ -83,5 +85,15 @@ Styleguide: core-utils.d.md
 		.D-if_#{$key} {
 			display: inline-flex;
 		}
+	}
+}
+
+@if $MLU-FLAG-EXTENDED {
+	.D-i {
+		display: inline;
+	}
+
+	.D-tbfg {
+		display: table-footer-group;
 	}
 }

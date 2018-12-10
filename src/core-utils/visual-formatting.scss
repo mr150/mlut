@@ -1,7 +1,14 @@
 /*
 Visual formatting
 
-Group of utilities for visual formatting management.
+* `D-tb`
+* `D-tbc`
+* `D-tbr`
+* `D-itb`
+* `Fl` \- turn on wrapping text on the right.
+* `Fl-r` \- turn on wrapping text on the left.
+* `Ov`
+* `Ov-a` \- adds a scroll bar if the content does not fit into the container.
 
 Styleguide: core-utils.visual
 */
@@ -23,7 +30,9 @@ Styleguide: core-utils.visual.mcl
 /*
 mV
 
-mV \- modified visibility. Shows and hides component with additional parameters.
+mV \- modified visibility. Shows and hides with additional parameters.
+
+vh - visually hidden.
 
 Markup:
 <div class="test-content W2gc_sm W4gc_md">

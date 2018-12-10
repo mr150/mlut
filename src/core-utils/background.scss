@@ -1,7 +1,9 @@
 /*
 Background
 
-Group of utilities for management of background.
+* `Bgr-n`
+* `Bgsz-cv`
+* `Bgsz-ct`
 
 Styleguide: core-utils.bg
 */
@@ -9,9 +11,9 @@ Styleguide: core-utils.bg
 /*
 mBgp
 
-mBgp-cc \- modified background position.
+mBgp \- modified `background-position`. Includes `Bgr-n`.
 
-Group of utilities for management of background.
+c - center.
 
 Styleguide: core-utils.bg.mbgp
 */
@@ -20,9 +22,9 @@ Styleguide: core-utils.bg.mbgp
 	background-repeat: no-repeat;
 }
 
-.mBgp-cc {
+.mBgp-c {
 	background-repeat: no-repeat;
-	background-position: 50% 50%;
+	background-position: center;
 }
 
 .Bgsz-cv {

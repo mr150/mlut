@@ -1,37 +1,13 @@
 /*
 Padding
 
-Group of utilities that sets padding for component.
+* `P0` \- clear all paddings.
+* `P8` \- creates paddings of 8px all around.
+* `Pt1gg` \- works similarly [Mt1gg](#kssref-core-utils-margin-mt)
+* `Pb1gg`
+* `Px1gg`
 
 Styleguide: core-utils.padding
-*/
-
-/*
-P
-
-P \- padding. Sets padding from all sides: top, right, bottom and left.
-
-Parkup:
-<div class="test-content W2gc_sm W5gc_md P0">
-	<h3>Title</h3>
-	<p>Some text</p>
-</div>
-
-Styleguide: core-utils.padding.p
-*/
-
-/*
-Px
-
-Px \- padding on X axis. Sets left and right padding.
-
-Parkup:
-<div class="Px1gg W2gc_sm W3gc_md">
-	<h3>Title</h3>
-	<p>[Browsersync] 2 files changed (mlut.min.css.map, mlut.min.css) [12:21:49] Finished 'style' after 212 ms Some text</p>
-</div>
-
-Styleguide: core-utils.padding.px
 */
 
 $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
