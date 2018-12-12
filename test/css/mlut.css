@@ -284,8 +284,6 @@ Wrapper
 
 The block-container for the main content of the page. The maximum width is set in the [settings](section-sass-tools.html#kssref-sass-tools-settings-blocks). The default is `1200px`.
 
-Gutters are added up with maximum width so that the width of the contents matches the width from the settings.
-
 The container has sides `padding` that equal to gutters so that the content does not stick to sides on small screens. On wide screens the container is centered.
 
 Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `calc()` fallback for fields:
@@ -301,47 +299,14 @@ Markup: ../../../docs/examples/core-blocks/wrapper/wrapper.html
 Styleguide: core-blocks.wrapper
 */
 
-/*
-wrapper__row
-
-An element that imposes left and right margins of the outermost columns on the fields of the wrapper.
-
-This behavior is necessary so that there are no double fields in the layout.
-
-This element is optional, because in different situations different behavior of fields may be needed.
-
-
-Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper__row is used `calc()` fallback for negative `margin`:
-```scss
-margin-right: -1.5%;
-margin-left: -1.5%;
-margin-right: calc(-12px);
-margin-left: calc(-12px);
-```
-
-.wrapper__row - [row](#kssref-core-blocks-row) without double fields
-
-Markup: ../../../docs/examples/core-blocks/wrapper/wrapper__row.hbs
-
-Styleguide: core-blocks.wrapper.wrapper__row
-*/
-
 .wrapper {
 	display: block;
-	max-width: 1224px;
-	box-sizing: border-box;
+	max-width: 1200px;
 	margin: 0 auto;
 	padding-right: 1.5%;
 	padding-left: 1.5%;
 	padding-right: calc(12px);
 	padding-left: calc(12px);
-}
-
-.wrapper__row {
-	margin-right: -1.5%;
-	margin-left: -1.5%;
-	margin-right: calc(-12px);
-	margin-left: calc(-12px);
 }
 
 /*
@@ -535,7 +500,7 @@ Styleguide: core-utils.pos.xy
 	z-index: 3;
 }
 
-.Z-max {
+.Z-Max {
 	z-index: 9999;
 }
 
@@ -851,7 +816,7 @@ Utilities for elements size management.
 Styleguide: core-utils.bxz
 */
 
-.W-card {
+.W-Card {
 	max-width: 288px;
 }
 
@@ -876,8 +841,11 @@ Margin
 
 You can set some margins in the grid-gutters(gg). For example margin top - `Mt` and margin bottom - `Mb`.
 
+Vertical margins in grid-gutters are converted to `rems`. This affects accessibility, because margins will be scaled when changing font sizes in the browser settings.
+
 * `M0` \- clear all margins.
 * `M-a`
+* `Mr0`
 * `Mt0`
 * `Mt1gg..Mt4gg`
 * `Mb0`
@@ -910,8 +878,9 @@ Mx
 Margin on X axis. Sets left and right margin.
 
 * `Mx-a` \- centered the element with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `Mx1gg` \- *Responsive*.
-* `Mx0` \- *Responsive*.
+* `Mx1gg` \- *responsive*.
+* `Mx-1gg` \- it needed for imposes left and right margins of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
+* `Mx0` \- *responsive*.
 
 Markup: ../../../docs/examples/core-utils/margin/mx.html
 
@@ -1010,6 +979,13 @@ Styleguide: core-utils.margin.mx
 	margin-left: 12px;
 }
 
+.Mx-1gg {
+	margin-right: -1.5%;
+	margin-left: -1.5%;
+	margin-right: calc(-12px);
+	margin-left: calc(-12px);
+}
+
 /*
 Padding
 
@@ -1041,8 +1017,8 @@ Styleguide: core-utils.padding
 .Px1gg {
 	padding-right: 1.5%;
 	padding-left: 1.5%;
-	padding-right: 12px;
-	padding-left: 12px;
+	padding-right: calc(12px);
+	padding-left: calc(12px);
 }
 
 /*
@@ -1708,15 +1684,6 @@ Styleguide: core-utils.bd
 		padding-left: calc(16px);
 	}
 
-	.wrapper {
-		max-width: 1232px;
-	}
-
-	.wrapper__row {
-		margin-right: calc(-16px);
-		margin-left: calc(-16px);
-	}
-
 	.D-n_lg {
 		display: none;
 	}
@@ -2117,6 +2084,11 @@ Styleguide: core-utils.bd
 		margin-left: 16px;
 	}
 
+	.Mx-1gg {
+		margin-right: calc(-16px);
+		margin-left: calc(-16px);
+	}
+
 	.Ml-a_lg {
 		margin-left: auto;
 	}
@@ -2145,8 +2117,8 @@ Styleguide: core-utils.bd
 	}
 
 	.Px1gg {
-		padding-right: 16px;
-		padding-left: 16px;
+		padding-right: calc(16px);
+		padding-left: calc(16px);
 	}
 }
 

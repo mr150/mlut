@@ -4,14 +4,14 @@
 
 .test-content {
 	padding: 10px;
-	color: #dddd77;
+	color: #306;
 	font-size: 1.2rem;
-	background-color: #77d;
+	background-color: #c9c;
 }
 
 .test-cell {
-	color: #dddd77;
-	background-color: #77d;
+	color: #306;
+	background-color: #c9c;
 }
 
 .test-card {
@@ -21,7 +21,7 @@
 @media (min-width: 520px) {
 	.grid-debug {
 		padding: 48px 0px;
-		background-image: linear-gradient(90deg, #ddf 12px, #60f 12px, #60f calc(100% - 12px), #ddf 0);
+		background-image: linear-gradient(90deg, #336 12px, #d15 12px, #d15 calc(100% - 12px), #336 0);
 		background-size: 25%;
 	}
 }
@@ -34,6 +34,6 @@
 
 @media (min-width: 960px) {
 	.grid-debug {
-		background-image: linear-gradient(90deg, #ddf 16px, #60f 16px, #60f calc(100% - 16px), #ddf 0);
+		background-image: linear-gradient(90deg, #336 16px, #d15 16px, #d15 calc(100% - 16px), #336 0);
 	}
 }

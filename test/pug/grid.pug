@@ -11,14 +11,14 @@ html(lang="ru")
 			.wrapper
 				h1.title-h1 Grid tests
 				h2 3 cols
-				.row.wrapper__row
+				.row.Mx-1gg
 					- for(i = 3; i < 6; i++)
 						.test-content.row__col.W2gc_sm(class="W" + i + "gc_md")
 							h3 .W#{i}c
 							p Et molestie ac, feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa, eget egestas purus viverra?
 				section
 					h2 12 cols
-					.row.wrapper__row.grid-debug
+					.row.Mx-1gg.grid-debug
 						- for(i = 0; i < 12; i++)
 							.row__col.W1gc_sm.W1gc_md
 								.test-content
@@ -30,9 +30,9 @@ html(lang="ru")
 					p Aenean euismod elementum nisi, quis eleifend quam adipiscing vitae proin sagittis, nisl. Suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet eget sit amet tellus cras adipiscing enim eu turpis egestas pretium aenean pharetra, magna ac placerat.
 				hr
 				h2 Fix width cards
-				.row.wrapper__row
+				.row.Mx-1gg
 					- for(i = 3; i < 6; i++)
-						.row__col.test-card.W-card.P8
+						.row__col.test-card.W-Card.P8
 							h3 Карточка #{i}
 							p Описание карточки в несколько строчек с подробностями
 				hr

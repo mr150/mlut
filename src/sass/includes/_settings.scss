@@ -118,8 +118,8 @@ $mlu-main-directions: (
 // $mlu-wrapper-max-width = 1200px - Wrapper block max width.
 // $mlu-font-family - Sans serif font stack contains default fonts on different OS.
 // $mlu-font-family-mono - Monospace font stack contains default fonts on different OS.
-// $mlu-debug-col-color = #60f - Column color of grid-debug block.
-// $mlu-debug-gutter-color = #ddf - Gutter color of grid-debug block.
+// $mlu-debug-col-color = #d15 - Column color of grid-debug block.
+// $mlu-debug-gutter-color = #336 - Gutter color of grid-debug block.
 //
 // Styleguide: sass-tools.settings.blocks
 
@@ -152,8 +152,8 @@ $mlu-font-family-mono: (
 ) !default;
 // stylelint-enable
 
-$mlu-debug-col-color: #60f !default;
-$mlu-debug-gutter-color: #ddf !default;
+$mlu-debug-col-color: #d15 !default;
+$mlu-debug-gutter-color: #336 !default;
 
 // Utilities
 //

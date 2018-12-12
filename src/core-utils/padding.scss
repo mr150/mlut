@@ -29,5 +29,5 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 }
 
 .Px1gg {
-	@include mlu-generate-gutter($type: "padding");
+	@include mlu-generate-gutter($type: "padding", $calc: 1);
 }
