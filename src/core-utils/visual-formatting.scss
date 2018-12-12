@@ -16,13 +16,9 @@ Styleguide: core-utils.visual
 /*
 mCl
 
-mCl is clearfix utility.
+Modified clear. It is clearfix utility. Use it with a container whose child elements have `Fl`.
 
-Markup:
-<div class="test-content W2gc_sm mCl">
-	<h3 class="Fl">Title</h3>
-	<p class="Fl-r">Some text</p>
-</div>
+Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
 
 Styleguide: core-utils.visual.mcl
 */
@@ -30,15 +26,11 @@ Styleguide: core-utils.visual.mcl
 /*
 mV
 
-mV \- modified visibility. Shows and hides with additional parameters.
+Modified visibility.
 
-vh - visually hidden.
+mV-vh - visually hides the element but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the element from all.
 
-Markup:
-<div class="test-content W2gc_sm W4gc_md">
-	<h3 class="mV-vh">Visually hidden title</h3>
-	<p>Some text</p>
-</div>
+Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
 
 Styleguide: core-utils.visual.mv
 */

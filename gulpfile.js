@@ -65,6 +65,7 @@ path = Object.assign({
 		html: dirs.test + files.html,
 		docs: [
 			dirs.docs + "examples/" + files.html,
+			dirs.docs + "examples/**/*.hbs",
 			dirs.docs + "*.md",
 		],
 		js: [

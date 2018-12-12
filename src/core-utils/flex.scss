@@ -1,32 +1,46 @@
 /*
 Flex
 
-A group of utilities for managing flex-containers and flex-elements. Modified flex utilities are needed to manage standard [row layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+A group of utilities for managing flex-containers and flex-elements. Modified flex utilities are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
 
 * `Fxd-c`
-* `Fxg1`
+* `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
 * `Fxw-wr`
 * `Fxw-w`
-* `As` \- all values
+* `As-s` \- stretches the flex-element to full height.
 * `Jc` \- all values except `flex-start`.
-* `Ai` \- all values except `stretch`.
 
 Styleguide: core-utils.flex
 */
 
 /*
+Jc
+
+Justify content. You can use it as additional horizontal alignment variants for row-layouts. Works only with flex-container. *Responsive*.
+
+Jc-sa - space-around.
+Jc-sb - space-between.
+Jc-sa_xl - space-between on `xl` breakpoint.
+
+Markup: ../../../docs/examples/core-utils/flex/jc.hbs
+
+Styleguide: core-utils.flex.jc
+*/
+
+/*
 mAs
 
-mAs \- my align self. Utility for componont vertical alignment.
+Modified align self. Set `vertical-align` for common elements and `align-self` for flex-element.
 
-Markup:
-<div class="row">
-	<div class="test-content row__col W2gc_sm W3gc_md mAs-fe">
-		<h3>W2gc_sm W3gc_md</h3>
-		<p>Some text</p>
-	</div>
-</div>
+Can be used to vertically align an element in row-layouts. Partially works without flex-container.
+
+* `fs` \- top.
+* `c` \- center.
+* `fe` \- bottom.
+* `b` \- text baseline.
+
+Markup: ../../../docs/examples/core-utils/flex/mas.html
 
 Styleguide: core-utils.flex.mas
 */
@@ -34,15 +48,14 @@ Styleguide: core-utils.flex.mas
 /*
 mJc
 
-mJc \- my justify content. Utility for horizontal alignment of layout items and text.
+Modified justify content. Combines [Ta](#kssref-core-utils-text-ta) and `Jc` utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts. *Responsive*.
 
-Markup:
-<div class="row mJc-c">
-	<div class="test-content row__col W2gc_sm W3gc_md">
-		<h3>Centered</h3>
-		<p>Some text</p>
-	</div>
-</div>
+* `mJc-fs` \- left. *Only responsive*.
+
+mJc-c - center.
+mJc-fe - right.
+
+Markup: ../../../docs/examples/core-utils/flex/mjc.hbs
 
 Styleguide: core-utils.flex.mjc
 */
@@ -50,15 +63,16 @@ Styleguide: core-utils.flex.mjc
 /*
 mAi
 
-mAi \- my align items. Utility for vertical alignment of layout items.
+Modified align items. Set `vertical-align` for child elements and `align-items` for flex-container.
 
-Markup:
-<div class="row mAi-fe">
-	<div class="test-content row__col W2gc_sm W3gc_md">
-		<h3>Bottom</h3>
-		<p>Some text</p>
-	</div>
-</div>
+Can be used to vertically align an elements in row-layouts. Partially works without flex-container.
+
+mAi-fs - top
+mAi-c - center
+mAi-fe - bottom
+mAi-b - text baseline
+
+Markup: ../../../docs/examples/core-utils/flex/mai.hbs
 
 Styleguide: core-utils.flex.mai
 */
@@ -87,23 +101,16 @@ Styleguide: core-utils.flex.mai
 	align-self: stretch;
 }
 
-.As-fs {
-	align-self: flex-start;
-}
-
-.As-c {
-	align-self: center;
-}
-
-.As-fe {
-	align-self: flex-end;
-}
-
-.As-b {
+.mAs-b {
 	align-self: baseline;
+	vertical-align: baseline;
 }
 
-// Progressive enhancement from inline-blocks to flex
+.mAs-fs {
+	align-self: flex-start;
+	vertical-align: top;
+}
+
 .mAs-c {
 	align-self: center;
 	vertical-align: middle;
@@ -140,20 +147,12 @@ Styleguide: core-utils.flex.mai
 	text-align: right;
 }
 
-.Ai-fs {
+.mAi-fs {
 	align-items: flex-start;
-}
 
-.Ai-fe {
-	align-items: flex-end;
-}
-
-.Ai-c {
-	align-items: center;
-}
-
-.Ai-b {
-	align-items: baseline;
+	> * {
+		vertical-align: top;
+	}
 }
 
 .mAi-c {
@@ -172,8 +171,24 @@ Styleguide: core-utils.flex.mai
 	}
 }
 
+.mAi-b {
+	align-items: baseline;
+
+	> * {
+		vertical-align: baseline;
+	}
+}
+
 @each $key, $value in $mlu-grid-cols {
 	@include mlu-bpm($key) {
+		.Jc-sa_#{$key} {
+			justify-content: space-around;
+		}
+
+		.Jc-sb_#{$key} {
+			justify-content: space-between;
+		}
+
 		.mJc-fs_#{$key} {
 			justify-content: flex-start;
 			text-align: left;
@@ -189,17 +204,11 @@ Styleguide: core-utils.flex.mai
 			text-align: right;
 		}
 
-		.mJc-sa_#{$key} {
-			justify-content: space-around;
-			text-align: center;
-		}
-
-		.mJc-sb_#{$key} {
-			justify-content: space-between;
-			text-align: center;
-		}
-
 		@if $MLU-FLAG-EXTENDED {
+			.Ai-s_#{$key} {
+				align-items: stretch;
+			}
+
 			.mAi-fs_#{$key} {
 				align-items: flex-start;
 
@@ -221,6 +230,14 @@ Styleguide: core-utils.flex.mai
 
 				> * {
 					vertical-align: bottom;
+				}
+			}
+
+			.mAi-b_#{$key} {
+				align-items: baseline;
+
+				> * {
+					vertical-align: baseline;
 				}
 			}
 		}

@@ -54,7 +54,7 @@ In the description of the utilities, there may be a '**Parameters**' item in whi
 
 If the property does not have a special value 'i' then 'i' value means `inherit`.
 
-Some utilities responsive by design or have only responsive values. It will be indicated in the description.
+Some utilities responsive by design or have only responsive values. It will be indicated in the description like this: *Responsive*.
 
 For some utilities, there is a description for non-developers.
 
@@ -460,7 +460,7 @@ Z
 `z-index`.
 
 0..3 - `z-index` available range. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
-max - max value. By default: `9999`.
+Max - max value. By default: `9999`.
 
 Styleguide: core-utils.pos.z
 */
@@ -468,7 +468,7 @@ Styleguide: core-utils.pos.z
 /*
 mXy
 
-X and Y coordinate axes.
+X and Y coordinate axes. Change `top` or `bottom` and `right` or `left`.
 
 0 - set T0, R0, B0 and L0.
 50p - centered element with `Pos-a` or `Pos-f` using `T50p`, `L50p` and `transform`.
@@ -542,11 +542,15 @@ Styleguide: core-utils.pos.xy
 /*
 D
 
-D \- display. Sets the display type.
+Display. Sets the display type.
 
-initial - block. The element stretches on the full width of the container and creates line breaks before and after. *Responsive*.
-f - flex. Turns an element into a flex container. Can be used to progressive enhancement the [row](section-core-block.html#kssref-core-blocks-row) layouts. Child elements will be stretched to the full height of the container. *Responsive*.
-if - inline-flex. *Responsive*.
+D - block. The element stretches on the full width of the container and creates line breaks before and after. *Responsive*.
+D-ib - inline-block. The width of the element depends on the width of the content. Inline-blocks line up in one line like a letters and wrap if they don’t fit. *Responsive*.
+D-f - flex. Turns an element into a flex container. Can be used to progressive enhancement the [row](section-core-block.html#kssref-core-blocks-row) layouts. Child elements will be stretched to the full height of the container. By default, child elements are not wrap to the new line and are compressed in width until they go beyond the line. *Responsive*.
+D-if - inline-flex. Combines inline-block and flex container. *Responsive*.
+D-n - none. Hides the element as if it is not on the page. *Responsive*.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/d.hbs
 
 Styleguide: core-utils.visual.d
 */
@@ -554,7 +558,10 @@ Styleguide: core-utils.visual.d
 /*
 mD
 
-mD-f - D-f with line breaks.
+Modified display.
+
+mD-f - `D-f` with line breaks.
+mD-if - `D-if` with `Fxw-w`.
 
 Styleguide: core-utils.visual.md
 */
@@ -608,32 +615,46 @@ Styleguide: core-utils.visual.md
 /*
 Flex
 
-A group of utilities for managing flex-containers and flex-elements. Modified flex utilities are needed to manage standard [row layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+A group of utilities for managing flex-containers and flex-elements. Modified flex utilities are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
 
 * `Fxd-c`
-* `Fxg1`
+* `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
 * `Fxw-wr`
 * `Fxw-w`
-* `As` \- all values
+* `As-s` \- stretches the flex-element to full height.
 * `Jc` \- all values except `flex-start`.
-* `Ai` \- all values except `stretch`.
 
 Styleguide: core-utils.flex
 */
 
 /*
+Jc
+
+Justify content. You can use it as additional horizontal alignment variants for row-layouts. Works only with flex-container. *Responsive*.
+
+Jc-sa - space-around.
+Jc-sb - space-between.
+Jc-sa_xl - space-between on `xl` breakpoint.
+
+Markup: ../../../docs/examples/core-utils/flex/jc.hbs
+
+Styleguide: core-utils.flex.jc
+*/
+
+/*
 mAs
 
-mAs \- my align self. Utility for componont vertical alignment.
+Modified align self. Set `vertical-align` for common elements and `align-self` for flex-element.
 
-Markup:
-<div class="row">
-	<div class="test-content row__col W2gc_sm W3gc_md mAs-fe">
-		<h3>W2gc_sm W3gc_md</h3>
-		<p>Some text</p>
-	</div>
-</div>
+Can be used to vertically align an element in row-layouts. Partially works without flex-container.
+
+* `fs` \- top.
+* `c` \- center.
+* `fe` \- bottom.
+* `b` \- text baseline.
+
+Markup: ../../../docs/examples/core-utils/flex/mas.html
 
 Styleguide: core-utils.flex.mas
 */
@@ -641,15 +662,14 @@ Styleguide: core-utils.flex.mas
 /*
 mJc
 
-mJc \- my justify content. Utility for horizontal alignment of layout items and text.
+Modified justify content. Combines [Ta](#kssref-core-utils-text-ta) and `Jc` utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts. *Responsive*.
 
-Markup:
-<div class="row mJc-c">
-	<div class="test-content row__col W2gc_sm W3gc_md">
-		<h3>Centered</h3>
-		<p>Some text</p>
-	</div>
-</div>
+* `mJc-fs` \- left. *Only responsive*.
+
+mJc-c - center.
+mJc-fe - right.
+
+Markup: ../../../docs/examples/core-utils/flex/mjc.hbs
 
 Styleguide: core-utils.flex.mjc
 */
@@ -657,15 +677,16 @@ Styleguide: core-utils.flex.mjc
 /*
 mAi
 
-mAi \- my align items. Utility for vertical alignment of layout items.
+Modified align items. Set `vertical-align` for child elements and `align-items` for flex-container.
 
-Markup:
-<div class="row mAi-fe">
-	<div class="test-content row__col W2gc_sm W3gc_md">
-		<h3>Bottom</h3>
-		<p>Some text</p>
-	</div>
-</div>
+Can be used to vertically align an elements in row-layouts. Partially works without flex-container.
+
+mAi-fs - top
+mAi-c - center
+mAi-fe - bottom
+mAi-b - text baseline
+
+Markup: ../../../docs/examples/core-utils/flex/mai.hbs
 
 Styleguide: core-utils.flex.mai
 */
@@ -694,20 +715,14 @@ Styleguide: core-utils.flex.mai
 	align-self: stretch;
 }
 
-.As-fs {
-	align-self: flex-start;
-}
-
-.As-c {
-	align-self: center;
-}
-
-.As-fe {
-	align-self: flex-end;
-}
-
-.As-b {
+.mAs-b {
 	align-self: baseline;
+	vertical-align: baseline;
+}
+
+.mAs-fs {
+	align-self: flex-start;
+	vertical-align: top;
 }
 
 .mAs-c {
@@ -746,20 +761,12 @@ Styleguide: core-utils.flex.mai
 	text-align: right;
 }
 
-.Ai-fs {
+.mAi-fs {
 	align-items: flex-start;
 }
 
-.Ai-fe {
-	align-items: flex-end;
-}
-
-.Ai-c {
-	align-items: center;
-}
-
-.Ai-b {
-	align-items: baseline;
+.mAi-fs > * {
+	vertical-align: top;
 }
 
 .mAi-c {
@@ -778,16 +785,33 @@ Styleguide: core-utils.flex.mai
 	vertical-align: bottom;
 }
 
+.mAi-b {
+	align-items: baseline;
+}
+
+.mAi-b > * {
+	vertical-align: baseline;
+}
+
 /*
 W
 
-W \- width. This utility sets component width.
+Width. Sets width of element. You can set width in the grid-columns(gc) or in the grid-spans(gs).
 
-Markup:
-<div class="test-content W2gc_sm W5gc_md">
-	<h3>Title</h3>
-	<p>Some text</p>
-</div>
+If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
+
+* `W-a` \- default element width. Depends on element [display type](#kssref-core-utils-visual-d). *Responsive*.
+* `W50p` \- 50%.
+* `W100p`
+* `W-Card` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+* `W1gc` \- 1/2 of grid in grid-columns on `xs` breakpoint, because on `xs`, grid has 2 columns.
+* `W2gc`
+* `W1gc_sm..W4gc_sm` \- range of available width in `gc` on `sm` breakpoint, because on `sm`, grid has 4 columns. You can change grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid). Contains CSS `calc()` fallback.
+* `W1gc..W12gc` \- available width in `gc` on all breakpoints, starting with `md`.
+* `W1gs_sm..W4gs_sm` \- range of available width in grid spans on `sm`.
+* `W1gs..W12gs`
+
+Markup: ../../../docs/examples/core-utils/box-sizing/w.html
 
 Styleguide: core-utils.bxz.w
 */
@@ -817,7 +841,7 @@ Styleguide: core-utils.bxz.w
 /*
 Box sizing
 
-Utilities for nodes size management.
+Utilities for elements size management.
 
 * `Maw100p`
 * `Maw-n`
@@ -850,10 +874,15 @@ Styleguide: core-utils.bxz
 /*
 Margin
 
-Group of utilities that sets margin.
+You can set some margins in the grid-gutters(gg). For example margin top - `Mt` and margin bottom - `Mb`.
 
 * `M0` \- clear all margins.
 * `M-a`
+* `Mt0`
+* `Mt1gg..Mt4gg`
+* `Mb0`
+* `Mb1gg..Mb4gg`
+* `Mb-2gg`
 
 Styleguide: core-utils.margin
 */
@@ -861,13 +890,16 @@ Styleguide: core-utils.margin
 /*
 Ml
 
-Ml \- margin left. Utility sets left margin.
+Margin left. You can set left margin in the grid-columns(gc), grid-gutters(gg) or in the grid-spans(gs). So you can set the offset for layout elements.
 
-Markup:
-<div class="test-content Ml3gc_md">
-	<h3>Container</h3>
-	<p>With margin left</p>
-</div>
+* `Ml-a` \- *Responsive*.
+* `Ml0` \- *Responsive*.
+* `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
+* `Ml1gg` \- Partial *responsive* on `lg` and `xl`. It is needed to return the default column gutter.
+* `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
+* `Ml1gs..Ml10gs`
+
+Markup: ../../../docs/examples/core-utils/margin/ml.html
 
 Styleguide: core-utils.margin.ml
 */
@@ -875,44 +907,15 @@ Styleguide: core-utils.margin.ml
 /*
 Mx
 
-Mx \- margin on X axis. Utility sets left and right margin.
+Margin on X axis. Sets left and right margin.
 
-Markup:
-<div class="test-content W3gc_sm Mx-a">
-	<h3>Title</h3>
-	<p>Some text</p>
-</div>
+* `Mx-a` \- centered the element with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
+* `Mx1gg` \- *Responsive*.
+* `Mx0` \- *Responsive*.
+
+Markup: ../../../docs/examples/core-utils/margin/mx.html
 
 Styleguide: core-utils.margin.mx
-*/
-
-/*
-Mt
-
-Mt \- margin top. Utility sets top margin.
-
-Markup:
-<div class="test-content W3gc_md">
-	<h3>Title</h3>
-	<p class="Mt3gg">text</p>
-</div>
-
-Styleguide: core-utils.margin.mt
-*/
-
-/*
-Mb
-
-Mb \- margin bottom. Utility sets bottom margin.
-
-Markup:
-<div class="test-content W3gc_md">
-	<h3>Title</h3>
-	<p class="Mb4gg">text</p>
-	<p>after indent</p>
-</div>
-
-Styleguide: core-utils.margin.mb
 */
 
 .M0 {
@@ -984,6 +987,14 @@ Styleguide: core-utils.margin.mb
 	margin-bottom: -24px;
 }
 
+.Ml-2gg {
+	margin-left: -24px;
+}
+
+.Ml2gg {
+	margin-left: 24px;
+}
+
 .Ml-1gg {
 	margin-left: -12px;
 }
@@ -992,12 +1003,19 @@ Styleguide: core-utils.margin.mb
 	margin-left: 12px;
 }
 
+.Mx1gg {
+	margin-right: 1.5%;
+	margin-left: 1.5%;
+	margin-right: 12px;
+	margin-left: 12px;
+}
+
 /*
 Padding
 
 * `P0` \- clear all paddings.
 * `P8` \- creates paddings of 8px all around.
-* `Pt1gg` \- works similarly [Mt1gg](#kssref-core-utils-margin-mt)
+* `Pt1gg` \- works similarly [Mt1gg](#kssref-core-utils-margin)
 * `Pb1gg`
 * `Px1gg`
 
@@ -1045,13 +1063,9 @@ Styleguide: core-utils.visual
 /*
 mCl
 
-mCl is clearfix utility.
+Modified clear. It is clearfix utility. Use it with a container whose child elements have `Fl`.
 
-Markup:
-<div class="test-content W2gc_sm mCl">
-	<h3 class="Fl">Title</h3>
-	<p class="Fl-r">Some text</p>
-</div>
+Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
 
 Styleguide: core-utils.visual.mcl
 */
@@ -1059,15 +1073,11 @@ Styleguide: core-utils.visual.mcl
 /*
 mV
 
-mV \- modified visibility. Shows and hides with additional parameters.
+Modified visibility.
 
-vh - visually hidden.
+mV-vh - visually hides the element but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the element from all.
 
-Markup:
-<div class="test-content W2gc_sm W4gc_md">
-	<h3 class="mV-vh">Visually hidden title</h3>
-	<p>Some text</p>
-</div>
+Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
 
 Styleguide: core-utils.visual.mv
 */
@@ -1122,13 +1132,9 @@ Styleguide: core-utils.f
 /*
 mFz
 
-mFz \- modified font size. Sets font size with additional parameters.
+Modified font size.
 
-Markup:
-<div class="test-content W2gc_sm W5gc_md">
-	<h3>Hidden text here</h3>
-	<p class="mFz0">Some text</p>
-</div>
+0 - Accessibly hides the text inside the element.
 
 Styleguide: core-utils.f.mfz
 */
@@ -1213,15 +1219,12 @@ Styleguide: core-utils.text.td
 /*
 Dir
 
-Dir \- direction. Sets direction of text and order items in layout.
+Direction. Sets direction of text and order items in row-layout. When specifying a breakpoint, the utility *only* works on it.
 
-Markup:
-<div class="row Dir-r">
-	<div class="test-content row__col W2gc_sm W3gc_md">
-		<h3>Rtl</h3>
-		<p>Some text</p>
-	</div>
-</div>
+Dir-r - right to left. *Responsive*.
+Dir-r_md - only on md.
+
+Markup: ../../../docs/examples/core-utils/text/dir.hbs
 
 Styleguide: core-utils.text.dir
 */
@@ -1229,13 +1232,9 @@ Styleguide: core-utils.text.dir
 /*
 mTov
 
-mTov \- modified text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container.
+Modified text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container. Element with `mTov` should have a width limit.
 
-Markup:
-<div class="test-content W2gc_sm W3gc_md">
-	<h3 class="Maw100p mTov">super long long [09:03:50] Finished 'style' title</h3>
-	<p>Some text</p>
-</div>
+Markup: ../../../docs/examples/core-utils/text/mtov.html
 
 Styleguide: core-utils.text.mtov
 */
@@ -1303,7 +1302,7 @@ Styleguide: core-utils.bg
 /*
 mBgp
 
-mBgp \- modified `background-position`. Includes `Bgr-n`.
+Modified `background-position`. Includes `Bgr-n`.
 
 c - center.
 
@@ -1367,6 +1366,14 @@ Styleguide: core-utils.bd
 		display: inline-flex;
 	}
 
+	.Jc-sa_sm {
+		justify-content: space-around;
+	}
+
+	.Jc-sb_sm {
+		justify-content: space-between;
+	}
+
 	.mJc-fs_sm {
 		justify-content: flex-start;
 		text-align: left;
@@ -1380,16 +1387,6 @@ Styleguide: core-utils.bd
 	.mJc-fe_sm {
 		justify-content: flex-end;
 		text-align: right;
-	}
-
-	.mJc-sa_sm {
-		justify-content: space-around;
-		text-align: center;
-	}
-
-	.mJc-sb_sm {
-		justify-content: space-between;
-		text-align: center;
 	}
 
 	.W-a_sm {
@@ -1473,6 +1470,14 @@ Styleguide: core-utils.bd
 		display: inline-flex;
 	}
 
+	.Jc-sa_md {
+		justify-content: space-around;
+	}
+
+	.Jc-sb_md {
+		justify-content: space-between;
+	}
+
 	.mJc-fs_md {
 		justify-content: flex-start;
 		text-align: left;
@@ -1486,16 +1491,6 @@ Styleguide: core-utils.bd
 	.mJc-fe_md {
 		justify-content: flex-end;
 		text-align: right;
-	}
-
-	.mJc-sa_md {
-		justify-content: space-around;
-		text-align: center;
-	}
-
-	.mJc-sb_md {
-		justify-content: space-between;
-		text-align: center;
 	}
 
 	.W-a_md {
@@ -1742,6 +1737,14 @@ Styleguide: core-utils.bd
 		display: inline-flex;
 	}
 
+	.Jc-sa_lg {
+		justify-content: space-around;
+	}
+
+	.Jc-sb_lg {
+		justify-content: space-between;
+	}
+
 	.mJc-fs_lg {
 		justify-content: flex-start;
 		text-align: left;
@@ -1755,16 +1758,6 @@ Styleguide: core-utils.bd
 	.mJc-fe_lg {
 		justify-content: flex-end;
 		text-align: right;
-	}
-
-	.mJc-sa_lg {
-		justify-content: space-around;
-		text-align: center;
-	}
-
-	.mJc-sb_lg {
-		justify-content: space-between;
-		text-align: center;
 	}
 
 	.W1gc {
@@ -2059,7 +2052,7 @@ Styleguide: core-utils.bd
 		width: 100%;
 	}
 
-	.Ml0gc_lg {
+	.Ml1gg_lg {
 		margin-left: 16px;
 	}
 
@@ -2103,11 +2096,24 @@ Styleguide: core-utils.bd
 		margin-bottom: -32px;
 	}
 
+	.Ml-2gg {
+		margin-left: -32px;
+	}
+
+	.Ml2gg {
+		margin-left: 32px;
+	}
+
 	.Ml-1gg {
 		margin-left: -16px;
 	}
 
 	.Ml1gg {
+		margin-left: 16px;
+	}
+
+	.Mx1gg {
+		margin-right: 16px;
 		margin-left: 16px;
 	}
 
@@ -2165,6 +2171,14 @@ Styleguide: core-utils.bd
 		display: inline-flex;
 	}
 
+	.Jc-sa_xl {
+		justify-content: space-around;
+	}
+
+	.Jc-sb_xl {
+		justify-content: space-between;
+	}
+
 	.mJc-fs_xl {
 		justify-content: flex-start;
 		text-align: left;
@@ -2178,16 +2192,6 @@ Styleguide: core-utils.bd
 	.mJc-fe_xl {
 		justify-content: flex-end;
 		text-align: right;
-	}
-
-	.mJc-sa_xl {
-		justify-content: space-around;
-		text-align: center;
-	}
-
-	.mJc-sb_xl {
-		justify-content: space-between;
-		text-align: center;
 	}
 
 	.W-a_xl {
@@ -2370,7 +2374,7 @@ Styleguide: core-utils.bd
 		width: 100%;
 	}
 
-	.Ml0gc_xl {
+	.Ml1gg_xl {
 		margin-left: 16px;
 	}
 

@@ -1,11 +1,15 @@
 /*
 D
 
-D \- display. Sets the display type.
+Display. Sets the display type.
 
-initial - block. The element stretches on the full width of the container and creates line breaks before and after. *Responsive*.
-f - flex. Turns an element into a flex container. Can be used to progressive enhancement the [row](section-core-block.html#kssref-core-blocks-row) layouts. Child elements will be stretched to the full height of the container. *Responsive*.
-if - inline-flex. *Responsive*.
+D - block. The element stretches on the full width of the container and creates line breaks before and after. *Responsive*.
+D-ib - inline-block. The width of the element depends on the width of the content. Inline-blocks line up in one line like a letters and wrap if they don’t fit. *Responsive*.
+D-f - flex. Turns an element into a flex container. Can be used to progressive enhancement the [row](section-core-block.html#kssref-core-blocks-row) layouts. Child elements will be stretched to the full height of the container. By default, child elements are not wrap to the new line and are compressed in width until they go beyond the line. *Responsive*.
+D-if - inline-flex. Combines inline-block and flex container. *Responsive*.
+D-n - none. Hides the element as if it is not on the page. *Responsive*.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/d.hbs
 
 Styleguide: core-utils.visual.d
 */
@@ -13,7 +17,10 @@ Styleguide: core-utils.visual.d
 /*
 mD
 
-mD-f - D-f with line breaks.
+Modified display.
+
+mD-f - `D-f` with line breaks.
+mD-if - `D-if` with `Fxw-w`.
 
 Styleguide: core-utils.visual.md
 */

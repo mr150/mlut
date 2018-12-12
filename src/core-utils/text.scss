@@ -38,15 +38,12 @@ Styleguide: core-utils.text.td
 /*
 Dir
 
-Dir \- direction. Sets direction of text and order items in layout.
+Direction. Sets direction of text and order items in row-layout. When specifying a breakpoint, the utility *only* works on it.
 
-Markup:
-<div class="row Dir-r">
-	<div class="test-content row__col W2gc_sm W3gc_md">
-		<h3>Rtl</h3>
-		<p>Some text</p>
-	</div>
-</div>
+Dir-r - right to left. *Responsive*.
+Dir-r_md - only on md.
+
+Markup: ../../../docs/examples/core-utils/text/dir.hbs
 
 Styleguide: core-utils.text.dir
 */
@@ -54,13 +51,9 @@ Styleguide: core-utils.text.dir
 /*
 mTov
 
-mTov \- modified text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container.
+Modified text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container. Element with `mTov` should have a width limit.
 
-Markup:
-<div class="test-content W2gc_sm W3gc_md">
-	<h3 class="Maw100p mTov">super long long [09:03:50] Finished 'style' title</h3>
-	<p>Some text</p>
-</div>
+Markup: ../../../docs/examples/core-utils/text/mtov.html
 
 Styleguide: core-utils.text.mtov
 */

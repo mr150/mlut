@@ -1,13 +1,22 @@
 /*
 W
 
-W \- width. This utility sets component width.
+Width. Sets width of element. You can set width in the grid-columns(gc) or in the grid-spans(gs).
 
-Markup:
-<div class="test-content W2gc_sm W5gc_md">
-	<h3>Title</h3>
-	<p>Some text</p>
-</div>
+If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
+
+* `W-a` \- default element width. Depends on element [display type](#kssref-core-utils-visual-d). *Responsive*.
+* `W50p` \- 50%.
+* `W100p`
+* `W-Card` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+* `W1gc` \- 1/2 of grid in grid-columns on `xs` breakpoint, because on `xs`, grid has 2 columns.
+* `W2gc`
+* `W1gc_sm..W4gc_sm` \- range of available width in `gc` on `sm` breakpoint, because on `sm`, grid has 4 columns. You can change grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid). Contains CSS `calc()` fallback.
+* `W1gc..W12gc` \- available width in `gc` on all breakpoints, starting with `md`.
+* `W1gs_sm..W4gs_sm` \- range of available width in grid spans on `sm`.
+* `W1gs..W12gs`
+
+Markup: ../../../docs/examples/core-utils/box-sizing/w.html
 
 Styleguide: core-utils.bxz.w
 */
@@ -17,11 +26,11 @@ Styleguide: core-utils.bxz.w
 }
 
 .W1gc {
-	@include mlu-W(6, $calc: 1);
+	@include mlu-W($mlu-grid-default-cols / 2, $calc: 1);
 }
 
 .W2gc {
-	@include mlu-W(12, $calc: 1);
+	@include mlu-W($mlu-grid-default-cols, $calc: 1);
 }
 
 .W50p {
@@ -102,7 +111,7 @@ Styleguide: core-utils.bxz.w
 		}
 
 		@if $MLU-FLAG-COL-OFFSET and mlu-breakpoint($key) > mlu-breakpoint($mlu-bp-md) {
-			.Ml0gc_#{$key} {
+			.Ml1gg_#{$key} {
 				margin-left: mlu-grid-gutter($key);
 			}
 

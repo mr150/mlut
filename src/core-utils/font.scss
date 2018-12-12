@@ -14,13 +14,9 @@ Styleguide: core-utils.f
 /*
 mFz
 
-mFz \- modified font size. Sets font size with additional parameters.
+Modified font size.
 
-Markup:
-<div class="test-content W2gc_sm W5gc_md">
-	<h3>Hidden text here</h3>
-	<p class="mFz0">Some text</p>
-</div>
+0 - Accessibly hides the text inside the element.
 
 Styleguide: core-utils.f.mfz
 */
@@ -49,7 +45,6 @@ Styleguide: core-utils.f.mfz
 	font-size: inherit;
 }
 
-// A11y hide text only
 .mFz0 {
 	overflow: hidden;
 	color: transparent;

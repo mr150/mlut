@@ -1,10 +1,15 @@
 /*
 Margin
 
-Group of utilities that sets margin.
+You can set some margins in the grid-gutters(gg). For example margin top - `Mt` and margin bottom - `Mb`.
 
 * `M0` \- clear all margins.
 * `M-a`
+* `Mt0`
+* `Mt1gg..Mt4gg`
+* `Mb0`
+* `Mb1gg..Mb4gg`
+* `Mb-2gg`
 
 Styleguide: core-utils.margin
 */
@@ -12,13 +17,16 @@ Styleguide: core-utils.margin
 /*
 Ml
 
-Ml \- margin left. Utility sets left margin.
+Margin left. You can set left margin in the grid-columns(gc), grid-gutters(gg) or in the grid-spans(gs). So you can set the offset for layout elements.
 
-Markup:
-<div class="test-content Ml3gc_md">
-	<h3>Container</h3>
-	<p>With margin left</p>
-</div>
+* `Ml-a` \- *Responsive*.
+* `Ml0` \- *Responsive*.
+* `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
+* `Ml1gg` \- Partial *responsive* on `lg` and `xl`. It is needed to return the default column gutter.
+* `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
+* `Ml1gs..Ml10gs`
+
+Markup: ../../../docs/examples/core-utils/margin/ml.html
 
 Styleguide: core-utils.margin.ml
 */
@@ -26,44 +34,15 @@ Styleguide: core-utils.margin.ml
 /*
 Mx
 
-Mx \- margin on X axis. Utility sets left and right margin.
+Margin on X axis. Sets left and right margin.
 
-Markup:
-<div class="test-content W3gc_sm Mx-a">
-	<h3>Title</h3>
-	<p>Some text</p>
-</div>
+* `Mx-a` \- centered the element with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
+* `Mx1gg` \- *Responsive*.
+* `Mx0` \- *Responsive*.
+
+Markup: ../../../docs/examples/core-utils/margin/mx.html
 
 Styleguide: core-utils.margin.mx
-*/
-
-/*
-Mt
-
-Mt \- margin top. Utility sets top margin.
-
-Markup:
-<div class="test-content W3gc_md">
-	<h3>Title</h3>
-	<p class="Mt3gg">text</p>
-</div>
-
-Styleguide: core-utils.margin.mt
-*/
-
-/*
-Mb
-
-Mb \- margin bottom. Utility sets bottom margin.
-
-Markup:
-<div class="test-content W3gc_md">
-	<h3>Title</h3>
-	<p class="Mb4gg">text</p>
-	<p>after indent</p>
-</div>
-
-Styleguide: core-utils.margin.mb
 */
 
 $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
@@ -102,7 +81,15 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 }
 
 .Mb-2gg {
-	@include mlu-generate-gutter($direct: "bottom", $coef: -2);
+	@include mlu-generate-gutter($coef: -2, $direct: "bottom");
+}
+
+.Ml-2gg {
+	@include mlu-generate-gutter($coef: -2, $direct: "left");
+}
+
+.Ml2gg {
+	@include mlu-generate-gutter($coef: 2, $direct: "left");
 }
 
 .Ml-1gg {
@@ -111,6 +98,10 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 
 .Ml1gg {
 	@include mlu-generate-gutter($direct: "left");
+}
+
+.Mx1gg {
+	@include mlu-generate-gutter();
 }
 
 @each $key, $value in $mlu-grid-gutters {
