@@ -6,8 +6,8 @@
 
   "//": "The css and js paths are URLs relative to the style guide destination.",
   "css": [
-    "../../dist/css/mlut.min.css",
-    "../../test/css/test.css"
+    "kss-assets/mlut.min.css",
+    "kss-assets/test.css"
   ],
   "js": [],
 

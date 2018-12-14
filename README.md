@@ -30,11 +30,11 @@ You can get assembled MLUT code and include it to your project. There are some w
 - if used `npm` files are in `node_modules/mlut/dist/`
 
 Then link file to your page:
-``` html
+```html
 <link href="css/mlut.min.css" rel="stylesheet">
 ```
 And just add MLUT classes to markup:
-``` html
+```html
 <div class="row D-f">
 	<div class="row__col W3gc_md">
 		<h3>Simple text</h3>
@@ -49,12 +49,12 @@ To use all MLUT features you need an assembly. There are 3 ways:
 
 ##### Styles #####
 Once the assembly is configured, import sass tools and settings to your `style.scss`
-``` scss
+```scss
 @import "includes/settings";
 @import "includes/functions";
 @import "includes/mixins";
 ```
-Then you can import blocks, utilities and use sass tools:
+Then you can import blocks and utilities how it is done in the `src/sass/mlut.scss` to get the standard build. Or you can import only what you need:
 ```scss
 @import "../core-blocks/wrapper/wrapper";
 @import "../core-utils/display";

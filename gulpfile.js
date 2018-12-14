@@ -147,7 +147,6 @@ gulp.task("scripts", function(){
 		.pipe(browserSync.stream());
 });
 
-// Pug used only for mlut examples
 gulp.task("pug", function(){
 	return gulp.src(path.test.pug + "*.pug")
 		.pipe(plumber())
@@ -166,7 +165,8 @@ gulp.task("html", function(){
 });
 
 gulp.task("kss", shell.task([
-	"node_modules/.bin/kss --config " + dirs.docs + "kss-config.json"
+	"node_modules/.bin/kss --config " + dirs.docs + "kss-config.json",
+	"cp test/css/mlut.min.* " + dirs.docs + "styleguide/kss-assets/"
 ]));
 
 gulp.task("default", ["server", "style", "pug", "scripts"], function(){
