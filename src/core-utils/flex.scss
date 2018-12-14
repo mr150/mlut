@@ -31,7 +31,7 @@ Styleguide: core-utils.flex.jc
 /*
 mAs
 
-Modified align self. Set `vertical-align` for common elements and `align-self` for flex-element.
+Modified align self. Set `vertical-align` for common DOM nodes and `align-self` for flex-element.
 
 Can be used to vertically align an element in row-layouts. Partially works without flex-container.
 
@@ -63,7 +63,7 @@ Styleguide: core-utils.flex.mjc
 /*
 mAi
 
-Modified align items. Set `vertical-align` for child elements and `align-items` for flex-container.
+Modified align items. Set `vertical-align` for child DOM nodes and `align-items` for flex-container.
 
 Can be used to vertically align an elements in row-layouts. Partially works without flex-container.
 

@@ -39,7 +39,7 @@ Mx
 
 Margin on X axis. Sets left and right margin.
 
-* `Mx-a` \- centered the element with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
+* `Mx-a` \- centered the DOM node with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
 * `Mx1gg` \- *responsive*.
 * `Mx-1gg` \- it needed for imposes left and right margins of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
 * `Mx0` \- *responsive*.

@@ -1,14 +1,14 @@
 /*
 W
 
-Width. Sets width of element. You can set width in the grid-columns(gc) or in the grid-spans(gs).
+Width. You can set width in the grid-columns(gc) or in the grid-spans(gs).
 
 If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
 
-* `W-a` \- default element width. Depends on element [display type](#kssref-core-utils-visual-d). *Responsive*.
+* `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-visual-d). *Responsive*.
 * `W50p` \- 50%.
 * `W100p`
-* `W-Card` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+* `W-card` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
 * `W1gc` \- 1/2 of grid in grid-columns on `xs` breakpoint, because on `xs`, grid has 2 columns.
 * `W2gc`
 * `W1gc_sm..W4gc_sm` \- range of available width in `gc` on `sm` breakpoint, because on `sm`, grid has 4 columns. You can change grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid). Contains CSS `calc()` fallback.

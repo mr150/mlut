@@ -1,7 +1,7 @@
 /*
 Box sizing
 
-Utilities for elements size management.
+Utilities for DOM nodes size management.
 
 * `Maw100p`
 * `Maw-n`
@@ -11,7 +11,7 @@ Utilities for elements size management.
 Styleguide: core-utils.bxz
 */
 
-.W-Card {
+.W-card {
 	max-width: $mlu-W-card;
 }
 

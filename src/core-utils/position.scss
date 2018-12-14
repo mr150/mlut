@@ -18,7 +18,7 @@ Z
 `z-index`.
 
 0..3 - `z-index` available range. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
-Max - max value. By default: `9999`.
+max - max value. By default: `9999`.
 
 Styleguide: core-utils.pos.z
 */
@@ -29,7 +29,7 @@ mXy
 X and Y coordinate axes. Change `top` or `bottom` and `right` or `left`.
 
 0 - set T0, R0, B0 and L0.
-50p - centered element with `Pos-a` or `Pos-f` using `T50p`, `L50p` and `transform`.
+50p - centered DOM node with `Pos-a` or `Pos-f` using `T50p`, `L50p` and `transform`.
 
 Styleguide: core-utils.pos.xy
 */
@@ -81,7 +81,7 @@ Styleguide: core-utils.pos.xy
 	}
 }
 
-.Z-Max {
+.Z-max {
 	z-index: $mlu-Z-max;
 }
 

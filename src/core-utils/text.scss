@@ -51,7 +51,7 @@ Styleguide: core-utils.text.dir
 /*
 mTov
 
-Modified text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container. Element with `mTov` should have a width limit.
+Modified text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container. DOM node with `mTov` should have a width limit.
 
 Markup: ../../../docs/examples/core-utils/text/mtov.html
 

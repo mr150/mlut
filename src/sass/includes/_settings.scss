@@ -1,13 +1,165 @@
 /* This comment needed for add @charset "utf-8"; in source because sass compiler erased this at-rule without it: утф8 */
 
 /*
-Core blocks
+Getting started
 
-Set of universal BEM-blocks for using on any project. Some blocks contain elements and modifiers.
-
-Core blocks don't contain, or almost don't contain styles such as colors, backgrounds, etc. Such styles are set on the 'theme' or 'design' layers. To style blocks or their elements, use utilities or modifiers such as block--mod.
+Text
 
 Weight: 0
+
+Styleguide: start
+*/
+
+/*
+Basic concepts
+
+Before reading the documentation, learn MLUT basic concepts.
+
+Weight: 1
+
+Styleguide: concepts
+*/
+
+/*
+DOM node
+
+HTML-element. Any tag on the page. For example:
+```html
+<p>This is DOM node</p>
+<div>I am DOM node too</div>
+```
+
+Weight: 0
+
+Styleguide: concepts.dom_node
+*/
+
+/*
+Block
+
+Independent page component that can be reused. Examples: [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper), [row](section-core-blocks.html#kssref-core-blocks-row).
+
+Weight: 1
+
+Styleguide: concepts.block
+*/
+
+/*
+Element
+
+A part of a block that cannot be used without it.
+
+The names of the elements are constructed according to the scheme: `block-name__element-name`. The element name is separated from the block name by two underscores '__'.
+
+Note that the *element* and the *HTML-element* are different concepts.
+
+Examples: [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col),  [ratio-block__content](section-core-blocks.html#kssref-core-blocks-ratio-block-ratio-block__content).
+
+Weight: 2
+
+Styleguide: concepts.element
+*/
+
+/*
+Modifier
+
+A entity that defines the appearance and behavior of a block or an element.
+
+The name of the modifier is separated from the name of the block or element by two hyphens `--`.
+
+Examples: [ratio-block--4x3](section-core-blocks.html#kssref-core-blocks-ratio-block), `ratio-block--1x1`.
+
+A modifier cannot be used in isolation from a modifiable block or element.
+
+Weight: 3
+
+Styleguide: concepts.modifier
+*/
+
+/*
+Breakpoint
+
+The width of the screen on which the styles change. In MLUT, the default breakpoints are:
+* `xs` \- minimum width `0px-520px`
+* `sm` \- horizontal orientation of smartphone `520px-760px`
+* `md` \- small tablet `760px-960px`
+* `lg` \- square monitor `960px-1168px`
+* `xl` \- wide screen `>1168px`
+
+Weight: 5
+
+Styleguide: concepts.breakpoint
+*/
+
+/*
+Utility
+
+An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
+
+Utility class names are formed according to the scheme:
+1. optional pseudo-class or pseudo-element: `h` - hover, `af` - after etc. Separated from the utility name by underscore '_'.
+1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations.
+1. optional value. Valid are number, [abbreviations](https://docs.emmet.io/cheat-sheet/) and keywords. Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). Abbreviation and keywords are separated by a hyphen '-' from utility name.
+1. optional breakpoint name: `sm`, `lg`, etc. Separated from the utility value by underscore '_'.
+
+Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-main`.
+
+There are some special abbreviations for color utilities:
+* `t` - `transparent`
+* `i` - `inherit`
+* `cc` - `curentColor`
+
+Utilities in MLUT are divided into *common* and *modified*.
+
+* **Common** \- utilities that are named and work like CSS properties.
+* **Modified** \- utilities that affect several CSS properties. The names of such utilities begin with 'm' prefix.
+
+Weight: 6
+
+Styleguide: concepts.utility
+*/
+
+/*
+Layout
+
+The relative layout of DOM nodes on the page.
+
+Weight: 7
+
+Styleguide: concepts.layout
+*/
+
+/*
+Modular grid
+
+Space on the page divided into a certain number of columns with gutters.
+
+In MLUT on the `sm` breakpoint, the grid has 4 columns, on `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called *columns*. Columns are separated by indents which are called *gutters*.
+
+The gutters have different widths at different breakpoints. From `xs` to `lg` gutter is 12px. From `lg` gutter is 16px.
+
+You can set the [width](section-core-utils.html#kssref-core-utils-bxz-w) and [offset](section-core-utils.html#kssref-core-utils-margin-ml) for the layout parts in the grid units. These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 3 types of grid units:
+* **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column. Grid-columns are mainly used with [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col).
+* **grid-spans** \- `gs`. 1gs is width of 1 column with 2 gutters.
+* **grid-gutters** \- `gg`. 1gg is width of 1 gutter.
+
+Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block you can see the graphic display of the grid.
+
+Modular grid are generated depending on this [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
+
+Weight: 8
+
+Styleguide: concepts.grid
+*/
+
+/*
+Core blocks
+
+Set of universal [blocks](section-concepts.html#kssref-concepts-block) for using on any project. Some blocks contain [elements](section-concepts.html#kssref-concepts-element) and [modifiers](section-concepts.html#kssref-concepts-modifier).
+
+Core blocks don't contain, or almost don't contain styles such as colors, backgrounds, etc. Such styles are set on the 'theme' or 'design' layers. To style blocks or their elements, use utilities or modifiers such as `block--mod`.
+
+Weight: 2
 
 Styleguide: core-blocks
 */
@@ -27,7 +179,7 @@ Some utilities responsive by design or have only responsive values. It will be i
 
 For some utilities, there is a description for non-developers.
 
-Weight: 1
+Weight: 3
 
 Styleguide: core-utils
 */
@@ -37,7 +189,7 @@ Core styles
 
 Simple text
 
-Weight: 2
+Weight: 4
 
 Styleguide: core-styles
 */
@@ -47,7 +199,7 @@ Sass tools
 
 Simple text
 
-Weight: 3
+Weight: 5
 
 Styleguide: sass-tools
 */
@@ -57,7 +209,7 @@ Examples
 
 Additional examples of core blocks, utilities, tools and ready-made components.
 
-Weight: 4
+Weight: 6
 
 Styleguide: examples
 */
@@ -65,7 +217,7 @@ Styleguide: examples
 /*
 Settings
 
-Grid settings, compilation flags, constants and more.
+Grid settings, compilation flags, constants and more. All core settings are in the `sass/includes/_settings.scss`.
 
 Styleguide: sass-tools.settings
 */

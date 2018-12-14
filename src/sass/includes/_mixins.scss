@@ -1,14 +1,19 @@
 /*
 Mixins
 
-Useful mixins. All MLUT mixins have 'mlu' prefix.
+Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sass/includes/_mixins.scss`.
 
 Styleguide: sass-tools.mixins
 */
 
 // mlu-bpm
 //
-// bpm - breakpoint manager
+// Bpm is breakpoint manager. Example:
+//
+// ```scss
+// @include mlu-bpm("md") {
+// }
+// ```
 //
 // $from and $to is breakpoints. They can be keyword (string) or number.
 // $from generate to 'min-width' mediaquery, and $to to 'max-width' - 1.
