@@ -16,7 +16,7 @@ Styleguide: core-utils.visual
 /*
 mCl
 
-Modified clear. It is clearfix utility. Use it with a container whose child elements have `Fl`.
+Modified clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
 
 Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
 
@@ -28,12 +28,30 @@ mV
 
 Modified visibility.
 
-mV-vh - visually hides the element but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the element from all.
+mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all.
 
 Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
 
 Styleguide: core-utils.visual.mv
 */
+
+/*
+mAll
+
+Modified all.
+
+* `sr` \- soft reset, reset some default browser styles:
+	* `margin`
+	* `padding`
+	* `border`
+	* `font`
+	* `list-style`
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mall.html
+
+Styleguide: core-utils.visual.mall
+*/
+
 
 .Fl {
 	float: left;
@@ -65,4 +83,12 @@ Styleguide: core-utils.visual.mv
 	white-space: nowrap;
 	border: 0px;
 	clip: rect(0 0 0 0);
+}
+
+.mAll-sr {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+	list-style: none;
+	border: 0;
 }
