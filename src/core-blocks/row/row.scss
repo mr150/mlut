@@ -65,9 +65,86 @@ Styleguide: examples.nested_layouts
 /*
 Set of ready layouts
 
-Simple text
+To use the layout, click on 'Markup:', copy HTML from the example and paste it onto the page. 'Col' in the name of the layout means column.
+
+The stylization of the columns is made for demo. It only works in this documentation.
 
 Styleguide: examples.layouts
+*/
+
+/*
+3 equal cols
+
+Markup: ../../../docs/examples/layouts/3ec.html
+
+Styleguide: examples.layouts.3ec
+*/
+
+/*
+1 big col and 1 small
+
+This example shows the variants for working the outermost fields in the layout. In all other layouts, you can work with fields similarly.
+
+Markup: ../../../docs/examples/layouts/1bc1sc.html
+
+Styleguide: examples.layouts.1bc1sc
+*/
+
+
+/*
+4 equal cols
+
+Markup: ../../../docs/examples/layouts/4ec.html
+
+Styleguide: examples.layouts.4ec
+*/
+
+/*
+2 equal cols. 4 equal cols inside the second
+
+Markup: ../../../docs/examples/layouts/2ec4ecin2-nd.html
+
+Styleguide: examples.layouts.2ec4ecin2_nd
+*/
+
+/*
+2 equal cols. 2 full width cols inside the second
+
+Markup: ../../../docs/examples/layouts/2ec2fwcin2-nd.html
+
+Styleguide: examples.layouts.2ec2fwcin2-nd
+*/
+
+/*
+3 equal cols. 3 full width cols in each.
+
+Markup: ../../../docs/examples/layouts/3fwcin3ec.html
+
+Styleguide: examples.layouts.3fwcin3ec
+*/
+
+/*
+3 full width cols. 2 equal cols inside the second
+
+Markup: ../../../docs/examples/layouts/3fwc2ecin2-nd.html
+
+Styleguide: examples.layouts.3fwc2ecin2-nd
+*/
+
+/*
+2 equal cols. 4 full width cols inside the second col
+
+Markup: ../../../docs/examples/layouts/2ec4fwcin2-nd.html
+
+Styleguide: examples.layouts.2ec4fwcin2-nd
+*/
+
+/*
+3 centered cards with fixed width
+
+Markup: ../../../docs/examples/layouts/3fc.html
+
+Styleguide: examples.layouts.3fc
 */
 
 .row {

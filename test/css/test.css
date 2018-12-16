@@ -2,7 +2,8 @@
 	background-color: #ccc;
 }
 
-.test-content {
+.test-content,
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) {
 	padding: 10px;
 	color: #306;
 	font-size: 1.1rem;
