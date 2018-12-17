@@ -1,3 +1,19 @@
+#kss-node {
+	font-family:
+	-apple-system,
+	BlinkMacSystemFont,
+	"Segoe UI",
+	Roboto,
+	Oxygen,
+	Cantarell,
+	Ubuntu,
+	"Fira Sans",
+	"Droid Sans",
+	"Helvetica Neue",
+	Arial,
+	sans-serif;
+}
+
 .test-row {
 	background-color: #ccc;
 }

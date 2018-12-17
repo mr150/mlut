@@ -420,14 +420,6 @@ Styleguide: core-blocks.row.row__item
 */
 
 /*
-Nested layouts
-
-All variants of nested layouts.
-
-Styleguide: examples.nested_layouts
-*/
-
-/*
 Set of ready layouts
 
 To use the layout, click on 'Markup:', copy HTML from the example and paste it onto the page. 'Col' in the name of the layout means column.
@@ -476,7 +468,7 @@ Styleguide: examples.layouts.2ec4ecin2_nd
 
 Markup: ../../../docs/examples/layouts/2ec2fwcin2-nd.html
 
-Styleguide: examples.layouts.2ec2fwcin2-nd
+Styleguide: examples.layouts.2ec2fwcin2_nd
 */
 
 /*
@@ -492,7 +484,7 @@ Styleguide: examples.layouts.3fwcin3ec
 
 Markup: ../../../docs/examples/layouts/3fwc2ecin2-nd.html
 
-Styleguide: examples.layouts.3fwc2ecin2-nd
+Styleguide: examples.layouts.3fwc2ecin2_nd
 */
 
 /*
@@ -500,7 +492,7 @@ Styleguide: examples.layouts.3fwc2ecin2-nd
 
 Markup: ../../../docs/examples/layouts/2ec4fwcin2-nd.html
 
-Styleguide: examples.layouts.2ec4fwcin2-nd
+Styleguide: examples.layouts.2ec4fwcin2_nd
 */
 
 /*
@@ -509,6 +501,46 @@ Styleguide: examples.layouts.2ec4fwcin2-nd
 Markup: ../../../docs/examples/layouts/3fc.html
 
 Styleguide: examples.layouts.3fc
+*/
+
+/*
+Nested layouts
+
+All variants of nested layouts. A column with a nested layout has a gray background to demonstrate the different behavior of the gutters.
+
+Styleguide: examples.nested_layouts
+*/
+
+/*
+Layout in col
+
+Markup: ../../../docs/examples/nested-row/row-in-col.html
+
+Styleguide: examples.nested_layouts.row_in_col
+*/
+
+/*
+Layout nested in col
+
+By default layout nested in col with gutters and margin bottom.
+
+Mx-1gg - layout with negative gutters nested in col.
+Mb-2gg - layout with negative margin bottom nested in col with gutters.
+Mb-2gg.Mx-1gg - layout with negative gutters and margin bottom nested in col.
+
+Markup: ../../../docs/examples/nested-row/row-nested-col.hbs
+
+Styleguide: examples.nested_layouts.row_nested_col
+*/
+
+/*
+Case of nesting #7
+
+Layout with negative gutters nested in col without margin bottom.
+
+Markup: ../../../docs/examples/nested-row/row-nested-col7.html
+
+Styleguide: examples.nested_layouts.row_nested_col.case7
 */
 
 .row {
