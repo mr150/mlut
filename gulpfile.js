@@ -166,7 +166,7 @@ gulp.task("html", function(){
 
 gulp.task("kss", shell.task([
 	"node_modules/.bin/kss --config " + dirs.docs + "kss-config.json",
-	"cp test/css/mlut.min.* " + dirs.docs + "styleguide/kss-assets/"
+	"cp " + path.build.css + files.distCss + " " + dirs.docs + "styleguide/kss-assets/"
 ]));
 
 gulp.task("default", ["server", "style", "pug", "scripts"], function(){

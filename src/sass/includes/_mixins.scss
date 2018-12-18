@@ -8,26 +8,58 @@ Styleguide: sass-tools.mixins
 
 // mlu-bpm
 //
-// Bpm is breakpoint manager. Example:
-//
+// Bpm is breakpoint manager.
 // ```scss
 // @include mlu-bpm("md") {
+//		.input--common {
+//			padding-left: 48px;
+//		}
+// }
+//
+// @include mlu-bpm($to: "lg") {
+//		.btn--common {
+//			margin-left: 48px;
+//		}
+// }
+//
+// @include mlu-bpm("sm", "lg") {
+//		.btn--common {
+//			margin-top: 48px;
+//		}
+// }
+// ```
+// Compile into:
+// ```css
+// @media (min-width: 760px) {
+//		.input--common {
+//			padding-left: 48px;
+//		}
+// }
+//
+// @media (max-width: 959px) {
+//		.btn--common {
+//			margin-left: 48px;
+//		}
+// }
+//
+// @media (min-width: 520px) and (max-width: 959px) {
+//		.btn--common {
+//			margin-top: 48px;
+//		}
 // }
 // ```
 //
-// $from and $to is breakpoints. They can be keyword (string) or number.
-// $from generate to 'min-width' mediaquery, and $to to 'max-width' - 1.
-// Together they generate to 'min-width and max-width - 1'.
-//
-// In $opt you can pass string with additional features or device to check.
+// $from = false - breakpoint. Can be keyword (string) or number. Generate to 'min-width' mediaquery, and `$to` to 'max-width' - 1.
+// $to = false - breakpoint. Can be keyword (string) or number. Generate to 'max-width' - 1 mediaquery. Together with `$from` generate to 'min-width and max-width - 1'.
+// $opt = false - string with additional media-features to check.
 // For example:
-// '(orientation: landscape)',
-// 'screen and (aspect-ratio: 11/5)',
-// 'print'.
-//
-// $prop is property in mediaquery. Property generate like '#{$type}-#{$prop}',
-// where $type can be 'min' or 'max'. By default $prop is 'width'.
-// $type depends on availability $from and $to
+// `(orientation: landscape)`,
+// `screen and (aspect-ratio: 11/5)`,
+// `print`.
+// $prop = "width" - property in mediaquery. Property generate like `#{$type}-#{$prop}`,
+// where `$type` can be 'min' or 'max'.
+// `$type` depends on availability `$from` and `$to`
+// @content - CSS relus that will be placed into mediaquery.
 //
 // Styleguide: sass-tools.mixins.bpm
 
@@ -85,33 +117,39 @@ Styleguide: sass-tools.mixins
 // mlu-mods-from-sprite
 //
 // Generator BEM modifiers for block with icon.
+// ```scss
+//$icons: (
+//		"vk": (27px, 16px, -5px, -5px),
+//		"fb": (13px, 28px, -27px, -5px),
+//);
 //
-// $sprite is map with icons data.
-// Icon rendered as a $pseudo element. Default is 'before'
+//.soc-icon {
+//		@include mlu-mods-from-sprite($icons);
+//}
+// ```
+// CSS
+// ```css
+//.soc-icon--vk:before {
+//		width: 27px;
+//		height: 16px;
+//		background-position-x: -5px;
+//}
 //
-// $sprite examples
+//.soc-icon--fb:before {
+//		width: 13px;
+//		height: 28px;
+//		background-position-x: -27px;
+//}
+// ```
 //
-// Map with 4 parameters of icon data list:
-// $icons: (
-//		modifier-name: (width, height, bgpx, bgpy),
-//		car: (208px, 90px, -767px, -5px),
-//	);
-//
-// If icons have the same sizes you can write in map only 2 params:
-// $icons: (
-//		modifier-name: (bgpx, bgpy),
-//		car: (-767px, -5px),
-//	);
-//
-// All icon data lists must be equal length
-//
+// $sprite - map with icons data. Icon rendered as a pseudo-element.
+// Sprite item example: `modifier-name: (width, height, bgpx, bgpy)`. <br>
+// If icons have the same sizes you can write in map only 2 params: `modifier-name: (bgpx, bgpy)`. <br>
+// All icon data lists must be equal length. <br>
 // If one or some parameters the same in all icons, it will not be
 // generated in modifiers that DRY. Write repeating
 // parameter in block class.
-//
-// .block {
-//		@include mlu-mods-from-sprite($icons);
-//	}
+// $pseudo = "before" - pseudo-element in which the icon will be inserted.
 //
 // Styleguide: sass-tools.mixins.mods_from_sprite
 
@@ -172,22 +210,31 @@ Styleguide: sass-tools.mixins
 
 // mlu-def-hover
 //
-// simple hover wich change color
-// to lighter on hover and darker on active
-//
-// $color is init color that will change.
-//
-// $prop is CSS property that will change. Default is background-color
-//
-// $lighten is percent on which the $color will become lighten
-// with sass function 'lighten' on :hover.
-//
-// $darken is the same at $lighten but $color will change
-// on :active
-//
-// .btn--common {
+// Simple hover wich change color
+// to lighter on hover and darker on active.
+// ```scss
+//.btn--common {
 //		@include mlu-def-hover(#f00);
-// }
+//}
+// ```
+// CSS
+// ```css
+//.btn--common:hover,
+//.btn--common:focus {
+//		background-color: #ff2929;
+//}
+//
+//.btn--common:active {
+//		background-color: #e60000;
+//}
+// ```
+//
+// $color - init color that will change.
+// $prop = background-color - CSS property that will change.
+// $lighten = 8% - percent on which the `$color` will become lighten
+// with sass function `lighten` on `:hover`.
+// $darken = $lighten \- 3 - the same at `$lighten` but `$color` will change
+// on `:active`.
 //
 // Styleguide: sass-tools.mixins.def_hover
 
@@ -204,7 +251,24 @@ Styleguide: sass-tools.mixins
 	}
 }
 
-// Generate clearfix for float layout
+// mlu-clearfix
+//
+// Generate clearfix for float layout.
+// ```scss
+//.block {
+//		@include mlu-clearfix;
+//}
+// ```
+// CSS
+// ```css
+//.block:after {
+//		display: table;
+//		clear: both;
+//		content: "";
+//}
+// ```
+//
+// Styleguide: sass-tools.mixins.clearfix
 @mixin mlu-clearfix {
 	&:after {
 		display: table;
@@ -215,19 +279,35 @@ Styleguide: sass-tools.mixins
 
 // mlu-generate-gutter
 //
-// Generate grid gutter on different breakpoints.
+// Generate fields or indents in grid-gutters on different breakpoints.
+// ```scss
+//.block {
+//		@include mlu-generate-gutter($direct: "right", $coef: 2);
+//}
+// ```
+// CSS
+// ```css
+//.block {
+//		margin-right: 24px;
+//}
 //
-// Gutter $type can be margin or padding in different directions.
+//@media (min-width: 960px) {
+//		.block {
+//			margin-right: 32px;
+//		}
+//}
+// ```
 //
-// $direct can take 4 main directions from $mlu-main-directions
-// or combined direction - 'x'(left right), 'y'(top bottom)
+// $init-gutter = $mlu-gtr-sm - initial gutter value out of breakpoint.
+// Can be number. If passed '-1', initial gutter will not be generated.
+// $type = margin - can be `margin` or `padding`.
+// $direct = "x" - can take 4 main directions from [$mlu-main-directions](#kssref-sass-tools-settings-general)
+// or combined direction: 'x'(left right), 'y'(top bottom)
 // and 'xy'(left right top bottom).
-//
-// You can pass map with custom gutters value in $gutters.
-//
-// $calc is fallback for old browsers. It need if your cols work this calc() width.
-//
-// $coef is coefficient by which the gutter value is multiplied
+// $gutters = $mlu-grid-gutters - map with gutters values on breakpoints.
+// Map item example: `"sm": 12px`.
+// $calc = false - bool flag for generation CSS `calc()` fallback for old browsers.
+// $coef = 1 - coefficient by which the gutter value is multiplied
 //
 // Styleguide: sass-tools.mixins.generate_gutter
 
@@ -295,15 +375,29 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 
 // mlu-icon
 //
-// Generate block with icon form css-$sprite in $pseudo element.
-// $sprite is path to css-sprite in png.
-// $pseudo is type of pseudo element: before or after.
+// Generate block with icon from css-sprite in pseudo-element.
+// ```scss
+//.icon {
+//		@include mlu-icon();
+//}
+// ```
+// CSS
+// ```css
+//.icon {
+//		position: relative;
+//}
 //
-// .icon {
-//		@include mlu-icon() {
-//			width: 32px
-//		};
-// }
+//.icon:before {
+//		position: absolute;
+//		background-image: url("../img/css_sprites.png");
+//		background-repeat: no-repeat;
+//		content: "";
+//}
+//```
+//
+// $sprite =  "../img/css_sprites.png" - path to css-sprite in png. Can be string.
+// $pseudo = "before" - type of pseudo-element: before or after.
+// @content - can take additional CSS into pseudo-element.
 //
 // Styleguide: sass-tools.mixins.icon
 
@@ -322,11 +416,24 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 
 // mlu-circle
 //
-// Generate circle
+// Generate circle.
+// ```scss
+//.block {
+//		@include mlu-circle(32px, #f00);
+//}
+// ```
+// CSS
+// ```css
+//.block {
+//		width: 32px;
+//		height: 32px;
+//		background-color: #f00;
+//		border-radius: 50%;
+//}
+// ```
 //
-// $diametr is circle diametr.
-//
-// $bgc is circle background-color.
+// $diametr - circle diametr. Can be number.
+// $bgc = transparent - circle `background-color`. Can be color.
 //
 // Styleguide: sass-tools.mixins.circle
 
@@ -340,12 +447,24 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 // mlu-triangle
 //
 // Generate blank for border triangle.
+// ```scss
+//.block {
+//		@include mlu-triangle(14px);
+//}
+// ```
+// CSS
+// ```css
+//.block {
+//		width: 0px;
+//		height: 0px;
+//		border: 14px transparent solid;
+//}
+// ```
 //
-// $size is triangle size.
-// For create triangle you need to add border-color for one of side
+// $size - triangle size.
+// For create triangle you need to add `border-color` for one of side
 // after this mixin.
-// For example:
-// border-top-color: #f00
+// For example: `border-top-color: #f00`.
 //
 // Styleguide: sass-tools.mixins.triangle
 
@@ -355,35 +474,47 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 	border: $size transparent solid;
 }
 
-// mlu-bgi-rhomb
+// mlu-bgi-hexagon
 //
-// Generate rhomb with CSS linear-gradient() in background-image.
+// Generate hexagon with CSS `linear-gradient()` in `background-image`. See demo [here](section-examples.html#kssref-examples-other).
+// ```scss
+//.block {
+//		@include mlu-bgi-hexagon($bgc: (#306, #d15));
+//}
+// ```
+// CSS
+// ```css
+//.block {
+//		box-sizing: border-box;
+//		background-repeat: no-repeat;
+//		background-position: 0px 0px, 100% 0px, 50% 50%, 0px 102%, 100% 102%;
+//		background-size: 51% 27%, 51% 27%, 100% 48%, 51% 28%, 51% 28%;
+//		background-image: linear-gradient(150deg, transparent 50%, #306 50%), linear-gradient(-150deg, transparent 50%, #306 50%), linear-gradient(#306, #d15), linear-gradient(-330deg, transparent 50%, #d15 50%), linear-gradient(330deg, transparent 50%, #d15 50%);
+//}
+// ```
 //
-// $edge-ang is linear-gradient angle of rhomb edges. Can be only number in deg.
+// $edge-ang = 150deg - linear-gradient angle of hexagon edges. Can be only number in `deg`.
+// $edge-cs = 50% - is color-stop in linear-gradient of hexagon edges. Can be number with unit.
+// $bgc = #000 - hexagon color. It can be single color or list in linear-gradient
+// value format. For example: `(167deg, blue 50%, #f0f, #000)`. <br>
+// Angle in gradient can be only number in `deg`. If you pass gradient value,
+// top hexagon edge get first color, bottom edge get last color and
+// hexagon body get full gradient.
+// $body-size = (100% 48%) - `background-size` of linear-gradient of hexagon body.
+// $change = false - bool flag for generate a change in color or size of an existing hexagon.
 //
-// $edge-cs is color stop in linear-gradient of rhomb edges. Can be number with unit.
-//
-// $bgc is rhomb color. It can be single color or list in linear-gradient
-// value format. For example:
-// $bgc: (167deg, blue 50%, #f0f, #000)
-// Angle in gradient can be only number in deg. If you pass gradient value
-// top rhomb edge get first color, bottom edge get last color and
-// rhomb body get full gradient.
-//
-// $body-size is background-size of linear-gradient of rhomb body.
-//
-// If you already generated rhomb and want to change their color
-// pass to $change '1'. You also can change $body-size with $change turned on
-//
-// .block {
-//		&:before {
-//			mlu-bgi-rhomb($bgc);
-//		}
-//	}
-//
-// Styleguide: sass-tools.mixins.bgi_rhomb
+// Styleguide: sass-tools.mixins.bgi_hexagon
 
-@mixin mlu-bgi-rhomb($edge-ang: 150deg, $edge-cs: 50%, $bgc: #000,
+// Hexagon
+//
+// Hexagon demo generated with [mlu-bgi-hexagon](section-sass-tools.html#kssref-sass-tools-mixins-bgi_hexagon) mixin.
+//
+// Markup:
+// <div class="test-hex"></div>
+//
+// Styleguide: examples.other.hexagon
+
+@mixin mlu-bgi-hexagon($edge-ang: 150deg, $edge-cs: 50%, $bgc: #000,
 $body-size: (100% 48%), $change: false) {
 
 	@if not (type-of($edge-ang) == "number" and unit($edge-ang) == "deg") {
@@ -430,7 +561,19 @@ $body-size: (100% 48%), $change: false) {
 
 // mlu-restore-outline
 //
-// Restore default browser outline on focus state
+// Restore default browser outline on focus state.
+// ```scss
+//.link {
+//		@include mlu-restore-outline;
+//}
+// ```
+// CSS
+// ```css
+//.link:focus {
+//		outline: 1px dotted #212121;
+//		outline: -webkit-focus-ring-color auto 5px;
+//}
+// ```
 //
 // Styleguide: sass-tools.mixins.restore_outline
 
@@ -443,33 +586,47 @@ $body-size: (100% 48%), $change: false) {
 
 // mlu-W
 //
-// Set $width in grid columns, grid spans or CSS units on different breakpoints.
-// It works similarly like W utility.
-//
-// $width can be in grid columns(unitless number, or 'gc' unit), grid spans('gs'),
-// any CSS units('px', 'rem' etc) or 'auto'. Grid units calculated to %
-// according to the formula 'n / $cols * 100%' and rounded by
-// 'mlu-decimal-floor'.
-//
-// If $width set in 'gc' or unitless, width will generated with considering
-// different gutters on breakpoints. Similarly like Wgc_md utility
-// on $mlu-bp-lg.
-//
-// $bp is breakpoint on which $width will sets.
-//
-// $cols is columns count in grid.
-//
-// $calc is flag for generation CSS 'calc()' fallback. It only needed if
-// $width set in 'gc' unit.
-//
-// $type is service argument which used only by mixins-wrappers.
-// It needed for reusable mlu-W for generating grid offset,
-// because the algorithm for generating them is the same.
-//
-// .block {
-//		@include mlu-W(2, sm);
-//		@include mlu-W(4, md);
+// Set `width` on different breakpoints.
+// It works similarly like [W utility](section-core-utils.html#kssref-core-utils-bxz-w).
+// ```scss
+//.block {
+//		@include mlu-W(2, "sm");
+//		@include mlu-W(4gs, "lg");
 //}
+// ```
+// CSS
+// ```css
+//@media (min-width: 520px) {
+//		.block {
+//			width: calc(16.666% - 24px);
+//		}
+//}
+//
+//@media (min-width: 960px) {
+//		.block {
+//			width: calc(16.666% - 32px);
+//		}
+//
+//		.block {
+//			width: 33.333%;
+//		}
+//}
+// ```
+//
+// $width - can be in grid-columns(unitless number, or `gc` unit), grid-spans(`gs`),
+// any CSS units(`px`, `rem` etc) or `auto`. <br> Grid units calculated to %
+// according to the formula '`n / $cols * 100%`' and rounded by
+// [mlu-decimal-floor](section-sass-tools.html#kssref-sass-tools-functions-decimal_floor). <br>
+// If `$width` set in `gc`, width will generated with considering
+// different gutters on breakpoints. Similarly like `Wgc_md`
+// on `$mlu-bp-lg`.
+// $bp = $mlu-bp-xs - breakpoint on which `$width` will sets. Can be number or breakpoint name.
+// $cols = $mlu-grid-default-cols - columns count in grid. Can be number or breakpoint name.
+// $calc = false - bool flag for generation CSS `calc()` fallback. It can needed only if
+// $width set in 'gc' unit.
+// $type = "width" - service argument which used only by mixins-wrappers.
+// It needed for reusable `mlu-W` for generating grid offset,
+// because the algorithm for generating them is the same.
 //
 // Styleguide: sass-tools.mixins.w
 
@@ -547,15 +704,44 @@ $body-size: (100% 48%), $change: false) {
 
 // mlu-Ml
 //
-// Set $offset in grid columns, grid spans or CSS units on different breakpoints.
+// Set `margin-left` on different breakpoints.
+// It works similarly like [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml).
 //
-// It wrapper on 'mlu-W' because calculating and generation algorithm of
-// width for grid columns width and grid offsets the same
+// It wrapper on [mlu-W](#kssref-sass-tools-mixins-w) because calculating and generation algorithm
+// for grid columns width and grid offsets the same. <br>
+// All parameters are the same as in `mlu-W`. Only the first parameter is called `$offset`.
+// ```scss
+//.block {
+//		@include mlu-Ml(1, "sm");
+//		@include mlu-Ml(4gs, "lg");
+//}
+// ```
+// CSS
+// ```css
+//@media (min-width: 520px) {
+//		.block {
+//			margin-left: calc(8.333% + 12px);
+//		}
+//}
+//
+//@media (min-width: 960px) {
+//		.block {
+//			margin-left: calc(8.333% + 16px);
+//		}
+//
+//		.block {
+//			margin-left: 33.333%;
+//		}
+//}
+// ```
+//
+// $offset - can be in grid-columns(unitless number, or `gc` unit), grid-spans(`gs`),
+// any CSS units(`px`, `rem` etc) or `auto`.
 //
 // Styleguide: sass-tools.mixins.ml
 
-@mixin mlu-Ml($offset, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $calc: false) {
-	@include mlu-W($offset, $bp, $cols, $calc, "margin-left");
+@mixin mlu-Ml($offset, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $calc: false) {
+	@include mlu-W($offset, $bp, $cols, $gutters, $calc, "margin-left");
 }
 
 // Private mixin for width and grid offset generation from 'mlu-W'.
@@ -582,9 +768,14 @@ $body-size: (100% 48%), $change: false) {
 
 // mlu-row
 //
-// Generate styles for 'row' block.
+// Generate [row](section-core-blocks.html#kssref-core-blocks-row) block styles.
+// ```scss
+//.block {
+//		@include mlu-row;
+//}
+// ```
 //
-// $display is display type
+// $display = block - display type. Can be value of CSS `display` property.
 //
 // Styleguide: sass-tools.mixins.row
 
@@ -600,16 +791,20 @@ $body-size: (100% 48%), $change: false) {
 
 // mlu-row-col
 //
-// Generate styles for 'row' elements like 'row__col' and 'row__item'.
+// Generate styles for [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) element.
+// ```scss
+//.item {
+//		@include mlu-row-col;
+//}
+// ```
 //
-// $display is display type.
-//
-// $calc is flag for generation CSS 'calc()' fallback. It only needed if
-// for "col" $type.
-//
-// $type is service argument which used only by mixins-wrappers.
-// It needed for reusable mlu-row-col for making other,
-// 'row' elements because the most of styles for them is the same.
+// $display = inline-block - display type. Can be value of CSS `display` property.
+// $gutters = $mlu-grid-gutters - map with column gutters values on breakpoints.
+// $calc = false - bool flag for generation CSS `calc()` fallback. It can needed only
+// for "col" `$type`.
+// $type = "col" - service parameter which used only by mixins-wrappers.
+// It needed for reusable `mlu-row-col` for making other
+// `row` elements, because the most of styles for them is the same.
 //
 // Styleguide: sass-tools.mixins.row_col
 
@@ -670,9 +865,16 @@ $body-size: (100% 48%), $change: false) {
 
 // mlu-row-item
 //
-// Generate styles for 'row__item' element.
+// Generate styles for [row__item](section-core-blocks.html#kssref-core-blocks-row-row__item) element.
 //
-// It mixin-wrapper on 'mlu-row-col' because most of styles the same.
+// It mixin-wrapper on `mlu-row-col` because most of styles the same.
+// ```scss
+//.item {
+//		@include mlu-row-item;
+//}
+// ```
+//
+// $display = inline-block - display type. Can be value of CSS `display` property.
 //
 // Styleguide: sass-tools.mixins.row_item
 

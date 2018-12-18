@@ -36,7 +36,7 @@ Getting started
 
 There are 2 ways to start using MLUT:
 
-- assembled dist
+- assembled distributive
 - developer toolkit
 
 Weight: 0
@@ -57,6 +57,8 @@ cd mlut-lib
 ```
 npm install bitbucket:mrzidan150/mlut-lib
 ```
+### Direct download ###
+Download CSS from [here](http://zidan150.co.nf/mlut/kss-assets/mlut.min.css)
 
 ### CDN ###
 Comming soon.
@@ -69,13 +71,13 @@ Styleguide: start.install
 /*
 Usage
 
-### Dist ###
-You can get assembled MLUT code and include it to your project. There are some ways to get a dist:
+### Distributive ###
+You can get assembled MLUT code and include it to your project. There are some ways to get a distributive.
 
 - if used `git clone` files are located in the `dist/` folder
 - if used `npm` files are in `node_modules/mlut/dist/`
 
-Then link file to your page:
+Add the file to your page like here:
 ```html
 <link href="css/mlut.min.css" rel="stylesheet">
 ```
@@ -303,8 +305,6 @@ Styleguide: core-styles
 
 /*
 Sass tools
-
-Simple text
 
 Weight: 5
 
