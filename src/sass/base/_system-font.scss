@@ -1,11 +1,12 @@
 /*
 System font
 
-This is a directive <code>@font-face</code> that creates a font called system-font.
+This is a directive `@font-face` that creates a font called `system-font`.
 System-font set native font family on user's OS.
-Use it for safety in font-family with custom web font:<br>
-<code>font-family: "PT Sans", system-font, Arial, sans-serif;</code>
-<br>
+Use it for safety in `font-family` with custom web font:
+```scss
+font-family: "PT Sans", system-font, Arial, sans-serif;
+```
 It turned off in default MLUT bundle.
 
 Styleguide: core-styles.system_font
