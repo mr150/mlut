@@ -21,6 +21,16 @@ An element for inserting content that will be resize proportionally. See example
 Styleguide: core-blocks.ratio-block.ratio-block__content
 */
 
+/*
+Responsive iframe
+
+Responsive `iframe` with [ratio-block](section-core-blocks.html#kssref-core-blocks-ratio-block). Width is set for example. Use modifiers to change the aspect ratio.
+
+Markup: ../../../docs/examples/core-blocks/ratio-block/iframe.html
+
+Styleguide: examples.other.responsive_iframe
+*/
+
 .ratio-block {
 	position: relative;
 

@@ -57,8 +57,11 @@ cd mlut-lib
 ```
 npm install bitbucket:mrzidan150/mlut-lib
 ```
-### Direct download ###
-Download CSS from [here](http://zidan150.co.nf/mlut/kss-assets/mlut.min.css)
+### Download ###
+Download assembled CSS from [here](http://a-erp.com/data/181219/1643392985173395.css) or link it to page:
+```html
+<link href="http://a-erp.com/data/181219/1643392985173395.css" rel="stylesheet">
+```
 
 ### CDN ###
 Comming soon.
@@ -71,11 +74,21 @@ Styleguide: start.install
 /*
 Usage
 
+### HTML ###
+Before starting work, make sure you have the correct HTML5 doctype:
+```html
+<!DOCTYPE html>
+```
+and the responsive viewport meta tag:
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
 ### Distributive ###
 You can get assembled MLUT code and include it to your project. There are some ways to get a distributive.
 
-- if used `git clone` files are located in the `dist/` folder
-- if used `npm` files are in `node_modules/mlut/dist/`
+- if used `git clone`, files are located in the `dist/` folder
+- if used `npm`, files are in `node_modules/mlut/dist/`
 
 Add the file to your page like here:
 ```html
@@ -87,6 +100,7 @@ And just add MLUT classes to markup:
 	<div class="row__col W3gc_md">
 		<h3>Simple text</h3>
 ```
+Try [examples](section-examples.html) with ready HTML.
 
 ### Toolkit ###
 To use all MLUT features you need an assembly. There are 3 ways:
@@ -94,6 +108,24 @@ To use all MLUT features you need an assembly. There are 3 ways:
 - If you don't want to develop MLUT, it's recommended to use [MLUT project template](https://bitbucket.org/MrZidan150/mlut-project/)
 - [Clone](#kssref-start-install) MLUT repo and use configured assembly from it
 - Setup assembly yourself use [technologies list](./)
+
+#### Assembly ####
+If you cloned git repo:
+```
+npm i
+```
+Run dev server with live reload, code linting and documentation building:
+```
+npm run dev
+```
+or
+```
+gulp
+```
+Build without dev server:
+```
+npm run build
+```
 
 #### Styles ####
 Once the assembly is configured, import sass tools and settings to your `style.scss`
@@ -183,6 +215,16 @@ A modifier cannot be used in isolation from a modifiable block or element.
 Weight: 3
 
 Styleguide: concepts.modifier
+*/
+
+/*
+BEM entity
+
+Blocks, elements, and modifiers are all called BEM entities. For now, BEM entities in MLUT are represented as CSS classes.
+
+Weight: 4
+
+Styleguide: concepts.bem_entity
 */
 
 /*
@@ -352,7 +394,7 @@ Styleguide: sass-tools.mixins
 /*
 Page
 
-Block for normalize browser styles of 'body'. Designed for 'body' tag only.
+Block for normalize browser styles of `body`. Designed for `body` tag.
 
 It has `height: 100%` for sticky footer.
 
@@ -368,15 +410,15 @@ Styleguide: core-blocks.page
 /*
 Row
 
-Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-d), you can change the layout technology to flexbox.
+Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-visual-d), you can change the layout technology to flexbox.
 
-Parts of the layout within a 'row' are created using the elements:
+Parts of the layout within a `row` are created using the elements:
 * [row__col](#kssref-core-blocks-row-row__col)
 * [row__item](#kssref-core-blocks-row-row__item)
 
-'Rows' can be put into each other an unlimited number of times.
+`Rows` can be put into each other an unlimited number of times.
 
-Row contains CSS counter named `mlu-row-item`.
+`Row` contains CSS counter named `mlu-row-item`.
 
 Markup: ../../../docs/examples/core-blocks/row/row.html
 
@@ -400,7 +442,7 @@ The size of gutter fallback you can find in the [settings](section-sass-tools.ht
 
 Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row).
 
-You can create nested layouts with a mix of `row` and `row__col` on the same tag. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
+You can create nested layouts with a mix of `row` and `row__col` on the same DOM node. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
 
 All examples of the work of nested layouts are [here](section-examples.html#kssref-examples-nested_layouts).
 
@@ -647,6 +689,16 @@ An element for inserting content that will be resize proportionally. See example
 Styleguide: core-blocks.ratio-block.ratio-block__content
 */
 
+/*
+Responsive iframe
+
+Responsive `iframe` with [ratio-block](section-core-blocks.html#kssref-core-blocks-ratio-block). Width is set for example. Use modifiers to change the aspect ratio.
+
+Markup: ../../../docs/examples/core-blocks/ratio-block/iframe.html
+
+Styleguide: examples.other.responsive_iframe
+*/
+
 .ratio-block {
 	position: relative;
 }
@@ -826,7 +878,7 @@ Display. Sets the display type.
 
 D - block. The DOM node stretches on the full width of the container and creates line breaks before and after. *Responsive*.
 D-ib - inline-block. The width of the DOM node depends on the width of the content. Inline-blocks line up in one line like a letters and wrap if they don’t fit. *Responsive*.
-D-f - flex. Turns an DOM node into a flex container. Can be used to progressive enhancement the [row](section-core-block.html#kssref-core-blocks-row) layouts. Child DOM nodes will be stretched to the full height of the container. By default, child DOM nodes are not wrap to the new line and are compressed in width until they go beyond the line. *Responsive*.
+D-f - flex. Turns an DOM node into a flex container. Can be used to progressive enhancement the [row](section-core-blocks.html#kssref-core-blocks-row) layouts. Child DOM nodes will be stretched to the full height of the container. By default, child DOM nodes are not wrap to the new line and are compressed in width until they go beyond the line. *Responsive*.
 D-if - inline-flex. Combines inline-block and flex container. *Responsive*.
 D-n - none. Hides the DOM node as if it is not on the page. *Responsive*.
 
@@ -942,7 +994,7 @@ Styleguide: core-utils.flex.mas
 /*
 mJc
 
-Modified justify content. Combines [Ta](#kssref-core-utils-text-ta) and `Jc` utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts. *Responsive*.
+Modified justify content. Combines [Ta](#kssref-core-utils-text-ta) and [Jc](#kssref-core-utils-flex-jc) utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts. *Responsive*.
 
 * `mJc-fs` \- left. *Only responsive*.
 
@@ -1346,7 +1398,7 @@ Visual formatting
 * `Fl` \- turn on wrapping text on the right.
 * `Fl-r` \- turn on wrapping text on the left.
 * `Ov`
-* `Ov-a` \- adds a scroll bar if the content does not fit into the container.
+* `Ov-a` \- adds a scrollbar if the content does not fit into the container.
 
 Styleguide: core-utils.visual
 */
@@ -1646,7 +1698,7 @@ Styleguide: core-utils.bg.mbgp
 Border
 
 * `Bdcl-c` \- remove the separation between table cells.
-* `Bdrs50p` \- makes the shape round.
+* `Bdrs50p` \- makes the shape visually round.
 
 Styleguide: core-utils.bd
 */

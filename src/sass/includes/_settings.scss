@@ -43,6 +43,16 @@ Styleguide: start.install
 /*
 Usage
 
+### HTML ###
+Before starting work, make sure you have the correct HTML5 doctype:
+```html
+<!DOCTYPE html>
+```
+and the responsive viewport meta tag:
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
 ### Distributive ###
 You can get assembled MLUT code and include it to your project. There are some ways to get a distributive.
 

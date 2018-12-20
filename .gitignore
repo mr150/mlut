@@ -1,6 +1,6 @@
-test/css/style.css
-
 test/**/*.map
+
+test/**/*.html
 
 test/js/scripts.js
 
