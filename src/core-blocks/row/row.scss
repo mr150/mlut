@@ -1,15 +1,15 @@
 /*
 Row
 
-Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-d), you can change the layout technology to flexbox.
+Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-visual-d), you can change the layout technology to flexbox.
 
-Parts of the layout within a 'row' are created using the elements:
+Parts of the layout within a `row` are created using the elements:
 * [row__col](#kssref-core-blocks-row-row__col)
 * [row__item](#kssref-core-blocks-row-row__item)
 
-'Rows' can be put into each other an unlimited number of times.
+`Rows` can be put into each other an unlimited number of times.
 
-Row contains CSS counter named `mlu-row-item`.
+`Row` contains CSS counter named `mlu-row-item`.
 
 Markup: ../../../docs/examples/core-blocks/row/row.html
 
@@ -33,7 +33,7 @@ The size of gutter fallback you can find in the [settings](section-sass-tools.ht
 
 Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row).
 
-You can create nested layouts with a mix of `row` and `row__col` on the same tag. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
+You can create nested layouts with a mix of `row` and `row__col` on the same DOM node. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
 
 All examples of the work of nested layouts are [here](section-examples.html#kssref-examples-nested_layouts).
 

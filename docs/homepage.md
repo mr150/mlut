@@ -1,18 +1,18 @@
 # My Little UI Toolkit #
-Responsive, simple and lightweight toolkit with progressive enhancement for website UI development. MLUT united in itself the [Atomic CSS](https://acss.io/) and [BEM](https://bem.info/) methodologies.
+Toolkit for quick development of lightweight, easily changeable and mobile-first website UI with progressive enhancement.
 
 ## Structure ##
 - BEM blocks
 - CSS utilities
 - Developer tools
 
-For now MLUT contains only Sass tools and CSS.
+For now MLUT contains Sass tools and CSS library.
 
 ### Concept ###
-The library part of toolkit consists of 2 layers:
+The library part of toolkit united in itself ideas from [Atomic CSS](https://acss.io/) and [BEM](https://bem.info/). It consists of 2 layers:
 
 - Core - all that can be used at each website. This layer contains BEM blocks and CSS utilities.
-- Theme - something that is only used in specific theme. Theme can be used on different sites. This layer may contain utilities, scripts, styles, and components with BEM naming.
+- Theme - something that is only used in specific theme. Theme can be used on different sites. This layer may contain utilities, scripts, styles and components with BEM naming.
 
 You can added third 'design' layer - parts of UI for a specific website. It may also contain utilities and components.
 

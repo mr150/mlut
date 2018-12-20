@@ -181,6 +181,6 @@ gulp.task("clear", function(){
 	return del.sync(dirs.build);
 });
 
-gulp.task("build", ["clear", "style", "pug", "scripts"], function(){
+gulp.task("build", ["clear", "style", "pug", "scripts", "kss"], function(){
 });
 

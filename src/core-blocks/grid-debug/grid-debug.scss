@@ -1,11 +1,11 @@
 /*
 Grid-debug
 
-Block for debugging layouts. It displays a modular grid in the background of the container. Modular grid are generated depending on the [settings](section-sass-tools.html#kssref-sass-tools-settings-layout). By default on the 'sm' breakpoint, the grid has 4 columns, on 'md' and above \- 12.
+Block for debugging layouts. It displays a modular grid in the background of the container. Modular grid are generated depending on the [settings](section-sass-tools.html#kssref-sass-tools-settings-grid). By default on the `sm` breakpoint, the grid has 4 columns, on `md` and above \- 12.
 
 There may be minor inaccuracies in the drawing of the grid, because the grid is generated with CSS `linear-gradient()`.
 
-It turned off in default MLUT bundle.
+It *turned off* in default MLUT distributive.
 
 Markup: ../../../docs/examples/core-blocks/grid-debug/grid-debug.html
 

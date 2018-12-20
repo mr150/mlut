@@ -1,7 +1,7 @@
 {
 	"name": "mlut",
 	"version": "0.15.0",
-	"description": "Responsive, simple and lightweight toolkit with progressive enhancement for website UI development",
+	"description": "Toolkit for quick development of lightweight, easily changeable and mobile-first website UI with progressive enhancement",
 	"author": "mr150",
 	"license": "MIT",
 	"keywords": [
@@ -14,6 +14,7 @@
 		"atomic",
 		"functional",
 		"responsive",
+		"mobile-first",
 		"lightweight",
 		"progressive enhancement",
 		"framework",

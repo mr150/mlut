@@ -1,7 +1,7 @@
-# My little UI toolkit
-Responsive, simple and lightweight toolkit with progressive enhancement for website UI development. MLUT united in itself the [Atomic CSS](https://acss.io/) and [BEM](https://bem.info/) methodologies.
+# My Little UI Toolkit #
+Toolkit for quick development of lightweight, easily changeable and mobile-first website UI with progressive enhancement.
 
-## Getting Started
+## Getting Started ##
 There are 2 ways to start using MLUT:
 
 - assembled dist
@@ -19,17 +19,20 @@ cd mlut-lib
 npm install bitbucket:mrzidan150/mlut-lib
 ```
 
+#### Download ####
+Download assembled CSS from [here](http://a-erp.com/data/181219/1643392985173395.css).
+
 #### CDN ####
 Comming soon.
 
 ### Usage ###
-#### Dist ####
-You can get assembled MLUT code and include it to your project. There are some ways to get a dist:
+### Distributive ###
+You can get assembled MLUT code and include it to your project. There are some ways to get a distributive.
 
-- if used `git clone` files are located in the `dist/` folder
-- if used `npm` files are in `node_modules/mlut/dist/`
+- if used `git clone`, files are located in the `dist/` folder
+- if used `npm`, files are in `node_modules/mlut/dist/`
 
-Then link file to your page:
+Add the file to your page like here:
 ```html
 <link href="css/mlut.min.css" rel="stylesheet">
 ```
@@ -45,7 +48,25 @@ To use all MLUT features you need an assembly. There are 3 ways:
 
 - If you don't want to develop MLUT, it's recommended to use [MLUT project template](https://bitbucket.org/MrZidan150/mlut-project/)
 - [Clone](#git) this repo and use configured assembly from it
-- Setup assembly yourself use [technologies list](#technologies)
+- Setup assembly yourself use [technologies list](http://zidan150.co.nf/mlut)
+
+##### Assembly #####
+If you cloned git repo:
+```
+npm i
+```
+Run dev server with live reload, code linting and documentation building:
+```
+npm run dev
+```
+or
+```
+gulp
+```
+Build without dev server:
+```
+npm run build
+```
 
 ##### Styles #####
 Once the assembly is configured, import sass tools and settings to your `style.scss`
@@ -67,7 +88,7 @@ Then you can import blocks and utilities how it is done in the `src/sass/mlut.sc
 ```
 
 ## Documentation ##
-Coming soon.
+Documentation is included in this repo and is generated using [KSS-node](https://github.com/kss-node/kss-node) from the comments in the sources. You can see it [here](http://zidan150.co.nf/mlut) or run locally.
 
 ## License ##
 MIT
