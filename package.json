@@ -4,6 +4,7 @@
 	"description": "Toolkit for quick development of lightweight, easily changeable and mobile-first website UI with progressive enhancement",
 	"author": "mr150",
 	"license": "MIT",
+	"homepage": "https://github.com/mr150/mlut",
 	"keywords": [
 		"html",
 		"sass",
@@ -22,7 +23,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://bitbucket.org/MrZidan150/mlut-lib/"
+		"url": "https://github.com/mr150/mlut.git"
+	},
+	"bugs": {
+		"url": "https://github.com/mr150/mlut/issues"
 	},
 	"files": [
 		"src/",

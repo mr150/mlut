@@ -29,9 +29,10 @@ You can added third 'design' layer - parts of UI for a specific website. It may 
 - [KSS-node](https://github.com/kss-node/kss-node)
 - [Pug](https://github.com/pugjs/pug)
 
-### Supported browsers ###
+## Supported browsers ##
+[Autoprefixer](https://github.com/postcss/autoprefixer) use [this](https://github.com/mr150/mlut/blob/master/.browserslistrc) `.browserslist` during assembly. Tested in last versions of modern browsers and some old:
 - Desktop
-	- Firefox
+	- Firefox - last, ESR
 	- Chrome
 	- Safari
 	- Opera
@@ -39,5 +40,5 @@ You can added third 'design' layer - parts of UI for a specific website. It may 
 	- IE9+
 	- partial IE8
 - Mobile
-	- Android 4+
+	- Android 4.2+
 	- IOS

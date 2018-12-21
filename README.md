@@ -10,13 +10,12 @@ There are 2 ways to start using MLUT:
 ### Installation ###
 #### Git ####
 ```
-git clone https://MrZidan150@bitbucket.org/MrZidan150/mlut-lib.git
-cd mlut-lib
+git clone https://github.com/mr150/mlut.git
 ```
 
 #### NPM ####
 ```
-npm install bitbucket:mrzidan150/mlut-lib
+npm i mlut
 ```
 
 #### Download ####
@@ -46,7 +45,7 @@ And just add MLUT classes to markup:
 #### Toolkit ####
 To use all MLUT features you need an assembly. There are 3 ways:
 
-- If you don't want to develop MLUT, it's recommended to use [MLUT project template](https://bitbucket.org/MrZidan150/mlut-project/)
+- If you don't want to develop MLUT, it's recommended to use [MLUT project template](https://github.com/mr150/mlut-project)
 - [Clone](#git) this repo and use configured assembly from it
 - Setup assembly yourself use [technologies list](http://zidan150.co.nf/mlut)
 
