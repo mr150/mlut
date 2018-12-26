@@ -47,23 +47,25 @@ Styleguide: start
 /*
 Installation
 
-### Git ###
+### [Git](https://github.com/mr150/mlut) ###
 ```
 git clone https://github.com/mr150/mlut.git
 ```
 
 ### NPM ###
 ```
-npm i mlut
+npm i mlut -D
 ```
 ### Download ###
-Download assembled CSS from [here](http://a-erp.com/data/181219/1643392985173395.css) or link it to page:
+Download assembled CSS from [here](https://unpkg.com/mlut@latest/dist/css/mlut.min.css) or link it from A-ERP server:
 ```html
 <link href="http://a-erp.com/data/181219/1643392985173395.css" rel="stylesheet">
 ```
 
 ### CDN ###
-Comming soon.
+```html
+<link href="https://unpkg.com/mlut@latest/dist/css/mlut.min.css" rel="stylesheet">
+```
 
 Weight: 0
 
@@ -140,7 +142,7 @@ Then you can import blocks and utilities how it is done in the `src/sass/mlut.sc
 
 @include mlu-bpm($mlu-bp-md) {
 	.input--common {
-		padding: mlu-px2em(16px) 16;
+		padding: mlu-px2em(16px) 16px;
 	}
 }
 ```

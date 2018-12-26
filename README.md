@@ -1,6 +1,9 @@
 # My Little UI Toolkit #
 Toolkit for quick development of lightweight, easily changeable and mobile-first website UI with progressive enhancement.
 
+[![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
+[![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
+
 ## Getting Started ##
 There are 2 ways to start using MLUT:
 
@@ -15,14 +18,16 @@ git clone https://github.com/mr150/mlut.git
 
 #### NPM ####
 ```
-npm i mlut
+npm i mlut -D
 ```
 
 #### Download ####
-Download assembled CSS from [here](http://a-erp.com/data/181219/1643392985173395.css).
+Download assembled CSS from [here](https://unpkg.com/mlut@latest/dist/css/mlut.min.css).
 
 #### CDN ####
-Comming soon.
+```html
+<link href="https://unpkg.com/mlut@latest/dist/css/mlut.min.css" rel="stylesheet">
+```
 
 ### Usage ###
 ### Distributive ###
@@ -47,7 +52,7 @@ To use all MLUT features you need an assembly. There are 3 ways:
 
 - If you don't want to develop MLUT, it's recommended to use [MLUT project template](https://github.com/mr150/mlut-project)
 - [Clone](#git) this repo and use configured assembly from it
-- Setup assembly yourself use [technologies list](http://zidan150.co.nf/mlut)
+- Setup assembly yourself use [technologies list](https://mr150.github.io/mlut/)
 
 ##### Assembly #####
 If you cloned git repo:
@@ -81,13 +86,13 @@ Then you can import blocks and utilities how it is done in the `src/sass/mlut.sc
 
 @include mlu-bpm($mlu-bp-md) {
 	.input--common {
-		padding: mlu-px2em(16px) 16;
+		padding: mlu-px2em(16px) 16px;
 	}
 }
 ```
 
 ## Documentation ##
-Documentation is included in this repo and is generated using [KSS-node](https://github.com/kss-node/kss-node) from the comments in the sources. You can see it [here](http://zidan150.co.nf/mlut) or run locally.
+Documentation is included in this repo and is generated using [KSS-node](https://github.com/kss-node/kss-node) from the comments in the sources. You can see it [here](https://mr150.github.io/mlut/) or run locally.
 
 ## License ##
 MIT
