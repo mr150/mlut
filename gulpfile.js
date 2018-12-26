@@ -67,6 +67,7 @@ path = Object.assign({
 			dirs.docs + "examples/" + files.html,
 			dirs.docs + "examples/**/*.hbs",
 			dirs.docs + "*.md",
+			path.test.css + "test.css",
 		],
 		js: [
 			path.src.js + "mlut.js",
@@ -113,6 +114,7 @@ gulp.task("style", ["css-lint"], function(){
 		.pipe(rename(files.distCss))
 		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build.css))
+		.pipe(gulp.dest(dirs.docs + "styleguide/kss-assets/"))
 		.pipe(sourcemaps.write(""))
 		.pipe(gulp.dest(path.test.css))
 		.pipe(browserSync.stream());
@@ -166,7 +168,7 @@ gulp.task("html", function(){
 
 gulp.task("kss", shell.task([
 	"node_modules/.bin/kss --config " + dirs.docs + "kss-config.json",
-	"cp " + path.build.css + files.distCss + " " + dirs.docs + "styleguide/kss-assets/"
+	"cp " + path.test.css + "test.css " + dirs.docs + "styleguide/kss-assets"
 ]));
 
 gulp.task("default", ["server", "style", "pug", "scripts"], function(){

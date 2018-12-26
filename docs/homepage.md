@@ -1,6 +1,9 @@
 # My Little UI Toolkit #
 Toolkit for quick development of lightweight, easily changeable and mobile-first website UI with progressive enhancement.
 
+[![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
+[![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
+
 ## Structure ##
 - BEM blocks
 - CSS utilities
