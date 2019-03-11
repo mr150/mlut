@@ -765,7 +765,8 @@ Styleguide: core-blocks.input
 	display: inline-block;
 	box-sizing: border-box;
 	margin: 0px;
-	font: inherit;
+	font-family: inherit;
+	font-size: 1rem;
 	border: 0;
 }
 
@@ -1341,8 +1342,8 @@ Styleguide: core-utils.margin.mx
 }
 
 .Mx1gg {
-	margin-right: 1.5%;
-	margin-left: 1.5%;
+	margin-right: 12px;
+	margin-left: 12px;
 	margin-right: 12px;
 	margin-left: 12px;
 }
@@ -1534,18 +1535,9 @@ Styleguide: core-utils.f.mfz
 
 .mFz0 {
 	overflow: hidden;
-	color: transparent;
 	text-indent: 120%;
 	white-space: nowrap;
 	font-size: 0px;
-}
-
-.mFz0::-moz-selection {
-	color: transparent;
-}
-
-.mFz0::selection {
-	color: transparent;
 }
 
 /*
@@ -1758,10 +1750,6 @@ Styleguide: core-utils.bd
 		text-align: right;
 	}
 
-	.W-a_sm {
-		width: auto;
-	}
-
 	.W1gc_sm {
 		width: 22%;
 		width: calc(25% - 24px);
@@ -1796,6 +1784,10 @@ Styleguide: core-utils.bd
 
 	.W4gs_sm {
 		width: 100%;
+	}
+
+	.W-a_sm {
+		width: auto;
 	}
 
 	.Ml-a_sm {
@@ -1860,10 +1852,6 @@ Styleguide: core-utils.bd
 	.mJc-fe_md {
 		justify-content: flex-end;
 		text-align: right;
-	}
-
-	.W-a_md {
-		width: auto;
 	}
 
 	.W1gc_md {
@@ -2042,6 +2030,10 @@ Styleguide: core-utils.bd
 		width: 100%;
 	}
 
+	.W-a_md {
+		width: auto;
+	}
+
 	.Ml-a_md {
 		margin-left: auto;
 	}
@@ -2126,10 +2118,6 @@ Styleguide: core-utils.bd
 
 	.W2gc {
 		width: calc(100% - 32px);
-	}
-
-	.W-a_lg {
-		width: auto;
 	}
 
 	.W1gc_sm {
@@ -2412,6 +2400,10 @@ Styleguide: core-utils.bd
 		width: 100%;
 	}
 
+	.W-a_lg {
+		width: auto;
+	}
+
 	.Ml1gg_lg {
 		margin-left: 16px;
 	}
@@ -2557,10 +2549,6 @@ Styleguide: core-utils.bd
 	.mJc-fe_xl {
 		justify-content: flex-end;
 		text-align: right;
-	}
-
-	.W-a_xl {
-		width: auto;
 	}
 
 	.W1gc_xl {
@@ -2737,6 +2725,10 @@ Styleguide: core-utils.bd
 
 	.W12gs_xl {
 		width: 100%;
+	}
+
+	.W-a_xl {
+		width: auto;
 	}
 
 	.Ml1gg_xl {
