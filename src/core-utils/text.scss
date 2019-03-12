@@ -6,6 +6,7 @@ Group of utilities that manage the display of text.
 * `Tt` \- UPPERCASE.
 * `Tt-n` \- remove text transform.
 * `C-i`
+* `Whs-nw`
 * `Lh-n` \- line-height normal.
 
 Styleguide: core-utils.text
@@ -102,6 +103,10 @@ Styleguide: core-utils.text.mtov
 
 .Lh-n {
 	line-height: normal;
+}
+
+.Whs-nw {
+	white-space: nowrap;
 }
 
 .Dir-r {

@@ -7,8 +7,8 @@ Visual formatting
 * `D-itb`
 * `Fl` \- turn on wrapping text on the right.
 * `Fl-r` \- turn on wrapping text on the left.
-* `Ov`
-* `Ov-a` \- adds a scrollbar if the content does not fit into the container.
+* `Ol0`
+* `Op0`
 
 Styleguide: core-utils.visual
 */
@@ -21,6 +21,21 @@ Modified clear. It is clearfix utility. Use it with a container whose child DOM 
 Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
 
 Styleguide: core-utils.visual.mcl
+*/
+
+/*
+Ov
+
+Controls content display in case of overflow
+
+Ov - hidden.
+Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
+Ov.Ovx-a - auto. Scrollbar on X axis.
+Ov.Ovy-a - auto. Scrollbar on Y axis.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
+
+Styleguide: core-utils.visual.ov
 */
 
 /*
@@ -71,6 +86,26 @@ Styleguide: core-utils.visual.mall
 
 .Ov-a {
 	overflow: auto;
+}
+
+.Ovx-a {
+	overflow-x: auto;
+}
+
+.Ovy-a {
+	overflow-y: auto;
+}
+
+.Ol0 {
+	outline: 0px;
+
+	&::-moz-focus-inner {
+		border: 0;
+	}
+}
+
+.Op0 {
+	opacity: 0;
 }
 
 .mV-vh {

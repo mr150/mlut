@@ -18,6 +18,7 @@ Z
 `z-index`.
 
 0..3 - `z-index` available range. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+-1 - move DOM node under parent node.
 max - max value. By default: `9999`.
 
 Styleguide: core-utils.pos.z
@@ -73,6 +74,10 @@ Styleguide: core-utils.pos.xy
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.Z-1 {
+	z-index: -1;
 }
 
 @for $i from 0 to $mlu-Z-range {

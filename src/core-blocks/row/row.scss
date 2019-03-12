@@ -193,6 +193,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	font-size: mlu-px2rem($mlu-base-font-size);
 	text-align: left;
 	vertical-align: top;
+	white-space: normal;
 	direction: ltr;
 
 	&.row {

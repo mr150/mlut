@@ -78,11 +78,6 @@
 		"declaration-block-semicolon-space-before": "never",
 		"declaration-block-trailing-semicolon": "always",
 		"declaration-block-no-shorthand-property-overrides": true,
-		"declaration-property-value-blacklist": {
-			"outline": [
-				"none"
-			]
-		},
 		"indentation": "tab",
 		"font-family-no-duplicate-names": true,
 		"font-family-no-missing-generic-family-keyword": true,
@@ -96,7 +91,6 @@
 		"function-comma-newline-before": "never-multi-line",
 		"function-max-empty-lines": 0,
 		"function-name-case": "lower",
-		"function-url-quotes": "always",
 		"function-whitespace-after": "always",
 		"function-parentheses-space-inside": "never",
 		"keyframe-declaration-no-important": true,

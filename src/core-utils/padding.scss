@@ -17,7 +17,7 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 }
 
 .P8 {
-	padding: mlu-px2em(8px) 8px;
+	padding: mlu-px2rem(8px) 8px;
 }
 
 .Pt1gg {
@@ -26,6 +26,14 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 
 .Pb1gg {
 	@include mlu-generate-gutter($mlu-gtr-sm-rem, "padding", $direct: "bottom");
+}
+
+.Pl1gg {
+	@include mlu-generate-gutter($mlu-gtr-sm-rem, "padding", $direct: "left");
+}
+
+.Pl2gg {
+	@include mlu-generate-gutter($mlu-gtr-sm-rem, "padding", $direct: "left", $coef: 2);
 }
 
 .Px1gg {

@@ -331,6 +331,8 @@ Some utilities responsive by design or have only responsive values. It will be i
 
 For some utilities, there is a description for non-developers.
 
+In the examples of the work of some utilities for demonstration, other utilities may be used like this: '`Util1.Util2`'. <br> In the markup, instead of a dot, you need to use a space to separate utilities, like this: "`Util1 Util2`"
+
 Weight: 3
 
 Styleguide: core-utils
@@ -608,6 +610,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	font-size: 1rem;
 	text-align: left;
 	vertical-align: top;
+	white-space: normal;
 	direction: ltr;
 }
 
@@ -794,6 +797,7 @@ Z
 `z-index`.
 
 0..3 - `z-index` available range. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+-1 - move DOM node under parent node.
 max - max value. By default: `9999`.
 
 Styleguide: core-utils.pos.z
@@ -851,6 +855,10 @@ Styleguide: core-utils.pos.xy
 	-webkit-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
+}
+
+.Z-1 {
+	z-index: -1;
 }
 
 .Z0 {
@@ -958,6 +966,7 @@ A group of utilities for managing flex-containers and flex-elements. Modified fl
 * `Fxw-w`
 * `As-s` \- stretches the flex-element to full height.
 * `Jc` \- all values except `flex-start`.
+* `Ord-1..Ord2` \- sequence number for flex-element.
 
 Styleguide: core-utils.flex
 */
@@ -1127,6 +1136,22 @@ Styleguide: core-utils.flex.mai
 	vertical-align: baseline;
 }
 
+.Ord-1 {
+	order: -1;
+}
+
+.Ord0 {
+	order: 0;
+}
+
+.Ord1 {
+	order: 1;
+}
+
+.Ord2 {
+	order: 2;
+}
+
 /*
 W
 
@@ -1180,6 +1205,7 @@ Utilities for DOM nodes size management.
 * `Maw100p`
 * `Maw-n`
 * `H100p`
+* `H0`
 * `Bxz`
 
 Styleguide: core-utils.bxz
@@ -1193,12 +1219,24 @@ Styleguide: core-utils.bxz
 	max-width: 100%;
 }
 
+.Maw50p {
+	max-width: 50%;
+}
+
 .Maw-n {
 	max-width: none;
 }
 
 .H100p {
 	height: 100%;
+}
+
+.H100vh {
+	height: 100vh;
+}
+
+.H0 {
+	height: 0px;
 }
 
 .Bxz {
@@ -1372,7 +1410,7 @@ Styleguide: core-utils.padding
 }
 
 .P8 {
-	padding: 0.5em 8px;
+	padding: 0.5rem 8px;
 }
 
 .Pt1gg {
@@ -1381,6 +1419,14 @@ Styleguide: core-utils.padding
 
 .Pb1gg {
 	padding-bottom: 0.75rem;
+}
+
+.Pl1gg {
+	padding-left: 0.75rem;
+}
+
+.Pl2gg {
+	padding-left: 1.5rem;
 }
 
 .Px1gg {
@@ -1399,8 +1445,8 @@ Visual formatting
 * `D-itb`
 * `Fl` \- turn on wrapping text on the right.
 * `Fl-r` \- turn on wrapping text on the left.
-* `Ov`
-* `Ov-a` \- adds a scrollbar if the content does not fit into the container.
+* `Ol0`
+* `Op0`
 
 Styleguide: core-utils.visual
 */
@@ -1413,6 +1459,21 @@ Modified clear. It is clearfix utility. Use it with a container whose child DOM 
 Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
 
 Styleguide: core-utils.visual.mcl
+*/
+
+/*
+Ov
+
+Controls content display in case of overflow
+
+Ov - hidden.
+Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
+Ov.Ovx-a - auto. Scrollbar on X axis.
+Ov.Ovy-a - auto. Scrollbar on Y axis.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
+
+Styleguide: core-utils.visual.ov
 */
 
 /*
@@ -1464,6 +1525,26 @@ Styleguide: core-utils.visual.mall
 
 .Ov-a {
 	overflow: auto;
+}
+
+.Ovx-a {
+	overflow-x: auto;
+}
+
+.Ovy-a {
+	overflow-y: auto;
+}
+
+.Ol0 {
+	outline: 0px;
+}
+
+.Ol0::-moz-focus-inner {
+	border: 0;
+}
+
+.Op0 {
+	opacity: 0;
 }
 
 .mV-vh {
@@ -1548,6 +1629,7 @@ Group of utilities that manage the display of text.
 * `Tt` \- UPPERCASE.
 * `Tt-n` \- remove text transform.
 * `C-i`
+* `Whs-nw`
 * `Lh-n` \- line-height normal.
 
 Styleguide: core-utils.text
@@ -1646,6 +1728,10 @@ Styleguide: core-utils.text.mtov
 	line-height: normal;
 }
 
+.Whs-nw {
+	white-space: nowrap;
+}
+
 .Dir-r {
 	direction: rtl;
 }
@@ -1692,9 +1778,14 @@ Border
 
 * `Bdcl-c` \- remove the separation between table cells.
 * `Bdrs50p` \- makes the shape visually round.
+* `Bd0` \- remove border.
 
 Styleguide: core-utils.bd
 */
+
+.Bd0 {
+	border: 0px;
+}
 
 .Bdcl-c {
 	border-collapse: collapse;
@@ -2499,6 +2590,14 @@ Styleguide: core-utils.bd
 
 	.Pb1gg {
 		padding-bottom: 1rem;
+	}
+
+	.Pl1gg {
+		padding-left: 1rem;
+	}
+
+	.Pl2gg {
+		padding-left: 2rem;
 	}
 
 	.Px1gg {
