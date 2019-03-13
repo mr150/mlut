@@ -282,6 +282,18 @@ Styleguide: concepts.layout
 */
 
 /*
+Space unit
+
+Abbreviated '`su`'. Units of measure for any dimensions. Widths, indents, line height, etc. By default, 1su is 4px. All sizes and indents in MLUT are multiple 1su.
+
+You can set value of `su` in [settings](section-sass-tools.html#kssref-sass-tools-settings-general).
+
+Weight: 7
+
+Styleguide: concepts.su
+*/
+
+/*
 Modular grid
 
 Space on the page divided into a certain number of columns with gutters.
@@ -1255,9 +1267,6 @@ Vertical margins in grid-gutters are converted to `rems`. This affects accessibi
 * `Mr0`
 * `Mt0`
 * `Mt1gg..Mt4gg`
-* `Mb0`
-* `Mb1gg..Mb4gg`
-* `Mb-2gg`
 
 Styleguide: core-utils.margin
 */
@@ -1265,7 +1274,7 @@ Styleguide: core-utils.margin
 /*
 Ml
 
-Margin left. You can set left margin in the grid-columns(gc), grid-gutters(gg) or in the grid-spans(gs). So you can set the offset for layout elements.
+Margin left. You can set left margin in the [grid units](section-concepts.html#kssref-concepts-grid)(gc, gg, gs) or [space units](section-concepts.html#kssref-concepts-su)(su). So you can set the offset for layout elements.
 
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
@@ -1273,10 +1282,26 @@ Margin left. You can set left margin in the grid-columns(gc), grid-gutters(gg) o
 * `Ml1gg` \- Partial *responsive* on `lg` and `xl`. It is needed to return the default column gutter.
 * `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
 * `Ml1gs..Ml10gs`
+* `Ml2su`
+* `Ml-2su`
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
 Styleguide: core-utils.margin.ml
+*/
+
+/*
+Mb
+
+Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units](section-concepts.html#kssref-concepts-su)(su).
+
+* `Mb0` \- *Responsive*
+* `Mb1gg..Mb4gg`
+* `Mb1su..Mb3su`
+* `Mb6su`
+* `Mb-2gg`
+
+Styleguide: core-utils.margin.mb
 */
 
 /*
@@ -1359,6 +1384,22 @@ Styleguide: core-utils.margin.mx
 	margin-bottom: 0.75rem;
 }
 
+.Mb1su {
+	margin-bottom: 0.25rem;
+}
+
+.Mb2su {
+	margin-bottom: 0.5rem;
+}
+
+.Mb3su {
+	margin-bottom: 0.75rem;
+}
+
+.Mb6su {
+	margin-bottom: 1.5rem;
+}
+
 .Mb-2gg {
 	margin-bottom: -24px;
 }
@@ -1377,6 +1418,14 @@ Styleguide: core-utils.margin.mx
 
 .Ml1gg {
 	margin-left: 12px;
+}
+
+.Ml-2su {
+	margin-left: -8px;
+}
+
+.Ml2su {
+	margin-left: 8px;
 }
 
 .Mx1gg {
@@ -1885,6 +1934,10 @@ Styleguide: core-utils.bd
 		margin-left: auto;
 	}
 
+	.Mb0_sm {
+		margin-bottom: 0px;
+	}
+
 	.Mx-a_sm {
 		margin-left: auto;
 		margin-right: auto;
@@ -2127,6 +2180,10 @@ Styleguide: core-utils.bd
 
 	.Ml-a_md {
 		margin-left: auto;
+	}
+
+	.Mb0_md {
+		margin-bottom: 0px;
 	}
 
 	.Mx-a_md {
@@ -2569,6 +2626,10 @@ Styleguide: core-utils.bd
 		margin-left: auto;
 	}
 
+	.Mb0_lg {
+		margin-bottom: 0px;
+	}
+
 	.Mx-a_lg {
 		margin-left: auto;
 		margin-right: auto;
@@ -2840,6 +2901,10 @@ Styleguide: core-utils.bd
 
 	.Ml-a_xl {
 		margin-left: auto;
+	}
+
+	.Mb0_xl {
+		margin-bottom: 0px;
 	}
 
 	.Mx-a_xl {
