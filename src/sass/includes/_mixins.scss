@@ -327,17 +327,17 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 		$tmp-val: if($calc, calc(#{$prev-value * $coef}), $prev-value * $coef);
 
 		@if $direct == "x" {
-			#{$type}-right: ($mlu-grid-gutter-fallback * $coef);
-			#{$type}-left: ($mlu-grid-gutter-fallback * $coef);
+			#{$type}-right: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+			#{$type}-left: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
 			#{$type}-right: $tmp-val;
 			#{$type}-left: $tmp-val;
 		} @else if $direct == "y" {
-			#{$type}-top: ($mlu-grid-gutter-fallback * $coef);
-			#{$type}-bottom: ($mlu-grid-gutter-fallback * $coef);
+			#{$type}-top: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+			#{$type}-bottom: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
 			#{$type}-top: $tmp-val;
 			#{$type}-bottom: $tmp-val;
 		} @else if $direct == "xy" {
-			#{$type}: ($mlu-grid-gutter-fallback * $coef);
+			#{$type}: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
 			#{$type}: $tmp-val;
 		} @else if index($mlu-main-directions, $direct) {
 			#{$type}-#{$direct}: $tmp-val;

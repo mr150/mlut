@@ -10,6 +10,7 @@ A group of utilities for managing flex-containers and flex-elements. Modified fl
 * `Fxw-w`
 * `As-s` \- stretches the flex-element to full height.
 * `Jc` \- all values except `flex-start`.
+* `Ord-1..Ord2` \- sequence number for flex-element.
 
 Styleguide: core-utils.flex
 */
@@ -176,6 +177,12 @@ Styleguide: core-utils.flex.mai
 
 	> * {
 		vertical-align: baseline;
+	}
+}
+
+@for $i from -1 to ($mlu-Ord-range - 1) {
+	.Ord#{$i} {
+		order: $i;
 	}
 }
 

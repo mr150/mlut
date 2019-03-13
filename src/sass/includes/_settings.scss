@@ -250,6 +250,19 @@ Weight: 7
 Styleguide: concepts.layout
 */
 
+
+/*
+Space unit
+
+Abbreviated '`su`'. Units of measure for any dimensions. Widths, indents, line height, etc. By default, 1su is 4px. All sizes and indents in MLUT are multiple 1su.
+
+You can set value of `su` in [settings](section-sass-tools.html#kssref-sass-tools-settings-general).
+
+Weight: 7
+
+Styleguide: concepts.su
+*/
+
 /*
 Modular grid
 
@@ -299,6 +312,8 @@ If the property does not have a special value 'i' then 'i' value means `inherit`
 Some utilities responsive by design or have only responsive values. It will be indicated in the description like this: *Responsive*.
 
 For some utilities, there is a description for non-developers.
+
+In the examples of the work of some utilities for demonstration, other utilities may be used like this: '`Util1.Util2`'. <br> In the markup, instead of a dot, you need to use a space to separate utilities, like this: "`Util1 Util2`"
 
 Weight: 3
 
@@ -366,6 +381,8 @@ $MLU-FLAG-COL-OFFSET: true !default;
 // Settings that affect the work of the mixins, functions and all toolkit.
 //
 // $MLU-BROWSER-FONT-SIZE = 16px - font size for converting [px to rem](section-sass-tools.html#kssref-sass-tools-functions-px2rem). 16px used because is default font size in settings of most browsers.
+// $mlu-su-cf = 4 - value of [space unit](section-concepts.html#kssref-concepts-su). Use this factor to change su and for calculations.
+// $mlu-su = 4px - space unit in px. Depends on `$mlu-su-cf`. Use this variable to set the values in px.
 // $mlu-base-font-size = $MLU-BROWSER-FONT-SIZE - base font size on website. Is used for `rems` fallback in [row elements](section-core-blocks.html#kssref-core-blocks-row) and in [mlu-px2em](section-sass-tools.html#kssref-sass-tools-functions-px2em) default font size.
 // $mlu-grid-default-cols = 12 - default columns count on large width screen (>960px).
 // $mlu-main-directions = ("top", "right", "bottom", "left") - List with directions for css properties generation. It used in [mlu-generate-gutter](section-sass-tools.html#kssref-sass-tools-mixins-generate_gutter) mixin.
@@ -374,6 +391,10 @@ $MLU-FLAG-COL-OFFSET: true !default;
 // Styleguide: sass-tools.settings.general
 
 $MLU-BROWSER-FONT-SIZE: 16px !default;
+
+$mlu-su-cf: 4 !default;
+
+$mlu-su: $mlu-su-cf * 1px;
 
 $mlu-base-font-size: $MLU-BROWSER-FONT-SIZE !default;
 
@@ -440,6 +461,7 @@ $mlu-debug-gutter-color: #336 !default;
 // $mlu-My-range = 4 - count of [Mt](section-core-utils.html#kssref-core-utils-margin) and [Mb](section-core-utils.html#kssref-core-utils-margin) utilities.
 // $mlu-Z-range = 4 - [z-index](section-core-utils.html#kssref-core-utils-pos-z) range. Counted from zero.
 // $mlu-Z-max = 9999 - `z-index` max value.
+// $mlu-Ord-range = 4 - [order](section-core-utils.html#kssref-core-utils-flex) range. Counted from -1.
 //
 // Styleguide: sass-tools.settings.utils
 
@@ -449,6 +471,8 @@ $mlu-My-range: 4 !default;
 
 $mlu-Z-max: 9999 !default;
 $mlu-Z-range: 4 !default;
+
+$mlu-Ord-range: 4 !default;
 
 // Grid
 //
@@ -503,9 +527,9 @@ $mlu-grid-cols: (
 //
 // Styleguide: sass-tools.settings.grid.gutters
 
-$mlu-gtr-sm: 12px !default;
+$mlu-gtr-sm: ($mlu-su * 3) !default;
 $mlu-gtr-md: $mlu-gtr-sm !default;
-$mlu-gtr-lg: 16px !default;
+$mlu-gtr-lg: ($mlu-su * 4) !default;
 $mlu-gtr-xl: $mlu-gtr-lg !default;
 
 $mlu-grid-gutters: (

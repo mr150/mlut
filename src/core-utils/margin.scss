@@ -10,9 +10,6 @@ Vertical margins in grid-gutters are converted to `rems`. This affects accessibi
 * `Mr0`
 * `Mt0`
 * `Mt1gg..Mt4gg`
-* `Mb0`
-* `Mb1gg..Mb4gg`
-* `Mb-2gg`
 
 Styleguide: core-utils.margin
 */
@@ -20,7 +17,7 @@ Styleguide: core-utils.margin
 /*
 Ml
 
-Margin left. You can set left margin in the grid-columns(gc), grid-gutters(gg) or in the grid-spans(gs). So you can set the offset for layout elements.
+Margin left. You can set left margin in the [grid units](section-concepts.html#kssref-concepts-grid)(gc, gg, gs) or [space units](section-concepts.html#kssref-concepts-su)(su). So you can set the offset for layout elements.
 
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
@@ -28,10 +25,26 @@ Margin left. You can set left margin in the grid-columns(gc), grid-gutters(gg) o
 * `Ml1gg` \- Partial *responsive* on `lg` and `xl`. It is needed to return the default column gutter.
 * `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
 * `Ml1gs..Ml10gs`
+* `Ml2su`
+* `Ml-2su`
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
 Styleguide: core-utils.margin.ml
+*/
+
+/*
+Mb
+
+Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units](section-concepts.html#kssref-concepts-su)(su).
+
+* `Mb0` \- *Responsive*
+* `Mb1gg..Mb4gg`
+* `Mb1su..Mb3su`
+* `Mb6su`
+* `Mb-2gg`
+
+Styleguide: core-utils.margin.mb
 */
 
 /*
@@ -50,6 +63,7 @@ Styleguide: core-utils.margin.mx
 */
 
 $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
+$mlu-su-rem: mlu-px2rem($mlu-su);
 
 .M0 {
 	margin: 0px;
@@ -69,7 +83,9 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 }
 
 @each $value in $mlu-main-directions {
-	.M#{str-slice($value, 1, 1)}0 {
+	$letter: str-slice($value, 1, 1);
+
+	.M#{$letter}0 {
 		margin-#{$value}: 0;
 	}
 }
@@ -82,6 +98,22 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 	.Mb#{$i}gg {
 		@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: $i, $direct: "bottom");
 	}
+}
+
+.Mb1su {
+	margin-bottom: $mlu-su-rem;
+}
+
+.Mb2su {
+	margin-bottom: $mlu-su-rem * 2;
+}
+
+.Mb3su {
+	margin-bottom: $mlu-su-rem * 3;
+}
+
+.Mb6su {
+	margin-bottom: $mlu-su-rem * 6;
 }
 
 .Mb-2gg {
@@ -104,6 +136,14 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 	@include mlu-generate-gutter($direct: "left");
 }
 
+.Ml-2su {
+	margin-left: $mlu-su * -2;
+}
+
+.Ml2su {
+	margin-left: $mlu-su * 2;
+}
+
 .Mx1gg {
 	@include mlu-generate-gutter();
 }
@@ -116,6 +156,10 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 	@include mlu-bpm($key) {
 		.Ml-a_#{$key} {
 			margin-left: auto;
+		}
+
+		.Mb0_#{$key} {
+			margin-bottom: 0px;
 		}
 
 		.Mx-a_#{$key} {

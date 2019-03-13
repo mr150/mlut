@@ -47,12 +47,7 @@ Styleguide: core-utils.f.mfz
 
 .mFz0 {
 	overflow: hidden;
-	color: transparent;
 	text-indent: 120%;
 	white-space: nowrap;
 	font-size: 0px;
-
-	&::selection {
-		color: transparent;
-	}
 }

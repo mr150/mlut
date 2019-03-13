@@ -51,10 +51,6 @@ Styleguide: core-utils.bxz.w
 	}
 
 	@include mlu-bpm($key) {
-		.W-a_#{$key} {
-			width: auto;
-		}
-
 		// Pass through the map of gutters to check for
 		// gutter differences at the current breakpoint and on breakpoint
 		// on which we want to generate
@@ -108,6 +104,10 @@ Styleguide: core-utils.bxz.w
 					}
 				}
 			}
+		}
+
+		.W-a_#{$key} {
+			width: auto;
 		}
 
 		@if $MLU-FLAG-COL-OFFSET and mlu-breakpoint($key) > mlu-breakpoint($mlu-bp-md) {

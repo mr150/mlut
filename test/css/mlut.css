@@ -282,6 +282,18 @@ Styleguide: concepts.layout
 */
 
 /*
+Space unit
+
+Abbreviated '`su`'. Units of measure for any dimensions. Widths, indents, line height, etc. By default, 1su is 4px. All sizes and indents in MLUT are multiple 1su.
+
+You can set value of `su` in [settings](section-sass-tools.html#kssref-sass-tools-settings-general).
+
+Weight: 7
+
+Styleguide: concepts.su
+*/
+
+/*
 Modular grid
 
 Space on the page divided into a certain number of columns with gutters.
@@ -330,6 +342,8 @@ If the property does not have a special value 'i' then 'i' value means `inherit`
 Some utilities responsive by design or have only responsive values. It will be indicated in the description like this: *Responsive*.
 
 For some utilities, there is a description for non-developers.
+
+In the examples of the work of some utilities for demonstration, other utilities may be used like this: '`Util1.Util2`'. <br> In the markup, instead of a dot, you need to use a space to separate utilities, like this: "`Util1 Util2`"
 
 Weight: 3
 
@@ -608,6 +622,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	font-size: 1rem;
 	text-align: left;
 	vertical-align: top;
+	white-space: normal;
 	direction: ltr;
 }
 
@@ -765,7 +780,8 @@ Styleguide: core-blocks.input
 	display: inline-block;
 	box-sizing: border-box;
 	margin: 0px;
-	font: inherit;
+	font-family: inherit;
+	font-size: 1rem;
 	border: 0;
 }
 
@@ -793,6 +809,7 @@ Z
 `z-index`.
 
 0..3 - `z-index` available range. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+-1 - move DOM node under parent node.
 max - max value. By default: `9999`.
 
 Styleguide: core-utils.pos.z
@@ -850,6 +867,10 @@ Styleguide: core-utils.pos.xy
 	-webkit-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
+}
+
+.Z-1 {
+	z-index: -1;
 }
 
 .Z0 {
@@ -957,6 +978,7 @@ A group of utilities for managing flex-containers and flex-elements. Modified fl
 * `Fxw-w`
 * `As-s` \- stretches the flex-element to full height.
 * `Jc` \- all values except `flex-start`.
+* `Ord-1..Ord2` \- sequence number for flex-element.
 
 Styleguide: core-utils.flex
 */
@@ -1126,6 +1148,22 @@ Styleguide: core-utils.flex.mai
 	vertical-align: baseline;
 }
 
+.Ord-1 {
+	order: -1;
+}
+
+.Ord0 {
+	order: 0;
+}
+
+.Ord1 {
+	order: 1;
+}
+
+.Ord2 {
+	order: 2;
+}
+
 /*
 W
 
@@ -1179,6 +1217,7 @@ Utilities for DOM nodes size management.
 * `Maw100p`
 * `Maw-n`
 * `H100p`
+* `H0`
 * `Bxz`
 
 Styleguide: core-utils.bxz
@@ -1192,12 +1231,24 @@ Styleguide: core-utils.bxz
 	max-width: 100%;
 }
 
+.Maw50p {
+	max-width: 50%;
+}
+
 .Maw-n {
 	max-width: none;
 }
 
 .H100p {
 	height: 100%;
+}
+
+.H100vh {
+	height: 100vh;
+}
+
+.H0 {
+	height: 0px;
 }
 
 .Bxz {
@@ -1216,9 +1267,6 @@ Vertical margins in grid-gutters are converted to `rems`. This affects accessibi
 * `Mr0`
 * `Mt0`
 * `Mt1gg..Mt4gg`
-* `Mb0`
-* `Mb1gg..Mb4gg`
-* `Mb-2gg`
 
 Styleguide: core-utils.margin
 */
@@ -1226,7 +1274,7 @@ Styleguide: core-utils.margin
 /*
 Ml
 
-Margin left. You can set left margin in the grid-columns(gc), grid-gutters(gg) or in the grid-spans(gs). So you can set the offset for layout elements.
+Margin left. You can set left margin in the [grid units](section-concepts.html#kssref-concepts-grid)(gc, gg, gs) or [space units](section-concepts.html#kssref-concepts-su)(su). So you can set the offset for layout elements.
 
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
@@ -1234,10 +1282,26 @@ Margin left. You can set left margin in the grid-columns(gc), grid-gutters(gg) o
 * `Ml1gg` \- Partial *responsive* on `lg` and `xl`. It is needed to return the default column gutter.
 * `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
 * `Ml1gs..Ml10gs`
+* `Ml2su`
+* `Ml-2su`
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
 Styleguide: core-utils.margin.ml
+*/
+
+/*
+Mb
+
+Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units](section-concepts.html#kssref-concepts-su)(su).
+
+* `Mb0` \- *Responsive*
+* `Mb1gg..Mb4gg`
+* `Mb1su..Mb3su`
+* `Mb6su`
+* `Mb-2gg`
+
+Styleguide: core-utils.margin.mb
 */
 
 /*
@@ -1320,6 +1384,22 @@ Styleguide: core-utils.margin.mx
 	margin-bottom: 0.75rem;
 }
 
+.Mb1su {
+	margin-bottom: 0.25rem;
+}
+
+.Mb2su {
+	margin-bottom: 0.5rem;
+}
+
+.Mb3su {
+	margin-bottom: 0.75rem;
+}
+
+.Mb6su {
+	margin-bottom: 1.5rem;
+}
+
 .Mb-2gg {
 	margin-bottom: -24px;
 }
@@ -1340,9 +1420,17 @@ Styleguide: core-utils.margin.mx
 	margin-left: 12px;
 }
 
+.Ml-2su {
+	margin-left: -8px;
+}
+
+.Ml2su {
+	margin-left: 8px;
+}
+
 .Mx1gg {
-	margin-right: 1.5%;
-	margin-left: 1.5%;
+	margin-right: 12px;
+	margin-left: 12px;
 	margin-right: 12px;
 	margin-left: 12px;
 }
@@ -1371,7 +1459,7 @@ Styleguide: core-utils.padding
 }
 
 .P8 {
-	padding: 0.5em 8px;
+	padding: 0.5rem 8px;
 }
 
 .Pt1gg {
@@ -1380,6 +1468,14 @@ Styleguide: core-utils.padding
 
 .Pb1gg {
 	padding-bottom: 0.75rem;
+}
+
+.Pl1gg {
+	padding-left: 0.75rem;
+}
+
+.Pl2gg {
+	padding-left: 1.5rem;
 }
 
 .Px1gg {
@@ -1398,8 +1494,8 @@ Visual formatting
 * `D-itb`
 * `Fl` \- turn on wrapping text on the right.
 * `Fl-r` \- turn on wrapping text on the left.
-* `Ov`
-* `Ov-a` \- adds a scrollbar if the content does not fit into the container.
+* `Ol0`
+* `Op0`
 
 Styleguide: core-utils.visual
 */
@@ -1412,6 +1508,21 @@ Modified clear. It is clearfix utility. Use it with a container whose child DOM 
 Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
 
 Styleguide: core-utils.visual.mcl
+*/
+
+/*
+Ov
+
+Controls content display in case of overflow
+
+Ov - hidden.
+Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
+Ov.Ovx-a - auto. Scrollbar on X axis.
+Ov.Ovy-a - auto. Scrollbar on Y axis.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
+
+Styleguide: core-utils.visual.ov
 */
 
 /*
@@ -1463,6 +1574,26 @@ Styleguide: core-utils.visual.mall
 
 .Ov-a {
 	overflow: auto;
+}
+
+.Ovx-a {
+	overflow-x: auto;
+}
+
+.Ovy-a {
+	overflow-y: auto;
+}
+
+.Ol0 {
+	outline: 0px;
+}
+
+.Ol0::-moz-focus-inner {
+	border: 0;
+}
+
+.Op0 {
+	opacity: 0;
 }
 
 .mV-vh {
@@ -1534,18 +1665,9 @@ Styleguide: core-utils.f.mfz
 
 .mFz0 {
 	overflow: hidden;
-	color: transparent;
 	text-indent: 120%;
 	white-space: nowrap;
 	font-size: 0px;
-}
-
-.mFz0::-moz-selection {
-	color: transparent;
-}
-
-.mFz0::selection {
-	color: transparent;
 }
 
 /*
@@ -1556,6 +1678,7 @@ Group of utilities that manage the display of text.
 * `Tt` \- UPPERCASE.
 * `Tt-n` \- remove text transform.
 * `C-i`
+* `Whs-nw`
 * `Lh-n` \- line-height normal.
 
 Styleguide: core-utils.text
@@ -1654,6 +1777,10 @@ Styleguide: core-utils.text.mtov
 	line-height: normal;
 }
 
+.Whs-nw {
+	white-space: nowrap;
+}
+
 .Dir-r {
 	direction: rtl;
 }
@@ -1700,9 +1827,14 @@ Border
 
 * `Bdcl-c` \- remove the separation between table cells.
 * `Bdrs50p` \- makes the shape visually round.
+* `Bd0` \- remove border.
 
 Styleguide: core-utils.bd
 */
+
+.Bd0 {
+	border: 0px;
+}
 
 .Bdcl-c {
 	border-collapse: collapse;
@@ -1758,10 +1890,6 @@ Styleguide: core-utils.bd
 		text-align: right;
 	}
 
-	.W-a_sm {
-		width: auto;
-	}
-
 	.W1gc_sm {
 		width: 22%;
 		width: calc(25% - 24px);
@@ -1798,8 +1926,16 @@ Styleguide: core-utils.bd
 		width: 100%;
 	}
 
+	.W-a_sm {
+		width: auto;
+	}
+
 	.Ml-a_sm {
 		margin-left: auto;
+	}
+
+	.Mb0_sm {
+		margin-bottom: 0px;
 	}
 
 	.Mx-a_sm {
@@ -1860,10 +1996,6 @@ Styleguide: core-utils.bd
 	.mJc-fe_md {
 		justify-content: flex-end;
 		text-align: right;
-	}
-
-	.W-a_md {
-		width: auto;
 	}
 
 	.W1gc_md {
@@ -2042,8 +2174,16 @@ Styleguide: core-utils.bd
 		width: 100%;
 	}
 
+	.W-a_md {
+		width: auto;
+	}
+
 	.Ml-a_md {
 		margin-left: auto;
+	}
+
+	.Mb0_md {
+		margin-bottom: 0px;
 	}
 
 	.Mx-a_md {
@@ -2126,10 +2266,6 @@ Styleguide: core-utils.bd
 
 	.W2gc {
 		width: calc(100% - 32px);
-	}
-
-	.W-a_lg {
-		width: auto;
 	}
 
 	.W1gc_sm {
@@ -2412,6 +2548,10 @@ Styleguide: core-utils.bd
 		width: 100%;
 	}
 
+	.W-a_lg {
+		width: auto;
+	}
+
 	.Ml1gg_lg {
 		margin-left: 16px;
 	}
@@ -2486,6 +2626,10 @@ Styleguide: core-utils.bd
 		margin-left: auto;
 	}
 
+	.Mb0_lg {
+		margin-bottom: 0px;
+	}
+
 	.Mx-a_lg {
 		margin-left: auto;
 		margin-right: auto;
@@ -2507,6 +2651,14 @@ Styleguide: core-utils.bd
 
 	.Pb1gg {
 		padding-bottom: 1rem;
+	}
+
+	.Pl1gg {
+		padding-left: 1rem;
+	}
+
+	.Pl2gg {
+		padding-left: 2rem;
 	}
 
 	.Px1gg {
@@ -2557,10 +2709,6 @@ Styleguide: core-utils.bd
 	.mJc-fe_xl {
 		justify-content: flex-end;
 		text-align: right;
-	}
-
-	.W-a_xl {
-		width: auto;
 	}
 
 	.W1gc_xl {
@@ -2739,6 +2887,10 @@ Styleguide: core-utils.bd
 		width: 100%;
 	}
 
+	.W-a_xl {
+		width: auto;
+	}
+
 	.Ml1gg_xl {
 		margin-left: 16px;
 	}
@@ -2749,6 +2901,10 @@ Styleguide: core-utils.bd
 
 	.Ml-a_xl {
 		margin-left: auto;
+	}
+
+	.Mb0_xl {
+		margin-bottom: 0px;
 	}
 
 	.Mx-a_xl {

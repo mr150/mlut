@@ -3,9 +3,14 @@ Border
 
 * `Bdcl-c` \- remove the separation between table cells.
 * `Bdrs50p` \- makes the shape visually round.
+* `Bd0` \- remove border.
 
 Styleguide: core-utils.bd
 */
+
+.Bd0 {
+	border: 0px;
+}
 
 .Bdcl-c {
 	border-collapse: collapse;

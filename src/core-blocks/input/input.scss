@@ -12,6 +12,7 @@ Styleguide: core-blocks.input
 	display: inline-block;
 	box-sizing: border-box;
 	margin: 0px;
-	font: inherit;
+	font-family: inherit;
+	font-size: mlu-px2rem($mlu-base-font-size);
 	border: 0;
 }

@@ -6,6 +6,7 @@ Utilities for DOM nodes size management.
 * `Maw100p`
 * `Maw-n`
 * `H100p`
+* `H0`
 * `Bxz`
 
 Styleguide: core-utils.bxz
@@ -19,12 +20,24 @@ Styleguide: core-utils.bxz
 	max-width: 100%;
 }
 
+.Maw50p {
+	max-width: 50%;
+}
+
 .Maw-n {
 	max-width: none;
 }
 
 .H100p {
 	height: 100%;
+}
+
+.H100vh {
+	height: 100vh;
+}
+
+.H0 {
+	height: 0px;
 }
 
 .Bxz {
