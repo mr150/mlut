@@ -298,7 +298,7 @@ Modular grid
 
 Space on the page divided into a certain number of columns with gutters.
 
-In MLUT on the `sm` breakpoint, the grid has 4 columns, on `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called *columns*. Columns are separated by indents which are called *gutters*.
+In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called *columns*. Columns are separated by indents which are called *gutters*.
 
 The gutters have different widths at different breakpoints. From `xs` to `lg` gutter is 12px. From `lg` gutter is 16px.
 
@@ -1187,26 +1187,40 @@ Markup: ../../../docs/examples/core-utils/box-sizing/w.html
 Styleguide: core-utils.bxz.w
 */
 
-.W-a {
-	width: auto;
+.W1gc {
+	width: calc(25% - 24px);
 }
 
-.W1gc {
-	width: 47%;
-	width: calc(50% - 24px);
+.W1gs {
+	width: 25%;
 }
 
 .W2gc {
-	width: 97%;
-	width: calc(100% - 24px);
+	width: calc(50% - 24px);
 }
 
-.W50p {
+.W2gs {
 	width: 50%;
 }
 
-.W100p {
+.W3gc {
+	width: calc(75% - 24px);
+}
+
+.W3gs {
+	width: 75%;
+}
+
+.W4gc {
+	width: calc(100% - 24px);
+}
+
+.W4gs {
 	width: 100%;
+}
+
+.W-a {
+	width: auto;
 }
 
 /*
@@ -1279,7 +1293,7 @@ Margin left. You can set left margin in the [grid units](section-concepts.html#k
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
-* `Ml1gg` \- Partial *responsive* on `lg` and `xl`. It is needed to return the default column gutter.
+* `Ml1gg` \- *responsive*. It is needed to return the default column gutter.
 * `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
 * `Ml1gs..Ml10gs`
 * `Ml2su`
@@ -1891,7 +1905,6 @@ Styleguide: core-utils.bd
 	}
 
 	.W1gc_sm {
-		width: 22%;
 		width: calc(25% - 24px);
 	}
 
@@ -1900,7 +1913,6 @@ Styleguide: core-utils.bd
 	}
 
 	.W2gc_sm {
-		width: 47%;
 		width: calc(50% - 24px);
 	}
 
@@ -1909,7 +1921,6 @@ Styleguide: core-utils.bd
 	}
 
 	.W3gc_sm {
-		width: 72%;
 		width: calc(75% - 24px);
 	}
 
@@ -1918,7 +1929,6 @@ Styleguide: core-utils.bd
 	}
 
 	.W4gc_sm {
-		width: 97%;
 		width: calc(100% - 24px);
 	}
 
@@ -1930,8 +1940,16 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
+	.Ml1gg_sm {
+		margin-left: 12px;
+	}
+
 	.Ml-a_sm {
 		margin-left: auto;
+	}
+
+	.Ml0_sm {
+		margin-left: 0;
 	}
 
 	.Mb0_sm {
@@ -2178,8 +2196,16 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
+	.Ml1gg_md {
+		margin-left: 12px;
+	}
+
 	.Ml-a_md {
 		margin-left: auto;
+	}
+
+	.Ml0_md {
+		margin-left: 0;
 	}
 
 	.Mb0_md {
@@ -2261,10 +2287,18 @@ Styleguide: core-utils.bd
 	}
 
 	.W1gc {
-		width: calc(50% - 32px);
+		width: calc(25% - 32px);
 	}
 
 	.W2gc {
+		width: calc(50% - 32px);
+	}
+
+	.W3gc {
+		width: calc(75% - 32px);
+	}
+
+	.W4gc {
 		width: calc(100% - 32px);
 	}
 
@@ -2552,14 +2586,6 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
-	.Ml1gg_lg {
-		margin-left: 16px;
-	}
-
-	.Ml0_lg {
-		margin-left: 0;
-	}
-
 	.Mt4gg {
 		margin-top: 4rem;
 	}
@@ -2622,8 +2648,16 @@ Styleguide: core-utils.bd
 		margin-left: calc(-16px);
 	}
 
+	.Ml1gg_lg {
+		margin-left: 16px;
+	}
+
 	.Ml-a_lg {
 		margin-left: auto;
+	}
+
+	.Ml0_lg {
+		margin-left: 0;
 	}
 
 	.Mb0_lg {
@@ -2895,12 +2929,12 @@ Styleguide: core-utils.bd
 		margin-left: 16px;
 	}
 
-	.Ml0_xl {
-		margin-left: 0;
-	}
-
 	.Ml-a_xl {
 		margin-left: auto;
+	}
+
+	.Ml0_xl {
+		margin-left: 0;
 	}
 
 	.Mb0_xl {

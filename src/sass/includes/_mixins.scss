@@ -665,13 +665,16 @@ $body-size: (100% 48%), $change: false) {
 
 	@if $bp == $mlu-bp-xs {
 		$prev-gutter: if($xs-gutter, $xs-gutter, $mlu-gtr-sm);
-		@include mlut-make-width($col-width, $custom-unit, $prev-gutter, $calc-fallback, $type);
+		@include _mlu-make-width($col-width, $custom-unit, $prev-gutter, $calc-fallback, $type);
 		$calc-fallback: false;
 
+		// Repeat generation utility with new gutter if it changed on breakpoint.
+		// It need for utilities for smaller breakpoints correct work
+		// on larger breakpoints with changed gutter
 		@each $key, $value in $grid-gutters {
 			@if $value != $prev-gutter and $custom-unit == "gc" {
 				@include mlu-bpm($key) {
-					@include mlut-make-width($col-width, $custom-unit, $value, $calc-fallback, $type);
+					@include _mlu-make-width($col-width, $custom-unit, $value, $calc-fallback, $type);
 				}
 			}
 
@@ -686,9 +689,10 @@ $body-size: (100% 48%), $change: false) {
 		$prev-gutter: $col-gutter;
 
 		@each $key, $value in $grid-gutters {
+			// Repeat generation utility with new gutter if it changed on breakpoint.
 			@if $key == $bp or ($value > $col-gutter and $value != $prev-gutter) {
 				@include mlu-bpm($key) {
-					@include mlut-make-width($col-width, $custom-unit, $value, $calc-fallback, $type);
+					@include _mlu-make-width($col-width, $custom-unit, $value, $calc-fallback, $type);
 					$calc-fallback: false;
 				}
 
@@ -697,7 +701,7 @@ $body-size: (100% 48%), $change: false) {
 		}
 	} @else {
 		@include mlu-bpm($bp) {
-			@include mlut-make-width($col-width, $custom-unit, $prop: $type);
+			@include _mlu-make-width($col-width, $custom-unit, $prop: $type);
 		}
 	}
 }
@@ -746,7 +750,7 @@ $body-size: (100% 48%), $change: false) {
 
 // Private mixin for width and grid offset generation from 'mlu-W'.
 
-@mixin mlut-make-width($width, $unit, $gutter: $mlu-gtr-sm, $calc: false, $prop: "width") {
+@mixin _mlu-make-width($width, $unit, $gutter: $mlu-gtr-sm, $calc: false, $prop: "width") {
 	$calc-val: calc(#{$width} - #{$gutter * 2});
 	$width-fallback: if($calc, mlu-decimal-floor($width, 2) - ($mlu-grid-gutter-fallback * 2), 0);
 
@@ -755,6 +759,7 @@ $body-size: (100% 48%), $change: false) {
 		$width-fallback: if($calc, mlu-decimal-floor($width, 2) + $mlu-grid-gutter-fallback, 0);
 	}
 
+	// Generation calc() fallback
 	@if $calc and $unit == "gc" {
 		#{$prop}: $width-fallback;
 	}

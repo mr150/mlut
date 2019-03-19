@@ -1,9 +1,9 @@
-> 0.08%
-last 5 versions
-not < 0.08%
-ie 8-11
+> 0.09%
+last 4 versions
+not < 0.09%
+ie 9-11
 chrome 41
 ios 7-8
 firefox esr
 android 4.1-4.4.4
-not ie < 8
+not ie < 9

@@ -22,7 +22,7 @@ Margin left. You can set left margin in the [grid units](section-concepts.html#k
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
-* `Ml1gg` \- Partial *responsive* on `lg` and `xl`. It is needed to return the default column gutter.
+* `Ml1gg` \- *responsive*. It is needed to return the default column gutter.
 * `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
 * `Ml1gs..Ml10gs`
 * `Ml2su`
@@ -154,8 +154,16 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 
 @each $key, $value in $mlu-grid-gutters {
 	@include mlu-bpm($key) {
+		.Ml1gg_#{$key} {
+			margin-left: $value;
+		}
+
 		.Ml-a_#{$key} {
 			margin-left: auto;
+		}
+
+		.Ml0_#{$key} {
+			margin-left: 0;
 		}
 
 		.Mb0_#{$key} {

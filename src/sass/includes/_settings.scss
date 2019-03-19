@@ -268,7 +268,7 @@ Modular grid
 
 Space on the page divided into a certain number of columns with gutters.
 
-In MLUT on the `sm` breakpoint, the grid has 4 columns, on `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called *columns*. Columns are separated by indents which are called *gutters*.
+In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called *columns*. Columns are separated by indents which are called *gutters*.
 
 The gutters have different widths at different breakpoints. From `xs` to `lg` gutter is 12px. From `lg` gutter is 16px.
 
@@ -480,6 +480,7 @@ $mlu-Ord-range: 4 !default;
 //
 // $mlu-breakpoints - map with main breakpoints. First breakpoint is `$mlu-bp-sm`.
 // $mlu-grid-cols - columls count on breakpoints.
+// $mlu-grid-cols-xs - columls count on '$mlu-bp-xs' (without breakpoints).
 // $mlu-grid-gutters - map with grid gutters on breakpoints.
 //
 // Styleguide: sass-tools.settings.grid
@@ -488,7 +489,7 @@ $mlu-Ord-range: 4 !default;
 //
 // Name, value and columns count on breakpoint.
 //
-// $mlu-bp-xs = 0 - `xs`, 2
+// $mlu-bp-xs = 0 - `xs`, 4
 // $mlu-bp-sm = 520px - `sm`, 4
 // $mlu-bp-md = 760px - `md`, 12
 // $mlu-bp-lg = 960px - `lg`, 12
@@ -508,6 +509,8 @@ $mlu-breakpoints: (
 	$mlu-bp-lg: 960px,
 	$mlu-bp-xl: 1168px,
 ) !default;
+
+$mlu-grid-cols-xs: 4 !default;
 
 $mlu-grid-cols: (
 	$mlu-bp-sm: 4,
