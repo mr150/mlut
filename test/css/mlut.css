@@ -1,34 +1,5 @@
 @charset "UTF-8";
 
-/*
-Normalize
-
-Simple css normalization that correcting old browsers bugs and not affecting other styles.
-
-Styleguide: core-styles.normalize
-*/
-
-main {
-	display: block;
-}
-
-img {
-	max-width: 100%;
-	height: auto;
-	border: 0;
-}
-
-legend {
-	display: table;
-	box-sizing: border-box;
-	max-width: 100%;
-	white-space: normal;
-}
-
-[hidden] {
-	display: none !important;
-}
-
 /* This comment needed for add @charset "utf-8"; in source because sass compiler erased this at-rule without it: утф8 */
 
 /*
@@ -403,6 +374,62 @@ Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sa
 
 Styleguide: sass-tools.mixins
 */
+
+/*
+CSS variables
+
+CSS custom properties which used in MLUT. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties.
+
+The values and meaning of many custom properties correspond to the [SASS settings](section-sass-tools.html#kssref-sass-tools-settings) of MLUT core. But unlike them, custom properties can be changed dynamically without recompiling.
+
+Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags).
+
+--mlu-su = 4px - [space unit](section-concepts.html#kssref-concepts-su) in `px`.
+Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-general).
+--mlu-su-rem = 0.25rem - 1su in `rem`.
+--mlu-gtr = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
+Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
+Fallback is [$mlu-grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).
+--mlu-gtr-rem = 0.75rem - grid gutter in `rem`.
+
+Styleguide: core-styles.css_vars
+*/
+
+:root {
+	--mlu-su: 4px;
+	--mlu-su-rem: 0.25rem;
+	--mlu-gtr: 12px;
+	--mlu-gtr-rem: 0.75rem;
+}
+
+/*
+Normalize
+
+Simple css normalization that correcting old browsers bugs and not affecting other styles.
+
+Styleguide: core-styles.normalize
+*/
+
+main {
+	display: block;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	border: 0;
+}
+
+legend {
+	display: table;
+	box-sizing: border-box;
+	max-width: 100%;
+	white-space: normal;
+}
+
+[hidden] {
+	display: none !important;
+}
 
 /*===CORE-BLOCKS===*/
 
@@ -2229,6 +2256,14 @@ Styleguide: core-utils.bd
 }
 
 @media (min-width: 960px) {
+	:root {
+		--mlu-gtr: 16px;
+	}
+
+	:root {
+		--mlu-gtr-rem: 1rem;
+	}
+
 	.row__col {
 		margin-right: calc(16px);
 		margin-left: calc(16px);

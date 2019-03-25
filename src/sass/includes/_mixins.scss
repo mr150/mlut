@@ -307,21 +307,30 @@ Styleguide: sass-tools.mixins
 // $gutters = $mlu-grid-gutters - map with gutters values on breakpoints.
 // Map item example: `"sm": 12px`.
 // $calc = false - bool flag for generation CSS `calc()` fallback for old browsers.
-// $coef = 1 - coefficient by which the gutter value is multiplied
+// $coef = 1 - coefficient by which the gutter value is multiplied.
+// $css-vars = $MLU-FLAG-CSS-VARS - use CSS custom properties for gutters.
 //
 // Styleguide: sass-tools.mixins.generate_gutter
 
 @mixin mlu-generate-gutter($init-gutter: $mlu-gtr-sm, $type: "margin",
-$gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
-	@if not ($type == "margin" or $type == "padding") {
-		@error "Invalid gutter type - '#{$type}'! Allowable margin or padding";
+$gutters: $mlu-grid-gutters, $calc: $MLU-FLAG-CALC-FALLBACK, $direct: "x",
+$coef: 1, $css-vars: false) {
+	//$coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
+	$custom-prop: false;
+	$prev-value: $mlu-grid-default-gtr;
+
+	@if str-slice($type, 1, 2) == "--" {
+		$direct: "xy";
+		$custom-prop: $type;
 	}
 
 	@if type-of($gutters) != "map" {
 		@error "Wrong type of argument $gutters: '#{type-of($gutters)}'. Expected 'map'";
 	}
 
-	$prev-value: if(map-has-key($gutters, $mlu-bp-xs), map-get($gutters, $mlu-bp-xs), $init-gutter);
+	@if not $css-vars {
+		$prev-value: if(map-has-key($gutters, $mlu-bp-xs), map-get($gutters, $mlu-bp-xs), $init-gutter);
+	}
 
 	@if $init-gutter and $init-gutter != -1 {
 		$tmp-val: if($calc, calc(#{$prev-value * $coef}), $prev-value * $coef);
@@ -337,7 +346,9 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 			#{$type}-top: $tmp-val;
 			#{$type}-bottom: $tmp-val;
 		} @else if $direct == "xy" {
-			#{$type}: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+			@if not $custom-prop {
+				#{$type}: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+			}
 			#{$type}: $tmp-val;
 		} @else if index($mlu-main-directions, $direct) {
 			#{$type}-#{$direct}: $tmp-val;
@@ -347,7 +358,13 @@ $gutters: $mlu-grid-gutters, $calc: false, $direct: "x", $coef: 1) {
 	}
 
 	@each $key, $value in $gutters {
-		$cur-val: if($prev-value and unit($prev-value) == "rem", mlu-px2rem($value), $value);
+		$cur-val: $value;
+
+		@if $prev-value and unit($prev-value) == "rem" {
+			$cur-val: mlu-px2rem($value);
+		} @else if $prev-value and unitless($prev-value) and $prev-value > -1 {
+			$cur-val: mlu-ston($value + "");
+		}
 
 		@if $prev-value != -1 and $cur-val != $prev-value {
 			@include mlu-bpm($key) {
@@ -648,7 +665,7 @@ $body-size: (100% 48%), $change: false) {
 		(unitless($width) or unit($width) == "gc" or unit($width) == "gs") {
 		$tmp-val: mlu-ston($width + "");
 		$col-width: mlu-decimal-floor($tmp-val / $columns * 100%, 3);
-		$custom-unit: if(unit($width) == "gs", "gs", "gc");
+		$custom-unit: if(unit($width) == "gc", "gc", "gs");
 	} @else if type-of($width) == "number" or $width == "auto" {
 		$col-width: $width;
 	} @else if type-of($width) != "number" {
@@ -835,6 +852,7 @@ $body-size: (100% 48%), $change: false) {
 	font-size: mlu-px2rem($mlu-base-font-size);
 	text-align: left;
 	vertical-align: top;
+	white-space: normal;
 	direction: ltr;
 
 	@if $type == "col" {

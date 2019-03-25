@@ -22,8 +22,10 @@ Styleguide: core-utils.bxz.w
 */
 
 @for $i from 1 through $mlu-grid-cols-xs {
-	.W#{$i}gc {
-		@include mlu-W($i * 1gc, $cols: $mlu-grid-cols-xs, $calc: $MLU-FLAG-CALC-FALLBACK);
+	@if $MLU-FLAG-COL-MARGIN {
+		.W#{$i}gc {
+			@include mlu-W($i * 1gc, $cols: $mlu-grid-cols-xs, $calc: $MLU-FLAG-CALC-FALLBACK);
+		}
 	}
 
 	.W#{$i}gs {
@@ -38,8 +40,10 @@ Styleguide: core-utils.bxz.w
 // Generate grid utilities W and Ml on breakpoints
 @each $key, $value in $mlu-grid-cols {
 	@for $i from 1 through $value {
-		.W#{$i}gc_#{$key} {
-			@include mlu-W($i * 1gc, $key, $value, $calc: $MLU-FLAG-CALC-FALLBACK);
+		@if $MLU-FLAG-COL-MARGIN {
+			.W#{$i}gc_#{$key} {
+				@include mlu-W($i * 1gc, $key, $value, $calc: $MLU-FLAG-CALC-FALLBACK);
+			}
 		}
 
 		.W#{$i}gs_#{$key} {
@@ -56,8 +60,10 @@ Styleguide: core-utils.bxz.w
 				@include mlu-Ml($i * 1gs, $key, $value);
 			}
 
-			.Ml#{$i}gc_#{$key} {
-				@include mlu-Ml($i * 1gc, $key, $value, $calc: $MLU-FLAG-CALC-FALLBACK);
+			@if $MLU-FLAG-COL-MARGIN {
+				.Ml#{$i}gc_#{$key} {
+					@include mlu-Ml($i * 1gc, $key, $value, $calc: $MLU-FLAG-CALC-FALLBACK);
+				}
 			}
 		}
 	}
