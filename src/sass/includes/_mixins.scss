@@ -335,58 +335,99 @@ $coef: 1, $css-vars: false) {
 	@if $init-gutter and $init-gutter != -1 {
 		$tmp-val: if($calc, calc(#{$prev-value * $coef}), $prev-value * $coef);
 
+		$var-value: if($coef > 1 or $coef < -1,
+		calc(var(#{$--mlu-gtr}) * #{$coef}),
+		var(#{$--mlu-gtr}));
+
+		@if $init-gutter == "rem" {
+			$var-value: if($coef > 1 or $coef < -1,
+			calc(var(#{$--mlu-gtr-rem}) * #{$coef}),
+			var(#{$--mlu-gtr-rem}));
+		}
+
 		@if $direct == "x" {
-			#{$type}-right: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
-			#{$type}-left: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
-			#{$type}-right: $tmp-val;
-			#{$type}-left: $tmp-val;
-		} @else if $direct == "y" {
-			#{$type}-top: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
-			#{$type}-bottom: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
-			#{$type}-top: $tmp-val;
-			#{$type}-bottom: $tmp-val;
-		} @else if $direct == "xy" {
-			@if not $custom-prop {
-				#{$type}: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+			@if not $css-vars or $css-vars == 1 {
+				#{$type}-right: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+				#{$type}-left: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+				#{$type}-right: $tmp-val;
+				#{$type}-left: $tmp-val;
 			}
-			#{$type}: $tmp-val;
+
+			@if $css-vars {
+				#{$type}-right: $var-value;
+				#{$type}-left: $var-value;
+			}
+		} @else if $direct == "y" {
+			@if not $css-vars or $css-vars == 1 {
+				#{$type}-top: if($calc, ($mlu-gtr-sm * $coef), $tmp-val);
+				#{$type}-bottom: if($calc, ($mlu-gtr-sm * $coef), $tmp-val);
+				#{$type}-top: $tmp-val;
+				#{$type}-bottom: $tmp-val;
+			}
+
+			@if $css-vars {
+				#{$type}-top: $var-value;
+				#{$type}-bottom: $var-value;
+			}
+		} @else if $direct == "xy" {
+			@if not $css-vars or $css-vars == 1 {
+				@if not $custom-prop {
+					$fallback-val: ($mlu-gtr-sm * $coef) ($mlu-grid-gutter-fallback * $coef);
+					#{$type}: if($calc, $fallback-val, $tmp-val);
+				}
+
+				#{$type}: $tmp-val;
+			}
+
+			@if not $custom-prop and $css-vars {
+				#{$type}: $var-value;
+			}
 		} @else if index($mlu-main-directions, $direct) {
-			#{$type}-#{$direct}: $tmp-val;
+			@if not $css-vars or $css-vars == 1 {
+				#{$type}-#{$direct}: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+				#{$type}-#{$direct}: $tmp-val;
+			}
+
+			@if $css-vars {
+				#{$type}-#{$direct}: $var-value;
+			}
 		} @else {
 			@error "Invalid gutter direction - '#{$direct}'";
 		}
 	}
 
-	@each $key, $value in $gutters {
-		$cur-val: $value;
+	@if not $css-vars {
+		@each $key, $value in $gutters {
+			$cur-val: $value;
 
-		@if $prev-value and unit($prev-value) == "rem" {
-			$cur-val: mlu-px2rem($value);
-		} @else if $prev-value and unitless($prev-value) and $prev-value > -1 {
-			$cur-val: mlu-ston($value + "");
-		}
+			@if $prev-value and unit($prev-value) == "rem" {
+				$cur-val: mlu-px2rem($value);
+			} @else if $prev-value and unitless($prev-value) and $prev-value > -1 {
+				$cur-val: mlu-ston($value + "");
+			}
 
-		@if $prev-value != -1 and $cur-val != $prev-value {
-			@include mlu-bpm($key) {
-				$tmp-val: if($calc, calc(#{$cur-val * $coef}), $cur-val * $coef);
+			@if $prev-value != -1 and $cur-val != $prev-value {
+				@include mlu-bpm($key) {
+					$tmp-val: if($calc, calc(#{$cur-val * $coef}), $cur-val * $coef);
 
-				@if $direct == "x" {
-					#{$type}-right: $tmp-val;
-					#{$type}-left: $tmp-val;
-				} @else if $direct == "y" {
-					#{$type}-top: $tmp-val;
-					#{$type}-bottom: $tmp-val;
-				} @else if $direct == "xy" {
-					#{$type}: $tmp-val;
-				} @else if index($mlu-main-directions, $direct) {
-					#{$type}-#{$direct}: $tmp-val;
-				} @else {
-					@error "Invalid gutter direction - '#{$direct}'";
+					@if $direct == "x" {
+						#{$type}-right: $tmp-val;
+						#{$type}-left: $tmp-val;
+					} @else if $direct == "y" {
+						#{$type}-top: $tmp-val;
+						#{$type}-bottom: $tmp-val;
+					} @else if $direct == "xy" {
+						#{$type}: $tmp-val;
+					} @else if index($mlu-main-directions, $direct) {
+						#{$type}-#{$direct}: $tmp-val;
+					} @else {
+						@error "Invalid gutter direction - '#{$direct}'";
+					}
 				}
 			}
-		}
 
-		$prev-value: $cur-val;
+			$prev-value: $cur-val;
+		}
 	}
 }
 
@@ -647,7 +688,7 @@ $body-size: (100% 48%), $change: false) {
 //
 // Styleguide: sass-tools.mixins.w
 
-@mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $calc: false, $type: "width") {
+@mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: false, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "width") {
 	$col-width: 0;
 	$columns: $cols;
 	$grid-gutters: $gutters;
@@ -682,22 +723,28 @@ $body-size: (100% 48%), $change: false) {
 
 	@if $bp == $mlu-bp-xs {
 		$prev-gutter: if($xs-gutter, $xs-gutter, $mlu-gtr-sm);
-		@include _mlu-make-width($col-width, $custom-unit, $prev-gutter, $calc-fallback, $type);
+		@if $css-vars {
+			$prev-gutter: $mlu-grid-default-gtr;
+		}
+
+		@include _mlu-make-width($col-width, $custom-unit, $prev-gutter, $calc-fallback, $type, $css-vars);
 		$calc-fallback: false;
 
 		// Repeat generation utility with new gutter if it changed on breakpoint.
 		// It need for utilities for smaller breakpoints correct work
 		// on larger breakpoints with changed gutter
-		@each $key, $value in $grid-gutters {
-			@if $value != $prev-gutter and $custom-unit == "gc" {
-				@include mlu-bpm($key) {
-					@include _mlu-make-width($col-width, $custom-unit, $value, $calc-fallback, $type);
+		@if not $css-vars {
+			@each $key, $value in $grid-gutters {
+				@if $value != $prev-gutter and $custom-unit == "gc" {
+					@include mlu-bpm($key) {
+						@include _mlu-make-width($col-width, $custom-unit, $value, $calc-fallback, $type);
+					}
 				}
-			}
 
-			$prev-gutter: $value;
+				$prev-gutter: $value;
+			}
 		}
-	} @else if $custom-unit == "gc" {
+	} @else if $custom-unit == "gc" and not $css-vars {
 		@if not map-has-key($grid-gutters, $bp) {
 			$grid-gutters: map-merge($grid-gutters, ($bp: nth(nth($grid-gutters, length($grid-gutters)), 2)));
 		}
@@ -718,7 +765,7 @@ $body-size: (100% 48%), $change: false) {
 		}
 	} @else {
 		@include mlu-bpm($bp) {
-			@include _mlu-make-width($col-width, $custom-unit, $prop: $type);
+			@include _mlu-make-width($col-width, $custom-unit, $mlu-grid-default-gtr, $calc, $type, $css-vars);
 		}
 	}
 }
@@ -761,18 +808,21 @@ $body-size: (100% 48%), $change: false) {
 //
 // Styleguide: sass-tools.mixins.ml
 
-@mixin mlu-Ml($offset, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $calc: false) {
-	@include mlu-W($offset, $bp, $cols, $gutters, $calc, "margin-left");
+@mixin mlu-Ml($offset, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: false, $calc: $MLU-FLAG-CALC-FALLBACK) {
+	@include mlu-W($offset, $bp, $cols, $gutters, $css-vars, $calc, "margin-left");
 }
 
 // Private mixin for width and grid offset generation from 'mlu-W'.
 
-@mixin _mlu-make-width($width, $unit, $gutter: $mlu-gtr-sm, $calc: false, $prop: "width") {
+@mixin _mlu-make-width($width, $unit, $gutter: $mlu-gtr-sm,
+$calc: false, $prop: "width", $css-vars: false) {
 	$calc-val: calc(#{$width} - #{$gutter * 2});
+	$var-val: calc(#{$width} - var(#{$--mlu-gtr}) * 2);
 	$width-fallback: if($calc, mlu-decimal-floor($width, 2) - ($mlu-grid-gutter-fallback * 2), 0);
 
 	@if $prop == "margin-left" {
 		$calc-val: calc(#{$width} + #{$gutter});
+		$var-val: calc(#{$width} + var(#{$--mlu-gtr}));
 		$width-fallback: if($calc, mlu-decimal-floor($width, 2) + $mlu-grid-gutter-fallback, 0);
 	}
 
@@ -782,7 +832,13 @@ $body-size: (100% 48%), $change: false) {
 	}
 
 	@if $unit == "gc" {
-		#{$prop}: $calc-val;
+		@if not $css-vars or $css-vars == 1 {
+			#{$prop}: $calc-val;
+		}
+
+		@if $css-vars {
+			#{$prop}: $var-val;
+		}
 	} @else {
 		#{$prop}: $width;
 	}
@@ -830,9 +886,9 @@ $body-size: (100% 48%), $change: false) {
 //
 // Styleguide: sass-tools.mixins.row_col
 
-@mixin mlu-row-col($display: inline-block, $gutters: $mlu-grid-gutters, $calc: false, $type: "col") {
+@mixin mlu-row-col($display: inline-block, $gutters: $mlu-grid-gutters, $css-vars: false, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	$grid-gutters: $gutters;
-	$xs-gutter: $mlu-gtr-sm;
+	$xs-gutter: if($css-vars, $mlu-grid-default-gtr, $mlu-gtr-sm);
 
 	@if type-of($gutters) == "number" {
 		$grid-gutters: ($mlu-bp-xs: $gutters);
@@ -857,15 +913,22 @@ $body-size: (100% 48%), $change: false) {
 
 	@if $type == "col" {
 		@if $calc {
-			width: 100% - ($mlu-grid-gutter-fallback * 2);
 			margin: 0 $mlu-grid-gutter-fallback $xs-gutter * 2;
 		}
 
-		width: calc(100% - #{$xs-gutter * 2});
+		@include mlu-W(12gc, $css-vars: $css-vars, $calc: 1);
 		$tmp-gtr: if($calc, calc(#{$xs-gutter}), $xs-gutter);
-		margin: 0 $tmp-gtr $xs-gutter * 2;
-		@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $calc: $calc);
-		@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $direct: "bottom", $coef: 2);
+
+		@if not $css-vars {
+			margin: 0 $tmp-gtr $xs-gutter * 2;
+			@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $calc: $calc);
+			@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $direct: "bottom", $coef: 2);
+		} @else if $css-vars == 1 {
+			margin: 0 $tmp-gtr $xs-gutter * 2;
+			margin: 0 var(#{$--mlu-gtr}) calc(var(#{$--mlu-gtr}) * 2);
+		} @else {
+			margin: 0 var(#{$--mlu-gtr}) calc(var(#{$--mlu-gtr}) * 2);
+		}
 
 		&.row {
 			margin-bottom: 0px;

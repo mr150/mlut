@@ -384,9 +384,6 @@ The values and meaning of many custom properties correspond to the [SASS setting
 
 Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags).
 
---mlu-su = 4px - [space unit](section-concepts.html#kssref-concepts-su) in `px`.
-Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-general).
---mlu-su-rem = 0.25rem - 1su in `rem`.
 --mlu-gtr = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
 Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
 Fallback is [$mlu-grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).
@@ -396,8 +393,6 @@ Styleguide: core-styles.css_vars
 */
 
 :root {
-	--mlu-su: 4px;
-	--mlu-su-rem: 0.25rem;
 	--mlu-gtr: 12px;
 	--mlu-gtr-rem: 0.75rem;
 }
@@ -671,8 +666,12 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 .row__col {
 	width: 97%;
 	width: calc(100% - 24px);
-	margin: 0 1.5% 24px;
-	margin: 0 calc(12px) 24px;
+	margin-right: 1.5%;
+	margin-left: 1.5%;
+	margin-right: calc(12px);
+	margin-left: calc(12px);
+	margin-bottom: 24px;
+	margin-bottom: 24px;
 }
 
 .row__col.row {
@@ -1395,33 +1394,41 @@ Styleguide: core-utils.margin.mx
 
 .Mt4gg {
 	margin-top: 3rem;
+	margin-top: 3rem;
 }
 
 .Mb4gg {
+	margin-bottom: 3rem;
 	margin-bottom: 3rem;
 }
 
 .Mt3gg {
 	margin-top: 2.25rem;
+	margin-top: 2.25rem;
 }
 
 .Mb3gg {
+	margin-bottom: 2.25rem;
 	margin-bottom: 2.25rem;
 }
 
 .Mt2gg {
 	margin-top: 1.5rem;
+	margin-top: 1.5rem;
 }
 
 .Mb2gg {
+	margin-bottom: 1.5rem;
 	margin-bottom: 1.5rem;
 }
 
 .Mt1gg {
 	margin-top: 0.75rem;
+	margin-top: 0.75rem;
 }
 
 .Mb1gg {
+	margin-bottom: 0.75rem;
 	margin-bottom: 0.75rem;
 }
 
@@ -1443,21 +1450,26 @@ Styleguide: core-utils.margin.mx
 
 .Mb-2gg {
 	margin-bottom: -24px;
+	margin-bottom: -24px;
 }
 
 .Ml-2gg {
+	margin-left: -24px;
 	margin-left: -24px;
 }
 
 .Ml2gg {
 	margin-left: 24px;
+	margin-left: 24px;
 }
 
 .Ml-1gg {
 	margin-left: -12px;
+	margin-left: -12px;
 }
 
 .Ml1gg {
+	margin-left: 12px;
 	margin-left: 12px;
 }
 
@@ -1505,17 +1517,21 @@ Styleguide: core-utils.padding
 
 .Pt1gg {
 	padding-top: 0.75rem;
+	padding-top: 0.75rem;
 }
 
 .Pb1gg {
+	padding-bottom: 0.75rem;
 	padding-bottom: 0.75rem;
 }
 
 .Pl1gg {
 	padding-left: 0.75rem;
+	padding-left: 0.75rem;
 }
 
 .Pl2gg {
+	padding-left: 1.5rem;
 	padding-left: 1.5rem;
 }
 
@@ -2262,6 +2278,10 @@ Styleguide: core-utils.bd
 
 	:root {
 		--mlu-gtr-rem: 1rem;
+	}
+
+	.row__col {
+		width: calc(100% - 32px);
 	}
 
 	.row__col {
