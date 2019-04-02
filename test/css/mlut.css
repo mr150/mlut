@@ -220,12 +220,12 @@ Utility
 An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
 
 Utility class names are formed according to the scheme:
-1. optional pseudo-class or pseudo-element: `h` - hover, `af` - after etc. Separated from the utility name by underscore '_'.
+1. optional pseudo-class, pseudo-element or state: `h` - hover, `af` - after, 'nojs' - javascript disabled etc. Allowed several states in the same class. <br> States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'.
 1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations.
-1. optional value. Valid are number, [abbreviations](https://docs.emmet.io/cheat-sheet/) and keywords. Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). Abbreviation and keywords are separated by a hyphen '-' from utility name.
+1. optional value. Valid are number, [abbreviations](https://docs.emmet.io/cheat-sheet/) and variables. Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). <br> Abbreviation and variables are separated by a hyphen '-' from utility name. Variables can contain only lowercase letters and numbers, and must also end in a number: `bd0`, `gr2` etc.
 1. optional breakpoint name: `sm`, `lg`, etc. Separated from the utility value by underscore '_'.
 
-Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-main`.
+Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-bd0`.
 
 There are some special abbreviations for color utilities:
 * `t` - `transparent`
@@ -467,13 +467,14 @@ row__col
 
 The main element for creating columns in layout. By default, it stretches the entire width of the container. The columns have gutters on the sides and bottom.
 
-The gutters are implemented using the `margin` property. For this reason, the percentage width must be specified using the CSS `calc()`. <br>
-If `calc()` is not supported by the browser, then margin is provided in percent as fallback:
+The gutters are implemented using the `margin` and [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars). For this reason, the percentage width must be specified using the CSS `calc()`. <br>
+If `calc()` or `var()` is not supported by the browser, then fallbacks are provided:
 ```scss
-margin: 0 1.5% 24px;
-margin: 0 calc(12px) 24px;
+margin: 0 1.5% 24px; //calc() fallback
+margin: 0 calc(16px) 2rem; //var() fallback
+margin: 0 var(--mlu-gtr) calc(var(--mlu-gtr-rem) * 2);
 ```
-so that the layout does not collapse. Similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields.
+similar fallbacks used in the [wrapper](#kssref-core-blocks-wrapper) for fields.
 
 The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-gutter-fallback.`
 
@@ -665,13 +666,11 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 
 .row__col {
 	width: 97%;
-	width: calc(100% - 24px);
-	margin-right: 1.5%;
-	margin-left: 1.5%;
-	margin-right: calc(12px);
-	margin-left: calc(12px);
-	margin-bottom: 24px;
-	margin-bottom: 24px;
+	width: calc(100% - 32px);
+	width: calc(100% - var(--mlu-gtr) * 2);
+	margin: 0 1.5% 32px;
+	margin: 0 calc(16px) 2rem;
+	margin: 0 var(--mlu-gtr) calc(var(--mlu-gtr-rem) * 2);
 }
 
 .row__col.row {
@@ -685,12 +684,14 @@ The block-container for the main content of the page. The maximum width is set i
 
 The container has sides `padding` that equal to gutters so that the content does not stick to sides on small screens. On wide screens the container is centered.
 
-Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `calc()` fallback for fields:
+Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `calc()` and `var()` fallbacks for fields:
 ```scss
 padding-right: 1.5%;
 padding-left: 1.5%;
-padding-right: calc(12px);
-padding-left: calc(12px);
+padding-right: calc(16px);
+padding-left: calc(16px);
+padding-right: var(--mlu-gtr);
+padding-left: var(--mlu-gtr);
 ```
 
 Markup: ../../../docs/examples/core-blocks/wrapper/wrapper.html
@@ -704,8 +705,10 @@ Styleguide: core-blocks.wrapper
 	margin: 0 auto;
 	padding-right: 1.5%;
 	padding-left: 1.5%;
-	padding-right: calc(12px);
-	padding-left: calc(12px);
+	padding-right: calc(16px);
+	padding-left: calc(16px);
+	padding-right: var(--mlu-gtr);
+	padding-left: var(--mlu-gtr);
 }
 
 /*
@@ -814,6 +817,137 @@ Styleguide: core-blocks.input
 /*===DESIGN-BLOCKS===*/
 
 /*===CORE-UTILS===*/
+
+/*
+Visual formatting
+
+* `D-tb`
+* `D-tbc`
+* `D-tbr`
+* `D-itb`
+* `Fl` \- turn on wrapping text on the right.
+* `Fl-r` \- turn on wrapping text on the left.
+* `Ol0`
+* `Op0`
+
+Styleguide: core-utils.visual
+*/
+
+/*
+mCl
+
+Modified clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
+
+Styleguide: core-utils.visual.mcl
+*/
+
+/*
+Ov
+
+Controls content display in case of overflow
+
+Ov - hidden.
+Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
+Ov.Ovx-a - auto. Scrollbar on X axis.
+Ov.Ovy-a - auto. Scrollbar on Y axis.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
+
+Styleguide: core-utils.visual.ov
+*/
+
+/*
+mV
+
+Modified visibility.
+
+mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
+
+Styleguide: core-utils.visual.mv
+*/
+
+/*
+mAll
+
+Modified `all`.
+
+* `sr` \- soft reset, reset some default browser styles:
+	* `margin`
+	* `padding`
+	* `border`
+	* `font`
+	* `list-style`
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mall.html
+
+Styleguide: core-utils.visual.mall
+*/
+
+.Fl {
+	float: left;
+}
+
+.Fl-r {
+	float: right;
+}
+
+.mCl:after {
+	display: table;
+	clear: both;
+	content: "";
+}
+
+.Ov {
+	overflow: hidden;
+}
+
+.Ov-a {
+	overflow: auto;
+}
+
+.Ovx-a {
+	overflow-x: auto;
+}
+
+.Ovy-a {
+	overflow-y: auto;
+}
+
+.Ol0 {
+	outline: 0px;
+}
+
+.Ol0::-moz-focus-inner {
+	border: 0;
+}
+
+.Op0 {
+	opacity: 0;
+}
+
+.mV-vh {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0px;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 0px;
+	clip: rect(0 0 0 0);
+}
+
+.mAll-sr {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+	list-style: none;
+	border: 0;
+}
 
 /*
 Position
@@ -1214,7 +1348,8 @@ Styleguide: core-utils.bxz.w
 */
 
 .W1gc {
-	width: calc(25% - 24px);
+	width: calc(25% - 32px);
+	width: calc(25% - var(--mlu-gtr) * 2);
 }
 
 .W1gs {
@@ -1222,7 +1357,8 @@ Styleguide: core-utils.bxz.w
 }
 
 .W2gc {
-	width: calc(50% - 24px);
+	width: calc(50% - 32px);
+	width: calc(50% - var(--mlu-gtr) * 2);
 }
 
 .W2gs {
@@ -1230,7 +1366,8 @@ Styleguide: core-utils.bxz.w
 }
 
 .W3gc {
-	width: calc(75% - 24px);
+	width: calc(75% - 32px);
+	width: calc(75% - var(--mlu-gtr) * 2);
 }
 
 .W3gs {
@@ -1238,7 +1375,8 @@ Styleguide: core-utils.bxz.w
 }
 
 .W4gc {
-	width: calc(100% - 24px);
+	width: calc(100% - 32px);
+	width: calc(100% - var(--mlu-gtr) * 2);
 }
 
 .W4gs {
@@ -1393,43 +1531,51 @@ Styleguide: core-utils.margin.mx
 }
 
 .Mt4gg {
-	margin-top: 3rem;
-	margin-top: 3rem;
+	margin-top: 4rem;
+	margin-top: 4rem;
+	margin-top: calc(var(--mlu-gtr-rem) * 4);
 }
 
 .Mb4gg {
-	margin-bottom: 3rem;
-	margin-bottom: 3rem;
+	margin-bottom: 4rem;
+	margin-bottom: 4rem;
+	margin-bottom: calc(var(--mlu-gtr-rem) * 4);
 }
 
 .Mt3gg {
-	margin-top: 2.25rem;
-	margin-top: 2.25rem;
+	margin-top: 3rem;
+	margin-top: 3rem;
+	margin-top: calc(var(--mlu-gtr-rem) * 3);
 }
 
 .Mb3gg {
-	margin-bottom: 2.25rem;
-	margin-bottom: 2.25rem;
+	margin-bottom: 3rem;
+	margin-bottom: 3rem;
+	margin-bottom: calc(var(--mlu-gtr-rem) * 3);
 }
 
 .Mt2gg {
-	margin-top: 1.5rem;
-	margin-top: 1.5rem;
+	margin-top: 2rem;
+	margin-top: 2rem;
+	margin-top: calc(var(--mlu-gtr-rem) * 2);
 }
 
 .Mb2gg {
-	margin-bottom: 1.5rem;
-	margin-bottom: 1.5rem;
+	margin-bottom: 2rem;
+	margin-bottom: 2rem;
+	margin-bottom: calc(var(--mlu-gtr-rem) * 2);
 }
 
 .Mt1gg {
-	margin-top: 0.75rem;
-	margin-top: 0.75rem;
+	margin-top: 1rem;
+	margin-top: 1rem;
+	margin-top: var(--mlu-gtr-rem);
 }
 
 .Mb1gg {
-	margin-bottom: 0.75rem;
-	margin-bottom: 0.75rem;
+	margin-bottom: 1rem;
+	margin-bottom: 1rem;
+	margin-bottom: var(--mlu-gtr-rem);
 }
 
 .Mb1su {
@@ -1449,28 +1595,33 @@ Styleguide: core-utils.margin.mx
 }
 
 .Mb-2gg {
-	margin-bottom: -24px;
-	margin-bottom: -24px;
+	margin-bottom: -32px;
+	margin-bottom: -32px;
+	margin-bottom: calc(var(--mlu-gtr) * -2);
 }
 
 .Ml-2gg {
-	margin-left: -24px;
-	margin-left: -24px;
+	margin-left: -32px;
+	margin-left: -32px;
+	margin-left: calc(var(--mlu-gtr) * -2);
 }
 
 .Ml2gg {
-	margin-left: 24px;
-	margin-left: 24px;
+	margin-left: 32px;
+	margin-left: 32px;
+	margin-left: calc(var(--mlu-gtr) * 2);
 }
 
 .Ml-1gg {
-	margin-left: -12px;
-	margin-left: -12px;
+	margin-left: -16px;
+	margin-left: -16px;
+	margin-left: calc(var(--mlu-gtr) * -1);
 }
 
 .Ml1gg {
-	margin-left: 12px;
-	margin-left: 12px;
+	margin-left: 16px;
+	margin-left: 16px;
+	margin-left: var(--mlu-gtr);
 }
 
 .Ml-2su {
@@ -1482,17 +1633,21 @@ Styleguide: core-utils.margin.mx
 }
 
 .Mx1gg {
-	margin-right: 12px;
-	margin-left: 12px;
-	margin-right: 12px;
-	margin-left: 12px;
+	margin-right: 16px;
+	margin-left: 16px;
+	margin-right: 16px;
+	margin-left: 16px;
+	margin-right: var(--mlu-gtr);
+	margin-left: var(--mlu-gtr);
 }
 
 .Mx-1gg {
 	margin-right: -1.5%;
 	margin-left: -1.5%;
-	margin-right: calc(-12px);
-	margin-left: calc(-12px);
+	margin-right: calc(-16px);
+	margin-left: calc(-16px);
+	margin-right: calc(var(--mlu-gtr) * -1);
+	margin-left: calc(var(--mlu-gtr) * -1);
 }
 
 /*
@@ -1516,161 +1671,36 @@ Styleguide: core-utils.padding
 }
 
 .Pt1gg {
-	padding-top: 0.75rem;
-	padding-top: 0.75rem;
+	padding-top: 1rem;
+	padding-top: 1rem;
+	padding-top: var(--mlu-gtr-rem);
 }
 
 .Pb1gg {
-	padding-bottom: 0.75rem;
-	padding-bottom: 0.75rem;
+	padding-bottom: 1rem;
+	padding-bottom: 1rem;
+	padding-bottom: var(--mlu-gtr-rem);
 }
 
 .Pl1gg {
-	padding-left: 0.75rem;
-	padding-left: 0.75rem;
+	margin-left: 16px;
+	margin-left: 16px;
+	margin-left: var(--mlu-gtr);
 }
 
 .Pl2gg {
-	padding-left: 1.5rem;
-	padding-left: 1.5rem;
+	margin-left: 32px;
+	margin-left: 32px;
+	margin-left: calc(var(--mlu-gtr) * 2);
 }
 
 .Px1gg {
 	padding-right: 1.5%;
 	padding-left: 1.5%;
-	padding-right: calc(12px);
-	padding-left: calc(12px);
-}
-
-/*
-Visual formatting
-
-* `D-tb`
-* `D-tbc`
-* `D-tbr`
-* `D-itb`
-* `Fl` \- turn on wrapping text on the right.
-* `Fl-r` \- turn on wrapping text on the left.
-* `Ol0`
-* `Op0`
-
-Styleguide: core-utils.visual
-*/
-
-/*
-mCl
-
-Modified clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
-
-Styleguide: core-utils.visual.mcl
-*/
-
-/*
-Ov
-
-Controls content display in case of overflow
-
-Ov - hidden.
-Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
-Ov.Ovx-a - auto. Scrollbar on X axis.
-Ov.Ovy-a - auto. Scrollbar on Y axis.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
-
-Styleguide: core-utils.visual.ov
-*/
-
-/*
-mV
-
-Modified visibility.
-
-mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
-
-Styleguide: core-utils.visual.mv
-*/
-
-/*
-mAll
-
-Modified `all`.
-
-* `sr` \- soft reset, reset some default browser styles:
-	* `margin`
-	* `padding`
-	* `border`
-	* `font`
-	* `list-style`
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/mall.html
-
-Styleguide: core-utils.visual.mall
-*/
-
-.Fl {
-	float: left;
-}
-
-.Fl-r {
-	float: right;
-}
-
-.mCl:after {
-	display: table;
-	clear: both;
-	content: "";
-}
-
-.Ov {
-	overflow: hidden;
-}
-
-.Ov-a {
-	overflow: auto;
-}
-
-.Ovx-a {
-	overflow-x: auto;
-}
-
-.Ovy-a {
-	overflow-y: auto;
-}
-
-.Ol0 {
-	outline: 0px;
-}
-
-.Ol0::-moz-focus-inner {
-	border: 0;
-}
-
-.Op0 {
-	opacity: 0;
-}
-
-.mV-vh {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0px;
-	overflow: hidden;
-	white-space: nowrap;
-	border: 0px;
-	clip: rect(0 0 0 0);
-}
-
-.mAll-sr {
-	margin: 0;
-	padding: 0;
-	font: inherit;
-	list-style: none;
-	border: 0;
+	padding-right: calc(16px);
+	padding-left: calc(16px);
+	padding-right: var(--mlu-gtr);
+	padding-left: var(--mlu-gtr);
 }
 
 /*
@@ -1948,7 +1978,8 @@ Styleguide: core-utils.bd
 	}
 
 	.W1gc_sm {
-		width: calc(25% - 24px);
+		width: calc(25% - 32px);
+		width: calc(25% - var(--mlu-gtr) * 2);
 	}
 
 	.W1gs_sm {
@@ -1956,7 +1987,8 @@ Styleguide: core-utils.bd
 	}
 
 	.W2gc_sm {
-		width: calc(50% - 24px);
+		width: calc(50% - 32px);
+		width: calc(50% - var(--mlu-gtr) * 2);
 	}
 
 	.W2gs_sm {
@@ -1964,7 +1996,8 @@ Styleguide: core-utils.bd
 	}
 
 	.W3gc_sm {
-		width: calc(75% - 24px);
+		width: calc(75% - 32px);
+		width: calc(75% - var(--mlu-gtr) * 2);
 	}
 
 	.W3gs_sm {
@@ -1972,7 +2005,8 @@ Styleguide: core-utils.bd
 	}
 
 	.W4gc_sm {
-		width: calc(100% - 24px);
+		width: calc(100% - 32px);
+		width: calc(100% - var(--mlu-gtr) * 2);
 	}
 
 	.W4gs_sm {
@@ -1984,7 +2018,9 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml1gg_sm {
-		margin-left: 12px;
+		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gtr);
 	}
 
 	.Ml-a_sm {
@@ -2005,8 +2041,12 @@ Styleguide: core-utils.bd
 	}
 
 	.Mx1gg_sm {
-		margin-left: 12px;
-		margin-right: 12px;
+		margin-right: 16px;
+		margin-left: 16px;
+		margin-right: 16px;
+		margin-left: 16px;
+		margin-right: var(--mlu-gtr);
+		margin-left: var(--mlu-gtr);
 	}
 
 	.Mx0_sm {
@@ -2060,7 +2100,8 @@ Styleguide: core-utils.bd
 	}
 
 	.W1gc_md {
-		width: calc(8.333% - 24px);
+		width: calc(8.333% - 32px);
+		width: calc(8.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W1gs_md {
@@ -2072,11 +2113,13 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml1gc_md {
-		margin-left: calc(8.333% + 12px);
+		margin-left: calc(8.333% + 16px);
+		margin-left: calc(8.333% + var(--mlu-gtr));
 	}
 
 	.W2gc_md {
-		width: calc(16.666% - 24px);
+		width: calc(16.666% - 32px);
+		width: calc(16.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W2gs_md {
@@ -2088,11 +2131,13 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml2gc_md {
-		margin-left: calc(16.666% + 12px);
+		margin-left: calc(16.666% + 16px);
+		margin-left: calc(16.666% + var(--mlu-gtr));
 	}
 
 	.W3gc_md {
-		width: calc(25% - 24px);
+		width: calc(25% - 32px);
+		width: calc(25% - var(--mlu-gtr) * 2);
 	}
 
 	.W3gs_md {
@@ -2104,11 +2149,13 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml3gc_md {
-		margin-left: calc(25% + 12px);
+		margin-left: calc(25% + 16px);
+		margin-left: calc(25% + var(--mlu-gtr));
 	}
 
 	.W4gc_md {
-		width: calc(33.333% - 24px);
+		width: calc(33.333% - 32px);
+		width: calc(33.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W4gs_md {
@@ -2120,11 +2167,13 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml4gc_md {
-		margin-left: calc(33.333% + 12px);
+		margin-left: calc(33.333% + 16px);
+		margin-left: calc(33.333% + var(--mlu-gtr));
 	}
 
 	.W5gc_md {
-		width: calc(41.666% - 24px);
+		width: calc(41.666% - 32px);
+		width: calc(41.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W5gs_md {
@@ -2136,11 +2185,13 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml5gc_md {
-		margin-left: calc(41.666% + 12px);
+		margin-left: calc(41.666% + 16px);
+		margin-left: calc(41.666% + var(--mlu-gtr));
 	}
 
 	.W6gc_md {
-		width: calc(50% - 24px);
+		width: calc(50% - 32px);
+		width: calc(50% - var(--mlu-gtr) * 2);
 	}
 
 	.W6gs_md {
@@ -2152,11 +2203,13 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml6gc_md {
-		margin-left: calc(50% + 12px);
+		margin-left: calc(50% + 16px);
+		margin-left: calc(50% + var(--mlu-gtr));
 	}
 
 	.W7gc_md {
-		width: calc(58.333% - 24px);
+		width: calc(58.333% - 32px);
+		width: calc(58.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W7gs_md {
@@ -2168,11 +2221,13 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml7gc_md {
-		margin-left: calc(58.333% + 12px);
+		margin-left: calc(58.333% + 16px);
+		margin-left: calc(58.333% + var(--mlu-gtr));
 	}
 
 	.W8gc_md {
-		width: calc(66.666% - 24px);
+		width: calc(66.666% - 32px);
+		width: calc(66.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W8gs_md {
@@ -2184,11 +2239,13 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml8gc_md {
-		margin-left: calc(66.666% + 12px);
+		margin-left: calc(66.666% + 16px);
+		margin-left: calc(66.666% + var(--mlu-gtr));
 	}
 
 	.W9gc_md {
-		width: calc(75% - 24px);
+		width: calc(75% - 32px);
+		width: calc(75% - var(--mlu-gtr) * 2);
 	}
 
 	.W9gs_md {
@@ -2200,11 +2257,13 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml9gc_md {
-		margin-left: calc(75% + 12px);
+		margin-left: calc(75% + 16px);
+		margin-left: calc(75% + var(--mlu-gtr));
 	}
 
 	.W10gc_md {
-		width: calc(83.333% - 24px);
+		width: calc(83.333% - 32px);
+		width: calc(83.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W10gs_md {
@@ -2216,11 +2275,13 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml10gc_md {
-		margin-left: calc(83.333% + 12px);
+		margin-left: calc(83.333% + 16px);
+		margin-left: calc(83.333% + var(--mlu-gtr));
 	}
 
 	.W11gc_md {
-		width: calc(91.666% - 24px);
+		width: calc(91.666% - 32px);
+		width: calc(91.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W11gs_md {
@@ -2228,7 +2289,8 @@ Styleguide: core-utils.bd
 	}
 
 	.W12gc_md {
-		width: calc(100% - 24px);
+		width: calc(100% - 32px);
+		width: calc(100% - var(--mlu-gtr) * 2);
 	}
 
 	.W12gs_md {
@@ -2240,7 +2302,9 @@ Styleguide: core-utils.bd
 	}
 
 	.Ml1gg_md {
-		margin-left: 12px;
+		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gtr);
 	}
 
 	.Ml-a_md {
@@ -2261,8 +2325,12 @@ Styleguide: core-utils.bd
 	}
 
 	.Mx1gg_md {
-		margin-left: 12px;
-		margin-right: 12px;
+		margin-right: 16px;
+		margin-left: 16px;
+		margin-right: 16px;
+		margin-left: 16px;
+		margin-right: var(--mlu-gtr);
+		margin-left: var(--mlu-gtr);
 	}
 
 	.Mx0_md {
@@ -2278,24 +2346,6 @@ Styleguide: core-utils.bd
 
 	:root {
 		--mlu-gtr-rem: 1rem;
-	}
-
-	.row__col {
-		width: calc(100% - 32px);
-	}
-
-	.row__col {
-		margin-right: calc(16px);
-		margin-left: calc(16px);
-	}
-
-	.row__col {
-		margin-bottom: 32px;
-	}
-
-	.wrapper {
-		padding-right: calc(16px);
-		padding-left: calc(16px);
 	}
 
 	.D-n_lg {
@@ -2341,128 +2391,9 @@ Styleguide: core-utils.bd
 		text-align: right;
 	}
 
-	.W1gc {
-		width: calc(25% - 32px);
-	}
-
-	.W2gc {
-		width: calc(50% - 32px);
-	}
-
-	.W3gc {
-		width: calc(75% - 32px);
-	}
-
-	.W4gc {
-		width: calc(100% - 32px);
-	}
-
-	.W1gc_sm {
-		width: calc(25% - 32px);
-	}
-
-	.W2gc_sm {
-		width: calc(50% - 32px);
-	}
-
-	.W3gc_sm {
-		width: calc(75% - 32px);
-	}
-
-	.W4gc_sm {
-		width: calc(100% - 32px);
-	}
-
-	.W1gc_md {
-		width: calc(8.333% - 32px);
-	}
-
-	.Ml1gc_md {
-		margin-left: calc(8.333% + 16px);
-	}
-
-	.W2gc_md {
-		width: calc(16.666% - 32px);
-	}
-
-	.Ml2gc_md {
-		margin-left: calc(16.666% + 16px);
-	}
-
-	.W3gc_md {
-		width: calc(25% - 32px);
-	}
-
-	.Ml3gc_md {
-		margin-left: calc(25% + 16px);
-	}
-
-	.W4gc_md {
-		width: calc(33.333% - 32px);
-	}
-
-	.Ml4gc_md {
-		margin-left: calc(33.333% + 16px);
-	}
-
-	.W5gc_md {
-		width: calc(41.666% - 32px);
-	}
-
-	.Ml5gc_md {
-		margin-left: calc(41.666% + 16px);
-	}
-
-	.W6gc_md {
-		width: calc(50% - 32px);
-	}
-
-	.Ml6gc_md {
-		margin-left: calc(50% + 16px);
-	}
-
-	.W7gc_md {
-		width: calc(58.333% - 32px);
-	}
-
-	.Ml7gc_md {
-		margin-left: calc(58.333% + 16px);
-	}
-
-	.W8gc_md {
-		width: calc(66.666% - 32px);
-	}
-
-	.Ml8gc_md {
-		margin-left: calc(66.666% + 16px);
-	}
-
-	.W9gc_md {
-		width: calc(75% - 32px);
-	}
-
-	.Ml9gc_md {
-		margin-left: calc(75% + 16px);
-	}
-
-	.W10gc_md {
-		width: calc(83.333% - 32px);
-	}
-
-	.Ml10gc_md {
-		margin-left: calc(83.333% + 16px);
-	}
-
-	.W11gc_md {
-		width: calc(91.666% - 32px);
-	}
-
-	.W12gc_md {
-		width: calc(100% - 32px);
-	}
-
 	.W1gc_lg {
 		width: calc(8.333% - 32px);
+		width: calc(8.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W1gs_lg {
@@ -2475,10 +2406,12 @@ Styleguide: core-utils.bd
 
 	.Ml1gc_lg {
 		margin-left: calc(8.333% + 16px);
+		margin-left: calc(8.333% + var(--mlu-gtr));
 	}
 
 	.W2gc_lg {
 		width: calc(16.666% - 32px);
+		width: calc(16.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W2gs_lg {
@@ -2491,10 +2424,12 @@ Styleguide: core-utils.bd
 
 	.Ml2gc_lg {
 		margin-left: calc(16.666% + 16px);
+		margin-left: calc(16.666% + var(--mlu-gtr));
 	}
 
 	.W3gc_lg {
 		width: calc(25% - 32px);
+		width: calc(25% - var(--mlu-gtr) * 2);
 	}
 
 	.W3gs_lg {
@@ -2507,10 +2442,12 @@ Styleguide: core-utils.bd
 
 	.Ml3gc_lg {
 		margin-left: calc(25% + 16px);
+		margin-left: calc(25% + var(--mlu-gtr));
 	}
 
 	.W4gc_lg {
 		width: calc(33.333% - 32px);
+		width: calc(33.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W4gs_lg {
@@ -2523,10 +2460,12 @@ Styleguide: core-utils.bd
 
 	.Ml4gc_lg {
 		margin-left: calc(33.333% + 16px);
+		margin-left: calc(33.333% + var(--mlu-gtr));
 	}
 
 	.W5gc_lg {
 		width: calc(41.666% - 32px);
+		width: calc(41.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W5gs_lg {
@@ -2539,10 +2478,12 @@ Styleguide: core-utils.bd
 
 	.Ml5gc_lg {
 		margin-left: calc(41.666% + 16px);
+		margin-left: calc(41.666% + var(--mlu-gtr));
 	}
 
 	.W6gc_lg {
 		width: calc(50% - 32px);
+		width: calc(50% - var(--mlu-gtr) * 2);
 	}
 
 	.W6gs_lg {
@@ -2555,10 +2496,12 @@ Styleguide: core-utils.bd
 
 	.Ml6gc_lg {
 		margin-left: calc(50% + 16px);
+		margin-left: calc(50% + var(--mlu-gtr));
 	}
 
 	.W7gc_lg {
 		width: calc(58.333% - 32px);
+		width: calc(58.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W7gs_lg {
@@ -2571,10 +2514,12 @@ Styleguide: core-utils.bd
 
 	.Ml7gc_lg {
 		margin-left: calc(58.333% + 16px);
+		margin-left: calc(58.333% + var(--mlu-gtr));
 	}
 
 	.W8gc_lg {
 		width: calc(66.666% - 32px);
+		width: calc(66.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W8gs_lg {
@@ -2587,10 +2532,12 @@ Styleguide: core-utils.bd
 
 	.Ml8gc_lg {
 		margin-left: calc(66.666% + 16px);
+		margin-left: calc(66.666% + var(--mlu-gtr));
 	}
 
 	.W9gc_lg {
 		width: calc(75% - 32px);
+		width: calc(75% - var(--mlu-gtr) * 2);
 	}
 
 	.W9gs_lg {
@@ -2603,10 +2550,12 @@ Styleguide: core-utils.bd
 
 	.Ml9gc_lg {
 		margin-left: calc(75% + 16px);
+		margin-left: calc(75% + var(--mlu-gtr));
 	}
 
 	.W10gc_lg {
 		width: calc(83.333% - 32px);
+		width: calc(83.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W10gs_lg {
@@ -2619,10 +2568,12 @@ Styleguide: core-utils.bd
 
 	.Ml10gc_lg {
 		margin-left: calc(83.333% + 16px);
+		margin-left: calc(83.333% + var(--mlu-gtr));
 	}
 
 	.W11gc_lg {
 		width: calc(91.666% - 32px);
+		width: calc(91.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W11gs_lg {
@@ -2631,6 +2582,7 @@ Styleguide: core-utils.bd
 
 	.W12gc_lg {
 		width: calc(100% - 32px);
+		width: calc(100% - var(--mlu-gtr) * 2);
 	}
 
 	.W12gs_lg {
@@ -2641,70 +2593,10 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
-	.Mt4gg {
-		margin-top: 4rem;
-	}
-
-	.Mb4gg {
-		margin-bottom: 4rem;
-	}
-
-	.Mt3gg {
-		margin-top: 3rem;
-	}
-
-	.Mb3gg {
-		margin-bottom: 3rem;
-	}
-
-	.Mt2gg {
-		margin-top: 2rem;
-	}
-
-	.Mb2gg {
-		margin-bottom: 2rem;
-	}
-
-	.Mt1gg {
-		margin-top: 1rem;
-	}
-
-	.Mb1gg {
-		margin-bottom: 1rem;
-	}
-
-	.Mb-2gg {
-		margin-bottom: -32px;
-	}
-
-	.Ml-2gg {
-		margin-left: -32px;
-	}
-
-	.Ml2gg {
-		margin-left: 32px;
-	}
-
-	.Ml-1gg {
-		margin-left: -16px;
-	}
-
-	.Ml1gg {
-		margin-left: 16px;
-	}
-
-	.Mx1gg {
-		margin-right: 16px;
-		margin-left: 16px;
-	}
-
-	.Mx-1gg {
-		margin-right: calc(-16px);
-		margin-left: calc(-16px);
-	}
-
 	.Ml1gg_lg {
 		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gtr);
 	}
 
 	.Ml-a_lg {
@@ -2725,34 +2617,17 @@ Styleguide: core-utils.bd
 	}
 
 	.Mx1gg_lg {
+		margin-right: 16px;
 		margin-left: 16px;
 		margin-right: 16px;
+		margin-left: 16px;
+		margin-right: var(--mlu-gtr);
+		margin-left: var(--mlu-gtr);
 	}
 
 	.Mx0_lg {
 		margin-left: 0;
 		margin-right: 0;
-	}
-
-	.Pt1gg {
-		padding-top: 1rem;
-	}
-
-	.Pb1gg {
-		padding-bottom: 1rem;
-	}
-
-	.Pl1gg {
-		padding-left: 1rem;
-	}
-
-	.Pl2gg {
-		padding-left: 2rem;
-	}
-
-	.Px1gg {
-		padding-right: calc(16px);
-		padding-left: calc(16px);
 	}
 }
 
@@ -2802,6 +2677,7 @@ Styleguide: core-utils.bd
 
 	.W1gc_xl {
 		width: calc(8.333% - 32px);
+		width: calc(8.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W1gs_xl {
@@ -2814,10 +2690,12 @@ Styleguide: core-utils.bd
 
 	.Ml1gc_xl {
 		margin-left: calc(8.333% + 16px);
+		margin-left: calc(8.333% + var(--mlu-gtr));
 	}
 
 	.W2gc_xl {
 		width: calc(16.666% - 32px);
+		width: calc(16.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W2gs_xl {
@@ -2830,10 +2708,12 @@ Styleguide: core-utils.bd
 
 	.Ml2gc_xl {
 		margin-left: calc(16.666% + 16px);
+		margin-left: calc(16.666% + var(--mlu-gtr));
 	}
 
 	.W3gc_xl {
 		width: calc(25% - 32px);
+		width: calc(25% - var(--mlu-gtr) * 2);
 	}
 
 	.W3gs_xl {
@@ -2846,10 +2726,12 @@ Styleguide: core-utils.bd
 
 	.Ml3gc_xl {
 		margin-left: calc(25% + 16px);
+		margin-left: calc(25% + var(--mlu-gtr));
 	}
 
 	.W4gc_xl {
 		width: calc(33.333% - 32px);
+		width: calc(33.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W4gs_xl {
@@ -2862,10 +2744,12 @@ Styleguide: core-utils.bd
 
 	.Ml4gc_xl {
 		margin-left: calc(33.333% + 16px);
+		margin-left: calc(33.333% + var(--mlu-gtr));
 	}
 
 	.W5gc_xl {
 		width: calc(41.666% - 32px);
+		width: calc(41.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W5gs_xl {
@@ -2878,10 +2762,12 @@ Styleguide: core-utils.bd
 
 	.Ml5gc_xl {
 		margin-left: calc(41.666% + 16px);
+		margin-left: calc(41.666% + var(--mlu-gtr));
 	}
 
 	.W6gc_xl {
 		width: calc(50% - 32px);
+		width: calc(50% - var(--mlu-gtr) * 2);
 	}
 
 	.W6gs_xl {
@@ -2894,10 +2780,12 @@ Styleguide: core-utils.bd
 
 	.Ml6gc_xl {
 		margin-left: calc(50% + 16px);
+		margin-left: calc(50% + var(--mlu-gtr));
 	}
 
 	.W7gc_xl {
 		width: calc(58.333% - 32px);
+		width: calc(58.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W7gs_xl {
@@ -2910,10 +2798,12 @@ Styleguide: core-utils.bd
 
 	.Ml7gc_xl {
 		margin-left: calc(58.333% + 16px);
+		margin-left: calc(58.333% + var(--mlu-gtr));
 	}
 
 	.W8gc_xl {
 		width: calc(66.666% - 32px);
+		width: calc(66.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W8gs_xl {
@@ -2926,10 +2816,12 @@ Styleguide: core-utils.bd
 
 	.Ml8gc_xl {
 		margin-left: calc(66.666% + 16px);
+		margin-left: calc(66.666% + var(--mlu-gtr));
 	}
 
 	.W9gc_xl {
 		width: calc(75% - 32px);
+		width: calc(75% - var(--mlu-gtr) * 2);
 	}
 
 	.W9gs_xl {
@@ -2942,10 +2834,12 @@ Styleguide: core-utils.bd
 
 	.Ml9gc_xl {
 		margin-left: calc(75% + 16px);
+		margin-left: calc(75% + var(--mlu-gtr));
 	}
 
 	.W10gc_xl {
 		width: calc(83.333% - 32px);
+		width: calc(83.333% - var(--mlu-gtr) * 2);
 	}
 
 	.W10gs_xl {
@@ -2958,10 +2852,12 @@ Styleguide: core-utils.bd
 
 	.Ml10gc_xl {
 		margin-left: calc(83.333% + 16px);
+		margin-left: calc(83.333% + var(--mlu-gtr));
 	}
 
 	.W11gc_xl {
 		width: calc(91.666% - 32px);
+		width: calc(91.666% - var(--mlu-gtr) * 2);
 	}
 
 	.W11gs_xl {
@@ -2970,6 +2866,7 @@ Styleguide: core-utils.bd
 
 	.W12gc_xl {
 		width: calc(100% - 32px);
+		width: calc(100% - var(--mlu-gtr) * 2);
 	}
 
 	.W12gs_xl {
@@ -2982,6 +2879,8 @@ Styleguide: core-utils.bd
 
 	.Ml1gg_xl {
 		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gtr);
 	}
 
 	.Ml-a_xl {
@@ -3002,8 +2901,12 @@ Styleguide: core-utils.bd
 	}
 
 	.Mx1gg_xl {
+		margin-right: 16px;
 		margin-left: 16px;
 		margin-right: 16px;
+		margin-left: 16px;
+		margin-right: var(--mlu-gtr);
+		margin-left: var(--mlu-gtr);
 	}
 
 	.Mx0_xl {

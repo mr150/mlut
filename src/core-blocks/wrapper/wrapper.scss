@@ -5,12 +5,14 @@ The block-container for the main content of the page. The maximum width is set i
 
 The container has sides `padding` that equal to gutters so that the content does not stick to sides on small screens. On wide screens the container is centered.
 
-Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `calc()` fallback for fields:
+Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `calc()` and `var()` fallbacks for fields:
 ```scss
 padding-right: 1.5%;
 padding-left: 1.5%;
-padding-right: calc(12px);
-padding-left: calc(12px);
+padding-right: calc(16px);
+padding-left: calc(16px);
+padding-right: var(--mlu-gtr);
+padding-left: var(--mlu-gtr);
 ```
 
 Markup: ../../../docs/examples/core-blocks/wrapper/wrapper.html

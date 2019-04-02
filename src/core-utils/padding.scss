@@ -10,7 +10,6 @@ Padding
 Styleguide: core-utils.padding
 */
 
-$mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 $mlu-su-rem: mlu-px2rem($mlu-su);
 
 .P0 {
@@ -22,19 +21,19 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 }
 
 .Pt1gg {
-	@include mlu-generate-gutter($mlu-gtr-sm-rem, "padding", $direct: "top");
+	@include mlu-generate-gutter("rem", "padding", $direct: "top");
 }
 
 .Pb1gg {
-	@include mlu-generate-gutter($mlu-gtr-sm-rem, "padding", $direct: "bottom");
+	@include mlu-generate-gutter("rem", "padding", $direct: "bottom");
 }
 
 .Pl1gg {
-	@include mlu-generate-gutter($mlu-gtr-sm-rem, "padding", $direct: "left");
+	@include mlu-generate-gutter("padding", $direct: "left");
 }
 
 .Pl2gg {
-	@include mlu-generate-gutter($mlu-gtr-sm-rem, "padding", $direct: "left", $coef: 2);
+	@include mlu-generate-gutter("padding", $direct: "left", $coef: 2);
 }
 
 .Px1gg {

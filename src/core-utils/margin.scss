@@ -62,7 +62,6 @@ Markup: ../../../docs/examples/core-utils/margin/mx.html
 Styleguide: core-utils.margin.mx
 */
 
-$mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 $mlu-su-rem: mlu-px2rem($mlu-su);
 
 .M0 {
@@ -92,11 +91,11 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 
 @for $i from $mlu-My-range through 1 {
 	.Mt#{$i}gg {
-		@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: $i, $direct: "top");
+		@include mlu-generate-gutter("rem", $coef: $i, $direct: "top");
 	}
 
 	.Mb#{$i}gg {
-		@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: $i, $direct: "bottom");
+		@include mlu-generate-gutter("rem", $coef: $i, $direct: "bottom");
 	}
 }
 
@@ -155,7 +154,7 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 @each $key, $value in $mlu-grid-gutters {
 	@include mlu-bpm($key) {
 		.Ml1gg_#{$key} {
-			margin-left: $value;
+			@include mlu-generate-gutter($direct: "left");
 		}
 
 		.Ml-a_#{$key} {
@@ -175,9 +174,10 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 			margin-right: auto;
 		}
 
-		.Mx1gg_#{$key} {
-			margin-left: $value;
-			margin-right: $value;
+		@if $MLU-FLAG-COL-MARGIN {
+			.Mx1gg_#{$key} {
+				@include mlu-generate-gutter();
+			}
 		}
 
 		.Mx0_#{$key} {

@@ -284,15 +284,24 @@ Styleguide: sass-tools.mixins
 //.block {
 //		@include mlu-generate-gutter($direct: "right", $coef: 2);
 //}
+//
+//.foo {
+//		@include mlu-generate-gutter($direct: "right", $coef: 2, $css-vars: false);
+//}
 // ```
 // CSS
 // ```css
 //.block {
+//		margin-right: 32px;
+//		margin-right: calc(var(--mlu-gtr) * 2);
+//}
+//
+//.foo {
 //		margin-right: 24px;
 //}
 //
 //@media (min-width: 960px) {
-//		.block {
+//		.foo {
 //			margin-right: 32px;
 //		}
 //}
@@ -300,22 +309,24 @@ Styleguide: sass-tools.mixins
 //
 // $init-gutter = $mlu-gtr-sm - initial gutter value out of breakpoint.
 // Can be number. If passed '-1', initial gutter will not be generated.
-// $type = margin - can be `margin` or `padding`.
+// If you need a gutter in `rem`, pass "rem" or value in `rem`.
+// $type = margin - can be any CSS property, including custom.
+// If no `margin`, `padding` or custom property is used, then `$direct` = "xy" must be specified.
 // $direct = "x" - can take 4 main directions from [$mlu-main-directions](#kssref-sass-tools-settings-general)
 // or combined direction: 'x'(left right), 'y'(top bottom)
 // and 'xy'(left right top bottom).
 // $gutters = $mlu-grid-gutters - map with gutters values on breakpoints.
-// Map item example: `"sm": 12px`.
+// Map item example: `"sm": 12px`. Custom gutters only work when the `$css-vars = false`.
 // $calc = false - bool flag for generation CSS `calc()` fallback for old browsers.
 // $coef = 1 - coefficient by which the gutter value is multiplied.
-// $css-vars = $MLU-FLAG-CSS-VARS - use CSS custom properties for gutters.
+// $css-vars = $MLU-FLAG-CSS-VARS - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
+// Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
 //
 // Styleguide: sass-tools.mixins.generate_gutter
 
 @mixin mlu-generate-gutter($init-gutter: $mlu-gtr-sm, $type: "margin",
 $gutters: $mlu-grid-gutters, $calc: $MLU-FLAG-CALC-FALLBACK, $direct: "x",
-$coef: 1, $css-vars: false) {
-	//$coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
+$coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 	$custom-prop: false;
 	$prev-value: $mlu-grid-default-gtr;
 
@@ -333,17 +344,18 @@ $coef: 1, $css-vars: false) {
 	}
 
 	@if $init-gutter and $init-gutter != -1 {
-		$tmp-val: if($calc, calc(#{$prev-value * $coef}), $prev-value * $coef);
-
-		$var-value: if($coef > 1 or $coef < -1,
+		$var-value: if($coef != 1,
 		calc(var(#{$--mlu-gtr}) * #{$coef}),
 		var(#{$--mlu-gtr}));
 
 		@if $init-gutter == "rem" {
-			$var-value: if($coef > 1 or $coef < -1,
+			$prev-value: mlu-px2rem($prev-value);
+			$var-value: if($coef != 1,
 			calc(var(#{$--mlu-gtr-rem}) * #{$coef}),
 			var(#{$--mlu-gtr-rem}));
 		}
+
+		$tmp-val: if($calc, calc(#{$prev-value * $coef}), $prev-value * $coef);
 
 		@if $direct == "x" {
 			@if not $css-vars or $css-vars == 1 {
@@ -648,36 +660,45 @@ $body-size: (100% 48%), $change: false) {
 // It works similarly like [W utility](section-core-utils.html#kssref-core-utils-bxz-w).
 // ```scss
 //.block {
-//		@include mlu-W(2, "sm");
-//		@include mlu-W(4gs, "lg");
+//		@include mlu-W(2gc, "sm");
+//		@include mlu-W(4, "lg");
+//}
+//
+//.foo {
+//		@include mlu-W(2gc, "sm", $css-vars: false);
 //}
 // ```
 // CSS
 // ```css
 //@media (min-width: 520px) {
 //		.block {
+//			width: calc(16.666% - 32px);
+//			width: calc(16.666% - var(--mlu-gtr) * 2);
+//		}
+//
+//		.foo {
 //			width: calc(16.666% - 24px);
 //		}
 //}
 //
 //@media (min-width: 960px) {
 //		.block {
-//			width: calc(16.666% - 32px);
+//			width: 33.333%;
 //		}
 //
-//		.block {
-//			width: 33.333%;
+//		.foo {
+//			width: calc(16.666% - 32px);
 //		}
 //}
 // ```
 //
-// $width - can be in grid-columns(unitless number, or `gc` unit), grid-spans(`gs`),
+// $width - can be in grid-columns(`gc`), grid-spans(unitless number, or `gs` unit),
 // any CSS units(`px`, `rem` etc) or `auto`. <br> Grid units calculated to %
 // according to the formula '`n / $cols * 100%`' and rounded by
 // [mlu-decimal-floor](section-sass-tools.html#kssref-sass-tools-functions-decimal_floor). <br>
-// If `$width` set in `gc`, width will generated with considering
-// different gutters on breakpoints. Similarly like `Wgc_md`
-// on `$mlu-bp-lg`.
+// If `$width = "gc"` and `$css-vars = false`, width will generated with considering
+// different gutters on breakpoints. As in the example above `foo`
+// on `lg`.
 // $bp = $mlu-bp-xs - breakpoint on which `$width` will sets. Can be number or breakpoint name.
 // $cols = $mlu-grid-default-cols - columns count in grid. Can be number or breakpoint name.
 // $calc = false - bool flag for generation CSS `calc()` fallback. It can needed only if
@@ -685,10 +706,12 @@ $body-size: (100% 48%), $change: false) {
 // $type = "width" - service argument which used only by mixins-wrappers.
 // It needed for reusable `mlu-W` for generating grid offset,
 // because the algorithm for generating them is the same.
+// $css-vars = $MLU-FLAG-CSS-VARS - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
+// Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
 //
 // Styleguide: sass-tools.mixins.w
 
-@mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: false, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "width") {
+@mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "width") {
 	$col-width: 0;
 	$columns: $cols;
 	$grid-gutters: $gutters;
@@ -808,7 +831,7 @@ $body-size: (100% 48%), $change: false) {
 //
 // Styleguide: sass-tools.mixins.ml
 
-@mixin mlu-Ml($offset, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: false, $calc: $MLU-FLAG-CALC-FALLBACK) {
+@mixin mlu-Ml($offset, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK) {
 	@include mlu-W($offset, $bp, $cols, $gutters, $css-vars, $calc, "margin-left");
 }
 
@@ -878,15 +901,19 @@ $calc: false, $prop: "width", $css-vars: false) {
 //
 // $display = inline-block - display type. Can be value of CSS `display` property.
 // $gutters = $mlu-grid-gutters - map with column gutters values on breakpoints.
+// Custom gutters only work when the `$css-vars = false`.
 // $calc = false - bool flag for generation CSS `calc()` fallback. It can needed only
 // for "col" `$type`.
 // $type = "col" - service parameter which used only by mixins-wrappers.
 // It needed for reusable `mlu-row-col` for making other
 // `row` elements, because the most of styles for them is the same.
+// $css-vars = $MLU-FLAG-CSS-VARS - use CSS custom properties for gutters.
+// Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
 //
 // Styleguide: sass-tools.mixins.row_col
 
-@mixin mlu-row-col($display: inline-block, $gutters: $mlu-grid-gutters, $css-vars: false, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
+@mixin mlu-row-col($display: inline-block, $gutters: $mlu-grid-gutters,
+$css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	$grid-gutters: $gutters;
 	$xs-gutter: if($css-vars, $mlu-grid-default-gtr, $mlu-gtr-sm);
 
@@ -916,13 +943,13 @@ $calc: false, $prop: "width", $css-vars: false) {
 			margin: 0 $mlu-grid-gutter-fallback $xs-gutter * 2;
 		}
 
-		@include mlu-W(12gc, $css-vars: $css-vars, $calc: 1);
+		@include mlu-W(12gc, $css-vars: $css-vars, $calc: $calc);
 		$tmp-gtr: if($calc, calc(#{$xs-gutter}), $xs-gutter);
 
 		@if not $css-vars {
 			margin: 0 $tmp-gtr $xs-gutter * 2;
-			@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $calc: $calc);
-			@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $direct: "bottom", $coef: 2);
+			@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $calc: $calc, $css-vars: false);
+			@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $direct: "bottom", $coef: 2, $css-vars: false);
 		} @else if $css-vars == 1 {
 			margin: 0 $tmp-gtr $xs-gutter * 2;
 			margin: 0 var(#{$--mlu-gtr}) calc(var(#{$--mlu-gtr}) * 2);
