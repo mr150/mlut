@@ -939,23 +939,10 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	direction: ltr;
 
 	@if $type == "col" {
-		@if $calc {
-			margin: 0 $mlu-grid-gutter-fallback $xs-gutter * 2;
-		}
+		width: 100%;
 
-		@include mlu-W(12gc, $css-vars: $css-vars, $calc: $calc);
-		$tmp-gtr: if($calc, calc(#{$xs-gutter}), $xs-gutter);
-
-		@if not $css-vars {
-			margin: 0 $tmp-gtr $xs-gutter * 2;
-			@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $calc: $calc, $css-vars: false);
-			@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $direct: "bottom", $coef: 2, $css-vars: false);
-		} @else if $css-vars == 1 {
-			margin: 0 $tmp-gtr $xs-gutter * 2;
-			margin: 0 var(#{$--mlu-gtr}) calc(var(#{$--mlu-gtr}) * 2);
-		} @else {
-			margin: 0 var(#{$--mlu-gtr}) calc(var(#{$--mlu-gtr}) * 2);
-		}
+		@include mlu-generate-gutter($init-gutter, "padding", $grid-gutters, $calc, $css-vars: $css-vars);
+		@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $calc: $calc, $direct: "bottom", $coef: 2, $css-vars: $css-vars);
 
 		&.row {
 			margin-bottom: 0px;

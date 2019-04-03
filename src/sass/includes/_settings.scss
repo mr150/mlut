@@ -67,7 +67,7 @@ Add the file to your page like here:
 And just add MLUT classes to markup:
 ```html
 <div class="row D-f">
-	<div class="row__col W3gc_md">
+	<div class="row__col W3gs_md">
 		<h3>Simple text</h3>
 ```
 Try [examples](section-examples.html) with ready HTML.
@@ -273,7 +273,7 @@ In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and abo
 The gutters have different widths at different breakpoints. From `xs` to `lg` gutter is 12px. From `lg` gutter is 16px.
 
 You can set the [width](section-core-utils.html#kssref-core-utils-bxz-w) and [offset](section-core-utils.html#kssref-core-utils-margin-ml) for the layout parts in the grid units. These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 3 types of grid units:
-* **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column. Grid-columns are mainly used with [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col).
+* **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column. For the presence of these units meets the flag [$MLU-FLAG-COL-MARGIN](section-sass-tools.html#kssref-sass-tools-settings-flags). By default it is off.
 * **grid-spans** \- `gs`. 1gs is width of 1 column with 2 gutters.
 * **grid-gutters** \- `gg`. 1gg is width of 1 gutter.
 
@@ -343,7 +343,7 @@ Styleguide: sass-tools
 /*
 Examples
 
-Additional examples of core blocks, utilities, tools and ready-made components.
+Additional examples of core blocks, utilities, tools and ready-made components. <br> If in the markup you meet the `{{modifier_class}}` construct, then substitute the necessary classes from the examples instead of it, or just erase
 
 Weight: 6
 
@@ -369,7 +369,7 @@ Styleguide: sass-tools.settings
 // $MLU-FLAG-EXTENDED = false - turn on additional features but increases distributive size. Type: `bool`.
 // $MLU-FLAG-CALC-FALLBACK = false - turn on CSS `calc()` fallback for grid utils on `md+` breakpoints. Type: `bool`.
 // $MLU-FLAG-COL-OFFSET = true - turn on generation grid columns offset [utils](section-core-utils.html#kssref-core-utils-margin-ml). Type: `bool`.
-// $MLU-FLAG-COL-MARGIN = true - turn on generation of
+// $MLU-FLAG-COL-MARGIN = false - turn on generation of
 //[W](section-core-utils.html#kssref-core-utils-bxz-w) and
 //[Ml](section-core-utils.html#kssref-core-utils-margin-ml) utils in
 //[grid-columns](section-concepts.html#kssref-concepts-grid) for columns with margin based gutters. Type: `bool`.
@@ -384,7 +384,7 @@ Styleguide: sass-tools.settings
 $MLU-FLAG-EXTENDED: false !default;
 $MLU-FLAG-CALC-FALLBACK: false !default;
 $MLU-FLAG-COL-OFFSET: true !default;
-$MLU-FLAG-COL-MARGIN: true !default;
+$MLU-FLAG-COL-MARGIN: false !default;
 $MLU-FLAG-CSS-VARS: 1 !default;
 
 // General
@@ -471,7 +471,7 @@ $mlu-debug-gutter-color: #336 !default;
 //
 // Settings affecting the values and generation of the core utilities.
 //
-// $mlu-W-card = 288px - fixed width for cards. This is value for [W-card](section-core-utils.html#kssref-core-utils-bxz-w) utility.
+// $mlu-W-fx0 = 288px - fixed width for cards. This is value for [W-fx0](section-core-utils.html#kssref-core-utils-bxz-w) utility.
 // $mlu-My-range = 4 - count of [Mt](section-core-utils.html#kssref-core-utils-margin) and [Mb](section-core-utils.html#kssref-core-utils-margin) utilities.
 // $mlu-Z-range = 4 - [z-index](section-core-utils.html#kssref-core-utils-pos-z) range. Counted from zero.
 // $mlu-Z-max = 9999 - `z-index` max value.
@@ -479,7 +479,7 @@ $mlu-debug-gutter-color: #336 !default;
 //
 // Styleguide: sass-tools.settings.utils
 
-$mlu-W-card: 288px !default;
+$mlu-W-fx0: 288px !default;
 
 $mlu-My-range: 4 !default;
 

@@ -1,7 +1,7 @@
 /*
 Margin
 
-You can set some margins in the grid-gutters(gg). For example margin top - `Mt` and margin bottom - `Mb`.
+You can set some margins in the grid-gutters(gg). For example margin top - `Mt` and margin bottom - `Mb`. By default, margins in `gg` contain `var()` fallback as [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col)
 
 Vertical margins in grid-gutters are converted to `rems`. This affects accessibility, because margins will be scaled when changing font sizes in the browser settings.
 
@@ -22,9 +22,9 @@ Margin left. You can set left margin in the [grid units](section-concepts.html#k
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
-* `Ml1gg` \- *responsive*. It is needed to return the default column gutter.
-* `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
-* `Ml1gs..Ml10gs`
+* `Ml1gg` \- if `gc` turned on. It is needed to return the default column gutter. *Responsive*.
+* `Ml1gs..Ml10gs` \- available margin in `gs` on all breakpoints, starting with `md`.
+* `Ml1gc..Ml10gc` \- if `gc` turned on.
 * `Ml2su`
 * `Ml-2su`
 
@@ -53,7 +53,7 @@ Mx
 Margin on X axis. Sets left and right margin.
 
 * `Mx-a` \- centered the DOM node with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `Mx1gg` \- *responsive*.
+* `Mx1gg` \- if `gc` turned on. *Responsive*.
 * `Mx-1gg` \- it needed for imposes left and right margins of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
 * `Mx0` \- *responsive*.
 
@@ -148,15 +148,11 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 }
 
 .Mx-1gg {
-	@include mlu-generate-gutter($coef: -1, $calc: 1);
+	@include mlu-generate-gutter($coef: -1);
 }
 
 @each $key, $value in $mlu-grid-gutters {
 	@include mlu-bpm($key) {
-		.Ml1gg_#{$key} {
-			@include mlu-generate-gutter($direct: "left");
-		}
-
 		.Ml-a_#{$key} {
 			margin-left: auto;
 		}
@@ -174,15 +170,19 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 			margin-right: auto;
 		}
 
-		@if $MLU-FLAG-COL-MARGIN {
-			.Mx1gg_#{$key} {
-				@include mlu-generate-gutter();
-			}
-		}
-
 		.Mx0_#{$key} {
 			margin-left: 0;
 			margin-right: 0;
+		}
+
+		@if $MLU-FLAG-COL-MARGIN {
+			.Ml1gg_#{$key} {
+				@include mlu-generate-gutter($direct: "left");
+			}
+
+			.Mx1gg_#{$key} {
+				@include mlu-generate-gutter();
+			}
 		}
 	}
 }

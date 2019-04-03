@@ -2,7 +2,7 @@
 Padding
 
 * `P0` \- clear all paddings.
-* `P8` \- creates paddings of 8px all around.
+* `P2su` \- creates paddings of 2su all around.
 * `Pt1gg` \- works similarly [Mt1gg](#kssref-core-utils-margin)
 * `Pb1gg`
 * `Px1gg`
@@ -16,7 +16,7 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	padding: 0px;
 }
 
-.P8 {
+.P2su {
 	padding: ($mlu-su-rem * 2) ($mlu-su * 2);
 }
 
@@ -29,13 +29,13 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 }
 
 .Pl1gg {
-	@include mlu-generate-gutter("padding", $direct: "left");
+	@include mlu-generate-gutter($type: "padding", $direct: "left");
 }
 
 .Pl2gg {
-	@include mlu-generate-gutter("padding", $direct: "left", $coef: 2);
+	@include mlu-generate-gutter($type: "padding", $direct: "left", $coef: 2);
 }
 
 .Px1gg {
-	@include mlu-generate-gutter($type: "padding", $calc: 1);
+	@include mlu-generate-gutter($type: "padding");
 }
