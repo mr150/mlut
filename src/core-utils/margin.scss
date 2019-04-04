@@ -153,26 +153,22 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 
 @each $key, $value in $mlu-grid-gutters {
 	@include mlu-bpm($key) {
-		.Ml-a_#{$key} {
-			margin-left: auto;
-		}
-
-		.Ml0_#{$key} {
-			margin-left: 0;
-		}
-
 		.Mb0_#{$key} {
 			margin-bottom: 0px;
-		}
-
-		.Mx-a_#{$key} {
-			margin-left: auto;
-			margin-right: auto;
 		}
 
 		.Mx0_#{$key} {
 			margin-left: 0;
 			margin-right: 0;
+		}
+
+		.Ml-a_#{$key} {
+			margin-left: auto;
+		}
+
+		.Mx-a_#{$key} {
+			margin-left: auto;
+			margin-right: auto;
 		}
 
 		@if $MLU-FLAG-COL-MARGIN {

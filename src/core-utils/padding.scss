@@ -39,3 +39,16 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 .Px1gg {
 	@include mlu-generate-gutter($type: "padding");
 }
+
+@each $key, $value in $mlu-grid-gutters {
+	@include mlu-bpm($key) {
+		.Px0_#{$key} {
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		.Px1gg_#{$key} {
+			@include mlu-generate-gutter($type: "padding");
+		}
+	}
+}

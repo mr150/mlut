@@ -470,8 +470,12 @@ The main element for creating columns in layout. By default, it stretches the en
 The gutters are implemented using the `padding` and [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars).
 If `var()` is not supported by the browser, then fallback are provided:
 ```scss
-margin: 0 16px 2rem;
-margin: 0 var(--mlu-gtr) calc(var(--mlu-gtr-rem) * 2);
+padding-right: 16px;
+padding-left: 16px;
+padding-right: var(--mlu-gtr);
+padding-left: var(--mlu-gtr);
+margin-bottom: 32px;
+margin-bottom: calc(var(--mlu-gtr) * 2);
 ```
 similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-general) = 1.
 
@@ -1975,16 +1979,17 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
-	.Ml-a_sm {
-		margin-left: auto;
-	}
-
-	.Ml0_sm {
-		margin-left: 0;
-	}
-
 	.Mb0_sm {
 		margin-bottom: 0px;
+	}
+
+	.Mx0_sm {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.Ml-a_sm {
+		margin-left: auto;
 	}
 
 	.Mx-a_sm {
@@ -1992,9 +1997,18 @@ Styleguide: core-utils.bd
 		margin-right: auto;
 	}
 
-	.Mx0_sm {
-		margin-left: 0;
-		margin-right: 0;
+	.Px0_sm {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.Px1gg_sm {
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: var(--mlu-gtr);
+		padding-left: var(--mlu-gtr);
 	}
 }
 
@@ -2134,16 +2148,17 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
-	.Ml-a_md {
-		margin-left: auto;
-	}
-
-	.Ml0_md {
-		margin-left: 0;
-	}
-
 	.Mb0_md {
 		margin-bottom: 0px;
+	}
+
+	.Mx0_md {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.Ml-a_md {
+		margin-left: auto;
 	}
 
 	.Mx-a_md {
@@ -2151,9 +2166,18 @@ Styleguide: core-utils.bd
 		margin-right: auto;
 	}
 
-	.Mx0_md {
-		margin-left: 0;
-		margin-right: 0;
+	.Px0_md {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.Px1gg_md {
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: var(--mlu-gtr);
+		padding-left: var(--mlu-gtr);
 	}
 }
 
@@ -2301,16 +2325,17 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
-	.Ml-a_lg {
-		margin-left: auto;
-	}
-
-	.Ml0_lg {
-		margin-left: 0;
-	}
-
 	.Mb0_lg {
 		margin-bottom: 0px;
+	}
+
+	.Mx0_lg {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.Ml-a_lg {
+		margin-left: auto;
 	}
 
 	.Mx-a_lg {
@@ -2318,9 +2343,18 @@ Styleguide: core-utils.bd
 		margin-right: auto;
 	}
 
-	.Mx0_lg {
-		margin-left: 0;
-		margin-right: 0;
+	.Px0_lg {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.Px1gg_lg {
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: var(--mlu-gtr);
+		padding-left: var(--mlu-gtr);
 	}
 }
 
@@ -2460,16 +2494,17 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
-	.Ml-a_xl {
-		margin-left: auto;
-	}
-
-	.Ml0_xl {
-		margin-left: 0;
-	}
-
 	.Mb0_xl {
 		margin-bottom: 0px;
+	}
+
+	.Mx0_xl {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.Ml-a_xl {
+		margin-left: auto;
 	}
 
 	.Mx-a_xl {
@@ -2477,9 +2512,18 @@ Styleguide: core-utils.bd
 		margin-right: auto;
 	}
 
-	.Mx0_xl {
-		margin-left: 0;
-		margin-right: 0;
+	.Px0_xl {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.Px1gg_xl {
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: var(--mlu-gtr);
+		padding-left: var(--mlu-gtr);
 	}
 
 	.Dir-r_xl {
