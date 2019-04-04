@@ -901,6 +901,7 @@ $calc: false, $prop: "width", $css-vars: false) {
 //
 // $display = inline-block - display type. Can be value of CSS `display` property.
 // $gutters = $mlu-grid-gutters - map with column gutters values on breakpoints.
+// You can also pass a number if you need the same gutter on all breakpoints.
 // Custom gutters only work when the `$css-vars = false`.
 // $calc = false - bool flag for generation CSS `calc()` fallback. It can needed only
 // for "col" `$type`.
@@ -915,17 +916,12 @@ $calc: false, $prop: "width", $css-vars: false) {
 @mixin mlu-row-col($display: inline-block, $gutters: $mlu-grid-gutters,
 $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	$grid-gutters: $gutters;
-	$xs-gutter: if($css-vars, $mlu-grid-default-gtr, $mlu-gtr-sm);
 
 	@if type-of($gutters) == "number" {
 		$grid-gutters: ($mlu-bp-xs: $gutters);
-	} @else if type-of($gutters) == "map" {
-		$xs-gutter: if(map-has-key($gutters, $mlu-bp-xs), map-get($gutters, $mlu-bp-xs), $xs-gutter);
-	} @else {
+	} @else if type-of($gutters) != "map" {
 		@error "Wrong type of argument $gutters: '#{type-of($gutters)}'. Expected 'number' or 'map'";
 	}
-
-	$init-gutter: if($xs-gutter == map-get($grid-gutters, $mlu-bp-sm), -1, false);
 
 	position: relative;
 	display: $display;
@@ -941,8 +937,8 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	@if $type == "col" {
 		width: 100%;
 
-		@include mlu-generate-gutter($init-gutter, "padding", $grid-gutters, $calc, $css-vars: $css-vars);
-		@include mlu-generate-gutter($init-gutter, $gutters: $grid-gutters, $calc: $calc, $direct: "bottom", $coef: 2, $css-vars: $css-vars);
+		@include mlu-generate-gutter($mlu-gtr-sm, "padding", $grid-gutters, $calc, $css-vars: $css-vars);
+		@include mlu-generate-gutter($mlu-gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: "bottom", $coef: 2, $css-vars: $css-vars);
 
 		&.row {
 			margin-bottom: 0px;

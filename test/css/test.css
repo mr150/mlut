@@ -18,16 +18,33 @@
 	background-color: #ccc;
 }
 
-.test-content,
-.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) {
+.test-content {
 	padding: 10px;
 	color: #306;
 	font-size: 1.1rem;
 	background-color: #c9c;
 }
 
-.test-cell {
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) {
+	background-clip: content-box;
+}
+
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > * {
+	padding: 0px 12px;
+}
+
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > :first-child {
+	padding-top: 4px;
+}
+
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > :last-child {
+	padding-bottom: 4px;
+}
+
+.test-cell,
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) {
 	color: #306;
+	font-size: 1.1rem;
 	background-color: #c9c;
 }
 

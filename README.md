@@ -43,7 +43,7 @@ Add the file to your page like here:
 And just add MLUT classes to markup:
 ```html
 <div class="row D-f">
-	<div class="row__col W3gc_md">
+	<div class="row__col W3gs_md">
 		<h3>Simple text</h3>
 ```
 
@@ -84,7 +84,7 @@ Then you can import blocks and utilities how it is done in the `src/sass/mlut.sc
 @import "../core-blocks/wrapper/wrapper";
 @import "../core-utils/display";
 
-@include mlu-bpm($mlu-bp-md) {
+@include mlu-bpm("md") {
 	.input--common {
 		padding: mlu-px2em(16px) 16px;
 	}
