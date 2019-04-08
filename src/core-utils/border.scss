@@ -1,15 +1,84 @@
 /*
 Border
 
+By default, the text color of the DOM node is used for the border.
+
+* `Bd` \- <span class="Bd">add border with 1px width all around.</span>
+* `Bdt` \- add border with 1px width on top.
+* `Bdr` \- border right.
+* `Bdb` \- border bottom.
+* `Bdl` \- border left.
+* `Bdx` \- left and rigth.
+* `Bdy` \- top and bottom.
 * `Bdcl-c` \- remove the separation between table cells.
 * `Bdrs50p` \- makes the shape visually round.
-* `Bd0` \- remove border.
 
 Styleguide: core-utils.bd
 */
 
-.Bd0 {
-	border: 0px;
+/*
+Bdw
+
+Border width.
+
+0 - remove border
+2 - <div class="Bd Bdw2 P2su Mb1gg">2px</div>
+1su - <div class="Bd Bdw1su P2su">1 space unit</div>
+
+Styleguide: core-utils.bd.bdw
+*/
+
+/*
+Bds
+
+Border style. Changes the style of the border on **all** sides at once.
+
+dt - <div class="Bd Bdw1su Bds-dt P2su Mb1gg">dotted</div>
+ds - <div class="Bd Bdw1su Bds-ds P2su">dashed</div>
+
+Styleguide: core-utils.bd.bds
+*/
+
+.Bd {
+	border: 1px solid;
+}
+
+@each $value in $mlu-main-directions {
+	$letter: str-slice($value, 1, 1);
+
+	.Bd#{$letter} {
+		border-#{$value}: 1px solid;
+	}
+}
+
+.Bdy {
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+}
+
+.Bdx {
+	border-right: 1px solid;
+	border-left: 1px solid;
+}
+
+.Bds-dt {
+	border-style: dotted;
+}
+
+.Bds-ds {
+	border-style: dashed;
+}
+
+.Bdw0 {
+	border-width: 0px;
+}
+
+.Bdw2 {
+	border-width: 2px;
+}
+
+.Bdw1su {
+	border-width: $mlu-su;
 }
 
 .Bdcl-c {

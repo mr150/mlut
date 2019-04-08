@@ -8,6 +8,7 @@ Group of utilities that manage the display of text.
 * `C-i`
 * `Whs-nw`
 * `Lh-n` \- line-height normal.
+* `Lh1`
 
 Styleguide: core-utils.text
 */
@@ -103,6 +104,10 @@ Styleguide: core-utils.text.mtov
 
 .Lh-n {
 	line-height: normal;
+}
+
+.Lh1 {
+	line-height: 1;
 }
 
 .Whs-nw {
