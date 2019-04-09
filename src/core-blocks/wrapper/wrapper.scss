@@ -22,5 +22,5 @@ Styleguide: core-blocks.wrapper
 	display: block;
 	max-width: $mlu-wrapper-max-width;
 	margin: 0 auto;
-	@include mlu-generate-gutter($type: "padding");
+	@include mlu-make-gtr($type: "padding");
 }

@@ -21,23 +21,23 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 }
 
 .Pt1gg {
-	@include mlu-generate-gutter("rem", "padding", $direct: "top");
+	@include mlu-make-gtr("rem", "padding", $direct: "top");
 }
 
 .Pb1gg {
-	@include mlu-generate-gutter("rem", "padding", $direct: "bottom");
+	@include mlu-make-gtr("rem", "padding", $direct: "bottom");
 }
 
 .Pl1gg {
-	@include mlu-generate-gutter($type: "padding", $direct: "left");
+	@include mlu-make-gtr($type: "padding", $direct: "left");
 }
 
 .Pl2gg {
-	@include mlu-generate-gutter($type: "padding", $direct: "left", $coef: 2);
+	@include mlu-make-gtr($type: "padding", $direct: "left", $coef: 2);
 }
 
 .Px1gg {
-	@include mlu-generate-gutter($type: "padding");
+	@include mlu-make-gtr($type: "padding");
 }
 
 @each $key, $value in $mlu-grid-gutters {
@@ -48,7 +48,7 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 		}
 
 		.Px1gg_#{$key} {
-			@include mlu-generate-gutter($type: "padding");
+			@include mlu-make-gtr($type: "padding");
 		}
 	}
 }
