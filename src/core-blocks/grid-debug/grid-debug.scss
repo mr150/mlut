@@ -22,11 +22,11 @@ Styleguide: core-blocks.grid-debug
 
 			@if $item-index == 1 {
 				/* autoprefixer: off */
-				padding: calc(var(#{$--mlu-gtr-rem}) * 3) 0px;
+				padding: calc(var(#{$--mlu-gg-rem}) * 3) 0px;
 				background-image: linear-gradient(90deg,
-				$mlu-debug-gutter-color var(#{$--mlu-gtr}),
-				$mlu-debug-col-color var(#{$--mlu-gtr}),
-				$mlu-debug-col-color calc(100% - var(#{$--mlu-gtr})),
+				$mlu-debug-gutter-color var(#{$--mlu-gg}),
+				$mlu-debug-col-color var(#{$--mlu-gg}),
+				$mlu-debug-col-color calc(100% - var(#{$--mlu-gg})),
 				$mlu-debug-gutter-color 0);
 			} @else {
 				$prev-bp-name: mlu-bp-prev-name($key);

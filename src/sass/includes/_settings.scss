@@ -268,16 +268,18 @@ Modular grid
 
 Space on the page divided into a certain number of columns with gutters.
 
-In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called *columns*. Columns are separated by indents which are called *gutters*.
+In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. <br> These parts called **columns**. Columns are separated by indents which are called **gutters**.
 
 The gutters have different widths at different breakpoints. From `xs` to `lg` gutter is 12px. From `lg` gutter is 16px.
+
+Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block you can see the graphic display of the grid.
+
+### Grid units
 
 You can set the [width](section-core-utils.html#kssref-core-utils-bxz-w) and [offset](section-core-utils.html#kssref-core-utils-margin-ml) for the layout parts in the grid units. These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 3 types of grid units:
 * **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column. For the presence of these units meets the flag [$MLU-FLAG-COL-MARGIN](section-sass-tools.html#kssref-sass-tools-settings-flags). By default it is off.
 * **grid-spans** \- `gs`. 1gs is width of 1 column with 2 gutters.
 * **grid-gutters** \- `gg`. 1gg is width of 1 gutter.
-
-Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block you can see the graphic display of the grid.
 
 Modular grid are generated depending on this [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
 
@@ -396,7 +398,7 @@ $MLU-FLAG-CSS-VARS: 1 !default;
 // $mlu-su = 4px - space unit in px. Depends on `$mlu-su-cf`. Use this variable to set the values in px.
 // $mlu-base-font-size = $MLU-BROWSER-FONT-SIZE - base font size on website. Is used for `rems` fallback in [row elements](section-core-blocks.html#kssref-core-blocks-row) and in [mlu-px2em](section-sass-tools.html#kssref-sass-tools-functions-px2em) default font size.
 // $mlu-grid-default-cols = 12 - default columns count on large width screen (>960px).
-// $mlu-grid-default-gtr = 16px - default gutter on large width screen. Used as fallback for [--mlu-gtr](section-core-styles.html#kssref-core-styles-css_vars).
+// $mlu-grid-default-gtr = 16px - default gutter on large width screen. Used as fallback for [--mlu-gg](section-core-styles.html#kssref-core-styles-css_vars).
 // $mlu-main-directions = ("top", "right", "bottom", "left") - List with directions for css properties generation. It used in [mlu-mk-gtr](section-sass-tools.html#kssref-sass-tools-mixins-mk_gtr) mixin.
 // $mlu-grid-gutter-fallback = 1.5% - Fallback for grid gutter's width if CSS `calc()` not supported
 //
@@ -567,21 +569,15 @@ $mlu-grid-gutters: (
 // In addition to variables, the names of custom properties are contained in the map `$mlu-css-vars`.
 // Below are the names of the variables, the corresponding keys in the map and names of custom properties.
 //
-// $--mlu-su = --mlu-su - `su`.
-// $--mlu-su-rem = --mlu-su-rem - `su-rem`.
-// $--mlu-gtr = --mlu-gtr - `gtr`.
-// $--mlu-gtr-rem = --mlu-gtr-rem - `gtr-rem`.
+// $--mlu-gg = --mlu-gg - `gg`.
+// $--mlu-gg-rem = --mlu-gg-rem - `gg-rem`.
 //
 // Styleguide: sass-tools.settings.css_vars.names
 
-$--mlu-su: "--mlu-su" !default;
-$--mlu-su-rem: "--mlu-su-rem" !default;
-$--mlu-gtr: "--mlu-gtr" !default;
-$--mlu-gtr-rem: "--mlu-gtr-rem" !default;
+$--mlu-gg: "--mlu-gg" !default;
+$--mlu-gg-rem: "--mlu-gg-rem" !default;
 
 $mlu-css-vars: (
-	"su": $--mlu-su,
-	"su-rem": $--mlu-su-rem,
-	"gtr": $--mlu-gtr,
-	"gtr-rem": $--mlu-gtr-rem,
+	"gg": $--mlu-gg,
+	"gg-rem": $--mlu-gg-rem,
 ) !default;

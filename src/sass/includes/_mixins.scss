@@ -293,7 +293,7 @@ Styleguide: sass-tools.mixins
 // ```css
 //.block {
 //		margin-right: 32px;
-//		margin-right: calc(var(--mlu-gtr) * 2);
+//		margin-right: calc(var(--mlu-gg) * 2);
 //}
 //
 //.foo {
@@ -345,14 +345,14 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 
 	@if $init-gutter and $init-gutter != -1 {
 		$var-value: if($coef != 1,
-		calc(var(#{$--mlu-gtr}) * #{$coef}),
-		var(#{$--mlu-gtr}));
+		calc(var(#{$--mlu-gg}) * #{$coef}),
+		var(#{$--mlu-gg}));
 
 		@if $init-gutter == "rem" {
 			$prev-value: mlu-px2rem($prev-value);
 			$var-value: if($coef != 1,
-			calc(var(#{$--mlu-gtr-rem}) * #{$coef}),
-			var(#{$--mlu-gtr-rem}));
+			calc(var(#{$--mlu-gg-rem}) * #{$coef}),
+			var(#{$--mlu-gg-rem}));
 		}
 
 		$tmp-val: if($calc, calc(#{$prev-value * $coef}), $prev-value * $coef);
@@ -673,7 +673,7 @@ $body-size: (100% 48%), $change: false) {
 //@media (min-width: 520px) {
 //		.block {
 //			width: calc(16.666% - 32px);
-//			width: calc(16.666% - var(--mlu-gtr) * 2);
+//			width: calc(16.666% - var(--mlu-gg) * 2);
 //		}
 //
 //		.foo {
@@ -840,12 +840,12 @@ $body-size: (100% 48%), $change: false) {
 @mixin _mlu-mk-width($width, $unit, $gutter: $mlu-gtr-sm,
 $calc: false, $prop: "width", $css-vars: false) {
 	$calc-val: calc(#{$width} - #{$gutter * 2});
-	$var-val: calc(#{$width} - var(#{$--mlu-gtr}) * 2);
+	$var-val: calc(#{$width} - var(#{$--mlu-gg}) * 2);
 	$width-fallback: if($calc, mlu-decimal-floor($width, 2) - ($mlu-grid-gutter-fallback * 2), 0);
 
 	@if $prop == "margin-left" {
 		$calc-val: calc(#{$width} + #{$gutter});
-		$var-val: calc(#{$width} + var(#{$--mlu-gtr}));
+		$var-val: calc(#{$width} + var(#{$--mlu-gg}));
 		$width-fallback: if($calc, mlu-decimal-floor($width, 2) + $mlu-grid-gutter-fallback, 0);
 	}
 

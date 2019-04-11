@@ -269,16 +269,18 @@ Modular grid
 
 Space on the page divided into a certain number of columns with gutters.
 
-In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called *columns*. Columns are separated by indents which are called *gutters*.
+In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. <br> These parts called **columns**. Columns are separated by indents which are called **gutters**.
 
 The gutters have different widths at different breakpoints. From `xs` to `lg` gutter is 12px. From `lg` gutter is 16px.
+
+Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block you can see the graphic display of the grid.
+
+### Grid units
 
 You can set the [width](section-core-utils.html#kssref-core-utils-bxz-w) and [offset](section-core-utils.html#kssref-core-utils-margin-ml) for the layout parts in the grid units. These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 3 types of grid units:
 * **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column. For the presence of these units meets the flag [$MLU-FLAG-COL-MARGIN](section-sass-tools.html#kssref-sass-tools-settings-flags). By default it is off.
 * **grid-spans** \- `gs`. 1gs is width of 1 column with 2 gutters.
 * **grid-gutters** \- `gg`. 1gg is width of 1 gutter.
-
-Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block you can see the graphic display of the grid.
 
 Modular grid are generated depending on this [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
 
@@ -384,17 +386,17 @@ The values and meaning of many custom properties correspond to the [SASS setting
 
 Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags).
 
---mlu-gtr = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
+--mlu-gg = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
 Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
 Fallback is [$mlu-grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).
---mlu-gtr-rem = 0.75rem - grid gutter in `rem`.
+--mlu-gg-rem = 0.75rem - grid gutter in `rem`.
 
 Styleguide: core-styles.css_vars
 */
 
 :root {
-	--mlu-gtr: 12px;
-	--mlu-gtr-rem: 0.75rem;
+	--mlu-gg: 12px;
+	--mlu-gg-rem: 0.75rem;
 }
 
 /*
@@ -673,11 +675,11 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	padding-left: 16px;
 	padding-right: 16px;
 	padding-left: 16px;
-	padding-right: var(--mlu-gtr);
-	padding-left: var(--mlu-gtr);
+	padding-right: var(--mlu-gg);
+	padding-left: var(--mlu-gg);
 	margin-bottom: 32px;
 	margin-bottom: 32px;
-	margin-bottom: calc(var(--mlu-gtr) * 2);
+	margin-bottom: calc(var(--mlu-gg) * 2);
 }
 
 .row__col.row {
@@ -712,8 +714,8 @@ Styleguide: core-blocks.wrapper
 	padding-left: 16px;
 	padding-right: 16px;
 	padding-left: 16px;
-	padding-right: var(--mlu-gtr);
-	padding-left: var(--mlu-gtr);
+	padding-right: var(--mlu-gg);
+	padding-left: var(--mlu-gg);
 }
 
 /*
@@ -1515,49 +1517,49 @@ Styleguide: core-utils.margin.mx
 .Mt4gg {
 	margin-top: 4rem;
 	margin-top: 4rem;
-	margin-top: calc(var(--mlu-gtr-rem) * 4);
+	margin-top: calc(var(--mlu-gg-rem) * 4);
 }
 
 .Mb4gg {
 	margin-bottom: 4rem;
 	margin-bottom: 4rem;
-	margin-bottom: calc(var(--mlu-gtr-rem) * 4);
+	margin-bottom: calc(var(--mlu-gg-rem) * 4);
 }
 
 .Mt3gg {
 	margin-top: 3rem;
 	margin-top: 3rem;
-	margin-top: calc(var(--mlu-gtr-rem) * 3);
+	margin-top: calc(var(--mlu-gg-rem) * 3);
 }
 
 .Mb3gg {
 	margin-bottom: 3rem;
 	margin-bottom: 3rem;
-	margin-bottom: calc(var(--mlu-gtr-rem) * 3);
+	margin-bottom: calc(var(--mlu-gg-rem) * 3);
 }
 
 .Mt2gg {
 	margin-top: 2rem;
 	margin-top: 2rem;
-	margin-top: calc(var(--mlu-gtr-rem) * 2);
+	margin-top: calc(var(--mlu-gg-rem) * 2);
 }
 
 .Mb2gg {
 	margin-bottom: 2rem;
 	margin-bottom: 2rem;
-	margin-bottom: calc(var(--mlu-gtr-rem) * 2);
+	margin-bottom: calc(var(--mlu-gg-rem) * 2);
 }
 
 .Mt1gg {
 	margin-top: 1rem;
 	margin-top: 1rem;
-	margin-top: var(--mlu-gtr-rem);
+	margin-top: var(--mlu-gg-rem);
 }
 
 .Mb1gg {
 	margin-bottom: 1rem;
 	margin-bottom: 1rem;
-	margin-bottom: var(--mlu-gtr-rem);
+	margin-bottom: var(--mlu-gg-rem);
 }
 
 .Mb1su {
@@ -1579,31 +1581,31 @@ Styleguide: core-utils.margin.mx
 .Mb-2gg {
 	margin-bottom: -32px;
 	margin-bottom: -32px;
-	margin-bottom: calc(var(--mlu-gtr) * -2);
+	margin-bottom: calc(var(--mlu-gg) * -2);
 }
 
 .Ml-2gg {
 	margin-left: -32px;
 	margin-left: -32px;
-	margin-left: calc(var(--mlu-gtr) * -2);
+	margin-left: calc(var(--mlu-gg) * -2);
 }
 
 .Ml2gg {
 	margin-left: 32px;
 	margin-left: 32px;
-	margin-left: calc(var(--mlu-gtr) * 2);
+	margin-left: calc(var(--mlu-gg) * 2);
 }
 
 .Ml-1gg {
 	margin-left: -16px;
 	margin-left: -16px;
-	margin-left: calc(var(--mlu-gtr) * -1);
+	margin-left: calc(var(--mlu-gg) * -1);
 }
 
 .Ml1gg {
 	margin-left: 16px;
 	margin-left: 16px;
-	margin-left: var(--mlu-gtr);
+	margin-left: var(--mlu-gg);
 }
 
 .Ml-2su {
@@ -1619,8 +1621,8 @@ Styleguide: core-utils.margin.mx
 	margin-left: 16px;
 	margin-right: 16px;
 	margin-left: 16px;
-	margin-right: var(--mlu-gtr);
-	margin-left: var(--mlu-gtr);
+	margin-right: var(--mlu-gg);
+	margin-left: var(--mlu-gg);
 }
 
 .Mx-1gg {
@@ -1628,8 +1630,8 @@ Styleguide: core-utils.margin.mx
 	margin-left: -16px;
 	margin-right: -16px;
 	margin-left: -16px;
-	margin-right: calc(var(--mlu-gtr) * -1);
-	margin-left: calc(var(--mlu-gtr) * -1);
+	margin-right: calc(var(--mlu-gg) * -1);
+	margin-left: calc(var(--mlu-gg) * -1);
 }
 
 /*
@@ -1655,25 +1657,25 @@ Styleguide: core-utils.padding
 .Pt1gg {
 	padding-top: 1rem;
 	padding-top: 1rem;
-	padding-top: var(--mlu-gtr-rem);
+	padding-top: var(--mlu-gg-rem);
 }
 
 .Pb1gg {
 	padding-bottom: 1rem;
 	padding-bottom: 1rem;
-	padding-bottom: var(--mlu-gtr-rem);
+	padding-bottom: var(--mlu-gg-rem);
 }
 
 .Pl1gg {
 	padding-left: 16px;
 	padding-left: 16px;
-	padding-left: var(--mlu-gtr);
+	padding-left: var(--mlu-gg);
 }
 
 .Pl2gg {
 	padding-left: 32px;
 	padding-left: 32px;
-	padding-left: calc(var(--mlu-gtr) * 2);
+	padding-left: calc(var(--mlu-gg) * 2);
 }
 
 .Px1gg {
@@ -1681,8 +1683,8 @@ Styleguide: core-utils.padding
 	padding-left: 16px;
 	padding-right: 16px;
 	padding-left: 16px;
-	padding-right: var(--mlu-gtr);
-	padding-left: var(--mlu-gtr);
+	padding-right: var(--mlu-gg);
+	padding-left: var(--mlu-gg);
 }
 
 /*
@@ -2084,8 +2086,8 @@ Styleguide: core-utils.bd.bds
 		padding-left: 16px;
 		padding-right: 16px;
 		padding-left: 16px;
-		padding-right: var(--mlu-gtr);
-		padding-left: var(--mlu-gtr);
+		padding-right: var(--mlu-gg);
+		padding-left: var(--mlu-gg);
 	}
 
 	.Px0_sm {
@@ -2253,8 +2255,8 @@ Styleguide: core-utils.bd.bds
 		padding-left: 16px;
 		padding-right: 16px;
 		padding-left: 16px;
-		padding-right: var(--mlu-gtr);
-		padding-left: var(--mlu-gtr);
+		padding-right: var(--mlu-gg);
+		padding-left: var(--mlu-gg);
 	}
 
 	.Px0_md {
@@ -2265,11 +2267,11 @@ Styleguide: core-utils.bd.bds
 
 @media (min-width: 960px) {
 	:root {
-		--mlu-gtr: 16px;
+		--mlu-gg: 16px;
 	}
 
 	:root {
-		--mlu-gtr-rem: 1rem;
+		--mlu-gg-rem: 1rem;
 	}
 
 	.D-n_lg {
@@ -2430,8 +2432,8 @@ Styleguide: core-utils.bd.bds
 		padding-left: 16px;
 		padding-right: 16px;
 		padding-left: 16px;
-		padding-right: var(--mlu-gtr);
-		padding-left: var(--mlu-gtr);
+		padding-right: var(--mlu-gg);
+		padding-left: var(--mlu-gg);
 	}
 
 	.Px0_lg {
@@ -2599,8 +2601,8 @@ Styleguide: core-utils.bd.bds
 		padding-left: 16px;
 		padding-right: 16px;
 		padding-left: 16px;
-		padding-right: var(--mlu-gtr);
-		padding-left: var(--mlu-gtr);
+		padding-right: var(--mlu-gg);
+		padding-left: var(--mlu-gg);
 	}
 
 	.Px0_xl {
