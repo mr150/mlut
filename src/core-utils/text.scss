@@ -119,7 +119,7 @@ Styleguide: core-utils.text.mtov
 }
 
 @each $key, $value in $mlu-grid-cols {
-	$mq: ($key, mlu-breakpoint-next($key));
+	$mq: ($key, mlu-bp-next($key));
 
 	@if index($mlu-grid-cols, ($key $value)) == length($mlu-grid-cols) {
 		$mq: $key;

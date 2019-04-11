@@ -29,7 +29,7 @@ Styleguide: core-blocks.grid-debug
 				$mlu-debug-col-color calc(100% - var(#{$--mlu-gtr})),
 				$mlu-debug-gutter-color 0);
 			} @else {
-				$prev-bp-name: mlu-breakpoint-prev-name($key);
+				$prev-bp-name: mlu-bp-prev-name($key);
 				$prev-col-width: mlu-decimal-floor(1 / mlu-grid-cols-count($prev-bp-name) * 100%, 3);
 			}
 

@@ -21,34 +21,26 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 }
 
 .Pt1gg {
-	@include mlu-make-gtr("rem", "padding", $direct: "top");
+	@include mlu-mk-gtr("rem", "padding", $direct: "top");
 }
 
 .Pb1gg {
-	@include mlu-make-gtr("rem", "padding", $direct: "bottom");
+	@include mlu-mk-gtr("rem", "padding", $direct: "bottom");
 }
 
 .Pl1gg {
-	@include mlu-make-gtr($type: "padding", $direct: "left");
+	@include mlu-mk-gtr($type: "padding", $direct: "left");
 }
 
 .Pl2gg {
-	@include mlu-make-gtr($type: "padding", $direct: "left", $coef: 2);
+	@include mlu-mk-gtr($type: "padding", $direct: "left", $coef: 2);
 }
 
-.Px1gg {
-	@include mlu-make-gtr($type: "padding");
+@include mlu-bp-all(".Px1gg") {
+	@include mlu-mk-gtr($type: "padding");
 }
 
-@each $key, $value in $mlu-grid-gutters {
-	@include mlu-bpm($key) {
-		.Px0_#{$key} {
-			padding-left: 0;
-			padding-right: 0;
-		}
-
-		.Px1gg_#{$key} {
-			@include mlu-make-gtr($type: "padding");
-		}
-	}
+@include mlu-bp-all(".Px0", 0) {
+	padding-left: 0;
+	padding-right: 0;
 }

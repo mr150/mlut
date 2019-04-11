@@ -17,7 +17,7 @@ Styleguide: core-styles.css_vars
 
 @if $MLU-FLAG-CSS-VARS {
 	:root {
-		@include mlu-make-gtr($type: $--mlu-gtr, $css-vars: false);
-		@include mlu-make-gtr(mlu-px2rem($mlu-gtr-sm), $type: $--mlu-gtr-rem, $css-vars: false);
+		@include mlu-mk-gtr($type: $--mlu-gtr, $css-vars: false);
+		@include mlu-mk-gtr(mlu-px2rem($mlu-gtr-sm), $type: $--mlu-gtr-rem, $css-vars: false);
 	}
 }

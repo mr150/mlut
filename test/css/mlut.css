@@ -2079,11 +2079,6 @@ Styleguide: core-utils.bd.bds
 		margin-right: auto;
 	}
 
-	.Px0_sm {
-		padding-left: 0;
-		padding-right: 0;
-	}
-
 	.Px1gg_sm {
 		padding-right: 16px;
 		padding-left: 16px;
@@ -2091,6 +2086,11 @@ Styleguide: core-utils.bd.bds
 		padding-left: 16px;
 		padding-right: var(--mlu-gtr);
 		padding-left: var(--mlu-gtr);
+	}
+
+	.Px0_sm {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
@@ -2248,11 +2248,6 @@ Styleguide: core-utils.bd.bds
 		margin-right: auto;
 	}
 
-	.Px0_md {
-		padding-left: 0;
-		padding-right: 0;
-	}
-
 	.Px1gg_md {
 		padding-right: 16px;
 		padding-left: 16px;
@@ -2260,6 +2255,11 @@ Styleguide: core-utils.bd.bds
 		padding-left: 16px;
 		padding-right: var(--mlu-gtr);
 		padding-left: var(--mlu-gtr);
+	}
+
+	.Px0_md {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
@@ -2425,11 +2425,6 @@ Styleguide: core-utils.bd.bds
 		margin-right: auto;
 	}
 
-	.Px0_lg {
-		padding-left: 0;
-		padding-right: 0;
-	}
-
 	.Px1gg_lg {
 		padding-right: 16px;
 		padding-left: 16px;
@@ -2437,6 +2432,11 @@ Styleguide: core-utils.bd.bds
 		padding-left: 16px;
 		padding-right: var(--mlu-gtr);
 		padding-left: var(--mlu-gtr);
+	}
+
+	.Px0_lg {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
@@ -2594,11 +2594,6 @@ Styleguide: core-utils.bd.bds
 		margin-right: auto;
 	}
 
-	.Px0_xl {
-		padding-left: 0;
-		padding-right: 0;
-	}
-
 	.Px1gg_xl {
 		padding-right: 16px;
 		padding-left: 16px;
@@ -2606,6 +2601,11 @@ Styleguide: core-utils.bd.bds
 		padding-left: 16px;
 		padding-right: var(--mlu-gtr);
 		padding-left: var(--mlu-gtr);
+	}
+
+	.Px0_xl {
+		padding-left: 0;
+		padding-right: 0;
 	}
 
 	.Dir-r_xl {

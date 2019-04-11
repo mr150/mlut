@@ -79,8 +79,8 @@ Styleguide: sass-tools.mixins
 		@if type-of($item) == "string" {
 			$bp-val: append($bp-val,
 			if($item == $to,
-			mlu-breakpoint($item) - 1,
-			mlu-breakpoint($item)));
+			mlu-bp($item) - 1,
+			mlu-bp($item)));
 		} @else if type-of($item) == "number" and not unitless($item) {
 			$item-to: $item;
 
@@ -114,9 +114,9 @@ Styleguide: sass-tools.mixins
 	}
 }
 
-// mlu-mods-from-sprite
+// mlu-sprite-mods
 //
-// Generator BEM modifiers for block with icon.
+// Generator BEM modifiers for block with [icon](#kssref-sass-tools-mixins-sprite_icon).
 // ```scss
 //$icons: (
 //		"vk": (27px, 16px, -5px, -5px),
@@ -124,7 +124,7 @@ Styleguide: sass-tools.mixins
 //);
 //
 //.soc-icon {
-//		@include mlu-mods-from-sprite($icons);
+//		@include mlu-sprite-mods($icons);
 //}
 // ```
 // CSS
@@ -151,9 +151,9 @@ Styleguide: sass-tools.mixins
 // parameter in block class.
 // $pseudo = "before" - pseudo-element in which the icon will be inserted.
 //
-// Styleguide: sass-tools.mixins.mods_from_sprite
+// Styleguide: sass-tools.mixins.sprite_mods
 
-@mixin mlu-mods-from-sprite($sprite, $pseudo: "before") {
+@mixin mlu-sprite-mods($sprite, $pseudo: "before") {
 	@if type-of($sprite) != "map" {
 		@error "Wrong type of argument $sprite: '#{type-of($sprite)}'. Expected 'map'";
 	}
@@ -251,12 +251,12 @@ Styleguide: sass-tools.mixins
 	}
 }
 
-// mlu-clearfix
+// mlu-mCl
 //
 // Generate clearfix for float layout.
 // ```scss
 //.block {
-//		@include mlu-clearfix;
+//		@include mlu-mCl;
 //}
 // ```
 // CSS
@@ -268,8 +268,8 @@ Styleguide: sass-tools.mixins
 //}
 // ```
 //
-// Styleguide: sass-tools.mixins.clearfix
-@mixin mlu-clearfix {
+// Styleguide: sass-tools.mixins.mcl
+@mixin mlu-mCl {
 	&:after {
 		display: table;
 		clear: both;
@@ -277,16 +277,16 @@ Styleguide: sass-tools.mixins
 	}
 }
 
-// mlu-make-gtr
+// mlu-mk-gtr
 //
 // Generate fields or indents in grid-gutters on different breakpoints.
 // ```scss
 //.block {
-//		@include mlu-make-gtr($direct: "right", $coef: 2);
+//		@include mlu-mk-gtr($direct: "right", $coef: 2);
 //}
 //
 //.foo {
-//		@include mlu-make-gtr($direct: "right", $coef: 2, $css-vars: false);
+//		@include mlu-mk-gtr($direct: "right", $coef: 2, $css-vars: false);
 //}
 // ```
 // CSS
@@ -322,9 +322,9 @@ Styleguide: sass-tools.mixins
 // $css-vars = $MLU-FLAG-CSS-VARS - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
 // Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
 //
-// Styleguide: sass-tools.mixins.make_gtr
+// Styleguide: sass-tools.mixins.mk_gtr
 
-@mixin mlu-make-gtr($init-gutter: $mlu-gtr-sm, $type: "margin",
+@mixin mlu-mk-gtr($init-gutter: $mlu-gtr-sm, $type: "margin",
 $gutters: $mlu-grid-gutters, $calc: $MLU-FLAG-CALC-FALLBACK, $direct: "x",
 $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 	$custom-prop: false;
@@ -443,12 +443,12 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 	}
 }
 
-// mlu-icon
+// mlu-sprite-icon
 //
 // Generate block with icon from css-sprite in pseudo-element.
 // ```scss
 //.icon {
-//		@include mlu-icon();
+//		@include mlu-sprite-icon();
 //}
 // ```
 // CSS
@@ -469,9 +469,9 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 // $pseudo = "before" - type of pseudo-element: before or after.
 // @content - can take additional CSS into pseudo-element.
 //
-// Styleguide: sass-tools.mixins.icon
+// Styleguide: sass-tools.mixins.sprite_icon
 
-@mixin mlu-icon($sprite: "../img/css_sprites.png", $pseudo: "before") {
+@mixin mlu-sprite-icon($sprite: "../img/css_sprites.png", $pseudo: "before") {
 	position: relative;
 
 	&:#{$pseudo} {
@@ -629,12 +629,12 @@ $body-size: (100% 48%), $change: false) {
 		linear-gradient($edge-ang-bot, transparent $edge-cs, $last-color $edge-cs);
 }
 
-// mlu-restore-outline
+// mlu-restore-Ol
 //
 // Restore default browser outline on focus state.
 // ```scss
 //.link {
-//		@include mlu-restore-outline;
+//		@include mlu-restore-Ol;
 //}
 // ```
 // CSS
@@ -645,9 +645,9 @@ $body-size: (100% 48%), $change: false) {
 //}
 // ```
 //
-// Styleguide: sass-tools.mixins.restore_outline
+// Styleguide: sass-tools.mixins.restore_ol
 
-@mixin mlu-restore-outline {
+@mixin mlu-restore-Ol {
 	&:focus {
 		outline: 1px dotted #212121;
 		outline: -webkit-focus-ring-color auto 5px;
@@ -750,7 +750,7 @@ $body-size: (100% 48%), $change: false) {
 			$prev-gutter: $mlu-grid-default-gtr;
 		}
 
-		@include _mlu-make-width($col-width, $custom-unit, $prev-gutter, $calc-fallback, $type, $css-vars);
+		@include _mlu-mk-width($col-width, $custom-unit, $prev-gutter, $calc-fallback, $type, $css-vars);
 		$calc-fallback: false;
 
 		// Repeat generation utility with new gutter if it changed on breakpoint.
@@ -760,7 +760,7 @@ $body-size: (100% 48%), $change: false) {
 			@each $key, $value in $grid-gutters {
 				@if $value != $prev-gutter and $custom-unit == "gc" {
 					@include mlu-bpm($key) {
-						@include _mlu-make-width($col-width, $custom-unit, $value, $calc-fallback, $type);
+						@include _mlu-mk-width($col-width, $custom-unit, $value, $calc-fallback, $type);
 					}
 				}
 
@@ -779,7 +779,7 @@ $body-size: (100% 48%), $change: false) {
 			// Repeat generation utility with new gutter if it changed on breakpoint.
 			@if $key == $bp or ($value > $col-gutter and $value != $prev-gutter) {
 				@include mlu-bpm($key) {
-					@include _mlu-make-width($col-width, $custom-unit, $value, $calc-fallback, $type);
+					@include _mlu-mk-width($col-width, $custom-unit, $value, $calc-fallback, $type);
 					$calc-fallback: false;
 				}
 
@@ -788,7 +788,7 @@ $body-size: (100% 48%), $change: false) {
 		}
 	} @else {
 		@include mlu-bpm($bp) {
-			@include _mlu-make-width($col-width, $custom-unit, $mlu-grid-default-gtr, $calc, $type, $css-vars);
+			@include _mlu-mk-width($col-width, $custom-unit, $mlu-grid-default-gtr, $calc, $type, $css-vars);
 		}
 	}
 }
@@ -837,7 +837,7 @@ $body-size: (100% 48%), $change: false) {
 
 // Private mixin for width and grid offset generation from 'mlu-W'.
 
-@mixin _mlu-make-width($width, $unit, $gutter: $mlu-gtr-sm,
+@mixin _mlu-mk-width($width, $unit, $gutter: $mlu-gtr-sm,
 $calc: false, $prop: "width", $css-vars: false) {
 	$calc-val: calc(#{$width} - #{$gutter * 2});
 	$var-val: calc(#{$width} - var(#{$--mlu-gtr}) * 2);
@@ -937,8 +937,8 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	@if $type == "col" {
 		width: 100%;
 
-		@include mlu-make-gtr($mlu-gtr-sm, "padding", $grid-gutters, $calc, $css-vars: $css-vars);
-		@include mlu-make-gtr($mlu-gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: "bottom", $coef: 2, $css-vars: $css-vars);
+		@include mlu-mk-gtr($mlu-gtr-sm, "padding", $grid-gutters, $calc, $css-vars: $css-vars);
+		@include mlu-mk-gtr($mlu-gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: "bottom", $coef: 2, $css-vars: $css-vars);
 
 		&.row {
 			margin-bottom: 0px;
@@ -978,12 +978,12 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	@include mlu-row-col($display, $type: "item");
 }
 
-// mlu-make-responsive
+// mlu-bp-all
 //
 // Generates the CSS rule on breakpoints, adding the name of the breakpoint to the selector, inside the corresponding media query.
 //
 // ```scss
-//@include mlu-make-responsive(".Bdw1") {
+//@include mlu-bp-all(".Bdw1") {
 //		border-width: 1px;
 //}
 // ```
@@ -1020,7 +1020,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 // You can also use mixin inside the rule. This will work as well as the example above:
 // ```scss
 //.Bdw1 {
-//		@include mlu-make-responsive() {
+//		@include mlu-bp-all() {
 //			border-width: 1px;
 //		}
 //}
@@ -1029,9 +1029,9 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 // $selector = & - selector of CSS rule. Can be `string` or `&`.
 // $xs = 1 - any type flag. If equal to 1, then the rule will first be generated outside of breakpoints(in `xs`).
 //
-// Styleguide: sass-tools.mixins.make_responsive
+// Styleguide: sass-tools.mixins.bp_all
 
-@mixin mlu-make-responsive($selector: &, $xs: 1) {
+@mixin mlu-bp-all($selector: &, $xs: 1) {
 	@if not $selector {
 		@error "'$selector' argument must not be null.";
 	}

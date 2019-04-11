@@ -91,11 +91,11 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 
 @for $i from $mlu-My-range through 1 {
 	.Mt#{$i}gg {
-		@include mlu-make-gtr("rem", $coef: $i, $direct: "top");
+		@include mlu-mk-gtr("rem", $coef: $i, $direct: "top");
 	}
 
 	.Mb#{$i}gg {
-		@include mlu-make-gtr("rem", $coef: $i, $direct: "bottom");
+		@include mlu-mk-gtr("rem", $coef: $i, $direct: "bottom");
 	}
 }
 
@@ -116,23 +116,23 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 }
 
 .Mb-2gg {
-	@include mlu-make-gtr($coef: -2, $direct: "bottom");
+	@include mlu-mk-gtr($coef: -2, $direct: "bottom");
 }
 
 .Ml-2gg {
-	@include mlu-make-gtr($coef: -2, $direct: "left");
+	@include mlu-mk-gtr($coef: -2, $direct: "left");
 }
 
 .Ml2gg {
-	@include mlu-make-gtr($coef: 2, $direct: "left");
+	@include mlu-mk-gtr($coef: 2, $direct: "left");
 }
 
 .Ml-1gg {
-	@include mlu-make-gtr($coef: -1, $direct: "left");
+	@include mlu-mk-gtr($coef: -1, $direct: "left");
 }
 
 .Ml1gg {
-	@include mlu-make-gtr($direct: "left");
+	@include mlu-mk-gtr($direct: "left");
 }
 
 .Ml-2su {
@@ -144,11 +144,11 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 }
 
 .Mx1gg {
-	@include mlu-make-gtr();
+	@include mlu-mk-gtr();
 }
 
 .Mx-1gg {
-	@include mlu-make-gtr($coef: -1);
+	@include mlu-mk-gtr($coef: -1);
 }
 
 @each $key, $value in $mlu-grid-gutters {
@@ -173,11 +173,11 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 
 		@if $MLU-FLAG-COL-MARGIN {
 			.Ml1gg_#{$key} {
-				@include mlu-make-gtr($direct: "left");
+				@include mlu-mk-gtr($direct: "left");
 			}
 
 			.Mx1gg_#{$key} {
-				@include mlu-make-gtr();
+				@include mlu-mk-gtr();
 			}
 		}
 	}

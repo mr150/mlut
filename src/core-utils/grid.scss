@@ -50,7 +50,7 @@ Styleguide: core-utils.bxz.w
 		// '$i < mlu-grid-cols-count($gtr-key) - 1' because
 		// offset like 'Ml11c' makes no sense
 		@if $MLU-FLAG-COL-OFFSET and
-			mlu-breakpoint($key) > mlu-breakpoint($mlu-bp-sm) and
+			mlu-bp($key) > mlu-bp($mlu-bp-sm) and
 			$i < $value - 1 {
 			.Ml#{$i}gs_#{$key} {
 				@include mlu-Ml($i * 1gs, $key, $value);
