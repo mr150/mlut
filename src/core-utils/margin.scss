@@ -40,6 +40,7 @@ Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units
 
 * `Mb0` \- *Responsive*
 * `Mb1gg..Mb4gg`
+* `Mb2gg` \- *Responsive*
 * `Mb1su..Mb3su`
 * `Mb6su`
 * `Mb-2gg`
@@ -72,21 +73,30 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	margin: auto;
 }
 
-.Ml-a {
-	margin-left: auto;
-}
-
-.Mx-a {
-	margin-left: auto;
-	margin-right: auto;
-}
-
 @each $value in $mlu-main-directions {
 	$letter: str-slice($value, 1, 1);
 
 	.M#{$letter}0 {
 		margin-#{$value}: 0;
 	}
+}
+
+@include mlu-bp-all(".Mb0", 0) {
+	margin-bottom: 0px;
+}
+
+@include mlu-bp-all(".Mx0", 0) {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+@include mlu-bp-all(".Ml-a") {
+	margin-left: auto;
+}
+
+@include mlu-bp-all(".Mx-a") {
+	margin-right: auto;
+	margin-left: auto;
 }
 
 @for $i from $mlu-My-range through 1 {
@@ -97,6 +107,10 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	.Mb#{$i}gg {
 		@include mlu-mk-gtr("rem", $coef: $i, $direct: "bottom");
 	}
+}
+
+@include mlu-bp-all(".Mb2gg", 0) {
+	@include mlu-mk-gtr("rem", $coef: 2, $direct: "bottom");
 }
 
 .Mb1su {
@@ -153,24 +167,6 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 
 @each $key, $value in $mlu-grid-gutters {
 	@include mlu-bpm($key) {
-		.Mb0_#{$key} {
-			margin-bottom: 0px;
-		}
-
-		.Mx0_#{$key} {
-			margin-left: 0;
-			margin-right: 0;
-		}
-
-		.Ml-a_#{$key} {
-			margin-left: auto;
-		}
-
-		.Mx-a_#{$key} {
-			margin-left: auto;
-			margin-right: auto;
-		}
-
 		@if $MLU-FLAG-COL-MARGIN {
 			.Ml1gg_#{$key} {
 				@include mlu-mk-gtr($direct: "left");

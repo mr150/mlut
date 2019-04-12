@@ -2,7 +2,7 @@
 Position
 
 * `Pos`
-* `Pos-a`
+* `Pos-a` - *responsive*
 * `Pos-f`
 * `T0`
 * `R0`
@@ -39,7 +39,7 @@ Styleguide: core-utils.pos.xy
 	position: relative;
 }
 
-.Pos-a {
+@include mlu-bp-all(".Pos-a") {
 	position: absolute;
 }
 

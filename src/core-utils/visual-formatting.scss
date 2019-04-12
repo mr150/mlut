@@ -43,7 +43,7 @@ mV
 
 Modified visibility.
 
-mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all.
+mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all. *Responsive*.
 
 Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
 
@@ -108,7 +108,7 @@ Styleguide: core-utils.visual.mall
 	opacity: 0;
 }
 
-.mV-vh {
+@include mlu-bp-all(".mV-vh") {
 	position: absolute;
 	width: 1px;
 	height: 1px;

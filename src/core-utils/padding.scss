@@ -3,9 +3,11 @@ Padding
 
 * `P0` \- clear all paddings.
 * `P2su` \- creates paddings of 2su all around.
-* `Pt1gg` \- works similarly [Mt1gg](#kssref-core-utils-margin)
-* `Pb1gg`
-* `Px1gg`
+* `P1gg`
+* `Pt1gg..Pt2gg` \- works similarly [Mt1gg](#kssref-core-utils-margin)
+* `Pb1gg..Pb2gg`
+* `Px1gg` - *responsive*
+* `Px0` - only *responsive*
 
 Styleguide: core-utils.padding
 */
@@ -20,12 +22,24 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	padding: ($mlu-su-rem * 2) ($mlu-su * 2);
 }
 
+.P1gg {
+	@include mlu-mk-gtr($type: "padding", $direct: "xy");
+}
+
 .Pt1gg {
 	@include mlu-mk-gtr("rem", "padding", $direct: "top");
 }
 
+.Pt2gg {
+	@include mlu-mk-gtr("rem", "padding", $direct: "top", $coef: 2);
+}
+
 .Pb1gg {
 	@include mlu-mk-gtr("rem", "padding", $direct: "bottom");
+}
+
+.Pb2gg {
+	@include mlu-mk-gtr("rem", "padding", $direct: "bottom", $coef: 2);
 }
 
 .Pl1gg {

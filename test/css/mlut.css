@@ -870,7 +870,7 @@ mV
 
 Modified visibility.
 
-mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all.
+mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all. *Responsive*.
 
 Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
 
@@ -960,7 +960,7 @@ Styleguide: core-utils.visual.mall
 Position
 
 * `Pos`
-* `Pos-a`
+* `Pos-a` - *responsive*
 * `Pos-f`
 * `T0`
 * `R0`
@@ -1459,6 +1459,7 @@ Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units
 
 * `Mb0` \- *Responsive*
 * `Mb1gg..Mb4gg`
+* `Mb2gg` \- *Responsive*
 * `Mb1su..Mb3su`
 * `Mb6su`
 * `Mb-2gg`
@@ -1489,15 +1490,6 @@ Styleguide: core-utils.margin.mx
 	margin: auto;
 }
 
-.Ml-a {
-	margin-left: auto;
-}
-
-.Mx-a {
-	margin-left: auto;
-	margin-right: auto;
-}
-
 .Mt0 {
 	margin-top: 0;
 }
@@ -1512,6 +1504,15 @@ Styleguide: core-utils.margin.mx
 
 .Ml0 {
 	margin-left: 0;
+}
+
+.Ml-a {
+	margin-left: auto;
+}
+
+.Mx-a {
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .Mt4gg {
@@ -1639,9 +1640,11 @@ Padding
 
 * `P0` \- clear all paddings.
 * `P2su` \- creates paddings of 2su all around.
-* `Pt1gg` \- works similarly [Mt1gg](#kssref-core-utils-margin)
-* `Pb1gg`
-* `Px1gg`
+* `P1gg`
+* `Pt1gg..Pt2gg` \- works similarly [Mt1gg](#kssref-core-utils-margin)
+* `Pb1gg..Pb2gg`
+* `Px1gg` - *responsive*
+* `Px0` - only *responsive*
 
 Styleguide: core-utils.padding
 */
@@ -1654,16 +1657,34 @@ Styleguide: core-utils.padding
 	padding: 0.5rem 8px;
 }
 
+.P1gg {
+	padding: 16px;
+	padding: 16px;
+	padding: var(--mlu-gg);
+}
+
 .Pt1gg {
 	padding-top: 1rem;
 	padding-top: 1rem;
 	padding-top: var(--mlu-gg-rem);
 }
 
+.Pt2gg {
+	padding-top: 2rem;
+	padding-top: 2rem;
+	padding-top: calc(var(--mlu-gg-rem) * 2);
+}
+
 .Pb1gg {
 	padding-bottom: 1rem;
 	padding-bottom: 1rem;
 	padding-bottom: var(--mlu-gg-rem);
+}
+
+.Pb2gg {
+	padding-bottom: 2rem;
+	padding-bottom: 2rem;
+	padding-bottom: calc(var(--mlu-gg-rem) * 2);
 }
 
 .Pl1gg {
@@ -2000,8 +2021,20 @@ Styleguide: core-utils.bd.bds
 /*===DESIGN-UTILS===*/
 
 @media (min-width: 520px) {
-	.D-n_sm {
-		display: none;
+	.mV-vh_sm {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
+	}
+
+	.Pos-a_sm {
+		position: absolute;
 	}
 
 	.D_sm {
@@ -2018,6 +2051,10 @@ Styleguide: core-utils.bd.bds
 
 	.D-if_sm {
 		display: inline-flex;
+	}
+
+	.D-n_sm {
+		display: none;
 	}
 
 	.Jc-sa_sm {
@@ -2068,8 +2105,8 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Mx0_sm {
-		margin-left: 0;
-		margin-right: 0;
+		margin-right: 0px;
+		margin-left: 0px;
 	}
 
 	.Ml-a_sm {
@@ -2077,8 +2114,14 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Mx-a_sm {
-		margin-left: auto;
 		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.Mb2gg_sm {
+		margin-bottom: 2rem;
+		margin-bottom: 2rem;
+		margin-bottom: calc(var(--mlu-gg-rem) * 2);
 	}
 
 	.Px1gg_sm {
@@ -2097,8 +2140,20 @@ Styleguide: core-utils.bd.bds
 }
 
 @media (min-width: 760px) {
-	.D-n_md {
-		display: none;
+	.mV-vh_md {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
+	}
+
+	.Pos-a_md {
+		position: absolute;
 	}
 
 	.D_md {
@@ -2115,6 +2170,10 @@ Styleguide: core-utils.bd.bds
 
 	.D-if_md {
 		display: inline-flex;
+	}
+
+	.D-n_md {
+		display: none;
 	}
 
 	.Jc-sa_md {
@@ -2237,8 +2296,8 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Mx0_md {
-		margin-left: 0;
-		margin-right: 0;
+		margin-right: 0px;
+		margin-left: 0px;
 	}
 
 	.Ml-a_md {
@@ -2246,8 +2305,14 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Mx-a_md {
-		margin-left: auto;
 		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.Mb2gg_md {
+		margin-bottom: 2rem;
+		margin-bottom: 2rem;
+		margin-bottom: calc(var(--mlu-gg-rem) * 2);
 	}
 
 	.Px1gg_md {
@@ -2274,8 +2339,20 @@ Styleguide: core-utils.bd.bds
 		--mlu-gg-rem: 1rem;
 	}
 
-	.D-n_lg {
-		display: none;
+	.mV-vh_lg {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
+	}
+
+	.Pos-a_lg {
+		position: absolute;
 	}
 
 	.D_lg {
@@ -2292,6 +2369,10 @@ Styleguide: core-utils.bd.bds
 
 	.D-if_lg {
 		display: inline-flex;
+	}
+
+	.D-n_lg {
+		display: none;
 	}
 
 	.Jc-sa_lg {
@@ -2414,8 +2495,8 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Mx0_lg {
-		margin-left: 0;
-		margin-right: 0;
+		margin-right: 0px;
+		margin-left: 0px;
 	}
 
 	.Ml-a_lg {
@@ -2423,8 +2504,14 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Mx-a_lg {
-		margin-left: auto;
 		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.Mb2gg_lg {
+		margin-bottom: 2rem;
+		margin-bottom: 2rem;
+		margin-bottom: calc(var(--mlu-gg-rem) * 2);
 	}
 
 	.Px1gg_lg {
@@ -2443,8 +2530,20 @@ Styleguide: core-utils.bd.bds
 }
 
 @media (min-width: 1168px) {
-	.D-n_xl {
-		display: none;
+	.mV-vh_xl {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
+	}
+
+	.Pos-a_xl {
+		position: absolute;
 	}
 
 	.D_xl {
@@ -2461,6 +2560,10 @@ Styleguide: core-utils.bd.bds
 
 	.D-if_xl {
 		display: inline-flex;
+	}
+
+	.D-n_xl {
+		display: none;
 	}
 
 	.Jc-sa_xl {
@@ -2583,8 +2686,8 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Mx0_xl {
-		margin-left: 0;
-		margin-right: 0;
+		margin-right: 0px;
+		margin-left: 0px;
 	}
 
 	.Ml-a_xl {
@@ -2592,8 +2695,14 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Mx-a_xl {
-		margin-left: auto;
 		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.Mb2gg_xl {
+		margin-bottom: 2rem;
+		margin-bottom: 2rem;
+		margin-bottom: calc(var(--mlu-gg-rem) * 2);
 	}
 
 	.Px1gg_xl {
