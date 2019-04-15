@@ -22,11 +22,9 @@ Margin left. You can set left margin in the [grid units](section-concepts.html#k
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
-* `Ml1gg` \- if `gc` turned on. It is needed to return the default column gutter. *Responsive*.
+* `Ml1gg` \- it is needed to return the default column gutter. *Responsive* if `gc` turned on.
 * `Ml1gs..Ml10gs` \- available margin in `gs` on all breakpoints, starting with `md`.
 * `Ml1gc..Ml10gc` \- if `gc` turned on.
-* `Ml2su`
-* `Ml-2su`
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
@@ -41,9 +39,13 @@ Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units
 * `Mb0` \- *Responsive*
 * `Mb1gg..Mb4gg`
 * `Mb2gg` \- *Responsive*
-* `Mb1su..Mb3su`
+* `Mb1su..Mb4su`
 * `Mb6su`
-* `Mb-2gg`
+* `Mb8su`
+* `Mb-2gg..Mb-1gg`
+* `Mb-4su`
+* `Mb-6su`
+* `Mb-8su`
 
 Styleguide: core-utils.margin.mb
 */
@@ -55,7 +57,8 @@ Margin on X axis. Sets left and right margin.
 
 * `Mx-a` \- centered the DOM node with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
 * `Mx1gg` \- if `gc` turned on. *Responsive*.
-* `Mx-1gg` \- it needed for imposes left and right margins of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
+* `Mx-1gg` \- it needed for imposes left and right padding of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
+* `Mx-2su..Mx-4su`
 * `Mx0` \- *responsive*.
 
 Markup: ../../../docs/examples/core-utils/margin/mx.html
@@ -113,6 +116,26 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	@include mlu-mk-gtr("rem", $coef: 2, $direct: "bottom");
 }
 
+.Mb-2gg {
+	@include mlu-mk-gtr("rem", $coef: -2, $direct: "bottom");
+}
+
+.Mb-8su {
+	margin-bottom: -$mlu-su-rem * 8;
+}
+
+.Mb-6su {
+	margin-bottom: -$mlu-su-rem * 6;
+}
+
+.Mb-1gg {
+	@include mlu-mk-gtr("rem", $coef: -1, $direct: "bottom");
+}
+
+.Mb-4su {
+	margin-bottom: -$mlu-su-rem * 4;
+}
+
 .Mb1su {
 	margin-bottom: $mlu-su-rem;
 }
@@ -125,12 +148,16 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	margin-bottom: $mlu-su-rem * 3;
 }
 
+.Mb4su {
+	margin-bottom: $mlu-su-rem * 4;
+}
+
 .Mb6su {
 	margin-bottom: $mlu-su-rem * 6;
 }
 
-.Mb-2gg {
-	@include mlu-mk-gtr($coef: -2, $direct: "bottom");
+.Mb8su {
+	margin-bottom: $mlu-su-rem * 8;
 }
 
 .Ml-2gg {
@@ -149,16 +176,19 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	@include mlu-mk-gtr($direct: "left");
 }
 
-.Ml-2su {
-	margin-left: $mlu-su * -2;
+.Mx-2su {
+	margin-right: -$mlu-su * 2;
+	margin-left: -$mlu-su * 2;
 }
 
-.Ml2su {
-	margin-left: $mlu-su * 2;
+.Mx-3su {
+	margin-right: -$mlu-su * 3;
+	margin-left: -$mlu-su * 3;
 }
 
-.Mx1gg {
-	@include mlu-mk-gtr();
+.Mx-4su {
+	margin-right: -$mlu-su * 4;
+	margin-left: -$mlu-su * 4;
 }
 
 .Mx-1gg {

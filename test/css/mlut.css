@@ -1441,11 +1441,9 @@ Margin left. You can set left margin in the [grid units](section-concepts.html#k
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
-* `Ml1gg` \- if `gc` turned on. It is needed to return the default column gutter. *Responsive*.
+* `Ml1gg` \- it is needed to return the default column gutter. *Responsive* if `gc` turned on.
 * `Ml1gs..Ml10gs` \- available margin in `gs` on all breakpoints, starting with `md`.
 * `Ml1gc..Ml10gc` \- if `gc` turned on.
-* `Ml2su`
-* `Ml-2su`
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
@@ -1460,9 +1458,13 @@ Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units
 * `Mb0` \- *Responsive*
 * `Mb1gg..Mb4gg`
 * `Mb2gg` \- *Responsive*
-* `Mb1su..Mb3su`
+* `Mb1su..Mb4su`
 * `Mb6su`
-* `Mb-2gg`
+* `Mb8su`
+* `Mb-2gg..Mb-1gg`
+* `Mb-4su`
+* `Mb-6su`
+* `Mb-8su`
 
 Styleguide: core-utils.margin.mb
 */
@@ -1474,7 +1476,8 @@ Margin on X axis. Sets left and right margin.
 
 * `Mx-a` \- centered the DOM node with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
 * `Mx1gg` \- if `gc` turned on. *Responsive*.
-* `Mx-1gg` \- it needed for imposes left and right margins of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
+* `Mx-1gg` \- it needed for imposes left and right padding of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
+* `Mx-2su..Mx-4su`
 * `Mx0` \- *responsive*.
 
 Markup: ../../../docs/examples/core-utils/margin/mx.html
@@ -1563,6 +1566,30 @@ Styleguide: core-utils.margin.mx
 	margin-bottom: var(--mlu-gg-rem);
 }
 
+.Mb-2gg {
+	margin-bottom: -2rem;
+	margin-bottom: -2rem;
+	margin-bottom: calc(var(--mlu-gg-rem) * -2);
+}
+
+.Mb-8su {
+	margin-bottom: -2rem;
+}
+
+.Mb-6su {
+	margin-bottom: -1.5rem;
+}
+
+.Mb-1gg {
+	margin-bottom: -1rem;
+	margin-bottom: -1rem;
+	margin-bottom: calc(var(--mlu-gg-rem) * -1);
+}
+
+.Mb-4su {
+	margin-bottom: -1rem;
+}
+
 .Mb1su {
 	margin-bottom: 0.25rem;
 }
@@ -1575,14 +1602,16 @@ Styleguide: core-utils.margin.mx
 	margin-bottom: 0.75rem;
 }
 
+.Mb4su {
+	margin-bottom: 1rem;
+}
+
 .Mb6su {
 	margin-bottom: 1.5rem;
 }
 
-.Mb-2gg {
-	margin-bottom: -32px;
-	margin-bottom: -32px;
-	margin-bottom: calc(var(--mlu-gg) * -2);
+.Mb8su {
+	margin-bottom: 2rem;
 }
 
 .Ml-2gg {
@@ -1609,21 +1638,19 @@ Styleguide: core-utils.margin.mx
 	margin-left: var(--mlu-gg);
 }
 
-.Ml-2su {
+.Mx-2su {
+	margin-right: -8px;
 	margin-left: -8px;
 }
 
-.Ml2su {
-	margin-left: 8px;
+.Mx-3su {
+	margin-right: -12px;
+	margin-left: -12px;
 }
 
-.Mx1gg {
-	margin-right: 16px;
-	margin-left: 16px;
-	margin-right: 16px;
-	margin-left: 16px;
-	margin-right: var(--mlu-gg);
-	margin-left: var(--mlu-gg);
+.Mx-4su {
+	margin-right: -16px;
+	margin-left: -16px;
 }
 
 .Mx-1gg {
@@ -1639,22 +1666,46 @@ Styleguide: core-utils.margin.mx
 Padding
 
 * `P0` \- clear all paddings.
-* `P2su` \- creates paddings of 2su all around.
+* `P1su..P4su` \- creates padding all around.
 * `P1gg`
 * `Pt1gg..Pt2gg` \- works similarly [Mt1gg](#kssref-core-utils-margin)
 * `Pb1gg..Pb2gg`
-* `Px1gg` - *responsive*
-* `Px0` - only *responsive*
 
 Styleguide: core-utils.padding
+*/
+
+/*
+Px
+
+Padding on X axis. Sets left and right padding.
+
+* `Px1gg` \- *responsive*
+* `Px2su..Px4su` \- with these utilities you can change the columns gutter. Use them with the appropriate [Mx utils](#kssref-core-utils-margin-mx) to remove double fields along the edges of the container.
+* `Px0` - only *responsive*
+
+Markup: ../../../docs/examples/core-utils/padding/px.html
+
+Styleguide: core-utils.padding.px
 */
 
 .P0 {
 	padding: 0px;
 }
 
+.P1su {
+	padding: 0.25rem 4px;
+}
+
 .P2su {
 	padding: 0.5rem 8px;
+}
+
+.P3su {
+	padding: 0.75rem 12px;
+}
+
+.P4su {
+	padding: 1rem 16px;
 }
 
 .P1gg {
@@ -1693,10 +1744,19 @@ Styleguide: core-utils.padding
 	padding-left: var(--mlu-gg);
 }
 
-.Pl2gg {
-	padding-left: 32px;
-	padding-left: 32px;
-	padding-left: calc(var(--mlu-gg) * 2);
+.Px2su {
+	padding-right: 8px;
+	padding-left: 8px;
+}
+
+.Px3su {
+	padding-right: 12px;
+	padding-left: 12px;
+}
+
+.Px4su {
+	padding-right: 16px;
+	padding-left: 16px;
 }
 
 .Px1gg {
@@ -2134,8 +2194,8 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Px0_sm {
-		padding-left: 0;
 		padding-right: 0;
+		padding-left: 0;
 	}
 }
 
@@ -2325,8 +2385,8 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Px0_md {
-		padding-left: 0;
 		padding-right: 0;
+		padding-left: 0;
 	}
 }
 
@@ -2524,8 +2584,8 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Px0_lg {
-		padding-left: 0;
 		padding-right: 0;
+		padding-left: 0;
 	}
 }
 
@@ -2715,8 +2775,8 @@ Styleguide: core-utils.bd.bds
 	}
 
 	.Px0_xl {
-		padding-left: 0;
 		padding-right: 0;
+		padding-left: 0;
 	}
 
 	.Dir-r_xl {

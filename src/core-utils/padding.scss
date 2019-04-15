@@ -2,14 +2,26 @@
 Padding
 
 * `P0` \- clear all paddings.
-* `P2su` \- creates paddings of 2su all around.
+* `P1su..P4su` \- creates padding all around.
 * `P1gg`
 * `Pt1gg..Pt2gg` \- works similarly [Mt1gg](#kssref-core-utils-margin)
 * `Pb1gg..Pb2gg`
-* `Px1gg` - *responsive*
-* `Px0` - only *responsive*
 
 Styleguide: core-utils.padding
+*/
+
+/*
+Px
+
+Padding on X axis. Sets left and right padding.
+
+* `Px1gg` \- *responsive*
+* `Px2su..Px4su` \- with these utilities you can change the columns gutter. Use them with the appropriate [Mx utils](#kssref-core-utils-margin-mx) to remove double fields along the edges of the container.
+* `Px0` - only *responsive*
+
+Markup: ../../../docs/examples/core-utils/padding/px.html
+
+Styleguide: core-utils.padding.px
 */
 
 $mlu-su-rem: mlu-px2rem($mlu-su);
@@ -18,8 +30,10 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	padding: 0px;
 }
 
-.P2su {
-	padding: ($mlu-su-rem * 2) ($mlu-su * 2);
+@for $i from 1 through $mlu-P-range {
+	.P#{$i}su {
+		padding: ($mlu-su-rem * $i) ($mlu-su * $i);
+	}
 }
 
 .P1gg {
@@ -46,8 +60,19 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	@include mlu-mk-gtr($type: "padding", $direct: "left");
 }
 
-.Pl2gg {
-	@include mlu-mk-gtr($type: "padding", $direct: "left", $coef: 2);
+.Px2su {
+	padding-right: $mlu-su * 2;
+	padding-left: $mlu-su * 2;
+}
+
+.Px3su {
+	padding-right: $mlu-su * 3;
+	padding-left: $mlu-su * 3;
+}
+
+.Px4su {
+	padding-right: $mlu-su * 4;
+	padding-left: $mlu-su * 4;
 }
 
 @include mlu-bp-all(".Px1gg") {
@@ -55,6 +80,6 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 }
 
 @include mlu-bp-all(".Px0", 0) {
-	padding-left: 0;
 	padding-right: 0;
+	padding-left: 0;
 }
