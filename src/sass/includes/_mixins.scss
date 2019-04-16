@@ -654,6 +654,33 @@ $body-size: (100% 48%), $change: false) {
 	}
 }
 
+// mlu-ie11-Ai-c
+//
+// Hack for [bug](https://github.com/philipwalton/flexbugs/issues/231) with `align-items: center` and `min-height` in IE11. No side effects were noticed in other browsers, but be careful using this.
+// ```scss
+//.foo {
+//		@include mlu-ie11-Ai-c;
+//}
+// ```
+// CSS
+// ```css
+//.foo:after {
+//		min-height: inherit;
+//		font-size: 0;
+//		content: "";
+//}
+// ```
+//
+// Styleguide: sass-tools.mixins.ie11_aic
+
+@mixin mlu-ie11-Ai-c {
+	&:after {
+		min-height: inherit;
+		font-size: 0;
+		content: "";
+	}
+}
+
 // mlu-W
 //
 // Set `width` on different breakpoints.

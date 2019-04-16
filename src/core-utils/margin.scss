@@ -195,16 +195,12 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	@include mlu-mk-gtr($coef: -1);
 }
 
-@each $key, $value in $mlu-grid-gutters {
-	@include mlu-bpm($key) {
-		@if $MLU-FLAG-COL-MARGIN {
-			.Ml1gg_#{$key} {
-				@include mlu-mk-gtr($direct: "left");
-			}
+@if $MLU-FLAG-COL-MARGIN {
+	@include mlu-bp-all(".Mx1gg") {
+		@include mlu-mk-gtr();
+	}
 
-			.Mx1gg_#{$key} {
-				@include mlu-mk-gtr();
-			}
-		}
+	@include mlu-bp-all(".Ml1gg", 0) {
+		@include mlu-mk-gtr($direct: "left");
 	}
 }
