@@ -309,7 +309,7 @@ Styleguide: sass-tools.mixins
 //
 // $init-gutter = $mlu-gtr-sm - initial gutter value out of breakpoint.
 // Can be number. If passed '-1', initial gutter will not be generated.
-// If you need a gutter in `rem`, pass "rem" or value in `rem`.
+// If you need a gutter in `rem`, pass value in `rem`.
 // $type = margin - can be any CSS property, including custom.
 // If no `margin`, `padding` or custom property is used, then `$direct` = "xy" must be specified.
 // $direct = "x" - can take 4 main directions from [$mlu-main-directions](#kssref-sass-tools-settings-general)
@@ -348,14 +348,21 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 		calc(var(#{$--mlu-gg}) * #{$coef}),
 		var(#{$--mlu-gg}));
 
-		@if $init-gutter == "rem" {
-			$prev-value: mlu-px2rem($prev-value);
-			$var-value: if($coef != 1,
-			calc(var(#{$--mlu-gg-rem}) * #{$coef}),
-			var(#{$--mlu-gg-rem}));
-		}
+		$var-value-rem: if($coef != 1,
+		calc(var(#{$--mlu-gg-rem}) * #{$coef}),
+		var(#{$--mlu-gg-rem}));
 
 		$tmp-val: if($calc, calc(#{$prev-value * $coef}), $prev-value * $coef);
+
+		$tmp-val-rem: if($calc,
+		calc(#{mlu-px2rem($prev-value) * $coef}),
+		mlu-px2rem($prev-value) * $coef);
+
+		@if unit($init-gutter) == "rem" {
+			$prev-value: mlu-px2rem($prev-value);
+			$tmp-val: $tmp-val-rem;
+			$var-value: $var-value-rem;
+		}
 
 		@if $direct == "x" {
 			@if not $css-vars or $css-vars == 1 {
@@ -388,11 +395,11 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 					#{$type}: if($calc, $fallback-val, $tmp-val);
 				}
 
-				#{$type}: $tmp-val;
+				@include _mlu-mk-gtr-xy($type, $tmp-val, $tmp-val-rem);
 			}
 
 			@if not $custom-prop and $css-vars {
-				#{$type}: $var-value;
+				@include _mlu-mk-gtr-xy($type, $var-value, $var-value-rem);
 			}
 		} @else if index($mlu-main-directions, $direct) {
 			@if not $css-vars or $css-vars == 1 {
@@ -419,9 +426,12 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 			}
 
 			@if $prev-value != -1 and $cur-val != $prev-value {
-				@include mlu-bpm($key) {
-					$tmp-val: if($calc, calc(#{$cur-val * $coef}), $cur-val * $coef);
+				$tmp-val: if($calc, calc(#{$cur-val * $coef}), $cur-val * $coef);
+				$tmp-val-rem: if($calc,
+				calc(#{mlu-px2rem($cur-val) * $coef}),
+				mlu-px2rem($cur-val) * $coef);
 
+				@include mlu-bpm($key) {
 					@if $direct == "x" {
 						#{$type}-right: $tmp-val;
 						#{$type}-left: $tmp-val;
@@ -429,7 +439,7 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 						#{$type}-top: $tmp-val;
 						#{$type}-bottom: $tmp-val;
 					} @else if $direct == "xy" {
-						#{$type}: $tmp-val;
+						@include _mlu-mk-gtr-xy($type, $tmp-val, $tmp-val-rem);
 					} @else if index($mlu-main-directions, $direct) {
 						#{$type}-#{$direct}: $tmp-val;
 					} @else {
@@ -440,6 +450,16 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 
 			$prev-value: $cur-val;
 		}
+	}
+}
+
+// Private mixin to create gutters in the 'xy' direction.
+
+@mixin _mlu-mk-gtr-xy($type, $value, $value-rem) {
+	@if ($type == "padding" or $type == "margin") and ($value != $value-rem) {
+		#{$type}: $value-rem $value;
+	} @else {
+		#{$type}: $value;
 	}
 }
 

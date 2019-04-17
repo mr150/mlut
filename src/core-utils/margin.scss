@@ -67,6 +67,7 @@ Styleguide: core-utils.margin.mx
 */
 
 $mlu-su-rem: mlu-px2rem($mlu-su);
+$mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 
 .M0 {
 	margin: 0px;
@@ -104,20 +105,20 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 
 @for $i from $mlu-My-range through 1 {
 	.Mt#{$i}gg {
-		@include mlu-mk-gtr("rem", $coef: $i, $direct: "top");
+		@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: $i, $direct: "top");
 	}
 
 	.Mb#{$i}gg {
-		@include mlu-mk-gtr("rem", $coef: $i, $direct: "bottom");
+		@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: $i, $direct: "bottom");
 	}
 }
 
 @include mlu-bp-all(".Mb2gg", 0) {
-	@include mlu-mk-gtr("rem", $coef: 2, $direct: "bottom");
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: 2, $direct: "bottom");
 }
 
 .Mb-2gg {
-	@include mlu-mk-gtr("rem", $coef: -2, $direct: "bottom");
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: -2, $direct: "bottom");
 }
 
 .Mb-8su {
@@ -129,7 +130,7 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 }
 
 .Mb-1gg {
-	@include mlu-mk-gtr("rem", $coef: -1, $direct: "bottom");
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: -1, $direct: "bottom");
 }
 
 .Mb-4su {

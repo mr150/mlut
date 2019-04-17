@@ -1710,8 +1710,8 @@ Styleguide: core-utils.padding.px
 
 .P1gg {
 	padding: 16px;
-	padding: 16px;
-	padding: var(--mlu-gg);
+	padding: 1rem 16px;
+	padding: var(--mlu-gg-rem) var(--mlu-gg);
 }
 
 .Pt1gg {
@@ -1945,30 +1945,99 @@ Styleguide: core-utils.text.mtov
 /*
 Background
 
-* `Bgr-n`
-* `Bgsz-cv`
-* `Bgsz-ct`
+Group of utilities for managing the background image of DOM node.
 
 Styleguide: core-utils.bg
 */
 
 /*
-mBgp
+Bgp
 
-Modified `background-position`. Includes `Bgr-n`.
+Position of background.
 
-c - center.
+t - top
+r - right
+b - bottom
+c - center
+rt - right top
+rb - right bottom
+lb - left bottom
 
-Styleguide: core-utils.bg.mbgp
+Styleguide: core-utils.bg.bgp
+*/
+
+/*
+Bgr
+
+Repeat of background.
+
+n - no repeat
+x - repeat on X axis
+y - repeat on Y
+
+Styleguide: core-utils.bg.bgr
+*/
+
+/*
+Bgsz
+
+Background size.
+
+cv - cover. Stretches the background image so that it covers the entire space of the container.
+ct - contain. Stretches the background image to the maximum possible size so it does not go beyond the background of the container. The image does not change the proportions.
+
+Styleguide: core-utils.bg.bgsz
+*/
+
+/*
+Bga
+
+Background attachment. It controls the behavior of the background when scrolling.
+
+f - fixed
+l - local
+
+Styleguide: core-utils.bg.bga
 */
 
 .Bgr-n {
 	background-repeat: no-repeat;
 }
 
-.mBgp-c {
-	background-repeat: no-repeat;
+.Bgr-x {
+	background-repeat: repeat-x;
+}
+
+.Bgr-y {
+	background-repeat: repeat-y;
+}
+
+.Bgp-c {
 	background-position: center;
+}
+
+.Bgp-t {
+	background-position: top;
+}
+
+.Bgp-r {
+	background-position: right;
+}
+
+.Bgp-b {
+	background-position: bottom;
+}
+
+.Bgp-rt {
+	background-position: right top;
+}
+
+.Bgp-rb {
+	background-position: right bottom;
+}
+
+.Bgp-lb {
+	background-position: left bottom;
 }
 
 .Bgsz-cv {
@@ -1977,6 +2046,14 @@ Styleguide: core-utils.bg.mbgp
 
 .Bgsz-ct {
 	background-size: contain;
+}
+
+.Bga-f {
+	background-attachment: fixed;
+}
+
+.Bga-l {
+	background-attachment: local;
 }
 
 /*
