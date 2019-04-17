@@ -7,6 +7,8 @@ The values and meaning of many custom properties correspond to the [SASS setting
 
 Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags).
 
+You can find CSS variables in `sass/base/_variables.scss`.
+
 --mlu-gg = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
 Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
 Fallback is [$mlu-grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).

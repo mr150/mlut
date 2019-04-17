@@ -26,10 +26,10 @@ If `var()` is not supported by the browser, then fallback are provided:
 ```scss
 padding-right: 16px;
 padding-left: 16px;
-padding-right: var(--mlu-gtr);
-padding-left: var(--mlu-gtr);
+padding-right: var(--mlu-gg);
+padding-left: var(--mlu-gg);
 margin-bottom: 32px;
-margin-bottom: calc(var(--mlu-gtr) * 2);
+margin-bottom: calc(var(--mlu-gg) * 2);
 ```
 similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-general) = 1.
 

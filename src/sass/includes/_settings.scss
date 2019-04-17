@@ -28,7 +28,7 @@ npm i mlut -D
 ### Download ###
 Download assembled CSS from [here](https://unpkg.com/mlut@latest/dist/css/mlut.min.css) or link it from A-ERP server:
 ```html
-<link href="http://a-erp.com/data/181219/1643392985173395.css" rel="stylesheet">
+<link href="http://a-erp.com/data/190417/2244293679379737.css" rel="stylesheet">
 ```
 
 ### CDN ###
@@ -109,7 +109,7 @@ Then you can import blocks and utilities how it is done in the `src/sass/mlut.sc
 @import "../core-blocks/wrapper/wrapper";
 @import "../core-utils/display";
 
-@include mlu-bpm($mlu-bp-md) {
+@include mlu-bpm("md") {
 	.input--common {
 		padding: mlu-px2em(16px) 16px;
 	}
