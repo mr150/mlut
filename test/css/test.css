@@ -18,16 +18,33 @@
 	background-color: #ccc;
 }
 
-.test-content,
-.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) {
+.test-content {
 	padding: 10px;
 	color: #306;
 	font-size: 1.1rem;
 	background-color: #c9c;
 }
 
-.test-cell {
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) {
+	background-clip: content-box;
+}
+
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > * {
+	padding: 0px 12px;
+}
+
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > :first-child {
+	padding-top: 4px;
+}
+
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > :last-child {
+	padding-bottom: 4px;
+}
+
+.test-cell,
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) {
 	color: #306;
+	font-size: 1.1rem;
 	background-color: #c9c;
 }
 
@@ -51,8 +68,8 @@
 
 @media (min-width: 520px) {
 	.grid-debug {
-		padding: 48px 0px;
-		background-image: linear-gradient(90deg, #336 12px, #d15 12px, #d15 calc(100% - 12px), #336 0);
+		padding: calc(var(--mlu-gg-rem) * 3) 0px;
+		background-image: linear-gradient(90deg, #336 var(--mlu-gg), #d15 var(--mlu-gg), #d15 calc(100% - var(--mlu-gg)), #336 0);
 		background-size: 25%;
 	}
 }
@@ -60,11 +77,5 @@
 @media (min-width: 760px) {
 	.grid-debug {
 		background-size: 8.333%;
-	}
-}
-
-@media (min-width: 960px) {
-	.grid-debug {
-		background-image: linear-gradient(90deg, #336 16px, #d15 16px, #d15 calc(100% - 16px), #336 0);
 	}
 }

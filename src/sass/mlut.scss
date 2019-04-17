@@ -1,11 +1,12 @@
 @charset "utf-8";
 
-@import "base/normalize";
-//@import "base/system-font";
-
 @import "includes/settings";
 @import "includes/functions";
 @import "includes/mixins";
+
+@import "base/variables";
+@import "base/normalize";
+//@import "base/system-font";
 
 /*===CORE-BLOCKS===*/
 @import "../core-blocks/page/page";
@@ -19,6 +20,7 @@
 /*===DESIGN-BLOCKS===*/
 
 /*===CORE-UTILS===*/
+@import "../core-utils/visual-formatting";
 @import "../core-utils/position";
 @import "../core-utils/display";
 @import "../core-utils/flex";
@@ -26,7 +28,6 @@
 @import "../core-utils/box-sizing";
 @import "../core-utils/margin";
 @import "../core-utils/padding";
-@import "../core-utils/visual-formatting";
 @import "../core-utils/font";
 @import "../core-utils/text";
 @import "../core-utils/background";

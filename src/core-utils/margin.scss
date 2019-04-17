@@ -1,7 +1,7 @@
 /*
 Margin
 
-You can set some margins in the grid-gutters(gg). For example margin top - `Mt` and margin bottom - `Mb`.
+You can set some margins in the grid-gutters(gg). For example margin top - `Mt` and margin bottom - `Mb`. By default, margins in `gg` contain `var()` fallback as [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col)
 
 Vertical margins in grid-gutters are converted to `rems`. This affects accessibility, because margins will be scaled when changing font sizes in the browser settings.
 
@@ -22,11 +22,9 @@ Margin left. You can set left margin in the [grid units](section-concepts.html#k
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
-* `Ml1gg` \- Partial *responsive* on `lg` and `xl`. It is needed to return the default column gutter.
-* `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
-* `Ml1gs..Ml10gs`
-* `Ml2su`
-* `Ml-2su`
+* `Ml1gg` \- it is needed to return the default column gutter. *Responsive* if `gc` turned on.
+* `Ml1gs..Ml10gs` \- available margin in `gs` on all breakpoints, starting with `md`.
+* `Ml1gc..Ml10gc` \- if `gc` turned on.
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
@@ -40,9 +38,14 @@ Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units
 
 * `Mb0` \- *Responsive*
 * `Mb1gg..Mb4gg`
-* `Mb1su..Mb3su`
+* `Mb2gg` \- *Responsive*
+* `Mb1su..Mb4su`
 * `Mb6su`
-* `Mb-2gg`
+* `Mb8su`
+* `Mb-2gg..Mb-1gg`
+* `Mb-4su`
+* `Mb-6su`
+* `Mb-8su`
 
 Styleguide: core-utils.margin.mb
 */
@@ -53,8 +56,9 @@ Mx
 Margin on X axis. Sets left and right margin.
 
 * `Mx-a` \- centered the DOM node with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `Mx1gg` \- *responsive*.
-* `Mx-1gg` \- it needed for imposes left and right margins of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
+* `Mx1gg` \- if `gc` turned on. *Responsive*.
+* `Mx-1gg` \- it needed for imposes left and right padding of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
+* `Mx-2su..Mx-4su`
 * `Mx0` \- *responsive*.
 
 Markup: ../../../docs/examples/core-utils/margin/mx.html
@@ -62,8 +66,8 @@ Markup: ../../../docs/examples/core-utils/margin/mx.html
 Styleguide: core-utils.margin.mx
 */
 
-$mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 $mlu-su-rem: mlu-px2rem($mlu-su);
+$mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 
 .M0 {
 	margin: 0px;
@@ -71,15 +75,6 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 
 .M-a {
 	margin: auto;
-}
-
-.Ml-a {
-	margin-left: auto;
-}
-
-.Mx-a {
-	margin-left: auto;
-	margin-right: auto;
 }
 
 @each $value in $mlu-main-directions {
@@ -90,14 +85,56 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	}
 }
 
+@include mlu-bp-all(".Mb0", 0) {
+	margin-bottom: 0px;
+}
+
+@include mlu-bp-all(".Mx0", 0) {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+@include mlu-bp-all(".Ml-a") {
+	margin-left: auto;
+}
+
+@include mlu-bp-all(".Mx-a") {
+	margin-right: auto;
+	margin-left: auto;
+}
+
 @for $i from $mlu-My-range through 1 {
 	.Mt#{$i}gg {
-		@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: $i, $direct: "top");
+		@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: $i, $direct: "top");
 	}
 
 	.Mb#{$i}gg {
-		@include mlu-generate-gutter($mlu-gtr-sm-rem, $coef: $i, $direct: "bottom");
+		@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: $i, $direct: "bottom");
 	}
+}
+
+@include mlu-bp-all(".Mb2gg", 0) {
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: 2, $direct: "bottom");
+}
+
+.Mb-2gg {
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: -2, $direct: "bottom");
+}
+
+.Mb-8su {
+	margin-bottom: -$mlu-su-rem * 8;
+}
+
+.Mb-6su {
+	margin-bottom: -$mlu-su-rem * 6;
+}
+
+.Mb-1gg {
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: -1, $direct: "bottom");
+}
+
+.Mb-4su {
+	margin-bottom: -$mlu-su-rem * 4;
 }
 
 .Mb1su {
@@ -112,69 +149,59 @@ $mlu-su-rem: mlu-px2rem($mlu-su);
 	margin-bottom: $mlu-su-rem * 3;
 }
 
+.Mb4su {
+	margin-bottom: $mlu-su-rem * 4;
+}
+
 .Mb6su {
 	margin-bottom: $mlu-su-rem * 6;
 }
 
-.Mb-2gg {
-	@include mlu-generate-gutter($coef: -2, $direct: "bottom");
+.Mb8su {
+	margin-bottom: $mlu-su-rem * 8;
 }
 
 .Ml-2gg {
-	@include mlu-generate-gutter($coef: -2, $direct: "left");
+	@include mlu-mk-gtr($coef: -2, $direct: "left");
 }
 
 .Ml2gg {
-	@include mlu-generate-gutter($coef: 2, $direct: "left");
+	@include mlu-mk-gtr($coef: 2, $direct: "left");
 }
 
 .Ml-1gg {
-	@include mlu-generate-gutter($coef: -1, $direct: "left");
+	@include mlu-mk-gtr($coef: -1, $direct: "left");
 }
 
 .Ml1gg {
-	@include mlu-generate-gutter($direct: "left");
+	@include mlu-mk-gtr($direct: "left");
 }
 
-.Ml-2su {
-	margin-left: $mlu-su * -2;
+.Mx-2su {
+	margin-right: -$mlu-su * 2;
+	margin-left: -$mlu-su * 2;
 }
 
-.Ml2su {
-	margin-left: $mlu-su * 2;
+.Mx-3su {
+	margin-right: -$mlu-su * 3;
+	margin-left: -$mlu-su * 3;
 }
 
-.Mx1gg {
-	@include mlu-generate-gutter();
+.Mx-4su {
+	margin-right: -$mlu-su * 4;
+	margin-left: -$mlu-su * 4;
 }
 
 .Mx-1gg {
-	@include mlu-generate-gutter($coef: -1, $calc: 1);
+	@include mlu-mk-gtr($coef: -1);
 }
 
-@each $key, $value in $mlu-grid-gutters {
-	@include mlu-bpm($key) {
-		.Ml-a_#{$key} {
-			margin-left: auto;
-		}
+@if $MLU-FLAG-COL-MARGIN {
+	@include mlu-bp-all(".Mx1gg") {
+		@include mlu-mk-gtr();
+	}
 
-		.Mb0_#{$key} {
-			margin-bottom: 0px;
-		}
-
-		.Mx-a_#{$key} {
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		.Mx1gg_#{$key} {
-			margin-left: $value;
-			margin-right: $value;
-		}
-
-		.Mx0_#{$key} {
-			margin-left: 0;
-			margin-right: 0;
-		}
+	@include mlu-bp-all(".Ml1gg", 0) {
+		@include mlu-mk-gtr($direct: "left");
 	}
 }

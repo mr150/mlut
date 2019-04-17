@@ -8,6 +8,7 @@ Group of utilities that manage the display of text.
 * `C-i`
 * `Whs-nw`
 * `Lh-n` \- line-height normal.
+* `Lh1`
 
 Styleguide: core-utils.text
 */
@@ -105,6 +106,10 @@ Styleguide: core-utils.text.mtov
 	line-height: normal;
 }
 
+.Lh1 {
+	line-height: 1;
+}
+
 .Whs-nw {
 	white-space: nowrap;
 }
@@ -114,7 +119,7 @@ Styleguide: core-utils.text.mtov
 }
 
 @each $key, $value in $mlu-grid-cols {
-	$mq: ($key, mlu-breakpoint-next($key));
+	$mq: ($key, mlu-bp-next($key));
 
 	@if index($mlu-grid-cols, ($key $value)) == length($mlu-grid-cols) {
 		$mq: $key;

@@ -5,12 +5,12 @@ The block-container for the main content of the page. The maximum width is set i
 
 The container has sides `padding` that equal to gutters so that the content does not stick to sides on small screens. On wide screens the container is centered.
 
-Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `calc()` fallback for fields:
+Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `var()` fallback for fields:
 ```scss
-padding-right: 1.5%;
-padding-left: 1.5%;
-padding-right: calc(12px);
-padding-left: calc(12px);
+padding-right: 16px;
+padding-left: 16px;
+padding-right: var(--mlu-gg);
+padding-left: var(--mlu-gg);
 ```
 
 Markup: ../../../docs/examples/core-blocks/wrapper/wrapper.html
@@ -22,5 +22,5 @@ Styleguide: core-blocks.wrapper
 	display: block;
 	max-width: $mlu-wrapper-max-width;
 	margin: 0 auto;
-	@include mlu-generate-gutter($type: "padding", $calc: 1);
+	@include mlu-mk-gtr($type: "padding");
 }

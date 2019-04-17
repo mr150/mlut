@@ -25,11 +25,11 @@ mD-if - `D-if` with `Fxw-w`.
 Styleguide: core-utils.visual.md
 */
 
-.D {
+@include mlu-bp-all(".D") {
 	display: block;
 }
 
-.D-ib {
+@include mlu-bp-all(".D-ib") {
 	display: inline-block;
 }
 
@@ -49,15 +49,15 @@ Styleguide: core-utils.visual.md
 	display: inline-table;
 }
 
-.D-f {
+@include mlu-bp-all(".D-f") {
 	display: flex;
 }
 
-.D-if {
+@include mlu-bp-all(".D-if") {
 	display: inline-flex;
 }
 
-.D-n {
+@include mlu-bp-all(".D-n") {
 	display: none;
 }
 
@@ -69,30 +69,6 @@ Styleguide: core-utils.visual.md
 .mD-if {
 	display: inline-flex;
 	flex-wrap: wrap;
-}
-
-@each $key, $value in $mlu-grid-cols {
-	@include mlu-bpm($key) {
-		.D-n_#{$key} {
-			display: none;
-		}
-
-		.D_#{$key} {
-			display: block;
-		}
-
-		.D-ib_#{$key} {
-			display: inline-block;
-		}
-
-		.D-f_#{$key} {
-			display: flex;
-		}
-
-		.D-if_#{$key} {
-			display: inline-flex;
-		}
-	}
 }
 
 @if $MLU-FLAG-EXTENDED {

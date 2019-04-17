@@ -28,7 +28,7 @@ npm i mlut -D
 ### Download ###
 Download assembled CSS from [here](https://unpkg.com/mlut@latest/dist/css/mlut.min.css) or link it from A-ERP server:
 ```html
-<link href="http://a-erp.com/data/181219/1643392985173395.css" rel="stylesheet">
+<link href="http://a-erp.com/data/190417/2244293679379737.css" rel="stylesheet">
 ```
 
 ### CDN ###
@@ -67,7 +67,7 @@ Add the file to your page like here:
 And just add MLUT classes to markup:
 ```html
 <div class="row D-f">
-	<div class="row__col W3gc_md">
+	<div class="row__col W3gs_md">
 		<h3>Simple text</h3>
 ```
 Try [examples](section-examples.html) with ready HTML.
@@ -109,7 +109,7 @@ Then you can import blocks and utilities how it is done in the `src/sass/mlut.sc
 @import "../core-blocks/wrapper/wrapper";
 @import "../core-utils/display";
 
-@include mlu-bpm($mlu-bp-md) {
+@include mlu-bpm("md") {
 	.input--common {
 		padding: mlu-px2em(16px) 16px;
 	}
@@ -218,12 +218,12 @@ Utility
 An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
 
 Utility class names are formed according to the scheme:
-1. optional pseudo-class or pseudo-element: `h` - hover, `af` - after etc. Separated from the utility name by underscore '_'.
+1. optional pseudo-class, pseudo-element or state: `h` - hover, `af` - after, 'nojs' - javascript disabled etc. Allowed several states in the same class. <br> States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'.
 1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations.
-1. optional value. Valid are number, [abbreviations](https://docs.emmet.io/cheat-sheet/) and keywords. Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). Abbreviation and keywords are separated by a hyphen '-' from utility name.
+1. optional value. Valid are number, [abbreviations](https://docs.emmet.io/cheat-sheet/) and variables. Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). <br> Abbreviation and variables are separated by a hyphen '-' from utility name. Variables can contain only lowercase letters and numbers, and must also end in a number: `bd0`, `gr2` etc.
 1. optional breakpoint name: `sm`, `lg`, etc. Separated from the utility value by underscore '_'.
 
-Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-main`.
+Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-bd0`.
 
 There are some special abbreviations for color utilities:
 * `t` - `transparent`
@@ -268,16 +268,18 @@ Modular grid
 
 Space on the page divided into a certain number of columns with gutters.
 
-In MLUT on the `sm` breakpoint, the grid has 4 columns, on `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called *columns*. Columns are separated by indents which are called *gutters*.
+In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. <br> These parts called **columns**. Columns are separated by indents which are called **gutters**.
 
 The gutters have different widths at different breakpoints. From `xs` to `lg` gutter is 12px. From `lg` gutter is 16px.
 
+Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block you can see the graphic display of the grid.
+
+### Grid units
+
 You can set the [width](section-core-utils.html#kssref-core-utils-bxz-w) and [offset](section-core-utils.html#kssref-core-utils-margin-ml) for the layout parts in the grid units. These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 3 types of grid units:
-* **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column. Grid-columns are mainly used with [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col).
+* **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column. For the presence of these units meets the flag [$MLU-FLAG-COL-MARGIN](section-sass-tools.html#kssref-sass-tools-settings-flags). By default it is off.
 * **grid-spans** \- `gs`. 1gs is width of 1 column with 2 gutters.
 * **grid-gutters** \- `gg`. 1gg is width of 1 gutter.
-
-Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block you can see the graphic display of the grid.
 
 Modular grid are generated depending on this [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
 
@@ -343,7 +345,7 @@ Styleguide: sass-tools
 /*
 Examples
 
-Additional examples of core blocks, utilities, tools and ready-made components.
+Additional examples of core blocks, utilities, tools and ready-made components. <br> If in the markup you meet the `{{modifier_class}}` construct, then substitute the necessary classes from the examples instead of it, or just erase
 
 Weight: 6
 
@@ -366,15 +368,26 @@ Styleguide: sass-tools.settings
 //
 // Flags for core compilation.
 //
-// $MLU-FLAG-EXTENDED = false - turn on additional features but increases distributive size. Type: bool.
-// $MLU-FLAG-CALC-FALLBACK = false - turn on CSS `calc()` fallback for grid utils on `md+` breakpoints. Type: bool.
-// $MLU-FLAG-COL-OFFSET = true - turn on generation grid columns offset [utils](section-core-utils.html#kssref-core-utils-margin-ml). Type: bool.
+// $MLU-FLAG-EXTENDED = false - turn on additional features but increases distributive size. Type: `bool`.
+// $MLU-FLAG-CALC-FALLBACK = false - turn on CSS `calc()` fallback for grid utils on `md+` breakpoints. Type: `bool`.
+// $MLU-FLAG-COL-OFFSET = true - turn on generation grid columns offset [utils](section-core-utils.html#kssref-core-utils-margin-ml). Type: `bool`.
+// $MLU-FLAG-COL-MARGIN = false - turn on generation of
+//[W](section-core-utils.html#kssref-core-utils-bxz-w) and
+//[Ml](section-core-utils.html#kssref-core-utils-margin-ml) utils in
+//[grid-columns](section-concepts.html#kssref-concepts-grid) for columns with margin based gutters. Type: `bool`.
+// $MLU-FLAG-CSS-VARS = 1 - turn on usage of [CSS variables](section-core-styles.html#kssref-core-styles-css_vars).
+// Allowable values: <br>
+// `false` \- turn off <br>
+// `1` \- turn on with fallback <br>
+// `2` \- turn on <br>
 //
 // Styleguide: sass-tools.settings.flags
 
 $MLU-FLAG-EXTENDED: false !default;
 $MLU-FLAG-CALC-FALLBACK: false !default;
 $MLU-FLAG-COL-OFFSET: true !default;
+$MLU-FLAG-COL-MARGIN: false !default;
+$MLU-FLAG-CSS-VARS: 1 !default;
 
 // General
 //
@@ -385,7 +398,8 @@ $MLU-FLAG-COL-OFFSET: true !default;
 // $mlu-su = 4px - space unit in px. Depends on `$mlu-su-cf`. Use this variable to set the values in px.
 // $mlu-base-font-size = $MLU-BROWSER-FONT-SIZE - base font size on website. Is used for `rems` fallback in [row elements](section-core-blocks.html#kssref-core-blocks-row) and in [mlu-px2em](section-sass-tools.html#kssref-sass-tools-functions-px2em) default font size.
 // $mlu-grid-default-cols = 12 - default columns count on large width screen (>960px).
-// $mlu-main-directions = ("top", "right", "bottom", "left") - List with directions for css properties generation. It used in [mlu-generate-gutter](section-sass-tools.html#kssref-sass-tools-mixins-generate_gutter) mixin.
+// $mlu-grid-default-gtr = 16px - default gutter on large width screen. Used as fallback for [--mlu-gg](section-core-styles.html#kssref-core-styles-css_vars).
+// $mlu-main-directions = ("top", "right", "bottom", "left") - List with directions for css properties generation. It used in [mlu-mk-gtr](section-sass-tools.html#kssref-sass-tools-mixins-mk_gtr) mixin.
 // $mlu-grid-gutter-fallback = 1.5% - Fallback for grid gutter's width if CSS `calc()` not supported
 //
 // Styleguide: sass-tools.settings.general
@@ -399,6 +413,8 @@ $mlu-su: $mlu-su-cf * 1px;
 $mlu-base-font-size: $MLU-BROWSER-FONT-SIZE !default;
 
 $mlu-grid-default-cols: 12 !default;
+
+$mlu-grid-default-gtr: ($mlu-su * 4) !default;
 
 $mlu-grid-gutter-fallback: 1.5% !default;
 
@@ -457,17 +473,20 @@ $mlu-debug-gutter-color: #336 !default;
 //
 // Settings affecting the values and generation of the core utilities.
 //
-// $mlu-W-card = 288px - fixed width for cards. This is value for [W-card](section-core-utils.html#kssref-core-utils-bxz-w) utility.
+// $mlu-W-fx0 = 288px - fixed width for cards. This is value for [W-fx0](section-core-utils.html#kssref-core-utils-bxz-w) utility.
 // $mlu-My-range = 4 - count of [Mt](section-core-utils.html#kssref-core-utils-margin) and [Mb](section-core-utils.html#kssref-core-utils-margin) utilities.
+// $mlu-P-range = 4 - count of [P](section-core-utils.html#kssref-core-utils-padding) utilities.
 // $mlu-Z-range = 4 - [z-index](section-core-utils.html#kssref-core-utils-pos-z) range. Counted from zero.
 // $mlu-Z-max = 9999 - `z-index` max value.
 // $mlu-Ord-range = 4 - [order](section-core-utils.html#kssref-core-utils-flex) range. Counted from -1.
 //
 // Styleguide: sass-tools.settings.utils
 
-$mlu-W-card: 288px !default;
+$mlu-W-fx0: 288px !default;
 
 $mlu-My-range: 4 !default;
+
+$mlu-P-range: 4 !default;
 
 $mlu-Z-max: 9999 !default;
 $mlu-Z-range: 4 !default;
@@ -480,6 +499,7 @@ $mlu-Ord-range: 4 !default;
 //
 // $mlu-breakpoints - map with main breakpoints. First breakpoint is `$mlu-bp-sm`.
 // $mlu-grid-cols - columls count on breakpoints.
+// $mlu-grid-cols-xs - columls count on `$mlu-bp-xs` (without breakpoints).
 // $mlu-grid-gutters - map with grid gutters on breakpoints.
 //
 // Styleguide: sass-tools.settings.grid
@@ -488,7 +508,7 @@ $mlu-Ord-range: 4 !default;
 //
 // Name, value and columns count on breakpoint.
 //
-// $mlu-bp-xs = 0 - `xs`, 2
+// $mlu-bp-xs = 0 - `xs`, 4
 // $mlu-bp-sm = 520px - `sm`, 4
 // $mlu-bp-md = 760px - `md`, 12
 // $mlu-bp-lg = 960px - `lg`, 12
@@ -508,6 +528,8 @@ $mlu-breakpoints: (
 	$mlu-bp-lg: 960px,
 	$mlu-bp-xl: 1168px,
 ) !default;
+
+$mlu-grid-cols-xs: 4 !default;
 
 $mlu-grid-cols: (
 	$mlu-bp-sm: 4,
@@ -529,7 +551,7 @@ $mlu-grid-cols: (
 
 $mlu-gtr-sm: ($mlu-su * 3) !default;
 $mlu-gtr-md: $mlu-gtr-sm !default;
-$mlu-gtr-lg: ($mlu-su * 4) !default;
+$mlu-gtr-lg: $mlu-grid-default-gtr !default;
 $mlu-gtr-xl: $mlu-gtr-lg !default;
 
 $mlu-grid-gutters: (
@@ -537,4 +559,28 @@ $mlu-grid-gutters: (
 	$mlu-bp-md: $mlu-gtr-md,
 	$mlu-bp-lg: $mlu-gtr-lg,
 	$mlu-bp-xl: $mlu-gtr-xl,
+) !default;
+
+// CSS variables
+//
+// Settings of [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) which used in MLUT.
+//
+// Styleguide: sass-tools.settings.css_vars
+
+// Names
+//
+// In addition to variables, the names of custom properties are contained in the map `$mlu-css-vars`.
+// Below are the names of the variables, the corresponding keys in the map and names of custom properties.
+//
+// $--mlu-gg = --mlu-gg - `gg`.
+// $--mlu-gg-rem = --mlu-gg-rem - `gg-rem`.
+//
+// Styleguide: sass-tools.settings.css_vars.names
+
+$--mlu-gg: "--mlu-gg" !default;
+$--mlu-gg-rem: "--mlu-gg-rem" !default;
+
+$mlu-css-vars: (
+	"gg": $--mlu-gg,
+	"gg-rem": $--mlu-gg-rem,
 ) !default;

@@ -1,123 +1,72 @@
 /*
 W
 
-Width. You can set width in the grid-columns(gc) or in the grid-spans(gs).
+Width. You can set width in the grid-spans(gs) or in the grid-columns(gc) **if they turned on**.
 
 If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
 
 * `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `W50p` \- 50%.
-* `W100p`
-* `W-card` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
-* `W1gc` \- 1/2 of grid in grid-columns on `xs` breakpoint, because on `xs`, grid has 2 columns.
-* `W2gc`
-* `W1gc_sm..W4gc_sm` \- range of available width in `gc` on `sm` breakpoint, because on `sm`, grid has 4 columns. You can change grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid). Contains CSS `calc()` fallback.
-* `W1gc..W12gc` \- available width in `gc` on all breakpoints, starting with `md`.
-* `W1gs_sm..W4gs_sm` \- range of available width in grid spans on `sm`.
-* `W1gs..W12gs`
+* `W-fx0` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+* `W1gs..W4gs` \- range of available width in grid spans on `xs` and `sm` breakpoints, because on `xs` and `sm`, grid has 4 columns. See grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
+* `W1gs..W12gs` \- available width in `gs` on all breakpoints, starting with `md`.
+* `W1gc..W4gc`
+* `W1gc..W12gc`
 
 Markup: ../../../docs/examples/core-utils/box-sizing/w.html
 
 Styleguide: core-utils.bxz.w
 */
 
+@for $i from 1 through $mlu-grid-cols-xs {
+	@if $MLU-FLAG-COL-MARGIN {
+		.W#{$i}gc {
+			@include mlu-W($i * 1gc, $cols: $mlu-grid-cols-xs, $calc: $MLU-FLAG-CALC-FALLBACK);
+		}
+	}
+
+	.W#{$i}gs {
+		@include mlu-W($i * 1gs, $cols: $mlu-grid-cols-xs);
+	}
+}
+
 .W-a {
 	width: auto;
 }
 
-.W1gc {
-	@include mlu-W($mlu-grid-default-cols / 2, $calc: 1);
-}
-
-.W2gc {
-	@include mlu-W($mlu-grid-default-cols, $calc: 1);
-}
-
-.W50p {
-	width: 50%;
-}
-
-.W100p {
-	width: 100%;
-}
-
 // Generate grid utilities W and Ml on breakpoints
 @each $key, $value in $mlu-grid-cols {
-	$col-gutter: mlu-grid-gutter($key);
-	$prev-col-gutter: 0;
+	@for $i from 1 through $value {
+		@if $MLU-FLAG-COL-MARGIN {
+			.W#{$i}gc_#{$key} {
+				@include mlu-W($i * 1gc, $key, $value, $calc: $MLU-FLAG-CALC-FALLBACK);
+			}
+		}
 
-	@if index($mlu-grid-cols, ($key $value)) > 1 {
-		$prev-col-gutter: mlu-grid-gutter(mlu-breakpoint-prev-name($key));
-	}
+		.W#{$i}gs_#{$key} {
+			@include mlu-W($i * 1gs, $key, $value);
+		}
 
-	@include mlu-bpm($key) {
-		// Pass through the map of gutters to check for
-		// gutter differences at the current breakpoint and on breakpoint
-		// on which we want to generate
-		@each $gtr-key, $gtr-value in $mlu-grid-gutters {
-			$cols-count: mlu-grid-cols-count($gtr-key);
+		// Offsets start generate from $mlu-bp-md and if offset flag turn on.
+		// '$i < mlu-grid-cols-count($gtr-key) - 1' because
+		// offset like 'Ml11c' makes no sense
+		@if $MLU-FLAG-COL-OFFSET and
+			mlu-bp($key) > mlu-bp($mlu-bp-sm) and
+			$i < $value - 1 {
+			.Ml#{$i}gs_#{$key} {
+				@include mlu-Ml($i * 1gs, $key, $value);
+			}
 
-			@for $i from 1 through mlu-grid-cols-count($key) {
-				$col-width: mlu-decimal-floor($i / $cols-count * 100%, 3);
-
-				// Repeat generation utility with new gutter if it changed on breakpoint.
-				// It need for utilities for smaller breakpoints correct work
-				// on larger breakpoints with changed gutter
-				@if $i <= $cols-count and
-					($gtr-key == $key or ($gtr-value < $col-gutter and $col-gutter != $prev-col-gutter)) {
-					.W#{$i}gc_#{$gtr-key} {
-						// Generation calc() fallback if flag turn on or
-						// current breakpoint is $mlu-bp-sm
-						@if ($MLU-FLAG-CALC-FALLBACK or $gtr-key == $mlu-bp-sm) and $gtr-key == $key {
-							width: mlu-decimal-floor($col-width, 2) - ($mlu-grid-gutter-fallback * 2);
-						}
-
-						width: calc(#{$col-width} - #{$col-gutter * 2});
-					}
-
-					@if $gtr-key == $key {
-						.W#{$i}gs_#{$gtr-key} {
-							width: $col-width;
-						}
-					}
-
-					// Offsets start generate from $mlu-bp-md and if offset flag turn on.
-					// '$i < mlu-grid-cols-count($gtr-key) - 1' because
-					// offset like 'Ml11c' makes no sense
-					@if $MLU-FLAG-COL-OFFSET and
-						mlu-breakpoint($gtr-key) > mlu-breakpoint($mlu-bp-sm) and
-						$i < mlu-grid-cols-count($gtr-key) - 1 {
-
-						@if $gtr-key == $key {
-							.Ml#{$i}gs_#{$gtr-key} {
-								margin-left: $col-width;
-							}
-						}
-
-						.Ml#{$i}gc_#{$gtr-key} {
-							@if $MLU-FLAG-CALC-FALLBACK and $gtr-key == $key {
-								margin-left: mlu-decimal-floor($col-width, 2) + $mlu-grid-gutter-fallback;
-							}
-
-							margin-left: calc(#{$col-width} + #{$col-gutter});
-						}
-					}
+			@if $MLU-FLAG-COL-MARGIN {
+				.Ml#{$i}gc_#{$key} {
+					@include mlu-Ml($i * 1gc, $key, $value, $calc: $MLU-FLAG-CALC-FALLBACK);
 				}
 			}
 		}
+	}
 
+	@include mlu-bpm($key) {
 		.W-a_#{$key} {
 			width: auto;
-		}
-
-		@if $MLU-FLAG-COL-OFFSET and mlu-breakpoint($key) > mlu-breakpoint($mlu-bp-md) {
-			.Ml1gg_#{$key} {
-				margin-left: mlu-grid-gutter($key);
-			}
-
-			.Ml0_#{$key} {
-				margin-left: 0;
-			}
 		}
 	}
 }

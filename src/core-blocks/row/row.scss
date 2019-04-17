@@ -21,15 +21,19 @@ row__col
 
 The main element for creating columns in layout. By default, it stretches the entire width of the container. The columns have gutters on the sides and bottom.
 
-The gutters are implemented using the `margin` property. For this reason, the percentage width must be specified using the CSS `calc()`. <br>
-If `calc()` is not supported by the browser, then margin is provided in percent as fallback:
+The gutters are implemented using the `padding` and [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars).
+If `var()` is not supported by the browser, then fallback are provided:
 ```scss
-margin: 0 1.5% 24px;
-margin: 0 calc(12px) 24px;
+padding-right: 16px;
+padding-left: 16px;
+padding-right: var(--mlu-gg);
+padding-left: var(--mlu-gg);
+margin-bottom: 32px;
+margin-bottom: calc(var(--mlu-gg) * 2);
 ```
-so that the layout does not collapse. Similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields.
+similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-general) = 1.
 
-The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-gutter-fallback.`
+The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-default-gtr`.
 
 Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row).
 
@@ -210,13 +214,10 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 }
 
 .row__col {
-	width: 100% - ($mlu-grid-gutter-fallback * 2);
-	width: calc(100% - #{mlu-grid-gutter($mlu-bp-sm) * 2});
-	margin: 0 $mlu-grid-gutter-fallback $mlu-gtr-sm * 2;
-	margin: 0 calc(#{$mlu-gtr-sm}) $mlu-gtr-sm * 2;
+	width: 100%;
 
-	@include mlu-generate-gutter(-1, $calc: 1);
-	@include mlu-generate-gutter(-1, $direct: "bottom", $coef: 2);
+	@include mlu-mk-gtr($type: "padding");
+	@include mlu-mk-gtr($direct: "bottom", $coef: 2);
 
 	&.row {
 		margin-bottom: 0px;

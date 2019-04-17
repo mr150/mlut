@@ -1,34 +1,5 @@
 @charset "UTF-8";
 
-/*
-Normalize
-
-Simple css normalization that correcting old browsers bugs and not affecting other styles.
-
-Styleguide: core-styles.normalize
-*/
-
-main {
-	display: block;
-}
-
-img {
-	max-width: 100%;
-	height: auto;
-	border: 0;
-}
-
-legend {
-	display: table;
-	box-sizing: border-box;
-	max-width: 100%;
-	white-space: normal;
-}
-
-[hidden] {
-	display: none !important;
-}
-
 /* This comment needed for add @charset "utf-8"; in source because sass compiler erased this at-rule without it: утф8 */
 
 /*
@@ -59,7 +30,7 @@ npm i mlut -D
 ### Download ###
 Download assembled CSS from [here](https://unpkg.com/mlut@latest/dist/css/mlut.min.css) or link it from A-ERP server:
 ```html
-<link href="http://a-erp.com/data/181219/1643392985173395.css" rel="stylesheet">
+<link href="http://a-erp.com/data/190417/2244293679379737.css" rel="stylesheet">
 ```
 
 ### CDN ###
@@ -98,7 +69,7 @@ Add the file to your page like here:
 And just add MLUT classes to markup:
 ```html
 <div class="row D-f">
-	<div class="row__col W3gc_md">
+	<div class="row__col W3gs_md">
 		<h3>Simple text</h3>
 ```
 Try [examples](section-examples.html) with ready HTML.
@@ -140,7 +111,7 @@ Then you can import blocks and utilities how it is done in the `src/sass/mlut.sc
 @import "../core-blocks/wrapper/wrapper";
 @import "../core-utils/display";
 
-@include mlu-bpm($mlu-bp-md) {
+@include mlu-bpm("md") {
 	.input--common {
 		padding: mlu-px2em(16px) 16px;
 	}
@@ -249,12 +220,12 @@ Utility
 An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
 
 Utility class names are formed according to the scheme:
-1. optional pseudo-class or pseudo-element: `h` - hover, `af` - after etc. Separated from the utility name by underscore '_'.
+1. optional pseudo-class, pseudo-element or state: `h` - hover, `af` - after, 'nojs' - javascript disabled etc. Allowed several states in the same class. <br> States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'.
 1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations.
-1. optional value. Valid are number, [abbreviations](https://docs.emmet.io/cheat-sheet/) and keywords. Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). Abbreviation and keywords are separated by a hyphen '-' from utility name.
+1. optional value. Valid are number, [abbreviations](https://docs.emmet.io/cheat-sheet/) and variables. Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). <br> Abbreviation and variables are separated by a hyphen '-' from utility name. Variables can contain only lowercase letters and numbers, and must also end in a number: `bd0`, `gr2` etc.
 1. optional breakpoint name: `sm`, `lg`, etc. Separated from the utility value by underscore '_'.
 
-Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-main`.
+Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-bd0`.
 
 There are some special abbreviations for color utilities:
 * `t` - `transparent`
@@ -298,16 +269,18 @@ Modular grid
 
 Space on the page divided into a certain number of columns with gutters.
 
-In MLUT on the `sm` breakpoint, the grid has 4 columns, on `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called *columns*. Columns are separated by indents which are called *gutters*.
+In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. <br> These parts called **columns**. Columns are separated by indents which are called **gutters**.
 
 The gutters have different widths at different breakpoints. From `xs` to `lg` gutter is 12px. From `lg` gutter is 16px.
 
+Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block you can see the graphic display of the grid.
+
+### Grid units
+
 You can set the [width](section-core-utils.html#kssref-core-utils-bxz-w) and [offset](section-core-utils.html#kssref-core-utils-margin-ml) for the layout parts in the grid units. These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 3 types of grid units:
-* **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column. Grid-columns are mainly used with [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col).
+* **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column. For the presence of these units meets the flag [$MLU-FLAG-COL-MARGIN](section-sass-tools.html#kssref-sass-tools-settings-flags). By default it is off.
 * **grid-spans** \- `gs`. 1gs is width of 1 column with 2 gutters.
 * **grid-gutters** \- `gg`. 1gg is width of 1 gutter.
-
-Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block you can see the graphic display of the grid.
 
 Modular grid are generated depending on this [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
 
@@ -373,7 +346,7 @@ Styleguide: sass-tools
 /*
 Examples
 
-Additional examples of core blocks, utilities, tools and ready-made components.
+Additional examples of core blocks, utilities, tools and ready-made components. <br> If in the markup you meet the `{{modifier_class}}` construct, then substitute the necessary classes from the examples instead of it, or just erase
 
 Weight: 6
 
@@ -403,6 +376,59 @@ Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sa
 
 Styleguide: sass-tools.mixins
 */
+
+/*
+CSS variables
+
+CSS custom properties which used in MLUT. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties.
+
+The values and meaning of many custom properties correspond to the [SASS settings](section-sass-tools.html#kssref-sass-tools-settings) of MLUT core. But unlike them, custom properties can be changed dynamically without recompiling.
+
+Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags).
+
+You can find CSS variables in `sass/base/_variables.scss`.
+
+--mlu-gg = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
+Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
+Fallback is [$mlu-grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).
+--mlu-gg-rem = 0.75rem - grid gutter in `rem`.
+
+Styleguide: core-styles.css_vars
+*/
+
+:root {
+	--mlu-gg: 12px;
+	--mlu-gg-rem: 0.75rem;
+}
+
+/*
+Normalize
+
+Simple css normalization that correcting old browsers bugs and not affecting other styles.
+
+Styleguide: core-styles.normalize
+*/
+
+main {
+	display: block;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	border: 0;
+}
+
+legend {
+	display: table;
+	box-sizing: border-box;
+	max-width: 100%;
+	white-space: normal;
+}
+
+[hidden] {
+	display: none !important;
+}
 
 /*===CORE-BLOCKS===*/
 
@@ -445,15 +471,19 @@ row__col
 
 The main element for creating columns in layout. By default, it stretches the entire width of the container. The columns have gutters on the sides and bottom.
 
-The gutters are implemented using the `margin` property. For this reason, the percentage width must be specified using the CSS `calc()`. <br>
-If `calc()` is not supported by the browser, then margin is provided in percent as fallback:
+The gutters are implemented using the `padding` and [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars).
+If `var()` is not supported by the browser, then fallback are provided:
 ```scss
-margin: 0 1.5% 24px;
-margin: 0 calc(12px) 24px;
+padding-right: 16px;
+padding-left: 16px;
+padding-right: var(--mlu-gg);
+padding-left: var(--mlu-gg);
+margin-bottom: 32px;
+margin-bottom: calc(var(--mlu-gg) * 2);
 ```
-so that the layout does not collapse. Similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields.
+similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-general) = 1.
 
-The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-gutter-fallback.`
+The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-default-gtr`.
 
 Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row).
 
@@ -642,10 +672,16 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 }
 
 .row__col {
-	width: 97%;
-	width: calc(100% - 24px);
-	margin: 0 1.5% 24px;
-	margin: 0 calc(12px) 24px;
+	width: 100%;
+	padding-right: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-left: 16px;
+	padding-right: var(--mlu-gg);
+	padding-left: var(--mlu-gg);
+	margin-bottom: 32px;
+	margin-bottom: 32px;
+	margin-bottom: calc(var(--mlu-gg) * 2);
 }
 
 .row__col.row {
@@ -659,12 +695,12 @@ The block-container for the main content of the page. The maximum width is set i
 
 The container has sides `padding` that equal to gutters so that the content does not stick to sides on small screens. On wide screens the container is centered.
 
-Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `calc()` fallback for fields:
+Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `var()` fallback for fields:
 ```scss
-padding-right: 1.5%;
-padding-left: 1.5%;
-padding-right: calc(12px);
-padding-left: calc(12px);
+padding-right: 16px;
+padding-left: 16px;
+padding-right: var(--mlu-gg);
+padding-left: var(--mlu-gg);
 ```
 
 Markup: ../../../docs/examples/core-blocks/wrapper/wrapper.html
@@ -676,10 +712,12 @@ Styleguide: core-blocks.wrapper
 	display: block;
 	max-width: 1200px;
 	margin: 0 auto;
-	padding-right: 1.5%;
-	padding-left: 1.5%;
-	padding-right: calc(12px);
-	padding-left: calc(12px);
+	padding-right: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-left: 16px;
+	padding-right: var(--mlu-gg);
+	padding-left: var(--mlu-gg);
 }
 
 /*
@@ -790,10 +828,141 @@ Styleguide: core-blocks.input
 /*===CORE-UTILS===*/
 
 /*
+Visual formatting
+
+* `D-tb`
+* `D-tbc`
+* `D-tbr`
+* `D-itb`
+* `Fl` \- turn on wrapping text on the right.
+* `Fl-r` \- turn on wrapping text on the left.
+* `Ol0`
+* `Op0`
+
+Styleguide: core-utils.visual
+*/
+
+/*
+mCl
+
+Modified clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
+
+Styleguide: core-utils.visual.mcl
+*/
+
+/*
+Ov
+
+Controls content display in case of overflow
+
+Ov - hidden.
+Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
+Ov.Ovx-a - auto. Scrollbar on X axis.
+Ov.Ovy-a - auto. Scrollbar on Y axis.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
+
+Styleguide: core-utils.visual.ov
+*/
+
+/*
+mV
+
+Modified visibility.
+
+mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all. *Responsive*.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
+
+Styleguide: core-utils.visual.mv
+*/
+
+/*
+mAll
+
+Modified `all`.
+
+* `sr` \- soft reset, reset some default browser styles:
+	* `margin`
+	* `padding`
+	* `border`
+	* `font`
+	* `list-style`
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mall.html
+
+Styleguide: core-utils.visual.mall
+*/
+
+.Fl {
+	float: left;
+}
+
+.Fl-r {
+	float: right;
+}
+
+.mCl:after {
+	display: table;
+	clear: both;
+	content: "";
+}
+
+.Ov {
+	overflow: hidden;
+}
+
+.Ov-a {
+	overflow: auto;
+}
+
+.Ovx-a {
+	overflow-x: auto;
+}
+
+.Ovy-a {
+	overflow-y: auto;
+}
+
+.Ol0 {
+	outline: 0px;
+}
+
+.Ol0::-moz-focus-inner {
+	border: 0;
+}
+
+.Op0 {
+	opacity: 0;
+}
+
+.mV-vh {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0px;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 0px;
+	clip: rect(0 0 0 0);
+}
+
+.mAll-sr {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+	list-style: none;
+	border: 0;
+}
+
+/*
 Position
 
 * `Pos`
-* `Pos-a`
+* `Pos-a` - *responsive*
 * `Pos-f`
 * `T0`
 * `R0`
@@ -1167,46 +1336,40 @@ Styleguide: core-utils.flex.mai
 /*
 W
 
-Width. You can set width in the grid-columns(gc) or in the grid-spans(gs).
+Width. You can set width in the grid-spans(gs) or in the grid-columns(gc) **if they turned on**.
 
 If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
 
 * `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `W50p` \- 50%.
-* `W100p`
-* `W-card` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
-* `W1gc` \- 1/2 of grid in grid-columns on `xs` breakpoint, because on `xs`, grid has 2 columns.
-* `W2gc`
-* `W1gc_sm..W4gc_sm` \- range of available width in `gc` on `sm` breakpoint, because on `sm`, grid has 4 columns. You can change grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid). Contains CSS `calc()` fallback.
-* `W1gc..W12gc` \- available width in `gc` on all breakpoints, starting with `md`.
-* `W1gs_sm..W4gs_sm` \- range of available width in grid spans on `sm`.
-* `W1gs..W12gs`
+* `W-fx0` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+* `W1gs..W4gs` \- range of available width in grid spans on `xs` and `sm` breakpoints, because on `xs` and `sm`, grid has 4 columns. See grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
+* `W1gs..W12gs` \- available width in `gs` on all breakpoints, starting with `md`.
+* `W1gc..W4gc`
+* `W1gc..W12gc`
 
 Markup: ../../../docs/examples/core-utils/box-sizing/w.html
 
 Styleguide: core-utils.bxz.w
 */
 
-.W-a {
-	width: auto;
+.W1gs {
+	width: 25%;
 }
 
-.W1gc {
-	width: 47%;
-	width: calc(50% - 24px);
-}
-
-.W2gc {
-	width: 97%;
-	width: calc(100% - 24px);
-}
-
-.W50p {
+.W2gs {
 	width: 50%;
 }
 
-.W100p {
+.W3gs {
+	width: 75%;
+}
+
+.W4gs {
 	width: 100%;
+}
+
+.W-a {
+	width: auto;
 }
 
 /*
@@ -1217,13 +1380,14 @@ Utilities for DOM nodes size management.
 * `Maw100p`
 * `Maw-n`
 * `H100p`
+* `H100vh`
 * `H0`
 * `Bxz`
 
 Styleguide: core-utils.bxz
 */
 
-.W-card {
+.W-fx0 {
 	max-width: 288px;
 }
 
@@ -1258,7 +1422,7 @@ Styleguide: core-utils.bxz
 /*
 Margin
 
-You can set some margins in the grid-gutters(gg). For example margin top - `Mt` and margin bottom - `Mb`.
+You can set some margins in the grid-gutters(gg). For example margin top - `Mt` and margin bottom - `Mb`. By default, margins in `gg` contain `var()` fallback as [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col)
 
 Vertical margins in grid-gutters are converted to `rems`. This affects accessibility, because margins will be scaled when changing font sizes in the browser settings.
 
@@ -1279,11 +1443,9 @@ Margin left. You can set left margin in the [grid units](section-concepts.html#k
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
-* `Ml1gg` \- Partial *responsive* on `lg` and `xl`. It is needed to return the default column gutter.
-* `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
-* `Ml1gs..Ml10gs`
-* `Ml2su`
-* `Ml-2su`
+* `Ml1gg` \- it is needed to return the default column gutter. *Responsive* if `gc` turned on.
+* `Ml1gs..Ml10gs` \- available margin in `gs` on all breakpoints, starting with `md`.
+* `Ml1gc..Ml10gc` \- if `gc` turned on.
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
@@ -1297,9 +1459,14 @@ Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units
 
 * `Mb0` \- *Responsive*
 * `Mb1gg..Mb4gg`
-* `Mb1su..Mb3su`
+* `Mb2gg` \- *Responsive*
+* `Mb1su..Mb4su`
 * `Mb6su`
-* `Mb-2gg`
+* `Mb8su`
+* `Mb-2gg..Mb-1gg`
+* `Mb-4su`
+* `Mb-6su`
+* `Mb-8su`
 
 Styleguide: core-utils.margin.mb
 */
@@ -1310,8 +1477,9 @@ Mx
 Margin on X axis. Sets left and right margin.
 
 * `Mx-a` \- centered the DOM node with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `Mx1gg` \- *responsive*.
-* `Mx-1gg` \- it needed for imposes left and right margins of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
+* `Mx1gg` \- if `gc` turned on. *Responsive*.
+* `Mx-1gg` \- it needed for imposes left and right padding of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
+* `Mx-2su..Mx-4su`
 * `Mx0` \- *responsive*.
 
 Markup: ../../../docs/examples/core-utils/margin/mx.html
@@ -1325,15 +1493,6 @@ Styleguide: core-utils.margin.mx
 
 .M-a {
 	margin: auto;
-}
-
-.Ml-a {
-	margin-left: auto;
-}
-
-.Mx-a {
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .Mt0 {
@@ -1352,36 +1511,85 @@ Styleguide: core-utils.margin.mx
 	margin-left: 0;
 }
 
+.Ml-a {
+	margin-left: auto;
+}
+
+.Mx-a {
+	margin-right: auto;
+	margin-left: auto;
+}
+
 .Mt4gg {
-	margin-top: 3rem;
+	margin-top: 4rem;
+	margin-top: 4rem;
+	margin-top: calc(var(--mlu-gg-rem) * 4);
 }
 
 .Mb4gg {
-	margin-bottom: 3rem;
+	margin-bottom: 4rem;
+	margin-bottom: 4rem;
+	margin-bottom: calc(var(--mlu-gg-rem) * 4);
 }
 
 .Mt3gg {
-	margin-top: 2.25rem;
+	margin-top: 3rem;
+	margin-top: 3rem;
+	margin-top: calc(var(--mlu-gg-rem) * 3);
 }
 
 .Mb3gg {
-	margin-bottom: 2.25rem;
+	margin-bottom: 3rem;
+	margin-bottom: 3rem;
+	margin-bottom: calc(var(--mlu-gg-rem) * 3);
 }
 
 .Mt2gg {
-	margin-top: 1.5rem;
+	margin-top: 2rem;
+	margin-top: 2rem;
+	margin-top: calc(var(--mlu-gg-rem) * 2);
 }
 
 .Mb2gg {
-	margin-bottom: 1.5rem;
+	margin-bottom: 2rem;
+	margin-bottom: 2rem;
+	margin-bottom: calc(var(--mlu-gg-rem) * 2);
 }
 
 .Mt1gg {
-	margin-top: 0.75rem;
+	margin-top: 1rem;
+	margin-top: 1rem;
+	margin-top: var(--mlu-gg-rem);
 }
 
 .Mb1gg {
-	margin-bottom: 0.75rem;
+	margin-bottom: 1rem;
+	margin-bottom: 1rem;
+	margin-bottom: var(--mlu-gg-rem);
+}
+
+.Mb-2gg {
+	margin-bottom: -2rem;
+	margin-bottom: -2rem;
+	margin-bottom: calc(var(--mlu-gg-rem) * -2);
+}
+
+.Mb-8su {
+	margin-bottom: -2rem;
+}
+
+.Mb-6su {
+	margin-bottom: -1.5rem;
+}
+
+.Mb-1gg {
+	margin-bottom: -1rem;
+	margin-bottom: -1rem;
+	margin-bottom: calc(var(--mlu-gg-rem) * -1);
+}
+
+.Mb-4su {
+	margin-bottom: -1rem;
 }
 
 .Mb1su {
@@ -1396,224 +1604,170 @@ Styleguide: core-utils.margin.mx
 	margin-bottom: 0.75rem;
 }
 
+.Mb4su {
+	margin-bottom: 1rem;
+}
+
 .Mb6su {
 	margin-bottom: 1.5rem;
 }
 
-.Mb-2gg {
-	margin-bottom: -24px;
+.Mb8su {
+	margin-bottom: 2rem;
 }
 
 .Ml-2gg {
-	margin-left: -24px;
+	margin-left: -32px;
+	margin-left: -32px;
+	margin-left: calc(var(--mlu-gg) * -2);
 }
 
 .Ml2gg {
-	margin-left: 24px;
+	margin-left: 32px;
+	margin-left: 32px;
+	margin-left: calc(var(--mlu-gg) * 2);
 }
 
 .Ml-1gg {
-	margin-left: -12px;
+	margin-left: -16px;
+	margin-left: -16px;
+	margin-left: calc(var(--mlu-gg) * -1);
 }
 
 .Ml1gg {
-	margin-left: 12px;
+	margin-left: 16px;
+	margin-left: 16px;
+	margin-left: var(--mlu-gg);
 }
 
-.Ml-2su {
+.Mx-2su {
+	margin-right: -8px;
 	margin-left: -8px;
 }
 
-.Ml2su {
-	margin-left: 8px;
+.Mx-3su {
+	margin-right: -12px;
+	margin-left: -12px;
 }
 
-.Mx1gg {
-	margin-right: 12px;
-	margin-left: 12px;
-	margin-right: 12px;
-	margin-left: 12px;
+.Mx-4su {
+	margin-right: -16px;
+	margin-left: -16px;
 }
 
 .Mx-1gg {
-	margin-right: -1.5%;
-	margin-left: -1.5%;
-	margin-right: calc(-12px);
-	margin-left: calc(-12px);
+	margin-right: -16px;
+	margin-left: -16px;
+	margin-right: -16px;
+	margin-left: -16px;
+	margin-right: calc(var(--mlu-gg) * -1);
+	margin-left: calc(var(--mlu-gg) * -1);
 }
 
 /*
 Padding
 
 * `P0` \- clear all paddings.
-* `P8` \- creates paddings of 8px all around.
-* `Pt1gg` \- works similarly [Mt1gg](#kssref-core-utils-margin)
-* `Pb1gg`
-* `Px1gg`
+* `P1su..P4su` \- creates padding all around.
+* `P1gg`
+* `Pt1gg..Pt2gg` \- works similarly [Mt1gg](#kssref-core-utils-margin)
+* `Pb1gg..Pb2gg`
 
 Styleguide: core-utils.padding
+*/
+
+/*
+Px
+
+Padding on X axis. Sets left and right padding.
+
+* `Px1gg` \- *responsive*
+* `Px2su..Px4su` \- with these utilities you can change the columns gutter. Use them with the appropriate [Mx utils](#kssref-core-utils-margin-mx) to remove double fields along the edges of the container.
+* `Px0` - only *responsive*
+
+Markup: ../../../docs/examples/core-utils/padding/px.html
+
+Styleguide: core-utils.padding.px
 */
 
 .P0 {
 	padding: 0px;
 }
 
-.P8 {
+.P1su {
+	padding: 0.25rem 4px;
+}
+
+.P2su {
 	padding: 0.5rem 8px;
 }
 
+.P3su {
+	padding: 0.75rem 12px;
+}
+
+.P4su {
+	padding: 1rem 16px;
+}
+
+.P1gg {
+	padding: 16px;
+	padding: 1rem 16px;
+	padding: var(--mlu-gg-rem) var(--mlu-gg);
+}
+
 .Pt1gg {
-	padding-top: 0.75rem;
+	padding-top: 1rem;
+	padding-top: 1rem;
+	padding-top: var(--mlu-gg-rem);
+}
+
+.Pt2gg {
+	padding-top: 2rem;
+	padding-top: 2rem;
+	padding-top: calc(var(--mlu-gg-rem) * 2);
 }
 
 .Pb1gg {
-	padding-bottom: 0.75rem;
+	padding-bottom: 1rem;
+	padding-bottom: 1rem;
+	padding-bottom: var(--mlu-gg-rem);
+}
+
+.Pb2gg {
+	padding-bottom: 2rem;
+	padding-bottom: 2rem;
+	padding-bottom: calc(var(--mlu-gg-rem) * 2);
 }
 
 .Pl1gg {
-	padding-left: 0.75rem;
+	padding-left: 16px;
+	padding-left: 16px;
+	padding-left: var(--mlu-gg);
 }
 
-.Pl2gg {
-	padding-left: 1.5rem;
+.Px2su {
+	padding-right: 8px;
+	padding-left: 8px;
+}
+
+.Px3su {
+	padding-right: 12px;
+	padding-left: 12px;
+}
+
+.Px4su {
+	padding-right: 16px;
+	padding-left: 16px;
 }
 
 .Px1gg {
-	padding-right: 1.5%;
-	padding-left: 1.5%;
-	padding-right: calc(12px);
-	padding-left: calc(12px);
-}
-
-/*
-Visual formatting
-
-* `D-tb`
-* `D-tbc`
-* `D-tbr`
-* `D-itb`
-* `Fl` \- turn on wrapping text on the right.
-* `Fl-r` \- turn on wrapping text on the left.
-* `Ol0`
-* `Op0`
-
-Styleguide: core-utils.visual
-*/
-
-/*
-mCl
-
-Modified clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
-
-Styleguide: core-utils.visual.mcl
-*/
-
-/*
-Ov
-
-Controls content display in case of overflow
-
-Ov - hidden.
-Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
-Ov.Ovx-a - auto. Scrollbar on X axis.
-Ov.Ovy-a - auto. Scrollbar on Y axis.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
-
-Styleguide: core-utils.visual.ov
-*/
-
-/*
-mV
-
-Modified visibility.
-
-mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
-
-Styleguide: core-utils.visual.mv
-*/
-
-/*
-mAll
-
-Modified `all`.
-
-* `sr` \- soft reset, reset some default browser styles:
-	* `margin`
-	* `padding`
-	* `border`
-	* `font`
-	* `list-style`
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/mall.html
-
-Styleguide: core-utils.visual.mall
-*/
-
-.Fl {
-	float: left;
-}
-
-.Fl-r {
-	float: right;
-}
-
-.mCl:after {
-	display: table;
-	clear: both;
-	content: "";
-}
-
-.Ov {
-	overflow: hidden;
-}
-
-.Ov-a {
-	overflow: auto;
-}
-
-.Ovx-a {
-	overflow-x: auto;
-}
-
-.Ovy-a {
-	overflow-y: auto;
-}
-
-.Ol0 {
-	outline: 0px;
-}
-
-.Ol0::-moz-focus-inner {
-	border: 0;
-}
-
-.Op0 {
-	opacity: 0;
-}
-
-.mV-vh {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0px;
-	overflow: hidden;
-	white-space: nowrap;
-	border: 0px;
-	clip: rect(0 0 0 0);
-}
-
-.mAll-sr {
-	margin: 0;
-	padding: 0;
-	font: inherit;
-	list-style: none;
-	border: 0;
+	padding-right: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-left: 16px;
+	padding-right: var(--mlu-gg);
+	padding-left: var(--mlu-gg);
 }
 
 /*
@@ -1680,6 +1834,7 @@ Group of utilities that manage the display of text.
 * `C-i`
 * `Whs-nw`
 * `Lh-n` \- line-height normal.
+* `Lh1`
 
 Styleguide: core-utils.text
 */
@@ -1777,6 +1932,10 @@ Styleguide: core-utils.text.mtov
 	line-height: normal;
 }
 
+.Lh1 {
+	line-height: 1;
+}
+
 .Whs-nw {
 	white-space: nowrap;
 }
@@ -1788,30 +1947,99 @@ Styleguide: core-utils.text.mtov
 /*
 Background
 
-* `Bgr-n`
-* `Bgsz-cv`
-* `Bgsz-ct`
+Group of utilities for managing the background image of DOM node.
 
 Styleguide: core-utils.bg
 */
 
 /*
-mBgp
+Bgp
 
-Modified `background-position`. Includes `Bgr-n`.
+Position of background.
 
-c - center.
+t - top
+r - right
+b - bottom
+c - center
+rt - right top
+rb - right bottom
+lb - left bottom
 
-Styleguide: core-utils.bg.mbgp
+Styleguide: core-utils.bg.bgp
+*/
+
+/*
+Bgr
+
+Repeat of background.
+
+n - no repeat
+x - repeat on X axis
+y - repeat on Y
+
+Styleguide: core-utils.bg.bgr
+*/
+
+/*
+Bgsz
+
+Background size.
+
+cv - cover. Stretches the background image so that it covers the entire space of the container.
+ct - contain. Stretches the background image to the maximum possible size so it does not go beyond the background of the container. The image does not change the proportions.
+
+Styleguide: core-utils.bg.bgsz
+*/
+
+/*
+Bga
+
+Background attachment. It controls the behavior of the background when scrolling.
+
+f - fixed
+l - local
+
+Styleguide: core-utils.bg.bga
 */
 
 .Bgr-n {
 	background-repeat: no-repeat;
 }
 
-.mBgp-c {
-	background-repeat: no-repeat;
+.Bgr-x {
+	background-repeat: repeat-x;
+}
+
+.Bgr-y {
+	background-repeat: repeat-y;
+}
+
+.Bgp-c {
 	background-position: center;
+}
+
+.Bgp-t {
+	background-position: top;
+}
+
+.Bgp-r {
+	background-position: right;
+}
+
+.Bgp-b {
+	background-position: bottom;
+}
+
+.Bgp-rt {
+	background-position: right top;
+}
+
+.Bgp-rb {
+	background-position: right bottom;
+}
+
+.Bgp-lb {
+	background-position: left bottom;
 }
 
 .Bgsz-cv {
@@ -1822,18 +2050,103 @@ Styleguide: core-utils.bg.mbgp
 	background-size: contain;
 }
 
+.Bga-f {
+	background-attachment: fixed;
+}
+
+.Bga-l {
+	background-attachment: local;
+}
+
 /*
 Border
 
+By default, the text color of the DOM node is used for the border.
+
+* `Bd` \- <span class="Bd">add border with 1px width all around.</span>
+* `Bdt` \- add border with 1px width on top.
+* `Bdr` \- border right.
+* `Bdb` \- border bottom.
+* `Bdl` \- border left.
+* `Bdx` \- left and rigth.
+* `Bdy` \- top and bottom.
 * `Bdcl-c` \- remove the separation between table cells.
 * `Bdrs50p` \- makes the shape visually round.
-* `Bd0` \- remove border.
 
 Styleguide: core-utils.bd
 */
 
-.Bd0 {
-	border: 0px;
+/*
+Bdw
+
+Border width.
+
+0 - remove border
+2 - <div class="Bd Bdw2 P2su Mb1gg">2px</div>
+1su - <div class="Bd Bdw1su P2su">1 space unit</div>
+
+Styleguide: core-utils.bd.bdw
+*/
+
+/*
+Bds
+
+Border style. Changes the style of the border on **all** sides at once.
+
+dt - <div class="Bd Bdw1su Bds-dt P2su Mb1gg">dotted</div>
+ds - <div class="Bd Bdw1su Bds-ds P2su">dashed</div>
+
+Styleguide: core-utils.bd.bds
+*/
+
+.Bd {
+	border: 1px solid;
+}
+
+.Bdt {
+	border-top: 1px solid;
+}
+
+.Bdr {
+	border-right: 1px solid;
+}
+
+.Bdb {
+	border-bottom: 1px solid;
+}
+
+.Bdl {
+	border-left: 1px solid;
+}
+
+.Bdy {
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+}
+
+.Bdx {
+	border-right: 1px solid;
+	border-left: 1px solid;
+}
+
+.Bds-dt {
+	border-style: dotted;
+}
+
+.Bds-ds {
+	border-style: dashed;
+}
+
+.Bdw0 {
+	border-width: 0px;
+}
+
+.Bdw2 {
+	border-width: 2px;
+}
+
+.Bdw1su {
+	border-width: 4px;
 }
 
 .Bdcl-c {
@@ -1847,8 +2160,20 @@ Styleguide: core-utils.bd
 /*===DESIGN-UTILS===*/
 
 @media (min-width: 520px) {
-	.D-n_sm {
-		display: none;
+	.mV-vh_sm {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
+	}
+
+	.Pos-a_sm {
+		position: absolute;
 	}
 
 	.D_sm {
@@ -1865,6 +2190,10 @@ Styleguide: core-utils.bd
 
 	.D-if_sm {
 		display: inline-flex;
+	}
+
+	.D-n_sm {
+		display: none;
 	}
 
 	.Jc-sa_sm {
@@ -1890,36 +2219,16 @@ Styleguide: core-utils.bd
 		text-align: right;
 	}
 
-	.W1gc_sm {
-		width: 22%;
-		width: calc(25% - 24px);
-	}
-
 	.W1gs_sm {
 		width: 25%;
-	}
-
-	.W2gc_sm {
-		width: 47%;
-		width: calc(50% - 24px);
 	}
 
 	.W2gs_sm {
 		width: 50%;
 	}
 
-	.W3gc_sm {
-		width: 72%;
-		width: calc(75% - 24px);
-	}
-
 	.W3gs_sm {
 		width: 75%;
-	}
-
-	.W4gc_sm {
-		width: 97%;
-		width: calc(100% - 24px);
 	}
 
 	.W4gs_sm {
@@ -1930,33 +2239,60 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
-	.Ml-a_sm {
-		margin-left: auto;
-	}
-
 	.Mb0_sm {
 		margin-bottom: 0px;
 	}
 
-	.Mx-a_sm {
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.Mx1gg_sm {
-		margin-left: 12px;
-		margin-right: 12px;
-	}
-
 	.Mx0_sm {
-		margin-left: 0;
-		margin-right: 0;
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+
+	.Ml-a_sm {
+		margin-left: auto;
+	}
+
+	.Mx-a_sm {
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.Mb2gg_sm {
+		margin-bottom: 2rem;
+		margin-bottom: 2rem;
+		margin-bottom: calc(var(--mlu-gg-rem) * 2);
+	}
+
+	.Px1gg_sm {
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: var(--mlu-gg);
+		padding-left: var(--mlu-gg);
+	}
+
+	.Px0_sm {
+		padding-right: 0;
+		padding-left: 0;
 	}
 }
 
 @media (min-width: 760px) {
-	.D-n_md {
-		display: none;
+	.mV-vh_md {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
+	}
+
+	.Pos-a_md {
+		position: absolute;
 	}
 
 	.D_md {
@@ -1973,6 +2309,10 @@ Styleguide: core-utils.bd
 
 	.D-if_md {
 		display: inline-flex;
+	}
+
+	.D-n_md {
+		display: none;
 	}
 
 	.Jc-sa_md {
@@ -1998,24 +2338,12 @@ Styleguide: core-utils.bd
 		text-align: right;
 	}
 
-	.W1gc_md {
-		width: calc(8.333% - 24px);
-	}
-
 	.W1gs_md {
 		width: 8.333%;
 	}
 
 	.Ml1gs_md {
 		margin-left: 8.333%;
-	}
-
-	.Ml1gc_md {
-		margin-left: calc(8.333% + 12px);
-	}
-
-	.W2gc_md {
-		width: calc(16.666% - 24px);
 	}
 
 	.W2gs_md {
@@ -2026,28 +2354,12 @@ Styleguide: core-utils.bd
 		margin-left: 16.666%;
 	}
 
-	.Ml2gc_md {
-		margin-left: calc(16.666% + 12px);
-	}
-
-	.W3gc_md {
-		width: calc(25% - 24px);
-	}
-
 	.W3gs_md {
 		width: 25%;
 	}
 
 	.Ml3gs_md {
 		margin-left: 25%;
-	}
-
-	.Ml3gc_md {
-		margin-left: calc(25% + 12px);
-	}
-
-	.W4gc_md {
-		width: calc(33.333% - 24px);
 	}
 
 	.W4gs_md {
@@ -2058,28 +2370,12 @@ Styleguide: core-utils.bd
 		margin-left: 33.333%;
 	}
 
-	.Ml4gc_md {
-		margin-left: calc(33.333% + 12px);
-	}
-
-	.W5gc_md {
-		width: calc(41.666% - 24px);
-	}
-
 	.W5gs_md {
 		width: 41.666%;
 	}
 
 	.Ml5gs_md {
 		margin-left: 41.666%;
-	}
-
-	.Ml5gc_md {
-		margin-left: calc(41.666% + 12px);
-	}
-
-	.W6gc_md {
-		width: calc(50% - 24px);
 	}
 
 	.W6gs_md {
@@ -2090,28 +2386,12 @@ Styleguide: core-utils.bd
 		margin-left: 50%;
 	}
 
-	.Ml6gc_md {
-		margin-left: calc(50% + 12px);
-	}
-
-	.W7gc_md {
-		width: calc(58.333% - 24px);
-	}
-
 	.W7gs_md {
 		width: 58.333%;
 	}
 
 	.Ml7gs_md {
 		margin-left: 58.333%;
-	}
-
-	.Ml7gc_md {
-		margin-left: calc(58.333% + 12px);
-	}
-
-	.W8gc_md {
-		width: calc(66.666% - 24px);
 	}
 
 	.W8gs_md {
@@ -2122,28 +2402,12 @@ Styleguide: core-utils.bd
 		margin-left: 66.666%;
 	}
 
-	.Ml8gc_md {
-		margin-left: calc(66.666% + 12px);
-	}
-
-	.W9gc_md {
-		width: calc(75% - 24px);
-	}
-
 	.W9gs_md {
 		width: 75%;
 	}
 
 	.Ml9gs_md {
 		margin-left: 75%;
-	}
-
-	.Ml9gc_md {
-		margin-left: calc(75% + 12px);
-	}
-
-	.W10gc_md {
-		width: calc(83.333% - 24px);
 	}
 
 	.W10gs_md {
@@ -2154,20 +2418,8 @@ Styleguide: core-utils.bd
 		margin-left: 83.333%;
 	}
 
-	.Ml10gc_md {
-		margin-left: calc(83.333% + 12px);
-	}
-
-	.W11gc_md {
-		width: calc(91.666% - 24px);
-	}
-
 	.W11gs_md {
 		width: 91.666%;
-	}
-
-	.W12gc_md {
-		width: calc(100% - 24px);
 	}
 
 	.W12gs_md {
@@ -2178,47 +2430,68 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
-	.Ml-a_md {
-		margin-left: auto;
-	}
-
 	.Mb0_md {
 		margin-bottom: 0px;
 	}
 
-	.Mx-a_md {
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.Mx1gg_md {
-		margin-left: 12px;
-		margin-right: 12px;
-	}
-
 	.Mx0_md {
-		margin-left: 0;
-		margin-right: 0;
+		margin-right: 0px;
+		margin-left: 0px;
+	}
+
+	.Ml-a_md {
+		margin-left: auto;
+	}
+
+	.Mx-a_md {
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.Mb2gg_md {
+		margin-bottom: 2rem;
+		margin-bottom: 2rem;
+		margin-bottom: calc(var(--mlu-gg-rem) * 2);
+	}
+
+	.Px1gg_md {
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: var(--mlu-gg);
+		padding-left: var(--mlu-gg);
+	}
+
+	.Px0_md {
+		padding-right: 0;
+		padding-left: 0;
 	}
 }
 
 @media (min-width: 960px) {
-	.row__col {
-		margin-right: calc(16px);
-		margin-left: calc(16px);
+	:root {
+		--mlu-gg: 16px;
 	}
 
-	.row__col {
-		margin-bottom: 32px;
+	:root {
+		--mlu-gg-rem: 1rem;
 	}
 
-	.wrapper {
-		padding-right: calc(16px);
-		padding-left: calc(16px);
+	.mV-vh_lg {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
 	}
 
-	.D-n_lg {
-		display: none;
+	.Pos-a_lg {
+		position: absolute;
 	}
 
 	.D_lg {
@@ -2235,6 +2508,10 @@ Styleguide: core-utils.bd
 
 	.D-if_lg {
 		display: inline-flex;
+	}
+
+	.D-n_lg {
+		display: none;
 	}
 
 	.Jc-sa_lg {
@@ -2260,136 +2537,12 @@ Styleguide: core-utils.bd
 		text-align: right;
 	}
 
-	.W1gc {
-		width: calc(50% - 32px);
-	}
-
-	.W2gc {
-		width: calc(100% - 32px);
-	}
-
-	.W1gc_sm {
-		width: calc(25% - 32px);
-	}
-
-	.W2gc_sm {
-		width: calc(50% - 32px);
-	}
-
-	.W3gc_sm {
-		width: calc(75% - 32px);
-	}
-
-	.W4gc_sm {
-		width: calc(100% - 32px);
-	}
-
-	.W1gc_md {
-		width: calc(8.333% - 32px);
-	}
-
-	.Ml1gc_md {
-		margin-left: calc(8.333% + 16px);
-	}
-
-	.W2gc_md {
-		width: calc(16.666% - 32px);
-	}
-
-	.Ml2gc_md {
-		margin-left: calc(16.666% + 16px);
-	}
-
-	.W3gc_md {
-		width: calc(25% - 32px);
-	}
-
-	.Ml3gc_md {
-		margin-left: calc(25% + 16px);
-	}
-
-	.W4gc_md {
-		width: calc(33.333% - 32px);
-	}
-
-	.Ml4gc_md {
-		margin-left: calc(33.333% + 16px);
-	}
-
-	.W5gc_md {
-		width: calc(41.666% - 32px);
-	}
-
-	.Ml5gc_md {
-		margin-left: calc(41.666% + 16px);
-	}
-
-	.W6gc_md {
-		width: calc(50% - 32px);
-	}
-
-	.Ml6gc_md {
-		margin-left: calc(50% + 16px);
-	}
-
-	.W7gc_md {
-		width: calc(58.333% - 32px);
-	}
-
-	.Ml7gc_md {
-		margin-left: calc(58.333% + 16px);
-	}
-
-	.W8gc_md {
-		width: calc(66.666% - 32px);
-	}
-
-	.Ml8gc_md {
-		margin-left: calc(66.666% + 16px);
-	}
-
-	.W9gc_md {
-		width: calc(75% - 32px);
-	}
-
-	.Ml9gc_md {
-		margin-left: calc(75% + 16px);
-	}
-
-	.W10gc_md {
-		width: calc(83.333% - 32px);
-	}
-
-	.Ml10gc_md {
-		margin-left: calc(83.333% + 16px);
-	}
-
-	.W11gc_md {
-		width: calc(91.666% - 32px);
-	}
-
-	.W12gc_md {
-		width: calc(100% - 32px);
-	}
-
-	.W1gc_lg {
-		width: calc(8.333% - 32px);
-	}
-
 	.W1gs_lg {
 		width: 8.333%;
 	}
 
 	.Ml1gs_lg {
 		margin-left: 8.333%;
-	}
-
-	.Ml1gc_lg {
-		margin-left: calc(8.333% + 16px);
-	}
-
-	.W2gc_lg {
-		width: calc(16.666% - 32px);
 	}
 
 	.W2gs_lg {
@@ -2400,28 +2553,12 @@ Styleguide: core-utils.bd
 		margin-left: 16.666%;
 	}
 
-	.Ml2gc_lg {
-		margin-left: calc(16.666% + 16px);
-	}
-
-	.W3gc_lg {
-		width: calc(25% - 32px);
-	}
-
 	.W3gs_lg {
 		width: 25%;
 	}
 
 	.Ml3gs_lg {
 		margin-left: 25%;
-	}
-
-	.Ml3gc_lg {
-		margin-left: calc(25% + 16px);
-	}
-
-	.W4gc_lg {
-		width: calc(33.333% - 32px);
 	}
 
 	.W4gs_lg {
@@ -2432,28 +2569,12 @@ Styleguide: core-utils.bd
 		margin-left: 33.333%;
 	}
 
-	.Ml4gc_lg {
-		margin-left: calc(33.333% + 16px);
-	}
-
-	.W5gc_lg {
-		width: calc(41.666% - 32px);
-	}
-
 	.W5gs_lg {
 		width: 41.666%;
 	}
 
 	.Ml5gs_lg {
 		margin-left: 41.666%;
-	}
-
-	.Ml5gc_lg {
-		margin-left: calc(41.666% + 16px);
-	}
-
-	.W6gc_lg {
-		width: calc(50% - 32px);
 	}
 
 	.W6gs_lg {
@@ -2464,28 +2585,12 @@ Styleguide: core-utils.bd
 		margin-left: 50%;
 	}
 
-	.Ml6gc_lg {
-		margin-left: calc(50% + 16px);
-	}
-
-	.W7gc_lg {
-		width: calc(58.333% - 32px);
-	}
-
 	.W7gs_lg {
 		width: 58.333%;
 	}
 
 	.Ml7gs_lg {
 		margin-left: 58.333%;
-	}
-
-	.Ml7gc_lg {
-		margin-left: calc(58.333% + 16px);
-	}
-
-	.W8gc_lg {
-		width: calc(66.666% - 32px);
 	}
 
 	.W8gs_lg {
@@ -2496,28 +2601,12 @@ Styleguide: core-utils.bd
 		margin-left: 66.666%;
 	}
 
-	.Ml8gc_lg {
-		margin-left: calc(66.666% + 16px);
-	}
-
-	.W9gc_lg {
-		width: calc(75% - 32px);
-	}
-
 	.W9gs_lg {
 		width: 75%;
 	}
 
 	.Ml9gs_lg {
 		margin-left: 75%;
-	}
-
-	.Ml9gc_lg {
-		margin-left: calc(75% + 16px);
-	}
-
-	.W10gc_lg {
-		width: calc(83.333% - 32px);
 	}
 
 	.W10gs_lg {
@@ -2528,20 +2617,8 @@ Styleguide: core-utils.bd
 		margin-left: 83.333%;
 	}
 
-	.Ml10gc_lg {
-		margin-left: calc(83.333% + 16px);
-	}
-
-	.W11gc_lg {
-		width: calc(91.666% - 32px);
-	}
-
 	.W11gs_lg {
 		width: 91.666%;
-	}
-
-	.W12gc_lg {
-		width: calc(100% - 32px);
 	}
 
 	.W12gs_lg {
@@ -2552,124 +2629,60 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
-	.Ml1gg_lg {
-		margin-left: 16px;
+	.Mb0_lg {
+		margin-bottom: 0px;
 	}
 
-	.Ml0_lg {
-		margin-left: 0;
-	}
-
-	.Mt4gg {
-		margin-top: 4rem;
-	}
-
-	.Mb4gg {
-		margin-bottom: 4rem;
-	}
-
-	.Mt3gg {
-		margin-top: 3rem;
-	}
-
-	.Mb3gg {
-		margin-bottom: 3rem;
-	}
-
-	.Mt2gg {
-		margin-top: 2rem;
-	}
-
-	.Mb2gg {
-		margin-bottom: 2rem;
-	}
-
-	.Mt1gg {
-		margin-top: 1rem;
-	}
-
-	.Mb1gg {
-		margin-bottom: 1rem;
-	}
-
-	.Mb-2gg {
-		margin-bottom: -32px;
-	}
-
-	.Ml-2gg {
-		margin-left: -32px;
-	}
-
-	.Ml2gg {
-		margin-left: 32px;
-	}
-
-	.Ml-1gg {
-		margin-left: -16px;
-	}
-
-	.Ml1gg {
-		margin-left: 16px;
-	}
-
-	.Mx1gg {
-		margin-right: 16px;
-		margin-left: 16px;
-	}
-
-	.Mx-1gg {
-		margin-right: calc(-16px);
-		margin-left: calc(-16px);
+	.Mx0_lg {
+		margin-right: 0px;
+		margin-left: 0px;
 	}
 
 	.Ml-a_lg {
 		margin-left: auto;
 	}
 
-	.Mb0_lg {
-		margin-bottom: 0px;
-	}
-
 	.Mx-a_lg {
-		margin-left: auto;
 		margin-right: auto;
+		margin-left: auto;
 	}
 
-	.Mx1gg_lg {
-		margin-left: 16px;
-		margin-right: 16px;
+	.Mb2gg_lg {
+		margin-bottom: 2rem;
+		margin-bottom: 2rem;
+		margin-bottom: calc(var(--mlu-gg-rem) * 2);
 	}
 
-	.Mx0_lg {
-		margin-left: 0;
-		margin-right: 0;
+	.Px1gg_lg {
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: var(--mlu-gg);
+		padding-left: var(--mlu-gg);
 	}
 
-	.Pt1gg {
-		padding-top: 1rem;
-	}
-
-	.Pb1gg {
-		padding-bottom: 1rem;
-	}
-
-	.Pl1gg {
-		padding-left: 1rem;
-	}
-
-	.Pl2gg {
-		padding-left: 2rem;
-	}
-
-	.Px1gg {
-		padding-right: calc(16px);
-		padding-left: calc(16px);
+	.Px0_lg {
+		padding-right: 0;
+		padding-left: 0;
 	}
 }
 
 @media (min-width: 1168px) {
-	.D-n_xl {
-		display: none;
+	.mV-vh_xl {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
+	}
+
+	.Pos-a_xl {
+		position: absolute;
 	}
 
 	.D_xl {
@@ -2686,6 +2699,10 @@ Styleguide: core-utils.bd
 
 	.D-if_xl {
 		display: inline-flex;
+	}
+
+	.D-n_xl {
+		display: none;
 	}
 
 	.Jc-sa_xl {
@@ -2711,24 +2728,12 @@ Styleguide: core-utils.bd
 		text-align: right;
 	}
 
-	.W1gc_xl {
-		width: calc(8.333% - 32px);
-	}
-
 	.W1gs_xl {
 		width: 8.333%;
 	}
 
 	.Ml1gs_xl {
 		margin-left: 8.333%;
-	}
-
-	.Ml1gc_xl {
-		margin-left: calc(8.333% + 16px);
-	}
-
-	.W2gc_xl {
-		width: calc(16.666% - 32px);
 	}
 
 	.W2gs_xl {
@@ -2739,28 +2744,12 @@ Styleguide: core-utils.bd
 		margin-left: 16.666%;
 	}
 
-	.Ml2gc_xl {
-		margin-left: calc(16.666% + 16px);
-	}
-
-	.W3gc_xl {
-		width: calc(25% - 32px);
-	}
-
 	.W3gs_xl {
 		width: 25%;
 	}
 
 	.Ml3gs_xl {
 		margin-left: 25%;
-	}
-
-	.Ml3gc_xl {
-		margin-left: calc(25% + 16px);
-	}
-
-	.W4gc_xl {
-		width: calc(33.333% - 32px);
 	}
 
 	.W4gs_xl {
@@ -2771,28 +2760,12 @@ Styleguide: core-utils.bd
 		margin-left: 33.333%;
 	}
 
-	.Ml4gc_xl {
-		margin-left: calc(33.333% + 16px);
-	}
-
-	.W5gc_xl {
-		width: calc(41.666% - 32px);
-	}
-
 	.W5gs_xl {
 		width: 41.666%;
 	}
 
 	.Ml5gs_xl {
 		margin-left: 41.666%;
-	}
-
-	.Ml5gc_xl {
-		margin-left: calc(41.666% + 16px);
-	}
-
-	.W6gc_xl {
-		width: calc(50% - 32px);
 	}
 
 	.W6gs_xl {
@@ -2803,28 +2776,12 @@ Styleguide: core-utils.bd
 		margin-left: 50%;
 	}
 
-	.Ml6gc_xl {
-		margin-left: calc(50% + 16px);
-	}
-
-	.W7gc_xl {
-		width: calc(58.333% - 32px);
-	}
-
 	.W7gs_xl {
 		width: 58.333%;
 	}
 
 	.Ml7gs_xl {
 		margin-left: 58.333%;
-	}
-
-	.Ml7gc_xl {
-		margin-left: calc(58.333% + 16px);
-	}
-
-	.W8gc_xl {
-		width: calc(66.666% - 32px);
 	}
 
 	.W8gs_xl {
@@ -2835,28 +2792,12 @@ Styleguide: core-utils.bd
 		margin-left: 66.666%;
 	}
 
-	.Ml8gc_xl {
-		margin-left: calc(66.666% + 16px);
-	}
-
-	.W9gc_xl {
-		width: calc(75% - 32px);
-	}
-
 	.W9gs_xl {
 		width: 75%;
 	}
 
 	.Ml9gs_xl {
 		margin-left: 75%;
-	}
-
-	.Ml9gc_xl {
-		margin-left: calc(75% + 16px);
-	}
-
-	.W10gc_xl {
-		width: calc(83.333% - 32px);
 	}
 
 	.W10gs_xl {
@@ -2867,20 +2808,8 @@ Styleguide: core-utils.bd
 		margin-left: 83.333%;
 	}
 
-	.Ml10gc_xl {
-		margin-left: calc(83.333% + 16px);
-	}
-
-	.W11gc_xl {
-		width: calc(91.666% - 32px);
-	}
-
 	.W11gs_xl {
 		width: 91.666%;
-	}
-
-	.W12gc_xl {
-		width: calc(100% - 32px);
 	}
 
 	.W12gs_xl {
@@ -2891,35 +2820,42 @@ Styleguide: core-utils.bd
 		width: auto;
 	}
 
-	.Ml1gg_xl {
-		margin-left: 16px;
+	.Mb0_xl {
+		margin-bottom: 0px;
 	}
 
-	.Ml0_xl {
-		margin-left: 0;
+	.Mx0_xl {
+		margin-right: 0px;
+		margin-left: 0px;
 	}
 
 	.Ml-a_xl {
 		margin-left: auto;
 	}
 
-	.Mb0_xl {
-		margin-bottom: 0px;
-	}
-
 	.Mx-a_xl {
-		margin-left: auto;
 		margin-right: auto;
+		margin-left: auto;
 	}
 
-	.Mx1gg_xl {
-		margin-left: 16px;
-		margin-right: 16px;
+	.Mb2gg_xl {
+		margin-bottom: 2rem;
+		margin-bottom: 2rem;
+		margin-bottom: calc(var(--mlu-gg-rem) * 2);
 	}
 
-	.Mx0_xl {
-		margin-left: 0;
-		margin-right: 0;
+	.Px1gg_xl {
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: 16px;
+		padding-left: 16px;
+		padding-right: var(--mlu-gg);
+		padding-left: var(--mlu-gg);
+	}
+
+	.Px0_xl {
+		padding-right: 0;
+		padding-left: 0;
 	}
 
 	.Dir-r_xl {

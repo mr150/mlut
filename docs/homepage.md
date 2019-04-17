@@ -15,9 +15,9 @@ For now MLUT contains Sass tools and CSS library.
 The library part of toolkit united in itself ideas from [Atomic CSS](https://acss.io/) and [BEM](https://bem.info/). It consists of 2 layers:
 
 - Core - all that can be used at each website. This layer contains BEM blocks and CSS utilities.
-- Theme - something that is only used in specific theme. Theme can be used on different sites. This layer may contain utilities, scripts, styles and components with BEM naming.
+- Theme - something that is only used in specific design theme. Theme can be used on different sites. This layer may contain utilities, scripts and styles with BEM naming.
 
-You can added third 'design' layer - parts of UI for a specific website. It may also contain utilities and components.
+You can add your 'design' layer - parts of UI for a specific website. It may contain any styles and scripts.
 
 ## Technologies ##
 - [LibSass](https://github.com/sass/libsass)
@@ -41,7 +41,6 @@ You can added third 'design' layer - parts of UI for a specific website. It may 
 	- Opera
 	- Edge
 	- IE9+
-	- partial IE8
 - Mobile
-	- Android 4.2+
+	- Android 4.4+
 	- IOS
