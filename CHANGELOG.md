@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.1 (2019-04-18)
+
+### Fixed
+- Deleted tests.scss file, which by mistake got into the npm package.
+
+### Changed
+- Npm package tags.
+
 ## 2.0.0 (2019-04-17)
 
 ### Breaking changes
