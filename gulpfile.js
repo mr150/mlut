@@ -27,8 +27,6 @@ var dirs = {
 
 var path = {
 	src: {
-		blocks: dirs.src + "core-blocks/",
-		utils: dirs.src + "core-utils/",
 		sass: dirs.src + "sass/",
 		js: dirs.src + "js/"
 	},
@@ -48,16 +46,12 @@ var files = {
 	js: "**/*.js",
 	pug: "**/*.pug",
 	html: "**/*.html",
-	distCss: "mlut.min.css",
-	distJs: "mlut.min.js",
 	all: "**/*"
 };
 
 path = Object.assign({
 	watch: {
 		styles: [
-			path.src.blocks + files.styles,
-			path.src.utils + files.styles,
 			dirs.libs + files.styles,
 			path.src.sass + files.styles
 		],
@@ -72,7 +66,6 @@ path = Object.assign({
 		js: [
 			path.src.js + "mlut.js",
 			path.src.js + "includes/" + files.js,
-			path.src.blocks + files.js,
 			dirs.libs + files.js
 		]
 	}
@@ -92,7 +85,7 @@ var servConfig = {
 		};
 
 gulp.task("style", ["css-lint"], function(){
-	return gulp.src(path.src.sass + "mlut.scss")
+	return gulp.src(path.src.sass + "*.scss")
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sass({
@@ -111,7 +104,7 @@ gulp.task("style", ["css-lint"], function(){
 			level: 2,
 			compatibility: "ie8"
 		}))
-		.pipe(rename(files.distCss))
+		.pipe(rename({suffix: ".min"}))
 		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build.css))
 		.pipe(gulp.dest(dirs.docs + "styleguide/kss-assets/"))
@@ -122,8 +115,6 @@ gulp.task("style", ["css-lint"], function(){
 
 gulp.task("css-lint", function(){
 	return gulp.src([
-		path.src.blocks + files.styles,
-		path.src.utils + files.styles,
 		path.src.sass + files.styles
 	])
 		.pipe(stylelint({
@@ -141,7 +132,7 @@ gulp.task("scripts", function(){
 		.pipe(rename("scripts.js"))
 		.pipe(gulp.dest(path.test.js))
 		.pipe(uglify())
-		.pipe(rename(files.distJs))
+		.pipe(rename({suffix: ".min"}))
 		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build.js))
 		.pipe(sourcemaps.write(""))
