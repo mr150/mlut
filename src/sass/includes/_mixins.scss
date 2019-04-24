@@ -1100,33 +1100,81 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	}
 }
 
-@mixin mlu-mk-util($name, $prop, $map) {
+@mixin mlu-mk-state($selector: &, $states: map-keys($mlu-util-states), $no-state: 1) {
+	@if not $selector {
+		@error "'$selector' argument must not be null.";
+	}
+
+	@at-root {
+		@if $no-state == 1 {
+			#{$selector} {
+				@content;
+			}
+		}
+
+		$selector: str-slice($selector + "", 2);
+
+		@each $key, $value in $mlu-util-states {
+			@if index($states, $key) {
+				$prefix: "." + $key;
+
+				@if type-of($value) == "string" {
+					#{$prefix}_#{$selector}:#{$value} {
+						@content;
+					}
+				} @else if type-of($value) == "list" {
+					$multi-selector: ();
+
+					@each $item in $value {
+						$multi-selector: append($multi-selector, $prefix + "_" + $selector + ":" + $item, comma);
+					}
+
+					#{$multi-selector} {
+						@content;
+					}
+				} @else {
+					#{$prefix}_#{$selector} {
+						@content;
+					}
+				}
+			}
+		}
+	}
+}
+
+@mixin mlu-mk-util($name, $prop, $map, $bp: false, $states: false) {
 	@each $key, $value in $map {
+		$bp-name: $bp;
 		$util-val: $key;
 		$separator: if(type-of($key) == "string", str-index($key, "_"), false);
-		$bp: false;
 
 		@if $separator {
-			$bp: str-slice($util-val, $separator + 1);
+			$bp-name: str-slice($util-val, $separator + 1);
 			$util-val: str-slice($util-val, 1, $separator - 1);
 		}
 
 		$separator: if(mlu-ston($util-val), "", "-");
 		$selector: $name + $separator + $util-val;
 
-		@if $bp == "all" or $bp == "bp" {
-			@include mlu-bp-all($selector, if($bp == "all", 1, 0)) {
-				@include _mlu-parse-unit($prop, $value);
-			}
-		} @else if $bp {
-			@include mlu-bpm($bp) {
-				#{$selector}_#{$bp} {
+		@if $bp-name == "all" or $bp-name == "bp" {
+			@include mlu-bp-all($selector, if($bp-name == "all", 1, 0)) {
+				@include mlu-mk-state(&, $states, if($states, 0, 1)) {
 					@include _mlu-parse-unit($prop, $value);
+				}
+			}
+		} @else if $bp-name {
+			@include mlu-bpm($bp-name) {
+				#{$selector}_#{$bp-name} {
+					@include mlu-mk-state(&, $states, if($states, 0, 1)) {
+						@include _mlu-parse-unit($prop, $value);
+					}
 				}
 			}
 		} @else {
 			#{$selector} {
-				@include _mlu-parse-unit($prop, $value);
+				@include mlu-mk-state(&, $states, if($states, 0, 1)) {
+					@include _mlu-parse-unit($prop, $value);
+				}
 			}
 		}
 	}

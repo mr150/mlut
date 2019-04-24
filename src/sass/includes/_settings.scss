@@ -479,6 +479,7 @@ $mlu-debug-gutter-color: #336 !default;
 // $mlu-Z-range = 4 - [z-index](section-core-utils.html#kssref-core-utils-pos-z) range. Counted from zero.
 // $mlu-Z-max = 9999 - `z-index` max value.
 // $mlu-Ord-range = 4 - [order](section-core-utils.html#kssref-core-utils-flex) range. Counted from -1.
+// $mlu-util-states - map with abbreviations of utility state names.
 //
 // Styleguide: sass-tools.settings.utils
 
@@ -492,6 +493,17 @@ $mlu-Z-max: 9999 !default;
 $mlu-Z-range: 4 !default;
 
 $mlu-Ord-range: 4 !default;
+
+$mlu-util-states: (
+	"h": "hover",
+	"f": "focus",
+	"h-f": ("hover", "focus"),
+	"a": "active",
+	"bf": "before",
+	"af": "after",
+	"js": null,
+	"nojs": null,
+) !default;
 
 // Grid
 //
