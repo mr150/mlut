@@ -1829,10 +1829,9 @@ Text
 
 Group of utilities that manage the display of text.
 
-* `Tt` \- UPPERCASE.
-* `Tt-n` \- remove text transform.
 * `C-i`
 * `Whs-nw`
+* `Whs-p`
 * `Lh-n` \- line-height normal.
 * `Lh1`
 
@@ -1849,6 +1848,19 @@ c - center.
 r - right.
 
 Styleguide: core-utils.text.ta
+*/
+
+/*
+Tt
+
+Text transform.
+
+initial - UPPERCASE.
+l - lowercase.
+n - remove text transform.
+c - Each Word Begins With A Capital Letter.
+
+Styleguide: core-utils.text.tt
 */
 
 /*
@@ -1918,6 +1930,14 @@ Styleguide: core-utils.text.mtov
 	text-transform: none;
 }
 
+.Tt-l {
+	text-transform: lowercase;
+}
+
+.Tt-c {
+	text-transform: capitalize;
+}
+
 .mTov {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1938,6 +1958,10 @@ Styleguide: core-utils.text.mtov
 
 .Whs-nw {
 	white-space: nowrap;
+}
+
+.Whs-p {
+	white-space: pre;
 }
 
 .Dir-r {

@@ -1099,3 +1099,49 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 		}
 	}
 }
+
+@mixin mlu-mk-util($name, $prop, $map) {
+	@each $key, $value in $map {
+		$util-val: $key;
+		$separator: if(type-of($key) == "string", str-index($key, "_"), false);
+		$bp: false;
+
+		@if $separator {
+			$bp: str-slice($util-val, $separator + 1);
+			$util-val: str-slice($util-val, 1, $separator - 1);
+		}
+
+		$separator: if(mlu-ston($util-val), "", "-");
+		$selector: $name + $separator + $util-val;
+
+		@if $bp == "all" or $bp == "bp" {
+			@include mlu-bp-all($selector, if($bp == "all", 1, 0)) {
+				@include _mlu-parse-unit($prop, $value);
+			}
+		} @else if $bp {
+			@include mlu-bpm($bp) {
+				#{$selector}_#{$bp} {
+					@include _mlu-parse-unit($prop, $value);
+				}
+			}
+		} @else {
+			#{$selector} {
+				@include _mlu-parse-unit($prop, $value);
+			}
+		}
+	}
+}
+
+@mixin _mlu-parse-unit($prop, $value) {
+	$coef-val: mlu-ston($value + "");
+
+	@if type-of($value) == "number" and unit($value) == "gg" {
+		$tmp-val: if(str-index($prop, "top") or str-index($prop, "bottom"), $mlu-gtr-sm-rem, 1);
+		@include mlu-mk-gtr($tmp-val, $type: $prop, $direct: "xy", $coef: $coef-val);
+	} @else if type-of($value) == "number" and unit($value) == "su" {
+		$tmp-val: if(str-index($prop, "top") or str-index($prop, "bottom"), $mlu-su-rem, $mlu-su);
+		#{$prop}: $tmp-val * $coef-val;
+	} @else {
+		#{$prop}: $value;
+	}
+}
