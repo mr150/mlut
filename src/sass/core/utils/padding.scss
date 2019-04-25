@@ -42,23 +42,23 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 }
 
 .Pt1gg {
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "top");
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "t");
 }
 
 .Pt2gg {
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "top", $coef: 2);
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "t", $coef: 2);
 }
 
 .Pb1gg {
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "bottom");
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "b");
 }
 
 .Pb2gg {
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "bottom", $coef: 2);
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "b", $coef: 2);
 }
 
 .Pl1gg {
-	@include mlu-mk-gtr($type: "padding", $direct: "left");
+	@include mlu-mk-gtr($type: "padding", $direct: "l");
 }
 
 .Px2su {

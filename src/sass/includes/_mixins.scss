@@ -282,11 +282,11 @@ Styleguide: sass-tools.mixins
 // Generate fields or indents in grid-gutters on different breakpoints.
 // ```scss
 //.block {
-//		@include mlu-mk-gtr($direct: "right", $coef: 2);
+//		@include mlu-mk-gtr($direct: "r", $coef: 2);
 //}
 //
 //.foo {
-//		@include mlu-mk-gtr($direct: "right", $coef: 2, $css-vars: false);
+//		@include mlu-mk-gtr($direct: "r", $coef: 2, $css-vars: false);
 //}
 // ```
 // CSS
@@ -317,7 +317,7 @@ Styleguide: sass-tools.mixins
 // and 'xy'(left right top bottom).
 // $gutters = $mlu-grid-gutters - map with gutters values on breakpoints.
 // Map item example: `"sm": 12px`. Custom gutters only work when the `$css-vars = false`.
-// $calc = false - bool flag for generation CSS `calc()` fallback for old browsers.
+// $calc = $MLU-FLAG-CALC-FALLBACK - bool flag for generation CSS `calc()` fallback for old browsers.
 // $coef = 1 - coefficient by which the gutter value is multiplied.
 // $css-vars = $MLU-FLAG-CSS-VARS - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
 // Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
@@ -327,8 +327,9 @@ Styleguide: sass-tools.mixins
 @mixin mlu-mk-gtr($init-gutter: $mlu-gtr-sm, $type: "margin",
 $gutters: $mlu-grid-gutters, $calc: $MLU-FLAG-CALC-FALLBACK, $direct: "x",
 $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
-	$custom-prop: false;
+	$custom-prop: null;
 	$prev-value: $mlu-grid-default-gtr;
+	$direct-val: null;
 
 	@if str-slice($type, 1, 2) == "--" {
 		$direct: "xy";
@@ -337,6 +338,10 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 
 	@if type-of($gutters) != "map" {
 		@error "Wrong type of argument $gutters: '#{type-of($gutters)}'. Expected 'map'";
+	}
+
+	@if map-has-key($mlu-main-directions, $direct) {
+		$direct-val: map-get($mlu-main-directions, $direct);
 	}
 
 	@if not $css-vars {
@@ -401,14 +406,14 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 			@if not $custom-prop and $css-vars {
 				@include _mlu-mk-gtr-xy($type, $var-value, $var-value-rem);
 			}
-		} @else if index($mlu-main-directions, $direct) {
+		} @else if $direct-val {
 			@if not $css-vars or $css-vars == 1 {
-				#{$type}-#{$direct}: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
-				#{$type}-#{$direct}: $tmp-val;
+				#{$type}-#{$direct-val}: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+				#{$type}-#{$direct-val}: $tmp-val;
 			}
 
 			@if $css-vars {
-				#{$type}-#{$direct}: $var-value;
+				#{$type}-#{$direct-val}: $var-value;
 			}
 		} @else {
 			@error "Invalid gutter direction - '#{$direct}'";
@@ -440,8 +445,8 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 						#{$type}-bottom: $tmp-val;
 					} @else if $direct == "xy" {
 						@include _mlu-mk-gtr-xy($type, $tmp-val, $tmp-val-rem);
-					} @else if index($mlu-main-directions, $direct) {
-						#{$type}-#{$direct}: $tmp-val;
+					} @else if $direct-val {
+						#{$type}-#{$direct-val}: $tmp-val;
 					} @else {
 						@error "Invalid gutter direction - '#{$direct}'";
 					}
@@ -985,7 +990,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 		width: 100%;
 
 		@include mlu-mk-gtr($mlu-gtr-sm, "padding", $grid-gutters, $calc, $css-vars: $css-vars);
-		@include mlu-mk-gtr($mlu-gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: "bottom", $coef: 2, $css-vars: $css-vars);
+		@include mlu-mk-gtr($mlu-gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: "b", $coef: 2, $css-vars: $css-vars);
 
 		&.row {
 			margin-bottom: 0px;

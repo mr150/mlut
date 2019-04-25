@@ -217,7 +217,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	width: 100%;
 
 	@include mlu-mk-gtr($type: "padding");
-	@include mlu-mk-gtr($direct: "bottom", $coef: 2);
+	@include mlu-mk-gtr($direct: "b", $coef: 2);
 
 	&.row {
 		margin-bottom: 0px;

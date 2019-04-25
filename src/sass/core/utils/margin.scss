@@ -77,10 +77,8 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 	margin: auto;
 }
 
-@each $value in $mlu-main-directions {
-	$letter: str-slice($value, 1, 1);
-
-	.M#{$letter}0 {
+@each $key, $value in $mlu-main-directions {
+	.M#{$key}0 {
 		margin-#{$value}: 0;
 	}
 }
@@ -105,20 +103,20 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 
 @for $i from $mlu-My-range through 1 {
 	.Mt#{$i}gg {
-		@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: $i, $direct: "top");
+		@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: $i, $direct: "t");
 	}
 
 	.Mb#{$i}gg {
-		@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: $i, $direct: "bottom");
+		@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: $i, $direct: "b");
 	}
 }
 
 @include mlu-bp-all(".Mb2gg", 0) {
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: 2, $direct: "bottom");
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: 2, $direct: "b");
 }
 
 .Mb-2gg {
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: -2, $direct: "bottom");
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: -2, $direct: "b");
 }
 
 .Mb-8su {
@@ -130,7 +128,7 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 }
 
 .Mb-1gg {
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: -1, $direct: "bottom");
+	@include mlu-mk-gtr($mlu-gtr-sm-rem, $coef: -1, $direct: "b");
 }
 
 .Mb-4su {
@@ -162,19 +160,19 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 }
 
 .Ml-2gg {
-	@include mlu-mk-gtr($coef: -2, $direct: "left");
+	@include mlu-mk-gtr($coef: -2, $direct: "l");
 }
 
 .Ml2gg {
-	@include mlu-mk-gtr($coef: 2, $direct: "left");
+	@include mlu-mk-gtr($coef: 2, $direct: "l");
 }
 
 .Ml-1gg {
-	@include mlu-mk-gtr($coef: -1, $direct: "left");
+	@include mlu-mk-gtr($coef: -1, $direct: "l");
 }
 
 .Ml1gg {
-	@include mlu-mk-gtr($direct: "left");
+	@include mlu-mk-gtr($direct: "l");
 }
 
 .Mx-2su {
@@ -202,6 +200,6 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 	}
 
 	@include mlu-bp-all(".Ml1gg", 0) {
-		@include mlu-mk-gtr($direct: "left");
+		@include mlu-mk-gtr($direct: "l");
 	}
 }

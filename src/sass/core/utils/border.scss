@@ -43,10 +43,8 @@ Styleguide: core-utils.bd.bds
 	border: 1px solid;
 }
 
-@each $value in $mlu-main-directions {
-	$letter: str-slice($value, 1, 1);
-
-	.Bd#{$letter} {
+@each $key, $value in $mlu-main-directions {
+	.Bd#{$key} {
 		border-#{$value}: 1px solid;
 	}
 }

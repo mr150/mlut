@@ -72,12 +72,10 @@ Styleguide: core-utils.bg.bga
 	background-position: center;
 }
 
-@each $value in $mlu-main-directions {
-	$letter: str-slice($value, 1, 1);
-
-	@if $letter != "l" {
-		.Bgp-#{$letter} {
-			background-position: unquote($value);
+@each $key, $value in $mlu-main-directions {
+	@if $key != "l" {
+		.Bgp-#{$key} {
+			background-position: $value;
 		}
 	}
 }
