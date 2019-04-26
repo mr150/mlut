@@ -395,9 +395,8 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 			}
 		} @else if $direct == "xy" {
 			@if not $css-vars or $css-vars == 1 {
-				@if not $custom-prop {
-					$fallback-val: ($mlu-gtr-sm * $coef) ($mlu-grid-gutter-fallback * $coef);
-					#{$type}: if($calc, $fallback-val, $tmp-val);
+				@if $calc {
+					#{$type}: ($mlu-gtr-sm * $coef) ($mlu-grid-gutter-fallback * $coef);
 				}
 
 				@include _mlu-mk-gtr-xy($type, $tmp-val, $tmp-val-rem);
@@ -1147,7 +1146,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	}
 }
 
-@mixin mlu-mk-util($name, $prop, $map, $bp: false, $states: false) {
+@mixin mlu-mk-util($name, $prop, $map, $bp: false, $states: false, $direct: null) {
 	@each $key, $value in $map {
 		$bp-name: $bp;
 		$util-val: $key;
@@ -1164,24 +1163,60 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 		@if $bp-name == "all" or $bp-name == "bp" {
 			@include mlu-bp-all($selector, if($bp-name == "all", 1, 0)) {
 				@include mlu-mk-state(&, $states, if($states, 0, 1)) {
-					@include _mlu-parse-unit($prop, $value);
+					@include _mlu-check-util-direction($direct, $prop, $value);
 				}
 			}
 		} @else if $bp-name {
 			@include mlu-bpm($bp-name) {
 				#{$selector}_#{$bp-name} {
 					@include mlu-mk-state(&, $states, if($states, 0, 1)) {
-						@include _mlu-parse-unit($prop, $value);
+						@include _mlu-check-util-direction($direct, $prop, $value);
 					}
 				}
 			}
 		} @else {
 			#{$selector} {
 				@include mlu-mk-state(&, $states, if($states, 0, 1)) {
-					@include _mlu-parse-unit($prop, $value);
+					@include _mlu-check-util-direction($direct, $prop, $value);
 				}
 			}
 		}
+	}
+}
+
+@mixin mlu-mk-util-directions($map, $name: null, $prop: null, $bp: null, $states: null) {
+	@each $key, $value in $map {
+		@if type-of($key) != "string" {
+			@error "Invalid key format '#{$key}' for '#{$name}' in map of values";
+		}
+
+		$dir: str-slice($key, 1, 1);
+		$dir-val: map-get($mlu-main-directions, $dir);
+		$util-val: if(not mlu-ston(str-slice($key, 2)), str-slice($key, 3), str-slice($key, 2));
+		$tmp-map: ($util-val: $value);
+
+		@if $dir-val {
+			@include mlu-mk-util($name + $dir, $prop + "-" + $dir-val, $tmp-map, $bp, $states);
+		} @else if $dir == "x" and str-slice($key, 2, 2) == "y" {
+			$util-val: if(not mlu-ston(str-slice($key, 3)), str-slice($key, 4), str-slice($key, 3));
+			@include mlu-mk-util($name, $prop, ($util-val: $value), $bp, $states);
+		} @else if $dir == "x" or $dir == "y" {
+			@include mlu-mk-util($name + $dir, $prop, $tmp-map, $bp, $states, $dir);
+		} @else {
+			@error "Invalid direction '#{$dir}' for '#{$name}' in map of values";
+		}
+	}
+}
+
+@mixin _mlu-check-util-direction($dir, $prop, $value) {
+	@if $dir == "x" {
+		@include _mlu-parse-unit($prop + "-right", $value);
+		@include _mlu-parse-unit($prop + "-left", $value);
+	} @else if $dir == "y" {
+		@include _mlu-parse-unit($prop + "-top", $value);
+		@include _mlu-parse-unit($prop + "-bottom", $value);
+	} @else {
+		@include _mlu-parse-unit($prop, $value);
 	}
 }
 

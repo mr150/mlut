@@ -1711,7 +1711,6 @@ Styleguide: core-utils.padding.px
 }
 
 .P1gg {
-	padding: 16px;
 	padding: 1rem 16px;
 	padding: var(--mlu-gg-rem) var(--mlu-gg);
 }
