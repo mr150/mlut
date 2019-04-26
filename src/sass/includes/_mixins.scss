@@ -6,6 +6,9 @@ Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sa
 Styleguide: sass-tools.mixins
 */
 
+$mlu-su-rem: mlu-px2rem($mlu-su);
+$mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
+
 // mlu-bpm
 //
 // Bpm is breakpoint manager.
@@ -1116,7 +1119,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 			}
 		}
 
-		$selector: str-slice($selector + "", 2);
+		$selector: mlu-check-class($selector, 1);
 
 		@each $key, $value in $mlu-util-states {
 			@if index($states, $key) {
@@ -1147,6 +1150,8 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 }
 
 @mixin mlu-mk-util($name, $prop, $map, $bp: false, $states: false, $direct: null) {
+	$name: mlu-check-class($name);
+
 	@each $key, $value in $map {
 		$bp-name: $bp;
 		$util-val: $key;
@@ -1196,12 +1201,25 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 		$tmp-map: ($util-val: $value);
 
 		@if $dir-val {
-			@include mlu-mk-util($name + $dir, $prop + "-" + $dir-val, $tmp-map, $bp, $states);
+			@if $name {
+				@include mlu-mk-util($name + $dir, $prop + "-" + $dir-val, $tmp-map, $bp, $states);
+			} @else {
+				@include mlu-mk-util(to-upper-case($dir), $dir-val, $tmp-map, $bp, $states);
+			}
 		} @else if $dir == "x" and str-slice($key, 2, 2) == "y" {
 			$util-val: if(not mlu-ston(str-slice($key, 3)), str-slice($key, 4), str-slice($key, 3));
-			@include mlu-mk-util($name, $prop, ($util-val: $value), $bp, $states);
+
+			@if $name {
+				@include mlu-mk-util($name, $prop, ($util-val: $value), $bp, $states);
+			} @else {
+				@include mlu-mk-util("mXy", null, ($util-val: $value), $bp, $states, "xy");
+			}
 		} @else if $dir == "x" or $dir == "y" {
-			@include mlu-mk-util($name + $dir, $prop, $tmp-map, $bp, $states, $dir);
+			@if $name {
+				@include mlu-mk-util($name + $dir, $prop, $tmp-map, $bp, $states, $dir);
+			} @else {
+				@include mlu-mk-util("m" + to-upper-case($dir), null, $tmp-map, $bp, $states, $dir);
+			}
 		} @else {
 			@error "Invalid direction '#{$dir}' for '#{$name}' in map of values";
 		}
@@ -1210,11 +1228,18 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 
 @mixin _mlu-check-util-direction($dir, $prop, $value) {
 	@if $dir == "x" {
-		@include _mlu-parse-unit($prop + "-right", $value);
-		@include _mlu-parse-unit($prop + "-left", $value);
+		$prop: if($prop, $prop + "-", "");
+		@include _mlu-parse-unit($prop + "right", $value);
+		@include _mlu-parse-unit($prop + "left", $value);
 	} @else if $dir == "y" {
-		@include _mlu-parse-unit($prop + "-top", $value);
-		@include _mlu-parse-unit($prop + "-bottom", $value);
+		$prop: if($prop, $prop + "-", "");
+		@include _mlu-parse-unit($prop + "top", $value);
+		@include _mlu-parse-unit($prop + "bottom", $value);
+	} @else if $dir == "xy" {
+		$prop: if($prop, $prop + "-", "");
+		@each $item in map-values($mlu-main-directions) {
+			@include _mlu-parse-unit($prop + $item, $value);
+		}
 	} @else {
 		@include _mlu-parse-unit($prop, $value);
 	}

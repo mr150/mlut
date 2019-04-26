@@ -361,3 +361,13 @@ Styleguide: sass-tools.functions
 
 	@return if($negative, -$result, $result);
 }
+
+@function mlu-check-class($selector, $only-name: null) {
+	$selector: $selector + "";
+
+	@if $only-name {
+		@return if(str-slice($selector, 1, 1) == ".", str-slice($selector, 2), $selector);
+	}
+
+	@return if(str-slice($selector, 1, 1) == ".", $selector, "." + $selector);
+}

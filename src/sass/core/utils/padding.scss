@@ -24,9 +24,6 @@ Markup: ../../../docs/examples/core-utils/padding/px.html
 Styleguide: core-utils.padding.px
 */
 
-$mlu-su-rem: mlu-px2rem($mlu-su);
-$mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
-
 .P0 {
 	padding: 0px;
 }
