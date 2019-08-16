@@ -1202,7 +1202,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 
 		@if $dir-val {
 			@if $name {
-				@include mlu-mk-util($name + $dir, $prop + "-" + $dir-val, $tmp-map, $bp, $states);
+				@include mlu-mk-util($name + $dir, $prop + "-" + $dir-val, $tmp-map, $bp, $states, $dir);
 			} @else {
 				@include mlu-mk-util(to-upper-case($dir), $dir-val, $tmp-map, $bp, $states);
 			}
@@ -1229,32 +1229,113 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 @mixin _mlu-check-util-direction($dir, $prop, $value) {
 	@if $dir == "x" {
 		$prop: if($prop, $prop + "-", "");
-		@include _mlu-parse-unit($prop + "right", $value);
-		@include _mlu-parse-unit($prop + "left", $value);
+		@include _mlu-parse-unit($prop + "right", $value, "r");
+		@include _mlu-parse-unit($prop + "left", $value, "l");
 	} @else if $dir == "y" {
 		$prop: if($prop, $prop + "-", "");
-		@include _mlu-parse-unit($prop + "top", $value);
-		@include _mlu-parse-unit($prop + "bottom", $value);
+		@include _mlu-parse-unit($prop + "top", $value, "t");
+		@include _mlu-parse-unit($prop + "bottom", $value, "b");
 	} @else if $dir == "xy" {
 		$prop: if($prop, $prop + "-", "");
 		@each $item in map-values($mlu-main-directions) {
-			@include _mlu-parse-unit($prop + $item, $value);
+			@include _mlu-parse-unit($prop + $item, $value, str-slice($item, 1, 1));
 		}
 	} @else {
-		@include _mlu-parse-unit($prop, $value);
+		@include _mlu-parse-unit($prop, $value, $dir);
 	}
 }
 
-@mixin _mlu-parse-unit($prop, $value) {
+@mixin _mlu-parse-unit($prop, $value, $dir) {
 	$coef-val: mlu-ston($value + "");
+	$dir: if($dir, $dir, "xy");
 
 	@if type-of($value) == "number" and unit($value) == "gg" {
-		$tmp-val: if(str-index($prop, "top") or str-index($prop, "bottom"), $mlu-gtr-sm-rem, 1);
-		@include mlu-mk-gtr($tmp-val, $type: $prop, $direct: "xy", $coef: $coef-val);
+		$tmp-val: if($dir == "t" or $dir == "b", $mlu-gtr-sm-rem, 1);
+		$dash-pos: str-index($prop, "-");
+
+		@if $dash-pos and $dir != "xy" {
+			$prop: str-slice($prop, 1, $dash-pos - 1);
+		} @else if $dir != "xy" {
+			$dir: "xy";
+		}
+
+		@include mlu-mk-gtr($tmp-val, $type: $prop, $direct: $dir, $coef: $coef-val);
 	} @else if type-of($value) == "number" and unit($value) == "su" {
-		$tmp-val: if(str-index($prop, "top") or str-index($prop, "bottom"), $mlu-su-rem, $mlu-su);
-		#{$prop}: $tmp-val * $coef-val;
+		@if $dir == "xy" {
+			@include _mlu-mk-gtr-xy($prop, $mlu-su * $coef-val, $mlu-su-rem * $coef-val);
+		} @else {
+			$tmp-val: if($dir == "t" or $dir == "b", $mlu-su-rem, $mlu-su);
+			#{$prop}: $tmp-val * $coef-val;
+		}
 	} @else {
 		#{$prop}: $value;
 	}
+}
+
+@mixin mlu-mk-Xy($map, $bp: null, $states: null) {
+	@include mlu-mk-util-directions($map, $bp: $bp, $states: $states);
+}
+
+@mixin mlu-mk-Maw($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Maw", "max-width", $map, $bp, $states);
+}
+
+@mixin mlu-mk-Mih($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Mih", "min-height", $map, $bp, $states);
+}
+
+@mixin mlu-mk-M($map, $bp: null, $states: null) {
+	@include mlu-mk-util-directions($map, "M", "margin", $bp, $states);
+}
+
+@mixin mlu-mk-P($map, $bp: null, $states: null) {
+	@include mlu-mk-util-directions($map, "P", "padding", $bp, $states);
+}
+
+@mixin mlu-mk-C($map, $bp: null, $states: null) {
+	@include mlu-mk-util("C", "color", $map, $bp, $states);
+}
+
+@mixin mlu-mk-Lh($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Lh", "line-height", $map, $bp, $states);
+}
+
+@mixin mlu-mk-Fw($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Fw", "font-weight", $map, $bp, $states);
+}
+
+@mixin mlu-mk-Fz($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Fz", "font-size", $map, $bp, $states);
+}
+
+@mixin mlu-mk-Ff($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Ff", "font-family", $map, $bp, $states);
+}
+
+@mixin mlu-mk-Bgc($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Bgc", "background-color", $map, $bp, $states);
+}
+
+@mixin mlu-mk-Bdxy($map, $bp: null, $states: null) {
+	@include mlu-mk-util-directions($map, "Bd", "border", $bp, $states);
+}
+
+@mixin mlu-mk-Bdc($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Bdc", "border-color", $map, $bp, $states);
+}
+
+@mixin mlu-mk-Bdrs($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Bdrs", "border-radius", $map, $bp, $states);
+}
+
+@mixin mlu-mk-Bxsh($map, $bp: null, $states: null) {
+	@include mlu-mk-util($map, "Bxsh", "box-shadow", $bp, $states);
+}
+
+@mixin mlu-mk-Trf($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Trf", "transform", $map, $bp, $states);
+}
+
+@mixin mlu-mk-O($map, $bp: null, $states: null) {
+	@include mlu-mk-util("O", "opacity", $map, $bp, $states);
 }

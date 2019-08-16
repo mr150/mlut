@@ -149,7 +149,6 @@
 		"string-quotes": "double",
 		"string-no-newline": true,
 		"unit-case": "lower",
-		"unit-no-unknown": true,
 		"value-list-comma-newline-after": "always-multi-line",
 		"value-list-comma-newline-before": "never-multi-line",
 		"value-list-comma-space-after": "always-single-line",
