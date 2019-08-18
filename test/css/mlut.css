@@ -1762,10 +1762,10 @@ Styleguide: core-utils.padding.px
 
 .Px1gg {
 	padding-right: 16px;
-	padding-left: 16px;
 	padding-right: 16px;
-	padding-left: 16px;
 	padding-right: var(--mlu-gg);
+	padding-left: 16px;
+	padding-left: 16px;
 	padding-left: var(--mlu-gg);
 }
 
@@ -2161,7 +2161,7 @@ Styleguide: core-utils.bd.bds
 }
 
 .Bdw0 {
-	border-width: 0px;
+	border-width: 0;
 }
 
 .Bdw2 {
@@ -2288,10 +2288,10 @@ Styleguide: core-utils.bd.bds
 
 	.Px1gg_sm {
 		padding-right: 16px;
-		padding-left: 16px;
 		padding-right: 16px;
-		padding-left: 16px;
 		padding-right: var(--mlu-gg);
+		padding-left: 16px;
+		padding-left: 16px;
 		padding-left: var(--mlu-gg);
 	}
 
@@ -2479,10 +2479,10 @@ Styleguide: core-utils.bd.bds
 
 	.Px1gg_md {
 		padding-right: 16px;
-		padding-left: 16px;
 		padding-right: 16px;
-		padding-left: 16px;
 		padding-right: var(--mlu-gg);
+		padding-left: 16px;
+		padding-left: 16px;
 		padding-left: var(--mlu-gg);
 	}
 
@@ -2678,10 +2678,10 @@ Styleguide: core-utils.bd.bds
 
 	.Px1gg_lg {
 		padding-right: 16px;
-		padding-left: 16px;
 		padding-right: 16px;
-		padding-left: 16px;
 		padding-right: var(--mlu-gg);
+		padding-left: 16px;
+		padding-left: 16px;
 		padding-left: var(--mlu-gg);
 	}
 
@@ -2869,10 +2869,10 @@ Styleguide: core-utils.bd.bds
 
 	.Px1gg_xl {
 		padding-right: 16px;
-		padding-left: 16px;
 		padding-right: 16px;
-		padding-left: 16px;
 		padding-right: var(--mlu-gg);
+		padding-left: 16px;
+		padding-left: 16px;
 		padding-left: var(--mlu-gg);
 	}
 

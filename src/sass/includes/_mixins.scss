@@ -1324,6 +1324,10 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	@include mlu-mk-util("Bdc", "border-color", $map, $bp, $states);
 }
 
+@mixin mlu-mk-Bdw($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Bdw", "border-width", $map, $bp, $states);
+}
+
 @mixin mlu-mk-Bdrs($map, $bp: null, $states: null) {
 	@include mlu-mk-util("Bdrs", "border-radius", $map, $bp, $states);
 }

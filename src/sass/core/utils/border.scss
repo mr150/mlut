@@ -39,45 +39,35 @@ ds - <div class="Bd Bdw1su Bds-ds P2su">dashed</div>
 Styleguide: core-utils.bd.bds
 */
 
-.Bd {
-	border: 1px solid;
-}
+$mlu-Bdxy-map: (
+	"xy": 1px solid,
+);
 
 @each $key, $value in $mlu-main-directions {
-	.Bd#{$key} {
-		border-#{$value}: 1px solid;
-	}
+	$mlu-Bdxy-map: map-merge($mlu-Bdxy-map, ($key: 1px solid));
 }
 
-.Bdy {
-	border-top: 1px solid;
-	border-bottom: 1px solid;
-}
+$mlu-Bdxy-map: map-merge($mlu-Bdxy-map,
+(
+	"y": 1px solid,
+	"x": 1px solid,
+));
 
-.Bdx {
-	border-right: 1px solid;
-	border-left: 1px solid;
-}
+@include mlu-mk-Bdxy($mlu-Bdxy-map);
 
-.Bds-dt {
-	border-style: dotted;
-}
 
-.Bds-ds {
-	border-style: dashed;
-}
+@include mlu-mk-util("Bds", "border-style", (
+	"dt": dotted,
+	"ds": dashed,
+));
 
-.Bdw0 {
-	border-width: 0px;
-}
+$mlu-Bdw-map: (
+	0: 0,
+	2: 2px,
+	1su: 1su,
+);
 
-.Bdw2 {
-	border-width: 2px;
-}
-
-.Bdw1su {
-	border-width: $mlu-su;
-}
+@include mlu-mk-Bdw($mlu-Bdw-map);
 
 .Bdcl-c {
 	border-collapse: collapse;

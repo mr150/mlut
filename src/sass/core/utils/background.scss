@@ -56,54 +56,37 @@ l - local
 Styleguide: core-utils.bg.bga
 */
 
-.Bgr-n {
-	background-repeat: no-repeat;
-}
+@include mlu-mk-util("Bgr", "background-repeat", (
+	"n": no-repeat,
+	"x": repeat-x,
+	"y": repeat-y,
+));
 
-.Bgr-x {
-	background-repeat: repeat-x;
-}
-
-.Bgr-y {
-	background-repeat: repeat-y;
-}
-
-.Bgp-c {
-	background-position: center;
-}
+$mlu-Bgp-map: (
+	"c": center,
+);
 
 @each $key, $value in $mlu-main-directions {
 	@if $key != "l" {
-		.Bgp-#{$key} {
-			background-position: $value;
-		}
+		$mlu-Bgp-map: map-merge($mlu-Bgp-map, ($key: $value));
 	}
 }
 
-.Bgp-rt {
-	background-position: right top;
-}
+$mlu-Bgp-map: map-merge($mlu-Bgp-map,
+(
+	"rt": right top,
+	"rb": right bottom,
+	"lb": left bottom,
+));
 
-.Bgp-rb {
-	background-position: right bottom;
-}
+@include mlu-mk-util("Bgp", "background-position", $mlu-Bgp-map);
 
-.Bgp-lb {
-	background-position: left bottom;
-}
+@include mlu-mk-util("Bgsz", "background-size", (
+	"cv": cover,
+	"ct": contain,
+));
 
-.Bgsz-cv {
-	background-size: cover;
-}
-
-.Bgsz-ct {
-	background-size: contain;
-}
-
-.Bga-f {
-	background-attachment: fixed;
-}
-
-.Bga-l {
-	background-attachment: local;
-}
+@include mlu-mk-util("Bga", "background-attachment", (
+	"f": fixed,
+	"l": local,
+));

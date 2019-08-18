@@ -24,60 +24,28 @@ Markup: ../../../docs/examples/core-utils/padding/px.html
 Styleguide: core-utils.padding.px
 */
 
-.P0 {
-	padding: 0px;
-}
+$mlu-P-map: (
+	"xy0": 0,
+);
 
 @for $i from 1 through $mlu-P-range {
-	.P#{$i}su {
-		padding: ($mlu-su-rem * $i) ($mlu-su * $i);
-	}
+	$value: $i * 1su;
+	$mlu-P-map: map-merge($mlu-P-map, ("xy" + $value: $value));
 }
 
-.P1gg {
-	@include mlu-mk-gtr($type: "padding", $direct: "xy");
-}
+$mlu-P-map: map-merge($mlu-P-map,
+(
+	"xy1gg": 1gg,
+	"t1gg": 1gg,
+	"t2gg": 2gg,
+	"b1gg": 1gg,
+	"b2gg": 2gg,
+	"l1gg": 1gg,
+	"x2su": 2su,
+	"x3su": 3su,
+	"x4su": 4su,
+	"x1gg_all": 1gg,
+	"x0_bp": 0,
+));
 
-.Pt1gg {
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "t");
-}
-
-.Pt2gg {
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "t", $coef: 2);
-}
-
-.Pb1gg {
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "b");
-}
-
-.Pb2gg {
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, "padding", $direct: "b", $coef: 2);
-}
-
-.Pl1gg {
-	@include mlu-mk-gtr($type: "padding", $direct: "l");
-}
-
-.Px2su {
-	padding-right: $mlu-su * 2;
-	padding-left: $mlu-su * 2;
-}
-
-.Px3su {
-	padding-right: $mlu-su * 3;
-	padding-left: $mlu-su * 3;
-}
-
-.Px4su {
-	padding-right: $mlu-su * 4;
-	padding-left: $mlu-su * 4;
-}
-
-@include mlu-bp-all(".Px1gg") {
-	@include mlu-mk-gtr($type: "padding");
-}
-
-@include mlu-bp-all(".Px0", 0) {
-	padding-right: 0;
-	padding-left: 0;
-}
+@include mlu-mk-P($mlu-P-map);
