@@ -25,21 +25,15 @@ Styleguide: core-utils.f.mfz
 	font: inherit;
 }
 
-.Fw400 {
-	font-weight: 400;
-}
+@include mlu-mk-Fw((
+	400: 400,
+	700: 700,
+));
 
-.Fw700 {
-	font-weight: 700;
-}
-
-.Fs {
-	font-style: italic;
-}
-
-.Fs-n {
-	font-style: normal;
-}
+@include mlu-mk-util("Fs", "font-style", (
+	"": italic,
+	"n": normal,
+));
 
 .Fz-i {
 	font-size: inherit;

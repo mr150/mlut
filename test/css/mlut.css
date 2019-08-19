@@ -1008,26 +1008,26 @@ Styleguide: core-utils.pos.xy
 }
 
 .T0 {
-	top: 0px;
+	top: 0;
 }
 
 .R0 {
-	right: 0px;
+	right: 0;
 }
 
 .B0 {
-	bottom: 0px;
+	bottom: 0;
 }
 
 .L0 {
-	left: 0px;
+	left: 0;
 }
 
 .mXy0 {
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-	left: 0px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 
 .mXy50p {
@@ -1036,6 +1036,10 @@ Styleguide: core-utils.pos.xy
 	-webkit-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
+}
+
+.Z-max {
+	z-index: 9999;
 }
 
 .Z-1 {
@@ -1056,10 +1060,6 @@ Styleguide: core-utils.pos.xy
 
 .Z3 {
 	z-index: 3;
-}
-
-.Z-max {
-	z-index: 9999;
 }
 
 /*
@@ -1877,10 +1877,12 @@ Styleguide: core-utils.text.td
 /*
 Dir
 
-Direction. Sets direction of text and order items in row-layout. When specifying a breakpoint, the utility *only* works on it.
+Direction. Sets direction of text and order items in row-layout.
+
+* `Dir-l` \- left to right. *Only responsive*.
 
 Dir-r - right to left. *Responsive*.
-Dir-r_md - only on md.
+Dir-r.Dir-l_xl - left to right on `xl`.
 
 Markup: ../../../docs/examples/core-utils/text/dir.hbs
 
@@ -2299,6 +2301,14 @@ Styleguide: core-utils.bd.bds
 		padding-right: 0;
 		padding-left: 0;
 	}
+
+	.Dir-r_sm {
+		direction: rtl;
+	}
+
+	.Dir-l_sm {
+		direction: ltr;
+	}
 }
 
 @media (min-width: 760px) {
@@ -2489,6 +2499,14 @@ Styleguide: core-utils.bd.bds
 	.Px0_md {
 		padding-right: 0;
 		padding-left: 0;
+	}
+
+	.Dir-r_md {
+		direction: rtl;
+	}
+
+	.Dir-l_md {
+		direction: ltr;
 	}
 }
 
@@ -2689,6 +2707,14 @@ Styleguide: core-utils.bd.bds
 		padding-right: 0;
 		padding-left: 0;
 	}
+
+	.Dir-r_lg {
+		direction: rtl;
+	}
+
+	.Dir-l_lg {
+		direction: ltr;
+	}
 }
 
 @media (min-width: 1168px) {
@@ -2884,22 +2910,8 @@ Styleguide: core-utils.bd.bds
 	.Dir-r_xl {
 		direction: rtl;
 	}
-}
 
-@media (min-width: 520px) and (max-width: 759px) {
-	.Dir-r_sm {
-		direction: rtl;
-	}
-}
-
-@media (min-width: 760px) and (max-width: 959px) {
-	.Dir-r_md {
-		direction: rtl;
-	}
-}
-
-@media (min-width: 960px) and (max-width: 1167px) {
-	.Dir-r_lg {
-		direction: rtl;
+	.Dir-l_xl {
+		direction: ltr;
 	}
 }

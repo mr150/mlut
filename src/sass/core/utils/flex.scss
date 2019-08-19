@@ -90,13 +90,10 @@ Styleguide: core-utils.flex.mai
 	flex-shrink: 0;
 }
 
-.Fxw-wr {
-	flex-wrap: wrap-reverse;
-}
-
-.Fxw-w {
-	flex-wrap: wrap;
-}
+@include mlu-mk-util("Fxw", "flex-wrap", (
+	"wr": wrap-reverse,
+	"w": wrap,
+));
 
 .As-s {
 	align-self: stretch;
@@ -122,21 +119,12 @@ Styleguide: core-utils.flex.mai
 	vertical-align: bottom;
 }
 
-.Jc-fe {
-	justify-content: flex-end;
-}
-
-.Jc-c {
-	justify-content: center;
-}
-
-@include mlu-bp-all(".Jc-sa") {
-	justify-content: space-around;
-}
-
-@include mlu-bp-all(".Jc-sb") {
-	justify-content: space-between;
-}
+@include mlu-mk-util("Jc", "justify-content", (
+	"fe": flex-end,
+	"c": center,
+	"sa_all": space-around,
+	"sb_all": space-between,
+));
 
 @include mlu-bp-all(".mJc-fs", 0) {
 	justify-content: flex-start;

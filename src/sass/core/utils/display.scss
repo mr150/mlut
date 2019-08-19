@@ -25,41 +25,27 @@ mD-if - `D-if` with `Fxw-w`.
 Styleguide: core-utils.visual.md
 */
 
-@include mlu-bp-all(".D") {
-	display: block;
+$mlu-D-map: (
+	"_all": block,
+	"ib_all": inline-block,
+	"tb": table,
+	"tbc": table-cell,
+	"tbr": table-row,
+	"itb": inline-table,
+	"f_all": flex,
+	"if_all": inline-flex,
+	"n_all": none,
+);
+
+@if $MLU-FLAG-EXTENDED {
+	$mlu-D-map: map-merge($mlu-D-map,
+	(
+		"i": inline,
+		"tbfg": table-footer-group,
+	));
 }
 
-@include mlu-bp-all(".D-ib") {
-	display: inline-block;
-}
-
-.D-tb {
-	display: table;
-}
-
-.D-tbc {
-	display: table-cell;
-}
-
-.D-tbr {
-	display: table-row;
-}
-
-.D-itb {
-	display: inline-table;
-}
-
-@include mlu-bp-all(".D-f") {
-	display: flex;
-}
-
-@include mlu-bp-all(".D-if") {
-	display: inline-flex;
-}
-
-@include mlu-bp-all(".D-n") {
-	display: none;
-}
+@include mlu-mk-util("D", "display", $mlu-D-map);
 
 .mD-f {
 	display: flex;
@@ -69,14 +55,4 @@ Styleguide: core-utils.visual.md
 .mD-if {
 	display: inline-flex;
 	flex-wrap: wrap;
-}
-
-@if $MLU-FLAG-EXTENDED {
-	.D-i {
-		display: inline;
-	}
-
-	.D-tbfg {
-		display: table-footer-group;
-	}
 }

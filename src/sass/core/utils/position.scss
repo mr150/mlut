@@ -35,40 +35,19 @@ X and Y coordinate axes. Change `top` or `bottom` and `right` or `left`.
 Styleguide: core-utils.pos.xy
 */
 
-.Pos {
-	position: relative;
-}
+@include mlu-mk-util("Pos", "position", (
+	"": relative,
+	"a_all": absolute,
+	"f": fixed,
+));
 
-@include mlu-bp-all(".Pos-a") {
-	position: absolute;
-}
-
-.Pos-f {
-	position: fixed;
-}
-
-.T0 {
-	top: 0px;
-}
-
-.R0 {
-	right: 0px;
-}
-
-.B0 {
-	bottom: 0px;
-}
-
-.L0 {
-	left: 0px;
-}
-
-.mXy0 {
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-	left: 0px;
-}
+@include mlu-mk-Xy((
+	"t0": 0,
+	"r0": 0,
+	"b0": 0,
+	"l0": 0,
+	"xy0": 0,
+));
 
 .mXy50p {
 	top: 50%;
@@ -76,17 +55,13 @@ Styleguide: core-utils.pos.xy
 	transform: translate(-50%, -50%);
 }
 
-.Z-1 {
-	z-index: -1;
-}
+$mlu-Z-map: (
+	"max": $mlu-Z-max,
+	-1: -1,
+);
 
 @for $i from 0 to $mlu-Z-range {
-	.Z#{$i} {
-		z-index: $i;
-	}
+	$mlu-Z-map: map-merge($mlu-Z-map, ($i: $i));
 }
 
-.Z-max {
-	z-index: $mlu-Z-max;
-}
-
+@include mlu-mk-util("Z", "z-index", $mlu-Z-map);
