@@ -68,25 +68,19 @@ Styleguide: core-utils.visual.mall
 */
 
 
-.Fl {
-	float: left;
-}
-
-.Fl-r {
-	float: right;
-}
+@include mlu-mk-util("Fl", "float", (
+	"": left,
+	"r": right,
+));
 
 .mCl {
 	@include mlu-mCl;
 }
 
-.Ov {
-	overflow: hidden;
-}
-
-.Ov-a {
-	overflow: auto;
-}
+@include mlu-mk-util("Ov", "overflow", (
+	"": hidden,
+	"a": auto,
+));
 
 .Ovx-a {
 	overflow-x: auto;

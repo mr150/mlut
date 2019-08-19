@@ -1341,7 +1341,6 @@ Width. You can set width in the grid-spans(gs) or in the grid-columns(gc) **if t
 If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
 
 * `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `W-fx0` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
 * `W1gs..W4gs` \- range of available width in grid spans on `xs` and `sm` breakpoints, because on `xs` and `sm`, grid has 4 columns. See grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
 * `W1gs..W12gs` \- available width in `gs` on all breakpoints, starting with `md`.
 * `W1gc..W4gc`
@@ -1377,17 +1376,18 @@ Box sizing
 
 Utilities for DOM nodes size management.
 
+* `Maw-fx0` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
 * `Maw100p`
 * `Maw-n`
 * `H100p`
-* `H100vh`
 * `H0`
+* `Mih100vh`
 * `Bxz`
 
 Styleguide: core-utils.bxz
 */
 
-.W-fx0 {
+.Maw-fx0 {
 	max-width: 288px;
 }
 
@@ -1407,12 +1407,16 @@ Styleguide: core-utils.bxz
 	height: 100%;
 }
 
-.H100vh {
-	height: 100vh;
+.H0 {
+	height: 0;
 }
 
-.H0 {
-	height: 0px;
+.Mih100p {
+	min-height: 100%;
+}
+
+.Mih100vh {
+	min-height: 100vh;
 }
 
 .Bxz {

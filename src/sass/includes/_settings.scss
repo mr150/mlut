@@ -473,7 +473,7 @@ $mlu-debug-gutter-color: #336 !default;
 //
 // Settings affecting the values and generation of the core utilities.
 //
-// $mlu-W-fx0 = 288px - fixed width for cards. This is value for [W-fx0](section-core-utils.html#kssref-core-utils-bxz-w) utility.
+// $mlu-Maw-fx0 = 288px - fixed width for cards. This is value for [Maw-fx0](section-core-utils.html#kssref-core-utils-bxz) utility.
 // $mlu-My-range = 4 - count of [Mt](section-core-utils.html#kssref-core-utils-margin) and [Mb](section-core-utils.html#kssref-core-utils-margin) utilities.
 // $mlu-P-range = 4 - count of [P](section-core-utils.html#kssref-core-utils-padding) utilities.
 // $mlu-Z-range = 4 - [z-index](section-core-utils.html#kssref-core-utils-pos-z) range. Counted from zero.
@@ -483,7 +483,7 @@ $mlu-debug-gutter-color: #336 !default;
 //
 // Styleguide: sass-tools.settings.utils
 
-$mlu-W-fx0: 288px !default;
+$mlu-Maw-fx0: 288px !default;
 
 $mlu-My-range: 4 !default;
 

@@ -3,43 +3,33 @@ Box sizing
 
 Utilities for DOM nodes size management.
 
+* `Maw-fx0` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
 * `Maw100p`
 * `Maw-n`
 * `H100p`
-* `H100vh`
 * `H0`
+* `Mih100vh`
 * `Bxz`
 
 Styleguide: core-utils.bxz
 */
 
-.W-fx0 {
-	max-width: $mlu-W-fx0;
-}
+@include mlu-mk-Maw((
+	"fx0": $mlu-Maw-fx0,
+	"100p": 100%,
+	"50p": 50%,
+	"n": none,
+));
 
-.Maw100p {
-	max-width: 100%;
-}
+@include mlu-mk-util("H", "height", (
+	"100p": 100%,
+	0: 0,
+));
 
-.Maw50p {
-	max-width: 50%;
-}
-
-.Maw-n {
-	max-width: none;
-}
-
-.H100p {
-	height: 100%;
-}
-
-.H100vh {
-	height: 100vh;
-}
-
-.H0 {
-	height: 0px;
-}
+@include mlu-mk-Mih((
+	"100p": 100%,
+	100vh: 100vh,
+));
 
 .Bxz {
 	box-sizing: border-box;
