@@ -16,10 +16,7 @@ Px
 Padding on X axis. Sets left and right padding.
 
 * `Px1gg` \- *responsive*
-* `Px2su..Px4su` \- with these utilities you can change the columns gutter. Use them with the appropriate [Mx utils](#kssref-core-utils-margin-mx) to remove double fields along the edges of the container.
 * `Px0` - only *responsive*
-
-Markup: ../../../docs/examples/core-utils/padding/px.html
 
 Styleguide: core-utils.padding.px
 */
@@ -41,9 +38,6 @@ $mlu-P-map: map-merge($mlu-P-map,
 	"b1gg": 1gg,
 	"b2gg": 2gg,
 	"l1gg": 1gg,
-	"x2su": 2su,
-	"x3su": 3su,
-	"x4su": 4su,
 	"x1gg_all": 1gg,
 	"x0_bp": 0,
 ));

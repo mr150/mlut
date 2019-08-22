@@ -1,0 +1,29 @@
+/*
+Custom
+
+Utilities that manage [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) which used in MLUT.
+
+Styleguide: core-utils.custom
+*/
+
+/*
+-Gg
+
+Controls gutters: `--mlu--gg` and `--mlu-gg-rem`.
+
+* `-Gg1su..-Gg5su` \- *Responsive*.
+
+-Gg1su - gutter is 8px
+-Gg5su_xl - gutter is 20px on `xl`
+
+Markup: ../../../docs/examples/core-utils/custom/gg.hbs
+
+Styleguide: core-utils.custom.gg
+*/
+
+@for $i from 1 through $mlu--Gg-range {
+	@include mlu-bp-all(".-Gg#{$i}su") {
+		#{$--mlu-gg}: $i * $mlu-su;
+		#{$--mlu-gg-rem}: mlu-px2rem($i * $mlu-su);
+	}
+}

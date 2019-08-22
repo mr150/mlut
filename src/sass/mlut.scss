@@ -20,11 +20,12 @@
 /*===DESIGN-BLOCKS===*/
 
 /*===CORE-UTILS===*/
+@import "core/utils/custom";
 @import "core/utils/visual-formatting";
 @import "core/utils/position";
 @import "core/utils/display";
 @import "core/utils/flex";
-@import "core/utils/grid";
+@import "core/utils/layout";
 @import "core/utils/box-sizing";
 @import "core/utils/margin";
 @import "core/utils/padding";

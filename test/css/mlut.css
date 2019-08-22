@@ -232,10 +232,11 @@ There are some special abbreviations for color utilities:
 * `i` - `inherit`
 * `cc` - `curentColor`
 
-Utilities in MLUT are divided into *common* and *modified*.
+Utilities in MLUT come in 3 types:
 
-* **Common** \- utilities that are named and work like CSS properties.
-* **Modified** \- utilities that affect several CSS properties. The names of such utilities begin with 'm' prefix.
+* **Common** \- named and work like CSS properties.
+* **Custom** \- manage one or more related CSS [custom properties](section-core-styles.html#kssref-core-styles-css_vars). Their names begin with a hyphen and are abbreviations <br> of the names of the corresponding properties without `mlu` prefix. Examples: `-Gg`.
+* **Modified** \- affect several CSS properties. The names of such utilities begin with 'm' prefix.
 
 Weight: 6
 
@@ -679,9 +680,9 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	padding-left: 16px;
 	padding-right: var(--mlu-gg);
 	padding-left: var(--mlu-gg);
-	margin-bottom: 32px;
-	margin-bottom: 32px;
-	margin-bottom: calc(var(--mlu-gg) * 2);
+	margin-bottom: 2rem;
+	margin-bottom: 2rem;
+	margin-bottom: calc(var(--mlu-gg-rem) * 2);
 }
 
 .row__col.row {
@@ -826,6 +827,54 @@ Styleguide: core-blocks.input
 /*===DESIGN-BLOCKS===*/
 
 /*===CORE-UTILS===*/
+
+/*
+Custom
+
+Utilities that manage [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) which used in MLUT.
+
+Styleguide: core-utils.custom
+*/
+
+/*
+-Gg
+
+Controls gutters: `--mlu--gg` and `--mlu-gg-rem`.
+
+* `-Gg1su..-Gg5su` \- *Responsive*.
+
+-Gg1su - gutter is 8px
+-Gg5su_xl - gutter is 20px on `xl`
+
+Markup: ../../../docs/examples/core-utils/custom/gg.hbs
+
+Styleguide: core-utils.custom.gg
+*/
+
+.-Gg1su {
+	--mlu-gg: 4px;
+	--mlu-gg-rem: 0.25rem;
+}
+
+.-Gg2su {
+	--mlu-gg: 8px;
+	--mlu-gg-rem: 0.5rem;
+}
+
+.-Gg3su {
+	--mlu-gg: 12px;
+	--mlu-gg-rem: 0.75rem;
+}
+
+.-Gg4su {
+	--mlu-gg: 16px;
+	--mlu-gg-rem: 1rem;
+}
+
+.-Gg5su {
+	--mlu-gg: 20px;
+	--mlu-gg-rem: 1.25rem;
+}
 
 /*
 Visual formatting
@@ -1382,6 +1431,7 @@ Utilities for DOM nodes size management.
 * `H100p`
 * `H0`
 * `Mih100vh`
+* `Mih100p`
 * `Bxz`
 
 Styleguide: core-utils.bxz
@@ -1464,13 +1514,8 @@ Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units
 * `Mb0` \- *Responsive*
 * `Mb1gg..Mb4gg`
 * `Mb2gg` \- *Responsive*
-* `Mb1su..Mb4su`
-* `Mb6su`
-* `Mb8su`
+* `Mb1su..Mb6su`
 * `Mb-2gg..Mb-1gg`
-* `Mb-4su`
-* `Mb-6su`
-* `Mb-8su`
 
 Styleguide: core-utils.margin.mb
 */
@@ -1483,7 +1528,6 @@ Margin on X axis. Sets left and right margin.
 * `Mx-a` \- centered the DOM node with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
 * `Mx1gg` \- if `gc` turned on. *Responsive*.
 * `Mx-1gg` \- it needed for imposes left and right padding of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
-* `Mx-2su..Mx-4su`
 * `Mx0` \- *responsive*.
 
 Markup: ../../../docs/examples/core-utils/margin/mx.html
@@ -1584,18 +1628,6 @@ Styleguide: core-utils.margin.mx
 	margin-bottom: calc(var(--mlu-gg-rem) * -1);
 }
 
-.Mb-8su {
-	margin-bottom: -2rem;
-}
-
-.Mb-6su {
-	margin-bottom: -1.5rem;
-}
-
-.Mb-4su {
-	margin-bottom: -1rem;
-}
-
 .Mb1su {
 	margin-bottom: 0.25rem;
 }
@@ -1612,12 +1644,12 @@ Styleguide: core-utils.margin.mx
 	margin-bottom: 1rem;
 }
 
-.Mb6su {
-	margin-bottom: 1.5rem;
+.Mb5su {
+	margin-bottom: 1.25rem;
 }
 
-.Mb8su {
-	margin-bottom: 2rem;
+.Mb6su {
+	margin-bottom: 1.5rem;
 }
 
 .Mx-1gg {
@@ -1627,21 +1659,6 @@ Styleguide: core-utils.margin.mx
 	margin-left: -16px;
 	margin-left: -16px;
 	margin-left: calc(var(--mlu-gg) * -1);
-}
-
-.Mx-4su {
-	margin-right: -16px;
-	margin-left: -16px;
-}
-
-.Mx-3su {
-	margin-right: -12px;
-	margin-left: -12px;
-}
-
-.Mx-2su {
-	margin-right: -8px;
-	margin-left: -8px;
 }
 
 .Ml-2gg {
@@ -1686,10 +1703,7 @@ Px
 Padding on X axis. Sets left and right padding.
 
 * `Px1gg` \- *responsive*
-* `Px2su..Px4su` \- with these utilities you can change the columns gutter. Use them with the appropriate [Mx utils](#kssref-core-utils-margin-mx) to remove double fields along the edges of the container.
 * `Px0` - only *responsive*
-
-Markup: ../../../docs/examples/core-utils/padding/px.html
 
 Styleguide: core-utils.padding.px
 */
@@ -1747,21 +1761,6 @@ Styleguide: core-utils.padding.px
 	padding-left: 16px;
 	padding-left: 16px;
 	padding-left: var(--mlu-gg);
-}
-
-.Px2su {
-	padding-right: 8px;
-	padding-left: 8px;
-}
-
-.Px3su {
-	padding-right: 12px;
-	padding-left: 12px;
-}
-
-.Px4su {
-	padding-right: 16px;
-	padding-left: 16px;
 }
 
 .Px1gg {
@@ -2189,6 +2188,31 @@ Styleguide: core-utils.bd.bds
 /*===DESIGN-UTILS===*/
 
 @media (min-width: 520px) {
+	.-Gg1su_sm {
+		--mlu-gg: 4px;
+		--mlu-gg-rem: 0.25rem;
+	}
+
+	.-Gg2su_sm {
+		--mlu-gg: 8px;
+		--mlu-gg-rem: 0.5rem;
+	}
+
+	.-Gg3su_sm {
+		--mlu-gg: 12px;
+		--mlu-gg-rem: 0.75rem;
+	}
+
+	.-Gg4su_sm {
+		--mlu-gg: 16px;
+		--mlu-gg-rem: 1rem;
+	}
+
+	.-Gg5su_sm {
+		--mlu-gg: 20px;
+		--mlu-gg-rem: 1.25rem;
+	}
+
 	.mV-vh_sm {
 		position: absolute;
 		width: 1px;
@@ -2316,6 +2340,31 @@ Styleguide: core-utils.bd.bds
 }
 
 @media (min-width: 760px) {
+	.-Gg1su_md {
+		--mlu-gg: 4px;
+		--mlu-gg-rem: 0.25rem;
+	}
+
+	.-Gg2su_md {
+		--mlu-gg: 8px;
+		--mlu-gg-rem: 0.5rem;
+	}
+
+	.-Gg3su_md {
+		--mlu-gg: 12px;
+		--mlu-gg-rem: 0.75rem;
+	}
+
+	.-Gg4su_md {
+		--mlu-gg: 16px;
+		--mlu-gg-rem: 1rem;
+	}
+
+	.-Gg5su_md {
+		--mlu-gg: 20px;
+		--mlu-gg-rem: 1.25rem;
+	}
+
 	.mV-vh_md {
 		position: absolute;
 		width: 1px;
@@ -2523,6 +2572,31 @@ Styleguide: core-utils.bd.bds
 		--mlu-gg-rem: 1rem;
 	}
 
+	.-Gg1su_lg {
+		--mlu-gg: 4px;
+		--mlu-gg-rem: 0.25rem;
+	}
+
+	.-Gg2su_lg {
+		--mlu-gg: 8px;
+		--mlu-gg-rem: 0.5rem;
+	}
+
+	.-Gg3su_lg {
+		--mlu-gg: 12px;
+		--mlu-gg-rem: 0.75rem;
+	}
+
+	.-Gg4su_lg {
+		--mlu-gg: 16px;
+		--mlu-gg-rem: 1rem;
+	}
+
+	.-Gg5su_lg {
+		--mlu-gg: 20px;
+		--mlu-gg-rem: 1.25rem;
+	}
+
 	.mV-vh_lg {
 		position: absolute;
 		width: 1px;
@@ -2722,6 +2796,31 @@ Styleguide: core-utils.bd.bds
 }
 
 @media (min-width: 1168px) {
+	.-Gg1su_xl {
+		--mlu-gg: 4px;
+		--mlu-gg-rem: 0.25rem;
+	}
+
+	.-Gg2su_xl {
+		--mlu-gg: 8px;
+		--mlu-gg-rem: 0.5rem;
+	}
+
+	.-Gg3su_xl {
+		--mlu-gg: 12px;
+		--mlu-gg-rem: 0.75rem;
+	}
+
+	.-Gg4su_xl {
+		--mlu-gg: 16px;
+		--mlu-gg-rem: 1rem;
+	}
+
+	.-Gg5su_xl {
+		--mlu-gg: 20px;
+		--mlu-gg-rem: 1.25rem;
+	}
+
 	.mV-vh_xl {
 		position: absolute;
 		width: 1px;
