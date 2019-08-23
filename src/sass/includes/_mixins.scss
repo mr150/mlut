@@ -236,7 +236,7 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 // $prop = background-color - CSS property that will change.
 // $lighten = 8% - percent on which the `$color` will become lighten
 // with sass function `lighten` on `:hover`.
-// $darken = $lighten \- 3 - the same at `$lighten` but `$color` will change
+// $darken = $lighten-3 - the same at `$lighten` but `$color` will change
 // on `:active`.
 //
 // Styleguide: sass-tools.mixins.def_hover

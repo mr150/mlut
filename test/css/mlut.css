@@ -393,6 +393,7 @@ You can find CSS variables in `sass/base/_variables.scss`.
 Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
 Fallback is [$mlu-grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).
 --mlu-gg-rem = 0.75rem - grid gutter in `rem`.
+--mlu-grid-cols = 4 - number of columns in the [grid system](section-concepts.html#kssref-concepts-grid). Sets by [$mlu-grid-cols-xs](section-sass-tools.html#kssref-sass-tools-settings-grid) and changes on breakpoints according to the [settings](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints).
 
 Styleguide: core-styles.css_vars
 */
@@ -400,6 +401,7 @@ Styleguide: core-styles.css_vars
 :root {
 	--mlu-gg: 12px;
 	--mlu-gg-rem: 0.75rem;
+	--mlu-grid-cols: 4;
 }
 
 /*
@@ -851,6 +853,16 @@ Markup: ../../../docs/examples/core-utils/custom/gg.hbs
 Styleguide: core-utils.custom.gg
 */
 
+/*
+-Gc
+
+Grid columns. Set number of columns in grid system. Controls `--mlu-grid-cols`.
+
+df0 - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). Works on all breakpoints where the number of columns differs from the default.
+
+Styleguide: core-utils.custom.gc
+*/
+
 .-Gg1su {
 	--mlu-gg: 4px;
 	--mlu-gg-rem: 0.25rem;
@@ -874,6 +886,10 @@ Styleguide: core-utils.custom.gg
 .-Gg5su {
 	--mlu-gg: 20px;
 	--mlu-gg-rem: 1.25rem;
+}
+
+.-Gc-df0 {
+	--mlu-grid-cols: 12;
 }
 
 /*
@@ -2213,6 +2229,10 @@ Styleguide: core-utils.bd.bds
 		--mlu-gg-rem: 1.25rem;
 	}
 
+	.-Gc-df0_sm {
+		--mlu-grid-cols: 12;
+	}
+
 	.mV-vh_sm {
 		position: absolute;
 		width: 1px;
@@ -2340,6 +2360,10 @@ Styleguide: core-utils.bd.bds
 }
 
 @media (min-width: 760px) {
+	:root {
+		--mlu-grid-cols: 12;
+	}
+
 	.-Gg1su_md {
 		--mlu-gg: 4px;
 		--mlu-gg-rem: 0.25rem;

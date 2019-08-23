@@ -21,9 +21,37 @@ Markup: ../../../docs/examples/core-utils/custom/gg.hbs
 Styleguide: core-utils.custom.gg
 */
 
+/*
+-Gc
+
+Grid columns. Set number of columns in grid system. Controls `--mlu-grid-cols`.
+
+df0 - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). Works on all breakpoints where the number of columns differs from the default.
+
+Styleguide: core-utils.custom.gc
+*/
+
 @for $i from 1 through $mlu--Gg-range {
 	@include mlu-bp-all(".-Gg#{$i}su") {
 		#{$--mlu-gg}: $i * $mlu-su;
 		#{$--mlu-gg-rem}: mlu-px2rem($i * $mlu-su);
+	}
+}
+
+.-Gc {
+	&-df0 {
+		@if $mlu-grid-cols-xs != $mlu-grid-default-cols {
+			#{$--mlu-grid-cols}: $mlu-grid-default-cols;
+		}
+	}
+
+	@each $key, $value in $mlu-grid-cols {
+		@if $value != $mlu-grid-default-cols {
+			@include mlu-bpm($key) {
+				&-df0_#{$key} {
+					#{$--mlu-grid-cols}: $mlu-grid-default-cols;
+				}
+			}
+		}
 	}
 }
