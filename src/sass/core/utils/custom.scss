@@ -24,11 +24,31 @@ Styleguide: core-utils.custom.gg
 /*
 -Gc
 
-Grid columns. Set number of columns in grid system. Controls `--mlu-grid-cols`.
+Grid columns. Sets number of columns in grid system on DOM node. Controls `--mlu-grid-cols`.
 
 df0 - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). Works on all breakpoints where the number of columns differs from the default.
 
 Styleguide: core-utils.custom.gc
+*/
+
+/*
+-Gcd
+
+Grid columns diff. Controls `--gc-diff` from grid column width [formula](section-core-blocks.html#kssref-core-blocks-row-row__col).
+
+0 - sets to 0px.
+
+Styleguide: core-utils.custom.gcd
+*/
+
+/*
+-Gcr
+
+Grid columns rule. Controls `--gc-rule` and `--mgc-rule` .
+
+initial - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the grid column(gc) widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` is replaced by `--mlu-gg`.
+
+Styleguide: core-utils.custom.gcr
 */
 
 @for $i from 1 through $mlu--Gg-range {
@@ -54,4 +74,13 @@ Styleguide: core-utils.custom.gc
 			}
 		}
 	}
+}
+
+.-Gcd0 {
+	--gc-diff: 0px;
+}
+
+.-Gcr {
+	--gc-rule: calc(var(--gc) / var(#{$--mlu-grid-cols}) * 100% - var(#{$--mlu-gg}) * 2);
+	--mgc-rule: calc(var(--mgc) / var(#{$--mlu-grid-cols}) * 100% + var(#{$--mlu-gg}));
 }

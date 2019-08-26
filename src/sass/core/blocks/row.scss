@@ -28,14 +28,22 @@ padding-right: 16px;
 padding-left: 16px;
 padding-right: var(--mlu-gg);
 padding-left: var(--mlu-gg);
-margin-bottom: 32px;
-margin-bottom: calc(var(--mlu-gg) * 2);
+margin-bottom: 2rem;
+margin-bottom: calc(var(--mlu-gg-rem) * 2);
 ```
 similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-general) = 1.
 
 The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-default-gtr`.
 
-Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row).
+Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row). The formulas for calculating the width and offset for the column are stored in the custom properties. <br> In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
+```scss
+--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
+--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
+```
+`--gc` or `--mgc` is the value of the width or offset in the grid columns(gc). This is a custom property of the utility.<br>
+`--mlu-grid-cols` - the number of columns in the grid system. This is a [global](section-core-styles.html#kssref-core-styles-css_vars) custom property that can be changed on any DOM node.<br>
+`--gc-diff` - variable is equal to the gutter if the gutter at the columns is created using margin.<br>
+Some of these variables can be changed using [custom utilities](section-core-utils.html#kssref-core-utils-custom).
 
 You can create nested layouts with a mix of `row` and `row__col` on the same DOM node. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
 
@@ -52,6 +60,12 @@ row__item
 Element for creating parts of the layout. By default, it stretches across the width of the content.
 
 The sizes and offsets are set with help of utilities.
+
+Like a `row__col`, an element contains formulas for calculating width and offset. But in these formulas there is no variable `gc-diff`:
+```scss
+--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100%);
+--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100%);
+```
 
 Markup: ../../../docs/examples/core-blocks/row/row__item.html
 
@@ -189,6 +203,9 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 
 .row__col,
 .row__item {
+	--gc-rule: calc(var(--gc) / var(#{$--mlu-grid-cols}) * 100%);
+	--mgc-rule: calc(var(--mgc) / var(#{$--mlu-grid-cols}) * 100%);
+
 	position: relative;
 	display: inline-block;
 	max-width: 100%;
@@ -214,6 +231,10 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 }
 
 .row__col {
+	--gc-diff: 0px;
+	--gc-rule: calc(var(--gc) / var(#{$--mlu-grid-cols}) * 100% - var(--gc-diff) * 2);
+	--mgc-rule: calc(var(--mgc) / var(#{$--mlu-grid-cols}) * 100% + var(--gc-diff));
+
 	width: 100%;
 
 	@include mlu-mk-gtr($type: "padding");

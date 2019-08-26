@@ -381,13 +381,15 @@ Styleguide: sass-tools.mixins
 /*
 CSS variables
 
-CSS custom properties which used in MLUT. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties.
+Global CSS custom properties which used in MLUT. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties. <br> Global custom properties names begin with the `mlu` prefix.
 
 The values and meaning of many custom properties correspond to the [SASS settings](section-sass-tools.html#kssref-sass-tools-settings) of MLUT core. But unlike them, custom properties can be changed dynamically without recompiling.
 
 Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags).
 
-You can find CSS variables in `sass/base/_variables.scss`.
+In some blocks and utilities, custom properties are also used. Look for info about them in the description of the corresponding block or utility.
+
+You can find global CSS variables in `sass/core/_variables.scss`.
 
 --mlu-gg = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
 Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
@@ -481,14 +483,22 @@ padding-right: 16px;
 padding-left: 16px;
 padding-right: var(--mlu-gg);
 padding-left: var(--mlu-gg);
-margin-bottom: 32px;
-margin-bottom: calc(var(--mlu-gg) * 2);
+margin-bottom: 2rem;
+margin-bottom: calc(var(--mlu-gg-rem) * 2);
 ```
 similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-general) = 1.
 
 The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-default-gtr`.
 
-Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row).
+Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row). The formulas for calculating the width and offset for the column are stored in the custom properties. <br> In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
+```scss
+--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
+--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
+```
+`--gc` or `--mgc` is the value of the width or offset in the grid columns(gc). This is a custom property of the utility.<br>
+`--mlu-grid-cols` - the number of columns in the grid system. This is a [global](section-core-styles.html#kssref-core-styles-css_vars) custom property that can be changed on any DOM node.<br>
+`--gc-diff` - variable is equal to the gutter if the gutter at the columns is created using margin.<br>
+Some of these variables can be changed using [custom utilities](section-core-utils.html#kssref-core-utils-custom).
 
 You can create nested layouts with a mix of `row` and `row__col` on the same DOM node. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
 
@@ -505,6 +515,12 @@ row__item
 Element for creating parts of the layout. By default, it stretches across the width of the content.
 
 The sizes and offsets are set with help of utilities.
+
+Like a `row__col`, an element contains formulas for calculating width and offset. But in these formulas there is no variable `gc-diff`:
+```scss
+--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100%);
+--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100%);
+```
 
 Markup: ../../../docs/examples/core-blocks/row/row__item.html
 
@@ -647,6 +663,8 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 
 .row__col,
 .row__item {
+	--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100%);
+	--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100%);
 	position: relative;
 	display: inline-block;
 	max-width: 100%;
@@ -675,6 +693,9 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 }
 
 .row__col {
+	--gc-diff: 0px;
+	--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
+	--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
 	width: 100%;
 	padding-right: 16px;
 	padding-left: 16px;
@@ -856,11 +877,31 @@ Styleguide: core-utils.custom.gg
 /*
 -Gc
 
-Grid columns. Set number of columns in grid system. Controls `--mlu-grid-cols`.
+Grid columns. Sets number of columns in grid system on DOM node. Controls `--mlu-grid-cols`.
 
 df0 - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). Works on all breakpoints where the number of columns differs from the default.
 
 Styleguide: core-utils.custom.gc
+*/
+
+/*
+-Gcd
+
+Grid columns diff. Controls `--gc-diff` from grid column width [formula](section-core-blocks.html#kssref-core-blocks-row-row__col).
+
+0 - sets to 0px.
+
+Styleguide: core-utils.custom.gcd
+*/
+
+/*
+-Gcr
+
+Grid columns rule. Controls `--gc-rule` and `--mgc-rule` .
+
+initial - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the grid column(gc) widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` is replaced by `--mlu-gg`.
+
+Styleguide: core-utils.custom.gcr
 */
 
 .-Gg1su {
@@ -890,6 +931,15 @@ Styleguide: core-utils.custom.gc
 
 .-Gc-df0 {
 	--mlu-grid-cols: 12;
+}
+
+.-Gcd0 {
+	--gc-diff: 0px;
+}
+
+.-Gcr {
+	--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--mlu-gg) * 2);
+	--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--mlu-gg));
 }
 
 /*
