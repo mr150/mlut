@@ -784,6 +784,7 @@ $body-size: (100% 48%), $change: false) {
 		$tmp-val: mlu-ston($width + "");
 		$col-width: mlu-decimal-floor($tmp-val / $columns * 100%, 3);
 		$custom-unit: if(unit($width) == "gc", "gc", "gs");
+		$custom-unit: if(unitless($width), $width, $custom-unit);
 	} @else if type-of($width) == "number" or $width == "auto" {
 		$col-width: $width;
 	} @else if type-of($width) != "number" {
@@ -893,14 +894,22 @@ $body-size: (100% 48%), $change: false) {
 
 @mixin _mlu-mk-width($width, $unit, $gutter: $mlu-gtr-sm,
 $calc: false, $prop: "width", $css-vars: false) {
+	$prop-abbr: (
+		"width": "",
+		"margin-left": "m",
+		"max-width": "maw",
+	);
+
+	$var-width: if(type-of($unit) == "number", $unit, null);
+	$unit: if($var-width, "gc", $unit);
 	$calc-val: calc(#{$width} - #{$gutter * 2});
 	$var-val: calc(#{$width} - var(#{$--mlu-gg}) * 2);
-	$width-fallback: if($calc, mlu-decimal-floor($width, 2) - ($mlu-grid-gutter-fallback * 2), 0);
+	$width-fallback: if($calc, mlu-decimal-floor($width, 3) - ($mlu-grid-gutter-fallback * 2), 0);
 
 	@if $prop == "margin-left" {
 		$calc-val: calc(#{$width} + #{$gutter});
 		$var-val: calc(#{$width} + var(#{$--mlu-gg}));
-		$width-fallback: if($calc, mlu-decimal-floor($width, 2) + $mlu-grid-gutter-fallback, 0);
+		$width-fallback: if($calc, mlu-decimal-floor($width, 3) + $mlu-grid-gutter-fallback, 0);
 	}
 
 	// Generation calc() fallback
@@ -909,12 +918,20 @@ $calc: false, $prop: "width", $css-vars: false) {
 	}
 
 	@if $unit == "gc" {
+		$abbr: map-get($prop-abbr, $prop);
+
+		@if $var-width {
+			--#{$abbr}gc: #{$var-width};
+		}
+
 		@if not $css-vars or $css-vars == 1 {
 			#{$prop}: $calc-val;
 		}
 
-		@if $css-vars {
+		@if $css-vars and not $var-width {
 			#{$prop}: $var-val;
+		} @else if $var-width {
+			#{$prop}: var(--#{$abbr}gc-rule, #{$width});
 		}
 	} @else {
 		#{$prop}: $width;

@@ -15,8 +15,7 @@ Px
 
 Padding on X axis. Sets left and right padding.
 
-* `Px1gg` \- *responsive*
-* `Px0` - only *responsive*
+* `Px1gg`
 
 Styleguide: core-utils.padding.px
 */
@@ -38,8 +37,7 @@ $mlu-P-map: map-merge($mlu-P-map,
 	"b1gg": 1gg,
 	"b2gg": 2gg,
 	"l1gg": 1gg,
-	"x1gg_all": 1gg,
-	"x0_bp": 0,
+	"x1gg": 1gg,
 ));
 
 @include mlu-mk-P($mlu-P-map);

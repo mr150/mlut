@@ -40,7 +40,7 @@ Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units
 * `Mb1gg..Mb4gg`
 * `Mb2gg` \- *Responsive*
 * `Mb1su..Mb6su`
-* `Mb-2gg..Mb-1gg`
+* `Mb-2gg`
 
 Styleguide: core-utils.margin.mb
 */
@@ -53,7 +53,7 @@ Margin on X axis. Sets left and right margin.
 * `Mx-a` \- centered the DOM node with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
 * `Mx1gg` \- if `gc` turned on. *Responsive*.
 * `Mx-1gg` \- it needed for imposes left and right padding of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
-* `Mx0` \- *responsive*.
+* `Mx0` \- only *responsive*.
 
 Markup: ../../../docs/examples/core-utils/margin/mx.html
 
@@ -86,27 +86,19 @@ $mlu-M-map: map-merge($mlu-M-map,
 $mlu-M-map: map-merge($mlu-M-map,
 (
 	"b-2gg": -2gg,
-	"b-1gg": -1gg,
-	"b2gg_bp": 2gg,
 	"b1su": 1su,
 	"b2su": 2su,
 	"b3su": 3su,
 	"b4su": 4su,
 	"b5su": 5su,
 	"b6su": 6su,
+	"b2gg_bp": 2gg,
 	"x-1gg": -1gg,
+	"x1gg_all": 1gg,
 	"l-2gg": -2gg,
 	"l-1gg": -1gg,
-	"l1gg": 1gg,
+	"l1gg_bp": 1gg,
 	"l2gg": 2gg,
 ));
-
-@if $MLU-FLAG-COL-MARGIN {
-	$mlu-M-map: map-merge($mlu-M-map,
-	(
-		"x1gg_bp": 1gg,
-		"l1gg_bp": 1gg,
-	));
-}
 
 @include mlu-mk-M($mlu-M-map);
