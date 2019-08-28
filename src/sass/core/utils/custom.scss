@@ -22,13 +22,14 @@ Styleguide: core-utils.custom.gg
 */
 
 /*
--Gc
+-Gcc
 
-Grid columns. Sets number of columns in grid system on DOM node. Controls `--mlu-grid-cols`.
+Grid columns count. Sets number of columns in grid system on DOM node. Controls `--mlu-grid-cols`.
 
-df0 - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). Works on breakpoints where the number of columns differs from the default.
+initial - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
+sm - keyword that means number of columns on `sm` breakpoint. There is on all breakpoints except `sm`.
 
-Styleguide: core-utils.custom.gc
+Styleguide: core-utils.custom.gcc
 */
 
 /*
@@ -59,15 +60,21 @@ Styleguide: core-utils.custom.gcr
 	}
 }
 
-.-Gc {
+.-Gcc {
+	$sm-cols: mlu-grid-cols-count($mlu-bp-sm);
+	$mlu--Gc-map: (
+		$mlu-bp-sm: $sm-cols,
+		"_bp": $mlu-grid-default-cols,
+	);
+
 	@each $key, $value in $mlu-grid-cols {
-		@if $value != $mlu-grid-default-cols {
-			@include mlu-bpm($key) {
-				&-df0_#{$key} {
-					#{$--mlu-grid-cols}: $mlu-grid-default-cols;
-				}
-			}
+		@if $key != $mlu-bp-sm and $sm-cols != $mlu-grid-default-gtr {
+			$mlu--Gc-map: map-merge($mlu--Gc-map, ($mlu-bp-sm + "_" + $key: $sm-cols));
 		}
+	}
+
+	@at-root {
+		@include mlu-mk-util(&, $--mlu-grid-cols, $mlu--Gc-map);
 	}
 }
 

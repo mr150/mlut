@@ -1,13 +1,13 @@
 /*
 W
 
-Width. You can set width in the grid-spans(gs).
+Width. You can set width in the grid-columns(gc).
 
 If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
 
 * `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `W1gs..W4gs` \- range of available width in grid spans on `xs` and `sm` breakpoints, because on `xs` and `sm`, grid has 4 columns. See grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
-* `W1gs..W12gs` \- available width in `gs` on all breakpoints, starting with `md`.
+* `W1gc..W4gc` \- range of available width in grid columns on `xs` and `sm` breakpoints, because on `xs` and `sm`, grid has 4 columns. See grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
+* `W1gc..W12gc` \- available width in `gc` on all breakpoints, starting with `md`.
 
 Markup: ../../../docs/examples/core-utils/box-sizing/w.html
 
@@ -15,20 +15,15 @@ Styleguide: core-utils.bxz.w
 */
 
 @for $i from 1 through $mlu-grid-cols-xs {
-	.W#{$i}gs {
+	.W#{$i}gc {
 		@include mlu-W($i, $cols: $mlu-grid-cols-xs);
 	}
-}
-
-.W-a {
-	width: auto;
 }
 
 // Generate grid utilities W and Ml on breakpoints
 @each $key, $value in $mlu-grid-cols {
 	@for $i from 1 through $value {
-		.W#{$i}gs_#{$key} {
-			//@include mlu-W($i * 1gs, $key, $value);
+		.W#{$i}gc_#{$key} {
 			@include mlu-W($i, $key, $value);
 		}
 
@@ -38,15 +33,13 @@ Styleguide: core-utils.bxz.w
 		@if $MLU-FLAG-COL-OFFSET and
 			mlu-bp($key) > mlu-bp($mlu-bp-sm) and
 			$i < $value - 1 {
-			.Ml#{$i}gs_#{$key} {
+			.Ml#{$i}gc_#{$key} {
 				@include mlu-Ml($i, $key, $value);
 			}
 		}
 	}
-
-	@include mlu-bpm($key) {
-		.W-a_#{$key} {
-			width: auto;
-		}
-	}
 }
+
+@include mlu-mk-util("W", "width", (
+	"a_all": auto,
+));

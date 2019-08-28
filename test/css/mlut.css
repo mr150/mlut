@@ -871,13 +871,14 @@ Styleguide: core-utils.custom.gg
 */
 
 /*
--Gc
+-Gcc
 
-Grid columns. Sets number of columns in grid system on DOM node. Controls `--mlu-grid-cols`.
+Grid columns count. Sets number of columns in grid system on DOM node. Controls `--mlu-grid-cols`.
 
-df0 - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). Works on breakpoints where the number of columns differs from the default.
+initial - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
+sm - keyword that means number of columns on `sm` breakpoint. There is on all breakpoints except `sm`.
 
-Styleguide: core-utils.custom.gc
+Styleguide: core-utils.custom.gcc
 */
 
 /*
@@ -924,6 +925,10 @@ Styleguide: core-utils.custom.gcr
 .-Gg5su {
 	--mlu-gg: 20px;
 	--mlu-gg-rem: 1.25rem;
+}
+
+.-Gcc-sm {
+	--mlu-grid-cols: 4;
 }
 
 .-Gcd0 {
@@ -1448,38 +1453,38 @@ Styleguide: core-utils.flex.mai
 /*
 W
 
-Width. You can set width in the grid-spans(gs).
+Width. You can set width in the grid-columns(gc).
 
 If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
 
 * `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `W1gs..W4gs` \- range of available width in grid spans on `xs` and `sm` breakpoints, because on `xs` and `sm`, grid has 4 columns. See grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
-* `W1gs..W12gs` \- available width in `gs` on all breakpoints, starting with `md`.
+* `W1gc..W4gc` \- range of available width in grid columns on `xs` and `sm` breakpoints, because on `xs` and `sm`, grid has 4 columns. See grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
+* `W1gc..W12gc` \- available width in `gc` on all breakpoints, starting with `md`.
 
 Markup: ../../../docs/examples/core-utils/box-sizing/w.html
 
 Styleguide: core-utils.bxz.w
 */
 
-.W1gs {
+.W1gc {
 	--gc: 1;
 	width: calc(25% - 32px);
 	width: var(--gc-rule, 25%);
 }
 
-.W2gs {
+.W2gc {
 	--gc: 2;
 	width: calc(50% - 32px);
 	width: var(--gc-rule, 50%);
 }
 
-.W3gs {
+.W3gc {
 	--gc: 3;
 	width: calc(75% - 32px);
 	width: var(--gc-rule, 75%);
 }
 
-.W4gs {
+.W4gc {
 	--gc: 4;
 	width: calc(100% - 32px);
 	width: var(--gc-rule, 100%);
@@ -1561,13 +1566,13 @@ Styleguide: core-utils.margin
 /*
 Ml
 
-Margin left. You can set left margin in the [grid units](section-concepts.html#kssref-concepts-grid)(gg, gs) or [space units](section-concepts.html#kssref-concepts-su)(su). So you can set the offset for layout elements.
+Margin left. You can set left margin in the [grid units](section-concepts.html#kssref-concepts-grid)(gg, gc) or [space units](section-concepts.html#kssref-concepts-su)(su). So you can set the offset for layout elements.
 
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
 * `Ml1gg` \- it is needed to return the default column gutter. *Responsive*.
-* `Ml1gs..Ml10gs` \- available margin in `gs` on all breakpoints, starting with `md`.
+* `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
@@ -2283,7 +2288,7 @@ Styleguide: core-utils.bd.bds
 		--mlu-gg-rem: 1.25rem;
 	}
 
-	.-Gc-df0_sm {
+	.-Gcc_sm {
 		--mlu-grid-cols: 12;
 	}
 
@@ -2346,25 +2351,25 @@ Styleguide: core-utils.bd.bds
 		text-align: right;
 	}
 
-	.W1gs_sm {
+	.W1gc_sm {
 		--gc: 1;
 		width: calc(25% - 32px);
 		width: var(--gc-rule, 25%);
 	}
 
-	.W2gs_sm {
+	.W2gc_sm {
 		--gc: 2;
 		width: calc(50% - 32px);
 		width: var(--gc-rule, 50%);
 	}
 
-	.W3gs_sm {
+	.W3gc_sm {
 		--gc: 3;
 		width: calc(75% - 32px);
 		width: var(--gc-rule, 75%);
 	}
 
-	.W4gs_sm {
+	.W4gc_sm {
 		--gc: 4;
 		width: calc(100% - 32px);
 		width: var(--gc-rule, 100%);
@@ -2452,6 +2457,14 @@ Styleguide: core-utils.bd.bds
 		--mlu-gg-rem: 1.25rem;
 	}
 
+	.-Gcc_md {
+		--mlu-grid-cols: 12;
+	}
+
+	.-Gcc-sm_md {
+		--mlu-grid-cols: 4;
+	}
+
 	.mV-vh_md {
 		position: absolute;
 		width: 1px;
@@ -2511,133 +2524,133 @@ Styleguide: core-utils.bd.bds
 		text-align: right;
 	}
 
-	.W1gs_md {
+	.W1gc_md {
 		--gc: 1;
 		width: calc(8.333% - 32px);
 		width: var(--gc-rule, 8.333%);
 	}
 
-	.Ml1gs_md {
+	.Ml1gc_md {
 		--mgc: 1;
 		margin-left: calc(8.333% + 16px);
 		margin-left: var(--mgc-rule, 8.333%);
 	}
 
-	.W2gs_md {
+	.W2gc_md {
 		--gc: 2;
 		width: calc(16.666% - 32px);
 		width: var(--gc-rule, 16.666%);
 	}
 
-	.Ml2gs_md {
+	.Ml2gc_md {
 		--mgc: 2;
 		margin-left: calc(16.666% + 16px);
 		margin-left: var(--mgc-rule, 16.666%);
 	}
 
-	.W3gs_md {
+	.W3gc_md {
 		--gc: 3;
 		width: calc(25% - 32px);
 		width: var(--gc-rule, 25%);
 	}
 
-	.Ml3gs_md {
+	.Ml3gc_md {
 		--mgc: 3;
 		margin-left: calc(25% + 16px);
 		margin-left: var(--mgc-rule, 25%);
 	}
 
-	.W4gs_md {
+	.W4gc_md {
 		--gc: 4;
 		width: calc(33.333% - 32px);
 		width: var(--gc-rule, 33.333%);
 	}
 
-	.Ml4gs_md {
+	.Ml4gc_md {
 		--mgc: 4;
 		margin-left: calc(33.333% + 16px);
 		margin-left: var(--mgc-rule, 33.333%);
 	}
 
-	.W5gs_md {
+	.W5gc_md {
 		--gc: 5;
 		width: calc(41.666% - 32px);
 		width: var(--gc-rule, 41.666%);
 	}
 
-	.Ml5gs_md {
+	.Ml5gc_md {
 		--mgc: 5;
 		margin-left: calc(41.666% + 16px);
 		margin-left: var(--mgc-rule, 41.666%);
 	}
 
-	.W6gs_md {
+	.W6gc_md {
 		--gc: 6;
 		width: calc(50% - 32px);
 		width: var(--gc-rule, 50%);
 	}
 
-	.Ml6gs_md {
+	.Ml6gc_md {
 		--mgc: 6;
 		margin-left: calc(50% + 16px);
 		margin-left: var(--mgc-rule, 50%);
 	}
 
-	.W7gs_md {
+	.W7gc_md {
 		--gc: 7;
 		width: calc(58.333% - 32px);
 		width: var(--gc-rule, 58.333%);
 	}
 
-	.Ml7gs_md {
+	.Ml7gc_md {
 		--mgc: 7;
 		margin-left: calc(58.333% + 16px);
 		margin-left: var(--mgc-rule, 58.333%);
 	}
 
-	.W8gs_md {
+	.W8gc_md {
 		--gc: 8;
 		width: calc(66.666% - 32px);
 		width: var(--gc-rule, 66.666%);
 	}
 
-	.Ml8gs_md {
+	.Ml8gc_md {
 		--mgc: 8;
 		margin-left: calc(66.666% + 16px);
 		margin-left: var(--mgc-rule, 66.666%);
 	}
 
-	.W9gs_md {
+	.W9gc_md {
 		--gc: 9;
 		width: calc(75% - 32px);
 		width: var(--gc-rule, 75%);
 	}
 
-	.Ml9gs_md {
+	.Ml9gc_md {
 		--mgc: 9;
 		margin-left: calc(75% + 16px);
 		margin-left: var(--mgc-rule, 75%);
 	}
 
-	.W10gs_md {
+	.W10gc_md {
 		--gc: 10;
 		width: calc(83.333% - 32px);
 		width: var(--gc-rule, 83.333%);
 	}
 
-	.Ml10gs_md {
+	.Ml10gc_md {
 		--mgc: 10;
 		margin-left: calc(83.333% + 16px);
 		margin-left: var(--mgc-rule, 83.333%);
 	}
 
-	.W11gs_md {
+	.W11gc_md {
 		--gc: 11;
 		width: calc(91.666% - 32px);
 		width: var(--gc-rule, 91.666%);
 	}
 
-	.W12gs_md {
+	.W12gc_md {
 		--gc: 12;
 		width: calc(100% - 32px);
 		width: var(--gc-rule, 100%);
@@ -2729,6 +2742,14 @@ Styleguide: core-utils.bd.bds
 		--mlu-gg-rem: 1.25rem;
 	}
 
+	.-Gcc_lg {
+		--mlu-grid-cols: 12;
+	}
+
+	.-Gcc-sm_lg {
+		--mlu-grid-cols: 4;
+	}
+
 	.mV-vh_lg {
 		position: absolute;
 		width: 1px;
@@ -2788,133 +2809,133 @@ Styleguide: core-utils.bd.bds
 		text-align: right;
 	}
 
-	.W1gs_lg {
+	.W1gc_lg {
 		--gc: 1;
 		width: calc(8.333% - 32px);
 		width: var(--gc-rule, 8.333%);
 	}
 
-	.Ml1gs_lg {
+	.Ml1gc_lg {
 		--mgc: 1;
 		margin-left: calc(8.333% + 16px);
 		margin-left: var(--mgc-rule, 8.333%);
 	}
 
-	.W2gs_lg {
+	.W2gc_lg {
 		--gc: 2;
 		width: calc(16.666% - 32px);
 		width: var(--gc-rule, 16.666%);
 	}
 
-	.Ml2gs_lg {
+	.Ml2gc_lg {
 		--mgc: 2;
 		margin-left: calc(16.666% + 16px);
 		margin-left: var(--mgc-rule, 16.666%);
 	}
 
-	.W3gs_lg {
+	.W3gc_lg {
 		--gc: 3;
 		width: calc(25% - 32px);
 		width: var(--gc-rule, 25%);
 	}
 
-	.Ml3gs_lg {
+	.Ml3gc_lg {
 		--mgc: 3;
 		margin-left: calc(25% + 16px);
 		margin-left: var(--mgc-rule, 25%);
 	}
 
-	.W4gs_lg {
+	.W4gc_lg {
 		--gc: 4;
 		width: calc(33.333% - 32px);
 		width: var(--gc-rule, 33.333%);
 	}
 
-	.Ml4gs_lg {
+	.Ml4gc_lg {
 		--mgc: 4;
 		margin-left: calc(33.333% + 16px);
 		margin-left: var(--mgc-rule, 33.333%);
 	}
 
-	.W5gs_lg {
+	.W5gc_lg {
 		--gc: 5;
 		width: calc(41.666% - 32px);
 		width: var(--gc-rule, 41.666%);
 	}
 
-	.Ml5gs_lg {
+	.Ml5gc_lg {
 		--mgc: 5;
 		margin-left: calc(41.666% + 16px);
 		margin-left: var(--mgc-rule, 41.666%);
 	}
 
-	.W6gs_lg {
+	.W6gc_lg {
 		--gc: 6;
 		width: calc(50% - 32px);
 		width: var(--gc-rule, 50%);
 	}
 
-	.Ml6gs_lg {
+	.Ml6gc_lg {
 		--mgc: 6;
 		margin-left: calc(50% + 16px);
 		margin-left: var(--mgc-rule, 50%);
 	}
 
-	.W7gs_lg {
+	.W7gc_lg {
 		--gc: 7;
 		width: calc(58.333% - 32px);
 		width: var(--gc-rule, 58.333%);
 	}
 
-	.Ml7gs_lg {
+	.Ml7gc_lg {
 		--mgc: 7;
 		margin-left: calc(58.333% + 16px);
 		margin-left: var(--mgc-rule, 58.333%);
 	}
 
-	.W8gs_lg {
+	.W8gc_lg {
 		--gc: 8;
 		width: calc(66.666% - 32px);
 		width: var(--gc-rule, 66.666%);
 	}
 
-	.Ml8gs_lg {
+	.Ml8gc_lg {
 		--mgc: 8;
 		margin-left: calc(66.666% + 16px);
 		margin-left: var(--mgc-rule, 66.666%);
 	}
 
-	.W9gs_lg {
+	.W9gc_lg {
 		--gc: 9;
 		width: calc(75% - 32px);
 		width: var(--gc-rule, 75%);
 	}
 
-	.Ml9gs_lg {
+	.Ml9gc_lg {
 		--mgc: 9;
 		margin-left: calc(75% + 16px);
 		margin-left: var(--mgc-rule, 75%);
 	}
 
-	.W10gs_lg {
+	.W10gc_lg {
 		--gc: 10;
 		width: calc(83.333% - 32px);
 		width: var(--gc-rule, 83.333%);
 	}
 
-	.Ml10gs_lg {
+	.Ml10gc_lg {
 		--mgc: 10;
 		margin-left: calc(83.333% + 16px);
 		margin-left: var(--mgc-rule, 83.333%);
 	}
 
-	.W11gs_lg {
+	.W11gc_lg {
 		--gc: 11;
 		width: calc(91.666% - 32px);
 		width: var(--gc-rule, 91.666%);
 	}
 
-	.W12gs_lg {
+	.W12gc_lg {
 		--gc: 12;
 		width: calc(100% - 32px);
 		width: var(--gc-rule, 100%);
@@ -2998,6 +3019,14 @@ Styleguide: core-utils.bd.bds
 		--mlu-gg-rem: 1.25rem;
 	}
 
+	.-Gcc_xl {
+		--mlu-grid-cols: 12;
+	}
+
+	.-Gcc-sm_xl {
+		--mlu-grid-cols: 4;
+	}
+
 	.mV-vh_xl {
 		position: absolute;
 		width: 1px;
@@ -3057,133 +3086,133 @@ Styleguide: core-utils.bd.bds
 		text-align: right;
 	}
 
-	.W1gs_xl {
+	.W1gc_xl {
 		--gc: 1;
 		width: calc(8.333% - 32px);
 		width: var(--gc-rule, 8.333%);
 	}
 
-	.Ml1gs_xl {
+	.Ml1gc_xl {
 		--mgc: 1;
 		margin-left: calc(8.333% + 16px);
 		margin-left: var(--mgc-rule, 8.333%);
 	}
 
-	.W2gs_xl {
+	.W2gc_xl {
 		--gc: 2;
 		width: calc(16.666% - 32px);
 		width: var(--gc-rule, 16.666%);
 	}
 
-	.Ml2gs_xl {
+	.Ml2gc_xl {
 		--mgc: 2;
 		margin-left: calc(16.666% + 16px);
 		margin-left: var(--mgc-rule, 16.666%);
 	}
 
-	.W3gs_xl {
+	.W3gc_xl {
 		--gc: 3;
 		width: calc(25% - 32px);
 		width: var(--gc-rule, 25%);
 	}
 
-	.Ml3gs_xl {
+	.Ml3gc_xl {
 		--mgc: 3;
 		margin-left: calc(25% + 16px);
 		margin-left: var(--mgc-rule, 25%);
 	}
 
-	.W4gs_xl {
+	.W4gc_xl {
 		--gc: 4;
 		width: calc(33.333% - 32px);
 		width: var(--gc-rule, 33.333%);
 	}
 
-	.Ml4gs_xl {
+	.Ml4gc_xl {
 		--mgc: 4;
 		margin-left: calc(33.333% + 16px);
 		margin-left: var(--mgc-rule, 33.333%);
 	}
 
-	.W5gs_xl {
+	.W5gc_xl {
 		--gc: 5;
 		width: calc(41.666% - 32px);
 		width: var(--gc-rule, 41.666%);
 	}
 
-	.Ml5gs_xl {
+	.Ml5gc_xl {
 		--mgc: 5;
 		margin-left: calc(41.666% + 16px);
 		margin-left: var(--mgc-rule, 41.666%);
 	}
 
-	.W6gs_xl {
+	.W6gc_xl {
 		--gc: 6;
 		width: calc(50% - 32px);
 		width: var(--gc-rule, 50%);
 	}
 
-	.Ml6gs_xl {
+	.Ml6gc_xl {
 		--mgc: 6;
 		margin-left: calc(50% + 16px);
 		margin-left: var(--mgc-rule, 50%);
 	}
 
-	.W7gs_xl {
+	.W7gc_xl {
 		--gc: 7;
 		width: calc(58.333% - 32px);
 		width: var(--gc-rule, 58.333%);
 	}
 
-	.Ml7gs_xl {
+	.Ml7gc_xl {
 		--mgc: 7;
 		margin-left: calc(58.333% + 16px);
 		margin-left: var(--mgc-rule, 58.333%);
 	}
 
-	.W8gs_xl {
+	.W8gc_xl {
 		--gc: 8;
 		width: calc(66.666% - 32px);
 		width: var(--gc-rule, 66.666%);
 	}
 
-	.Ml8gs_xl {
+	.Ml8gc_xl {
 		--mgc: 8;
 		margin-left: calc(66.666% + 16px);
 		margin-left: var(--mgc-rule, 66.666%);
 	}
 
-	.W9gs_xl {
+	.W9gc_xl {
 		--gc: 9;
 		width: calc(75% - 32px);
 		width: var(--gc-rule, 75%);
 	}
 
-	.Ml9gs_xl {
+	.Ml9gc_xl {
 		--mgc: 9;
 		margin-left: calc(75% + 16px);
 		margin-left: var(--mgc-rule, 75%);
 	}
 
-	.W10gs_xl {
+	.W10gc_xl {
 		--gc: 10;
 		width: calc(83.333% - 32px);
 		width: var(--gc-rule, 83.333%);
 	}
 
-	.Ml10gs_xl {
+	.Ml10gc_xl {
 		--mgc: 10;
 		margin-left: calc(83.333% + 16px);
 		margin-left: var(--mgc-rule, 83.333%);
 	}
 
-	.W11gs_xl {
+	.W11gc_xl {
 		--gc: 11;
 		width: calc(91.666% - 32px);
 		width: var(--gc-rule, 91.666%);
 	}
 
-	.W12gs_xl {
+	.W12gc_xl {
 		--gc: 12;
 		width: calc(100% - 32px);
 		width: var(--gc-rule, 100%);
