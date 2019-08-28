@@ -26,7 +26,7 @@ Styleguide: core-utils.custom.gg
 
 Grid columns. Sets number of columns in grid system on DOM node. Controls `--mlu-grid-cols`.
 
-df0 - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). Works on all breakpoints where the number of columns differs from the default.
+df0 - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). Works on breakpoints where the number of columns differs from the default.
 
 Styleguide: core-utils.custom.gc
 */
@@ -36,7 +36,8 @@ Styleguide: core-utils.custom.gc
 
 Grid columns diff. Controls `--gc-diff` from grid column width [formula](section-core-blocks.html#kssref-core-blocks-row-row__col).
 
-0 - sets to 0px.
+* `0` \- 0px
+* `1gg`
 
 Styleguide: core-utils.custom.gcd
 */
@@ -46,7 +47,7 @@ Styleguide: core-utils.custom.gcd
 
 Grid columns rule. Controls `--gc-rule` and `--mgc-rule` .
 
-initial - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the grid column(gc) widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` is replaced by `--mlu-gg`.
+initial - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the grid column(gc) widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu-gg`.
 
 Styleguide: core-utils.custom.gcr
 */
@@ -59,12 +60,6 @@ Styleguide: core-utils.custom.gcr
 }
 
 .-Gc {
-	&-df0 {
-		@if $mlu-grid-cols-xs != $mlu-grid-default-cols {
-			#{$--mlu-grid-cols}: $mlu-grid-default-cols;
-		}
-	}
-
 	@each $key, $value in $mlu-grid-cols {
 		@if $value != $mlu-grid-default-cols {
 			@include mlu-bpm($key) {
@@ -80,7 +75,11 @@ Styleguide: core-utils.custom.gcr
 	--gc-diff: 0px;
 }
 
+.-Gcd1gg {
+	--gc-diff: var(#{$--mlu-gg});
+}
+
 .-Gcr {
-	--gc-rule: calc(var(--gc) / var(#{$--mlu-grid-cols}) * 100% - var(#{$--mlu-gg}) * 2);
-	--mgc-rule: calc(var(--mgc) / var(#{$--mlu-grid-cols}) * 100% + var(#{$--mlu-gg}));
+	--gc-rule: calc(var(--gc) / var(#{$--mlu-grid-cols}) * 100% - var(--gc-diff, var(#{$--mlu-gg})) * 2);
+	--mgc-rule: calc(var(--mgc) / var(#{$--mlu-grid-cols}) * 100% + var(--gc-diff, var(#{$--mlu-gg})));
 }
