@@ -278,7 +278,7 @@ Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) b
 ### Grid units
 
 You can set the [width](section-core-utils.html#kssref-core-utils-bxz-w) and [offset](section-core-utils.html#kssref-core-utils-margin-ml) for the layout parts in the grid units. These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 3 types of grid units:
-* **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column. For the presence of these units meets the flag [$MLU-FLAG-COL-MARGIN](section-sass-tools.html#kssref-sass-tools-settings-flags). By default it is off.
+* **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column.
 * **grid-spans** \- `gs`. 1gs is width of 1 column with 2 gutters.
 * **grid-gutters** \- `gg`. 1gg is width of 1 gutter.
 
@@ -372,7 +372,6 @@ Styleguide: sass-tools.settings
 // $MLU-FLAG-EXTENDED = false - turn on additional features but increases distributive size. Type: `bool`.
 // $MLU-FLAG-CALC-FALLBACK = false - turn on CSS `calc()` fallback for grid utils on `md+` breakpoints. Type: `bool`.
 // $MLU-FLAG-COL-OFFSET = true - turn on generation grid columns offset [utils](section-core-utils.html#kssref-core-utils-margin-ml). Type: `bool`.
-// $MLU-FLAG-COL-MARGIN = false - turn on generation of
 //[W](section-core-utils.html#kssref-core-utils-bxz-w) and
 //[Ml](section-core-utils.html#kssref-core-utils-margin-ml) utils in
 //[grid-columns](section-concepts.html#kssref-concepts-grid) for columns with margin based gutters. Type: `bool`.
@@ -387,7 +386,6 @@ Styleguide: sass-tools.settings
 $MLU-FLAG-EXTENDED: false !default;
 $MLU-FLAG-CALC-FALLBACK: false !default;
 $MLU-FLAG-COL-OFFSET: true !default;
-$MLU-FLAG-COL-MARGIN: false !default;
 $MLU-FLAG-CSS-VARS: 1 !default;
 
 // General
