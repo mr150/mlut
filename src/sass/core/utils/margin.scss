@@ -17,14 +17,13 @@ Styleguide: core-utils.margin
 /*
 Ml
 
-Margin left. You can set left margin in the [grid units](section-concepts.html#kssref-concepts-grid)(gc, gg, gs) or [space units](section-concepts.html#kssref-concepts-su)(su). So you can set the offset for layout elements.
+Margin left. You can set left margin in the [grid units](section-concepts.html#kssref-concepts-grid)(gg, gs) or [space units](section-concepts.html#kssref-concepts-su)(su). So you can set the offset for layout elements.
 
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
-* `Ml1gg` \- it is needed to return the default column gutter. *Responsive* if `gc` turned on.
+* `Ml1gg` \- it is needed to return the default column gutter. *Responsive*.
 * `Ml1gs..Ml10gs` \- available margin in `gs` on all breakpoints, starting with `md`.
-* `Ml1gc..Ml10gc` \- if `gc` turned on.
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
@@ -51,7 +50,7 @@ Mx
 Margin on X axis. Sets left and right margin.
 
 * `Mx-a` \- centered the DOM node with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `Mx1gg` \- if `gc` turned on. *Responsive*.
+* `Mx1gg` \- *Responsive*.
 * `Mx-1gg` \- it needed for imposes left and right padding of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
 * `Mx0` \- only *responsive*.
 
@@ -97,7 +96,7 @@ $mlu-M-map: map-merge($mlu-M-map,
 	"x1gg_all": 1gg,
 	"l-2gg": -2gg,
 	"l-1gg": -1gg,
-	"l1gg_bp": 1gg,
+	"l1gg_all": 1gg,
 	"l2gg": 2gg,
 ));
 

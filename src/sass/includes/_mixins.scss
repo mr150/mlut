@@ -714,8 +714,9 @@ $body-size: (100% 48%), $change: false) {
 // It works similarly like [W utility](section-core-utils.html#kssref-core-utils-bxz-w).
 // ```scss
 //.block {
-//		@include mlu-W(2gc, "sm");
-//		@include mlu-W(4, "lg");
+//		@include mlu-W(2, "sm");
+//		@include mlu-W(3gc, "md");
+//		@include mlu-W(4gs, "lg");
 //}
 //
 //.foo {
@@ -726,12 +727,20 @@ $body-size: (100% 48%), $change: false) {
 // ```css
 //@media (min-width: 520px) {
 //		.block {
+//			--gc: 2;
 //			width: calc(16.666% - 32px);
-//			width: calc(16.666% - var(--mlu-gg) * 2);
+//			width: var(--gc-rule, 16.666%);
 //		}
 //
 //		.foo {
 //			width: calc(16.666% - 24px);
+//		}
+//}
+//
+//@media (min-width: 760px) {
+//		.block {
+//			width: calc(25% - 32px);
+//			width: calc(25% - var(--mlu-gg) * 2);
 //		}
 //}
 //
@@ -746,7 +755,7 @@ $body-size: (100% 48%), $change: false) {
 //}
 // ```
 //
-// $width - can be in grid-columns(`gc`), grid-spans(unitless number, or `gs` unit),
+// $width - can be in grid-columns(simple - `gc`, variable - unitless number), grid-spans(`gs`),
 // any CSS units(`px`, `rem` etc) or `auto`. <br> Grid units calculated to %
 // according to the formula '`n / $cols * 100%`' and rounded by
 // [mlu-decimal-floor](section-sass-tools.html#kssref-sass-tools-functions-decimal_floor). <br>
@@ -755,6 +764,8 @@ $body-size: (100% 48%), $change: false) {
 // on `lg`.
 // $bp = $mlu-bp-xs - breakpoint on which `$width` will sets. Can be number or breakpoint name.
 // $cols = $mlu-grid-default-cols - columns count in grid. Can be number or breakpoint name.
+// $gutters = $mlu-grid-gutters - map with gutters values on breakpoints.
+// Map item example: `"sm": 12px`. Custom gutters only work when the `$css-vars = false`.
 // $calc = false - bool flag for generation CSS `calc()` fallback. It can needed only if
 // $width set in 'gc' unit.
 // $type = "width" - service argument which used only by mixins-wrappers.
@@ -859,6 +870,7 @@ $body-size: (100% 48%), $change: false) {
 // ```scss
 //.block {
 //		@include mlu-Ml(1, "sm");
+//		@include mlu-Ml(3gc, "lg");
 //		@include mlu-Ml(4gs, "lg");
 //}
 // ```
@@ -866,13 +878,16 @@ $body-size: (100% 48%), $change: false) {
 // ```css
 //@media (min-width: 520px) {
 //		.block {
-//			margin-left: calc(8.333% + 12px);
+//			--mgc: 1;
+//			margin-left: calc(8.333% + 16px);
+//			margin-left: var(--mgc-rule, 8.333%);
 //		}
 //}
 //
 //@media (min-width: 960px) {
 //		.block {
-//			margin-left: calc(8.333% + 16px);
+//			margin-left: calc(25% + 16px);
+//			margin-left: calc(25% + var(--mlu-gg));
 //		}
 //
 //		.block {
@@ -881,7 +896,7 @@ $body-size: (100% 48%), $change: false) {
 //}
 // ```
 //
-// $offset - can be in grid-columns(unitless number, or `gc` unit), grid-spans(`gs`),
+// $offset - can be in grid-columns(simple - `gc` unit, variable - unitless number), grid-spans(`gs`),
 // any CSS units(`px`, `rem` etc) or `auto`.
 //
 // Styleguide: sass-tools.mixins.ml
@@ -994,6 +1009,11 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 		@error "Wrong type of argument $gutters: '#{type-of($gutters)}'. Expected 'number' or 'map'";
 	}
 
+	@if $css-vars {
+		--gc-rule: calc(var(--gc) / var(#{$--mlu-grid-cols}) * 100% - var(--gc-diff) * 2);
+		--mgc-rule: calc(var(--mgc) / var(#{$--mlu-grid-cols}) * 100% + var(--gc-diff));
+	}
+
 	position: relative;
 	display: $display;
 	max-width: 100%;
@@ -1006,9 +1026,11 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	direction: ltr;
 
 	@if $type == "col" {
-		width: 100%;
+		--gc-diff: var(#{$--mlu-gg});
 
-		@include mlu-mk-gtr($mlu-gtr-sm, "padding", $grid-gutters, $calc, $css-vars: $css-vars);
+		@include mlu-W(12gc, $gutters: $grid-gutters, $css-vars: $css-vars, $calc: $calc);
+
+		@include mlu-mk-gtr($mlu-gtr-sm, $gutters: $grid-gutters, $calc: $calc, $css-vars: $css-vars);
 		@include mlu-mk-gtr($mlu-gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: "b", $coef: 2, $css-vars: $css-vars);
 
 		&.row {
@@ -1016,6 +1038,8 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 			font-size: 0px;
 		}
 	} @else {
+		--gc-diff: 0px;
+
 		&.row {
 			font-size: 0px;
 		}
