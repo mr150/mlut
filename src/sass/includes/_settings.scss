@@ -218,12 +218,18 @@ Utility
 An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
 
 Utility class names are formed according to the scheme:
-1. optional pseudo-class, pseudo-element or state: `h` - hover, `af` - after, 'nojs' - javascript disabled etc. Allowed several states in the same class. <br> States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'.
+1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, 'nojs' - javascript disabled etc. Allowed several states in the same class. <br> States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'.
 1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations.
-1. optional value. Valid are number, [abbreviations](https://docs.emmet.io/cheat-sheet/) and variables. Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). <br> Abbreviation and variables are separated by a hyphen '-' from utility name. Variables can contain only lowercase letters and numbers, and must also end in a number: `bd0`, `gr2` etc.
+1. optional value. Valid are:
+	* number
+	* CSS or MLUT keywords
+	* variables
+	* CSS custom properties.
+
+	Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). Keywords and variables are separated by a hyphen '-' from utility name.<br> Variable name can contain only lowercase letters and numbers, and must also end in a number: `bd0`, `gr2` etc.<br> Custom property is separated from the utility name by two hyphens. Its name may contain lowercase letters and numbers.
 1. optional breakpoint name: `sm`, `lg`, etc. Separated from the utility value by underscore '_'.
 
-Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-bd0`.
+Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-bd0`, `Fz--gg-rem`.
 
 There are some special abbreviations for color utilities:
 * `t` - `transparent`
@@ -233,7 +239,7 @@ There are some special abbreviations for color utilities:
 Utilities in MLUT come in 3 types:
 
 * **Common** \- named and work like CSS properties.
-* **Custom** \- manage one or more related CSS [custom properties](section-core-styles.html#kssref-core-styles-css_vars). Their names begin with a hyphen and are abbreviations <br> of the names of the corresponding properties without `mlu` prefix. Examples: `-Gg`.
+* **Custom** \- manage one or more related CSS [custom properties](section-core-styles.html#kssref-core-styles-css_vars). Their names begin with a hyphen and are abbreviations <br> of the names of the corresponding properties. Examples: `-Gg`.
 * **Modified** \- affect several CSS properties. The names of such utilities begin with 'm' prefix.
 
 Weight: 6
@@ -311,6 +317,10 @@ Utilities are grouped by sections. Each section lists the standard utilities tha
 In the description of the utilities, there may be a '**Parameters**' item in which the available values are listed. Instead of the utility value, the '`initial`' keyword may be specified. We will get this effect when using the utility with no value. The range of values can be specified as `0..3`.
 
 If the property does not have a special value 'i' then 'i' value means `inherit`.
+
+Some utilities have a value with a selector modifier([see naming](section-concepts.html#kssref-concepts-utility)). Existing modifiers:
+
+* `chl` \- children. Means `> *`.
 
 Some utilities responsive by design or have only responsive values. It will be indicated in the description like this: *Responsive*.
 

@@ -7,6 +7,7 @@ Vertical margins in grid-gutters are converted to `rems`. This affects accessibi
 
 * `M0` \- clear all margins.
 * `M-a`
+* `M-i` \- inherit all margins
 * `Mr0`
 * `Mt0`
 * `Mt1gg..Mt4gg`
@@ -62,6 +63,7 @@ Styleguide: core-utils.margin.mx
 $mlu-M-map: (
 	"xy0": 0,
 	"xy-a": auto,
+	"xy-i": inherit,
 );
 
 @each $key, $value in $mlu-main-directions {

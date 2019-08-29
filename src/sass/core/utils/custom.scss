@@ -27,7 +27,7 @@ Styleguide: core-utils.custom.gg
 Grid columns count. Sets number of columns in grid system on DOM node. Controls `--mlu-grid-cols`.
 
 initial - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
-sm - keyword that means number of columns on `sm` breakpoint. There is on all breakpoints except `sm`.
+sm - keyword that means number of columns on `sm` breakpoint. There is on all breakpoints except `sm`.<br> Available selector modifier `chl`. See [example](section-examples.html#kssref-examples-layouts-2ec4ecin2_nd).
 
 Styleguide: core-utils.custom.gcc
 */
@@ -74,6 +74,10 @@ Styleguide: core-utils.custom.gcr
 	}
 
 	@at-root {
+		.chl_-Gcc-#{$mlu-bp-sm} > * {
+			#{$--mlu-grid-cols}: $sm-cols;
+		}
+
 		@include mlu-mk-util(&, $--mlu-grid-cols, $mlu--Gc-map);
 	}
 }

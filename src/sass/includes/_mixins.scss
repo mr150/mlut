@@ -783,6 +783,10 @@ $body-size: (100% 48%), $change: false) {
 	$xs-gutter: false;
 	$calc-fallback: $calc;
 	$custom-unit: "";
+	$valid-values: (
+		"auto",
+		"inherit",
+	);
 
 	@if type-of($cols) == "string" {
 		$columns: mlu-grid-cols-count($cols);
@@ -796,10 +800,10 @@ $body-size: (100% 48%), $change: false) {
 		$col-width: mlu-decimal-floor($tmp-val / $columns * 100%, 3);
 		$custom-unit: if(unit($width) == "gc", "gc", "gs");
 		$custom-unit: if(unitless($width), $width, $custom-unit);
-	} @else if type-of($width) == "number" or $width == "auto" {
+	} @else if type-of($width) == "number" or index($valid-values, $width) {
 		$col-width: $width;
 	} @else if type-of($width) != "number" {
-		@error "Invalid value of argument $width: '#{$width}'. Expected number value or 'auto'";
+		@error "Invalid value of argument $width: '#{$width}'. Expected number value or CSS keyword";
 	}
 
 	@if type-of($gutters) == "number" {
