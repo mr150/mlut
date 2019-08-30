@@ -66,16 +66,8 @@
 	background-image: linear-gradient(150deg, transparent 50%, #336 50%), linear-gradient(-150deg, transparent 50%, #336 50%), linear-gradient(#336, #c9c), linear-gradient(-330deg, transparent 50%, #c9c 50%), linear-gradient(330deg, transparent 50%, #c9c 50%);
 }
 
-@media (min-width: 520px) {
-	.grid-debug {
-		padding: calc(var(--mlu-gg-rem) * 3) 0px;
-		background-image: linear-gradient(90deg, #336 var(--mlu-gg), #d15 var(--mlu-gg), #d15 calc(100% - var(--mlu-gg)), #336 0);
-		background-size: 25%;
-	}
-}
-
-@media (min-width: 760px) {
-	.grid-debug {
-		background-size: 8.333%;
-	}
+.grid-debug {
+	padding: calc(var(--mlu-gg-rem) * 3) 0px;
+	background-image: linear-gradient(90deg, #336 var(--mlu-gg), #d15 var(--mlu-gg), #d15 calc(100% - var(--mlu-gg)), #336 0);
+	background-size: calc(1 / var(--mlu-grid-cols) * 100%);
 }

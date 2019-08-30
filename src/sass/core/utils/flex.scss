@@ -1,15 +1,19 @@
 /*
 Flex
 
-A group of utilities for managing flex-containers and flex-elements. Modified flex utilities are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+A group of utilities for managing flex-containers and flex-elements.
+
+Most of modified flex utilities **turned off** and available with flag [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
 
 * `Fxd-c`
 * `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
+* `Fx-i`
 * `Fxw-wr`
 * `Fxw-w`
-* `As-s` \- stretches the flex-element to full height.
-* `Jc` \- all values except `flex-start`.
+* `As` \- all values.
+* `Ai` \- all values are *Responsive*. `s` only *Responsive*.
+* `Jc` \- all values are *Responsive*. `fs` only *Responsive*.
 * `Ord-1..Ord2` \- sequence number for flex-element.
 
 Styleguide: core-utils.flex
@@ -18,11 +22,11 @@ Styleguide: core-utils.flex
 /*
 Jc
 
-Justify content. You can use it as additional horizontal alignment variants for row-layouts. Works only with flex-container. *Responsive*.
+Justify content.
 
 Jc-sa - space-around.
 Jc-sb - space-between.
-Jc-sa_xl - space-between on `xl` breakpoint.
+Jc-fe_xl - flex-end on `xl` breakpoint.
 
 Markup: ../../../docs/examples/core-utils/flex/jc.hbs
 
@@ -30,18 +34,36 @@ Styleguide: core-utils.flex.jc
 */
 
 /*
+As
+
+Align self.
+
+Markup: ../../../docs/examples/core-utils/flex/as.html
+
+Styleguide: core-utils.flex.as
+*/
+
+/*
+Ai
+
+Align items.
+
+Ai-fs - top
+Ai-c - center
+Ai-fe - bottom
+Ai-b - text baseline
+
+Markup: ../../../docs/examples/core-utils/flex/ai.hbs
+
+Styleguide: core-utils.flex.ai
+*/
+
+/*
 mAs
 
 Modified align self. Set `vertical-align` for common DOM nodes and `align-self` for flex-element.
 
-Can be used to vertically align an element in row-layouts. Partially works without flex-container.
-
-* `fs` \- top.
-* `c` \- center.
-* `fe` \- bottom.
-* `b` \- text baseline.
-
-Markup: ../../../docs/examples/core-utils/flex/mas.html
+Can be used to vertically align an element in row-layouts. Partially works without flex-container. Has the same values as `As`.
 
 Styleguide: core-utils.flex.mas
 */
@@ -49,14 +71,11 @@ Styleguide: core-utils.flex.mas
 /*
 mJc
 
-Modified justify content. Combines [Ta](#kssref-core-utils-text-ta) and [Jc](#kssref-core-utils-flex-jc) utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts. *Responsive*.
+Modified justify content. Combines [Ta](#kssref-core-utils-text-ta) and [Jc](#kssref-core-utils-flex-jc) utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts.
 
-* `mJc-fs` \- left. *Only responsive*.
+All values are available and correspond to `Jc` if [flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags) flag turned on. By default available one value.
 
 mJc-c - center.
-mJc-fe - right.
-
-Markup: ../../../docs/examples/core-utils/flex/mjc.hbs
 
 Styleguide: core-utils.flex.mjc
 */
@@ -66,14 +85,7 @@ mAi
 
 Modified align items. Set `vertical-align` for child DOM nodes and `align-items` for flex-container.
 
-Can be used to vertically align an elements in row-layouts. Partially works without flex-container.
-
-mAi-fs - top
-mAi-c - center
-mAi-fe - bottom
-mAi-b - text baseline
-
-Markup: ../../../docs/examples/core-utils/flex/mai.hbs
+Can be used to vertically align an elements in row-layouts. Partially works without flex-container. Has the same values as `Ai`.
 
 Styleguide: core-utils.flex.mai
 */
@@ -90,87 +102,121 @@ Styleguide: core-utils.flex.mai
 	flex-shrink: 0;
 }
 
+.Fx-i {
+	flex: inherit;
+}
+
 @include mlu-mk-util("Fxw", "flex-wrap", (
 	"wr": wrap-reverse,
 	"w": wrap,
 ));
 
-.As-s {
-	align-self: stretch;
+$mlu-As-map: (
+	"s": stretch,
+);
+
+@if $MLU-FLAG-FLEX-PE {
+	.mAs-b {
+		align-self: baseline;
+		vertical-align: baseline;
+	}
+
+	.mAs-fs {
+		align-self: flex-start;
+		vertical-align: top;
+	}
+
+	.mAs-c {
+		align-self: center;
+		vertical-align: middle;
+	}
+
+	.mAs-fe {
+		align-self: flex-end;
+		vertical-align: bottom;
+	}
+} @else {
+	$mlu-As-map: map-merge($mlu-As-map,
+	(
+		"fs": flex-start,
+		"fe": flex-end,
+		"c": center,
+		"b": baseline,
+	));
 }
 
-.mAs-b {
-	align-self: baseline;
-	vertical-align: baseline;
-}
-
-.mAs-fs {
-	align-self: flex-start;
-	vertical-align: top;
-}
-
-.mAs-c {
-	align-self: center;
-	vertical-align: middle;
-}
-
-.mAs-fe {
-	align-self: flex-end;
-	vertical-align: bottom;
-}
+@include mlu-mk-util("As", "align-self", $mlu-As-map);
 
 @include mlu-mk-util("Jc", "justify-content", (
-	"fe": flex-end,
-	"c": center,
+	"fs_bp": flex-start,
+	"fe_all": flex-end,
+	"c_all": center,
 	"sa_all": space-around,
 	"sb_all": space-between,
 ));
 
-@include mlu-bp-all(".mJc-fs", 0) {
-	justify-content: flex-start;
-	text-align: left;
-}
+@if $MLU-FLAG-FLEX-PE {
+	@include mlu-bp-all(".mJc-fs", 0) {
+		justify-content: flex-start;
+		text-align: left;
+	}
 
-@include mlu-bp-all(".mJc-c") {
-	justify-content: center;
-	text-align: center;
-}
+	@include mlu-bp-all(".mJc-c") {
+		justify-content: center;
+		text-align: center;
+	}
 
-@include mlu-bp-all(".mJc-fe") {
-	justify-content: flex-end;
-	text-align: right;
-}
-
-.mAi-fs {
-	align-items: flex-start;
-
-	> * {
-		vertical-align: top;
+	@include mlu-bp-all(".mJc-fe") {
+		justify-content: flex-end;
+		text-align: right;
+	}
+} @else if $MLU-FLAG-CSS-VARS != 2 {
+	.mJc-c {
+		justify-content: center;
+		text-align: center;
 	}
 }
 
-.mAi-c {
-	align-items: center;
+@if $MLU-FLAG-FLEX-PE {
+	.mAi-fs {
+		align-items: flex-start;
 
-	> * {
-		vertical-align: middle;
+		> * {
+			vertical-align: top;
+		}
 	}
-}
 
-.mAi-fe {
-	align-items: flex-end;
+	.mAi-c {
+		align-items: center;
 
-	> * {
-		vertical-align: bottom;
+		> * {
+			vertical-align: middle;
+		}
 	}
-}
 
-.mAi-b {
-	align-items: baseline;
+	.mAi-fe {
+		align-items: flex-end;
 
-	> * {
-		vertical-align: baseline;
+		> * {
+			vertical-align: bottom;
+		}
 	}
+
+	.mAi-b {
+		align-items: baseline;
+
+		> * {
+			vertical-align: baseline;
+		}
+	}
+} @else {
+	@include mlu-mk-util("Ai", "align-items", (
+		"s_bp": stretch,
+		"fs_all": flex-start,
+		"fe_all": flex-end,
+		"b_all": baseline,
+		"c_all": center,
+	));
 }
 
 @for $i from -1 to ($mlu-Ord-range - 1) {
@@ -181,7 +227,7 @@ Styleguide: core-utils.flex.mai
 
 @each $key, $value in $mlu-grid-cols {
 	@include mlu-bpm($key) {
-		@if $MLU-FLAG-EXTENDED {
+		@if $MLU-FLAG-EXTENDED and $MLU-FLAG-FLEX-PE {
 			.Ai-s_#{$key} {
 				align-items: stretch;
 			}

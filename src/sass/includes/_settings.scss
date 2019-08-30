@@ -390,6 +390,7 @@ Styleguide: sass-tools.settings
 // `false` \- turn off <br>
 // `1` \- turn on with fallback <br>
 // `2` \- turn on <br>
+// $MLU-FLAG-FLEX-PE = false - turn on utilities with progressive enhancement for flexbox.
 //
 // Styleguide: sass-tools.settings.flags
 
@@ -397,6 +398,7 @@ $MLU-FLAG-EXTENDED: false !default;
 $MLU-FLAG-CALC-FALLBACK: false !default;
 $MLU-FLAG-COL-OFFSET: true !default;
 $MLU-FLAG-CSS-VARS: 1 !default;
+$MLU-FLAG-FLEX-PE: false !default;
 
 // General
 //

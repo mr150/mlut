@@ -676,10 +676,10 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	display: inline-block;
 	max-width: 100%;
 	box-sizing: border-box;
+	vertical-align: top;
 	font-size: 16px;
 	font-size: 1rem;
 	text-align: left;
-	vertical-align: top;
 	white-space: normal;
 	direction: ltr;
 }
@@ -1269,15 +1269,19 @@ Styleguide: core-utils.visual.md
 /*
 Flex
 
-A group of utilities for managing flex-containers and flex-elements. Modified flex utilities are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+A group of utilities for managing flex-containers and flex-elements.
+
+Most of modified flex utilities **turned off** and available with flag [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
 
 * `Fxd-c`
 * `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
+* `Fx-i`
 * `Fxw-wr`
 * `Fxw-w`
-* `As-s` \- stretches the flex-element to full height.
-* `Jc` \- all values except `flex-start`.
+* `As` \- all values.
+* `Ai` \- all values are *Responsive*. `s` only *Responsive*.
+* `Jc` \- all values are *Responsive*. `fs` only *Responsive*.
 * `Ord-1..Ord2` \- sequence number for flex-element.
 
 Styleguide: core-utils.flex
@@ -1286,11 +1290,11 @@ Styleguide: core-utils.flex
 /*
 Jc
 
-Justify content. You can use it as additional horizontal alignment variants for row-layouts. Works only with flex-container. *Responsive*.
+Justify content.
 
 Jc-sa - space-around.
 Jc-sb - space-between.
-Jc-sa_xl - space-between on `xl` breakpoint.
+Jc-fe_xl - flex-end on `xl` breakpoint.
 
 Markup: ../../../docs/examples/core-utils/flex/jc.hbs
 
@@ -1298,18 +1302,36 @@ Styleguide: core-utils.flex.jc
 */
 
 /*
+As
+
+Align self.
+
+Markup: ../../../docs/examples/core-utils/flex/as.html
+
+Styleguide: core-utils.flex.as
+*/
+
+/*
+Ai
+
+Align items.
+
+Ai-fs - top
+Ai-c - center
+Ai-fe - bottom
+Ai-b - text baseline
+
+Markup: ../../../docs/examples/core-utils/flex/ai.hbs
+
+Styleguide: core-utils.flex.ai
+*/
+
+/*
 mAs
 
 Modified align self. Set `vertical-align` for common DOM nodes and `align-self` for flex-element.
 
-Can be used to vertically align an element in row-layouts. Partially works without flex-container.
-
-* `fs` \- top.
-* `c` \- center.
-* `fe` \- bottom.
-* `b` \- text baseline.
-
-Markup: ../../../docs/examples/core-utils/flex/mas.html
+Can be used to vertically align an element in row-layouts. Partially works without flex-container. Has the same values as `As`.
 
 Styleguide: core-utils.flex.mas
 */
@@ -1317,14 +1339,11 @@ Styleguide: core-utils.flex.mas
 /*
 mJc
 
-Modified justify content. Combines [Ta](#kssref-core-utils-text-ta) and [Jc](#kssref-core-utils-flex-jc) utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts. *Responsive*.
+Modified justify content. Combines [Ta](#kssref-core-utils-text-ta) and [Jc](#kssref-core-utils-flex-jc) utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts.
 
-* `mJc-fs` \- left. *Only responsive*.
+All values are available and correspond to `Jc` if [flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags) flag turned on. By default available one value.
 
 mJc-c - center.
-mJc-fe - right.
-
-Markup: ../../../docs/examples/core-utils/flex/mjc.hbs
 
 Styleguide: core-utils.flex.mjc
 */
@@ -1334,14 +1353,7 @@ mAi
 
 Modified align items. Set `vertical-align` for child DOM nodes and `align-items` for flex-container.
 
-Can be used to vertically align an elements in row-layouts. Partially works without flex-container.
-
-mAi-fs - top
-mAi-c - center
-mAi-fe - bottom
-mAi-b - text baseline
-
-Markup: ../../../docs/examples/core-utils/flex/mai.hbs
+Can be used to vertically align an elements in row-layouts. Partially works without flex-container. Has the same values as `Ai`.
 
 Styleguide: core-utils.flex.mai
 */
@@ -1358,6 +1370,10 @@ Styleguide: core-utils.flex.mai
 	flex-shrink: 0;
 }
 
+.Fx-i {
+	flex: inherit;
+}
+
 .Fxw-wr {
 	flex-wrap: wrap-reverse;
 }
@@ -1370,24 +1386,20 @@ Styleguide: core-utils.flex.mai
 	align-self: stretch;
 }
 
-.mAs-b {
-	align-self: baseline;
-	vertical-align: baseline;
-}
-
-.mAs-fs {
+.As-fs {
 	align-self: flex-start;
-	vertical-align: top;
 }
 
-.mAs-c {
-	align-self: center;
-	vertical-align: middle;
-}
-
-.mAs-fe {
+.As-fe {
 	align-self: flex-end;
-	vertical-align: bottom;
+}
+
+.As-c {
+	align-self: center;
+}
+
+.As-b {
+	align-self: baseline;
 }
 
 .Jc-fe {
@@ -1411,41 +1423,20 @@ Styleguide: core-utils.flex.mai
 	text-align: center;
 }
 
-.mJc-fe {
-	justify-content: flex-end;
-	text-align: right;
-}
-
-.mAi-fs {
+.Ai-fs {
 	align-items: flex-start;
 }
 
-.mAi-fs > * {
-	vertical-align: top;
-}
-
-.mAi-c {
-	align-items: center;
-}
-
-.mAi-c > * {
-	vertical-align: middle;
-}
-
-.mAi-fe {
+.Ai-fe {
 	align-items: flex-end;
 }
 
-.mAi-fe > * {
-	vertical-align: bottom;
-}
-
-.mAi-b {
+.Ai-b {
 	align-items: baseline;
 }
 
-.mAi-b > * {
-	vertical-align: baseline;
+.Ai-c {
+	align-items: center;
 }
 
 .Ord-1 {
@@ -2352,6 +2343,18 @@ Styleguide: core-utils.bd.bds
 		display: none;
 	}
 
+	.Jc-fs_sm {
+		justify-content: flex-start;
+	}
+
+	.Jc-fe_sm {
+		justify-content: flex-end;
+	}
+
+	.Jc-c_sm {
+		justify-content: center;
+	}
+
 	.Jc-sa_sm {
 		justify-content: space-around;
 	}
@@ -2360,19 +2363,24 @@ Styleguide: core-utils.bd.bds
 		justify-content: space-between;
 	}
 
-	.mJc-fs_sm {
-		justify-content: flex-start;
-		text-align: left;
+	.Ai-s_sm {
+		align-items: stretch;
 	}
 
-	.mJc-c_sm {
-		justify-content: center;
-		text-align: center;
+	.Ai-fs_sm {
+		align-items: flex-start;
 	}
 
-	.mJc-fe_sm {
-		justify-content: flex-end;
-		text-align: right;
+	.Ai-fe_sm {
+		align-items: flex-end;
+	}
+
+	.Ai-b_sm {
+		align-items: baseline;
+	}
+
+	.Ai-c_sm {
+		align-items: center;
 	}
 
 	.W1gc_sm {
@@ -2529,6 +2537,18 @@ Styleguide: core-utils.bd.bds
 		display: none;
 	}
 
+	.Jc-fs_md {
+		justify-content: flex-start;
+	}
+
+	.Jc-fe_md {
+		justify-content: flex-end;
+	}
+
+	.Jc-c_md {
+		justify-content: center;
+	}
+
 	.Jc-sa_md {
 		justify-content: space-around;
 	}
@@ -2537,19 +2557,24 @@ Styleguide: core-utils.bd.bds
 		justify-content: space-between;
 	}
 
-	.mJc-fs_md {
-		justify-content: flex-start;
-		text-align: left;
+	.Ai-s_md {
+		align-items: stretch;
 	}
 
-	.mJc-c_md {
-		justify-content: center;
-		text-align: center;
+	.Ai-fs_md {
+		align-items: flex-start;
 	}
 
-	.mJc-fe_md {
-		justify-content: flex-end;
-		text-align: right;
+	.Ai-fe_md {
+		align-items: flex-end;
+	}
+
+	.Ai-b_md {
+		align-items: baseline;
+	}
+
+	.Ai-c_md {
+		align-items: center;
 	}
 
 	.W1gc_md {
@@ -2818,6 +2843,18 @@ Styleguide: core-utils.bd.bds
 		display: none;
 	}
 
+	.Jc-fs_lg {
+		justify-content: flex-start;
+	}
+
+	.Jc-fe_lg {
+		justify-content: flex-end;
+	}
+
+	.Jc-c_lg {
+		justify-content: center;
+	}
+
 	.Jc-sa_lg {
 		justify-content: space-around;
 	}
@@ -2826,19 +2863,24 @@ Styleguide: core-utils.bd.bds
 		justify-content: space-between;
 	}
 
-	.mJc-fs_lg {
-		justify-content: flex-start;
-		text-align: left;
+	.Ai-s_lg {
+		align-items: stretch;
 	}
 
-	.mJc-c_lg {
-		justify-content: center;
-		text-align: center;
+	.Ai-fs_lg {
+		align-items: flex-start;
 	}
 
-	.mJc-fe_lg {
-		justify-content: flex-end;
-		text-align: right;
+	.Ai-fe_lg {
+		align-items: flex-end;
+	}
+
+	.Ai-b_lg {
+		align-items: baseline;
+	}
+
+	.Ai-c_lg {
+		align-items: center;
 	}
 
 	.W1gc_lg {
@@ -3099,6 +3141,18 @@ Styleguide: core-utils.bd.bds
 		display: none;
 	}
 
+	.Jc-fs_xl {
+		justify-content: flex-start;
+	}
+
+	.Jc-fe_xl {
+		justify-content: flex-end;
+	}
+
+	.Jc-c_xl {
+		justify-content: center;
+	}
+
 	.Jc-sa_xl {
 		justify-content: space-around;
 	}
@@ -3107,19 +3161,24 @@ Styleguide: core-utils.bd.bds
 		justify-content: space-between;
 	}
 
-	.mJc-fs_xl {
-		justify-content: flex-start;
-		text-align: left;
+	.Ai-s_xl {
+		align-items: stretch;
 	}
 
-	.mJc-c_xl {
-		justify-content: center;
-		text-align: center;
+	.Ai-fs_xl {
+		align-items: flex-start;
 	}
 
-	.mJc-fe_xl {
-		justify-content: flex-end;
-		text-align: right;
+	.Ai-fe_xl {
+		align-items: flex-end;
+	}
+
+	.Ai-b_xl {
+		align-items: baseline;
+	}
+
+	.Ai-c_xl {
+		align-items: center;
 	}
 
 	.W1gc_xl {
