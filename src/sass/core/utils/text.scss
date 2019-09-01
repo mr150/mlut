@@ -52,12 +52,11 @@ Styleguide: core-utils.text.td
 /*
 Dir
 
-Direction. Sets direction of text and order items in row-layout.
+Direction. Sets direction of text and order items in row-layout. Responsive values available if [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags) is turned on.
 
-* `Dir-l` \- left to right. *Only responsive*.
+* `Dir-l` - left to right *Responsive* only.
 
-Dir-r - right to left. *Responsive*.
-Dir-r.Dir-l_xl - left to right on `xl`.
+Dir-r - right to left.
 
 Markup: ../../../docs/examples/core-utils/text/dir.hbs
 
@@ -113,10 +112,16 @@ Styleguide: core-utils.text.mtov
 	"p": pre,
 ));
 
-@include mlu-mk-util("Dir", "direction", (
-	"r_all": rtl,
-	"l_bp": ltr,
-));
+@if $MLU-FLAG-FLEX-PE {
+	@include mlu-mk-util("Dir", "direction", (
+		"r_all": rtl,
+		"l_bp": ltr,
+	));
+} @else {
+	.Dir-r {
+		direction: rtl;
+	}
+}
 
 @if $MLU-FLAG-EXTENDED {
 	.Ta-j {

@@ -970,12 +970,16 @@ $calc: false, $prop: "width", $css-vars: false) {
 //
 // Styleguide: sass-tools.mixins.row
 
-@mixin mlu-row($display: block) {
+@mixin mlu-row($display: block, $css-vars: $MLU-FLAG-CSS-VARS) {
 	position: relative;
 	display: $display;
 	margin: 0px;
 	padding: 0px;
-	font-size: 0px;
+
+	@if $css-vars != 2 {
+		font-size: 0px;
+	}
+
 	list-style: none;
 	counter-reset: mlu-row-item;
 }
@@ -1022,12 +1026,17 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	display: $display;
 	max-width: 100%;
 	box-sizing: border-box;
-	font-size: $mlu-base-font-size;
-	font-size: mlu-px2rem($mlu-base-font-size);
-	text-align: left;
 	vertical-align: top;
-	white-space: normal;
-	direction: ltr;
+
+	@if $css-vars != 2 {
+		font-size: $mlu-base-font-size;
+		font-size: mlu-px2rem($mlu-base-font-size);
+		text-align: left;
+		white-space: normal;
+		@if $MLU-FLAG-FLEX-PE {
+			direction: ltr;
+		}
+	}
 
 	@if $type == "col" {
 		--gc-diff: var(#{$--mlu-gg});
@@ -1039,13 +1048,17 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 
 		&.row {
 			margin-bottom: 0px;
-			font-size: 0px;
+			@if $css-vars != 2 {
+				font-size: 0px;
+			}
 		}
 	} @else {
 		--gc-diff: 0px;
 
-		&.row {
-			font-size: 0px;
+		@if $css-vars != 2 {
+			&.row {
+				font-size: 0px;
+			}
 		}
 	}
 

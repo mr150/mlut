@@ -5,28 +5,39 @@ A group of utilities for managing flex-containers and flex-elements.
 
 Most of modified flex utilities **turned off** and available with flag [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
 
-* `Fxd-c`
 * `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
 * `Fx-i`
 * `Fxw-wr`
 * `Fxw-w`
-* `As` \- all values.
-* `Ai` \- all values are *Responsive*. `s` only *Responsive*.
-* `Jc` \- all values are *Responsive*. `fs` only *Responsive*.
-* `Ord-1..Ord2` \- sequence number for flex-element.
+* `Ord-1..Ord2` \- sequence number for flex-element
 
 Styleguide: core-utils.flex
 */
 
 /*
+Fxd
+
+Flex direction.
+
+* `Fxd-r` \- row. Only *Responsive*
+
+Fxd-rr - row-reverse. *Responsive*
+Fxd-c - column
+
+Markup: ../../../docs/examples/core-utils/flex/fxd.hbs
+
+Styleguide: core-utils.flex.fxd
+*/
+
+/*
 Jc
 
-Justify content.
+Justify content. All values are *Responsive*. `fs` only *Responsive*.
 
-Jc-sa - space-around.
-Jc-sb - space-between.
-Jc-fe_xl - flex-end on `xl` breakpoint.
+Jc-sa - space-around
+Jc-sb - space-between
+Jc-fe_xl - flex-end on `xl` breakpoint
 
 Markup: ../../../docs/examples/core-utils/flex/jc.hbs
 
@@ -36,7 +47,7 @@ Styleguide: core-utils.flex.jc
 /*
 As
 
-Align self.
+Align self. Available all values.
 
 Markup: ../../../docs/examples/core-utils/flex/as.html
 
@@ -46,7 +57,7 @@ Styleguide: core-utils.flex.as
 /*
 Ai
 
-Align items.
+Align items. All values are *Responsive*. `s` only *Responsive*.
 
 Ai-fs - top
 Ai-c - center
@@ -90,9 +101,11 @@ Can be used to vertically align an elements in row-layouts. Partially works with
 Styleguide: core-utils.flex.mai
 */
 
-.Fxd-c {
-	flex-direction: column;
-}
+@include mlu-mk-util("Fxd", "flex-direction", (
+	"rr_all": row-reverse,
+	"r_bp": row,
+	"c": column,
+));
 
 .Fxg1 {
 	flex-grow: 1;

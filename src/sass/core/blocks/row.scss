@@ -207,15 +207,21 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	display: inline-block;
 	max-width: 100%;
 	box-sizing: border-box;
-	font-size: $mlu-base-font-size;
-	font-size: mlu-px2rem($mlu-base-font-size);
-	text-align: left;
 	vertical-align: top;
-	white-space: normal;
-	direction: ltr;
 
-	&.row {
-		font-size: 0px;
+	@if $MLU-FLAG-CSS-VARS != 2 {
+		font-size: $mlu-base-font-size;
+		font-size: mlu-px2rem($mlu-base-font-size);
+		white-space: normal;
+
+		@if $MLU-FLAG-FLEX-PE {
+			text-align: left;
+			direction: ltr;
+		}
+
+		&.row {
+			font-size: 0px;
+		}
 	}
 
 	& > :first-child:not([class]) {

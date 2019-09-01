@@ -679,9 +679,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	vertical-align: top;
 	font-size: 16px;
 	font-size: 1rem;
-	text-align: left;
 	white-space: normal;
-	direction: ltr;
 }
 
 .row__col.row,
@@ -1273,28 +1271,39 @@ A group of utilities for managing flex-containers and flex-elements.
 
 Most of modified flex utilities **turned off** and available with flag [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
 
-* `Fxd-c`
 * `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
 * `Fx-i`
 * `Fxw-wr`
 * `Fxw-w`
-* `As` \- all values.
-* `Ai` \- all values are *Responsive*. `s` only *Responsive*.
-* `Jc` \- all values are *Responsive*. `fs` only *Responsive*.
-* `Ord-1..Ord2` \- sequence number for flex-element.
+* `Ord-1..Ord2` \- sequence number for flex-element
 
 Styleguide: core-utils.flex
 */
 
 /*
+Fxd
+
+Flex direction.
+
+* `Fxd-r` \- row. Only *Responsive*
+
+Fxd-rr - row-reverse. *Responsive*
+Fxd-c - column
+
+Markup: ../../../docs/examples/core-utils/flex/fxd.hbs
+
+Styleguide: core-utils.flex.fxd
+*/
+
+/*
 Jc
 
-Justify content.
+Justify content. All values are *Responsive*. `fs` only *Responsive*.
 
-Jc-sa - space-around.
-Jc-sb - space-between.
-Jc-fe_xl - flex-end on `xl` breakpoint.
+Jc-sa - space-around
+Jc-sb - space-between
+Jc-fe_xl - flex-end on `xl` breakpoint
 
 Markup: ../../../docs/examples/core-utils/flex/jc.hbs
 
@@ -1304,7 +1313,7 @@ Styleguide: core-utils.flex.jc
 /*
 As
 
-Align self.
+Align self. Available all values.
 
 Markup: ../../../docs/examples/core-utils/flex/as.html
 
@@ -1314,7 +1323,7 @@ Styleguide: core-utils.flex.as
 /*
 Ai
 
-Align items.
+Align items. All values are *Responsive*. `s` only *Responsive*.
 
 Ai-fs - top
 Ai-c - center
@@ -1357,6 +1366,10 @@ Can be used to vertically align an elements in row-layouts. Partially works with
 
 Styleguide: core-utils.flex.mai
 */
+
+.Fxd-rr {
+	flex-direction: row-reverse;
+}
 
 .Fxd-c {
 	flex-direction: column;
@@ -1970,12 +1983,11 @@ Styleguide: core-utils.text.td
 /*
 Dir
 
-Direction. Sets direction of text and order items in row-layout.
+Direction. Sets direction of text and order items in row-layout. Responsive values available if [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags) is turned on.
 
-* `Dir-l` \- left to right. *Only responsive*.
+* `Dir-l` - left to right *Responsive* only.
 
-Dir-r - right to left. *Responsive*.
-Dir-r.Dir-l_xl - left to right on `xl`.
+Dir-r - right to left.
 
 Markup: ../../../docs/examples/core-utils/text/dir.hbs
 
@@ -2343,6 +2355,14 @@ Styleguide: core-utils.bd.bds
 		display: none;
 	}
 
+	.Fxd-rr_sm {
+		flex-direction: row-reverse;
+	}
+
+	.Fxd-r_sm {
+		flex-direction: row;
+	}
+
 	.Jc-fs_sm {
 		justify-content: flex-start;
 	}
@@ -2453,14 +2473,6 @@ Styleguide: core-utils.bd.bds
 		margin-left: 16px;
 		margin-left: var(--mlu-gg);
 	}
-
-	.Dir-r_sm {
-		direction: rtl;
-	}
-
-	.Dir-l_sm {
-		direction: ltr;
-	}
 }
 
 @media (min-width: 760px) {
@@ -2535,6 +2547,14 @@ Styleguide: core-utils.bd.bds
 
 	.D-n_md {
 		display: none;
+	}
+
+	.Fxd-rr_md {
+		flex-direction: row-reverse;
+	}
+
+	.Fxd-r_md {
+		flex-direction: row;
 	}
 
 	.Jc-fs_md {
@@ -2755,14 +2775,6 @@ Styleguide: core-utils.bd.bds
 		margin-left: 16px;
 		margin-left: var(--mlu-gg);
 	}
-
-	.Dir-r_md {
-		direction: rtl;
-	}
-
-	.Dir-l_md {
-		direction: ltr;
-	}
 }
 
 @media (min-width: 960px) {
@@ -2841,6 +2853,14 @@ Styleguide: core-utils.bd.bds
 
 	.D-n_lg {
 		display: none;
+	}
+
+	.Fxd-rr_lg {
+		flex-direction: row-reverse;
+	}
+
+	.Fxd-r_lg {
+		flex-direction: row;
 	}
 
 	.Jc-fs_lg {
@@ -3061,14 +3081,6 @@ Styleguide: core-utils.bd.bds
 		margin-left: 16px;
 		margin-left: var(--mlu-gg);
 	}
-
-	.Dir-r_lg {
-		direction: rtl;
-	}
-
-	.Dir-l_lg {
-		direction: ltr;
-	}
 }
 
 @media (min-width: 1168px) {
@@ -3139,6 +3151,14 @@ Styleguide: core-utils.bd.bds
 
 	.D-n_xl {
 		display: none;
+	}
+
+	.Fxd-rr_xl {
+		flex-direction: row-reverse;
+	}
+
+	.Fxd-r_xl {
+		flex-direction: row;
 	}
 
 	.Jc-fs_xl {
@@ -3358,13 +3378,5 @@ Styleguide: core-utils.bd.bds
 		margin-left: 16px;
 		margin-left: 16px;
 		margin-left: var(--mlu-gg);
-	}
-
-	.Dir-r_xl {
-		direction: rtl;
-	}
-
-	.Dir-l_xl {
-		direction: ltr;
 	}
 }
