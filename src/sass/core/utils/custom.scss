@@ -26,8 +26,11 @@ Styleguide: core-utils.custom.gg
 
 Grid columns count. Sets number of columns in grid system on DOM node. Controls `--mlu-grid-cols`.
 
-initial - columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
-sm - keyword that means number of columns on `sm` breakpoint. There is on all breakpoints except `sm`.<br> Available selector modifier `chl`. See [example](section-examples.html#kssref-examples-layouts-2ec4ecin2_nd).
+* `-Gcc` \- columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
+
+-Gcc-sm - keyword that means number of columns on `sm` breakpoint. There is on all breakpoints except `sm`.<br> Available selector modifier `chl`. See [example](section-examples.html#kssref-examples-layouts-2ec4ecin2_nd).
+
+Markup: ../../../docs/examples/core-utils/custom/gcc.hbs
 
 Styleguide: core-utils.custom.gcc
 */
@@ -37,8 +40,11 @@ Styleguide: core-utils.custom.gcc
 
 Grid columns diff. Controls `--gc-diff` from grid column width [formula](section-core-blocks.html#kssref-core-blocks-row-row__col).
 
-* `0` \- 0px
-* `1gg`
+* `-Gcd1gg` \- 1 gutter
+
+-Gcd0 - 0px
+
+Markup: ../../../docs/examples/core-utils/custom/gcd.hbs
 
 Styleguide: core-utils.custom.gcd
 */
@@ -48,7 +54,9 @@ Styleguide: core-utils.custom.gcd
 
 Grid columns rule. Controls `--gc-rule` and `--mgc-rule` .
 
-initial - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the grid column(gc) widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu-gg`.
+-Gcr - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the grid column(gc) widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu-gg`.
+
+Markup: ../../../docs/examples/core-utils/custom/gcr.hbs
 
 Styleguide: core-utils.custom.gcr
 */

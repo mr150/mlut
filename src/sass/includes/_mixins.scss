@@ -714,7 +714,7 @@ $body-size: (100% 48%), $change: false) {
 // It works similarly like [W utility](section-core-utils.html#kssref-core-utils-bxz-w).
 // ```scss
 //.block {
-//		@include mlu-W(2, "sm");
+//		@include mlu-W(2c, "sm");
 //		@include mlu-W(3gc, "md");
 //		@include mlu-W(4gs, "lg");
 //}
@@ -755,13 +755,13 @@ $body-size: (100% 48%), $change: false) {
 //}
 // ```
 //
-// $width - can be in grid-columns(simple - `gc`, variable - unitless number), grid-spans(`gs`),
-// any CSS units(`px`, `rem` etc) or `auto`. <br> Grid units calculated to %
+// $width - can be in variable columns(`c`), grid-columns(`gc`), grid-spans(`gs`),
+// any CSS units(`px`, `rem` etc), `auto` or `inherit`. <br> `gc` and `gs` calculated to %
 // according to the formula '`n / $cols * 100%`' and rounded by
 // [mlu-decimal-floor](section-sass-tools.html#kssref-sass-tools-functions-decimal_floor). <br>
-// If `$width = "gc"` and `$css-vars = false`, width will generated with considering
-// different gutters on breakpoints. As in the example above `foo`
-// on `lg`.
+// If `$width` in `gc` and `$css-vars = false`, width will generated with considering
+// different gutters on breakpoints. As in the example above `foo`.<br>
+// If `$width` in `c` and `$css-vars != 2`, will be generated fallback in gc.
 // $bp = $mlu-bp-xs - breakpoint on which `$width` will sets. Can be number or breakpoint name.
 // $cols = $mlu-grid-default-cols - columns count in grid. Can be number or breakpoint name.
 // $gutters = $mlu-grid-gutters - map with gutters values on breakpoints.
@@ -795,11 +795,11 @@ $body-size: (100% 48%), $change: false) {
 	}
 
 	@if type-of($width) == "number" and
-		(unitless($width) or unit($width) == "gc" or unit($width) == "gs") {
+		(unit($width) == "c" or unit($width) == "gc" or unit($width) == "gs") {
 		$tmp-val: mlu-ston($width + "");
 		$col-width: mlu-decimal-floor($tmp-val / $columns * 100%, 3);
 		$custom-unit: if(unit($width) == "gc", "gc", "gs");
-		$custom-unit: if(unitless($width), $width, $custom-unit);
+		$custom-unit: if(unit($width) == "c", $tmp-val, $custom-unit);
 	} @else if type-of($width) == "number" or index($valid-values, $width) {
 		$col-width: $width;
 	} @else if type-of($width) != "number" {
@@ -873,7 +873,7 @@ $body-size: (100% 48%), $change: false) {
 // All parameters are the same as in `mlu-W`. Only the first parameter is called `$offset`.
 // ```scss
 //.block {
-//		@include mlu-Ml(1, "sm");
+//		@include mlu-Ml(1c, "sm");
 //		@include mlu-Ml(3gc, "lg");
 //		@include mlu-Ml(4gs, "lg");
 //}
@@ -900,8 +900,7 @@ $body-size: (100% 48%), $change: false) {
 //}
 // ```
 //
-// $offset - can be in grid-columns(simple - `gc` unit, variable - unitless number), grid-spans(`gs`),
-// any CSS units(`px`, `rem` etc) or `auto`.
+// $offset - takes the same values as `$width` in `mlu-W`.
 //
 // Styleguide: sass-tools.mixins.ml
 

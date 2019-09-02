@@ -283,10 +283,13 @@ Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) b
 
 ### Grid units
 
-You can set the [width](section-core-utils.html#kssref-core-utils-bxz-w) and [offset](section-core-utils.html#kssref-core-utils-margin-ml) for the layout parts in the grid units. These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 3 types of grid units:
-* **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column.
+These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 4 types of grid units:
+* **variable columns** \- abbreviated `c`. 1c is 1 column width which changes dynamically depending on the [formula](section-core-blocks.html#kssref-core-blocks-row-row__col).<br> Using [custom utilities](section-core-utils.html#kssref-core-utils-custom), you can get values equal to both `gc` and `gs`.
+* **grid-columns** \- `gc`. 1gc is width of 1 column.
 * **grid-spans** \- `gs`. 1gs is width of 1 column with 2 gutters.
 * **grid-gutters** \- `gg`. 1gg is width of 1 gutter.
+
+In the standard MLUT build, only `c` and `gg` are used. Other units can be used in some [mixins](section-sass-tools.html#kssref-sass-tools-mixins-w).
 
 Modular grid are generated depending on this [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
 
@@ -389,7 +392,7 @@ Styleguide: sass-tools.settings
 // Allowable values: <br>
 // `false` \- turn off <br>
 // `1` \- turn on with fallback <br>
-// `2` \- turn on <br>
+// `2` \- turn on. With this value, most fallbacks will be disabled for browsers that don't support custom properties. Be careful. <br>
 // $MLU-FLAG-FLEX-PE = false - turn on utilities with progressive enhancement for flexbox.
 //
 // Styleguide: sass-tools.settings.flags

@@ -18,13 +18,13 @@ Styleguide: core-utils.margin
 /*
 Ml
 
-Margin left. You can set left margin in the [grid units](section-concepts.html#kssref-concepts-grid)(gg, gc) or [space units](section-concepts.html#kssref-concepts-su)(su). So you can set the offset for layout elements.
+Margin left. You can set left margin in the [grid units](section-concepts.html#kssref-concepts-grid)(gg, c) or [space units](section-concepts.html#kssref-concepts-su)(su). So you can set the offset for layout elements.
 
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
 * `Ml1gg` \- it is needed to return the default column gutter. *Responsive*.
-* `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints, starting with `md`.
+* `Ml1c..Ml10c` \- available margin in `c` on all breakpoints, starting with `md`.
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
