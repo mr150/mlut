@@ -38,9 +38,8 @@ You can add your 'design' layer - parts of UI for a specific website. It may con
 	- Firefox - last, ESR
 	- Chrome
 	- Safari
-	- Opera
 	- Edge
-	- IE9+
+	- IE9+ with progressive enhancement
 - Mobile
 	- Android 4.4+
 	- IOS

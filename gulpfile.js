@@ -84,7 +84,18 @@ var servConfig = {
 			showFiles: true
 		};
 
-gulp.task("style", ["css-lint"], function(){
+gulp.task("css-lint", function(){
+	return gulp.src([
+		path.src.sass + files.styles
+	])
+		.pipe(stylelint({
+			reporters:[
+				{formatter: "string", console: true}
+			]
+		}));
+});
+
+gulp.task("style", gulp.series("css-lint", function(){
 	return gulp.src(path.src.sass + "*.scss")
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
@@ -111,21 +122,10 @@ gulp.task("style", ["css-lint"], function(){
 		.pipe(sourcemaps.write(""))
 		.pipe(gulp.dest(path.test.css))
 		.pipe(browserSync.stream());
-});
-
-gulp.task("css-lint", function(){
-	return gulp.src([
-		path.src.sass + files.styles
-	])
-		.pipe(stylelint({
-			reporters:[
-				{formatter: "string", console: true}
-			]
-		}));
-});
+}));
 
 gulp.task("scripts", function(){
-	return gulp.src(path.src.js + "mlut.js")
+	return gulp.src(path.src.js + "mlut.js", {allowEmpty: true})
 		.pipe(plumber())
 		.pipe(rigger())
 		.pipe(sourcemaps.init())
@@ -141,7 +141,7 @@ gulp.task("scripts", function(){
 });
 
 gulp.task("pug", function(){
-	return gulp.src(path.test.pug + "*.pug")
+	return gulp.src(path.test.pug + "*.pug", {allowEmpty: true})
 		.pipe(plumber())
 		.pipe(pug({"pretty": "\t"}))
 		.pipe(gulp.dest(dirs.test));
@@ -152,7 +152,7 @@ gulp.task("server", function(){
 });
 
 gulp.task("html", function(){
-	return gulp.src(dirs.test + files.html)
+	return gulp.src(dirs.test + files.html, {allowEmpty: true})
 		.pipe(fileSize(sizeConfig))
 		.pipe(browserSync.stream());
 });
@@ -162,18 +162,18 @@ gulp.task("kss", shell.task([
 	"cp " + path.test.css + "test.css " + dirs.docs + "styleguide/kss-assets"
 ]));
 
-gulp.task("default", ["server", "style", "pug", "scripts"], function(){
-	gulp.watch(path.watch.styles, ["style", "kss"]);
-	gulp.watch(path.watch.pug, ["pug"]);
-	gulp.watch(path.watch.html, ["html"]);
-	gulp.watch(path.watch.js, ["scripts"]);
-	gulp.watch(path.watch.docs, ["kss"]);
+gulp.task("default", gulp.parallel("server", "style", "pug", "scripts", function(){
+	gulp.watch(path.watch.styles, gulp.parallel("style", "kss"));
+	gulp.watch(path.watch.pug, gulp.series("pug"));
+	gulp.watch(path.watch.html, gulp.series("html"));
+	gulp.watch(path.watch.js, gulp.series("scripts"));
+	gulp.watch(path.watch.docs, gulp.series("kss"));
+}));
+
+gulp.task("clear", function(cb){
+	del.sync(dirs.build);
+	cb();
 });
 
-gulp.task("clear", function(){
-	return del.sync(dirs.build);
-});
-
-gulp.task("build", ["clear", "style", "pug", "scripts", "kss"], function(){
-});
+gulp.task("build", gulp.series("clear", "style", "pug", "scripts", "kss"));
 
