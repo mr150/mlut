@@ -75,6 +75,7 @@ Styleguide: sass-tools.functions
 // ```scss
 //mlu-bp-prev("md") => 520px
 //```
+//
 // $bp = 0 - breakpoint name.
 // If pass firts breakpoint, function return 0. With default value, function return last breakpoint. Type: string.
 // $data-type = "value" - service parameter for functions-wrappers. Type: string.

@@ -86,7 +86,7 @@ Styleguide: core-utils.custom.gcr
 			#{$--mlu-grid-cols}: $sm-cols;
 		}
 
-		@include mlu-mk-util(&, $--mlu-grid-cols, $mlu--Gc-map);
+		@include mlu-mk--Gcc($mlu--Gc-map);
 	}
 }
 

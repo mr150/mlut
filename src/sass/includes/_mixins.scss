@@ -272,6 +272,7 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 // ```
 //
 // Styleguide: sass-tools.mixins.mcl
+
 @mixin mlu-mCl {
 	&:after {
 		display: table;
@@ -591,7 +592,7 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 // $edge-ang = 150deg - linear-gradient angle of hexagon edges. Can be only number in `deg`.
 // $edge-cs = 50% - is color-stop in linear-gradient of hexagon edges. Can be number with unit.
 // $bgc = #000 - hexagon color. It can be single color or list in linear-gradient
-// value format. For example: `(167deg, blue 50%, #f0f, #000)`. <br>
+// value format. For example: `(167deg, blue 50%, #f0f, #000)`.
 // Angle in gradient can be only number in `deg`. If you pass gradient value,
 // top hexagon edge get first color, bottom edge get last color and
 // hexagon body get full gradient.
@@ -1247,12 +1248,13 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 //
 // Values for CSS properties can be any CSS values, as well as numbers with `gg` and `su` units. Values with  `gg` units are created using the [mk-gtr](#kssref-sass-tools-mixins-mk_gtr) mixin.
 //
-// For most commonly used utilities, there are mixins-wrappers in which utilities names and CSS properties are already selected.
+// For most commonly used utilities, there are [mixins-wrappers](#kssref-sass-tools-mixins-util_wrappers) in which utilities names and CSS properties are already selected.
 //
 // ```scss
 //$Bgc-map: (
 //		"f": #fff,
-//		"mn0": #60f,
+//		"mn0_lg": #60f,
+//		"mn1": #c05,
 //);
 //
 //@include mlu-mk-util("Bgc", "background-color", $Bgc-map);
@@ -1263,8 +1265,14 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 //		background-color: #fff;
 //}
 //
-//.Bgc-mn0 {
-//		background-color: #60f;
+//.Bgc-mn1 {
+//		background-color: #c05;
+//}
+//
+//@media (min-width: 960px) {
+//		.Bgc-mn0_lg {
+//			background-color: #60f;
+//		}
 //}
 // ```
 //
@@ -1272,7 +1280,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 // $prop - CSS property name.
 // $map - map with utilities names values and CSS properties values.
 // $bp = false - breakpoint on which utility values will be generated. Can be any breakpoint from the settings or a special value: `bp` and `all`.
-// $states = false - List of state names. For each value of the utility, all states from this list will be generated. Info about states see [here](#kssref-sass-tools-mixins-mk_state).
+// $states = false - list of state names. For each value of the utility, all states from this list will be generated. Info about states see [here](#kssref-sass-tools-mixins-mk_state).
 // $direct = null - service argument which used only by [mk-util-direction](#kssref-sass-tools-mixins-mk_util_dir).
 //
 // Styleguide: sass-tools.mixins.mk_util
@@ -1317,6 +1325,61 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	}
 }
 
+// mlu-mk-util-directions
+//
+// Creates utility groups that have different directions. For example [margin](section-core-utils.html#kssref-core-utils-margin) and [padding](section-core-utils.html#kssref-core-utils-padding).
+//
+// The [mlu-mk-util](#kssref-sass-tools-mixins-mk_util) functionality is mainly used, but the map of values for creating utilities is slightly different.
+// Before the utility value, one or two letters indicate the [direction](section-concepts.html#kssref-concepts-utility-dirs). Keywords and variables are separated by a hyphen from direction. Examples: `l4su`, `xy1gg`, `t-b8_lg`.
+//
+// A mixin can create [positioning](section-core-utils.html#kssref-core-utils-pos) utilities that match the CSS properties: `top` , `right` etc. To do this, just pass the map with the data.
+// Each of the 4 main directions will correspond to the CSS property. If the direction is combined,
+// then a modified utility `mX`, `mY` or `mXy` will be created. These utilities changes several properties. For the convenience of creating positioning utilities, a [mixin-wrapper](#kssref-sass-tools-mixins-util_wrappers) is used.
+//
+// All parameters are the same as in `mk-util`. Only their order and default values differ.
+// ```scss
+//$Xy-map: (
+//		x3gg: 3gg,
+//		l4su: 4su,
+//);
+//
+//@include mlu-mk-util-directions($Xy-map, "P", "padding");
+//
+//@include mlu-mk-Xy($Xy-map);
+// ```
+// CSS
+// ```css
+//.Px3gg {
+//		padding-right: 48px;
+//		padding-right: calc(var(--mlu-gg) * 3);
+//		padding-left: 48px;
+//		padding-left: calc(var(--mlu-gg) * 3);
+//}
+//
+//.Pl4su {
+//		padding-left: 16px;
+//}
+//
+//.mX3gg {
+//		right: 48px;
+//		right: calc(var(--mlu-gg) * 3);
+//		left: 48px;
+//		left: calc(var(--mlu-gg) * 3);
+//}
+//
+//.L4su {
+//		left: 16px;
+//}
+// ```
+//
+// $map - map with utilities names values and CSS properties values.
+// $name = null - the name of the utility.
+// $prop = null - CSS property name.
+// $bp = null - breakpoint on which utility values will be generated.
+// $states = null - list of state names.
+//
+// Styleguide: sass-tools.mixins.mk_util_dir
+
 @mixin mlu-mk-util-directions($map, $name: null, $prop: null, $bp: null, $states: null) {
 	@each $key, $value in $map {
 		@if type-of($key) != "string" {
@@ -1354,6 +1417,8 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	}
 }
 
+// Private mixin that parses combined directions and identifies positioning utilities.
+
 @mixin _mlu-check-util-direction($dir, $prop, $value) {
 	@if $dir == "x" {
 		$prop: if($prop, $prop + "-", "");
@@ -1372,6 +1437,8 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 		@include _mlu-parse-unit($prop, $value, $dir);
 	}
 }
+
+// Private mixin that parses custom units based on directions.
 
 @mixin _mlu-parse-unit($prop, $value, $dir) {
 	$coef-val: mlu-ston($value + "");
@@ -1400,8 +1467,42 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	}
 }
 
+// Wrappers for utils creation
+//
+// Mixins-wrappers over [mlu-mk-util](#kssref-sass-tools-mixins-mk_util) and [mk-util-direction](#kssref-sass-tools-mixins-mk_util_dir), in which the names of utilities and CSS properties are written. Only a map with values is required. All have the same parameters.
+//
+// The names of all mixins begin with `mlu-mk-` and end with the name of the utility they create:  `mlu-mk-Maw`, `mlu-mk-Fw` etc.
+// The exception is `mlu-mk-Xy`, which creates [positioning](section-core-utils.html#kssref-core-utils-pos) utilities. 2 hyphens are written in the names of mixins for custom utilities: `mlu-mk--Gcc`. Mixins for groups of utilities with directions are marked separately.
+//
+// Mixins for common utilities:
+// * `Maw`
+// * `Mih`
+// * `Bdw`
+// * `Fw`
+// * `Lh`
+// * `Z`
+//
+// For custom utilities:
+// * `-Gcc`
+//
+// Utils with directions:
+// * `M`
+// * `P`
+// * `Bdxy`
+// * `Xy`
+//
+// $map - map with utilities names values and CSS properties values.
+// $bp = null - breakpoint on which utility values will be generated.
+// $states = null - list of state names.
+//
+// Styleguide: sass-tools.mixins.util_wrappers
+
 @mixin mlu-mk-Xy($map, $bp: null, $states: null) {
 	@include mlu-mk-util-directions($map, $bp: $bp, $states: $states);
+}
+
+@mixin mlu-mk-Z($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Z", "z-index", $map, $bp, $states);
 }
 
 @mixin mlu-mk-Maw($map, $bp: null, $states: null) {
@@ -1470,4 +1571,8 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 
 @mixin mlu-mk-O($map, $bp: null, $states: null) {
 	@include mlu-mk-util("O", "opacity", $map, $bp, $states);
+}
+
+@mixin mlu-mk--Gcc($map, $bp: null, $states: null) {
+	@include mlu-mk-util("-Gcc", $--mlu-grid-cols, $map, $bp, $states);
 }

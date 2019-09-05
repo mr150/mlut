@@ -220,7 +220,7 @@ Utility
 An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
 
 Utility class names are formed according to the scheme:
-1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, 'nojs' - javascript disabled etc. Allowed several states in the same class. <br> States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'.
+1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `nojs` - javascript disabled etc. Allowed several states in the same class. <br> States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'.
 1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations.
 1. optional value. Valid are:
 	* number
@@ -238,15 +238,37 @@ There are some special abbreviations for color utilities:
 * `i` - `inherit`
 * `cc` - `curentColor`
 
+Weight: 6
+
+Styleguide: concepts.utility
+*/
+
+/*
+Types
+
 Utilities in MLUT come in 3 types:
 
 * **Common** \- named and work like CSS properties.
 * **Custom** \- manage one or more related CSS [custom properties](section-core-styles.html#kssref-core-styles-css_vars). Their names begin with a hyphen and are abbreviations <br> of the names of the corresponding properties. Examples: `-Gg`.
 * **Modified** \- affect several CSS properties. The names of such utilities begin with 'm' prefix.
 
-Weight: 6
+Weight: 0
 
-Styleguide: concepts.utility
+Styleguide: concepts.utility.types
+*/
+
+/*
+Directions
+
+Some utilities have directions. There are 7 of them:
+* 4 main directions - top, right, bottom, left. They are registered in the map [$mlu-main-directions](section-sass-tools.html#kssref-sass-tools-settings-general).
+* 3 combined direction - `x`(left, right), `y`(top, bottom) and `xy`(all main directions).
+
+The direction is used in the names of utilities, as well as in some mixins. 1 letter is used to indicate the direction(`Mt`, `Pb`), with the exception of `xy`.<br> In the names of utilities `xy` is not indicated(`M`, `P`), and 2 letters `xy` are passed in mixins.
+
+Weight: 1
+
+Styleguide: concepts.utility.dirs
 */
 
 /*
@@ -858,6 +880,12 @@ Styleguide: core-blocks.input
 
 /*===DESIGN-BLOCKS===*/
 
+/*
+@include mlu-mk-state(".Pos-f", ("js", "nojs"), 0) {
+	position: fixed;
+}
+*/
+
 /*===CORE-UTILS===*/
 
 /*
@@ -1121,7 +1149,7 @@ Z
 
 0..3 - `z-index` available range. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
 -1 - move DOM node under parent node.
-max - max value. By default: `9999`.
+max = 9999 - max value.
 
 Styleguide: core-utils.pos.z
 */

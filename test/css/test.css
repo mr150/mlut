@@ -71,3 +71,8 @@
 	background-image: linear-gradient(90deg, #336 var(--mlu-gg), #d15 var(--mlu-gg), #d15 calc(100% - var(--mlu-gg)), #336 0);
 	background-size: calc(1 / var(--mlu-grid-cols) * 100%);
 }
+
+.kss-description,
+.kss-parameters {
+	max-width: 920px;
+}

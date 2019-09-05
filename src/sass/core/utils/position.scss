@@ -19,7 +19,7 @@ Z
 
 0..3 - `z-index` available range. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
 -1 - move DOM node under parent node.
-max - max value. By default: `9999`.
+max = 9999 - max value.
 
 Styleguide: core-utils.pos.z
 */
@@ -64,4 +64,4 @@ $mlu-Z-map: (
 	$mlu-Z-map: map-merge($mlu-Z-map, ($i: $i));
 }
 
-@include mlu-mk-util("Z", "z-index", $mlu-Z-map);
+@include mlu-mk-Z($mlu-Z-map);
