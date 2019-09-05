@@ -315,9 +315,7 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 // If you need a gutter in `rem`, pass value in `rem`.
 // $type = margin - can be any CSS property, including custom.
 // If no `margin`, `padding` or custom property is used, then `$direct` = "xy" must be specified.
-// $direct = "x" - can take 4 main directions from [$mlu-main-directions](#kssref-sass-tools-settings-general)
-// or combined direction: 'x'(left right), 'y'(top bottom)
-// and 'xy'(left right top bottom).
+// $direct = "x" - any of 7 [directions](section-concepts.html#kssref-concepts-utility-dirs).
 // $gutters = $mlu-grid-gutters - map with gutters values on breakpoints.
 // Map item example: `"sm": 12px`. Custom gutters only work when the `$css-vars = false`.
 // $calc = $MLU-FLAG-CALC-FALLBACK - bool flag for generation CSS `calc()` fallback for old browsers.
@@ -1164,6 +1162,39 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	}
 }
 
+// mlu-mk-state
+//
+// Generates values for utilities in various states. Names and values of states are set in the [settings](#kssref-sass-tools-settings-utils). Usually this mixin is not used separately because it is called inside [mlu-mk-util](#kssref-sass-tools-mixins-mk_util).
+//
+// Mixin can create 3 types of states based on the types of values in the states [map](#kssref-sass-tools-settings-utils-states):
+// 1. pseudo-classes and pseudo-elements. In states map the value is a string - `"h": "hover"`
+// 1. multiple selectors with pseudo-classes. State value is a list - `"h-f": ("hover", "focus")`
+// 1. just values with prefixed state. State value is a null - `"js": null`
+//
+// States naming convention see in [basic concepts](section-concepts.html#kssref-concepts-utility).
+//
+// ```scss
+//@include mlu-mk-state(".Bgc-mn0", ("h")) {
+//		background-color: #60f;
+//}
+// ```
+// CSS
+// ```css
+//.Bgc-mn0 {
+//		background-color: #60f;
+//}
+//
+//.h_Bgc-mn0:hover {
+//		background-color: #60f;
+//}
+// ```
+//
+// $selector = & - selector of CSS rule. Can be `string` or `&`.
+// $states = map-keys($mlu-util-states) -  list of state names to be generated.
+// $no-state = 1 - number flag. If equal to 1, then a value without state will be generated as in the example above.
+//
+// Styleguide: sass-tools.mixins.mk_state
+
 @mixin mlu-mk-state($selector: &, $states: map-keys($mlu-util-states), $no-state: 1) {
 	@if not $selector {
 		@error "'$selector' argument must not be null.";
@@ -1205,6 +1236,46 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 		}
 	}
 }
+
+// mlu-mk-util
+//
+// Сreates utilities based on a map in which the *keys* are the values of the utilities, and the *values* are the values of the CSS properties.
+//
+// Utility values are set according to the utility [naming rules](section-concepts.html#kssref-concepts-utility). They can be a string (including empty) or a number.<br> Also, the value can indicate the breakpoint on which it should work - `"tb_lg"`. Even if the breakpoint is passed as a parameter<br> when this mixin is called, then the data about breakpoints from the values map will be more priority.<br> In addition to a specific breakpoint, 2 special values are valid:
+// * `bp` - create a value only on breakpoints:	`"r_bp"`, "4gg_bp"
+// * `all` - create a normal value and on breakpoints: `"ib_all"`, `"_all"`.
+//
+// Values for CSS properties can be any CSS values, as well as numbers with `gg` and `su` units. Values with  `gg` units are created using the [mk-gtr](#kssref-sass-tools-mixins-mk_gtr) mixin.
+//
+// For most commonly used utilities, there are mixins-wrappers in which utilities names and CSS properties are already selected.
+//
+// ```scss
+//$Bgc-map: (
+//		"f": #fff,
+//		"mn0": #60f,
+//);
+//
+//@include mlu-mk-util("Bgc", "background-color", $Bgc-map);
+// ```
+// CSS
+// ```css
+//.Bgc-f {
+//		background-color: #fff;
+//}
+//
+//.Bgc-mn0 {
+//		background-color: #60f;
+//}
+// ```
+//
+// $name - the name of the utility. It can be specified as a CSS class (with a dot) or just a `string`.
+// $prop - CSS property name.
+// $map - map with utilities names values and CSS properties values.
+// $bp = false - breakpoint on which utility values will be generated. Can be any breakpoint from the settings or a special value: `bp` and `all`.
+// $states = false - List of state names. For each value of the utility, all states from this list will be generated. Info about states see [here](#kssref-sass-tools-mixins-mk_state).
+// $direct = null - service argument which used only by [mk-util-direction](#kssref-sass-tools-mixins-mk_util_dir).
+//
+// Styleguide: sass-tools.mixins.mk_util
 
 @mixin mlu-mk-util($name, $prop, $map, $bp: false, $states: false, $direct: null) {
 	$name: mlu-check-class($name);
