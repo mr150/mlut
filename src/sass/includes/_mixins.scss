@@ -146,9 +146,9 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 // ```
 //
 // $sprite - map with icons data. Icon rendered as a pseudo-element.
-// Sprite item example: `modifier-name: (width, height, bgpx, bgpy)`. <br>
+// Sprite item example: `modifier-name: (width, height, bgpx, bgpy)`.
 // If icons have the same sizes you can write in map only 2 params: `modifier-name: (bgpx, bgpy)`. <br>
-// All icon data lists must be equal length. <br>
+// All icon data lists must be equal length.
 // If one or some parameters the same in all icons, it will not be
 // generated in modifiers that DRY. Write repeating
 // parameter in block class.
@@ -755,7 +755,7 @@ $body-size: (100% 48%), $change: false) {
 // ```
 //
 // $width - can be in variable columns(`c`), grid-columns(`gc`), grid-spans(`gs`),
-// any CSS units(`px`, `rem` etc), `auto` or `inherit`. <br> `gc` and `gs` calculated to %
+// any CSS units(`px`, `rem` etc), `auto` or `inherit`. `gc` and `gs` calculated to %
 // according to the formula '`n / $cols * 100%`' and rounded by
 // [mlu-decimal-floor](section-sass-tools.html#kssref-sass-tools-functions-decimal_floor). <br>
 // If `$width` in `gc` and `$css-vars = false`, width will generated with considering
@@ -868,7 +868,7 @@ $body-size: (100% 48%), $change: false) {
 // It works similarly like [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml).
 //
 // It wrapper on [mlu-W](#kssref-sass-tools-mixins-w) because calculating and generation algorithm
-// for grid columns width and grid offsets the same. <br>
+// for grid columns width and grid offsets the same.
 // All parameters are the same as in `mlu-W`. Only the first parameter is called `$offset`.
 // ```scss
 //.block {
@@ -1172,6 +1172,10 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 // 1. multiple selectors with pseudo-classes. State value is a list - `"h-f": ("hover", "focus")`
 // 1. just values with prefixed state. State value is a null - `"js": null`
 //
+// There are utilities with states whose creation has not yet been implemented:
+// * `sp` \- utility inside the @supports at-rule. It will only work if the CSS property, value, or @supports supported by the browser.
+// * `chl` \- utility will work on all children. Means `> *`.
+//
 // States naming convention see in [basic concepts](section-concepts.html#kssref-concepts-utility).
 //
 // ```scss
@@ -1242,7 +1246,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 //
 // Сreates utilities based on a map in which the *keys* are the values of the utilities, and the *values* are the values of the CSS properties.
 //
-// Utility values are set according to the utility [naming rules](section-concepts.html#kssref-concepts-utility). They can be a string (including empty) or a number.<br> Also, the value can indicate the breakpoint on which it should work - `"tb_lg"`. Even if the breakpoint is passed as a parameter<br> when this mixin is called, then the data about breakpoints from the values map will be more priority.<br> In addition to a specific breakpoint, 2 special values are valid:
+// Utility values are set according to the utility [naming rules](section-concepts.html#kssref-concepts-utility). They can be a string (including empty) or a number. Also, the value can indicate the breakpoint on which it should work - `"tb_lg"`. Even if the breakpoint is passed as a parameter when this mixin is called, then the data about breakpoints from the values map will be more priority. In addition to a specific breakpoint, 2 special values are valid:
 // * `bp` - create a value only on breakpoints:	`"r_bp"`, "4gg_bp"
 // * `all` - create a normal value and on breakpoints: `"ib_all"`, `"_all"`.
 //

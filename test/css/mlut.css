@@ -220,15 +220,15 @@ Utility
 An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
 
 Utility class names are formed according to the scheme:
-1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `nojs` - javascript disabled etc. Allowed several states in the same class. <br> States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'.
+1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `nojs` - javascript disabled etc. Allowed several states in the same class. States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'. More about states [here](section-sass-tools.html#kssref-sass-tools-mixins-mk_state).
 1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations.
 1. optional value. Valid are:
 	* number
 	* CSS or MLUT keywords
-	* variables
-	* CSS custom properties.
+	* MLUT variables
+	* [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars).
 
-	Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). Keywords and variables are separated by a hyphen '-' from utility name.<br> Variable name can contain only lowercase letters and numbers, and must also end in a number: `bd0`, `gr2` etc.<br> Custom property is separated from the utility name by two hyphens. Its name may contain lowercase letters and numbers.
+	Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). Keywords and variables are separated by a hyphen '-' from utility name. Custom property is separated from the utility name by two hyphens. Its name may contain lowercase letters and numbers.
 1. optional breakpoint name: `sm`, `lg`, etc. Separated from the utility value by underscore '_'.
 
 Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-bd0`, `Fz--gg-rem`.
@@ -249,7 +249,7 @@ Types
 Utilities in MLUT come in 3 types:
 
 * **Common** \- named and work like CSS properties.
-* **Custom** \- manage one or more related CSS [custom properties](section-core-styles.html#kssref-core-styles-css_vars). Their names begin with a hyphen and are abbreviations <br> of the names of the corresponding properties. Examples: `-Gg`.
+* **Custom** \- manage one or more related CSS [custom properties](section-core-styles.html#kssref-core-styles-css_vars). Their names begin with a hyphen and are abbreviations of the names of the corresponding properties. Examples: `-Gg`.
 * **Modified** \- affect several CSS properties. The names of such utilities begin with 'm' prefix.
 
 Weight: 0
@@ -264,11 +264,26 @@ Some utilities have directions. There are 7 of them:
 * 4 main directions - top, right, bottom, left. They are registered in the map [$mlu-main-directions](section-sass-tools.html#kssref-sass-tools-settings-general).
 * 3 combined direction - `x`(left, right), `y`(top, bottom) and `xy`(all main directions).
 
-The direction is used in the names of utilities, as well as in some mixins. 1 letter is used to indicate the direction(`Mt`, `Pb`), with the exception of `xy`.<br> In the names of utilities `xy` is not indicated(`M`, `P`), and 2 letters `xy` are passed in mixins.
+The direction is used in the names of utilities, as well as in some mixins. 1 letter is used to indicate the direction(`Mt`, `Pb`), with the exception of `xy`. In the names of utilities `xy` is not indicated(`M`, `P`), and 2 letters `xy` are passed in mixins.
 
 Weight: 1
 
 Styleguide: concepts.utility.dirs
+*/
+
+/*
+MLUT keywords and variables
+
+**MLUT keywords** are strings values. Their names can only contain lowercase letters. Keywords include:
+* names of breakpoints - `sm`, `lg`, etc. Permissible to use only in custom and modified utilities
+* `min` and `max`. Allowed to use only in utils with number values
+* abbreviations for invented values that are not in the CSS specification. Allowed to use only in custom and modified utilities
+
+**MLUT variables** exist only at the agreement level. Essentially, they are similar to Sass variables, which are compiled into CSS values. They can take any value, including CSS custom properties. Variable name can contain only lowercase letters and numbers, and must also end in a number: `bd0`, `gr2` etc. Example: [Maw-fx0](section-core-utils.html#kssref-core-utils-bxz).
+
+Weight: 0
+
+Styleguide: concepts.utility.mlut_kw_var
 */
 
 /*
@@ -298,7 +313,7 @@ Modular grid
 
 Space on the page divided into a certain number of columns with gutters.
 
-In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. <br> These parts called **columns**. Columns are separated by indents which are called **gutters**.
+In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called **columns**. Columns are separated by indents which are called **gutters**.
 
 The gutters have different widths at different breakpoints. From `xs` to `lg` gutter is 12px. From `lg` gutter is 16px.
 
@@ -307,7 +322,7 @@ Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) b
 ### Grid units
 
 These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 4 types of grid units:
-* **variable columns** \- abbreviated `c`. 1c is 1 column width which changes dynamically depending on the [formula](section-core-blocks.html#kssref-core-blocks-row-row__col).<br> Using [custom utilities](section-core-utils.html#kssref-core-utils-custom), you can get values equal to both `gc` and `gs`.
+* **variable columns** \- abbreviated `c`. 1c is 1 column width which changes dynamically depending on the [formula](section-core-blocks.html#kssref-core-blocks-row-row__col). Using [custom utilities](section-core-utils.html#kssref-core-utils-custom), you can get values equal to both `gc` and `gs`.
 * **grid-columns** \- `gc`. 1gc is width of 1 column.
 * **grid-spans** \- `gs`. 1gs is width of 1 column with 2 gutters.
 * **grid-gutters** \- `gg`. 1gg is width of 1 gutter.
@@ -344,15 +359,11 @@ In the description of the utilities, there may be a '**Parameters**' item in whi
 
 If the property does not have a special value 'i' then 'i' value means `inherit`.
 
-Some utilities have a value with a selector modifier([see naming](section-concepts.html#kssref-concepts-utility)). Existing modifiers:
-
-* `chl` \- children. Means `> *`.
-
 Some utilities responsive by design or have only responsive values. It will be indicated in the description like this: *Responsive*.
 
 For some utilities, there is a description for non-developers.
 
-In the examples of the work of some utilities for demonstration, other utilities may be used like this: '`Util1.Util2`'. <br> In the markup, instead of a dot, you need to use a space to separate utilities, like this: "`Util1 Util2`"
+In the examples of the work of some utilities for demonstration, other utilities may be used like this: '`Util1.Util2`'. In the markup, instead of a dot, you need to use a space to separate utilities, like this: "`Util1 Util2`"
 
 Weight: 3
 
@@ -382,7 +393,7 @@ Styleguide: sass-tools
 /*
 Examples
 
-Additional examples of core blocks, utilities, tools and ready-made components. <br> If in the markup you meet the `{{modifier_class}}` construct, then substitute the necessary classes from the examples instead of it, or just erase
+Additional examples of core blocks, utilities, tools and ready-made components. If in the markup you meet the `{{modifier_class}}` construct, then substitute the necessary classes from the examples instead of it, or just erase
 
 Weight: 6
 
@@ -416,11 +427,13 @@ Styleguide: sass-tools.mixins
 /*
 CSS variables
 
-Global CSS custom properties which used in MLUT. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties. <br> Global custom properties names begin with the `mlu` prefix.
+Global CSS custom properties which used in MLUT. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties. Global custom properties names begin with the `mlu` prefix.
 
 The values and meaning of many custom properties correspond to the [SASS settings](section-sass-tools.html#kssref-sass-tools-settings) of MLUT core. But unlike them, custom properties can be changed dynamically without recompiling.
 
 Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags).
+
+Remember that custom properties do not work in all browsers. This means that part of the settings, such as dynamically changing the gutters and the number of columns in the grid system, also does not work everywhere.
 
 In some blocks and utilities, custom properties are also used. Look for info about them in the description of the corresponding block or utility.
 
@@ -527,7 +540,7 @@ similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields a
 
 The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-default-gtr`.
 
-Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row). The formulas for calculating the width and offset for the column are stored in the custom properties. <br> In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
+Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row). The formulas for calculating the width and offset for the column are stored in the custom properties. In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
 ```scss
 --gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
 --mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
@@ -1004,6 +1017,7 @@ Visual formatting
 * `D-tbc`
 * `D-tbr`
 * `D-itb`
+* `sp_D-f` \- useful if the flexbox layout in IE11 has many bugs.
 * `Fl` \- turn on wrapping text on the right.
 * `Fl-r` \- turn on wrapping text on the left.
 * `Ol0`
@@ -1305,6 +1319,12 @@ Styleguide: core-utils.visual.md
 	flex-wrap: wrap;
 }
 
+@supports (display: flex) {
+	.sp_D-f {
+		display: flex;
+	}
+}
+
 /*
 Flex
 
@@ -1316,7 +1336,8 @@ Most of modified flex utilities **turned off** and available with flag [$MLU-FLA
 * `Fxsh0`
 * `Fx-i`
 * `Fxw-wr`
-* `Fxw-w`
+* `Fxw-w` \- only *Responsive*.
+* `Fxw-n` \- only *Responsive*.
 * `Ord-1..Ord2` \- sequence number for flex-element
 
 Styleguide: core-utils.flex
@@ -1430,10 +1451,6 @@ Styleguide: core-utils.flex.mai
 
 .Fxw-wr {
 	flex-wrap: wrap-reverse;
-}
-
-.Fxw-w {
-	flex-wrap: wrap;
 }
 
 .As-s {
@@ -2404,6 +2421,14 @@ Styleguide: core-utils.bd.bds
 		flex-direction: row;
 	}
 
+	.Fxw-w_sm {
+		flex-wrap: wrap;
+	}
+
+	.Fxw-n_sm {
+		flex-wrap: nowrap;
+	}
+
 	.Jc-fs_sm {
 		justify-content: flex-start;
 	}
@@ -2596,6 +2621,14 @@ Styleguide: core-utils.bd.bds
 
 	.Fxd-r_md {
 		flex-direction: row;
+	}
+
+	.Fxw-w_md {
+		flex-wrap: wrap;
+	}
+
+	.Fxw-n_md {
+		flex-wrap: nowrap;
 	}
 
 	.Jc-fs_md {
@@ -2904,6 +2937,14 @@ Styleguide: core-utils.bd.bds
 		flex-direction: row;
 	}
 
+	.Fxw-w_lg {
+		flex-wrap: wrap;
+	}
+
+	.Fxw-n_lg {
+		flex-wrap: nowrap;
+	}
+
 	.Jc-fs_lg {
 		justify-content: flex-start;
 	}
@@ -3200,6 +3241,14 @@ Styleguide: core-utils.bd.bds
 
 	.Fxd-r_xl {
 		flex-direction: row;
+	}
+
+	.Fxw-w_xl {
+		flex-wrap: wrap;
+	}
+
+	.Fxw-n_xl {
+		flex-wrap: nowrap;
 	}
 
 	.Jc-fs_xl {

@@ -9,7 +9,8 @@ Most of modified flex utilities **turned off** and available with flag [$MLU-FLA
 * `Fxsh0`
 * `Fx-i`
 * `Fxw-wr`
-* `Fxw-w`
+* `Fxw-w` \- only *Responsive*.
+* `Fxw-n` \- only *Responsive*.
 * `Ord-1..Ord2` \- sequence number for flex-element
 
 Styleguide: core-utils.flex
@@ -121,7 +122,8 @@ Styleguide: core-utils.flex.mai
 
 @include mlu-mk-util("Fxw", "flex-wrap", (
 	"wr": wrap-reverse,
-	"w": wrap,
+	"w_bp": wrap,
+	"n_bp": nowrap,
 ));
 
 $mlu-As-map: (

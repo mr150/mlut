@@ -56,3 +56,9 @@ $mlu-D-map: (
 	display: inline-flex;
 	flex-wrap: wrap;
 }
+
+.sp_D-f {
+	@supports (display: flex) {
+		display: flex;
+	}
+}

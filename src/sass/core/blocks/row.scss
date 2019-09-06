@@ -37,7 +37,7 @@ similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields a
 
 The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-default-gtr`.
 
-Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row). The formulas for calculating the width and offset for the column are stored in the custom properties. <br> In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
+Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row). The formulas for calculating the width and offset for the column are stored in the custom properties. In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
 ```scss
 --gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
 --mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
