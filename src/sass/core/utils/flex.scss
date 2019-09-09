@@ -8,9 +8,6 @@ Most of modified flex utilities **turned off** and available with flag [$MLU-FLA
 * `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
 * `Fx-i`
-* `Fxw-wr`
-* `Fxw-w` \- only *Responsive*.
-* `Fxw-n` \- only *Responsive*.
 * `Ord-1..Ord2` \- sequence number for flex-element
 
 Styleguide: core-utils.flex
@@ -29,6 +26,18 @@ Fxd-c - column
 Markup: ../../../docs/examples/core-utils/flex/fxd.hbs
 
 Styleguide: core-utils.flex.fxd
+*/
+
+/*
+Fxw
+
+Flex wrap.
+
+wr - wrap-reverse
+w - wrap. only *Responsive*.
+n - nowrap. only *Responsive*.
+
+Styleguide: core-utils.flex.fxw
 */
 
 /*
@@ -68,6 +77,22 @@ Ai-b - text baseline
 Markup: ../../../docs/examples/core-utils/flex/ai.hbs
 
 Styleguide: core-utils.flex.ai
+*/
+
+/*
+Ac
+
+Align content.
+
+Ac-fs - top
+Ac-c - center
+Ac-fe - bottom
+Ac-sa - space-around
+Ac-sb - space-between
+
+Markup: ../../../docs/examples/core-utils/flex/ac.hbs
+
+Styleguide: core-utils.flex.ac
 */
 
 /*
@@ -124,6 +149,14 @@ Styleguide: core-utils.flex.mai
 	"wr": wrap-reverse,
 	"w_bp": wrap,
 	"n_bp": nowrap,
+));
+
+@include mlu-mk-util("Ac", "align-content", (
+	"fs": flex-start,
+	"fe": flex-end,
+	"c": center,
+	"sa": space-around,
+	"sb": space-between,
 ));
 
 $mlu-As-map: (

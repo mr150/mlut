@@ -29,6 +29,7 @@ Grid columns count. Sets number of columns in grid system on DOM node. Controls 
 * `-Gcc` \- columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
 
 -Gcc-sm - keyword that means number of columns on `sm` breakpoint. There is on all breakpoints except `sm`.<br> Available selector modifier `chl`. See [example](section-examples.html#kssref-examples-layouts-2ec4ecin2_nd).
+-Gcc10_md - only *Responsive*. Available `chl` state.
 
 Markup: ../../../docs/examples/core-utils/custom/gcc.hbs
 
@@ -73,6 +74,7 @@ Styleguide: core-utils.custom.gcr
 	$mlu--Gc-map: (
 		$mlu-bp-sm: $sm-cols,
 		"_bp": $mlu-grid-default-cols,
+		"10_bp": 10,
 	);
 
 	@each $key, $value in $mlu-grid-cols {
@@ -84,6 +86,10 @@ Styleguide: core-utils.custom.gcr
 	@at-root {
 		.chl_-Gcc-#{$mlu-bp-sm} > * {
 			#{$--mlu-grid-cols}: $sm-cols;
+		}
+
+		.chl_-Gcc10 > * {
+			#{$--mlu-grid-cols}: 10;
 		}
 
 		@include mlu-mk--Gcc($mlu--Gc-map);

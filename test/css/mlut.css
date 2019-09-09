@@ -353,7 +353,7 @@ Core utilities
 
 Set of utilities that can be used on any project.
 
-Utilities are grouped by sections. Each section lists the standard utilities that come with the MLUT core. Modified utilities, utilities with more values and non-standard values are allocated in subsections.
+Utilities are grouped by sections. The description of each section lists the values of the utilities that relate to it and are included in the MLUT core. Modified utilities, utilities with more values and non-standard values are allocated in subsections. Values of common utilities correspond to [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations([pdf](https://yadi.sk/i/VcKfz5u7DBHrLA)). If written that all values are available in the utility, you can see them in the Emmet cheat sheet from the link above.
 
 In the description of the utilities, there may be a '**Parameters**' item in which the available values are listed. Instead of the utility value, the '`initial`' keyword may be specified. We will get this effect when using the utility with no value. The range of values can be specified as `0..3`.
 
@@ -932,6 +932,7 @@ Grid columns count. Sets number of columns in grid system on DOM node. Controls 
 * `-Gcc` \- columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
 
 -Gcc-sm - keyword that means number of columns on `sm` breakpoint. There is on all breakpoints except `sm`.<br> Available selector modifier `chl`. See [example](section-examples.html#kssref-examples-layouts-2ec4ecin2_nd).
+-Gcc10_md - only *Responsive*. Available `chl` state.
 
 Markup: ../../../docs/examples/core-utils/custom/gcc.hbs
 
@@ -991,6 +992,10 @@ Styleguide: core-utils.custom.gcr
 
 .chl_-Gcc-sm > * {
 	--mlu-grid-cols: 4;
+}
+
+.chl_-Gcc10 > * {
+	--mlu-grid-cols: 10;
 }
 
 .-Gcc-sm {
@@ -1335,9 +1340,6 @@ Most of modified flex utilities **turned off** and available with flag [$MLU-FLA
 * `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
 * `Fx-i`
-* `Fxw-wr`
-* `Fxw-w` \- only *Responsive*.
-* `Fxw-n` \- only *Responsive*.
 * `Ord-1..Ord2` \- sequence number for flex-element
 
 Styleguide: core-utils.flex
@@ -1356,6 +1358,18 @@ Fxd-c - column
 Markup: ../../../docs/examples/core-utils/flex/fxd.hbs
 
 Styleguide: core-utils.flex.fxd
+*/
+
+/*
+Fxw
+
+Flex wrap.
+
+wr - wrap-reverse
+w - wrap. only *Responsive*.
+n - nowrap. only *Responsive*.
+
+Styleguide: core-utils.flex.fxw
 */
 
 /*
@@ -1395,6 +1409,22 @@ Ai-b - text baseline
 Markup: ../../../docs/examples/core-utils/flex/ai.hbs
 
 Styleguide: core-utils.flex.ai
+*/
+
+/*
+Ac
+
+Align content.
+
+Ac-fs - top
+Ac-c - center
+Ac-fe - bottom
+Ac-sa - space-around
+Ac-sb - space-between
+
+Markup: ../../../docs/examples/core-utils/flex/ac.hbs
+
+Styleguide: core-utils.flex.ac
 */
 
 /*
@@ -1451,6 +1481,26 @@ Styleguide: core-utils.flex.mai
 
 .Fxw-wr {
 	flex-wrap: wrap-reverse;
+}
+
+.Ac-fs {
+	align-content: flex-start;
+}
+
+.Ac-fe {
+	align-content: flex-end;
+}
+
+.Ac-c {
+	align-content: center;
+}
+
+.Ac-sa {
+	align-content: space-around;
+}
+
+.Ac-sb {
+	align-content: space-between;
 }
 
 .As-s {
@@ -2377,6 +2427,10 @@ Styleguide: core-utils.bd.bds
 		--mlu-grid-cols: 12;
 	}
 
+	.-Gcc10_sm {
+		--mlu-grid-cols: 10;
+	}
+
 	.mV-vh_sm {
 		position: absolute;
 		width: 1px;
@@ -2573,6 +2627,10 @@ Styleguide: core-utils.bd.bds
 
 	.-Gcc_md {
 		--mlu-grid-cols: 12;
+	}
+
+	.-Gcc10_md {
+		--mlu-grid-cols: 10;
 	}
 
 	.-Gcc-sm_md {
@@ -2889,6 +2947,10 @@ Styleguide: core-utils.bd.bds
 		--mlu-grid-cols: 12;
 	}
 
+	.-Gcc10_lg {
+		--mlu-grid-cols: 10;
+	}
+
 	.-Gcc-sm_lg {
 		--mlu-grid-cols: 4;
 	}
@@ -3193,6 +3255,10 @@ Styleguide: core-utils.bd.bds
 
 	.-Gcc_xl {
 		--mlu-grid-cols: 12;
+	}
+
+	.-Gcc10_xl {
+		--mlu-grid-cols: 10;
 	}
 
 	.-Gcc-sm_xl {

@@ -351,7 +351,7 @@ Core utilities
 
 Set of utilities that can be used on any project.
 
-Utilities are grouped by sections. Each section lists the standard utilities that come with the MLUT core. Modified utilities, utilities with more values and non-standard values are allocated in subsections.
+Utilities are grouped by sections. The description of each section lists the values of the utilities that relate to it and are included in the MLUT core. Modified utilities, utilities with more values and non-standard values are allocated in subsections. Values of common utilities correspond to [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations([pdf](https://yadi.sk/i/VcKfz5u7DBHrLA)). If written that all values are available in the utility, you can see them in the Emmet cheat sheet from the link above.
 
 In the description of the utilities, there may be a '**Parameters**' item in which the available values are listed. Instead of the utility value, the '`initial`' keyword may be specified. We will get this effect when using the utility with no value. The range of values can be specified as `0..3`.
 
