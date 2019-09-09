@@ -3,6 +3,9 @@ Background
 
 Group of utilities for managing the background image of DOM node.
 
+* `Bga-f`
+* `Bga-l`
+
 Styleguide: core-utils.bg
 */
 
@@ -43,17 +46,6 @@ cv - cover. Stretches the background image so that it covers the entire space of
 ct - contain. Stretches the background image to the maximum possible size so it does not go beyond the background of the container. The image does not change the proportions.
 
 Styleguide: core-utils.bg.bgsz
-*/
-
-/*
-Bga
-
-Background attachment. It controls the behavior of the background when scrolling.
-
-f - fixed
-l - local
-
-Styleguide: core-utils.bg.bga
 */
 
 @include mlu-mk-util("Bgr", "background-repeat", (

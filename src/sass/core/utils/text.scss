@@ -52,13 +52,10 @@ Styleguide: core-utils.text.td
 /*
 Dir
 
-Direction. Sets direction of text and order items in row-layout. Responsive values available if [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags) is turned on.
+Direction. Unility available if [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags) turned on. Sets direction of text and order items in row-layout.
 
-* `Dir-l` - left to right *Responsive* only.
-
-Dir-r - right to left.
-
-Markup: ../../../docs/examples/core-utils/text/dir.hbs
+l - left to right *Responsive* only.
+r - right to left *Responsive*.
 
 Styleguide: core-utils.text.dir
 */
@@ -117,10 +114,6 @@ Styleguide: core-utils.text.mtov
 		"r_all": rtl,
 		"l_bp": ltr,
 	));
-} @else {
-	.Dir-r {
-		direction: rtl;
-	}
 }
 
 @if $MLU-FLAG-EXTENDED {

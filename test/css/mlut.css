@@ -373,7 +373,7 @@ Styleguide: core-utils
 /*
 Core styles
 
-You can find their in `sass/base/`.
+You can find their in `sass/core/`.
 
 Weight: 4
 
@@ -437,7 +437,7 @@ Remember that custom properties do not work in all browsers. This means that par
 
 In some blocks and utilities, custom properties are also used. Look for info about them in the description of the corresponding block or utility.
 
-You can find global CSS variables in `sass/core/_variables.scss`.
+You can find global CSS variables in `sass/core/variables.scss`.
 
 --mlu-gg = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
 Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
@@ -1018,42 +1018,10 @@ Styleguide: core-utils.custom.gcr
 /*
 Visual formatting
 
-* `D-tb`
-* `D-tbc`
-* `D-tbr`
-* `D-itb`
-* `sp_D-f` \- useful if the flexbox layout in IE11 has many bugs.
-* `Fl` \- turn on wrapping text on the right.
-* `Fl-r` \- turn on wrapping text on the left.
 * `Ol0`
 * `Op0`
 
 Styleguide: core-utils.visual
-*/
-
-/*
-mCl
-
-Modified clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
-
-Styleguide: core-utils.visual.mcl
-*/
-
-/*
-Ov
-
-Controls content display in case of overflow
-
-Ov - hidden.
-Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
-Ov.Ovx-a - auto. Scrollbar on X axis.
-Ov.Ovy-a - auto. Scrollbar on Y axis.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
-
-Styleguide: core-utils.visual.ov
 */
 
 /*
@@ -1067,53 +1035,6 @@ Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
 
 Styleguide: core-utils.visual.mv
 */
-
-/*
-mAll
-
-Modified `all`.
-
-* `sr` \- soft reset, reset some default browser styles:
-	* `margin`
-	* `padding`
-	* `border`
-	* `font`
-	* `list-style`
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/mall.html
-
-Styleguide: core-utils.visual.mall
-*/
-
-.Fl {
-	float: left;
-}
-
-.Fl-r {
-	float: right;
-}
-
-.mCl:after {
-	display: table;
-	clear: both;
-	content: "";
-}
-
-.Ov {
-	overflow: hidden;
-}
-
-.Ov-a {
-	overflow: auto;
-}
-
-.Ovx-a {
-	overflow-x: auto;
-}
-
-.Ovy-a {
-	overflow-y: auto;
-}
 
 .Ol0 {
 	outline: 0px;
@@ -1137,14 +1058,6 @@ Styleguide: core-utils.visual.mall
 	white-space: nowrap;
 	border: 0px;
 	clip: rect(0 0 0 0);
-}
-
-.mAll-sr {
-	margin: 0;
-	padding: 0;
-	font: inherit;
-	list-style: none;
-	border: 0;
 }
 
 /*
@@ -1256,6 +1169,12 @@ D
 
 Display. Sets the display type.
 
+* `D-tb`
+* `D-tbc`
+* `D-tbr`
+* `D-itb`
+* `sp_D-f` \- useful if the flexbox layout in IE11 has many bugs.
+
 D - block. The DOM node stretches on the full width of the container and creates line breaks before and after. *Responsive*.
 D-ib - inline-block. The width of the DOM node depends on the width of the content. Inline-blocks line up in one line like a letters and wrap if they don’t fit. *Responsive*.
 D-f - flex. Turns an DOM node into a flex container. Can be used to progressive enhancement the [row](section-core-blocks.html#kssref-core-blocks-row) layouts. Child DOM nodes will be stretched to the full height of the container. By default, child DOM nodes are not wrap to the new line and are compressed in width until they go beyond the line. *Responsive*.
@@ -1264,7 +1183,7 @@ D-n - none. Hides the DOM node as if it is not on the page. *Responsive*.
 
 Markup: ../../../docs/examples/core-utils/visual-formatting/d.hbs
 
-Styleguide: core-utils.visual.d
+Styleguide: core-utils.bxz.d
 */
 
 /*
@@ -1275,7 +1194,7 @@ Modified display.
 mD-f - `D-f` with line breaks.
 mD-if - `D-if` with `Fxw-w`.
 
-Styleguide: core-utils.visual.md
+Styleguide: core-utils.bxz.md
 */
 
 .D {
@@ -1630,16 +1549,52 @@ Box sizing
 
 Utilities for DOM nodes size management.
 
-* `Maw-fx0` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
-* `Maw100p`
-* `Maw-n`
 * `H100p`
 * `H0`
 * `Mih100vh`
 * `Mih100p`
 * `Bxz`
+* `Fl` \- turn on wrapping text on the right.
+* `Fl-r` \- turn on wrapping text on the left.
 
 Styleguide: core-utils.bxz
+*/
+
+/*
+Maw
+
+Max-width.
+
+fx0 - fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+100p - 100%
+n - none
+
+Styleguide: core-utils.bxz.maw
+*/
+
+/*
+mCl
+
+Modified clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
+
+Styleguide: core-utils.bxz.mcl
+*/
+
+/*
+Ov
+
+Controls content display in case of overflow
+
+Ov - hidden.
+Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
+Ov.Ovx-a - auto. Scrollbar on X axis.
+Ov.Ovy-a - auto. Scrollbar on Y axis.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
+
+Styleguide: core-utils.bxz.ov
 */
 
 .Maw-fx0 {
@@ -1648,10 +1603,6 @@ Styleguide: core-utils.bxz
 
 .Maw100p {
 	max-width: 100%;
-}
-
-.Maw50p {
-	max-width: 50%;
 }
 
 .Maw-n {
@@ -1676,6 +1627,36 @@ Styleguide: core-utils.bxz
 
 .Bxz {
 	box-sizing: border-box;
+}
+
+.Fl {
+	float: left;
+}
+
+.Fl-r {
+	float: right;
+}
+
+.mCl:after {
+	display: table;
+	clear: both;
+	content: "";
+}
+
+.Ov {
+	overflow: hidden;
+}
+
+.Ov-a {
+	overflow: auto;
+}
+
+.Ovx-a {
+	overflow-x: auto;
+}
+
+.Ovy-a {
+	overflow-y: auto;
 }
 
 /*
@@ -2091,13 +2072,10 @@ Styleguide: core-utils.text.td
 /*
 Dir
 
-Direction. Sets direction of text and order items in row-layout. Responsive values available if [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags) is turned on.
+Direction. Unility available if [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags) turned on. Sets direction of text and order items in row-layout.
 
-* `Dir-l` - left to right *Responsive* only.
-
-Dir-r - right to left.
-
-Markup: ../../../docs/examples/core-utils/text/dir.hbs
+l - left to right *Responsive* only.
+r - right to left *Responsive*.
 
 Styleguide: core-utils.text.dir
 */
@@ -2178,14 +2156,13 @@ Styleguide: core-utils.text.mtov
 	white-space: pre;
 }
 
-.Dir-r {
-	direction: rtl;
-}
-
 /*
 Background
 
 Group of utilities for managing the background image of DOM node.
+
+* `Bga-f`
+* `Bga-l`
 
 Styleguide: core-utils.bg
 */
@@ -2227,17 +2204,6 @@ cv - cover. Stretches the background image so that it covers the entire space of
 ct - contain. Stretches the background image to the maximum possible size so it does not go beyond the background of the container. The image does not change the proportions.
 
 Styleguide: core-utils.bg.bgsz
-*/
-
-/*
-Bga
-
-Background attachment. It controls the behavior of the background when scrolling.
-
-f - fixed
-l - local
-
-Styleguide: core-utils.bg.bga
 */
 
 .Bgr-n {
@@ -2393,6 +2359,56 @@ Styleguide: core-utils.bd.bds
 
 .Bdrs50p {
 	border-radius: 50%;
+}
+
+/*
+Animation
+
+* `Trs-all` \- transition duration sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
+
+Styleguide: core-utils.anim
+*/
+
+.Trs-all {
+	/* autoprefixer: off */
+	transition: all 0.3s;
+}
+
+/*
+Misc
+
+* `Rsz-n`
+
+Styleguide: core-utils.misc
+*/
+
+/*
+mAll
+
+Modified `all`.
+
+* `sr` \- soft reset, reset some default browser styles:
+	* `margin`
+	* `padding`
+	* `border`
+	* `font`
+	* `list-style`
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mall.html
+
+Styleguide: core-utils.misc.mall
+*/
+
+.Rsz-n {
+	resize: none;
+}
+
+.mAll-sr {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+	list-style: none;
+	border: 0;
 }
 
 /*===DESIGN-UTILS===*/

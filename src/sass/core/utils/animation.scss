@@ -1,0 +1,12 @@
+/*
+Animation
+
+* `Trs-all` \- transition duration sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
+
+Styleguide: core-utils.anim
+*/
+
+.Trs-all {
+	/* autoprefixer: off */
+	transition: all $mlu-Trsdu-df0;
+}
