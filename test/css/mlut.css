@@ -220,7 +220,7 @@ Utility
 An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
 
 Utility class names are formed according to the scheme:
-1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `nojs` - javascript disabled etc. Allowed several states in the same class. States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'. More about states [here](section-sass-tools.html#kssref-sass-tools-mixins-mk_state).
+1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `nojs` - javascript disabled etc. Allowed several states in the same class. States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'. More about states [below](#kssref-concepts-utility-states).
 1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations.
 1. optional value. Valid are:
 	* number
@@ -284,6 +284,32 @@ MLUT keywords and variables
 Weight: 0
 
 Styleguide: concepts.utility.mlut_kw_var
+*/
+
+/*
+States
+
+States in MLUT called the implementation of some features of the CSS using utilities, such as pseudo-classes, selectors combinators etc.
+States also include utilities values that work under certain conditions that are not related with CSS.
+Available states for utilities are listed in the [settings](section-sass-tools.html#kssref-sass-tools-settings-utils-states).
+States are created using the [mk-state](section-sass-tools.html#kssref-sass-tools-mixins-mk_state) mixin. It can create 3 types of states based on the types of values in the states map:
+1. pseudo-classes and pseudo-elements. In states map the value is a string - `"h": "hover"`
+1. multiple selectors with pseudo-classes. State value is a list - `"h-f": ("hover", "focus")`
+1. just the utilities values that work under certain conditions. State value is a null - `"nojs": null`
+
+In the core there are utilities with states whose creation has not yet been implemented:
+* `sp` \- utility inside the @supports at-rule. It will only work if the CSS property, value, or @supports supported by the browser.
+* `chl` \- utility will work on all children. Means `> *`.
+
+Using the `js` and `nojs` states, you can add utilities that work depending on the presence of javascript in the browser.
+* if you want the utility to work only when js is turned on, add the `js` state to it in the markup.
+* if the utility should work in the absence of js, create a value for it with the `nojs` state and use it.
+
+This mechanism is implemented using the `init.js` script.
+
+Weight: 0
+
+Styleguide: concepts.utility.states
 */
 
 /*
@@ -381,11 +407,21 @@ Styleguide: core-styles
 */
 
 /*
+Core scripts
+
+Scripts that complement the MLUT core functionality.
+
+Weight: 5
+
+Styleguide: core-scripts
+*/
+
+/*
 Sass tools
 
 Available when using MLUT as a [toolkit](section-start.html#kssref-start-usage).
 
-Weight: 5
+Weight: 6
 
 Styleguide: sass-tools
 */
@@ -395,7 +431,7 @@ Examples
 
 Additional examples of core blocks, utilities, tools and ready-made components. If in the markup you meet the `{{modifier_class}}` construct, then substitute the necessary classes from the examples instead of it, or just erase
 
-Weight: 6
+Weight: 7
 
 Styleguide: examples
 */
@@ -1136,7 +1172,6 @@ Styleguide: core-utils.pos.xy
 	top: 50%;
 	left: 50%;
 	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 }
 

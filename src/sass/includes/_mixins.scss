@@ -1165,18 +1165,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 
 // mlu-mk-state
 //
-// Generates values for utilities in various states. Names and values of states are set in the [settings](#kssref-sass-tools-settings-utils). Usually this mixin is not used separately because it is called inside [mlu-mk-util](#kssref-sass-tools-mixins-mk_util).
-//
-// Mixin can create 3 types of states based on the types of values in the states [map](#kssref-sass-tools-settings-utils-states):
-// 1. pseudo-classes and pseudo-elements. In states map the value is a string - `"h": "hover"`
-// 1. multiple selectors with pseudo-classes. State value is a list - `"h-f": ("hover", "focus")`
-// 1. just values with prefixed state. State value is a null - `"js": null`
-//
-// There are utilities with states whose creation has not yet been implemented:
-// * `sp` \- utility inside the @supports at-rule. It will only work if the CSS property, value, or @supports supported by the browser.
-// * `chl` \- utility will work on all children. Means `> *`.
-//
-// States naming convention see in [basic concepts](section-concepts.html#kssref-concepts-utility).
+// Generates values for utilities in various [states](section-concepts.html#kssref-concepts-utility-states). Names and values of states are set in the [settings](#kssref-sass-tools-settings-utils-states). Usually this mixin is not used separately because it is called inside [mlu-mk-util](#kssref-sass-tools-mixins-mk_util).
 //
 // ```scss
 //@include mlu-mk-state(".Bgc-mn0", ("h")) {
@@ -1284,7 +1273,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 // $prop - CSS property name.
 // $map - map with utilities names values and CSS properties values.
 // $bp = false - breakpoint on which utility values will be generated. Can be any breakpoint from the settings or a special value: `bp` and `all`.
-// $states = false - list of state names. For each value of the utility, all states from this list will be generated. Info about states see [here](#kssref-sass-tools-mixins-mk_state).
+// $states = false - list of state names. For each value of the utility, all states from this list will be generated. Info about states see [here](section-concepts.html#kssref-concepts-utility-states).
 // $direct = null - service argument which used only by [mk-util-direction](#kssref-sass-tools-mixins-mk_util_dir).
 //
 // Styleguide: sass-tools.mixins.mk_util

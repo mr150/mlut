@@ -64,8 +64,7 @@ path = Object.assign({
 			path.test.css + "test.css",
 		],
 		js: [
-			path.src.js + "mlut.js",
-			path.src.js + "includes/" + files.js,
+			path.src.js + files.js,
 			dirs.libs + files.js
 		]
 	}
@@ -129,12 +128,12 @@ gulp.task("scripts", function(){
 		.pipe(plumber())
 		.pipe(rigger())
 		.pipe(sourcemaps.init())
-		.pipe(rename("scripts.js"))
 		.pipe(gulp.dest(path.test.js))
 		.pipe(uglify())
 		.pipe(rename({suffix: ".min"}))
 		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build.js))
+		.pipe(gulp.dest(dirs.docs + "styleguide/kss-assets/"))
 		.pipe(sourcemaps.write(""))
 		.pipe(gulp.dest(path.test.js))
 		.pipe(browserSync.stream());
@@ -166,7 +165,7 @@ gulp.task("default", gulp.parallel("server", "style", "pug", "scripts", function
 	gulp.watch(path.watch.styles, gulp.parallel("style", "kss"));
 	gulp.watch(path.watch.pug, gulp.series("pug"));
 	gulp.watch(path.watch.html, gulp.series("html"));
-	gulp.watch(path.watch.js, gulp.series("scripts"));
+	gulp.watch(path.watch.js, gulp.series("scripts", "kss"));
 	gulp.watch(path.watch.docs, gulp.series("kss"));
 }));
 
