@@ -1,0 +1,53 @@
+// Getters from utils map
+//
+// Functions for conveniently retrieving values from a map of utility values. They help to use utilities values in common CSS rules. If there is no value in the map, an error will occur.
+//
+// Functions names have the same form: `mlu-#{utility name}`. Each function has 1 argument - a *key* in the map. Each function corresponds to a map whose name has the form of a `mlu-#{Utility name}-map`. By default, these maps are empty. To start using the functions, add your values to the map you need, as in the example below.
+// ```scss
+//$C-map: (
+//		"f": #fff,
+//		"mn1": #c05,
+//);
+//
+//$mlu-C-map: $C-map;
+//
+//mlu-c("mn1") => #co5
+// ```
+// Available functions and maps corresponding to them:
+// * `mlu-c` \- `$mlu-C-map`
+// * `mlu-fz` \- `$mlu-Fz-map`
+// * `mlu-bgi` \- `$mlu-Bgi-map`
+//
+// $key - *key* for the value in the map.
+//
+// Styleguide: sass-tools.functions.map_getters
+
+$mlu-C-map: () !default;
+
+@function mlu-c($key) {
+	@if map-has-key($mlu-C-map, $key) {
+		@return map-get($mlu-C-map, $key);
+	}
+
+	@error "Invalid color name. '#{$key}' is not defined in $mlu-C-map";
+}
+
+$mlu-Fz-map: () !default;
+
+@function mlu-fz($key) {
+	@if map-has-key($mlu-Fz-map, $key) {
+		@return map-get($mlu-Fz-map, $key);
+	}
+
+	@error "Invalid font-size name. '#{$key}' is not defined in $mlu-Fz-map";
+}
+
+$mlu-Bgi-map: () !default;
+
+@function mlu-bgi($key) {
+	@if map-has-key($mlu-Bgi-map, $key) {
+		@return map-get($mlu-Bgi-map, $key);
+	}
+
+	@error "Invalid background-image name. '#{$key}' is not defined in $mlu-Bgi-map";
+}

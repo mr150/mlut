@@ -386,3 +386,5 @@ Styleguide: sass-tools.functions
 
 	@return if(str-slice($name, 1, 1) == ".", $name, "." + $name);
 }
+
+@import "utils-map-getters";
