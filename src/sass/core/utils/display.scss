@@ -43,14 +43,6 @@ $mlu-D-map: (
 	"n_all": none,
 );
 
-@if $MLU-FLAG-EXTENDED {
-	$mlu-D-map: map-merge($mlu-D-map,
-	(
-		"i": inline,
-		"tbfg": table-footer-group,
-	));
-}
-
 @include mlu-mk-util("D", "display", $mlu-D-map);
 
 .mD-f {

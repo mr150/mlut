@@ -1,0 +1,38 @@
+/*
+Mixins-wrappers
+
+Additional [mixins wrappers](section-sass-tools.html#kssref-sass-tools-mixins-util_wrappers) over mk-util to create utilities. Note that the naming for these mixins is the same as for the rest of the similar ones - their names begin with `mlu-mk-`.
+
+* Box-model: `W`
+* Typografy: `Lts`, `Tsh`
+* Visual: `Bxsh`, `Ol`
+* Animation: `Trs`
+
+Weight: 0
+
+Styleguide: sass_modules.core_extend.mixins
+*/
+
+@mixin mlu-mk-Bxsh($map, $bp: null, $states: null) {
+	@include mlu-mk-util($map, "Bxsh", "box-shadow", $bp, $states);
+}
+
+@mixin mlu-mk-Lts($map, $bp: null, $states: null) {
+	@include mlu-mk-util($map, "Lts", "letter-spacing", $bp, $states);
+}
+
+@mixin mlu-mk-Trs($map, $bp: null, $states: null) {
+	@include mlu-mk-util($map, "Trs", "transition", $bp, $states);
+}
+
+@mixin mlu-mk-W($map, $bp: null, $states: null) {
+	@include mlu-mk-util($map, "W", "width", $bp, $states);
+}
+
+@mixin mlu-mk-Tsh($map, $bp: null, $states: null) {
+	@include mlu-mk-util($map, "Tsh", "text-shadow", $bp, $states);
+}
+
+@mixin mlu-mk-Ol($map, $bp: null, $states: null) {
+	@include mlu-mk-util($map, "Ol", "outline", $bp, $states);
+}

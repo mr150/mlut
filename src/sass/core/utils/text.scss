@@ -115,13 +115,3 @@ Styleguide: core-utils.text.mtov
 		"l_bp": ltr,
 	));
 }
-
-@if $MLU-FLAG-EXTENDED {
-	.Ta-j {
-		text-align: justify;
-	}
-
-	.Td-o {
-		text-decoration: overline;
-	}
-}

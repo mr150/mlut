@@ -190,16 +190,6 @@ Styleguide: concepts.modifier
 */
 
 /*
-BEM entity
-
-Blocks, elements, and modifiers are all called BEM entities. For now, BEM entities in MLUT are represented as CSS classes.
-
-Weight: 4
-
-Styleguide: concepts.bem_entity
-*/
-
-/*
 Breakpoint
 
 The width of the screen on which the styles change. In MLUT, the default breakpoints are:
@@ -313,16 +303,6 @@ Styleguide: concepts.utility.states
 */
 
 /*
-Layout
-
-The relative layout of DOM nodes on the page.
-
-Weight: 7
-
-Styleguide: concepts.layout
-*/
-
-/*
 Space unit
 
 Abbreviated '`su`'. Units of measure for any dimensions. Widths, indents, line height, etc. By default, 1su is 4px. All sizes and indents in MLUT are multiple 1su.
@@ -427,11 +407,23 @@ Styleguide: sass-tools
 */
 
 /*
+Sass modules
+
+Themes, tools, utility sets, and more.
+
+Names of variables, mixins, and sass functions in modules must have prefixes `mabbreviated module name`. The names of common CSS classes in modules must comply with BEM naming rules.
+
+Weight: 7
+
+Styleguide: sass_modules
+*/
+
+/*
 Examples
 
 Additional examples of core blocks, utilities, tools and ready-made components. If in the markup you meet the `{{modifier_class}}` construct, then substitute the necessary classes from the examples instead of it, or just erase
 
-Weight: 7
+Weight: 8
 
 Styleguide: examples
 */
@@ -439,7 +431,7 @@ Styleguide: examples
 /*
 Settings
 
-Grid settings, compilation flags, constants and more. All core settings are in the `sass/includes/_settings.scss`.
+Grid settings, compilation flags, constants and more. All core settings are in the `sass/tools/_settings.scss`.
 
 Styleguide: sass-tools.settings
 */
@@ -447,7 +439,7 @@ Styleguide: sass-tools.settings
 /*
 Functions
 
-Useful functions. All MLUT functions have 'mlu' prefix. You can find all functions in `sass/includes/_functions.scss`.
+Useful functions. All MLUT functions have 'mlu' prefix. You can find all functions in `sass/tools/_functions.scss`.
 
 Styleguide: sass-tools.functions
 */
@@ -455,7 +447,7 @@ Styleguide: sass-tools.functions
 /*
 Mixins
 
-Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sass/includes/_mixins.scss`.
+Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sass/tools/_mixins.scss`.
 
 Styleguide: sass-tools.mixins
 */
@@ -927,13 +919,17 @@ Styleguide: core-blocks.input
 	border: 0;
 }
 
-/*===DESIGN-BLOCKS===*/
-
 /*
-@include mlu-mk-state(".Pos-f", ("js", "nojs"), 0) {
-	position: fixed;
-}
+Styling helpers
+
+Useful Sass tools set for designing mockup.
+
+Weight: 0
+
+Styleguide: sass_modules.styl_help
 */
+
+/*===DESIGN-STYLES===*/
 
 /*===CORE-UTILS===*/
 
