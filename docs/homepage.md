@@ -5,19 +5,25 @@ Toolkit for quick development of lightweight, easily changeable and mobile-first
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
 
 ## Structure ##
-- BEM blocks
-- CSS utilities
-- Developer tools
+- CSS library
+- JS library
+- Sass tools
 
-For now MLUT contains Sass tools and CSS library.
-
-### Concept ###
+### Library ###
 The library part of toolkit united in itself ideas from [Atomic CSS](https://acss.io/) and [BEM](https://bem.info/). It consists of 2 layers:
 
-- Core - all that can be used at each website. This layer contains BEM blocks and CSS utilities.
-- Theme - something that is only used in specific design theme. Theme can be used on different sites. This layer may contain utilities, scripts and styles with BEM naming.
+- Core - all that can be used at any project. This layer contains BEM blocks, CSS utilities and simple optional scripts.
+- Modules - themes, utilities sets and scripts, that can be reused in different projects.
 
-You can add your 'design' layer - parts of UI for a specific website. It may contain any styles and scripts.
+In most projects, you will probably need to add another “design” layer that will be specific to your interface. It may contain any styles and scripts.
+
+### Tools ###
+Sass tools include:
+
+- settings based on which the CSS library is generated.
+- mixins and functions. Most of them are needed to generate the library, but can also be used for UI creating.
+
+Most modules use existing MLUT Sass tools, but some may contain new ones or entirely consist of them.
 
 ## Technologies ##
 - [LibSass](https://github.com/sass/libsass)
@@ -33,7 +39,7 @@ You can add your 'design' layer - parts of UI for a specific website. It may con
 - [Pug](https://github.com/pugjs/pug)
 
 ## Supported browsers ##
-[Autoprefixer](https://github.com/postcss/autoprefixer) use [this](https://github.com/mr150/mlut/blob/master/.browserslistrc) `.browserslist` during assembly. Tested in last versions of modern browsers and some old:
+Autoprefixer use [this](https://github.com/mr150/mlut/blob/master/.browserslistrc) `browserslist` during assembly. Tested in last versions of modern browsers and some old:
 - Desktop
 	- Firefox - last, ESR
 	- Chrome
