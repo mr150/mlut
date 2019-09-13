@@ -7,9 +7,9 @@
 //
 // Mixins for common utilities:
 // * Positioning: `Z`
-// * Box-model: `Maw`, `Mih`
+// * Box-model: `W`, `Maw`, `Mih`
 // * Typografy: `Fw`, `Fz`, `Ff`, `C`, `Lh`
-// * Visual: `Bgc`, `Bdc`, `Bdw`, `Bdrs`, `Trf`, `O`
+// * Visual: `Bgc`, `Bdc`, `Bdw`, `Bdrs`, `Trf`, `Op`
 //
 // For custom utilities:
 // * `-Gcc`
@@ -32,6 +32,10 @@
 
 @mixin mlu-mk-Z($map, $bp: null, $states: null) {
 	@include mlu-mk-util("Z", "z-index", $map, $bp, $states);
+}
+
+@mixin mlu-mk-W($map, $bp: null, $states: null) {
+	@include mlu-mk-util("W", "width", $map, $bp, $states);
 }
 
 @mixin mlu-mk-Maw($map, $bp: null, $states: null) {
@@ -94,8 +98,8 @@
 	@include mlu-mk-util("Trf", "transform", $map, $bp, $states);
 }
 
-@mixin mlu-mk-O($map, $bp: null, $states: null) {
-	@include mlu-mk-util("O", "opacity", $map, $bp, $states);
+@mixin mlu-mk-Op($map, $bp: null, $states: null) {
+	@include mlu-mk-util("Op", "opacity", $map, $bp, $states);
 }
 
 @mixin mlu-mk--Gcc($map, $bp: null, $states: null) {
