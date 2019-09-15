@@ -211,7 +211,7 @@ An entity that, depending on the parameters, does 1 action with the DOM node sty
 
 Utility class names are formed according to the scheme:
 1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `nojs` - javascript disabled etc. Allowed several states in the same class. States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'. More about states [below](#kssref-concepts-utility-states).
-1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations.
+1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations([pdf](https://yadi.sk/i/VcKfz5u7DBHrLA)).
 1. optional value. Valid are:
 	* number
 	* CSS or MLUT keywords
@@ -409,9 +409,26 @@ Styleguide: sass-tools
 /*
 Sass modules
 
-Themes, tools, utility sets, and more.
+Modules include themes, tools, utility sets, and more. Now there are not many modules included in MLUT, so their documentation will be in this section.
 
-Names of variables, mixins, and sass functions in modules must have prefixes `mabbreviated module name`. The names of common CSS classes in modules must comply with BEM naming rules.
+Names of variables, mixins, and sass functions in modules must have prefixes `mabbreviated module name`. For themes, this prefix should look like: `mttheme name`. The names of common CSS classes in modules must comply with [BEM](https://ru.bem.info/) naming rules.
+
+## Themes
+
+Design theme can be used on different sites. They may contain utilities, styles with BEM naming, tools and more. Theme example see [here](section-sass_modules.html#kssref-sass_modules-demo_theme).
+
+Each theme consists of at least 2 parts: *config* and *init*.
+- the config contains data on the basis of which the theme is created: variables, maps with utility values, etc.
+- in the init file all parts of the theme and, if necessary, other modules are included. After including all required parts, the theme is generated.
+
+Themes can be imported to the MLUT assembly for make a single bundle or builded as separate files. To add a theme to your styles, just import an int file. You can also use only the theme config to make it custom build.
+
+The theme documentation is up to you. At a minimum, you should specify:
+- main colors
+- dependencies
+- info about unusual parts of the theme, such as mixins, additional styles, etc.
+
+Following these rules you can create your own module. Your module can be added to MLUT. To do this, send a issue, pull-request or contact the maintainer in any other way. Also you can create your own modules collection in a separate repository.
 
 Weight: 7
 
