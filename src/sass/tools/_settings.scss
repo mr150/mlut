@@ -25,16 +25,16 @@ git clone https://github.com/mr150/mlut.git
 ```
 npm i mlut -D
 ```
-### Download ###
-Download assembled CSS from [here](https://unpkg.com/mlut@latest/dist/css/mlut.min.css) or link it from A-ERP server:
-```html
-<link href="http://a-erp.com/data/190417/2244293679379737.css" rel="stylesheet">
-```
 
 ### CDN ###
 ```html
 <link href="https://unpkg.com/mlut@latest/dist/css/mlut.min.css" rel="stylesheet">
 ```
+```html
+<script src="https://unpkg.com/mlut@latest/dist/js/mlut.min.js"></script>
+```
+### Download ###
+Download assembled files: [CSS](https://unpkg.com/mlut@latest/dist/css/mlut.min.css), [JS](https://unpkg.com/mlut@latest/dist/js/mlut.min.js)
 
 Weight: 0
 
@@ -57,17 +57,19 @@ and the responsive viewport meta tag:
 ### Distributive ###
 You can get assembled MLUT code and include it to your project. There are some ways to get a distributive.
 
+- just plug in with CDN
 - if used `git clone`, files are located in the `dist/` folder
 - if used `npm`, files are in `node_modules/mlut/dist/`
 
 Add the file to your page like here:
 ```html
 <link href="css/mlut.min.css" rel="stylesheet">
+<script src="js/mlut.min.js"></script>
 ```
 And just add MLUT classes to markup:
 ```html
 <div class="row D-f">
-	<div class="row__col W3gs_md">
+	<div class="row__col W3c_md">
 		<h3>Simple text</h3>
 ```
 Try [examples](section-examples.html) with ready HTML.
@@ -100,14 +102,14 @@ npm run build
 #### Styles ####
 Once the assembly is configured, import sass tools and settings to your `style.scss`
 ```scss
-@import "includes/settings";
-@import "includes/functions";
-@import "includes/mixins";
+@import "tools/settings";
+@import "tools/functions";
+@import "tools/mixins";
 ```
-Then you can import blocks and utilities how it is done in the `src/sass/mlut.scss` to get the standard build. Or you can import only what you need:
+Then you can import blocks and utilities how it is done in the [src/sass/mlut.scss](https://github.com/mr150/mlut/blob/master/src/sass/mlut.scss) to get the standard build. Or you can import only what you need:
 ```scss
-@import "../core-blocks/wrapper/wrapper";
-@import "../core-utils/display";
+@import "core/blocks/wrapper";
+@import "core/utils/display";
 
 @include mlu-bpm("md") {
 	.input--common {
@@ -129,20 +131,6 @@ Before reading the documentation, learn MLUT basic concepts.
 Weight: 1
 
 Styleguide: concepts
-*/
-
-/*
-DOM node
-
-HTML-element. Any tag on the page. For example:
-```html
-<p>This is DOM node</p>
-<div>I am DOM node too</div>
-```
-
-Weight: 0
-
-Styleguide: concepts.dom_node
 */
 
 /*
@@ -269,9 +257,22 @@ MLUT keywords and variables
 
 **MLUT variables** exist only at the agreement level. Essentially, they are similar to Sass variables, which are compiled into CSS values. They can take any value, including CSS custom properties. Variable name can contain only lowercase letters and numbers, and must also end in a number: `bd0`, `gr2` etc. Example: [Maw-fx0](section-core-utils.html#kssref-core-utils-bxz).
 
-Weight: 0
+Weight: 1
 
 Styleguide: concepts.utility.mlut_kw_var
+*/
+
+/*
+Creation
+
+For convenient creation of frequently used utilities, a [group of mixins](section-sass-tools.html#kssref-sass-tools-mixins-util_wrappers) has been prepared. They are wrappers over the main mixins for creating utilities:
+- [mk-util](section-sass-tools.html#kssref-sass-tools-mixins-mk_util)
+- [mk-util-directions](section-sass-tools.html#kssref-sass-tools-mixins-mk_util_dir)
+- [mk-state](section-sass-tools.html#kssref-sass-tools-mixins-mk_state)
+
+Weight: 2
+
+Styleguide: concepts.utility.creation
 */
 
 /*
@@ -295,7 +296,7 @@ Using the `js` and `nojs` states, you can add utilities that work depending on t
 
 This mechanism is implemented using the `init.js` script.
 
-Weight: 0
+Weight: 1
 
 Styleguide: concepts.utility.states
 */
@@ -424,6 +425,7 @@ Themes can be imported to the MLUT assembly for make a single bundle or builded 
 The theme documentation is up to you. At a minimum, you should specify:
 - main colors
 - dependencies
+- gzipped size
 - info about unusual parts of the theme, such as mixins, additional styles, etc.
 
 Following these rules you can create your own module. Your module can be added to MLUT. To do this, send a issue, pull-request or contact the maintainer in any other way. Also you can create your own modules collection in a separate repository.
