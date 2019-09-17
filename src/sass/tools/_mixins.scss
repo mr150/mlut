@@ -899,7 +899,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 // $map - map with utilities names values and CSS properties values.
 // $bp = false - breakpoint on which utility values will be generated. Can be any breakpoint from the settings or a special value: `bp` and `all`.
 // $states = false - list of state names. For each value of the utility, all states from this list will be generated. Info about states see [here](section-concepts.html#kssref-concepts-utility-states).
-// $direct = null - service argument which used only by [mk-util-direction](#kssref-sass-tools-mixins-mk_util_dir).
+// $direct = null - service argument which used only by [mk-util-directions](#kssref-sass-tools-mixins-mk_util_dir).
 //
 // Styleguide: sass-tools.mixins.mk_util
 
