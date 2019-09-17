@@ -14,7 +14,7 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 // Bpm is breakpoint manager.
 // ```scss
 // @include mlu-bpm("md") {
-//		.input--common {
+//		.inp--common {
 //			padding-left: 48px;
 //		}
 // }
@@ -34,7 +34,7 @@ $mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 // Compile into:
 // ```css
 // @media (min-width: 760px) {
-//		.input--common {
+//		.inp--common {
 //			padding-left: 48px;
 //		}
 // }

@@ -114,7 +114,7 @@ Then you can import blocks and utilities how it is done in the [src/sass/mlut.sc
 @import "core/utils/display";
 
 @include mlu-bpm("md") {
-	.input--common {
+	.inp--common {
 		padding: mlu-px2em(16px) 16px;
 	}
 }
@@ -920,16 +920,16 @@ Styleguide: core-blocks.btn
 }
 
 /*
-Input
+Inp
 
 Block for creating inputs. Normalizes styles.
 
-Markup: ../../../docs/examples/core-blocks/input/input.html
+Markup: ../../../docs/examples/core-blocks/inp/inp.html
 
-Styleguide: core-blocks.input
+Styleguide: core-blocks.inp
 */
 
-.input {
+.inp {
 	display: inline-block;
 	box-sizing: border-box;
 	margin: 0px;
