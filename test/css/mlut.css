@@ -348,7 +348,7 @@ Core blocks
 
 Set of universal [blocks](section-concepts.html#kssref-concepts-block) for using on any project. Some blocks contain [elements](section-concepts.html#kssref-concepts-element) and [modifiers](section-concepts.html#kssref-concepts-modifier).
 
-Core blocks don't contain, or almost don't contain styles such as colors, backgrounds, etc. Such styles are set on the 'theme' or 'design' layers. To style blocks or their elements, use utilities or modifiers such as `block--mod`.
+Core blocks don't contain, or almost don't contain styles such as colors, backgrounds, etc. Such styles are set on the theme or 'design' layer. To style blocks or their elements, use utilities or modifiers such as `block--mod`.
 
 Weight: 2
 
@@ -531,22 +531,6 @@ legend {
 }
 
 /*===CORE-BLOCKS===*/
-
-/*
-Page
-
-Block for normalize browser styles of `body`. Designed for `body` tag.
-
-It has `height: 100%` for sticky footer.
-
-Styleguide: core-blocks.page
-*/
-
-.page {
-	height: 100%;
-	margin: 0px;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-}
 
 /*
 Row
@@ -2018,6 +2002,7 @@ Styleguide: core-utils.padding.px
 Font
 
 * `F-i`
+* `Ff-ss0` \- sans serif system fonts stack. Sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
 * `Fw400` \- normal font weight.
 * `Fw700` \- **bold**.
 * `Fs` \- *italic*.
@@ -2039,6 +2024,10 @@ Styleguide: core-utils.f.mfz
 
 .F-i {
 	font: inherit;
+}
+
+.Ff-ss0 {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
 .Fw400 {
