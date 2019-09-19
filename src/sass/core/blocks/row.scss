@@ -214,10 +214,10 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	@if $MLU-FLAG-CSS-VARS != 2 {
 		font-size: $mlu-base-font-size;
 		font-size: mlu-px2rem($mlu-base-font-size);
-		white-space: normal;
 
 		@if $MLU-FLAG-FLEX-PE {
 			text-align: left;
+			white-space: normal;
 			direction: ltr;
 		}
 

@@ -750,7 +750,6 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	vertical-align: top;
 	font-size: 16px;
 	font-size: 1rem;
-	white-space: normal;
 }
 
 .row__col.row,
@@ -1171,6 +1170,7 @@ Styleguide: core-utils.pos.xy
 	top: 50%;
 	left: 50%;
 	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 }
 
@@ -1538,6 +1538,7 @@ If you specify the width in grid units on one breakpoint, then the width is pres
 
 * `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-visual-d). *Responsive*.
 * `W-i` \- inherit value from parent DOM node. *Responsive*.
+* `W100p` \- for browsers which not support custom properties.
 * `W1c..W4c` \- range of available width in variable columns on `xs` and `sm` breakpoints, because on `xs` and `sm`, grid has 4 columns. See grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
 * `W1c..W12c` \- available width in `c` on all breakpoints, starting with `md`.
 
@@ -1568,6 +1569,10 @@ Styleguide: core-utils.bxz.w
 	--gc: 4;
 	width: calc(100% - 32px);
 	width: var(--gc-rule, 100%);
+}
+
+.W100p {
+	width: 100%;
 }
 
 .W-a {

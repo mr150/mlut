@@ -10,7 +10,7 @@ Markup: ../../../docs/examples/core-scripts/init.html
 Styleguide: core-scripts.init
 */
 
-(function(){
+;(function(){
 	"use strict"
 
 	var nodesWithJsUtils = document.querySelectorAll("[class*='js_']"),
