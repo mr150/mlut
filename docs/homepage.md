@@ -1,12 +1,23 @@
 # My Little UI Toolkit #
-Toolkit for quick development of lightweight, easily changeable and mobile-first website UI with progressive enhancement.
+Atomic CSS based, modular and lightweight toolkit with progressive enhancement.
 
 [![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
 
+## Features ##
+- Strong naming conventions: [Emmet](https://github.com/emmetio) abbreviations and BEM naming
+- Lightweight: CSS core ~3.8KB, themes from 0.8KB
+- Modular and easily extensible
+- Designed with progressive enhancement
+- Well customizable
+- Advanced grid system with CSS custom properties
+- Responsive and mobile first
+- Reusable across projects
+- Written in Sass and vanilla JS
+
 ## Structure ##
 - CSS library
-- JS library
+- JS library (optional)
 - Sass tools
 
 ### Library ###
@@ -15,7 +26,7 @@ The library part of toolkit united in itself ideas from [Atomic CSS](https://acs
 - Core - all that can be used at any project. This layer contains BEM blocks, CSS utilities and simple optional scripts.
 - Modules - themes, utilities sets and scripts, that can be reused in different projects.
 
-In most projects, you will probably need to add another “design” layer that will be specific to your interface. It may contain any styles and scripts.
+In most projects, you will probably need to add another "design" layer that will be specific to your interface. It may contain any styles and scripts.
 
 ### Tools ###
 Sass tools include:
