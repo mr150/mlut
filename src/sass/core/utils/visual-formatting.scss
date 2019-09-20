@@ -1,0 +1,44 @@
+/*
+Visual formatting
+
+* `Ol0`
+* `Op0`
+
+Styleguide: core-utils.visual
+*/
+
+/*
+mV
+
+Modified visibility.
+
+mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all. *Responsive*.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
+
+Styleguide: core-utils.visual.mv
+*/
+
+.Ol0 {
+	outline: 0px;
+
+	&::-moz-focus-inner {
+		border: 0;
+	}
+}
+
+.Op0 {
+	opacity: 0;
+}
+
+@include mlu-bp-all(".mV-vh") {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0px;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 0px;
+	clip: rect(0 0 0 0);
+}

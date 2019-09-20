@@ -1,0 +1,49 @@
+/*
+W
+
+Width. You can set width in the variable columns(`c`).
+
+If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
+
+* `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-visual-d). *Responsive*.
+* `W-i` \- inherit value from parent DOM node. *Responsive*.
+* `W100p` \- for browsers which not support custom properties.
+* `W1c..W4c` \- range of available width in variable columns on `xs` and `sm` breakpoints, because on `xs` and `sm`, grid has 4 columns. See grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
+* `W1c..W12c` \- available width in `c` on all breakpoints, starting with `md`.
+
+Markup: ../../../docs/examples/core-utils/box-sizing/w.html
+
+Styleguide: core-utils.bxz.w
+*/
+
+@for $i from 1 through $mlu-grid-cols-xs {
+	.W#{$i}c {
+		@include mlu-W($i * 1c, $cols: $mlu-grid-cols-xs);
+	}
+}
+
+// Generate grid utilities W and Ml on breakpoints
+@each $key, $value in $mlu-grid-cols {
+	@for $i from 1 through $value {
+		.W#{$i}c_#{$key} {
+			@include mlu-W($i * 1c, $key, $value);
+		}
+
+		// Offsets start generate from $mlu-bp-md and if offset flag turn on.
+		// '$i < mlu-grid-cols-count($gtr-key) - 1' because
+		// offset like 'Ml11c' makes no sense
+		@if $MLU-FLAG-COL-OFFSET and
+			mlu-bp($key) > mlu-bp($mlu-bp-sm) and
+			$i < $value - 1 {
+			.Ml#{$i}c_#{$key} {
+				@include mlu-Ml($i * 1c, $key, $value);
+			}
+		}
+	}
+}
+
+@include mlu-mk-W((
+	"100p": 100%,
+	"a_all": auto,
+	"i_all": inherit,
+));

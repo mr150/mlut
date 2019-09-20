@@ -1,0 +1,84 @@
+/*
+Background
+
+Group of utilities for managing the background image of DOM node.
+
+* `Bga-f`
+* `Bga-l`
+
+Styleguide: core-utils.bg
+*/
+
+/*
+Bgp
+
+Position of background.
+
+t - top
+r - right
+b - bottom
+c - center
+rt - right top
+rb - right bottom
+lb - left bottom
+
+Styleguide: core-utils.bg.bgp
+*/
+
+/*
+Bgr
+
+Repeat of background.
+
+n - no repeat
+x - repeat on X axis
+y - repeat on Y
+
+Styleguide: core-utils.bg.bgr
+*/
+
+/*
+Bgsz
+
+Background size.
+
+cv - cover. Stretches the background image so that it covers the entire space of the container.
+ct - contain. Stretches the background image to the maximum possible size so it does not go beyond the background of the container. The image does not change the proportions.
+
+Styleguide: core-utils.bg.bgsz
+*/
+
+@include mlu-mk-util("Bgr", "background-repeat", (
+	"n": no-repeat,
+	"x": repeat-x,
+	"y": repeat-y,
+));
+
+$mlu-Bgp-map: (
+	"c": center,
+);
+
+@each $key, $value in $mlu-main-directions {
+	@if $key != "l" {
+		$mlu-Bgp-map: map-merge($mlu-Bgp-map, ($key: $value));
+	}
+}
+
+$mlu-Bgp-map: map-merge($mlu-Bgp-map,
+(
+	"rt": right top,
+	"rb": right bottom,
+	"lb": left bottom,
+));
+
+@include mlu-mk-util("Bgp", "background-position", $mlu-Bgp-map);
+
+@include mlu-mk-util("Bgsz", "background-size", (
+	"cv": cover,
+	"ct": contain,
+));
+
+@include mlu-mk-util("Bga", "background-attachment", (
+	"f": fixed,
+	"l": local,
+));

@@ -27,16 +27,16 @@ git clone https://github.com/mr150/mlut.git
 ```
 npm i mlut -D
 ```
-### Download ###
-Download assembled CSS from [here](https://unpkg.com/mlut@latest/dist/css/mlut.min.css) or link it from A-ERP server:
-```html
-<link href="http://a-erp.com/data/190417/2244293679379737.css" rel="stylesheet">
-```
 
 ### CDN ###
 ```html
 <link href="https://unpkg.com/mlut@latest/dist/css/mlut.min.css" rel="stylesheet">
 ```
+```html
+<script src="https://unpkg.com/mlut@latest/dist/js/mlut.min.js"></script>
+```
+### Download ###
+Download assembled files: [CSS](https://unpkg.com/mlut@latest/dist/css/mlut.min.css), [JS](https://unpkg.com/mlut@latest/dist/js/mlut.min.js)
 
 Weight: 0
 
@@ -59,17 +59,19 @@ and the responsive viewport meta tag:
 ### Distributive ###
 You can get assembled MLUT code and include it to your project. There are some ways to get a distributive.
 
+- just plug in with CDN
 - if used `git clone`, files are located in the `dist/` folder
 - if used `npm`, files are in `node_modules/mlut/dist/`
 
 Add the file to your page like here:
 ```html
 <link href="css/mlut.min.css" rel="stylesheet">
+<script src="js/mlut.min.js"></script>
 ```
 And just add MLUT classes to markup:
 ```html
 <div class="row D-f">
-	<div class="row__col W3gs_md">
+	<div class="row__col W3c_md">
 		<h3>Simple text</h3>
 ```
 Try [examples](section-examples.html) with ready HTML.
@@ -77,7 +79,7 @@ Try [examples](section-examples.html) with ready HTML.
 ### Toolkit ###
 To use all MLUT features you need an assembly. There are 3 ways:
 
-- If you don't want to develop MLUT, it's recommended to use [MLUT project template](https://github.com/mr150/mlut-project)
+- Recommended to use [MLUT project template](https://github.com/mr150/mlut-project)
 - [Clone](#kssref-start-install) MLUT repo and use configured assembly from it
 - Setup assembly yourself use [technologies list](./)
 
@@ -102,17 +104,17 @@ npm run build
 #### Styles ####
 Once the assembly is configured, import sass tools and settings to your `style.scss`
 ```scss
-@import "includes/settings";
-@import "includes/functions";
-@import "includes/mixins";
+@import "tools/settings";
+@import "tools/functions";
+@import "tools/mixins";
 ```
-Then you can import blocks and utilities how it is done in the `src/sass/mlut.scss` to get the standard build. Or you can import only what you need:
+Then you can import blocks and utilities how it is done in the [src/sass/mlut.scss](https://github.com/mr150/mlut/blob/master/src/sass/mlut.scss) to get the standard build. Or you can import only what you need:
 ```scss
-@import "../core-blocks/wrapper/wrapper";
-@import "../core-utils/display";
+@import "core/blocks/wrapper";
+@import "core/utils/display";
 
 @include mlu-bpm("md") {
-	.input--common {
+	.inp--common {
 		padding: mlu-px2em(16px) 16px;
 	}
 }
@@ -131,20 +133,6 @@ Before reading the documentation, learn MLUT basic concepts.
 Weight: 1
 
 Styleguide: concepts
-*/
-
-/*
-DOM node
-
-HTML-element. Any tag on the page. For example:
-```html
-<p>This is DOM node</p>
-<div>I am DOM node too</div>
-```
-
-Weight: 0
-
-Styleguide: concepts.dom_node
 */
 
 /*
@@ -190,16 +178,6 @@ Styleguide: concepts.modifier
 */
 
 /*
-BEM entity
-
-Blocks, elements, and modifiers are all called BEM entities. For now, BEM entities in MLUT are represented as CSS classes.
-
-Weight: 4
-
-Styleguide: concepts.bem_entity
-*/
-
-/*
 Breakpoint
 
 The width of the screen on which the styles change. In MLUT, the default breakpoints are:
@@ -220,22 +198,23 @@ Utility
 An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
 
 Utility class names are formed according to the scheme:
-1. optional pseudo-class, pseudo-element or state: `h` - hover, `af` - after, 'nojs' - javascript disabled etc. Allowed several states in the same class. <br> States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'.
-1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations.
-1. optional value. Valid are number, [abbreviations](https://docs.emmet.io/cheat-sheet/) and variables. Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). <br> Abbreviation and variables are separated by a hyphen '-' from utility name. Variables can contain only lowercase letters and numbers, and must also end in a number: `bd0`, `gr2` etc.
+1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `nojs` - javascript disabled etc. Allowed several states in the same class. States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'. More about states [below](#kssref-concepts-utility-states).
+1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations([pdf](https://yadi.sk/i/VcKfz5u7DBHrLA)).
+1. optional value. Valid are:
+	* number
+	* CSS or MLUT keywords
+	* MLUT variables
+	* [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars).
+
+	Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). Keywords and variables are separated by a hyphen '-' from utility name. Custom property is separated from the utility name by two hyphens. Its name may contain lowercase letters and numbers.
 1. optional breakpoint name: `sm`, `lg`, etc. Separated from the utility value by underscore '_'.
 
-Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-bd0`.
+Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-bd0`, `Fz--gg-rem`.
 
 There are some special abbreviations for color utilities:
 * `t` - `transparent`
 * `i` - `inherit`
 * `cc` - `curentColor`
-
-Utilities in MLUT are divided into *common* and *modified*.
-
-* **Common** \- utilities that are named and work like CSS properties.
-* **Modified** \- utilities that affect several CSS properties. The names of such utilities begin with 'm' prefix.
 
 Weight: 6
 
@@ -243,13 +222,85 @@ Styleguide: concepts.utility
 */
 
 /*
-Layout
+Types
 
-The relative layout of DOM nodes on the page.
+Utilities in MLUT come in 3 types:
 
-Weight: 7
+* **Common** \- named and work like CSS properties.
+* **Custom** \- manage one or more related CSS [custom properties](section-core-styles.html#kssref-core-styles-css_vars). Their names begin with a hyphen and are abbreviations of the names of the corresponding properties. Examples: `-Gg`.
+* **Modified** \- affect several CSS properties. The names of such utilities begin with 'm' prefix.
 
-Styleguide: concepts.layout
+Weight: 0
+
+Styleguide: concepts.utility.types
+*/
+
+/*
+Directions
+
+Some utilities have directions. There are 7 of them:
+* 4 main directions - top, right, bottom, left. They are registered in the map [$mlu-main-directions](section-sass-tools.html#kssref-sass-tools-settings-general).
+* 3 combined direction - `x`(left, right), `y`(top, bottom) and `xy`(all main directions).
+
+The direction is used in the names of utilities, as well as in some mixins. 1 letter is used to indicate the direction(`Mt`, `Pb`), with the exception of `xy`. In the names of utilities `xy` is not indicated(`M`, `P`), and 2 letters `xy` are passed in mixins.
+
+Weight: 1
+
+Styleguide: concepts.utility.dirs
+*/
+
+/*
+MLUT keywords and variables
+
+**MLUT keywords** are strings values. Their names can only contain lowercase letters. Keywords include:
+* names of breakpoints - `sm`, `lg`, etc. Permissible to use only in custom and modified utilities
+* `min` and `max`. Allowed to use only in utils with number values
+* abbreviations for invented values that are not in the CSS specification. Allowed to use only in custom and modified utilities
+
+**MLUT variables** exist only at the agreement level. Essentially, they are similar to Sass variables, which are compiled into CSS values. They can take any value, including CSS custom properties. Variable name can contain only lowercase letters and numbers, and must also end in a number: `bd0`, `gr2` etc. Example: [Maw-fx0](section-core-utils.html#kssref-core-utils-bxz).
+
+Weight: 1
+
+Styleguide: concepts.utility.mlut_kw_var
+*/
+
+/*
+Creation
+
+For convenient creation of frequently used utilities, a [group of mixins](section-sass-tools.html#kssref-sass-tools-mixins-util_wrappers) has been prepared. They are wrappers over the main mixins for creating utilities:
+- [mk-util](section-sass-tools.html#kssref-sass-tools-mixins-mk_util)
+- [mk-util-directions](section-sass-tools.html#kssref-sass-tools-mixins-mk_util_dir)
+- [mk-state](section-sass-tools.html#kssref-sass-tools-mixins-mk_state)
+
+Weight: 2
+
+Styleguide: concepts.utility.creation
+*/
+
+/*
+States
+
+States in MLUT called the implementation of some features of the CSS using utilities, such as pseudo-classes, selectors combinators etc.
+States also include utilities values that work under certain conditions that are not related with CSS.
+Available states for utilities are listed in the [settings](section-sass-tools.html#kssref-sass-tools-settings-utils-states).
+States are created using the [mk-state](section-sass-tools.html#kssref-sass-tools-mixins-mk_state) mixin. It can create 3 types of states based on the types of values in the states map:
+1. pseudo-classes and pseudo-elements. In states map the value is a string - `"h": "hover"`
+1. multiple selectors with pseudo-classes. State value is a list - `"h-f": ("hover", "focus")`
+1. just the utilities values that work under certain conditions. State value is a null - `"nojs": null`
+
+In the core there are utilities with states whose creation has not yet been implemented:
+* `sp` \- utility inside the @supports at-rule. It will only work if the CSS property, value, or @supports supported by the browser.
+* `chl` \- utility will work on all children. Means `> *`.
+
+Using the `js` and `nojs` states, you can add utilities that work depending on the presence of javascript in the browser.
+* if you want the utility to work only when js is turned on, add the `js` state to it in the markup.
+* if the utility should work in the absence of js, create a value for it with the `nojs` state and use it.
+
+This mechanism is implemented using the `init.js` script.
+
+Weight: 1
+
+Styleguide: concepts.utility.states
 */
 
 /*
@@ -269,7 +320,7 @@ Modular grid
 
 Space on the page divided into a certain number of columns with gutters.
 
-In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. <br> These parts called **columns**. Columns are separated by indents which are called **gutters**.
+In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called **columns**. Columns are separated by indents which are called **gutters**.
 
 The gutters have different widths at different breakpoints. From `xs` to `lg` gutter is 12px. From `lg` gutter is 16px.
 
@@ -277,10 +328,13 @@ Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) b
 
 ### Grid units
 
-You can set the [width](section-core-utils.html#kssref-core-utils-bxz-w) and [offset](section-core-utils.html#kssref-core-utils-margin-ml) for the layout parts in the grid units. These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 3 types of grid units:
-* **grid-columns** \- abbreviated `gc`. 1gc is width of 1 column. For the presence of these units meets the flag [$MLU-FLAG-COL-MARGIN](section-sass-tools.html#kssref-sass-tools-settings-flags). By default it is off.
+These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 4 types of grid units:
+* **variable columns** \- abbreviated `c`. 1c is 1 column width which changes dynamically depending on the [formula](section-core-blocks.html#kssref-core-blocks-row-row__col). Using [custom utilities](section-core-utils.html#kssref-core-utils-custom), you can get values equal to both `gc` and `gs`.
+* **grid-columns** \- `gc`. 1gc is width of 1 column.
 * **grid-spans** \- `gs`. 1gs is width of 1 column with 2 gutters.
 * **grid-gutters** \- `gg`. 1gg is width of 1 gutter.
+
+In the standard MLUT build, only `c` and `gg` are used. Other units can be used in some [mixins](section-sass-tools.html#kssref-sass-tools-mixins-w).
 
 Modular grid are generated depending on this [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
 
@@ -294,7 +348,7 @@ Core blocks
 
 Set of universal [blocks](section-concepts.html#kssref-concepts-block) for using on any project. Some blocks contain [elements](section-concepts.html#kssref-concepts-element) and [modifiers](section-concepts.html#kssref-concepts-modifier).
 
-Core blocks don't contain, or almost don't contain styles such as colors, backgrounds, etc. Such styles are set on the 'theme' or 'design' layers. To style blocks or their elements, use utilities or modifiers such as `block--mod`.
+Core blocks don't contain, or almost don't contain styles such as colors, backgrounds, etc. Such styles are set on the theme or 'design' layer. To style blocks or their elements, use utilities or modifiers such as `block--mod`.
 
 Weight: 2
 
@@ -306,7 +360,7 @@ Core utilities
 
 Set of utilities that can be used on any project.
 
-Utilities are grouped by sections. Each section lists the standard utilities that come with the MLUT core. Modified utilities, utilities with more values and non-standard values are allocated in subsections.
+Utilities are grouped by sections. The description of each section lists the values of the utilities that relate to it and are included in the MLUT core. Modified utilities, utilities with more values and non-standard values are allocated in subsections. Values of common utilities correspond to [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations([pdf](https://yadi.sk/i/VcKfz5u7DBHrLA)). If written that all values are available in the utility, you can see them in the Emmet cheat sheet from the link above.
 
 In the description of the utilities, there may be a '**Parameters**' item in which the available values are listed. Instead of the utility value, the '`initial`' keyword may be specified. We will get this effect when using the utility with no value. The range of values can be specified as `0..3`.
 
@@ -316,7 +370,7 @@ Some utilities responsive by design or have only responsive values. It will be i
 
 For some utilities, there is a description for non-developers.
 
-In the examples of the work of some utilities for demonstration, other utilities may be used like this: '`Util1.Util2`'. <br> In the markup, instead of a dot, you need to use a space to separate utilities, like this: "`Util1 Util2`"
+In the examples of the work of some utilities for demonstration, other utilities may be used like this: '`Util1.Util2`'. In the markup, instead of a dot, you need to use a space to separate utilities, like this: "`Util1 Util2`"
 
 Weight: 3
 
@@ -326,7 +380,7 @@ Styleguide: core-utils
 /*
 Core styles
 
-You can find their in `sass/base/`.
+You can find their in `sass/core/`.
 
 Weight: 4
 
@@ -334,21 +388,61 @@ Styleguide: core-styles
 */
 
 /*
+Core scripts
+
+Scripts that complement the MLUT core functionality.
+
+Weight: 5
+
+Styleguide: core-scripts
+*/
+
+/*
 Sass tools
 
 Available when using MLUT as a [toolkit](section-start.html#kssref-start-usage).
 
-Weight: 5
+Weight: 6
 
 Styleguide: sass-tools
 */
 
 /*
+Sass modules
+
+Modules include themes, tools, utility sets, and more. Now there are not many modules included in MLUT, so their documentation will be in this section.
+
+Names of variables, mixins, and sass functions in modules must have prefixes `mabbreviated module name`. For themes, this prefix should look like: `mttheme name`. The names of common CSS classes in modules must comply with [BEM](https://ru.bem.info/) naming rules.
+
+## Themes
+
+Design theme can be used on different sites. They may contain utilities, styles with BEM naming, tools and more. Theme example see [here](section-sass_modules.html#kssref-sass_modules-demo_theme).
+
+Each theme consists of at least 2 parts: *config* and *init*.
+- the config contains data on the basis of which the theme is created: variables, maps with utility values, etc.
+- in the init file all parts of the theme and, if necessary, other modules are included. After including all required parts, the theme is generated.
+
+Themes can be imported to the MLUT assembly for make a single bundle or builded as separate files. To add a theme to your styles, just import an int file. You can also use only the theme config to make it custom build.
+
+The theme documentation is up to you. At a minimum, you should specify:
+- main colors
+- dependencies
+- gzipped size
+- info about unusual parts of the theme, such as mixins, additional styles, etc.
+
+Following these rules you can create your own module. Your module can be added to MLUT. To do this, send a issue, pull-request or contact the maintainer in any other way. Also you can create your own modules collection in a separate repository.
+
+Weight: 7
+
+Styleguide: sass_modules
+*/
+
+/*
 Examples
 
-Additional examples of core blocks, utilities, tools and ready-made components. <br> If in the markup you meet the `{{modifier_class}}` construct, then substitute the necessary classes from the examples instead of it, or just erase
+Additional examples of core blocks, utilities, tools and ready-made components. If in the markup you meet the `{{modifier_class}}` construct, then substitute the necessary classes from the examples instead of it, or just erase
 
-Weight: 6
+Weight: 8
 
 Styleguide: examples
 */
@@ -356,7 +450,7 @@ Styleguide: examples
 /*
 Settings
 
-Grid settings, compilation flags, constants and more. All core settings are in the `sass/includes/_settings.scss`.
+Grid settings, compilation flags, constants and more. All core settings are in the `sass/tools/_settings.scss`.
 
 Styleguide: sass-tools.settings
 */
@@ -364,7 +458,7 @@ Styleguide: sass-tools.settings
 /*
 Functions
 
-Useful functions. All MLUT functions have 'mlu' prefix. You can find all functions in `sass/includes/_functions.scss`.
+Useful functions. All MLUT functions have 'mlu' prefix. You can find all functions in `sass/tools/_functions.scss`.
 
 Styleguide: sass-tools.functions
 */
@@ -372,7 +466,7 @@ Styleguide: sass-tools.functions
 /*
 Mixins
 
-Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sass/includes/_mixins.scss`.
+Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sass/tools/_mixins.scss`.
 
 Styleguide: sass-tools.mixins
 */
@@ -380,18 +474,23 @@ Styleguide: sass-tools.mixins
 /*
 CSS variables
 
-CSS custom properties which used in MLUT. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties.
+Global CSS custom properties which used in MLUT. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties. Global custom properties names begin with the `mlu` prefix.
 
 The values and meaning of many custom properties correspond to the [SASS settings](section-sass-tools.html#kssref-sass-tools-settings) of MLUT core. But unlike them, custom properties can be changed dynamically without recompiling.
 
 Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags).
 
-You can find CSS variables in `sass/base/_variables.scss`.
+Remember that custom properties do not work in all browsers. This means that part of the settings, such as dynamically changing the gutters and the number of columns in the grid system, also does not work everywhere.
+
+In some blocks and utilities, custom properties are also used. Look for info about them in the description of the corresponding block or utility.
+
+You can find global CSS variables in `sass/core/variables.scss`.
 
 --mlu-gg = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
 Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
 Fallback is [$mlu-grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).
 --mlu-gg-rem = 0.75rem - grid gutter in `rem`.
+--mlu-grid-cols = 4 - number of columns in the [grid system](section-concepts.html#kssref-concepts-grid). Sets by [$mlu-grid-cols-xs](section-sass-tools.html#kssref-sass-tools-settings-grid) and changes on breakpoints according to the [settings](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints).
 
 Styleguide: core-styles.css_vars
 */
@@ -399,6 +498,7 @@ Styleguide: core-styles.css_vars
 :root {
 	--mlu-gg: 12px;
 	--mlu-gg-rem: 0.75rem;
+	--mlu-grid-cols: 4;
 }
 
 /*
@@ -433,25 +533,11 @@ legend {
 /*===CORE-BLOCKS===*/
 
 /*
-Page
-
-Block for normalize browser styles of `body`. Designed for `body` tag.
-
-It has `height: 100%` for sticky footer.
-
-Styleguide: core-blocks.page
-*/
-
-.page {
-	height: 100%;
-	margin: 0px;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-}
-
-/*
 Row
 
 Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-visual-d), you can change the layout technology to flexbox.
+
+if the [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags) = 2, then the styles for correct work of layouts which using inline-blocks will be disabled.
 
 Parts of the layout within a `row` are created using the elements:
 * [row__col](#kssref-core-blocks-row-row__col)
@@ -471,21 +557,29 @@ row__col
 
 The main element for creating columns in layout. By default, it stretches the entire width of the container. The columns have gutters on the sides and bottom.
 
-The gutters are implemented using the `padding` and [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars).
+The gutters are implemented using the `margin` and [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars).
 If `var()` is not supported by the browser, then fallback are provided:
 ```scss
-padding-right: 16px;
-padding-left: 16px;
-padding-right: var(--mlu-gg);
-padding-left: var(--mlu-gg);
-margin-bottom: 32px;
-margin-bottom: calc(var(--mlu-gg) * 2);
+margin-right: 16px;
+margin-left: 16px;
+margin-right: var(--mlu-gg);
+margin-left: var(--mlu-gg);
+margin-bottom: 2rem;
+margin-bottom: calc(var(--mlu-gg-rem) * 2);
 ```
-similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-general) = 1.
+similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags) = 1.
 
 The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-default-gtr`.
 
-Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row).
+Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row). The formulas for calculating the width and offset for the column are stored in the custom properties. In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
+```scss
+--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
+--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
+```
+`--gc` or `--mgc` is the value of the width or offset in the grid columns. This is a custom property of the utility.<br>
+`--mlu-grid-cols` - the number of columns in the grid system. This is a [global](section-core-styles.html#kssref-core-styles-css_vars) custom property that can be changed on any DOM node.<br>
+`--gc-diff` - variable is equal to the gutter if the gutter at the columns is created using margin. In `row__col` is equal 1gg.<br>
+Some of these variables can be changed using [custom utilities](section-core-utils.html#kssref-core-utils-custom).
 
 You can create nested layouts with a mix of `row` and `row__col` on the same DOM node. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
 
@@ -502,6 +596,8 @@ row__item
 Element for creating parts of the layout. By default, it stretches across the width of the content.
 
 The sizes and offsets are set with help of utilities.
+
+Like a `row__col`, an element contains formulas for calculating width and offset. But `gc-diff` here is equal 0px.
 
 Markup: ../../../docs/examples/core-blocks/row/row__item.html
 
@@ -644,16 +740,16 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 
 .row__col,
 .row__item {
+	--gc-diff: 0px;
+	--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
+	--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
 	position: relative;
 	display: inline-block;
 	max-width: 100%;
 	box-sizing: border-box;
+	vertical-align: top;
 	font-size: 16px;
 	font-size: 1rem;
-	text-align: left;
-	vertical-align: top;
-	white-space: normal;
-	direction: ltr;
 }
 
 .row__col.row,
@@ -672,16 +768,18 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 }
 
 .row__col {
-	width: 100%;
-	padding-right: 16px;
-	padding-left: 16px;
-	padding-right: 16px;
-	padding-left: 16px;
-	padding-right: var(--mlu-gg);
-	padding-left: var(--mlu-gg);
-	margin-bottom: 32px;
-	margin-bottom: 32px;
-	margin-bottom: calc(var(--mlu-gg) * 2);
+	--gc-diff: var(--mlu-gg);
+	width: calc(100% - 32px);
+	width: calc(100% - var(--mlu-gg) * 2);
+	margin-right: 16px;
+	margin-left: 16px;
+	margin-right: 16px;
+	margin-left: 16px;
+	margin-right: var(--mlu-gg);
+	margin-left: var(--mlu-gg);
+	margin-bottom: 2rem;
+	margin-bottom: 2rem;
+	margin-bottom: calc(var(--mlu-gg-rem) * 2);
 }
 
 .row__col.row {
@@ -805,16 +903,16 @@ Styleguide: core-blocks.btn
 }
 
 /*
-Input
+Inp
 
 Block for creating inputs. Normalizes styles.
 
-Markup: ../../../docs/examples/core-blocks/input/input.html
+Markup: ../../../docs/examples/core-blocks/inp/inp.html
 
-Styleguide: core-blocks.input
+Styleguide: core-blocks.inp
 */
 
-.input {
+.inp {
 	display: inline-block;
 	box-sizing: border-box;
 	margin: 0px;
@@ -823,139 +921,132 @@ Styleguide: core-blocks.input
 	border: 0;
 }
 
-/*===DESIGN-BLOCKS===*/
+/*
+Styling helpers
+
+Useful tools set for designing mockup.
+
+Weight: 0
+
+Styleguide: sass_modules.styl_help
+*/
+
+/*===DESIGN-STYLES===*/
 
 /*===CORE-UTILS===*/
 
 /*
-Visual formatting
+Custom
 
-* `D-tb`
-* `D-tbc`
-* `D-tbr`
-* `D-itb`
-* `Fl` \- turn on wrapping text on the right.
-* `Fl-r` \- turn on wrapping text on the left.
-* `Ol0`
-* `Op0`
+Utilities that manage [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) which used in MLUT.
 
-Styleguide: core-utils.visual
+Styleguide: core-utils.custom
 */
 
 /*
-mCl
+-Gg
 
-Modified clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
+Controls gutters: `--mlu--gg` and `--mlu-gg-rem`.
 
-Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
+* `-Gg1su..-Gg5su` \- *Responsive*.
 
-Styleguide: core-utils.visual.mcl
+-Gg1su - gutter is 8px
+-Gg5su_xl - gutter is 20px on `xl`
+
+Markup: ../../../docs/examples/core-utils/custom/gg.hbs
+
+Styleguide: core-utils.custom.gg
 */
 
 /*
-Ov
+-Gcc
 
-Controls content display in case of overflow
+Grid columns count. Sets number of columns in grid system on DOM node. Controls `--mlu-grid-cols`.
 
-Ov - hidden.
-Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
-Ov.Ovx-a - auto. Scrollbar on X axis.
-Ov.Ovy-a - auto. Scrollbar on Y axis.
+* `-Gcc` \- columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
 
-Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
+-Gcc-sm - keyword that means number of columns on `sm` breakpoint. There is on all breakpoints except `sm`.<br> Available selector modifier `chl`. See [example](section-examples.html#kssref-examples-layouts-2ec4ecin2_nd).
+-Gcc10_md - only *Responsive*. Available `chl` state.
 
-Styleguide: core-utils.visual.ov
+Markup: ../../../docs/examples/core-utils/custom/gcc.hbs
+
+Styleguide: core-utils.custom.gcc
 */
 
 /*
-mV
+-Gcd
 
-Modified visibility.
+Grid columns diff. Controls `--gc-diff` from grid column width [formula](section-core-blocks.html#kssref-core-blocks-row-row__col).
 
-mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all. *Responsive*.
+* `-Gcd1gg` \- 1 gutter
 
-Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
+-Gcd0 - 0px
 
-Styleguide: core-utils.visual.mv
+Markup: ../../../docs/examples/core-utils/custom/gcd.hbs
+
+Styleguide: core-utils.custom.gcd
 */
 
 /*
-mAll
+-Gcr
 
-Modified `all`.
+Grid columns rule. Controls `--gc-rule` and `--mgc-rule` .
 
-* `sr` \- soft reset, reset some default browser styles:
-	* `margin`
-	* `padding`
-	* `border`
-	* `font`
-	* `list-style`
+-Gcr - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the grid column(gc) widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu-gg`.
 
-Markup: ../../../docs/examples/core-utils/visual-formatting/mall.html
+Markup: ../../../docs/examples/core-utils/custom/gcr.hbs
 
-Styleguide: core-utils.visual.mall
+Styleguide: core-utils.custom.gcr
 */
 
-.Fl {
-	float: left;
+.-Gg1su {
+	--mlu-gg: 4px;
+	--mlu-gg-rem: 0.25rem;
 }
 
-.Fl-r {
-	float: right;
+.-Gg2su {
+	--mlu-gg: 8px;
+	--mlu-gg-rem: 0.5rem;
 }
 
-.mCl:after {
-	display: table;
-	clear: both;
-	content: "";
+.-Gg3su {
+	--mlu-gg: 12px;
+	--mlu-gg-rem: 0.75rem;
 }
 
-.Ov {
-	overflow: hidden;
+.-Gg4su {
+	--mlu-gg: 16px;
+	--mlu-gg-rem: 1rem;
 }
 
-.Ov-a {
-	overflow: auto;
+.-Gg5su {
+	--mlu-gg: 20px;
+	--mlu-gg-rem: 1.25rem;
 }
 
-.Ovx-a {
-	overflow-x: auto;
+.chl_-Gcc-sm > * {
+	--mlu-grid-cols: 4;
 }
 
-.Ovy-a {
-	overflow-y: auto;
+.chl_-Gcc10 > * {
+	--mlu-grid-cols: 10;
 }
 
-.Ol0 {
-	outline: 0px;
+.-Gcc-sm {
+	--mlu-grid-cols: 4;
 }
 
-.Ol0::-moz-focus-inner {
-	border: 0;
+.-Gcd0 {
+	--gc-diff: 0px;
 }
 
-.Op0 {
-	opacity: 0;
+.-Gcd1gg {
+	--gc-diff: var(--mlu-gg);
 }
 
-.mV-vh {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0px;
-	overflow: hidden;
-	white-space: nowrap;
-	border: 0px;
-	clip: rect(0 0 0 0);
-}
-
-.mAll-sr {
-	margin: 0;
-	padding: 0;
-	font: inherit;
-	list-style: none;
-	border: 0;
+.-Gcr {
+	--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--gc-diff, var(--mlu-gg)) * 2);
+	--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--gc-diff, var(--mlu-gg)));
 }
 
 /*
@@ -979,7 +1070,7 @@ Z
 
 0..3 - `z-index` available range. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
 -1 - move DOM node under parent node.
-max - max value. By default: `9999`.
+max = 9999 - max value.
 
 Styleguide: core-utils.pos.z
 */
@@ -1008,26 +1099,26 @@ Styleguide: core-utils.pos.xy
 }
 
 .T0 {
-	top: 0px;
+	top: 0;
 }
 
 .R0 {
-	right: 0px;
+	right: 0;
 }
 
 .B0 {
-	bottom: 0px;
+	bottom: 0;
 }
 
 .L0 {
-	left: 0px;
+	left: 0;
 }
 
 .mXy0 {
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-	left: 0px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 
 .mXy50p {
@@ -1036,6 +1127,10 @@ Styleguide: core-utils.pos.xy
 	-webkit-transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
+}
+
+.Z-max {
+	z-index: 9999;
 }
 
 .Z-1 {
@@ -1058,14 +1153,16 @@ Styleguide: core-utils.pos.xy
 	z-index: 3;
 }
 
-.Z-max {
-	z-index: 9999;
-}
-
 /*
 D
 
 Display. Sets the display type.
+
+* `D-tb`
+* `D-tbc`
+* `D-tbr`
+* `D-itb`
+* `sp_D-f` \- useful if the flexbox layout in IE11 has many bugs.
 
 D - block. The DOM node stretches on the full width of the container and creates line breaks before and after. *Responsive*.
 D-ib - inline-block. The width of the DOM node depends on the width of the content. Inline-blocks line up in one line like a letters and wrap if they don’t fit. *Responsive*.
@@ -1075,7 +1172,7 @@ D-n - none. Hides the DOM node as if it is not on the page. *Responsive*.
 
 Markup: ../../../docs/examples/core-utils/visual-formatting/d.hbs
 
-Styleguide: core-utils.visual.d
+Styleguide: core-utils.bxz.d
 */
 
 /*
@@ -1086,7 +1183,7 @@ Modified display.
 mD-f - `D-f` with line breaks.
 mD-if - `D-if` with `Fxw-w`.
 
-Styleguide: core-utils.visual.md
+Styleguide: core-utils.bxz.md
 */
 
 .D {
@@ -1135,31 +1232,62 @@ Styleguide: core-utils.visual.md
 	flex-wrap: wrap;
 }
 
+@supports (display: flex) {
+	.sp_D-f {
+		display: flex;
+	}
+}
+
 /*
 Flex
 
-A group of utilities for managing flex-containers and flex-elements. Modified flex utilities are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+A group of utilities for managing flex-containers and flex-elements.
 
-* `Fxd-c`
+Most of modified flex utilities **turned off** and available with flag [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+
 * `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
-* `Fxw-wr`
-* `Fxw-w`
-* `As-s` \- stretches the flex-element to full height.
-* `Jc` \- all values except `flex-start`.
-* `Ord-1..Ord2` \- sequence number for flex-element.
+* `Fx-i`
+* `Ord-1..Ord2` \- sequence number for flex-element
 
 Styleguide: core-utils.flex
 */
 
 /*
+Fxd
+
+Flex direction.
+
+* `Fxd-r` \- row. Only *Responsive*
+
+Fxd-rr - row-reverse. *Responsive*
+Fxd-c - column
+
+Markup: ../../../docs/examples/core-utils/flex/fxd.hbs
+
+Styleguide: core-utils.flex.fxd
+*/
+
+/*
+Fxw
+
+Flex wrap.
+
+wr - wrap-reverse
+w - wrap. only *Responsive*.
+n - nowrap. only *Responsive*.
+
+Styleguide: core-utils.flex.fxw
+*/
+
+/*
 Jc
 
-Justify content. You can use it as additional horizontal alignment variants for row-layouts. Works only with flex-container. *Responsive*.
+Justify content. All values are *Responsive*. `fs` only *Responsive*.
 
-Jc-sa - space-around.
-Jc-sb - space-between.
-Jc-sa_xl - space-between on `xl` breakpoint.
+Jc-sa - space-around
+Jc-sb - space-between
+Jc-fe_xl - flex-end on `xl` breakpoint
 
 Markup: ../../../docs/examples/core-utils/flex/jc.hbs
 
@@ -1167,18 +1295,52 @@ Styleguide: core-utils.flex.jc
 */
 
 /*
+As
+
+Align self. Available all values.
+
+Markup: ../../../docs/examples/core-utils/flex/as.html
+
+Styleguide: core-utils.flex.as
+*/
+
+/*
+Ai
+
+Align items. All values are *Responsive*. `s` only *Responsive*.
+
+Ai-fs - top
+Ai-c - center
+Ai-fe - bottom
+Ai-b - text baseline
+
+Markup: ../../../docs/examples/core-utils/flex/ai.hbs
+
+Styleguide: core-utils.flex.ai
+*/
+
+/*
+Ac
+
+Align content.
+
+Ac-fs - top
+Ac-c - center
+Ac-fe - bottom
+Ac-sa - space-around
+Ac-sb - space-between
+
+Markup: ../../../docs/examples/core-utils/flex/ac.hbs
+
+Styleguide: core-utils.flex.ac
+*/
+
+/*
 mAs
 
 Modified align self. Set `vertical-align` for common DOM nodes and `align-self` for flex-element.
 
-Can be used to vertically align an element in row-layouts. Partially works without flex-container.
-
-* `fs` \- top.
-* `c` \- center.
-* `fe` \- bottom.
-* `b` \- text baseline.
-
-Markup: ../../../docs/examples/core-utils/flex/mas.html
+Can be used to vertically align an element in row-layouts. Partially works without flex-container. Has the same values as `As`.
 
 Styleguide: core-utils.flex.mas
 */
@@ -1186,14 +1348,11 @@ Styleguide: core-utils.flex.mas
 /*
 mJc
 
-Modified justify content. Combines [Ta](#kssref-core-utils-text-ta) and [Jc](#kssref-core-utils-flex-jc) utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts. *Responsive*.
+Modified justify content. Combines [Ta](#kssref-core-utils-text-ta) and [Jc](#kssref-core-utils-flex-jc) utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts.
 
-* `mJc-fs` \- left. *Only responsive*.
+All values are available and correspond to `Jc` if [flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags) flag turned on. By default available one value.
 
 mJc-c - center.
-mJc-fe - right.
-
-Markup: ../../../docs/examples/core-utils/flex/mjc.hbs
 
 Styleguide: core-utils.flex.mjc
 */
@@ -1203,17 +1362,14 @@ mAi
 
 Modified align items. Set `vertical-align` for child DOM nodes and `align-items` for flex-container.
 
-Can be used to vertically align an elements in row-layouts. Partially works without flex-container.
-
-mAi-fs - top
-mAi-c - center
-mAi-fe - bottom
-mAi-b - text baseline
-
-Markup: ../../../docs/examples/core-utils/flex/mai.hbs
+Can be used to vertically align an elements in row-layouts. Partially works without flex-container. Has the same values as `Ai`.
 
 Styleguide: core-utils.flex.mai
 */
+
+.Fxd-rr {
+	flex-direction: row-reverse;
+}
 
 .Fxd-c {
 	flex-direction: column;
@@ -1227,36 +1383,52 @@ Styleguide: core-utils.flex.mai
 	flex-shrink: 0;
 }
 
+.Fx-i {
+	flex: inherit;
+}
+
 .Fxw-wr {
 	flex-wrap: wrap-reverse;
 }
 
-.Fxw-w {
-	flex-wrap: wrap;
+.Ac-fs {
+	align-content: flex-start;
+}
+
+.Ac-fe {
+	align-content: flex-end;
+}
+
+.Ac-c {
+	align-content: center;
+}
+
+.Ac-sa {
+	align-content: space-around;
+}
+
+.Ac-sb {
+	align-content: space-between;
 }
 
 .As-s {
 	align-self: stretch;
 }
 
-.mAs-b {
-	align-self: baseline;
-	vertical-align: baseline;
-}
-
-.mAs-fs {
+.As-fs {
 	align-self: flex-start;
-	vertical-align: top;
 }
 
-.mAs-c {
-	align-self: center;
-	vertical-align: middle;
-}
-
-.mAs-fe {
+.As-fe {
 	align-self: flex-end;
-	vertical-align: bottom;
+}
+
+.As-c {
+	align-self: center;
+}
+
+.As-b {
+	align-self: baseline;
 }
 
 .Jc-fe {
@@ -1280,41 +1452,20 @@ Styleguide: core-utils.flex.mai
 	text-align: center;
 }
 
-.mJc-fe {
-	justify-content: flex-end;
-	text-align: right;
-}
-
-.mAi-fs {
+.Ai-fs {
 	align-items: flex-start;
 }
 
-.mAi-fs > * {
-	vertical-align: top;
-}
-
-.mAi-c {
-	align-items: center;
-}
-
-.mAi-c > * {
-	vertical-align: middle;
-}
-
-.mAi-fe {
+.Ai-fe {
 	align-items: flex-end;
 }
 
-.mAi-fe > * {
-	vertical-align: bottom;
-}
-
-.mAi-b {
+.Ai-b {
 	align-items: baseline;
 }
 
-.mAi-b > * {
-	vertical-align: baseline;
+.Ai-c {
+	align-items: center;
 }
 
 .Ord-1 {
@@ -1336,35 +1487,46 @@ Styleguide: core-utils.flex.mai
 /*
 W
 
-Width. You can set width in the grid-spans(gs) or in the grid-columns(gc) **if they turned on**.
+Width. You can set width in the variable columns(`c`).
 
 If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
 
 * `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `W-fx0` \- fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
-* `W1gs..W4gs` \- range of available width in grid spans on `xs` and `sm` breakpoints, because on `xs` and `sm`, grid has 4 columns. See grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
-* `W1gs..W12gs` \- available width in `gs` on all breakpoints, starting with `md`.
-* `W1gc..W4gc`
-* `W1gc..W12gc`
+* `W-i` \- inherit value from parent DOM node. *Responsive*.
+* `W100p` \- for browsers which not support custom properties.
+* `W1c..W4c` \- range of available width in variable columns on `xs` and `sm` breakpoints, because on `xs` and `sm`, grid has 4 columns. See grid options in [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
+* `W1c..W12c` \- available width in `c` on all breakpoints, starting with `md`.
 
 Markup: ../../../docs/examples/core-utils/box-sizing/w.html
 
 Styleguide: core-utils.bxz.w
 */
 
-.W1gs {
-	width: 25%;
+.W1c {
+	--gc: 1;
+	width: calc(25% - 32px);
+	width: var(--gc-rule, 25%);
 }
 
-.W2gs {
-	width: 50%;
+.W2c {
+	--gc: 2;
+	width: calc(50% - 32px);
+	width: var(--gc-rule, 50%);
 }
 
-.W3gs {
-	width: 75%;
+.W3c {
+	--gc: 3;
+	width: calc(75% - 32px);
+	width: var(--gc-rule, 75%);
 }
 
-.W4gs {
+.W4c {
+	--gc: 4;
+	width: calc(100% - 32px);
+	width: var(--gc-rule, 100%);
+}
+
+.W100p {
 	width: 100%;
 }
 
@@ -1372,31 +1534,69 @@ Styleguide: core-utils.bxz.w
 	width: auto;
 }
 
+.W-i {
+	width: inherit;
+}
+
 /*
 Box sizing
 
 Utilities for DOM nodes size management.
 
-* `Maw100p`
-* `Maw-n`
 * `H100p`
-* `H100vh`
 * `H0`
+* `Mih100vh`
+* `Mih100p`
 * `Bxz`
+* `Fl` \- turn on wrapping text on the right.
+* `Fl-r` \- turn on wrapping text on the left.
 
 Styleguide: core-utils.bxz
 */
 
-.W-fx0 {
+/*
+Maw
+
+Max-width.
+
+fx0 - fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+100p - 100%
+n - none
+
+Styleguide: core-utils.bxz.maw
+*/
+
+/*
+mCl
+
+Modified clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
+
+Styleguide: core-utils.bxz.mcl
+*/
+
+/*
+Ov
+
+Controls content display in case of overflow
+
+Ov - hidden.
+Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
+Ov.Ovx-a - auto. Scrollbar on X axis.
+Ov.Ovy-a - auto. Scrollbar on Y axis.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
+
+Styleguide: core-utils.bxz.ov
+*/
+
+.Maw-fx0 {
 	max-width: 288px;
 }
 
 .Maw100p {
 	max-width: 100%;
-}
-
-.Maw50p {
-	max-width: 50%;
 }
 
 .Maw-n {
@@ -1407,16 +1607,50 @@ Styleguide: core-utils.bxz
 	height: 100%;
 }
 
-.H100vh {
-	height: 100vh;
+.H0 {
+	height: 0;
 }
 
-.H0 {
-	height: 0px;
+.Mih100p {
+	min-height: 100%;
+}
+
+.Mih100vh {
+	min-height: 100vh;
 }
 
 .Bxz {
 	box-sizing: border-box;
+}
+
+.Fl {
+	float: left;
+}
+
+.Fl-r {
+	float: right;
+}
+
+.mCl:after {
+	display: table;
+	clear: both;
+	content: "";
+}
+
+.Ov {
+	overflow: hidden;
+}
+
+.Ov-a {
+	overflow: auto;
+}
+
+.Ovx-a {
+	overflow-x: auto;
+}
+
+.Ovy-a {
+	overflow-y: auto;
 }
 
 /*
@@ -1428,6 +1662,7 @@ Vertical margins in grid-gutters are converted to `rems`. This affects accessibi
 
 * `M0` \- clear all margins.
 * `M-a`
+* `M-i` \- inherit all margins
 * `Mr0`
 * `Mt0`
 * `Mt1gg..Mt4gg`
@@ -1438,14 +1673,13 @@ Styleguide: core-utils.margin
 /*
 Ml
 
-Margin left. You can set left margin in the [grid units](section-concepts.html#kssref-concepts-grid)(gc, gg, gs) or [space units](section-concepts.html#kssref-concepts-su)(su). So you can set the offset for layout elements.
+Margin left. You can set left margin in the [grid units](section-concepts.html#kssref-concepts-grid)(gg, c) or [space units](section-concepts.html#kssref-concepts-su)(su). So you can set the offset for layout elements.
 
 * `Ml-a` \- *Responsive*.
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
-* `Ml1gg` \- it is needed to return the default column gutter. *Responsive* if `gc` turned on.
-* `Ml1gs..Ml10gs` \- available margin in `gs` on all breakpoints, starting with `md`.
-* `Ml1gc..Ml10gc` \- if `gc` turned on.
+* `Ml1gg` \- it is needed to return the default column gutter. *Responsive*.
+* `Ml1c..Ml10c` \- available margin in `c` on all breakpoints, starting with `md`.
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
@@ -1460,13 +1694,8 @@ Margin bottom. You can set bottom margin in the grid-gutters(gg) or [space units
 * `Mb0` \- *Responsive*
 * `Mb1gg..Mb4gg`
 * `Mb2gg` \- *Responsive*
-* `Mb1su..Mb4su`
-* `Mb6su`
-* `Mb8su`
-* `Mb-2gg..Mb-1gg`
-* `Mb-4su`
-* `Mb-6su`
-* `Mb-8su`
+* `Mb1su..Mb6su`
+* `Mb-2gg`
 
 Styleguide: core-utils.margin.mb
 */
@@ -1477,10 +1706,9 @@ Mx
 Margin on X axis. Sets left and right margin.
 
 * `Mx-a` \- centered the DOM node with a given width and `block` [display type](#kssref-core-utils-visual-d). *Responsive*.
-* `Mx1gg` \- if `gc` turned on. *Responsive*.
+* `Mx1gg` \- *Responsive*.
 * `Mx-1gg` \- it needed for imposes left and right padding of the outermost columns on the fields of the [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper). This behavior is necessary so that there are no double fields in the layout, using [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) or `Mx1gg`.
-* `Mx-2su..Mx-4su`
-* `Mx0` \- *responsive*.
+* `Mx0` \- only *responsive*.
 
 Markup: ../../../docs/examples/core-utils/margin/mx.html
 
@@ -1488,11 +1716,15 @@ Styleguide: core-utils.margin.mx
 */
 
 .M0 {
-	margin: 0px;
+	margin: 0;
 }
 
 .M-a {
 	margin: auto;
+}
+
+.M-i {
+	margin: inherit;
 }
 
 .Mt0 {
@@ -1574,24 +1806,6 @@ Styleguide: core-utils.margin.mx
 	margin-bottom: calc(var(--mlu-gg-rem) * -2);
 }
 
-.Mb-8su {
-	margin-bottom: -2rem;
-}
-
-.Mb-6su {
-	margin-bottom: -1.5rem;
-}
-
-.Mb-1gg {
-	margin-bottom: -1rem;
-	margin-bottom: -1rem;
-	margin-bottom: calc(var(--mlu-gg-rem) * -1);
-}
-
-.Mb-4su {
-	margin-bottom: -1rem;
-}
-
 .Mb1su {
 	margin-bottom: 0.25rem;
 }
@@ -1608,24 +1822,36 @@ Styleguide: core-utils.margin.mx
 	margin-bottom: 1rem;
 }
 
+.Mb5su {
+	margin-bottom: 1.25rem;
+}
+
 .Mb6su {
 	margin-bottom: 1.5rem;
 }
 
-.Mb8su {
-	margin-bottom: 2rem;
+.Mx-1gg {
+	margin-right: -16px;
+	margin-right: -16px;
+	margin-right: calc(var(--mlu-gg) * -1);
+	margin-left: -16px;
+	margin-left: -16px;
+	margin-left: calc(var(--mlu-gg) * -1);
+}
+
+.Mx1gg {
+	margin-right: 16px;
+	margin-right: 16px;
+	margin-right: var(--mlu-gg);
+	margin-left: 16px;
+	margin-left: 16px;
+	margin-left: var(--mlu-gg);
 }
 
 .Ml-2gg {
 	margin-left: -32px;
 	margin-left: -32px;
 	margin-left: calc(var(--mlu-gg) * -2);
-}
-
-.Ml2gg {
-	margin-left: 32px;
-	margin-left: 32px;
-	margin-left: calc(var(--mlu-gg) * 2);
 }
 
 .Ml-1gg {
@@ -1640,28 +1866,10 @@ Styleguide: core-utils.margin.mx
 	margin-left: var(--mlu-gg);
 }
 
-.Mx-2su {
-	margin-right: -8px;
-	margin-left: -8px;
-}
-
-.Mx-3su {
-	margin-right: -12px;
-	margin-left: -12px;
-}
-
-.Mx-4su {
-	margin-right: -16px;
-	margin-left: -16px;
-}
-
-.Mx-1gg {
-	margin-right: -16px;
-	margin-left: -16px;
-	margin-right: -16px;
-	margin-left: -16px;
-	margin-right: calc(var(--mlu-gg) * -1);
-	margin-left: calc(var(--mlu-gg) * -1);
+.Ml2gg {
+	margin-left: 32px;
+	margin-left: 32px;
+	margin-left: calc(var(--mlu-gg) * 2);
 }
 
 /*
@@ -1681,17 +1889,13 @@ Px
 
 Padding on X axis. Sets left and right padding.
 
-* `Px1gg` \- *responsive*
-* `Px2su..Px4su` \- with these utilities you can change the columns gutter. Use them with the appropriate [Mx utils](#kssref-core-utils-margin-mx) to remove double fields along the edges of the container.
-* `Px0` - only *responsive*
-
-Markup: ../../../docs/examples/core-utils/padding/px.html
+* `Px1gg`
 
 Styleguide: core-utils.padding.px
 */
 
 .P0 {
-	padding: 0px;
+	padding: 0;
 }
 
 .P1su {
@@ -1711,7 +1915,6 @@ Styleguide: core-utils.padding.px
 }
 
 .P1gg {
-	padding: 16px;
 	padding: 1rem 16px;
 	padding: var(--mlu-gg-rem) var(--mlu-gg);
 }
@@ -1746,82 +1949,13 @@ Styleguide: core-utils.padding.px
 	padding-left: var(--mlu-gg);
 }
 
-.Px2su {
-	padding-right: 8px;
-	padding-left: 8px;
-}
-
-.Px3su {
-	padding-right: 12px;
-	padding-left: 12px;
-}
-
-.Px4su {
-	padding-right: 16px;
-	padding-left: 16px;
-}
-
 .Px1gg {
 	padding-right: 16px;
-	padding-left: 16px;
 	padding-right: 16px;
-	padding-left: 16px;
 	padding-right: var(--mlu-gg);
+	padding-left: 16px;
+	padding-left: 16px;
 	padding-left: var(--mlu-gg);
-}
-
-/*
-Font
-
-* `F-i`
-* `Fw400` \- normal font weight.
-* `Fw700` \- **bold**.
-* `Fs` \- *italic*.
-* `Fs-n` \- normal font style.
-* `Fz-i`
-
-Styleguide: core-utils.f
-*/
-
-/*
-mFz
-
-Modified font size.
-
-0 - Accessibly hides the text inside the DOM node.
-
-Styleguide: core-utils.f.mfz
-*/
-
-.F-i {
-	font: inherit;
-}
-
-.Fw400 {
-	font-weight: 400;
-}
-
-.Fw700 {
-	font-weight: 700;
-}
-
-.Fs {
-	font-style: italic;
-}
-
-.Fs-n {
-	font-style: normal;
-}
-
-.Fz-i {
-	font-size: inherit;
-}
-
-.mFz0 {
-	overflow: hidden;
-	text-indent: 120%;
-	white-space: nowrap;
-	font-size: 0px;
 }
 
 /*
@@ -1829,10 +1963,9 @@ Text
 
 Group of utilities that manage the display of text.
 
-* `Tt` \- UPPERCASE.
-* `Tt-n` \- remove text transform.
 * `C-i`
 * `Whs-nw`
+* `Whs-p`
 * `Lh-n` \- line-height normal.
 * `Lh1`
 
@@ -1852,6 +1985,19 @@ Styleguide: core-utils.text.ta
 */
 
 /*
+Tt
+
+Text transform.
+
+initial - UPPERCASE.
+l - lowercase.
+n - remove text transform.
+c - Each Word Begins With A Capital Letter.
+
+Styleguide: core-utils.text.tt
+*/
+
+/*
 Td
 
 Text decoration.
@@ -1866,12 +2012,10 @@ Styleguide: core-utils.text.td
 /*
 Dir
 
-Direction. Sets direction of text and order items in row-layout. When specifying a breakpoint, the utility *only* works on it.
+Direction. Unility available if [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags) turned on. Sets direction of text and order items in row-layout.
 
-Dir-r - right to left. *Responsive*.
-Dir-r_md - only on md.
-
-Markup: ../../../docs/examples/core-utils/text/dir.hbs
+l - left to right *Responsive* only.
+r - right to left *Responsive*.
 
 Styleguide: core-utils.text.dir
 */
@@ -1918,6 +2062,14 @@ Styleguide: core-utils.text.mtov
 	text-transform: none;
 }
 
+.Tt-l {
+	text-transform: lowercase;
+}
+
+.Tt-c {
+	text-transform: capitalize;
+}
+
 .mTov {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1940,122 +2092,67 @@ Styleguide: core-utils.text.mtov
 	white-space: nowrap;
 }
 
-.Dir-r {
-	direction: rtl;
+.Whs-p {
+	white-space: pre;
 }
 
 /*
-Background
+Font
 
-Group of utilities for managing the background image of DOM node.
+* `F-i`
+* `Ff-ss0` \- sans serif system fonts stack. Sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
+* `Fw400` \- normal font weight.
+* `Fw700` \- **bold**.
+* `Fs` \- *italic*.
+* `Fs-n` \- normal font style.
+* `Fz-i`
 
-Styleguide: core-utils.bg
+Styleguide: core-utils.f
 */
 
 /*
-Bgp
+mFz
 
-Position of background.
+Modified font size.
 
-t - top
-r - right
-b - bottom
-c - center
-rt - right top
-rb - right bottom
-lb - left bottom
+0 - Accessibly hides the text inside the DOM node.
 
-Styleguide: core-utils.bg.bgp
+Styleguide: core-utils.f.mfz
 */
 
-/*
-Bgr
-
-Repeat of background.
-
-n - no repeat
-x - repeat on X axis
-y - repeat on Y
-
-Styleguide: core-utils.bg.bgr
-*/
-
-/*
-Bgsz
-
-Background size.
-
-cv - cover. Stretches the background image so that it covers the entire space of the container.
-ct - contain. Stretches the background image to the maximum possible size so it does not go beyond the background of the container. The image does not change the proportions.
-
-Styleguide: core-utils.bg.bgsz
-*/
-
-/*
-Bga
-
-Background attachment. It controls the behavior of the background when scrolling.
-
-f - fixed
-l - local
-
-Styleguide: core-utils.bg.bga
-*/
-
-.Bgr-n {
-	background-repeat: no-repeat;
+.F-i {
+	font: inherit;
 }
 
-.Bgr-x {
-	background-repeat: repeat-x;
+.Ff-ss0 {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
-.Bgr-y {
-	background-repeat: repeat-y;
+.Fw400 {
+	font-weight: 400;
 }
 
-.Bgp-c {
-	background-position: center;
+.Fw700 {
+	font-weight: 700;
 }
 
-.Bgp-t {
-	background-position: top;
+.Fs {
+	font-style: italic;
 }
 
-.Bgp-r {
-	background-position: right;
+.Fs-n {
+	font-style: normal;
 }
 
-.Bgp-b {
-	background-position: bottom;
+.Fz-i {
+	font-size: inherit;
 }
 
-.Bgp-rt {
-	background-position: right top;
-}
-
-.Bgp-rb {
-	background-position: right bottom;
-}
-
-.Bgp-lb {
-	background-position: left bottom;
-}
-
-.Bgsz-cv {
-	background-size: cover;
-}
-
-.Bgsz-ct {
-	background-size: contain;
-}
-
-.Bga-f {
-	background-attachment: fixed;
-}
-
-.Bga-l {
-	background-attachment: local;
+.mFz0 {
+	overflow: hidden;
+	text-indent: 120%;
+	white-space: nowrap;
+	font-size: 0px;
 }
 
 /*
@@ -2138,7 +2235,7 @@ Styleguide: core-utils.bd.bds
 }
 
 .Bdw0 {
-	border-width: 0px;
+	border-width: 0;
 }
 
 .Bdw2 {
@@ -2157,19 +2254,241 @@ Styleguide: core-utils.bd.bds
 	border-radius: 50%;
 }
 
+/*
+Background
+
+Group of utilities for managing the background image of DOM node.
+
+* `Bga-f`
+* `Bga-l`
+
+Styleguide: core-utils.bg
+*/
+
+/*
+Bgp
+
+Position of background.
+
+t - top
+r - right
+b - bottom
+c - center
+rt - right top
+rb - right bottom
+lb - left bottom
+
+Styleguide: core-utils.bg.bgp
+*/
+
+/*
+Bgr
+
+Repeat of background.
+
+n - no repeat
+x - repeat on X axis
+y - repeat on Y
+
+Styleguide: core-utils.bg.bgr
+*/
+
+/*
+Bgsz
+
+Background size.
+
+cv - cover. Stretches the background image so that it covers the entire space of the container.
+ct - contain. Stretches the background image to the maximum possible size so it does not go beyond the background of the container. The image does not change the proportions.
+
+Styleguide: core-utils.bg.bgsz
+*/
+
+.Bgr-n {
+	background-repeat: no-repeat;
+}
+
+.Bgr-x {
+	background-repeat: repeat-x;
+}
+
+.Bgr-y {
+	background-repeat: repeat-y;
+}
+
+.Bgp-c {
+	background-position: center;
+}
+
+.Bgp-t {
+	background-position: top;
+}
+
+.Bgp-r {
+	background-position: right;
+}
+
+.Bgp-b {
+	background-position: bottom;
+}
+
+.Bgp-rt {
+	background-position: right top;
+}
+
+.Bgp-rb {
+	background-position: right bottom;
+}
+
+.Bgp-lb {
+	background-position: left bottom;
+}
+
+.Bgsz-cv {
+	background-size: cover;
+}
+
+.Bgsz-ct {
+	background-size: contain;
+}
+
+.Bga-f {
+	background-attachment: fixed;
+}
+
+.Bga-l {
+	background-attachment: local;
+}
+
+/*
+Animation
+
+* `Trs-all` \- transition duration sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
+
+Styleguide: core-utils.anim
+*/
+
+.Trs-all {
+	/* autoprefixer: off */
+	transition: all 0.3s;
+}
+
+/*
+Misc
+
+* `Rsz-n`
+
+Styleguide: core-utils.misc
+*/
+
+/*
+mAll
+
+Modified `all`.
+
+* `sr` \- soft reset, reset some default browser styles:
+	* `margin`
+	* `padding`
+	* `border`
+	* `font`
+	* `list-style`
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mall.html
+
+Styleguide: core-utils.misc.mall
+*/
+
+.Rsz-n {
+	resize: none;
+}
+
+.mAll-sr {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+	list-style: none;
+	border: 0;
+}
+
+/*
+Visual formatting
+
+* `Ol0`
+* `Op0`
+
+Styleguide: core-utils.visual
+*/
+
+/*
+mV
+
+Modified visibility.
+
+mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all. *Responsive*.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
+
+Styleguide: core-utils.visual.mv
+*/
+
+.Ol0 {
+	outline: 0px;
+}
+
+.Ol0::-moz-focus-inner {
+	border: 0;
+}
+
+.Op0 {
+	opacity: 0;
+}
+
+.mV-vh {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0px;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 0px;
+	clip: rect(0 0 0 0);
+}
+
 /*===DESIGN-UTILS===*/
 
 @media (min-width: 520px) {
-	.mV-vh_sm {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		padding: 0px;
-		overflow: hidden;
-		white-space: nowrap;
-		border: 0px;
-		clip: rect(0 0 0 0);
+	.-Gg1su_sm {
+		--mlu-gg: 4px;
+		--mlu-gg-rem: 0.25rem;
+	}
+
+	.-Gg2su_sm {
+		--mlu-gg: 8px;
+		--mlu-gg-rem: 0.5rem;
+	}
+
+	.-Gg3su_sm {
+		--mlu-gg: 12px;
+		--mlu-gg-rem: 0.75rem;
+	}
+
+	.-Gg4su_sm {
+		--mlu-gg: 16px;
+		--mlu-gg-rem: 1rem;
+	}
+
+	.-Gg5su_sm {
+		--mlu-gg: 20px;
+		--mlu-gg-rem: 1.25rem;
+	}
+
+	.-Gcc_sm {
+		--mlu-grid-cols: 12;
+	}
+
+	.-Gcc10_sm {
+		--mlu-grid-cols: 10;
 	}
 
 	.Pos-a_sm {
@@ -2196,6 +2515,34 @@ Styleguide: core-utils.bd.bds
 		display: none;
 	}
 
+	.Fxd-rr_sm {
+		flex-direction: row-reverse;
+	}
+
+	.Fxd-r_sm {
+		flex-direction: row;
+	}
+
+	.Fxw-w_sm {
+		flex-wrap: wrap;
+	}
+
+	.Fxw-n_sm {
+		flex-wrap: nowrap;
+	}
+
+	.Jc-fs_sm {
+		justify-content: flex-start;
+	}
+
+	.Jc-fe_sm {
+		justify-content: flex-end;
+	}
+
+	.Jc-c_sm {
+		justify-content: center;
+	}
+
 	.Jc-sa_sm {
 		justify-content: space-around;
 	}
@@ -2204,48 +2551,65 @@ Styleguide: core-utils.bd.bds
 		justify-content: space-between;
 	}
 
-	.mJc-fs_sm {
-		justify-content: flex-start;
-		text-align: left;
+	.Ai-s_sm {
+		align-items: stretch;
 	}
 
-	.mJc-c_sm {
-		justify-content: center;
-		text-align: center;
+	.Ai-fs_sm {
+		align-items: flex-start;
 	}
 
-	.mJc-fe_sm {
-		justify-content: flex-end;
-		text-align: right;
+	.Ai-fe_sm {
+		align-items: flex-end;
 	}
 
-	.W1gs_sm {
-		width: 25%;
+	.Ai-b_sm {
+		align-items: baseline;
 	}
 
-	.W2gs_sm {
-		width: 50%;
+	.Ai-c_sm {
+		align-items: center;
 	}
 
-	.W3gs_sm {
-		width: 75%;
+	.W1c_sm {
+		--gc: 1;
+		width: calc(25% - 32px);
+		width: var(--gc-rule, 25%);
 	}
 
-	.W4gs_sm {
-		width: 100%;
+	.W2c_sm {
+		--gc: 2;
+		width: calc(50% - 32px);
+		width: var(--gc-rule, 50%);
+	}
+
+	.W3c_sm {
+		--gc: 3;
+		width: calc(75% - 32px);
+		width: var(--gc-rule, 75%);
+	}
+
+	.W4c_sm {
+		--gc: 4;
+		width: calc(100% - 32px);
+		width: var(--gc-rule, 100%);
 	}
 
 	.W-a_sm {
 		width: auto;
 	}
 
+	.W-i_sm {
+		width: inherit;
+	}
+
 	.Mb0_sm {
-		margin-bottom: 0px;
+		margin-bottom: 0;
 	}
 
 	.Mx0_sm {
-		margin-right: 0px;
-		margin-left: 0px;
+		margin-right: 0;
+		margin-left: 0;
 	}
 
 	.Ml-a_sm {
@@ -2263,23 +2627,22 @@ Styleguide: core-utils.bd.bds
 		margin-bottom: calc(var(--mlu-gg-rem) * 2);
 	}
 
-	.Px1gg_sm {
-		padding-right: 16px;
-		padding-left: 16px;
-		padding-right: 16px;
-		padding-left: 16px;
-		padding-right: var(--mlu-gg);
-		padding-left: var(--mlu-gg);
+	.Mx1gg_sm {
+		margin-right: 16px;
+		margin-right: 16px;
+		margin-right: var(--mlu-gg);
+		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gg);
 	}
 
-	.Px0_sm {
-		padding-right: 0;
-		padding-left: 0;
+	.Ml1gg_sm {
+		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gg);
 	}
-}
 
-@media (min-width: 760px) {
-	.mV-vh_md {
+	.mV-vh_sm {
 		position: absolute;
 		width: 1px;
 		height: 1px;
@@ -2289,6 +2652,49 @@ Styleguide: core-utils.bd.bds
 		white-space: nowrap;
 		border: 0px;
 		clip: rect(0 0 0 0);
+	}
+}
+
+@media (min-width: 760px) {
+	:root {
+		--mlu-grid-cols: 12;
+	}
+
+	.-Gg1su_md {
+		--mlu-gg: 4px;
+		--mlu-gg-rem: 0.25rem;
+	}
+
+	.-Gg2su_md {
+		--mlu-gg: 8px;
+		--mlu-gg-rem: 0.5rem;
+	}
+
+	.-Gg3su_md {
+		--mlu-gg: 12px;
+		--mlu-gg-rem: 0.75rem;
+	}
+
+	.-Gg4su_md {
+		--mlu-gg: 16px;
+		--mlu-gg-rem: 1rem;
+	}
+
+	.-Gg5su_md {
+		--mlu-gg: 20px;
+		--mlu-gg-rem: 1.25rem;
+	}
+
+	.-Gcc_md {
+		--mlu-grid-cols: 12;
+	}
+
+	.-Gcc10_md {
+		--mlu-grid-cols: 10;
+	}
+
+	.-Gcc-sm_md {
+		--mlu-grid-cols: 4;
 	}
 
 	.Pos-a_md {
@@ -2315,6 +2721,34 @@ Styleguide: core-utils.bd.bds
 		display: none;
 	}
 
+	.Fxd-rr_md {
+		flex-direction: row-reverse;
+	}
+
+	.Fxd-r_md {
+		flex-direction: row;
+	}
+
+	.Fxw-w_md {
+		flex-wrap: wrap;
+	}
+
+	.Fxw-n_md {
+		flex-wrap: nowrap;
+	}
+
+	.Jc-fs_md {
+		justify-content: flex-start;
+	}
+
+	.Jc-fe_md {
+		justify-content: flex-end;
+	}
+
+	.Jc-c_md {
+		justify-content: center;
+	}
+
 	.Jc-sa_md {
 		justify-content: space-around;
 	}
@@ -2323,120 +2757,173 @@ Styleguide: core-utils.bd.bds
 		justify-content: space-between;
 	}
 
-	.mJc-fs_md {
-		justify-content: flex-start;
-		text-align: left;
+	.Ai-s_md {
+		align-items: stretch;
 	}
 
-	.mJc-c_md {
-		justify-content: center;
-		text-align: center;
+	.Ai-fs_md {
+		align-items: flex-start;
 	}
 
-	.mJc-fe_md {
-		justify-content: flex-end;
-		text-align: right;
+	.Ai-fe_md {
+		align-items: flex-end;
 	}
 
-	.W1gs_md {
-		width: 8.333%;
+	.Ai-b_md {
+		align-items: baseline;
 	}
 
-	.Ml1gs_md {
-		margin-left: 8.333%;
+	.Ai-c_md {
+		align-items: center;
 	}
 
-	.W2gs_md {
-		width: 16.666%;
+	.W1c_md {
+		--gc: 1;
+		width: calc(8.333% - 32px);
+		width: var(--gc-rule, 8.333%);
 	}
 
-	.Ml2gs_md {
-		margin-left: 16.666%;
+	.Ml1c_md {
+		--mgc: 1;
+		margin-left: calc(8.333% + 16px);
+		margin-left: var(--mgc-rule, 8.333%);
 	}
 
-	.W3gs_md {
-		width: 25%;
+	.W2c_md {
+		--gc: 2;
+		width: calc(16.666% - 32px);
+		width: var(--gc-rule, 16.666%);
 	}
 
-	.Ml3gs_md {
-		margin-left: 25%;
+	.Ml2c_md {
+		--mgc: 2;
+		margin-left: calc(16.666% + 16px);
+		margin-left: var(--mgc-rule, 16.666%);
 	}
 
-	.W4gs_md {
-		width: 33.333%;
+	.W3c_md {
+		--gc: 3;
+		width: calc(25% - 32px);
+		width: var(--gc-rule, 25%);
 	}
 
-	.Ml4gs_md {
-		margin-left: 33.333%;
+	.Ml3c_md {
+		--mgc: 3;
+		margin-left: calc(25% + 16px);
+		margin-left: var(--mgc-rule, 25%);
 	}
 
-	.W5gs_md {
-		width: 41.666%;
+	.W4c_md {
+		--gc: 4;
+		width: calc(33.333% - 32px);
+		width: var(--gc-rule, 33.333%);
 	}
 
-	.Ml5gs_md {
-		margin-left: 41.666%;
+	.Ml4c_md {
+		--mgc: 4;
+		margin-left: calc(33.333% + 16px);
+		margin-left: var(--mgc-rule, 33.333%);
 	}
 
-	.W6gs_md {
-		width: 50%;
+	.W5c_md {
+		--gc: 5;
+		width: calc(41.666% - 32px);
+		width: var(--gc-rule, 41.666%);
 	}
 
-	.Ml6gs_md {
-		margin-left: 50%;
+	.Ml5c_md {
+		--mgc: 5;
+		margin-left: calc(41.666% + 16px);
+		margin-left: var(--mgc-rule, 41.666%);
 	}
 
-	.W7gs_md {
-		width: 58.333%;
+	.W6c_md {
+		--gc: 6;
+		width: calc(50% - 32px);
+		width: var(--gc-rule, 50%);
 	}
 
-	.Ml7gs_md {
-		margin-left: 58.333%;
+	.Ml6c_md {
+		--mgc: 6;
+		margin-left: calc(50% + 16px);
+		margin-left: var(--mgc-rule, 50%);
 	}
 
-	.W8gs_md {
-		width: 66.666%;
+	.W7c_md {
+		--gc: 7;
+		width: calc(58.333% - 32px);
+		width: var(--gc-rule, 58.333%);
 	}
 
-	.Ml8gs_md {
-		margin-left: 66.666%;
+	.Ml7c_md {
+		--mgc: 7;
+		margin-left: calc(58.333% + 16px);
+		margin-left: var(--mgc-rule, 58.333%);
 	}
 
-	.W9gs_md {
-		width: 75%;
+	.W8c_md {
+		--gc: 8;
+		width: calc(66.666% - 32px);
+		width: var(--gc-rule, 66.666%);
 	}
 
-	.Ml9gs_md {
-		margin-left: 75%;
+	.Ml8c_md {
+		--mgc: 8;
+		margin-left: calc(66.666% + 16px);
+		margin-left: var(--mgc-rule, 66.666%);
 	}
 
-	.W10gs_md {
-		width: 83.333%;
+	.W9c_md {
+		--gc: 9;
+		width: calc(75% - 32px);
+		width: var(--gc-rule, 75%);
 	}
 
-	.Ml10gs_md {
-		margin-left: 83.333%;
+	.Ml9c_md {
+		--mgc: 9;
+		margin-left: calc(75% + 16px);
+		margin-left: var(--mgc-rule, 75%);
 	}
 
-	.W11gs_md {
-		width: 91.666%;
+	.W10c_md {
+		--gc: 10;
+		width: calc(83.333% - 32px);
+		width: var(--gc-rule, 83.333%);
 	}
 
-	.W12gs_md {
-		width: 100%;
+	.Ml10c_md {
+		--mgc: 10;
+		margin-left: calc(83.333% + 16px);
+		margin-left: var(--mgc-rule, 83.333%);
+	}
+
+	.W11c_md {
+		--gc: 11;
+		width: calc(91.666% - 32px);
+		width: var(--gc-rule, 91.666%);
+	}
+
+	.W12c_md {
+		--gc: 12;
+		width: calc(100% - 32px);
+		width: var(--gc-rule, 100%);
 	}
 
 	.W-a_md {
 		width: auto;
 	}
 
+	.W-i_md {
+		width: inherit;
+	}
+
 	.Mb0_md {
-		margin-bottom: 0px;
+		margin-bottom: 0;
 	}
 
 	.Mx0_md {
-		margin-right: 0px;
-		margin-left: 0px;
+		margin-right: 0;
+		margin-left: 0;
 	}
 
 	.Ml-a_md {
@@ -2454,18 +2941,31 @@ Styleguide: core-utils.bd.bds
 		margin-bottom: calc(var(--mlu-gg-rem) * 2);
 	}
 
-	.Px1gg_md {
-		padding-right: 16px;
-		padding-left: 16px;
-		padding-right: 16px;
-		padding-left: 16px;
-		padding-right: var(--mlu-gg);
-		padding-left: var(--mlu-gg);
+	.Mx1gg_md {
+		margin-right: 16px;
+		margin-right: 16px;
+		margin-right: var(--mlu-gg);
+		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gg);
 	}
 
-	.Px0_md {
-		padding-right: 0;
-		padding-left: 0;
+	.Ml1gg_md {
+		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gg);
+	}
+
+	.mV-vh_md {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
 	}
 }
 
@@ -2478,16 +2978,41 @@ Styleguide: core-utils.bd.bds
 		--mlu-gg-rem: 1rem;
 	}
 
-	.mV-vh_lg {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		padding: 0px;
-		overflow: hidden;
-		white-space: nowrap;
-		border: 0px;
-		clip: rect(0 0 0 0);
+	.-Gg1su_lg {
+		--mlu-gg: 4px;
+		--mlu-gg-rem: 0.25rem;
+	}
+
+	.-Gg2su_lg {
+		--mlu-gg: 8px;
+		--mlu-gg-rem: 0.5rem;
+	}
+
+	.-Gg3su_lg {
+		--mlu-gg: 12px;
+		--mlu-gg-rem: 0.75rem;
+	}
+
+	.-Gg4su_lg {
+		--mlu-gg: 16px;
+		--mlu-gg-rem: 1rem;
+	}
+
+	.-Gg5su_lg {
+		--mlu-gg: 20px;
+		--mlu-gg-rem: 1.25rem;
+	}
+
+	.-Gcc_lg {
+		--mlu-grid-cols: 12;
+	}
+
+	.-Gcc10_lg {
+		--mlu-grid-cols: 10;
+	}
+
+	.-Gcc-sm_lg {
+		--mlu-grid-cols: 4;
 	}
 
 	.Pos-a_lg {
@@ -2514,6 +3039,34 @@ Styleguide: core-utils.bd.bds
 		display: none;
 	}
 
+	.Fxd-rr_lg {
+		flex-direction: row-reverse;
+	}
+
+	.Fxd-r_lg {
+		flex-direction: row;
+	}
+
+	.Fxw-w_lg {
+		flex-wrap: wrap;
+	}
+
+	.Fxw-n_lg {
+		flex-wrap: nowrap;
+	}
+
+	.Jc-fs_lg {
+		justify-content: flex-start;
+	}
+
+	.Jc-fe_lg {
+		justify-content: flex-end;
+	}
+
+	.Jc-c_lg {
+		justify-content: center;
+	}
+
 	.Jc-sa_lg {
 		justify-content: space-around;
 	}
@@ -2522,120 +3075,173 @@ Styleguide: core-utils.bd.bds
 		justify-content: space-between;
 	}
 
-	.mJc-fs_lg {
-		justify-content: flex-start;
-		text-align: left;
+	.Ai-s_lg {
+		align-items: stretch;
 	}
 
-	.mJc-c_lg {
-		justify-content: center;
-		text-align: center;
+	.Ai-fs_lg {
+		align-items: flex-start;
 	}
 
-	.mJc-fe_lg {
-		justify-content: flex-end;
-		text-align: right;
+	.Ai-fe_lg {
+		align-items: flex-end;
 	}
 
-	.W1gs_lg {
-		width: 8.333%;
+	.Ai-b_lg {
+		align-items: baseline;
 	}
 
-	.Ml1gs_lg {
-		margin-left: 8.333%;
+	.Ai-c_lg {
+		align-items: center;
 	}
 
-	.W2gs_lg {
-		width: 16.666%;
+	.W1c_lg {
+		--gc: 1;
+		width: calc(8.333% - 32px);
+		width: var(--gc-rule, 8.333%);
 	}
 
-	.Ml2gs_lg {
-		margin-left: 16.666%;
+	.Ml1c_lg {
+		--mgc: 1;
+		margin-left: calc(8.333% + 16px);
+		margin-left: var(--mgc-rule, 8.333%);
 	}
 
-	.W3gs_lg {
-		width: 25%;
+	.W2c_lg {
+		--gc: 2;
+		width: calc(16.666% - 32px);
+		width: var(--gc-rule, 16.666%);
 	}
 
-	.Ml3gs_lg {
-		margin-left: 25%;
+	.Ml2c_lg {
+		--mgc: 2;
+		margin-left: calc(16.666% + 16px);
+		margin-left: var(--mgc-rule, 16.666%);
 	}
 
-	.W4gs_lg {
-		width: 33.333%;
+	.W3c_lg {
+		--gc: 3;
+		width: calc(25% - 32px);
+		width: var(--gc-rule, 25%);
 	}
 
-	.Ml4gs_lg {
-		margin-left: 33.333%;
+	.Ml3c_lg {
+		--mgc: 3;
+		margin-left: calc(25% + 16px);
+		margin-left: var(--mgc-rule, 25%);
 	}
 
-	.W5gs_lg {
-		width: 41.666%;
+	.W4c_lg {
+		--gc: 4;
+		width: calc(33.333% - 32px);
+		width: var(--gc-rule, 33.333%);
 	}
 
-	.Ml5gs_lg {
-		margin-left: 41.666%;
+	.Ml4c_lg {
+		--mgc: 4;
+		margin-left: calc(33.333% + 16px);
+		margin-left: var(--mgc-rule, 33.333%);
 	}
 
-	.W6gs_lg {
-		width: 50%;
+	.W5c_lg {
+		--gc: 5;
+		width: calc(41.666% - 32px);
+		width: var(--gc-rule, 41.666%);
 	}
 
-	.Ml6gs_lg {
-		margin-left: 50%;
+	.Ml5c_lg {
+		--mgc: 5;
+		margin-left: calc(41.666% + 16px);
+		margin-left: var(--mgc-rule, 41.666%);
 	}
 
-	.W7gs_lg {
-		width: 58.333%;
+	.W6c_lg {
+		--gc: 6;
+		width: calc(50% - 32px);
+		width: var(--gc-rule, 50%);
 	}
 
-	.Ml7gs_lg {
-		margin-left: 58.333%;
+	.Ml6c_lg {
+		--mgc: 6;
+		margin-left: calc(50% + 16px);
+		margin-left: var(--mgc-rule, 50%);
 	}
 
-	.W8gs_lg {
-		width: 66.666%;
+	.W7c_lg {
+		--gc: 7;
+		width: calc(58.333% - 32px);
+		width: var(--gc-rule, 58.333%);
 	}
 
-	.Ml8gs_lg {
-		margin-left: 66.666%;
+	.Ml7c_lg {
+		--mgc: 7;
+		margin-left: calc(58.333% + 16px);
+		margin-left: var(--mgc-rule, 58.333%);
 	}
 
-	.W9gs_lg {
-		width: 75%;
+	.W8c_lg {
+		--gc: 8;
+		width: calc(66.666% - 32px);
+		width: var(--gc-rule, 66.666%);
 	}
 
-	.Ml9gs_lg {
-		margin-left: 75%;
+	.Ml8c_lg {
+		--mgc: 8;
+		margin-left: calc(66.666% + 16px);
+		margin-left: var(--mgc-rule, 66.666%);
 	}
 
-	.W10gs_lg {
-		width: 83.333%;
+	.W9c_lg {
+		--gc: 9;
+		width: calc(75% - 32px);
+		width: var(--gc-rule, 75%);
 	}
 
-	.Ml10gs_lg {
-		margin-left: 83.333%;
+	.Ml9c_lg {
+		--mgc: 9;
+		margin-left: calc(75% + 16px);
+		margin-left: var(--mgc-rule, 75%);
 	}
 
-	.W11gs_lg {
-		width: 91.666%;
+	.W10c_lg {
+		--gc: 10;
+		width: calc(83.333% - 32px);
+		width: var(--gc-rule, 83.333%);
 	}
 
-	.W12gs_lg {
-		width: 100%;
+	.Ml10c_lg {
+		--mgc: 10;
+		margin-left: calc(83.333% + 16px);
+		margin-left: var(--mgc-rule, 83.333%);
+	}
+
+	.W11c_lg {
+		--gc: 11;
+		width: calc(91.666% - 32px);
+		width: var(--gc-rule, 91.666%);
+	}
+
+	.W12c_lg {
+		--gc: 12;
+		width: calc(100% - 32px);
+		width: var(--gc-rule, 100%);
 	}
 
 	.W-a_lg {
 		width: auto;
 	}
 
+	.W-i_lg {
+		width: inherit;
+	}
+
 	.Mb0_lg {
-		margin-bottom: 0px;
+		margin-bottom: 0;
 	}
 
 	.Mx0_lg {
-		margin-right: 0px;
-		margin-left: 0px;
+		margin-right: 0;
+		margin-left: 0;
 	}
 
 	.Ml-a_lg {
@@ -2653,23 +3259,22 @@ Styleguide: core-utils.bd.bds
 		margin-bottom: calc(var(--mlu-gg-rem) * 2);
 	}
 
-	.Px1gg_lg {
-		padding-right: 16px;
-		padding-left: 16px;
-		padding-right: 16px;
-		padding-left: 16px;
-		padding-right: var(--mlu-gg);
-		padding-left: var(--mlu-gg);
+	.Mx1gg_lg {
+		margin-right: 16px;
+		margin-right: 16px;
+		margin-right: var(--mlu-gg);
+		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gg);
 	}
 
-	.Px0_lg {
-		padding-right: 0;
-		padding-left: 0;
+	.Ml1gg_lg {
+		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gg);
 	}
-}
 
-@media (min-width: 1168px) {
-	.mV-vh_xl {
+	.mV-vh_lg {
 		position: absolute;
 		width: 1px;
 		height: 1px;
@@ -2679,6 +3284,45 @@ Styleguide: core-utils.bd.bds
 		white-space: nowrap;
 		border: 0px;
 		clip: rect(0 0 0 0);
+	}
+}
+
+@media (min-width: 1168px) {
+	.-Gg1su_xl {
+		--mlu-gg: 4px;
+		--mlu-gg-rem: 0.25rem;
+	}
+
+	.-Gg2su_xl {
+		--mlu-gg: 8px;
+		--mlu-gg-rem: 0.5rem;
+	}
+
+	.-Gg3su_xl {
+		--mlu-gg: 12px;
+		--mlu-gg-rem: 0.75rem;
+	}
+
+	.-Gg4su_xl {
+		--mlu-gg: 16px;
+		--mlu-gg-rem: 1rem;
+	}
+
+	.-Gg5su_xl {
+		--mlu-gg: 20px;
+		--mlu-gg-rem: 1.25rem;
+	}
+
+	.-Gcc_xl {
+		--mlu-grid-cols: 12;
+	}
+
+	.-Gcc10_xl {
+		--mlu-grid-cols: 10;
+	}
+
+	.-Gcc-sm_xl {
+		--mlu-grid-cols: 4;
 	}
 
 	.Pos-a_xl {
@@ -2705,6 +3349,34 @@ Styleguide: core-utils.bd.bds
 		display: none;
 	}
 
+	.Fxd-rr_xl {
+		flex-direction: row-reverse;
+	}
+
+	.Fxd-r_xl {
+		flex-direction: row;
+	}
+
+	.Fxw-w_xl {
+		flex-wrap: wrap;
+	}
+
+	.Fxw-n_xl {
+		flex-wrap: nowrap;
+	}
+
+	.Jc-fs_xl {
+		justify-content: flex-start;
+	}
+
+	.Jc-fe_xl {
+		justify-content: flex-end;
+	}
+
+	.Jc-c_xl {
+		justify-content: center;
+	}
+
 	.Jc-sa_xl {
 		justify-content: space-around;
 	}
@@ -2713,120 +3385,173 @@ Styleguide: core-utils.bd.bds
 		justify-content: space-between;
 	}
 
-	.mJc-fs_xl {
-		justify-content: flex-start;
-		text-align: left;
+	.Ai-s_xl {
+		align-items: stretch;
 	}
 
-	.mJc-c_xl {
-		justify-content: center;
-		text-align: center;
+	.Ai-fs_xl {
+		align-items: flex-start;
 	}
 
-	.mJc-fe_xl {
-		justify-content: flex-end;
-		text-align: right;
+	.Ai-fe_xl {
+		align-items: flex-end;
 	}
 
-	.W1gs_xl {
-		width: 8.333%;
+	.Ai-b_xl {
+		align-items: baseline;
 	}
 
-	.Ml1gs_xl {
-		margin-left: 8.333%;
+	.Ai-c_xl {
+		align-items: center;
 	}
 
-	.W2gs_xl {
-		width: 16.666%;
+	.W1c_xl {
+		--gc: 1;
+		width: calc(8.333% - 32px);
+		width: var(--gc-rule, 8.333%);
 	}
 
-	.Ml2gs_xl {
-		margin-left: 16.666%;
+	.Ml1c_xl {
+		--mgc: 1;
+		margin-left: calc(8.333% + 16px);
+		margin-left: var(--mgc-rule, 8.333%);
 	}
 
-	.W3gs_xl {
-		width: 25%;
+	.W2c_xl {
+		--gc: 2;
+		width: calc(16.666% - 32px);
+		width: var(--gc-rule, 16.666%);
 	}
 
-	.Ml3gs_xl {
-		margin-left: 25%;
+	.Ml2c_xl {
+		--mgc: 2;
+		margin-left: calc(16.666% + 16px);
+		margin-left: var(--mgc-rule, 16.666%);
 	}
 
-	.W4gs_xl {
-		width: 33.333%;
+	.W3c_xl {
+		--gc: 3;
+		width: calc(25% - 32px);
+		width: var(--gc-rule, 25%);
 	}
 
-	.Ml4gs_xl {
-		margin-left: 33.333%;
+	.Ml3c_xl {
+		--mgc: 3;
+		margin-left: calc(25% + 16px);
+		margin-left: var(--mgc-rule, 25%);
 	}
 
-	.W5gs_xl {
-		width: 41.666%;
+	.W4c_xl {
+		--gc: 4;
+		width: calc(33.333% - 32px);
+		width: var(--gc-rule, 33.333%);
 	}
 
-	.Ml5gs_xl {
-		margin-left: 41.666%;
+	.Ml4c_xl {
+		--mgc: 4;
+		margin-left: calc(33.333% + 16px);
+		margin-left: var(--mgc-rule, 33.333%);
 	}
 
-	.W6gs_xl {
-		width: 50%;
+	.W5c_xl {
+		--gc: 5;
+		width: calc(41.666% - 32px);
+		width: var(--gc-rule, 41.666%);
 	}
 
-	.Ml6gs_xl {
-		margin-left: 50%;
+	.Ml5c_xl {
+		--mgc: 5;
+		margin-left: calc(41.666% + 16px);
+		margin-left: var(--mgc-rule, 41.666%);
 	}
 
-	.W7gs_xl {
-		width: 58.333%;
+	.W6c_xl {
+		--gc: 6;
+		width: calc(50% - 32px);
+		width: var(--gc-rule, 50%);
 	}
 
-	.Ml7gs_xl {
-		margin-left: 58.333%;
+	.Ml6c_xl {
+		--mgc: 6;
+		margin-left: calc(50% + 16px);
+		margin-left: var(--mgc-rule, 50%);
 	}
 
-	.W8gs_xl {
-		width: 66.666%;
+	.W7c_xl {
+		--gc: 7;
+		width: calc(58.333% - 32px);
+		width: var(--gc-rule, 58.333%);
 	}
 
-	.Ml8gs_xl {
-		margin-left: 66.666%;
+	.Ml7c_xl {
+		--mgc: 7;
+		margin-left: calc(58.333% + 16px);
+		margin-left: var(--mgc-rule, 58.333%);
 	}
 
-	.W9gs_xl {
-		width: 75%;
+	.W8c_xl {
+		--gc: 8;
+		width: calc(66.666% - 32px);
+		width: var(--gc-rule, 66.666%);
 	}
 
-	.Ml9gs_xl {
-		margin-left: 75%;
+	.Ml8c_xl {
+		--mgc: 8;
+		margin-left: calc(66.666% + 16px);
+		margin-left: var(--mgc-rule, 66.666%);
 	}
 
-	.W10gs_xl {
-		width: 83.333%;
+	.W9c_xl {
+		--gc: 9;
+		width: calc(75% - 32px);
+		width: var(--gc-rule, 75%);
 	}
 
-	.Ml10gs_xl {
-		margin-left: 83.333%;
+	.Ml9c_xl {
+		--mgc: 9;
+		margin-left: calc(75% + 16px);
+		margin-left: var(--mgc-rule, 75%);
 	}
 
-	.W11gs_xl {
-		width: 91.666%;
+	.W10c_xl {
+		--gc: 10;
+		width: calc(83.333% - 32px);
+		width: var(--gc-rule, 83.333%);
 	}
 
-	.W12gs_xl {
-		width: 100%;
+	.Ml10c_xl {
+		--mgc: 10;
+		margin-left: calc(83.333% + 16px);
+		margin-left: var(--mgc-rule, 83.333%);
+	}
+
+	.W11c_xl {
+		--gc: 11;
+		width: calc(91.666% - 32px);
+		width: var(--gc-rule, 91.666%);
+	}
+
+	.W12c_xl {
+		--gc: 12;
+		width: calc(100% - 32px);
+		width: var(--gc-rule, 100%);
 	}
 
 	.W-a_xl {
 		width: auto;
 	}
 
+	.W-i_xl {
+		width: inherit;
+	}
+
 	.Mb0_xl {
-		margin-bottom: 0px;
+		margin-bottom: 0;
 	}
 
 	.Mx0_xl {
-		margin-right: 0px;
-		margin-left: 0px;
+		margin-right: 0;
+		margin-left: 0;
 	}
 
 	.Ml-a_xl {
@@ -2844,39 +3569,30 @@ Styleguide: core-utils.bd.bds
 		margin-bottom: calc(var(--mlu-gg-rem) * 2);
 	}
 
-	.Px1gg_xl {
-		padding-right: 16px;
-		padding-left: 16px;
-		padding-right: 16px;
-		padding-left: 16px;
-		padding-right: var(--mlu-gg);
-		padding-left: var(--mlu-gg);
+	.Mx1gg_xl {
+		margin-right: 16px;
+		margin-right: 16px;
+		margin-right: var(--mlu-gg);
+		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gg);
 	}
 
-	.Px0_xl {
-		padding-right: 0;
-		padding-left: 0;
+	.Ml1gg_xl {
+		margin-left: 16px;
+		margin-left: 16px;
+		margin-left: var(--mlu-gg);
 	}
 
-	.Dir-r_xl {
-		direction: rtl;
-	}
-}
-
-@media (min-width: 520px) and (max-width: 759px) {
-	.Dir-r_sm {
-		direction: rtl;
-	}
-}
-
-@media (min-width: 760px) and (max-width: 959px) {
-	.Dir-r_md {
-		direction: rtl;
-	}
-}
-
-@media (min-width: 960px) and (max-width: 1167px) {
-	.Dir-r_lg {
-		direction: rtl;
+	.mV-vh_xl {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
 	}
 }

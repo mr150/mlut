@@ -27,8 +27,6 @@ var dirs = {
 
 var path = {
 	src: {
-		blocks: dirs.src + "core-blocks/",
-		utils: dirs.src + "core-utils/",
 		sass: dirs.src + "sass/",
 		js: dirs.src + "js/"
 	},
@@ -48,16 +46,12 @@ var files = {
 	js: "**/*.js",
 	pug: "**/*.pug",
 	html: "**/*.html",
-	distCss: "mlut.min.css",
-	distJs: "mlut.min.js",
 	all: "**/*"
 };
 
 path = Object.assign({
 	watch: {
 		styles: [
-			path.src.blocks + files.styles,
-			path.src.utils + files.styles,
 			dirs.libs + files.styles,
 			path.src.sass + files.styles
 		],
@@ -70,9 +64,7 @@ path = Object.assign({
 			path.test.css + "test.css",
 		],
 		js: [
-			path.src.js + "mlut.js",
-			path.src.js + "includes/" + files.js,
-			path.src.blocks + files.js,
+			path.src.js + files.js,
 			dirs.libs + files.js
 		]
 	}
@@ -91,8 +83,19 @@ var servConfig = {
 			showFiles: true
 		};
 
-gulp.task("style", ["css-lint"], function(){
-	return gulp.src(path.src.sass + "mlut.scss")
+gulp.task("css-lint", function(){
+	return gulp.src([
+		path.src.sass + files.styles
+	])
+		.pipe(stylelint({
+			reporters:[
+				{formatter: "string", console: true}
+			]
+		}));
+});
+
+gulp.task("style", gulp.series("css-lint", function(){
+	return gulp.src(path.src.sass + "*.scss")
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sass({
@@ -111,46 +114,33 @@ gulp.task("style", ["css-lint"], function(){
 			level: 2,
 			compatibility: "ie8"
 		}))
-		.pipe(rename(files.distCss))
+		.pipe(rename({suffix: ".min"}))
 		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build.css))
 		.pipe(gulp.dest(dirs.docs + "styleguide/kss-assets/"))
 		.pipe(sourcemaps.write(""))
 		.pipe(gulp.dest(path.test.css))
 		.pipe(browserSync.stream());
-});
-
-gulp.task("css-lint", function(){
-	return gulp.src([
-		path.src.blocks + files.styles,
-		path.src.utils + files.styles,
-		path.src.sass + files.styles
-	])
-		.pipe(stylelint({
-			reporters:[
-				{formatter: "string", console: true}
-			]
-		}));
-});
+}));
 
 gulp.task("scripts", function(){
-	return gulp.src(path.src.js + "mlut.js")
+	return gulp.src(path.src.js + "mlut.js", {allowEmpty: true})
 		.pipe(plumber())
 		.pipe(rigger())
 		.pipe(sourcemaps.init())
-		.pipe(rename("scripts.js"))
 		.pipe(gulp.dest(path.test.js))
 		.pipe(uglify())
-		.pipe(rename(files.distJs))
+		.pipe(rename({suffix: ".min"}))
 		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build.js))
+		.pipe(gulp.dest(dirs.docs + "styleguide/kss-assets/"))
 		.pipe(sourcemaps.write(""))
 		.pipe(gulp.dest(path.test.js))
 		.pipe(browserSync.stream());
 });
 
 gulp.task("pug", function(){
-	return gulp.src(path.test.pug + "*.pug")
+	return gulp.src(path.test.pug + "*.pug", {allowEmpty: true})
 		.pipe(plumber())
 		.pipe(pug({"pretty": "\t"}))
 		.pipe(gulp.dest(dirs.test));
@@ -161,7 +151,7 @@ gulp.task("server", function(){
 });
 
 gulp.task("html", function(){
-	return gulp.src(dirs.test + files.html)
+	return gulp.src(dirs.test + files.html, {allowEmpty: true})
 		.pipe(fileSize(sizeConfig))
 		.pipe(browserSync.stream());
 });
@@ -171,18 +161,18 @@ gulp.task("kss", shell.task([
 	"cp " + path.test.css + "test.css " + dirs.docs + "styleguide/kss-assets"
 ]));
 
-gulp.task("default", ["server", "style", "pug", "scripts"], function(){
-	gulp.watch(path.watch.styles, ["style", "kss"]);
-	gulp.watch(path.watch.pug, ["pug"]);
-	gulp.watch(path.watch.html, ["html"]);
-	gulp.watch(path.watch.js, ["scripts"]);
-	gulp.watch(path.watch.docs, ["kss"]);
+gulp.task("default", gulp.parallel("server", "style", "pug", "scripts", function(){
+	gulp.watch(path.watch.styles, gulp.parallel("style", "kss"));
+	gulp.watch(path.watch.pug, gulp.series("pug"));
+	gulp.watch(path.watch.html, gulp.series("html"));
+	gulp.watch(path.watch.js, gulp.series("scripts", "kss"));
+	gulp.watch(path.watch.docs, gulp.series("kss"));
+}));
+
+gulp.task("clear", function(cb){
+	del.sync(dirs.build);
+	cb();
 });
 
-gulp.task("clear", function(){
-	return del.sync(dirs.build);
-});
-
-gulp.task("build", ["clear", "style", "pug", "scripts", "kss"], function(){
-});
+gulp.task("build", gulp.series("clear", "style", "pug", "scripts", "kss"));
 

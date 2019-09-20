@@ -1,0 +1,52 @@
+/*
+Font
+
+* `F-i`
+* `Ff-ss0` \- sans serif system fonts stack. Sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
+* `Fw400` \- normal font weight.
+* `Fw700` \- **bold**.
+* `Fs` \- *italic*.
+* `Fs-n` \- normal font style.
+* `Fz-i`
+
+Styleguide: core-utils.f
+*/
+
+/*
+mFz
+
+Modified font size.
+
+0 - Accessibly hides the text inside the DOM node.
+
+Styleguide: core-utils.f.mfz
+*/
+
+.F-i {
+	font: inherit;
+}
+
+.Ff-ss0 {
+	font-family: $mlu-Ff-ss0;
+}
+
+@include mlu-mk-Fw((
+	400: 400,
+	700: 700,
+));
+
+@include mlu-mk-util("Fs", "font-style", (
+	"": italic,
+	"n": normal,
+));
+
+.Fz-i {
+	font-size: inherit;
+}
+
+.mFz0 {
+	overflow: hidden;
+	text-indent: 120%;
+	white-space: nowrap;
+	font-size: 0px;
+}

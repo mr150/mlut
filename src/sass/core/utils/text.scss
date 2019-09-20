@@ -1,0 +1,117 @@
+/*
+Text
+
+Group of utilities that manage the display of text.
+
+* `C-i`
+* `Whs-nw`
+* `Whs-p`
+* `Lh-n` \- line-height normal.
+* `Lh1`
+
+Styleguide: core-utils.text
+*/
+
+/*
+Ta
+
+Text alignment.
+
+initial - left.
+c - center.
+r - right.
+
+Styleguide: core-utils.text.ta
+*/
+
+/*
+Tt
+
+Text transform.
+
+initial - UPPERCASE.
+l - lowercase.
+n - remove text transform.
+c - Each Word Begins With A Capital Letter.
+
+Styleguide: core-utils.text.tt
+*/
+
+/*
+Td
+
+Text decoration.
+
+initial - remove text decoration.
+u - <u>underline</u>.
+l - ~~strikethrough~~.
+
+Styleguide: core-utils.text.td
+*/
+
+/*
+Dir
+
+Direction. Unility available if [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags) turned on. Sets direction of text and order items in row-layout.
+
+l - left to right *Responsive* only.
+r - right to left *Responsive*.
+
+Styleguide: core-utils.text.dir
+*/
+
+/*
+mTov
+
+Modified text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container. DOM node with `mTov` should have a width limit.
+
+Markup: ../../../docs/examples/core-utils/text/mtov.html
+
+Styleguide: core-utils.text.mtov
+*/
+
+@include mlu-mk-util("Ta", "text-align", (
+	"": left,
+	"c": center,
+	"r": right,
+));
+
+@include mlu-mk-util("Td", "text-decoration", (
+	"": none,
+	"u": underline,
+	"l": line-through,
+));
+
+@include mlu-mk-util("Tt", "text-transform", (
+	"": uppercase,
+	"n": none,
+	"l": lowercase,
+	"c": capitalize,
+));
+
+.mTov {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.C-i {
+	color: inherit;
+}
+
+@include mlu-mk-Lh((
+	"n": normal,
+	1: 1,
+));
+
+@include mlu-mk-util("Whs", "white-space", (
+	"nw": nowrap,
+	"p": pre,
+));
+
+@if $MLU-FLAG-FLEX-PE {
+	@include mlu-mk-util("Dir", "direction", (
+		"r_all": rtl,
+		"l_bp": ltr,
+	));
+}

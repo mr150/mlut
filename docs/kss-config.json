@@ -3,13 +3,16 @@
   "source": "../src",
   "destination": "styleguide",
   "homepage": "../docs/homepage.md",
+	"mask": "*.css|*.less|*.sass|*.scss|*.styl|*.stylus|*.js",
 
   "//": "The css and js paths are URLs relative to the style guide destination.",
   "css": [
     "kss-assets/mlut.min.css",
     "kss-assets/test.css"
   ],
-  "js": [],
+  "js": [
+    "kss-assets/mlut.min.js"
+	],
 
   "title": "MLUT documentation"
 }

@@ -1,0 +1,94 @@
+/*
+Box sizing
+
+Utilities for DOM nodes size management.
+
+* `H100p`
+* `H0`
+* `Mih100vh`
+* `Mih100p`
+* `Bxz`
+* `Fl` \- turn on wrapping text on the right.
+* `Fl-r` \- turn on wrapping text on the left.
+
+Styleguide: core-utils.bxz
+*/
+
+/*
+Maw
+
+Max-width.
+
+fx0 - fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+100p - 100%
+n - none
+
+Styleguide: core-utils.bxz.maw
+*/
+
+/*
+mCl
+
+Modified clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
+
+Styleguide: core-utils.bxz.mcl
+*/
+
+/*
+Ov
+
+Controls content display in case of overflow
+
+Ov - hidden.
+Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
+Ov.Ovx-a - auto. Scrollbar on X axis.
+Ov.Ovy-a - auto. Scrollbar on Y axis.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
+
+Styleguide: core-utils.bxz.ov
+*/
+
+@include mlu-mk-Maw((
+	"fx0": $mlu-Maw-fx0,
+	"100p": 100%,
+	"n": none,
+));
+
+@include mlu-mk-util("H", "height", (
+	"100p": 100%,
+	0: 0,
+));
+
+@include mlu-mk-Mih((
+	"100p": 100%,
+	100vh: 100vh,
+));
+
+.Bxz {
+	box-sizing: border-box;
+}
+
+@include mlu-mk-util("Fl", "float", (
+	"": left,
+	"r": right,
+));
+
+.mCl {
+	@include mlu-mCl;
+}
+
+@include mlu-mk-util("Ov", "overflow", (
+	"": hidden,
+	"a": auto,
+));
+
+.Ovx-a {
+	overflow-x: auto;
+}
+
+.Ovy-a {
+	overflow-y: auto;
+}

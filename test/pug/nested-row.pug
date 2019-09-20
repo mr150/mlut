@@ -5,93 +5,79 @@ html(lang="ru")
 	head
 		- pageTitle = "Nested rows examples";
 		include includes/head.pug
-	body.page
+	body.M0.Ff-ss0
 		include includes/header.pug
 		main
 			.wrapper
 				h1.title-h1 Nested rows examples
 				h2 Row mixed in col without gutter left, right, bottom
 				.row.Mx-1gg
-					.row__item.row.test-row.W4gs_sm.W9gs_md
+					.row__item.row.test-row.W4c_sm.W9c_md
 						- for(i = 3; i < 6; i++)
-							.row__col.W2gs_sm(class="W" + i + "gs_md")
-								.test-content
-									h3 Parent .W9s
-									p this .W#{i}s
-					.row__col.W2gs_sm.W3gs_md
-						.test-content
-							h3 .W3s
+							.row__col.test-content.W2c_sm(class="W" + i + "c_md")
+								h3 Parent .W9c
+								p this .W#{i}c
+					.row__col.test-content.W2c_sm.W3c_md
+						h3 .W3c
 				h2 Row mixed in col with gutter left, right
 				.row.Mx-1gg
-					.row__col.row.test-row.W9gs_md
+					.row__col.row.test-row.W9c_md
 						- for(i = 3; i < 6; i++)
-							.row__col.W2gs_sm(class="W" + i + "gs_md")
-								.test-content
-									h3 Parent .W9s
-									p this .W#{i}s
-					.row__col.W2gs_sm.W3gs_md
-						.test-content
-							h3 .W3s
+							.row__col.test-content.W2c_sm(class="W" + i + "c_md")
+								h3 Parent .W9c
+								p this .W#{i}c
+					.row__col.test-content.W2c_sm.W3c_md
+						h3 .W3c
 				h2 Row nested in col with gutter left, right, bottom
 				.row.Mx-1gg
-					.row__col.test-row.W9gs_md
+					.row__col.test-row.W9c_md
 						.row
 							- for(i = 3; i < 6; i++)
-								.row__col.W2gs_sm(class="W" + i + "gs_md")
-									.test-content
-										h3 Parent .W9s
-										p this .W#{i}s
-					.row__col.W2gs_sm.W3gs_md
-						.test-content
-							h3 .W3s
+								.row__col.test-content.W2c_sm(class="W" + i + "c_md")
+									h3 Parent .W9c
+									p this .W#{i}c
+					.row__col.test-content.W2c_sm.W3c_md
+						h3 .W3c
 				h2 Row nested in col with gutter bottom only
 				.row.Mx-1gg
-					.row__col.test-row.W9gs_md
+					.row__col.test-row.W9c_md
 						.row.Mx-1gg
 							- for(i = 3; i < 6; i++)
-								.row__col.W2gs_sm(class="W" + i + "gs_md")
-									.test-content
-										h3 Parent .W9s
-										p this .W#{i}s
-					.row__col.W2gs_sm.W3gs_md
-						.test-content
-							h3 .W3s
+								.row__col.test-content.W2c_sm(class="W" + i + "c_md")
+									h3 Parent .W9c
+									p this .W#{i}c
+					.row__col.test-content.W2c_sm.W3c_md
+						h3 .W3c
 				h2 Row nested in col with gutter left, rigth
 				.row.Mx-1gg
-					.row__col.test-row.W9gs_md
+					.row__col.test-row.W9c_md
 						.row.Mb-2gg
 							- for(i = 3; i < 6; i++)
-								.row__col.W2gs_sm(class="W" + i + "gs_md")
-									.test-content
-										h3 Parent .W9s
-										p this .W#{i}s
-					.row__col.W2gs_sm.W3gs_md
-						.test-content
-							h3 .W3s
+								.row__col.test-content.W2c_sm(class="W" + i + "c_md")
+									h3 Parent .W9c
+									p this .W#{i}c
+					.row__col.test-content.W2c_sm.W3c_md
+						h3 .W3c
 				h2 Row nested in col minus gutter
 				.row.Mx-1gg
-					.row__col.test-row.W9gs_md
+					.row__col.test-row.W9c_md
 						.row.Mb-2gg.Mx-1gg
 							- for(i = 3; i < 6; i++)
-								.row__col.W2gs_sm(class="W" + i + "gs_md")
-									.test-content
-										h3 Parent .W9s
-										p this .W#{i}s
-					.row__col.W2gs_sm.W3gs_md
-						.test-content
-							h3 .W3s
+								.row__col.test-content.W2c_sm(class="W" + i + "c_md")
+									h3 Parent .W9c
+									p this .W#{i}c
+					.row__col.test-content.W2c_sm.W3c_md
+						h3 .W3c
 				h2 Row nested in col without gutter
 				.row.Mx-1gg
-					.row__col.row.test-row.W9gs_md
+					.row__col.row.test-row.W9c_md
 						.row.Mx-1gg
 							- for(i = 3; i < 6; i++)
-								.row__col.W2gs_sm(class="W" + i + "gs_md")
-									.test-content
-										h3 Parent .W9s
-										p this .W#{i}s
-					.row__col.W2gs_sm.W3gs_md
-						.test-content
-							h3 .W3s
+								.row__col.test-content.W2c_sm(class="W" + i + "c_md")
+									h3 Parent .W9c
+									p this .W#{i}c
+					.row__col.test-content.W2c_sm.W3c_md
+						h3 .W3c
 
 		include includes/footer.pug
 		include includes/scripts.pug

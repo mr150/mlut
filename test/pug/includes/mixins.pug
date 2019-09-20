@@ -14,7 +14,7 @@
 		+formInputs(myForm)
 		button Submit
 
-mixin formInputs(inputs, inputClass = "input input--common", labelClass = "mV-vh", groupClass = "")
+mixin formInputs(inputs, inputClass = "inp inp--common", labelClass = "mV-vh", groupClass = "")
 	- for(var i = 0; i < inputs.length; i++)
 		p(class=groupClass)
 			label(class=labelClass for=inputs[i].input.id)= inputs[i].label || inputs[i].input.placeholder
@@ -32,7 +32,7 @@ mixin formInputs(inputs, inputClass = "input input--common", labelClass = "mV-vh
 
 //- Usage example:
 	h2.mV-vh Site map
-	+siteMap(siteMapData, "row__col W2gc_sm W4gc_md", "", "mAll-sr")
+	+siteMap(siteMapData, "row__col W2c_sm W4c_md", "", "mAll-sr")
 
 mixin siteMap(mapData, sectionClass = "", sectionTitleClass = "", listClass = "", itemClass = "", linkClass = "")
 	- for(i = 0; i < mapData.length; i++)

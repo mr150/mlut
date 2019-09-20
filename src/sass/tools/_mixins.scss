@@ -1,0 +1,1088 @@
+/*
+Mixins
+
+Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sass/tools/_mixins.scss`.
+
+Styleguide: sass-tools.mixins
+*/
+
+$mlu-su-rem: mlu-px2rem($mlu-su);
+$mlu-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
+
+// mlu-bpm
+//
+// Bpm is breakpoint manager.
+// ```scss
+// @include mlu-bpm("md") {
+//		.inp--common {
+//			padding-left: 48px;
+//		}
+// }
+//
+// @include mlu-bpm($to: "lg") {
+//		.btn--common {
+//			margin-left: 48px;
+//		}
+// }
+//
+// @include mlu-bpm("sm", "lg") {
+//		.btn--common {
+//			margin-top: 48px;
+//		}
+// }
+// ```
+// Compile into:
+// ```css
+// @media (min-width: 760px) {
+//		.inp--common {
+//			padding-left: 48px;
+//		}
+// }
+//
+// @media (max-width: 959px) {
+//		.btn--common {
+//			margin-left: 48px;
+//		}
+// }
+//
+// @media (min-width: 520px) and (max-width: 959px) {
+//		.btn--common {
+//			margin-top: 48px;
+//		}
+// }
+// ```
+//
+// $from = false - breakpoint. Can be keyword (string) or number. Generate to 'min-width' mediaquery, and `$to` to 'max-width' - 1.
+// $to = false - breakpoint. Can be keyword (string) or number. Generate to 'max-width' - 1 mediaquery. Together with `$from` generate to 'min-width and max-width - 1'.
+// $opt = false - string with additional media-features to check.
+// For example:
+// `(orientation: landscape)`,
+// `screen and (aspect-ratio: 11/5)`,
+// `print`.
+// $prop = "width" - property in mediaquery. Property generate like `#{$type}-#{$prop}`,
+// where `$type` can be 'min' or 'max'.
+// `$type` depends on availability `$from` and `$to`
+// @content - CSS relus that will be placed into mediaquery.
+//
+// Styleguide: sass-tools.mixins.bpm
+
+@mixin mlu-bpm($from: false, $to: false, $opt: false, $prop: "width") {
+	$type: "min";
+	$bp-val: ();
+
+	@if $from and $to {
+		$type: "range";
+	} @else if $to {
+		$type: "max";
+	} @else if not $from {
+		@error "Breakpoint value must be not null.";
+	}
+
+	@each $item in ($from, $to) {
+		@if type-of($item) == "string" {
+			$bp-val: append($bp-val,
+			if($item == $to,
+			mlu-bp($item) - 1,
+			mlu-bp($item)));
+		} @else if type-of($item) == "number" and not unitless($item) {
+			$item-to: $item;
+
+			@if unit($item) == "em" {
+				$item-to: mlu-px2em((($item / 1em) * $MLU-BROWSER-FONT-SIZE) - 1, $MLU-BROWSER-FONT-SIZE);
+			} @else if unit($item) == "rem" {
+				$item-to: mlu-px2rem((($item / 1rem) * $MLU-BROWSER-FONT-SIZE) - 1, $MLU-BROWSER-FONT-SIZE);
+			} @else if unit($item) == "px" {
+				$item-to: $item - 1;
+			}
+
+			$bp-val: append($bp-val,
+			if($item == $to, $item-to, $item));
+		} @else if type-of($item) != "bool" or (type-of($item) == "bool" and $item) {
+			@error "Invalid breakpoint type: '#{type-of($item)}' or value: '#{$item}'";
+		}
+	}
+
+	$opt: if($opt, $opt + " ", "");
+	$media-str: "";
+
+	@if $type == "range" {
+		$media-str: $opt + "(min-" + $prop + ":" + nth($bp-val, 1) + ") and (max-" + $prop + ":" + nth($bp-val, 2) + ")";
+	} @else {
+		$bp-val: nth($bp-val, 1);
+		$media-str: $opt + "(" + $type + "-" + $prop + ":" + $bp-val + ")";
+	}
+
+	@media #{$media-str} {
+		@content;
+	}
+}
+
+// mlu-mCl
+//
+// Generate clearfix for float layout.
+// ```scss
+//.block {
+//		@include mlu-mCl;
+//}
+// ```
+// CSS
+// ```css
+//.block:after {
+//		display: table;
+//		clear: both;
+//		content: "";
+//}
+// ```
+//
+// Styleguide: sass-tools.mixins.mcl
+
+@mixin mlu-mCl {
+	&:after {
+		display: table;
+		clear: both;
+		content: "";
+	}
+}
+
+// mlu-mk-gtr
+//
+// Generate fields or indents in grid-gutters on different breakpoints.
+// ```scss
+//.block {
+//		@include mlu-mk-gtr($direct: "r", $coef: 2);
+//}
+//
+//.foo {
+//		@include mlu-mk-gtr($direct: "r", $coef: 2, $css-vars: false);
+//}
+// ```
+// CSS
+// ```css
+//.block {
+//		margin-right: 32px;
+//		margin-right: calc(var(--mlu-gg) * 2);
+//}
+//
+//.foo {
+//		margin-right: 24px;
+//}
+//
+//@media (min-width: 960px) {
+//		.foo {
+//			margin-right: 32px;
+//		}
+//}
+// ```
+//
+// $init-gutter = $mlu-gtr-sm - initial gutter value out of breakpoint.
+// Can be number. If passed '-1', initial gutter will not be generated.
+// If you need a gutter in `rem`, pass value in `rem`.
+// $type = margin - can be any CSS property, including custom.
+// If no `margin`, `padding` or custom property is used, then `$direct` = "xy" must be specified.
+// $direct = "x" - any of 7 [directions](section-concepts.html#kssref-concepts-utility-dirs).
+// $gutters = $mlu-grid-gutters - map with gutters values on breakpoints.
+// Map item example: `"sm": 12px`. Custom gutters only work when the `$css-vars = false`.
+// $calc = $MLU-FLAG-CALC-FALLBACK - bool flag for generation CSS `calc()` fallback for old browsers.
+// $coef = 1 - coefficient by which the gutter value is multiplied.
+// $css-vars = $MLU-FLAG-CSS-VARS - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
+// Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
+//
+// Styleguide: sass-tools.mixins.mk_gtr
+
+@mixin mlu-mk-gtr($init-gutter: $mlu-gtr-sm, $type: "margin",
+$gutters: $mlu-grid-gutters, $calc: $MLU-FLAG-CALC-FALLBACK, $direct: "x",
+$coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
+	$custom-prop: null;
+	$prev-value: $mlu-grid-default-gtr;
+	$direct-val: null;
+
+	@if str-slice($type, 1, 2) == "--" {
+		$direct: "xy";
+		$custom-prop: $type;
+	}
+
+	@if type-of($gutters) != "map" {
+		@error "Wrong type of argument $gutters: '#{type-of($gutters)}'. Expected 'map'";
+	}
+
+	@if map-has-key($mlu-main-directions, $direct) {
+		$direct-val: map-get($mlu-main-directions, $direct);
+	}
+
+	@if not $css-vars {
+		$prev-value: if(map-has-key($gutters, $mlu-bp-xs), map-get($gutters, $mlu-bp-xs), $init-gutter);
+	}
+
+	@if $init-gutter and $init-gutter != -1 {
+		$var-value: if($coef != 1,
+		calc(var(#{$--mlu-gg}) * #{$coef}),
+		var(#{$--mlu-gg}));
+
+		$var-value-rem: if($coef != 1,
+		calc(var(#{$--mlu-gg-rem}) * #{$coef}),
+		var(#{$--mlu-gg-rem}));
+
+		$tmp-val: if($calc, calc(#{$prev-value * $coef}), $prev-value * $coef);
+
+		$tmp-val-rem: if($calc,
+		calc(#{mlu-px2rem($prev-value) * $coef}),
+		mlu-px2rem($prev-value) * $coef);
+
+		@if unit($init-gutter) == "rem" {
+			$prev-value: mlu-px2rem($prev-value);
+			$tmp-val: $tmp-val-rem;
+			$var-value: $var-value-rem;
+		}
+
+		@if $direct == "x" {
+			@if not $css-vars or $css-vars == 1 {
+				#{$type}-right: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+				#{$type}-left: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+				#{$type}-right: $tmp-val;
+				#{$type}-left: $tmp-val;
+			}
+
+			@if $css-vars {
+				#{$type}-right: $var-value;
+				#{$type}-left: $var-value;
+			}
+		} @else if $direct == "y" {
+			@if not $css-vars or $css-vars == 1 {
+				#{$type}-top: if($calc, ($mlu-gtr-sm * $coef), $tmp-val);
+				#{$type}-bottom: if($calc, ($mlu-gtr-sm * $coef), $tmp-val);
+				#{$type}-top: $tmp-val;
+				#{$type}-bottom: $tmp-val;
+			}
+
+			@if $css-vars {
+				#{$type}-top: $var-value;
+				#{$type}-bottom: $var-value;
+			}
+		} @else if $direct == "xy" {
+			@if not $css-vars or $css-vars == 1 {
+				@if $calc {
+					#{$type}: ($mlu-gtr-sm * $coef) ($mlu-grid-gutter-fallback * $coef);
+				}
+
+				@include _mlu-mk-gtr-xy($type, $tmp-val, $tmp-val-rem);
+			}
+
+			@if not $custom-prop and $css-vars {
+				@include _mlu-mk-gtr-xy($type, $var-value, $var-value-rem);
+			}
+		} @else if $direct-val {
+			@if not $css-vars or $css-vars == 1 {
+				#{$type}-#{$direct-val}: if($calc, ($mlu-grid-gutter-fallback * $coef), $tmp-val);
+				#{$type}-#{$direct-val}: $tmp-val;
+			}
+
+			@if $css-vars {
+				#{$type}-#{$direct-val}: $var-value;
+			}
+		} @else {
+			@error "Invalid gutter direction - '#{$direct}'";
+		}
+	}
+
+	@if not $css-vars {
+		@each $key, $value in $gutters {
+			$cur-val: $value;
+
+			@if $prev-value and unit($prev-value) == "rem" {
+				$cur-val: mlu-px2rem($value);
+			} @else if $prev-value and unitless($prev-value) and $prev-value > -1 {
+				$cur-val: mlu-ston($value + "");
+			}
+
+			@if $prev-value != -1 and $cur-val != $prev-value {
+				$tmp-val: if($calc, calc(#{$cur-val * $coef}), $cur-val * $coef);
+				$tmp-val-rem: if($calc,
+				calc(#{mlu-px2rem($cur-val) * $coef}),
+				mlu-px2rem($cur-val) * $coef);
+
+				@include mlu-bpm($key) {
+					@if $direct == "x" {
+						#{$type}-right: $tmp-val;
+						#{$type}-left: $tmp-val;
+					} @else if $direct == "y" {
+						#{$type}-top: $tmp-val;
+						#{$type}-bottom: $tmp-val;
+					} @else if $direct == "xy" {
+						@include _mlu-mk-gtr-xy($type, $tmp-val, $tmp-val-rem);
+					} @else if $direct-val {
+						#{$type}-#{$direct-val}: $tmp-val;
+					} @else {
+						@error "Invalid gutter direction - '#{$direct}'";
+					}
+				}
+			}
+
+			$prev-value: $cur-val;
+		}
+	}
+}
+
+// Private mixin to create gutters in the 'xy' direction.
+
+@mixin _mlu-mk-gtr-xy($type, $value, $value-rem) {
+	@if ($type == "padding" or $type == "margin") and ($value != $value-rem) {
+		#{$type}: $value-rem $value;
+	} @else {
+		#{$type}: $value;
+	}
+}
+
+// mlu-W
+//
+// Set `width` on different breakpoints.
+// It works similarly like [W utility](section-core-utils.html#kssref-core-utils-bxz-w).
+// ```scss
+//.block {
+//		@include mlu-W(2c, "sm");
+//		@include mlu-W(3gc, "md");
+//		@include mlu-W(4gs, "lg");
+//}
+//
+//.foo {
+//		@include mlu-W(2gc, "sm", $css-vars: false);
+//}
+// ```
+// CSS
+// ```css
+//@media (min-width: 520px) {
+//		.block {
+//			--gc: 2;
+//			width: calc(16.666% - 32px);
+//			width: var(--gc-rule, 16.666%);
+//		}
+//
+//		.foo {
+//			width: calc(16.666% - 24px);
+//		}
+//}
+//
+//@media (min-width: 760px) {
+//		.block {
+//			width: calc(25% - 32px);
+//			width: calc(25% - var(--mlu-gg) * 2);
+//		}
+//}
+//
+//@media (min-width: 960px) {
+//		.block {
+//			width: 33.333%;
+//		}
+//
+//		.foo {
+//			width: calc(16.666% - 32px);
+//		}
+//}
+// ```
+//
+// $width - can be in variable columns(`c`), grid-columns(`gc`), grid-spans(`gs`),
+// any CSS units(`px`, `rem` etc), `auto` or `inherit`. `gc` and `gs` calculated to %
+// according to the formula '`n / $cols * 100%`' and rounded by
+// [mlu-decimal-floor](section-sass-tools.html#kssref-sass-tools-functions-decimal_floor). <br>
+// If `$width` in `gc` and `$css-vars = false`, width will generated with considering
+// different gutters on breakpoints. As in the example above `foo`.<br>
+// If `$width` in `c` and `$css-vars != 2`, will be generated fallback in gc.
+// $bp = $mlu-bp-xs - breakpoint on which `$width` will sets. Can be number or breakpoint name.
+// $cols = $mlu-grid-default-cols - columns count in grid. Can be number or breakpoint name.
+// $gutters = $mlu-grid-gutters - map with gutters values on breakpoints.
+// Map item example: `"sm": 12px`. Custom gutters only work when the `$css-vars = false`.
+// $calc = false - bool flag for generation CSS `calc()` fallback. It can needed only if
+// $width set in 'gc' unit.
+// $type = "width" - service argument which used only by mixins-wrappers.
+// It needed for reusable `mlu-W` for generating grid offset,
+// because the algorithm for generating them is the same.
+// $css-vars = $MLU-FLAG-CSS-VARS - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
+// Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
+//
+// Styleguide: sass-tools.mixins.w
+
+@mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "width") {
+	$col-width: 0;
+	$columns: $cols;
+	$grid-gutters: $gutters;
+	$xs-gutter: false;
+	$calc-fallback: $calc;
+	$custom-unit: "";
+	$valid-values: (
+		"auto",
+		"inherit",
+	);
+
+	@if type-of($cols) == "string" {
+		$columns: mlu-grid-cols-count($cols);
+	} @else if type-of($cols) != "number" {
+		@error "Invalid value of argument $cols: '#{$cols}'. Expected number value or breakpoint name";
+	}
+
+	@if type-of($width) == "number" and
+		(unit($width) == "c" or unit($width) == "gc" or unit($width) == "gs") {
+		$tmp-val: mlu-ston($width + "");
+		$col-width: mlu-decimal-floor($tmp-val / $columns * 100%, 3);
+		$custom-unit: if(unit($width) == "gc", "gc", "gs");
+		$custom-unit: if(unit($width) == "c", $tmp-val, $custom-unit);
+	} @else if type-of($width) == "number" or index($valid-values, $width) {
+		$col-width: $width;
+	} @else if type-of($width) != "number" {
+		@error "Invalid value of argument $width: '#{$width}'. Expected number value or CSS keyword";
+	}
+
+	@if type-of($gutters) == "number" {
+		$grid-gutters: (if($bp == $mlu-bp-xs, $mlu-bp-sm, $bp): $gutters);
+	} @else if type-of($gutters) == "map" {
+		$xs-gutter: map-get($gutters, $mlu-bp-xs);
+	} @else {
+		@error "Wrong type of argument $gutters: '#{type-of($gutters)}'. Expected 'number' or 'map'";
+	}
+
+	@if $bp == $mlu-bp-xs {
+		$prev-gutter: if($xs-gutter, $xs-gutter, $mlu-gtr-sm);
+		@if $css-vars {
+			$prev-gutter: $mlu-grid-default-gtr;
+		}
+
+		@include _mlu-mk-width($col-width, $custom-unit, $prev-gutter, $calc-fallback, $type, $css-vars);
+		$calc-fallback: false;
+
+		// Repeat generation utility with new gutter if it changed on breakpoint.
+		// It need for utilities for smaller breakpoints correct work
+		// on larger breakpoints with changed gutter
+		@if not $css-vars {
+			@each $key, $value in $grid-gutters {
+				@if $value != $prev-gutter and $custom-unit == "gc" {
+					@include mlu-bpm($key) {
+						@include _mlu-mk-width($col-width, $custom-unit, $value, $calc-fallback, $type);
+					}
+				}
+
+				$prev-gutter: $value;
+			}
+		}
+	} @else if $custom-unit == "gc" and not $css-vars {
+		@if not map-has-key($grid-gutters, $bp) {
+			$grid-gutters: map-merge($grid-gutters, ($bp: nth(nth($grid-gutters, length($grid-gutters)), 2)));
+		}
+
+		$col-gutter: map-get($grid-gutters, $bp);
+		$prev-gutter: $col-gutter;
+
+		@each $key, $value in $grid-gutters {
+			// Repeat generation utility with new gutter if it changed on breakpoint.
+			@if $key == $bp or ($value > $col-gutter and $value != $prev-gutter) {
+				@include mlu-bpm($key) {
+					@include _mlu-mk-width($col-width, $custom-unit, $value, $calc-fallback, $type);
+					$calc-fallback: false;
+				}
+
+				$prev-gutter: $value;
+			}
+		}
+	} @else {
+		@include mlu-bpm($bp) {
+			@include _mlu-mk-width($col-width, $custom-unit, $mlu-grid-default-gtr, $calc, $type, $css-vars);
+		}
+	}
+}
+
+// mlu-Ml
+//
+// Set `margin-left` on different breakpoints.
+// It works similarly like [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml).
+//
+// It wrapper on [mlu-W](#kssref-sass-tools-mixins-w) because calculating and generation algorithm
+// for grid columns width and grid offsets the same.
+// All parameters are the same as in `mlu-W`. Only the first parameter is called `$offset`.
+// ```scss
+//.block {
+//		@include mlu-Ml(1c, "sm");
+//		@include mlu-Ml(3gc, "lg");
+//		@include mlu-Ml(4gs, "lg");
+//}
+// ```
+// CSS
+// ```css
+//@media (min-width: 520px) {
+//		.block {
+//			--mgc: 1;
+//			margin-left: calc(8.333% + 16px);
+//			margin-left: var(--mgc-rule, 8.333%);
+//		}
+//}
+//
+//@media (min-width: 960px) {
+//		.block {
+//			margin-left: calc(25% + 16px);
+//			margin-left: calc(25% + var(--mlu-gg));
+//		}
+//
+//		.block {
+//			margin-left: 33.333%;
+//		}
+//}
+// ```
+//
+// $offset - takes the same values as `$width` in `mlu-W`.
+//
+// Styleguide: sass-tools.mixins.ml
+
+@mixin mlu-Ml($offset, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK) {
+	@include mlu-W($offset, $bp, $cols, $gutters, $css-vars, $calc, "margin-left");
+}
+
+// Private mixin for width and grid offset generation from 'mlu-W'.
+
+@mixin _mlu-mk-width($width, $unit, $gutter: $mlu-gtr-sm,
+$calc: false, $prop: "width", $css-vars: false) {
+	$prop-abbr: (
+		"width": "",
+		"margin-left": "m",
+		"max-width": "maw",
+	);
+
+	$var-width: if(type-of($unit) == "number", $unit, null);
+	$unit: if($var-width, "gc", $unit);
+	$calc-val: calc(#{$width} - #{$gutter * 2});
+	$var-val: calc(#{$width} - var(#{$--mlu-gg}) * 2);
+	$width-fallback: if($calc, mlu-decimal-floor($width, 3) - ($mlu-grid-gutter-fallback * 2), 0);
+
+	@if $prop == "margin-left" {
+		$calc-val: calc(#{$width} + #{$gutter});
+		$var-val: calc(#{$width} + var(#{$--mlu-gg}));
+		$width-fallback: if($calc, mlu-decimal-floor($width, 3) + $mlu-grid-gutter-fallback, 0);
+	}
+
+	// Generation calc() fallback
+	@if $calc and $unit == "gc" {
+		#{$prop}: $width-fallback;
+	}
+
+	@if $unit == "gc" {
+		$abbr: map-get($prop-abbr, $prop);
+
+		@if $var-width {
+			--#{$abbr}gc: #{$var-width};
+		}
+
+		@if not $css-vars or $css-vars == 1 {
+			#{$prop}: $calc-val;
+		}
+
+		@if $css-vars and not $var-width {
+			#{$prop}: $var-val;
+		} @else if $var-width {
+			#{$prop}: var(--#{$abbr}gc-rule, #{$width});
+		}
+	} @else {
+		#{$prop}: $width;
+	}
+}
+
+// mlu-row
+//
+// Generate [row](section-core-blocks.html#kssref-core-blocks-row) block styles.
+// ```scss
+//.block {
+//		@include mlu-row;
+//}
+// ```
+//
+// $display = block - display type. Can be value of CSS `display` property.
+//
+// Styleguide: sass-tools.mixins.row
+
+@mixin mlu-row($display: block, $css-vars: $MLU-FLAG-CSS-VARS) {
+	position: relative;
+	display: $display;
+	margin: 0px;
+	padding: 0px;
+
+	@if $css-vars != 2 {
+		font-size: 0px;
+	}
+
+	list-style: none;
+	counter-reset: mlu-row-item;
+}
+
+// mlu-row-col
+//
+// Generate styles for [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) element.
+// ```scss
+//.item {
+//		@include mlu-row-col;
+//}
+// ```
+//
+// $display = inline-block - display type. Can be value of CSS `display` property.
+// $gutters = $mlu-grid-gutters - map with column gutters values on breakpoints.
+// You can also pass a number if you need the same gutter on all breakpoints.
+// Custom gutters only work when the `$css-vars = false`.
+// $calc = false - bool flag for generation CSS `calc()` fallback. It can needed only
+// for "col" `$type`.
+// $type = "col" - service parameter which used only by mixins-wrappers.
+// It needed for reusable `mlu-row-col` for making other
+// `row` elements, because the most of styles for them is the same.
+// $css-vars = $MLU-FLAG-CSS-VARS - use CSS custom properties for gutters.
+// Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
+//
+// Styleguide: sass-tools.mixins.row_col
+
+@mixin mlu-row-col($display: inline-block, $gutters: $mlu-grid-gutters,
+$css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
+	$grid-gutters: $gutters;
+
+	@if type-of($gutters) == "number" {
+		$grid-gutters: ($mlu-bp-xs: $gutters);
+	} @else if type-of($gutters) != "map" {
+		@error "Wrong type of argument $gutters: '#{type-of($gutters)}'. Expected 'number' or 'map'";
+	}
+
+	@if $css-vars {
+		--gc-rule: calc(var(--gc) / var(#{$--mlu-grid-cols}) * 100% - var(--gc-diff) * 2);
+		--mgc-rule: calc(var(--mgc) / var(#{$--mlu-grid-cols}) * 100% + var(--gc-diff));
+	}
+
+	position: relative;
+	display: $display;
+	max-width: 100%;
+	box-sizing: border-box;
+	vertical-align: top;
+
+	@if $css-vars != 2 {
+		font-size: $mlu-base-font-size;
+		font-size: mlu-px2rem($mlu-base-font-size);
+		text-align: left;
+		white-space: normal;
+		@if $MLU-FLAG-FLEX-PE {
+			direction: ltr;
+		}
+	}
+
+	@if $type == "col" {
+		--gc-diff: var(#{$--mlu-gg});
+
+		@include mlu-W(12gc, $gutters: $grid-gutters, $css-vars: $css-vars, $calc: $calc);
+
+		@include mlu-mk-gtr($mlu-gtr-sm, $gutters: $grid-gutters, $calc: $calc, $css-vars: $css-vars);
+		@include mlu-mk-gtr($mlu-gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: "b", $coef: 2, $css-vars: $css-vars);
+
+		&.row {
+			margin-bottom: 0px;
+			@if $css-vars != 2 {
+				font-size: 0px;
+			}
+		}
+	} @else {
+		--gc-diff: 0px;
+
+		@if $css-vars != 2 {
+			&.row {
+				font-size: 0px;
+			}
+		}
+	}
+
+	& > :first-child:not([class]) {
+		margin-top: 0px;
+	}
+
+	& > :last-child:not([class]) {
+		margin-bottom: 0px;
+	}
+}
+
+// mlu-row-item
+//
+// Generate styles for [row__item](section-core-blocks.html#kssref-core-blocks-row-row__item) element.
+//
+// It mixin-wrapper on `mlu-row-col` because most of styles the same.
+// ```scss
+//.item {
+//		@include mlu-row-item;
+//}
+// ```
+//
+// $display = inline-block - display type. Can be value of CSS `display` property.
+//
+// Styleguide: sass-tools.mixins.row_item
+
+@mixin mlu-row-item($display: inline-block) {
+	@include mlu-row-col($display, $type: "item");
+}
+
+// mlu-bp-all
+//
+// Generates the CSS rule on breakpoints, adding the name of the breakpoint to the selector, inside the corresponding media query.
+//
+// ```scss
+//@include mlu-bp-all(".Bdw1") {
+//		border-width: 1px;
+//}
+// ```
+// CSS
+// ```css
+//.Bdw1 {
+//		border-width: 1px;
+//}
+//
+//@media (min-width: 520px) {
+//		.Bdw1_sm {
+//			border-width: 1px;
+//		}
+//}
+//
+//@media (min-width: 760px) {
+//		.Bdw1_md {
+//			border-width: 1px;
+//		}
+//}
+//
+//@media (min-width: 960px) {
+//		.Bdw1_lg {
+//			border-width: 1px;
+//		}
+//}
+//
+//@media (min-width: 1168px) {
+//		.Bdw1_xl {
+//			border-width: 1px;
+//		}
+//}
+// ```
+// You can also use mixin inside the rule. This will work as well as the example above:
+// ```scss
+//.Bdw1 {
+//		@include mlu-bp-all() {
+//			border-width: 1px;
+//		}
+//}
+// ```
+//
+// $selector = & - selector of CSS rule. Can be `string` or `&`.
+// $xs = 1 - any type flag. If equal to 1, then the rule will first be generated outside of breakpoints(in `xs`).
+//
+// Styleguide: sass-tools.mixins.bp_all
+
+@mixin mlu-bp-all($selector: &, $xs: 1) {
+	@if not $selector {
+		@error "'$selector' argument must not be null.";
+	}
+
+	@at-root {
+		@if $xs == 1 {
+			#{$selector} {
+				@content;
+			}
+		}
+
+		@each $key, $value in $mlu-breakpoints {
+			@include mlu-bpm($key) {
+				#{$selector}_#{$key} {
+					@content;
+				}
+			}
+		}
+	}
+}
+
+// mlu-mk-state
+//
+// Generates values for utilities in various [states](section-concepts.html#kssref-concepts-utility-states). Names and values of states are set in the [settings](#kssref-sass-tools-settings-utils-states). Usually this mixin is not used separately because it is called inside [mlu-mk-util](#kssref-sass-tools-mixins-mk_util).
+//
+// ```scss
+//@include mlu-mk-state(".Bgc-mn0", ("h")) {
+//		background-color: #60f;
+//}
+// ```
+// CSS
+// ```css
+//.Bgc-mn0 {
+//		background-color: #60f;
+//}
+//
+//.h_Bgc-mn0:hover {
+//		background-color: #60f;
+//}
+// ```
+//
+// $selector = & - selector of CSS rule. Can be `string` or `&`.
+// $states = map-keys($mlu-util-states) -  list of state names to be generated.
+// $no-state = 1 - number flag. If equal to 1, then a value without state will be generated as in the example above.
+//
+// Styleguide: sass-tools.mixins.mk_state
+
+@mixin mlu-mk-state($selector: &, $states: map-keys($mlu-util-states), $no-state: 1) {
+	@if not $selector {
+		@error "'$selector' argument must not be null.";
+	}
+
+	@at-root {
+		@if $no-state == 1 {
+			#{$selector} {
+				@content;
+			}
+		}
+
+		$selector: mlu-check-class($selector, 1);
+
+		@each $key, $value in $mlu-util-states {
+			@if index($states, $key) {
+				$prefix: "." + $key;
+
+				@if type-of($value) == "string" {
+					#{$prefix}_#{$selector}:#{$value} {
+						@content;
+					}
+				} @else if type-of($value) == "list" {
+					$multi-selector: ();
+
+					@each $item in $value {
+						$multi-selector: append($multi-selector, $prefix + "_" + $selector + ":" + $item, comma);
+					}
+
+					#{$multi-selector} {
+						@content;
+					}
+				} @else {
+					#{$prefix}_#{$selector} {
+						@content;
+					}
+				}
+			}
+		}
+	}
+}
+
+// mlu-mk-util
+//
+// Сreates utilities based on a map in which the *keys* are the values of the utilities, and the *values* are the values of the CSS properties.
+//
+// Utility values are set according to the utility [naming rules](section-concepts.html#kssref-concepts-utility). They can be a string (including empty) or a number. Also, the value can indicate the breakpoint on which it should work - `"tb_lg"`. Even if the breakpoint is passed as a parameter when this mixin is called, then the data about breakpoints from the values map will be more priority. In addition to a specific breakpoint, 2 special values are valid:
+// * `bp` - create a value only on breakpoints:	`"r_bp"`, "4gg_bp"
+// * `all` - create a normal value and on breakpoints: `"ib_all"`, `"_all"`.
+//
+// Values for CSS properties can be any CSS values, as well as numbers with `gg` and `su` units. Values with  `gg` units are created using the [mk-gtr](#kssref-sass-tools-mixins-mk_gtr) mixin.
+//
+// For most commonly used utilities, there are [mixins-wrappers](#kssref-sass-tools-mixins-util_wrappers) in which utilities names and CSS properties are already selected.
+//
+// ```scss
+//$Bgc-map: (
+//		"f": #fff,
+//		"mn0_lg": #60f,
+//		"mn1": #c05,
+//);
+//
+//@include mlu-mk-util("Bgc", "background-color", $Bgc-map);
+// ```
+// CSS
+// ```css
+//.Bgc-f {
+//		background-color: #fff;
+//}
+//
+//.Bgc-mn1 {
+//		background-color: #c05;
+//}
+//
+//@media (min-width: 960px) {
+//		.Bgc-mn0_lg {
+//			background-color: #60f;
+//		}
+//}
+// ```
+//
+// $name - the name of the utility. It can be specified as a CSS class (with a dot) or just a `string`.
+// $prop - CSS property name.
+// $map - map with utilities names values and CSS properties values.
+// $bp = false - breakpoint on which utility values will be generated. Can be any breakpoint from the settings or a special value: `bp` and `all`.
+// $states = false - list of state names. For each value of the utility, all states from this list will be generated. Info about states see [here](section-concepts.html#kssref-concepts-utility-states).
+// $direct = null - service argument which used only by [mk-util-directions](#kssref-sass-tools-mixins-mk_util_dir).
+//
+// Styleguide: sass-tools.mixins.mk_util
+
+@mixin mlu-mk-util($name, $prop, $map, $bp: false, $states: false, $direct: null) {
+	$name: mlu-check-class($name);
+
+	@each $key, $value in $map {
+		$bp-name: $bp;
+		$util-val: $key;
+		$separator: if(type-of($key) == "string", str-index($key, "_"), false);
+
+		@if $separator {
+			$bp-name: str-slice($util-val, $separator + 1);
+			$util-val: str-slice($util-val, 1, $separator - 1);
+		}
+
+		$separator: if(mlu-ston($util-val), "", "-");
+		$selector: $name + $separator + $util-val;
+
+		@if $bp-name == "all" or $bp-name == "bp" {
+			@include mlu-bp-all($selector, if($bp-name == "all", 1, 0)) {
+				@include mlu-mk-state(&, $states, if($states, 0, 1)) {
+					@include _mlu-check-util-direction($direct, $prop, $value);
+				}
+			}
+		} @else if $bp-name {
+			@include mlu-bpm($bp-name) {
+				#{$selector}_#{$bp-name} {
+					@include mlu-mk-state(&, $states, if($states, 0, 1)) {
+						@include _mlu-check-util-direction($direct, $prop, $value);
+					}
+				}
+			}
+		} @else {
+			#{$selector} {
+				@include mlu-mk-state(&, $states, if($states, 0, 1)) {
+					@include _mlu-check-util-direction($direct, $prop, $value);
+				}
+			}
+		}
+	}
+}
+
+// mlu-mk-util-directions
+//
+// Creates utility groups that have different directions. For example [margin](section-core-utils.html#kssref-core-utils-margin) and [padding](section-core-utils.html#kssref-core-utils-padding).
+//
+// The [mlu-mk-util](#kssref-sass-tools-mixins-mk_util) functionality is mainly used, but the map of values for creating utilities is slightly different.
+// Before the utility value, one or two letters indicate the [direction](section-concepts.html#kssref-concepts-utility-dirs). Keywords and variables are separated by a hyphen from direction. Examples: `l4su`, `xy1gg`, `t-b8_lg`.
+//
+// A mixin can create [positioning](section-core-utils.html#kssref-core-utils-pos) utilities that match the CSS properties: `top` , `right` etc. To do this, just pass the map with the data.
+// Each of the 4 main directions will correspond to the CSS property. If the direction is combined,
+// then a modified utility `mX`, `mY` or `mXy` will be created. These utilities changes several properties. For the convenience of creating positioning utilities, a [mixin-wrapper](#kssref-sass-tools-mixins-util_wrappers) is used.
+//
+// All parameters are the same as in `mk-util`. Only their order and default values differ.
+// ```scss
+//$Xy-map: (
+//		x3gg: 3gg,
+//		l4su: 4su,
+//);
+//
+//@include mlu-mk-util-directions($Xy-map, "P", "padding");
+//
+//@include mlu-mk-Xy($Xy-map);
+// ```
+// CSS
+// ```css
+//.Px3gg {
+//		padding-right: 48px;
+//		padding-right: calc(var(--mlu-gg) * 3);
+//		padding-left: 48px;
+//		padding-left: calc(var(--mlu-gg) * 3);
+//}
+//
+//.Pl4su {
+//		padding-left: 16px;
+//}
+//
+//.mX3gg {
+//		right: 48px;
+//		right: calc(var(--mlu-gg) * 3);
+//		left: 48px;
+//		left: calc(var(--mlu-gg) * 3);
+//}
+//
+//.L4su {
+//		left: 16px;
+//}
+// ```
+//
+// $map - map with utilities names values and CSS properties values.
+// $name = null - the name of the utility.
+// $prop = null - CSS property name.
+// $bp = null - breakpoint on which utility values will be generated.
+// $states = null - list of state names.
+//
+// Styleguide: sass-tools.mixins.mk_util_dir
+
+@mixin mlu-mk-util-directions($map, $name: null, $prop: null, $bp: null, $states: null) {
+	@each $key, $value in $map {
+		@if type-of($key) != "string" {
+			@error "Invalid key format '#{$key}' for '#{$name}' in map of values";
+		}
+
+		$dir: str-slice($key, 1, 1);
+		$dir-val: map-get($mlu-main-directions, $dir);
+		$util-val: if(not mlu-ston(str-slice($key, 2)), str-slice($key, 3), str-slice($key, 2));
+		$tmp-map: ($util-val: $value);
+
+		@if $dir-val {
+			@if $name {
+				@include mlu-mk-util($name + $dir, $prop + "-" + $dir-val, $tmp-map, $bp, $states, $dir);
+			} @else {
+				@include mlu-mk-util(to-upper-case($dir), $dir-val, $tmp-map, $bp, $states);
+			}
+		} @else if $dir == "x" and str-slice($key, 2, 2) == "y" {
+			$util-val: if(not mlu-ston(str-slice($key, 3)), str-slice($key, 4), str-slice($key, 3));
+
+			@if $name {
+				@include mlu-mk-util($name, $prop, ($util-val: $value), $bp, $states);
+			} @else {
+				@include mlu-mk-util("mXy", null, ($util-val: $value), $bp, $states, "xy");
+			}
+		} @else if $dir == "x" or $dir == "y" {
+			@if $name {
+				@include mlu-mk-util($name + $dir, $prop, $tmp-map, $bp, $states, $dir);
+			} @else {
+				@include mlu-mk-util("m" + to-upper-case($dir), null, $tmp-map, $bp, $states, $dir);
+			}
+		} @else {
+			@error "Invalid direction '#{$dir}' for '#{$name}' in map of values";
+		}
+	}
+}
+
+// Private mixin that parses combined directions and identifies positioning utilities.
+
+@mixin _mlu-check-util-direction($dir, $prop, $value) {
+	@if $dir == "x" {
+		$prop: if($prop, $prop + "-", "");
+		@include _mlu-parse-unit($prop + "right", $value, "r");
+		@include _mlu-parse-unit($prop + "left", $value, "l");
+	} @else if $dir == "y" {
+		$prop: if($prop, $prop + "-", "");
+		@include _mlu-parse-unit($prop + "top", $value, "t");
+		@include _mlu-parse-unit($prop + "bottom", $value, "b");
+	} @else if $dir == "xy" {
+		$prop: if($prop, $prop + "-", "");
+		@each $item in map-values($mlu-main-directions) {
+			@include _mlu-parse-unit($prop + $item, $value, str-slice($item, 1, 1));
+		}
+	} @else {
+		@include _mlu-parse-unit($prop, $value, $dir);
+	}
+}
+
+// Private mixin that parses custom units based on directions.
+
+@mixin _mlu-parse-unit($prop, $value, $dir) {
+	$coef-val: mlu-ston($value + "");
+	$dir: if($dir, $dir, "xy");
+
+	@if type-of($value) == "number" and unit($value) == "gg" {
+		$tmp-val: if($dir == "t" or $dir == "b", $mlu-gtr-sm-rem, 1);
+		$dash-pos: str-index($prop, "-");
+
+		@if $dash-pos and $dir != "xy" {
+			$prop: str-slice($prop, 1, $dash-pos - 1);
+		} @else if $dir != "xy" {
+			$dir: "xy";
+		}
+
+		@include mlu-mk-gtr($tmp-val, $type: $prop, $direct: $dir, $coef: $coef-val);
+	} @else if type-of($value) == "number" and unit($value) == "su" {
+		@if $dir == "xy" {
+			@include _mlu-mk-gtr-xy($prop, $mlu-su * $coef-val, $mlu-su-rem * $coef-val);
+		} @else {
+			$tmp-val: if($dir == "t" or $dir == "b", $mlu-su-rem, $mlu-su);
+			#{$prop}: $tmp-val * $coef-val;
+		}
+	} @else {
+		#{$prop}: $value;
+	}
+}
+
+@import "mk-util-wrappers";

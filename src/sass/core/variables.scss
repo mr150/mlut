@@ -1,0 +1,43 @@
+/*
+CSS variables
+
+Global CSS custom properties which used in MLUT. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties. Global custom properties names begin with the `mlu` prefix.
+
+The values and meaning of many custom properties correspond to the [SASS settings](section-sass-tools.html#kssref-sass-tools-settings) of MLUT core. But unlike them, custom properties can be changed dynamically without recompiling.
+
+Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags).
+
+Remember that custom properties do not work in all browsers. This means that part of the settings, such as dynamically changing the gutters and the number of columns in the grid system, also does not work everywhere.
+
+In some blocks and utilities, custom properties are also used. Look for info about them in the description of the corresponding block or utility.
+
+You can find global CSS variables in `sass/core/variables.scss`.
+
+--mlu-gg = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
+Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
+Fallback is [$mlu-grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).
+--mlu-gg-rem = 0.75rem - grid gutter in `rem`.
+--mlu-grid-cols = 4 - number of columns in the [grid system](section-concepts.html#kssref-concepts-grid). Sets by [$mlu-grid-cols-xs](section-sass-tools.html#kssref-sass-tools-settings-grid) and changes on breakpoints according to the [settings](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints).
+
+Styleguide: core-styles.css_vars
+*/
+
+@if $MLU-FLAG-CSS-VARS {
+	:root {
+		$prev-value: $mlu-grid-cols-xs;
+
+		@include mlu-mk-gtr($type: $--mlu-gg, $css-vars: false);
+		@include mlu-mk-gtr(mlu-px2rem($mlu-gtr-sm), $type: $--mlu-gg-rem, $css-vars: false);
+		#{$--mlu-grid-cols}: $mlu-grid-cols-xs;
+
+		@each $key, $value in $mlu-grid-cols {
+			@if $value != $prev-value {
+				@include mlu-bpm($key) {
+					#{$--mlu-grid-cols}: $value;
+				}
+			}
+
+			$prev-value: $value;
+		}
+	}
+}

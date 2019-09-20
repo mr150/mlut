@@ -1,0 +1,97 @@
+/*
+Demo theme
+
+This theme was created primarily for demonstration, but it can also be used.
+
+**Dependencies**: [core-extend/mixins](section-sass_modules.html#kssref-sass_modules-core_extend-mixins).
+
+**Size**: 669B
+
+Colors:
+$mt-demo-primary-color: #0363cd - primary color
+$mt-demo-second-color: #282828 - secondary color
+
+Weight: 0
+
+Styleguide: sass_modules.demo_theme
+*/
+
+//stylelint-disable
+
+$mt-demo-primary-color: #0363cd;
+$mt-demo-second-color: #282828;
+
+$mt-demo-Maw: (
+	"xs0": 480px,
+	"sm0": 720px,
+) !default;
+
+$mt-demo-P: (
+	"xy-inp0": mlu-px2em(6px) 10px,
+	"xy-btn0": mlu-px2em(10px) 12px,
+	"t3gg_md": 3gg,
+	"b6su": 6su,
+	"t6su": 6su,
+	"b10su_md": 10su,
+) !default;
+
+$mt-demo-Fz: (
+	"h1_bp": mlu-px2rem(36px),
+	"h2_all": mlu-px2rem(28px),
+	"h3_all": mlu-px2rem(24px),
+	"h4": mlu-px2rem(18px),
+	"h5": mlu-px2rem(16px),
+	"h6": mlu-px2rem(12px),
+) !default;
+
+$mt-demo-C: (
+	"f": #fff,
+	"pr0": $mt-demo-primary-color,
+	"sc0": $mt-demo-second-color,
+	"sc2": #333,
+) !default;
+
+$mt-demo-Bgc: (
+	"pr1": #81b1e6,
+	"pr2": #428ad9,
+	"pr3": #047afe,
+	"sc1": #242426,
+) !default;
+
+$mt-demo-C-states: (
+	"pr0": $mt-demo-primary-color,
+	"pr2": #428ad9,
+	"f": #fff,
+) !default;
+
+$mt-demo-Bgc: map-merge($mt-demo-Bgc, $mt-demo-C);
+
+$mt-demo-Bdc: (
+	"pr0": $mt-demo-primary-color,
+	"pr4": #1d73d2,
+	"sc2": #333,
+	"gr0": #eee,
+) !default;
+
+$mt-demo-Bdrs: (
+	"crd0": 4px,
+	"crd1": 8px,
+) !default;
+
+$mt-demo-Bxsh: (
+	"sh0": (4px 4px 4px 0px rgba(0, 0, 0, 0.5)),
+) !default;
+
+$mt-demo-Bxsh-states: (
+	"n": none,
+) !default;
+
+$mt-demo-Trf: (
+	"r-90": rotate(-90deg),
+) !default;
+
+$mt-demo-Op: (
+	"08": 0.8,
+) !default;
+
+//stylelint-enable
