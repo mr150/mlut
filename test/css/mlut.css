@@ -1050,51 +1050,6 @@ Styleguide: core-utils.custom.gcr
 }
 
 /*
-Visual formatting
-
-* `Ol0`
-* `Op0`
-
-Styleguide: core-utils.visual
-*/
-
-/*
-mV
-
-Modified visibility.
-
-mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all. *Responsive*.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
-
-Styleguide: core-utils.visual.mv
-*/
-
-.Ol0 {
-	outline: 0px;
-}
-
-.Ol0::-moz-focus-inner {
-	border: 0;
-}
-
-.Op0 {
-	opacity: 0;
-}
-
-.mV-vh {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0px;
-	overflow: hidden;
-	white-space: nowrap;
-	border: 0px;
-	clip: rect(0 0 0 0);
-}
-
-/*
 Position
 
 * `Pos`
@@ -2004,65 +1959,6 @@ Styleguide: core-utils.padding.px
 }
 
 /*
-Font
-
-* `F-i`
-* `Ff-ss0` \- sans serif system fonts stack. Sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
-* `Fw400` \- normal font weight.
-* `Fw700` \- **bold**.
-* `Fs` \- *italic*.
-* `Fs-n` \- normal font style.
-* `Fz-i`
-
-Styleguide: core-utils.f
-*/
-
-/*
-mFz
-
-Modified font size.
-
-0 - Accessibly hides the text inside the DOM node.
-
-Styleguide: core-utils.f.mfz
-*/
-
-.F-i {
-	font: inherit;
-}
-
-.Ff-ss0 {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-}
-
-.Fw400 {
-	font-weight: 400;
-}
-
-.Fw700 {
-	font-weight: 700;
-}
-
-.Fs {
-	font-style: italic;
-}
-
-.Fs-n {
-	font-style: normal;
-}
-
-.Fz-i {
-	font-size: inherit;
-}
-
-.mFz0 {
-	overflow: hidden;
-	text-indent: 120%;
-	white-space: nowrap;
-	font-size: 0px;
-}
-
-/*
 Text
 
 Group of utilities that manage the display of text.
@@ -2201,6 +2097,164 @@ Styleguide: core-utils.text.mtov
 }
 
 /*
+Font
+
+* `F-i`
+* `Ff-ss0` \- sans serif system fonts stack. Sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
+* `Fw400` \- normal font weight.
+* `Fw700` \- **bold**.
+* `Fs` \- *italic*.
+* `Fs-n` \- normal font style.
+* `Fz-i`
+
+Styleguide: core-utils.f
+*/
+
+/*
+mFz
+
+Modified font size.
+
+0 - Accessibly hides the text inside the DOM node.
+
+Styleguide: core-utils.f.mfz
+*/
+
+.F-i {
+	font: inherit;
+}
+
+.Ff-ss0 {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.Fw400 {
+	font-weight: 400;
+}
+
+.Fw700 {
+	font-weight: 700;
+}
+
+.Fs {
+	font-style: italic;
+}
+
+.Fs-n {
+	font-style: normal;
+}
+
+.Fz-i {
+	font-size: inherit;
+}
+
+.mFz0 {
+	overflow: hidden;
+	text-indent: 120%;
+	white-space: nowrap;
+	font-size: 0px;
+}
+
+/*
+Border
+
+By default, the text color of the DOM node is used for the border.
+
+* `Bd` \- <span class="Bd">add border with 1px width all around.</span>
+* `Bdt` \- add border with 1px width on top.
+* `Bdr` \- border right.
+* `Bdb` \- border bottom.
+* `Bdl` \- border left.
+* `Bdx` \- left and rigth.
+* `Bdy` \- top and bottom.
+* `Bdcl-c` \- remove the separation between table cells.
+* `Bdrs50p` \- makes the shape visually round.
+
+Styleguide: core-utils.bd
+*/
+
+/*
+Bdw
+
+Border width.
+
+0 - remove border
+2 - <div class="Bd Bdw2 P2su Mb1gg">2px</div>
+1su - <div class="Bd Bdw1su P2su">1 space unit</div>
+
+Styleguide: core-utils.bd.bdw
+*/
+
+/*
+Bds
+
+Border style. Changes the style of the border on **all** sides at once.
+
+dt - <div class="Bd Bdw1su Bds-dt P2su Mb1gg">dotted</div>
+ds - <div class="Bd Bdw1su Bds-ds P2su">dashed</div>
+
+Styleguide: core-utils.bd.bds
+*/
+
+.Bd {
+	border: 1px solid;
+}
+
+.Bdt {
+	border-top: 1px solid;
+}
+
+.Bdr {
+	border-right: 1px solid;
+}
+
+.Bdb {
+	border-bottom: 1px solid;
+}
+
+.Bdl {
+	border-left: 1px solid;
+}
+
+.Bdy {
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+}
+
+.Bdx {
+	border-right: 1px solid;
+	border-left: 1px solid;
+}
+
+.Bds-dt {
+	border-style: dotted;
+}
+
+.Bds-ds {
+	border-style: dashed;
+}
+
+.Bdw0 {
+	border-width: 0;
+}
+
+.Bdw2 {
+	border-width: 2px;
+}
+
+.Bdw1su {
+	border-width: 4px;
+}
+
+.Bdcl-c {
+	border-collapse: collapse;
+}
+
+.Bdrs50p {
+	border-radius: 50%;
+}
+
+/*
 Background
 
 Group of utilities for managing the background image of DOM node.
@@ -2307,105 +2361,6 @@ Styleguide: core-utils.bg.bgsz
 }
 
 /*
-Border
-
-By default, the text color of the DOM node is used for the border.
-
-* `Bd` \- <span class="Bd">add border with 1px width all around.</span>
-* `Bdt` \- add border with 1px width on top.
-* `Bdr` \- border right.
-* `Bdb` \- border bottom.
-* `Bdl` \- border left.
-* `Bdx` \- left and rigth.
-* `Bdy` \- top and bottom.
-* `Bdcl-c` \- remove the separation between table cells.
-* `Bdrs50p` \- makes the shape visually round.
-
-Styleguide: core-utils.bd
-*/
-
-/*
-Bdw
-
-Border width.
-
-0 - remove border
-2 - <div class="Bd Bdw2 P2su Mb1gg">2px</div>
-1su - <div class="Bd Bdw1su P2su">1 space unit</div>
-
-Styleguide: core-utils.bd.bdw
-*/
-
-/*
-Bds
-
-Border style. Changes the style of the border on **all** sides at once.
-
-dt - <div class="Bd Bdw1su Bds-dt P2su Mb1gg">dotted</div>
-ds - <div class="Bd Bdw1su Bds-ds P2su">dashed</div>
-
-Styleguide: core-utils.bd.bds
-*/
-
-.Bd {
-	border: 1px solid;
-}
-
-.Bdt {
-	border-top: 1px solid;
-}
-
-.Bdr {
-	border-right: 1px solid;
-}
-
-.Bdb {
-	border-bottom: 1px solid;
-}
-
-.Bdl {
-	border-left: 1px solid;
-}
-
-.Bdy {
-	border-top: 1px solid;
-	border-bottom: 1px solid;
-}
-
-.Bdx {
-	border-right: 1px solid;
-	border-left: 1px solid;
-}
-
-.Bds-dt {
-	border-style: dotted;
-}
-
-.Bds-ds {
-	border-style: dashed;
-}
-
-.Bdw0 {
-	border-width: 0;
-}
-
-.Bdw2 {
-	border-width: 2px;
-}
-
-.Bdw1su {
-	border-width: 4px;
-}
-
-.Bdcl-c {
-	border-collapse: collapse;
-}
-
-.Bdrs50p {
-	border-radius: 50%;
-}
-
-/*
 Animation
 
 * `Trs-all` \- transition duration sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
@@ -2455,6 +2410,51 @@ Styleguide: core-utils.misc.mall
 	border: 0;
 }
 
+/*
+Visual formatting
+
+* `Ol0`
+* `Op0`
+
+Styleguide: core-utils.visual
+*/
+
+/*
+mV
+
+Modified visibility.
+
+mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all. *Responsive*.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
+
+Styleguide: core-utils.visual.mv
+*/
+
+.Ol0 {
+	outline: 0px;
+}
+
+.Ol0::-moz-focus-inner {
+	border: 0;
+}
+
+.Op0 {
+	opacity: 0;
+}
+
+.mV-vh {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0px;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 0px;
+	clip: rect(0 0 0 0);
+}
+
 /*===DESIGN-UTILS===*/
 
 @media (min-width: 520px) {
@@ -2489,18 +2489,6 @@ Styleguide: core-utils.misc.mall
 
 	.-Gcc10_sm {
 		--mlu-grid-cols: 10;
-	}
-
-	.mV-vh_sm {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		padding: 0px;
-		overflow: hidden;
-		white-space: nowrap;
-		border: 0px;
-		clip: rect(0 0 0 0);
 	}
 
 	.Pos-a_sm {
@@ -2653,6 +2641,18 @@ Styleguide: core-utils.misc.mall
 		margin-left: 16px;
 		margin-left: var(--mlu-gg);
 	}
+
+	.mV-vh_sm {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
+	}
 }
 
 @media (min-width: 760px) {
@@ -2695,18 +2695,6 @@ Styleguide: core-utils.misc.mall
 
 	.-Gcc-sm_md {
 		--mlu-grid-cols: 4;
-	}
-
-	.mV-vh_md {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		padding: 0px;
-		overflow: hidden;
-		white-space: nowrap;
-		border: 0px;
-		clip: rect(0 0 0 0);
 	}
 
 	.Pos-a_md {
@@ -2967,6 +2955,18 @@ Styleguide: core-utils.misc.mall
 		margin-left: 16px;
 		margin-left: var(--mlu-gg);
 	}
+
+	.mV-vh_md {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
+	}
 }
 
 @media (min-width: 960px) {
@@ -3013,18 +3013,6 @@ Styleguide: core-utils.misc.mall
 
 	.-Gcc-sm_lg {
 		--mlu-grid-cols: 4;
-	}
-
-	.mV-vh_lg {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		padding: 0px;
-		overflow: hidden;
-		white-space: nowrap;
-		border: 0px;
-		clip: rect(0 0 0 0);
 	}
 
 	.Pos-a_lg {
@@ -3285,6 +3273,18 @@ Styleguide: core-utils.misc.mall
 		margin-left: 16px;
 		margin-left: var(--mlu-gg);
 	}
+
+	.mV-vh_lg {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
+	}
 }
 
 @media (min-width: 1168px) {
@@ -3323,18 +3323,6 @@ Styleguide: core-utils.misc.mall
 
 	.-Gcc-sm_xl {
 		--mlu-grid-cols: 4;
-	}
-
-	.mV-vh_xl {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		margin: -1px;
-		padding: 0px;
-		overflow: hidden;
-		white-space: nowrap;
-		border: 0px;
-		clip: rect(0 0 0 0);
 	}
 
 	.Pos-a_xl {
@@ -3594,5 +3582,17 @@ Styleguide: core-utils.misc.mall
 		margin-left: 16px;
 		margin-left: 16px;
 		margin-left: var(--mlu-gg);
+	}
+
+	.mV-vh_xl {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0px;
+		overflow: hidden;
+		white-space: nowrap;
+		border: 0px;
+		clip: rect(0 0 0 0);
 	}
 }

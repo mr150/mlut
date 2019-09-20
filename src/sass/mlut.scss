@@ -22,7 +22,6 @@
 
 /*===CORE-UTILS===*/
 @import "core/utils/custom";
-@import "core/utils/visual-formatting";
 @import "core/utils/position";
 @import "core/utils/display";
 @import "core/utils/flex";
@@ -30,12 +29,13 @@
 @import "core/utils/box-sizing";
 @import "core/utils/margin";
 @import "core/utils/padding";
-@import "core/utils/font";
 @import "core/utils/text";
-@import "core/utils/background";
+@import "core/utils/font";
 @import "core/utils/border";
+@import "core/utils/background";
 @import "core/utils/animation";
 @import "core/utils/misc";
+@import "core/utils/visual-formatting";
 
 /*===DESIGN-UTILS===*/
 
