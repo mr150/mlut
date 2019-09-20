@@ -1,5 +1,55 @@
 # Changelog
 
+## 3.0.0 (2019-09-20)
+
+### Breaking changes
+- Changed concept and file structure of project.
+- Updated `gulpfile.js` for working with Gulp 4.
+- Changed `$mlu-main-directions` from list to map.
+- Removed utilities values in `gs` unit from default distributive.
+- Removed `P` and `M` utils values that can be implemented with the `-Gg` utility.
+- Removed `$MLU-FLAG-COL-MARGIN` and utils values in `gc` unit.
+- Added `$MLU-FLAG-FLEX-PE` and hid behind it styles for flexbox progressive enhancement.
+- Removed `$MLU-FLAG-EXTENDED` and styles from under it are moved to the `core-extend` module.
+- Renamed settings `$mlu-font-family` and `$mlu-font-family-mono` to `$mlu-Ff-ss0` and `$mlu-Ff-m0`.
+- Moved part of the mixins to the `styling-helpers` module.
+- Renamed `grid.scss` to `layout.scss`.
+- Replaced `W-fx0` to `Maw-fx0`.
+- Removed `page` block.
+- Renamed `input` block to `inp`.
+
+### Added
+- Mixins to create utils: `mlu-mk-util`, `mlu-mk-util-directions` and wrappers over them.
+- Utilities states concept and mixin `mlu-mk-state` to create them.
+- Modules layer concept and some modules: `styling-helpers` and `core-extend`.
+- Added core script `init.js` that implements `nojs` and `js` states for utilities.
+- New grid system on custom properties with the ability to change the columns number and gutters sizes.
+- Concept custom utilities.
+- CSS custom property `--mlu-grid-cols` for columns count in grid system.
+- Variable columns units based on custom properties, that can behave like `gc` and like `gs`.
+- `mlu-check-class` function.
+- Several functions-getters from maps with utilities values.
+- Ability to compile multiple SCSS files.
+#### New utilities
+- Custom: `-Gcc`, `-Gcd`, `-Gcr`, `-Gg` responsive
+- Flex: `Ac`, `Ai`, `Fx-i`, `Fxd`, `sp_D-f`, `As` values 
+- Box sizing: `Mih100vh`, `Mih100p`, `W100p`, `W-i`, `M-i`
+- `W` and `Ml` values for new grid system
+- Text: `Tt-l`, `Tt-c`, `Whs-p`
+- `Ff-ss0`
+- `Trs-all`
+- `Rsz-n`
+
+### Fixed
+- Bottom gutter in `row__col` to rem.
+- Calc fallback in `mlu-mk-gtr` with `$direct = "xy"`.
+
+### Changed
+- Rethought the concept of themes and added `demo-theme` as an example.
+- Regrouped utilities according to rational order.
+- `grid-debug` block for work with new grid system.
+- Most utilities are created using new mixins.
+
 ## 2.0.1 (2019-04-18)
 
 ### Fixed
