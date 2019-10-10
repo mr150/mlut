@@ -34,7 +34,7 @@ Fxw
 Flex wrap.
 
 wr - wrap-reverse
-w - wrap. only *Responsive*.
+w - wrap. *Responsive*.
 n - nowrap. only *Responsive*.
 
 Styleguide: core-utils.flex.fxw
@@ -147,7 +147,7 @@ Styleguide: core-utils.flex.mai
 
 @include mlu-mk-util("Fxw", "flex-wrap", (
 	"wr": wrap-reverse,
-	"w_bp": wrap,
+	"w_all": wrap,
 	"n_bp": nowrap,
 ));
 

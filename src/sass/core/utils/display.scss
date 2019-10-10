@@ -7,6 +7,7 @@ Display. Sets the display type.
 * `D-tbc`
 * `D-tbr`
 * `D-itb`
+* `D-g` \- grid. *Responsive*.
 * `sp_D-f` \- useful if the flexbox layout in IE11 has many bugs.
 
 D - block. The DOM node stretches on the full width of the container and creates line breaks before and after. *Responsive*.
@@ -40,6 +41,7 @@ $mlu-D-map: (
 	"itb": inline-table,
 	"f_all": flex,
 	"if_all": inline-flex,
+	"g_all": grid,
 	"n_all": none,
 );
 
