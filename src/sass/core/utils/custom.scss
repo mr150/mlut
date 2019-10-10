@@ -55,7 +55,7 @@ Styleguide: core-utils.custom.gcd
 
 Grid columns rule. Controls `--gc-rule` and `--mgc-rule` .
 
--Gcr - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the grid column(gc) widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu-gg`.
+-Gcr - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the column widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu-gg`.
 
 Markup: ../../../docs/examples/core-utils/custom/gcr.hbs
 
@@ -105,6 +105,6 @@ Styleguide: core-utils.custom.gcr
 }
 
 .-Gcr {
-	--gc-rule: calc(var(--gc) / var(#{$--mlu-grid-cols}) * 100% - var(--gc-diff, var(#{$--mlu-gg})) * 2);
-	--mgc-rule: calc(var(--mgc) / var(#{$--mlu-grid-cols}) * 100% + var(--gc-diff, var(#{$--mlu-gg})));
+	--gc-rule: calc((var(--gc) - 0.0001) / var(#{$--mlu-grid-cols}) * 100% - var(--gc-diff, var(#{$--mlu-gg})) * 2);
+	--mgc-rule: calc((var(--mgc) - 0.0001) / var(#{$--mlu-grid-cols}) * 100% + var(--gc-diff, var(#{$--mlu-gg})));
 }
