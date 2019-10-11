@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.1.0 (2019-10-11)
+
+### Fixed
+- [Bug](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/15637241/) of calculating the grid columns width with `calc()` in Edge 16-18
+- Regexes in `init.js` for `js` and `nojs` states
+
+### Added
+- Gulp task for uploading to ftp
+- Utilities values: `D-g` responsive and `Fxw-w` on xs
+
 ## 3.0.0 (2019-09-20)
 
 ### Breaking changes
