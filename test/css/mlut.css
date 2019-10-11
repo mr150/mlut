@@ -292,11 +292,15 @@ In the core there are utilities with states whose creation has not yet been impl
 * `sp` \- utility inside the @supports at-rule. It will only work if the CSS property, value, or @supports supported by the browser.
 * `chl` \- utility will work on all children. Means `> *`.
 
-Using the `js` and `nojs` states, you can add utilities that work depending on the presence of javascript in the browser.
-* if you want the utility to work only when js is turned on, add the `js` state to it in the markup.
-* if the utility should work in the absence of js, create a value for it with the `nojs` state and use it.
+#### Javascript on/off
 
-This mechanism is implemented using the `init.js` script.
+Using the `js` and `nojs` states, you can add utilities that work depending on the presence of javascript in the browser.
+* if you want the utility to work only when javascript is loaded, just add the `js` state to it in the markup.
+* if the utility should work only without javascript, create a value for it with the `nojs` state using a mixins.
+
+Note that if the utility has other states, `js` and `nojs` should be indicated first: `js-h_Bgc-mn0`, `nojs-sp_D-f`.
+
+This mechanism is implemented using the [init.js](section-core-scripts.html#kssref-core-scripts-init) script.
 
 Weight: 1
 
