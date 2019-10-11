@@ -15,6 +15,7 @@ var gulp = require("gulp"),
 		pkg = require("./package.json"),
 		fileSize = require("gulp-size"),
 		shell = require("gulp-shell"),
+		ftp = require("vinyl-ftp"),
 		autoprefixer = require("gulp-autoprefixer");
 
 var dirs = {
@@ -22,7 +23,8 @@ var dirs = {
 	test: "test/",
 	docs: "docs/",
 	libs: "test/libs/",
-	build: "dist/"
+	build: "dist/",
+	ftp: ""
 };
 
 var path = {
@@ -77,11 +79,17 @@ var servConfig = {
 		notify: false,
 		open: false
 },
-		sizeConfig = {
-			gzip: true,
-			pretty: false,
-			showFiles: true
-		};
+sizeConfig = {
+	gzip: true,
+	pretty: false,
+	showFiles: true
+},
+ftpConfig = {
+	host: "",
+	user: "",
+	password: "",
+	parallel: 10
+};
 
 gulp.task("css-lint", function(){
 	return gulp.src([
@@ -169,10 +177,16 @@ gulp.task("default", gulp.parallel("server", "style", "pug", "scripts", function
 	gulp.watch(path.watch.docs, gulp.series("kss"));
 }));
 
+gulp.task("ftp", function(){
+	var conn = ftp.create(ftpConfig);
+	return gulp.src(dirs.test + files.all, {buffer: false})
+		.pipe(conn.newer(dirs.ftp))
+		.pipe(conn.dest(dirs.ftp));
+});
+
 gulp.task("clear", function(cb){
 	del.sync(dirs.build);
 	cb();
 });
 
 gulp.task("build", gulp.series("clear", "style", "pug", "scripts", "kss"));
-

@@ -292,11 +292,15 @@ In the core there are utilities with states whose creation has not yet been impl
 * `sp` \- utility inside the @supports at-rule. It will only work if the CSS property, value, or @supports supported by the browser.
 * `chl` \- utility will work on all children. Means `> *`.
 
-Using the `js` and `nojs` states, you can add utilities that work depending on the presence of javascript in the browser.
-* if you want the utility to work only when js is turned on, add the `js` state to it in the markup.
-* if the utility should work in the absence of js, create a value for it with the `nojs` state and use it.
+#### Javascript on/off
 
-This mechanism is implemented using the `init.js` script.
+Using the `js` and `nojs` states, you can add utilities that work depending on the presence of javascript in the browser.
+* if you want the utility to work only when javascript is loaded, just add the `js` state to it in the markup.
+* if the utility should work only without javascript, create a value for it with the `nojs` state using a mixins.
+
+Note that if the utility has other states, `js` and `nojs` should be indicated first: `js-h_Bgc-mn0`, `nojs-sp_D-f`.
+
+This mechanism is implemented using the [init.js](section-core-scripts.html#kssref-core-scripts-init) script.
 
 Weight: 1
 
@@ -573,10 +577,11 @@ The size of gutter fallback you can find in the [settings](section-sass-tools.ht
 
 Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row). The formulas for calculating the width and offset for the column are stored in the custom properties. In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
 ```scss
---gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
---mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
+--gc-rule: calc((var(--gc) - 0.0001) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
+--mgc-rule: calc((var(--mgc) - 0.0001) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
 ```
 `--gc` or `--mgc` is the value of the width or offset in the grid columns. This is a custom property of the utility.<br>
+`(var(--gc) - 0.0001)` - fix for calc() [bug](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/15637241/) in Edge 16-18.<br>
 `--mlu-grid-cols` - the number of columns in the grid system. This is a [global](section-core-styles.html#kssref-core-styles-css_vars) custom property that can be changed on any DOM node.<br>
 `--gc-diff` - variable is equal to the gutter if the gutter at the columns is created using margin. In `row__col` is equal 1gg.<br>
 Some of these variables can be changed using [custom utilities](section-core-utils.html#kssref-core-utils-custom).
@@ -741,8 +746,8 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 .row__col,
 .row__item {
 	--gc-diff: 0px;
-	--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
-	--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
+	--gc-rule: calc((var(--gc) - 0.0001) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
+	--mgc-rule: calc((var(--mgc) - 0.0001) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
 	position: relative;
 	display: inline-block;
 	max-width: 100%;
@@ -992,7 +997,7 @@ Styleguide: core-utils.custom.gcd
 
 Grid columns rule. Controls `--gc-rule` and `--mgc-rule` .
 
--Gcr - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the grid column(gc) widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu-gg`.
+-Gcr - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the column widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu-gg`.
 
 Markup: ../../../docs/examples/core-utils/custom/gcr.hbs
 
@@ -1045,8 +1050,8 @@ Styleguide: core-utils.custom.gcr
 }
 
 .-Gcr {
-	--gc-rule: calc(var(--gc) / var(--mlu-grid-cols) * 100% - var(--gc-diff, var(--mlu-gg)) * 2);
-	--mgc-rule: calc(var(--mgc) / var(--mlu-grid-cols) * 100% + var(--gc-diff, var(--mlu-gg)));
+	--gc-rule: calc((var(--gc) - 0.0001) / var(--mlu-grid-cols) * 100% - var(--gc-diff, var(--mlu-gg)) * 2);
+	--mgc-rule: calc((var(--mgc) - 0.0001) / var(--mlu-grid-cols) * 100% + var(--gc-diff, var(--mlu-gg)));
 }
 
 /*
@@ -1162,6 +1167,7 @@ Display. Sets the display type.
 * `D-tbc`
 * `D-tbr`
 * `D-itb`
+* `D-g` \- grid. *Responsive*.
 * `sp_D-f` \- useful if the flexbox layout in IE11 has many bugs.
 
 D - block. The DOM node stretches on the full width of the container and creates line breaks before and after. *Responsive*.
@@ -1216,6 +1222,10 @@ Styleguide: core-utils.bxz.md
 
 .D-if {
 	display: inline-flex;
+}
+
+.D-g {
+	display: grid;
 }
 
 .D-n {
@@ -1274,7 +1284,7 @@ Fxw
 Flex wrap.
 
 wr - wrap-reverse
-w - wrap. only *Responsive*.
+w - wrap. *Responsive*.
 n - nowrap. only *Responsive*.
 
 Styleguide: core-utils.flex.fxw
@@ -1389,6 +1399,10 @@ Styleguide: core-utils.flex.mai
 
 .Fxw-wr {
 	flex-wrap: wrap-reverse;
+}
+
+.Fxw-w {
+	flex-wrap: wrap;
 }
 
 .Ac-fs {
@@ -2511,6 +2525,10 @@ Styleguide: core-utils.visual.mv
 		display: inline-flex;
 	}
 
+	.D-g_sm {
+		display: grid;
+	}
+
 	.D-n_sm {
 		display: none;
 	}
@@ -2715,6 +2733,10 @@ Styleguide: core-utils.visual.mv
 
 	.D-if_md {
 		display: inline-flex;
+	}
+
+	.D-g_md {
+		display: grid;
 	}
 
 	.D-n_md {
@@ -3035,6 +3057,10 @@ Styleguide: core-utils.visual.mv
 		display: inline-flex;
 	}
 
+	.D-g_lg {
+		display: grid;
+	}
+
 	.D-n_lg {
 		display: none;
 	}
@@ -3343,6 +3369,10 @@ Styleguide: core-utils.visual.mv
 
 	.D-if_xl {
 		display: inline-flex;
+	}
+
+	.D-g_xl {
+		display: grid;
 	}
 
 	.D-n_xl {
