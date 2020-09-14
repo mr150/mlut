@@ -58,5 +58,5 @@ Autoprefixer use [this](https://github.com/mr150/mlut/blob/master/.browserslistr
 	- Edge
 	- IE9+ with progressive enhancement
 - Mobile
-	- Android 4.4+
+	- Android 4.4.4
 	- IOS
