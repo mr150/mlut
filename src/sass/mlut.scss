@@ -9,11 +9,11 @@
 //@import "core/system-font";
 
 /*===CORE-BLOCKS===*/
+@import "core/blocks/btn";
+@import "core/blocks/inp";
 @import "core/blocks/row";
 @import "core/blocks/wrapper";
 @import "core/blocks/ratio-block";
-@import "core/blocks/btn";
-@import "core/blocks/inp";
 //@import "core/blocks/grid-debug";
 
 @import "modules/styling-helpers/mixins";

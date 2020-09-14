@@ -11,13 +11,14 @@ Styleguide: core-blocks.btn
 .btn {
 	display: inline-block;
 	box-sizing: border-box;
-	margin: 0px;
+	margin: 0;
 	font-family: inherit;
 	font-size: mlu-px2rem($mlu-base-font-size);
 	line-height: normal;
 	text-align: center;
 	text-decoration: none;
 	vertical-align: top;
+	background: none;
 	border: 0;
 	cursor: pointer;
 }
