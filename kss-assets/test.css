@@ -1,0 +1,79 @@
+.kss-style,
+#kss-node {
+	font-family:
+	-apple-system,
+	BlinkMacSystemFont,
+	"Segoe UI",
+	Roboto,
+	Oxygen,
+	Cantarell,
+	Ubuntu,
+	"Fira Sans",
+	"Droid Sans",
+	"Helvetica Neue",
+	Arial,
+	sans-serif;
+}
+
+.test-row {
+	background-color: #ccc;
+}
+
+.test-content {
+	padding: 10px;
+	color: #306;
+	font-size: 1.1rem;
+	background-color: #c9c;
+}
+
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) {
+	background-clip: content-box;
+}
+
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > * {
+	padding: 0px 12px;
+}
+
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > :first-child {
+	padding-top: 4px;
+}
+
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > :last-child {
+	padding-bottom: 4px;
+}
+
+.test-cell,
+.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) {
+	color: #306;
+	font-size: 1.1rem;
+	background-color: #c9c;
+}
+
+.test-card {
+	border: 1px #ccc solid;
+}
+
+.test-hex {
+	width: 172px;
+	height: 196px;
+	box-sizing: border-box;
+	background-repeat: no-repeat;
+	background-position: 0px 0px, 100% 0px, 50% 50%, 0px 102%, 100% 102%;
+	background-size: 51% 27%, 51% 27%, 100% 48%, 51% 28%, 51% 28%;
+	background-image: linear-gradient(150deg, transparent 50%, #306 50%), linear-gradient(-150deg, transparent 50%, #306 50%), linear-gradient(#306, #d15), linear-gradient(-330deg, transparent 50%, #d15 50%), linear-gradient(330deg, transparent 50%, #d15 50%);
+}
+
+.test-hex:hover {
+	background-image: linear-gradient(150deg, transparent 50%, #336 50%), linear-gradient(-150deg, transparent 50%, #336 50%), linear-gradient(#336, #c9c), linear-gradient(-330deg, transparent 50%, #c9c 50%), linear-gradient(330deg, transparent 50%, #c9c 50%);
+}
+
+.grid-debug {
+	padding: calc(var(--mlu-gg-rem) * 3) 0px;
+	background-image: linear-gradient(90deg, #336 var(--mlu-gg), #d15 var(--mlu-gg), #d15 calc(100% - var(--mlu-gg)), #336 0);
+	background-size: calc(1 / var(--mlu-grid-cols) * 100%);
+}
+
+.kss-description,
+.kss-parameters {
+	max-width: 872px;
+}

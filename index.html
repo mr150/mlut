@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>MLUT documentation</title>
+
+  <meta name="description" content=""/>
+  <meta name="generator" content="kss-node"/>
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="kss-assets/kss.css"/>
+  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+<link rel="stylesheet" href="kss-assets/test.css"/>
+
+</head>
+<body id="kss-node" >
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">MLUT documentation</h1>
+  </header>
+  <nav class="kss-nav" aria-label="Style Guide">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-start.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Getting started</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-concepts.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Basic concepts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-blocks.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Core blocks</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-utils.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-styles.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-scripts.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass-tools.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass_modules.html">
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-examples.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<main class="kss-main" aria-label="Content">
+  <article>
+      <div id="kssref-0" class="kss-section kss-section--depth-0 kss-overview kss-style">
+        <h1>My Little UI Toolkit</h1>
+<p>Atomic CSS based, modular and lightweight toolkit with progressive enhancement.</p>
+<p><a href="https://travis-ci.com/mr150/mlut"><img src="https://travis-ci.com/mr150/mlut.svg?branch=master" alt="Build Status"></a>
+<a href="https://www.npmjs.com/package/mlut"><img src="https://img.shields.io/npm/v/mlut.svg" alt=""></a></p>
+<h2>Features</h2>
+<ul>
+<li>Strong naming conventions: <a href="https://github.com/emmetio">Emmet</a> abbreviations and BEM naming</li>
+<li>Lightweight: CSS core ~3.9KB, themes from 0.8KB</li>
+<li>Modular and easily extensible</li>
+<li>Designed with progressive enhancement</li>
+<li>Well customizable</li>
+<li>Advanced grid system with CSS custom properties</li>
+<li>Responsive and mobile first</li>
+<li>Reusable across projects</li>
+<li>Written in Sass and vanilla JS</li>
+</ul>
+<h2>Structure</h2>
+<ul>
+<li>CSS library</li>
+<li>JS library (optional)</li>
+<li>Sass tools</li>
+</ul>
+<h3>Library</h3>
+<p>The library part of toolkit united in itself ideas from <a href="https://acss.io/">Atomic CSS</a> and <a href="https://bem.info/">BEM</a>. It consists of 2 layers:</p>
+<ul>
+<li>Core - all that can be used at any project. This layer contains BEM blocks, CSS utilities and simple optional scripts.</li>
+<li>Modules - themes, utilities sets and scripts, that can be reused in different projects.</li>
+</ul>
+<p>In most projects, you will probably need to add another &quot;design&quot; layer that will be specific to your interface. It may contain any styles and scripts.</p>
+<h3>Tools</h3>
+<p>Sass tools include:</p>
+<ul>
+<li>settings based on which the CSS library is generated.</li>
+<li>mixins and functions. Most of them are needed to generate the library, but can also be used for UI creating.</li>
+</ul>
+<p>Most modules use existing MLUT Sass tools, but some may contain new ones or entirely consist of them.</p>
+<h2>Technologies</h2>
+<ul>
+<li><a href="https://github.com/sass/libsass">LibSass</a></li>
+</ul>
+<h3>Assembly</h3>
+<ul>
+<li><a href="https://github.com/gulpjs/gulp">Gulp</a></li>
+<li><a href="https://github.com/jakubpawlowicz/clean-css">Clean-css</a></li>
+<li><a href="https://github.com/postcss/autoprefixer">Autoprefixer</a></li>
+<li><a href="https://github.com/Se7enSky/group-css-media-queries">group-css-media-queries</a></li>
+<li><a href="https://github.com/buildjs/rigger">Rigger</a></li>
+<li><a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a></li>
+</ul>
+<h3>Documentation and examples</h3>
+<ul>
+<li><a href="https://github.com/kss-node/kss-node">KSS-node</a></li>
+<li><a href="https://github.com/pugjs/pug">Pug</a></li>
+</ul>
+<h2>Supported browsers</h2>
+<p>Autoprefixer use <a href="https://github.com/mr150/mlut/blob/master/.browserslistrc">this</a> <code>browserslist</code> during assembly. Tested in last versions of modern browsers and some old:</p>
+<ul>
+<li>Desktop
+<ul>
+<li>Firefox - last, ESR</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Edge</li>
+<li>IE9+ with progressive enhancement</li>
+</ul>
+</li>
+<li>Mobile
+<ul>
+<li>Android 4.4.4</li>
+<li>IOS</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+</article>
+</main>
+
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
+<script src="kss-assets/mlut.min.js"></script>
+
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>

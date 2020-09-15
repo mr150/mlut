@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>MLUT documentation</title>
+
+  <meta name="description" content=""/>
+  <meta name="generator" content="kss-node"/>
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="kss-assets/kss.css"/>
+  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+<link rel="stylesheet" href="kss-assets/test.css"/>
+
+</head>
+<body id="kss-node" class="kss-fullscreen-mode">
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">MLUT documentation</h1>
+  </header>
+  <nav class="kss-nav" aria-label="Style Guide">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-start.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Getting started</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-concepts.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Basic concepts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-blocks.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Core blocks</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-utils.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-styles.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-scripts.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass-tools.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass_modules.html">
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-examples.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<main class="kss-main" aria-label="Content">
+  <article>
+
+    <div id="kssref-concepts-grid" class="kss-section kss-section--depth-2 is-fullscreen">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-concepts-grid">
+            <span class="kss-title__ref">
+              2.7
+              <span class="kss-title__permalink-hash">
+                  #concepts.grid
+              </span>
+            </span>
+            Modular grid
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>Space on the page divided into a certain number of columns with gutters.</p>
+<p>In MLUT on the <code>xs</code> and <code>sm</code> breakpoint, the grid has 4 columns. On <code>md</code> and above - 12. This means that the grid divides the space into 4 equal parts on <code>sm</code> and 12 parts on <code>md</code> and above. These parts called <strong>columns</strong>. Columns are separated by indents which are called <strong>gutters</strong>.</p>
+<p>The gutters have different widths at different breakpoints. From <code>xs</code> to <code>lg</code> gutter is 12px. From <code>lg</code> gutter is 16px.</p>
+<p>Using the <a href="section-core-blocks.html#kssref-core-blocks-grid-debug">grid-debug</a> block you can see the graphic display of the grid.</p>
+<h3>Grid units</h3>
+<p>These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 4 types of grid units:</p>
+<ul>
+<li><strong>variable columns</strong> - abbreviated <code>c</code>. 1c is 1 column width which changes dynamically depending on the <a href="section-core-blocks.html#kssref-core-blocks-row-row__col">formula</a>. Using <a href="section-core-utils.html#kssref-core-utils-custom">custom utilities</a>, you can get values equal to both <code>gc</code> and <code>gs</code>.</li>
+<li><strong>grid-columns</strong> - <code>gc</code>. 1gc is width of 1 column.</li>
+<li><strong>grid-spans</strong> - <code>gs</code>. 1gs is width of 1 column with 2 gutters.</li>
+<li><strong>grid-gutters</strong> - <code>gg</code>. 1gg is width of 1 gutter.</li>
+</ul>
+<p>In the standard MLUT build, only <code>c</code> and <code>gg</code> are used. Other units can be used in some <a href="section-sass-tools.html#kssref-sass-tools-mixins-w">mixins</a>.</p>
+<p>Modular grid are generated depending on this <a href="section-sass-tools.html#kssref-sass-tools-settings-grid">settings</a>.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 320
+        </div>
+
+    </div>
+</article>
+</main>
+
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
+<script src="kss-assets/mlut.min.js"></script>
+
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>

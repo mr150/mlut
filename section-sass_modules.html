@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>MLUT documentation</title>
+
+  <meta name="description" content=""/>
+  <meta name="generator" content="kss-node"/>
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="kss-assets/kss.css"/>
+  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+<link rel="stylesheet" href="kss-assets/test.css"/>
+
+</head>
+<body id="kss-node" >
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">MLUT documentation</h1>
+  </header>
+  <nav class="kss-nav" aria-label="Style Guide">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-start.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Getting started</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-concepts.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Basic concepts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-blocks.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Core blocks</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-utils.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-styles.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-scripts.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass-tools.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass_modules.html">
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
+        </a>
+            <ul class="kss-nav__menu-child">
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-core_extend">
+                  <span class="kss-nav__ref ">8.1</span
+                  ><span class="kss-nav__name">Core extend</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-core_extend-mixins">
+                  <span class="kss-nav__ref kss-nav__ref-child">8.1.1</span
+                  ><span class="kss-nav__name">Mixins-wrappers</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-core_extend-utils">
+                  <span class="kss-nav__ref kss-nav__ref-child">8.1.2</span
+                  ><span class="kss-nav__name">Utilities</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-demo_theme">
+                  <span class="kss-nav__ref ">8.2</span
+                  ><span class="kss-nav__name">Demo theme</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-styl_help">
+                  <span class="kss-nav__ref ">8.3</span
+                  ><span class="kss-nav__name">Styling helpers</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-styl_help-bgi_hexagon">
+                  <span class="kss-nav__ref kss-nav__ref-child">8.3.1</span
+                  ><span class="kss-nav__name">msh-bgi-hexagon</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-styl_help-circle">
+                  <span class="kss-nav__ref kss-nav__ref-child">8.3.2</span
+                  ><span class="kss-nav__name">msh-circle</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-styl_help-def_hover">
+                  <span class="kss-nav__ref kss-nav__ref-child">8.3.3</span
+                  ><span class="kss-nav__name">msh-def-hover</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-styl_help-ie11_aic">
+                  <span class="kss-nav__ref kss-nav__ref-child">8.3.4</span
+                  ><span class="kss-nav__name">msh-ie11-Ai-c</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-styl_help-restore_ol">
+                  <span class="kss-nav__ref kss-nav__ref-child">8.3.5</span
+                  ><span class="kss-nav__name">msh-restore-Ol</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-styl_help-sprite_icon">
+                  <span class="kss-nav__ref kss-nav__ref-child">8.3.6</span
+                  ><span class="kss-nav__name">msh-sprite-icon</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-styl_help-sprite_mods">
+                  <span class="kss-nav__ref kss-nav__ref-child">8.3.7</span
+                  ><span class="kss-nav__name">msh-sprite-mods</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-sass_modules.html#kssref-sass_modules-styl_help-triangle">
+                  <span class="kss-nav__ref kss-nav__ref-child">8.3.8</span
+                  ><span class="kss-nav__name">msh-triangle</span>
+                </a>
+              </li>
+            </ul>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-examples.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<main class="kss-main" aria-label="Content">
+  <article>
+
+    <div id="kssref-sass_modules" class="kss-section kss-section--depth-1 ">
+
+      <div class="kss-style">
+        <h1 class="kss-title kss-title--level-1">
+          <a class="kss-title__permalink" href="#kssref-sass_modules">
+            <span class="kss-title__ref">
+              8
+              <span class="kss-title__permalink-hash">
+                  #sass_modules
+              </span>
+            </span>
+            Sass modules
+          </a>
+        </h1>
+
+
+          <div class="kss-description">
+            <p>Modules include themes, tools, utility sets, and more. Now there are not many modules included in MLUT, so their documentation will be in this section.</p>
+<p>Names of variables, mixins, and sass functions in modules must have prefixes <code>m#{abbreviated module name}</code>. For themes, this prefix should look like: <code>mt#{theme name}</code>. The names of common CSS classes in modules must comply with <a href="https://ru.bem.info/">BEM</a> naming rules.</p>
+<h2>Themes</h2>
+<p>Design theme can be used on different sites. They may contain utilities, styles with BEM naming, tools and more. Theme example see <a href="section-sass_modules.html#kssref-sass_modules-demo_theme">here</a>.</p>
+<p>Each theme consists of at least 2 parts: <em>config</em> and <em>init</em>.</p>
+<ul>
+<li>the config contains data on the basis of which the theme is created: variables, maps with utility values, etc.</li>
+<li>in the init file all parts of the theme and, if necessary, other modules are included. After including all required parts, the theme is generated.</li>
+</ul>
+<p>Themes can be imported to the MLUT assembly for make a single bundle or builded as separate files. To add a theme to your styles, just import an int file. You can also use only the theme config to make it custom build.</p>
+<p>The theme documentation is up to you. At a minimum, you should specify:</p>
+<ul>
+<li>main colors</li>
+<li>dependencies</li>
+<li>gzipped size</li>
+<li>info about unusual parts of the theme, such as mixins, additional styles, etc.</li>
+</ul>
+<p>Following these rules you can create your own module. Your module can be added to MLUT. To do this, send a issue, pull-request or contact the maintainer in any other way. Also you can create your own modules collection in a separate repository.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 412
+        </div>
+
+    </div>
+    <section id="kssref-sass_modules-core_extend" class="kss-section kss-section--depth-2 ">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-core_extend">
+            <span class="kss-title__ref">
+              8.1
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.core_extend
+              </span>
+            </span>
+            Core extend
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>The module contains a set of utilities and mixins-wrappers for mk-util.</p>
+<p>A set of rarely used utilities values not included in the MLUT core. Most of them correspond to the standard CSS properties values.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/core-extend/utils.scss</code>, line 1
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-core_extend-mixins" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-core_extend-mixins">
+            <span class="kss-title__ref">
+              8.1.1
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.core_extend.mixins
+              </span>
+            </span>
+            Mixins-wrappers
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Additional <a href="section-sass-tools.html#kssref-sass-tools-mixins-util_wrappers">mixins wrappers</a> over mk-util to create utilities. Note that the naming for these mixins is the same as for the rest of the similar ones - their names begin with <code>mlu-mk-</code>.</p>
+<ul>
+<li>Typografy: <code>Lts</code>, <code>Tsh</code></li>
+<li>Visual: <code>Bxsh</code>, <code>Ol</code></li>
+<li>Animation: <code>Trs</code></li>
+</ul>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/core-extend/_mixins.scss</code>, line 1
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-core_extend-utils" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-core_extend-utils">
+            <span class="kss-title__ref">
+              8.1.2
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.core_extend.utils
+              </span>
+            </span>
+            Utilities
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>A set of rarely used utilities values not included in the MLUT core. Most of them correspond to the standard CSS properties values.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/core-extend/utils.scss</code>, line 13
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-core_extend-utils-d" class="kss-section kss-section--depth-4 ">
+
+      <div class="kss-style">
+        <h4 class="kss-title kss-title--level-4">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-core_extend-utils-d">
+            <span class="kss-title__ref">
+              8.1.2.1
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.core_extend.utils.d
+              </span>
+            </span>
+            D
+          </a>
+        </h4>
+
+
+          <div class="kss-description">
+            <p>Display.</p>
+
+          </div>
+
+
+          <div class="kss-parameters__title">Parameters:</div>
+          <ul class="kss-parameters">
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>i</code></div>
+              <div class="kss-parameters__description">
+                inline.
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>tbcl</code></div>
+              <div class="kss-parameters__description">
+                table-column.
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>tbfg</code></div>
+              <div class="kss-parameters__description">
+                table-footer-group.
+              </div>
+            </li>
+          </ul>
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/core-extend/utils.scss</code>, line 23
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-core_extend-utils-flex" class="kss-section kss-section--depth-4 ">
+
+      <div class="kss-style">
+        <h4 class="kss-title kss-title--level-4">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-core_extend-utils-flex">
+            <span class="kss-title__ref">
+              8.1.2.2
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.core_extend.utils.flex
+              </span>
+            </span>
+            Flex
+          </a>
+        </h4>
+
+
+          <div class="kss-description">
+            <ul>
+<li><code>Ac</code> - all values <em>Responsive</em>.</li>
+<li><code>Ai-s</code> - <em>Responsive</em>.</li>
+<li><code>mAi-s</code> - <em>Responsive</em>. Available if <a href="section-sass-tools.html#kssref-sass-tools-settings-flags">flex-pe</a> flag turned on.</li>
+</ul>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/core-extend/utils.scss</code>, line 41
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-core_extend-utils-text" class="kss-section kss-section--depth-4 ">
+
+      <div class="kss-style">
+        <h4 class="kss-title kss-title--level-4">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-core_extend-utils-text">
+            <span class="kss-title__ref">
+              8.1.2.3
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.core_extend.utils.text
+              </span>
+            </span>
+            Text
+          </a>
+        </h4>
+
+
+          <div class="kss-description">
+            <ul>
+<li><code>Ta-j</code></li>
+</ul>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/core-extend/utils.scss</code>, line 101
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-demo_theme" class="kss-section kss-section--depth-2 ">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-demo_theme">
+            <span class="kss-title__ref">
+              8.2
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.demo_theme
+              </span>
+            </span>
+            Demo theme
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>This theme was created primarily for demonstration, but it can also be used.</p>
+<p><strong>Dependencies</strong>: <a href="section-sass_modules.html#kssref-sass_modules-core_extend-mixins">core-extend/mixins</a>.</p>
+<p><strong>Size</strong>: 669B</p>
+
+          </div>
+
+          <ul class="kss-colors">
+              <li>
+                <figure class="kss-color">
+                  <div class="kss-color-figure" style="background-color:#0363cd"></div>
+                  <figcaption class="kss-color-caption">
+                      <strong class="kss-color-name"></strong>
+                    <strong class="kss-color-name">$mt-demo-primary-color</strong>
+                    <code class="kss-color-code">#0363cd</code>
+                      <p class="kss-color-desc">primary color</p>
+                  </figcaption>
+                </figure>
+              </li>
+              <li>
+                <figure class="kss-color">
+                  <div class="kss-color-figure" style="background-color:#282828"></div>
+                  <figcaption class="kss-color-caption">
+                      <strong class="kss-color-name"></strong>
+                    <strong class="kss-color-name">$mt-demo-second-color</strong>
+                    <code class="kss-color-code">#282828</code>
+                      <p class="kss-color-desc">secondary color</p>
+                  </figcaption>
+                </figure>
+              </li>
+          </ul>
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/demo-theme/_config.scss</code>, line 1
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-styl_help" class="kss-section kss-section--depth-2 ">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-styl_help">
+            <span class="kss-title__ref">
+              8.3
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.styl_help
+              </span>
+            </span>
+            Styling helpers
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>Useful tools set for designing mockup.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/styling-helpers/_mixins.scss</code>, line 1
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-styl_help-bgi_hexagon" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-styl_help-bgi_hexagon">
+            <span class="kss-title__ref">
+              8.3.1
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.styl_help.bgi_hexagon
+              </span>
+            </span>
+            msh-bgi-hexagon
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Generate hexagon with CSS <code>linear-gradient()</code> in <code>background-image</code>. See demo <a href="section-examples.html#kssref-examples-other-hexagon">here</a>.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.block</span> {
+	<span class="hljs-keyword">@include</span> msh-bgi-hexagon(<span class="hljs-variable">$bgc</span>: (<span class="hljs-number">#306</span>, <span class="hljs-number">#d15</span>));
+}
+</code></pre>
+<p>CSS</p>
+<pre class="hljs"><code class="language-css"><span class="hljs-selector-class">.block</span> {
+	<span class="hljs-attribute">box-sizing</span>: border-box;
+	<span class="hljs-attribute">background-repeat</span>: no-repeat;
+	<span class="hljs-attribute">background-position</span>: <span class="hljs-number">0px</span> <span class="hljs-number">0px</span>, <span class="hljs-number">100%</span> <span class="hljs-number">0px</span>, <span class="hljs-number">50%</span> <span class="hljs-number">50%</span>, <span class="hljs-number">0px</span> <span class="hljs-number">102%</span>, <span class="hljs-number">100%</span> <span class="hljs-number">102%</span>;
+	<span class="hljs-attribute">background-size</span>: <span class="hljs-number">51%</span> <span class="hljs-number">27%</span>, <span class="hljs-number">51%</span> <span class="hljs-number">27%</span>, <span class="hljs-number">100%</span> <span class="hljs-number">48%</span>, <span class="hljs-number">51%</span> <span class="hljs-number">28%</span>, <span class="hljs-number">51%</span> <span class="hljs-number">28%</span>;
+	<span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">linear-gradient</span>(<span class="hljs-number">150deg</span>, transparent <span class="hljs-number">50%</span>, #<span class="hljs-number">306</span> <span class="hljs-number">50%</span>), <span class="hljs-built_in">linear-gradient</span>(-<span class="hljs-number">150deg</span>, transparent <span class="hljs-number">50%</span>, #<span class="hljs-number">306</span> <span class="hljs-number">50%</span>), <span class="hljs-built_in">linear-gradient</span>(#<span class="hljs-number">306</span>, #d15), <span class="hljs-built_in">linear-gradient</span>(-<span class="hljs-number">330deg</span>, transparent <span class="hljs-number">50%</span>, #d15 <span class="hljs-number">50%</span>), <span class="hljs-built_in">linear-gradient</span>(<span class="hljs-number">330deg</span>, transparent <span class="hljs-number">50%</span>, #d15 <span class="hljs-number">50%</span>);
+}
+</code></pre>
+
+          </div>
+
+
+          <div class="kss-parameters__title">Parameters:</div>
+          <ul class="kss-parameters">
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$edge-ang</code></div>
+              <div class="kss-parameters__description">
+                linear-gradient angle of hexagon edges. Can be only number in <code>deg</code>.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>150deg</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$edge-cs</code></div>
+              <div class="kss-parameters__description">
+                is color-stop in linear-gradient of hexagon edges. Can be number with unit.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>50%</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$bgc</code></div>
+              <div class="kss-parameters__description">
+                hexagon color. It can be single color or list in linear-gradient value format. For example: <code>(167deg, blue 50%, #f0f, #000)</code>. Angle in gradient can be only number in <code>deg</code>. If you pass gradient value, top hexagon edge get first color, bottom edge get last color and hexagon body get full gradient.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>#000</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$body-size</code></div>
+              <div class="kss-parameters__description">
+                <code>background-size</code> of linear-gradient of hexagon body.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>(100% 48%)</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$change</code></div>
+              <div class="kss-parameters__description">
+                bool flag for generate a change in color or size of an existing hexagon.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>false</code>
+                  </div>
+              </div>
+            </li>
+          </ul>
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/styling-helpers/_mixins.scss</code>, line 96
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-styl_help-circle" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-styl_help-circle">
+            <span class="kss-title__ref">
+              8.3.2
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.styl_help.circle
+              </span>
+            </span>
+            msh-circle
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Generate circle.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.block</span> {
+	<span class="hljs-keyword">@include</span> msh-circle(<span class="hljs-number">32px</span>, <span class="hljs-number">#f00</span>);
+}
+</code></pre>
+<p>CSS</p>
+<pre class="hljs"><code class="language-css"><span class="hljs-selector-class">.block</span> {
+	<span class="hljs-attribute">width</span>: <span class="hljs-number">32px</span>;
+	<span class="hljs-attribute">height</span>: <span class="hljs-number">32px</span>;
+	<span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f00</span>;
+	<span class="hljs-attribute">border-radius</span>: <span class="hljs-number">50%</span>;
+}
+</code></pre>
+
+          </div>
+
+
+          <div class="kss-parameters__title">Parameters:</div>
+          <ul class="kss-parameters">
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$diametr</code></div>
+              <div class="kss-parameters__description">
+                circle diametr. Can be number.
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$bgc</code></div>
+              <div class="kss-parameters__description">
+                circle <code>background-color</code>. Can be color.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>transparent</code>
+                  </div>
+              </div>
+            </li>
+          </ul>
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/styling-helpers/_mixins.scss</code>, line 36
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-styl_help-def_hover" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-styl_help-def_hover">
+            <span class="kss-title__ref">
+              8.3.3
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.styl_help.def_hover
+              </span>
+            </span>
+            msh-def-hover
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Simple hover wich change color
+to lighter on hover and darker on active.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.btn--common</span> {
+	<span class="hljs-keyword">@include</span> msh-def-hover(<span class="hljs-number">#f00</span>);
+}
+</code></pre>
+<p>CSS</p>
+<pre class="hljs"><code class="language-css"><span class="hljs-selector-class">.btn--common</span><span class="hljs-selector-pseudo">:hover</span>,
+<span class="hljs-selector-class">.btn--common</span><span class="hljs-selector-pseudo">:focus</span> {
+	<span class="hljs-attribute">background-color</span>: <span class="hljs-number">#ff2929</span>;
+}
+
+<span class="hljs-selector-class">.btn--common</span><span class="hljs-selector-pseudo">:active</span> {
+	<span class="hljs-attribute">background-color</span>: <span class="hljs-number">#e60000</span>;
+}
+</code></pre>
+
+          </div>
+
+
+          <div class="kss-parameters__title">Parameters:</div>
+          <ul class="kss-parameters">
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$color</code></div>
+              <div class="kss-parameters__description">
+                init color that will change.
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$prop</code></div>
+              <div class="kss-parameters__description">
+                CSS property that will change.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>background-color</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$lighten</code></div>
+              <div class="kss-parameters__description">
+                percent on which the <code>$color</code> will become lighten with sass function <code>lighten</code> on <code>:hover</code>.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>8%</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$darken</code></div>
+              <div class="kss-parameters__description">
+                the same at <code>$lighten</code> but <code>$color</code> will change on <code>:active</code>.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>$lighten-3</code>
+                  </div>
+              </div>
+            </li>
+          </ul>
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/styling-helpers/_mixins.scss</code>, line 181
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-styl_help-ie11_aic" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-styl_help-ie11_aic">
+            <span class="kss-title__ref">
+              8.3.4
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.styl_help.ie11_aic
+              </span>
+            </span>
+            msh-ie11-Ai-c
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Hack for <a href="https://github.com/philipwalton/flexbugs/issues/231">bug</a> with <code>align-items: center</code> and <code>min-height</code> in IE11. No side effects were noticed in other browsers, but be careful using this.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.foo</span> {
+	<span class="hljs-keyword">@include</span> msh-ie11-Ai-c;
+}
+</code></pre>
+<p>CSS</p>
+<pre class="hljs"><code class="language-css"><span class="hljs-selector-class">.foo</span><span class="hljs-selector-pseudo">:after</span> {
+	<span class="hljs-attribute">min-height</span>: inherit;
+	<span class="hljs-attribute">font-size</span>: <span class="hljs-number">0</span>;
+	<span class="hljs-attribute">content</span>: <span class="hljs-string">""</span>;
+}
+</code></pre>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/styling-helpers/_mixins.scss</code>, line 224
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-styl_help-restore_ol" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-styl_help-restore_ol">
+            <span class="kss-title__ref">
+              8.3.5
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.styl_help.restore_ol
+              </span>
+            </span>
+            msh-restore-Ol
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Restore default browser outline on focus state.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.link</span> {
+	<span class="hljs-keyword">@include</span> msh-restore-Ol;
+}
+</code></pre>
+<p>CSS</p>
+<pre class="hljs"><code class="language-css"><span class="hljs-selector-class">.link</span><span class="hljs-selector-pseudo">:focus</span> {
+	<span class="hljs-attribute">outline</span>: <span class="hljs-number">1px</span> dotted <span class="hljs-number">#212121</span>;
+	<span class="hljs-attribute">outline</span>: -webkit-focus-ring-color auto <span class="hljs-number">5px</span>;
+}
+</code></pre>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/styling-helpers/_mixins.scss</code>, line 11
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-styl_help-sprite_icon" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-styl_help-sprite_icon">
+            <span class="kss-title__ref">
+              8.3.6
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.styl_help.sprite_icon
+              </span>
+            </span>
+            msh-sprite-icon
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Generate block with icon from css-sprite in pseudo-element.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.icon</span> {
+	<span class="hljs-keyword">@include</span> msh-sprite-icon();
+}
+</code></pre>
+<p>CSS</p>
+<pre class="hljs"><code class="language-css"><span class="hljs-selector-class">.icon</span> {
+	<span class="hljs-attribute">position</span>: relative;
+}
+
+<span class="hljs-selector-class">.icon</span><span class="hljs-selector-pseudo">:before</span> {
+	<span class="hljs-attribute">position</span>: absolute;
+	<span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">"../img/css_sprites.png"</span>);
+	<span class="hljs-attribute">background-repeat</span>: no-repeat;
+	<span class="hljs-attribute">content</span>: <span class="hljs-string">""</span>;
+}
+</code></pre>
+
+          </div>
+
+
+          <div class="kss-parameters__title">Parameters:</div>
+          <ul class="kss-parameters">
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$sprite</code></div>
+              <div class="kss-parameters__description">
+                path to css-sprite in png. Can be string.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>&quot;../img/css_sprites.png&quot;</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$pseudo</code></div>
+              <div class="kss-parameters__description">
+                type of pseudo-element: before or after.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>&quot;before&quot;</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>@content</code></div>
+              <div class="kss-parameters__description">
+                can take additional CSS into pseudo-element.
+              </div>
+            </li>
+          </ul>
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/styling-helpers/_mixins.scss</code>, line 345
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-styl_help-sprite_mods" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-styl_help-sprite_mods">
+            <span class="kss-title__ref">
+              8.3.7
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.styl_help.sprite_mods
+              </span>
+            </span>
+            msh-sprite-mods
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Generator BEM modifiers for block with <a href="#kssref-sass_modules-styl_help-sprite_icon">icon</a>.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-variable">$icons</span>: (
+	<span class="hljs-string">"vk"</span>: (<span class="hljs-number">27px</span>, <span class="hljs-number">16px</span>, -<span class="hljs-number">5px</span>, -<span class="hljs-number">5px</span>),
+	<span class="hljs-string">"fb"</span>: (<span class="hljs-number">13px</span>, <span class="hljs-number">28px</span>, -<span class="hljs-number">27px</span>, -<span class="hljs-number">5px</span>),
+);
+
+<span class="hljs-selector-class">.soc-icon</span> {
+	<span class="hljs-keyword">@include</span> msh-sprite-mods(<span class="hljs-variable">$icons</span>);
+}
+</code></pre>
+<p>CSS</p>
+<pre class="hljs"><code class="language-css"><span class="hljs-selector-class">.soc-icon--vk</span><span class="hljs-selector-pseudo">:before</span> {
+	<span class="hljs-attribute">width</span>: <span class="hljs-number">27px</span>;
+	<span class="hljs-attribute">height</span>: <span class="hljs-number">16px</span>;
+	<span class="hljs-attribute">background-position-x</span>: -<span class="hljs-number">5px</span>;
+}
+
+<span class="hljs-selector-class">.soc-icon--fb</span><span class="hljs-selector-pseudo">:before</span> {
+	<span class="hljs-attribute">width</span>: <span class="hljs-number">13px</span>;
+	<span class="hljs-attribute">height</span>: <span class="hljs-number">28px</span>;
+	<span class="hljs-attribute">background-position-x</span>: -<span class="hljs-number">27px</span>;
+}
+</code></pre>
+
+          </div>
+
+
+          <div class="kss-parameters__title">Parameters:</div>
+          <ul class="kss-parameters">
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$sprite</code></div>
+              <div class="kss-parameters__description">
+                map with icons data. Icon rendered as a pseudo-element. Sprite item example: <code>modifier-name: (width, height, bgpx, bgpy)</code>. If icons have the same sizes you can write in map only 2 params: <code>modifier-name: (bgpx, bgpy)</code>. <br> All icon data lists must be equal length. If one or some parameters the same in all icons, it will not be generated in modifiers that DRY. Write repeating parameter in block class.
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$pseudo</code></div>
+              <div class="kss-parameters__description">
+                pseudo-element in which the icon will be inserted.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>&quot;before&quot;</code>
+                  </div>
+              </div>
+            </li>
+          </ul>
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/styling-helpers/_mixins.scss</code>, line 251
+        </div>
+
+    </section>
+    <section id="kssref-sass_modules-styl_help-triangle" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-sass_modules-styl_help-triangle">
+            <span class="kss-title__ref">
+              8.3.8
+              <span class="kss-title__permalink-hash">
+                  #sass_modules.styl_help.triangle
+              </span>
+            </span>
+            msh-triangle
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Generate blank for border triangle.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.block</span> {
+	<span class="hljs-keyword">@include</span> msh-triangle(<span class="hljs-number">14px</span>);
+}
+</code></pre>
+<p>CSS</p>
+<pre class="hljs"><code class="language-css"><span class="hljs-selector-class">.block</span> {
+	<span class="hljs-attribute">width</span>: <span class="hljs-number">0px</span>;
+	<span class="hljs-attribute">height</span>: <span class="hljs-number">0px</span>;
+	<span class="hljs-attribute">border</span>: <span class="hljs-number">14px</span> transparent solid;
+}
+</code></pre>
+
+          </div>
+
+
+          <div class="kss-parameters__title">Parameters:</div>
+          <ul class="kss-parameters">
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$size</code></div>
+              <div class="kss-parameters__description">
+                triangle size. For create triangle you need to add <code>border-color</code> for one of side after this mixin. For example: <code>border-top-color: #f00</code>.
+              </div>
+            </li>
+          </ul>
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/modules/styling-helpers/_mixins.scss</code>, line 66
+        </div>
+
+    </section>
+</article>
+</main>
+
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
+<script src="kss-assets/mlut.min.js"></script>
+
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>

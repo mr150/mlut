@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>MLUT documentation</title>
+
+  <meta name="description" content=""/>
+  <meta name="generator" content="kss-node"/>
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="kss-assets/kss.css"/>
+  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+<link rel="stylesheet" href="kss-assets/test.css"/>
+
+</head>
+<body id="kss-node" >
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">MLUT documentation</h1>
+  </header>
+  <nav class="kss-nav" aria-label="Style Guide">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-start.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Getting started</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-concepts.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Basic concepts</span>
+        </a>
+            <ul class="kss-nav__menu-child">
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-block">
+                  <span class="kss-nav__ref ">2.1</span
+                  ><span class="kss-nav__name">Block</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-element">
+                  <span class="kss-nav__ref ">2.2</span
+                  ><span class="kss-nav__name">Element</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-modifier">
+                  <span class="kss-nav__ref ">2.3</span
+                  ><span class="kss-nav__name">Modifier</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-breakpoint">
+                  <span class="kss-nav__ref ">2.4</span
+                  ><span class="kss-nav__name">Breakpoint</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-utility">
+                  <span class="kss-nav__ref ">2.5</span
+                  ><span class="kss-nav__name">Utility</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-utility-types">
+                  <span class="kss-nav__ref kss-nav__ref-child">2.5.1</span
+                  ><span class="kss-nav__name">Types</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-utility-dirs">
+                  <span class="kss-nav__ref kss-nav__ref-child">2.5.2</span
+                  ><span class="kss-nav__name">Directions</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-utility-mlut_kw_var">
+                  <span class="kss-nav__ref kss-nav__ref-child">2.5.3</span
+                  ><span class="kss-nav__name">MLUT keywords and variables</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-utility-states">
+                  <span class="kss-nav__ref kss-nav__ref-child">2.5.4</span
+                  ><span class="kss-nav__name">States</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-utility-creation">
+                  <span class="kss-nav__ref kss-nav__ref-child">2.5.5</span
+                  ><span class="kss-nav__name">Creation</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-su">
+                  <span class="kss-nav__ref ">2.6</span
+                  ><span class="kss-nav__name">Space unit</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-grid">
+                  <span class="kss-nav__ref ">2.7</span
+                  ><span class="kss-nav__name">Modular grid</span>
+                </a>
+              </li>
+            </ul>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-blocks.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Core blocks</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-utils.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-styles.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-scripts.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass-tools.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass_modules.html">
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-examples.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<main class="kss-main" aria-label="Content">
+  <article>
+
+    <div id="kssref-concepts" class="kss-section kss-section--depth-1 ">
+
+      <div class="kss-style">
+        <h1 class="kss-title kss-title--level-1">
+          <a class="kss-title__permalink" href="#kssref-concepts">
+            <span class="kss-title__ref">
+              2
+              <span class="kss-title__permalink-hash">
+                  #concepts
+              </span>
+            </span>
+            Basic concepts
+          </a>
+        </h1>
+
+
+          <div class="kss-description">
+            <p>Before reading the documentation, learn MLUT basic concepts.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 126
+        </div>
+
+    </div>
+    <section id="kssref-concepts-block" class="kss-section kss-section--depth-2 ">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-concepts-block">
+            <span class="kss-title__ref">
+              2.1
+              <span class="kss-title__permalink-hash">
+                  #concepts.block
+              </span>
+            </span>
+            Block
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>Independent page component that can be reused. Examples: <a href="section-core-blocks.html#kssref-core-blocks-wrapper">wrapper</a>, <a href="section-core-blocks.html#kssref-core-blocks-row">row</a>.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 136
+        </div>
+
+    </section>
+    <section id="kssref-concepts-element" class="kss-section kss-section--depth-2 ">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-concepts-element">
+            <span class="kss-title__ref">
+              2.2
+              <span class="kss-title__permalink-hash">
+                  #concepts.element
+              </span>
+            </span>
+            Element
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>A part of a block that cannot be used without it.</p>
+<p>The names of the elements are constructed according to the scheme: <code>block-name__element-name</code>. The element name is separated from the block name by two underscores '__'.</p>
+<p>Note that the <em>element</em> and the <em>HTML-element</em> are different concepts.</p>
+<p>Examples: <a href="section-core-blocks.html#kssref-core-blocks-row-row__col">row__col</a>,  <a href="section-core-blocks.html#kssref-core-blocks-ratio-block-ratio-block__content">ratio-block__content</a>.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 146
+        </div>
+
+    </section>
+    <section id="kssref-concepts-modifier" class="kss-section kss-section--depth-2 ">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-concepts-modifier">
+            <span class="kss-title__ref">
+              2.3
+              <span class="kss-title__permalink-hash">
+                  #concepts.modifier
+              </span>
+            </span>
+            Modifier
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>A entity that defines the appearance and behavior of a block or an element.</p>
+<p>The name of the modifier is separated from the name of the block or element by two hyphens <code>--</code>.</p>
+<p>Examples: <a href="section-core-blocks.html#kssref-core-blocks-ratio-block">ratio-block--4x3</a>, <code>ratio-block--1x1</code>.</p>
+<p>A modifier cannot be used in isolation from a modifiable block or element.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 162
+        </div>
+
+    </section>
+    <section id="kssref-concepts-breakpoint" class="kss-section kss-section--depth-2 ">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-concepts-breakpoint">
+            <span class="kss-title__ref">
+              2.4
+              <span class="kss-title__permalink-hash">
+                  #concepts.breakpoint
+              </span>
+            </span>
+            Breakpoint
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>The width of the screen on which the styles change. In MLUT, the default breakpoints are:</p>
+<ul>
+<li><code>xs</code> - minimum width <code>0px-520px</code></li>
+<li><code>sm</code> - horizontal orientation of smartphone <code>520px-760px</code></li>
+<li><code>md</code> - small tablet <code>760px-960px</code></li>
+<li><code>lg</code> - square monitor <code>960px-1168px</code></li>
+<li><code>xl</code> - wide screen <code>&gt;1168px</code></li>
+</ul>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 178
+        </div>
+
+    </section>
+    <section id="kssref-concepts-utility" class="kss-section kss-section--depth-2 ">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-concepts-utility">
+            <span class="kss-title__ref">
+              2.5
+              <span class="kss-title__permalink-hash">
+                  #concepts.utility
+              </span>
+            </span>
+            Utility
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.</p>
+<p>Utility class names are formed according to the scheme:</p>
+<ol>
+<li>
+<p>optional pseudo-class, pseudo-element, selector modifier or state: <code>h</code> - hover, <code>af</code> - after, <code>nojs</code> - javascript disabled etc. Allowed several states in the same class. States are separated by a hyphen: <code>h-f</code> - hover, focus. States separated from the utility name by underscore '_'. More about states <a href="#kssref-concepts-utility-states">below</a>.</p>
+</li>
+<li>
+<p>utility name. Written with capital letter. Most utility names are <a href="https://docs.emmet.io/cheat-sheet/">Emmet</a> abbreviations(<a href="https://yadi.sk/i/VcKfz5u7DBHrLA">pdf</a>).</p>
+</li>
+<li>
+<p>optional value. Valid are:</p>
+<ul>
+<li>number</li>
+<li>CSS or MLUT keywords</li>
+<li>MLUT variables</li>
+<li><a href="section-core-styles.html#kssref-core-styles-css_vars">CSS custom properties</a>.</li>
+</ul>
+<p>Values are set according to	<a href="https://docs.emmet.io/css-abbreviations/#supplying-values-with-units">Emmet rules</a>. Keywords and variables are separated by a hyphen '-' from utility name. Custom property is separated from the utility name by two hyphens. Its name may contain lowercase letters and numbers.</p>
+</li>
+<li>
+<p>optional breakpoint name: <code>sm</code>, <code>lg</code>, etc. Separated from the utility value by underscore '_'.</p>
+</li>
+</ol>
+<p>Utility class name example: <code>Tt</code>, <code>Mb2r</code>, <code>D-ib_sm</code>, <code>h_Bgc-bd0</code>, <code>Fz--gg-rem</code>.</p>
+<p>There are some special abbreviations for color utilities:</p>
+<ul>
+<li><code>t</code> - <code>transparent</code></li>
+<li><code>i</code> - <code>inherit</code></li>
+<li><code>cc</code> - <code>curentColor</code></li>
+</ul>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 193
+        </div>
+
+    </section>
+    <section id="kssref-concepts-utility-types" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-concepts-utility-types">
+            <span class="kss-title__ref">
+              2.5.1
+              <span class="kss-title__permalink-hash">
+                  #concepts.utility.types
+              </span>
+            </span>
+            Types
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Utilities in MLUT come in 3 types:</p>
+<ul>
+<li><strong>Common</strong> - named and work like CSS properties.</li>
+<li><strong>Custom</strong> - manage one or more related CSS <a href="section-core-styles.html#kssref-core-styles-css_vars">custom properties</a>. Their names begin with a hyphen and are abbreviations of the names of the corresponding properties. Examples: <code>-Gg</code>.</li>
+<li><strong>Modified</strong> - affect several CSS properties. The names of such utilities begin with 'm' prefix.</li>
+</ul>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 222
+        </div>
+
+    </section>
+    <section id="kssref-concepts-utility-dirs" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-concepts-utility-dirs">
+            <span class="kss-title__ref">
+              2.5.2
+              <span class="kss-title__permalink-hash">
+                  #concepts.utility.dirs
+              </span>
+            </span>
+            Directions
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Some utilities have directions. There are 7 of them:</p>
+<ul>
+<li>4 main directions - top, right, bottom, left. They are registered in the map <a href="section-sass-tools.html#kssref-sass-tools-settings-general">$mlu-main-directions</a>.</li>
+<li>3 combined direction - <code>x</code>(left, right), <code>y</code>(top, bottom) and <code>xy</code>(all main directions).</li>
+</ul>
+<p>The direction is used in the names of utilities, as well as in some mixins. 1 letter is used to indicate the direction(<code>Mt</code>, <code>Pb</code>), with the exception of <code>xy</code>. In the names of utilities <code>xy</code> is not indicated(<code>M</code>, <code>P</code>), and 2 letters <code>xy</code> are passed in mixins.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 236
+        </div>
+
+    </section>
+    <section id="kssref-concepts-utility-mlut_kw_var" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-concepts-utility-mlut_kw_var">
+            <span class="kss-title__ref">
+              2.5.3
+              <span class="kss-title__permalink-hash">
+                  #concepts.utility.mlut_kw_var
+              </span>
+            </span>
+            MLUT keywords and variables
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p><strong>MLUT keywords</strong> are strings values. Their names can only contain lowercase letters. Keywords include:</p>
+<ul>
+<li>names of breakpoints - <code>sm</code>, <code>lg</code>, etc. Permissible to use only in custom and modified utilities</li>
+<li><code>min</code> and <code>max</code>. Allowed to use only in utils with number values</li>
+<li>abbreviations for invented values that are not in the CSS specification. Allowed to use only in custom and modified utilities</li>
+</ul>
+<p><strong>MLUT variables</strong> exist only at the agreement level. Essentially, they are similar to Sass variables, which are compiled into CSS values. They can take any value, including CSS custom properties. Variable name can contain only lowercase letters and numbers, and must also end in a number: <code>bd0</code>, <code>gr2</code> etc. Example: <a href="section-core-utils.html#kssref-core-utils-bxz-maw">Maw-fx0</a>.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 250
+        </div>
+
+    </section>
+    <section id="kssref-concepts-utility-states" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-concepts-utility-states">
+            <span class="kss-title__ref">
+              2.5.4
+              <span class="kss-title__permalink-hash">
+                  #concepts.utility.states
+              </span>
+            </span>
+            States
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>States in MLUT called the implementation of some features of the CSS using utilities, such as pseudo-classes, selectors combinators etc.
+States also include utilities values that work under certain conditions that are not related with CSS.
+Available states for utilities are listed in the <a href="section-sass-tools.html#kssref-sass-tools-settings-utils-states">settings</a>.
+States are created using the <a href="section-sass-tools.html#kssref-sass-tools-mixins-mk_state">mk-state</a> mixin. It can create 3 types of states based on the types of values in the states map:</p>
+<ol>
+<li>pseudo-classes and pseudo-elements. In states map the value is a string - <code>&quot;h&quot;: &quot;hover&quot;</code></li>
+<li>multiple selectors with pseudo-classes. State value is a list - <code>&quot;h-f&quot;: (&quot;hover&quot;, &quot;focus&quot;)</code></li>
+<li>just the utilities values that work under certain conditions. State value is a null - <code>&quot;nojs&quot;: null</code></li>
+</ol>
+<p>In the core there are utilities with states whose creation has not yet been implemented:</p>
+<ul>
+<li><code>sp</code> - utility inside the @supports at-rule. It will only work if the CSS property, value, or @supports supported by the browser.</li>
+<li><code>chl</code> - utility will work on all children. Means <code>&gt; *</code>.</li>
+</ul>
+<h4>Javascript on/off</h4>
+<p>Using the <code>js</code> and <code>nojs</code> states, you can add utilities that work depending on the presence of javascript in the browser.</p>
+<ul>
+<li>if you want the utility to work only when javascript is loaded, just add the <code>js</code> state to it in the markup.</li>
+<li>if the utility should work only without javascript, create a value for it with the <code>nojs</code> state using a mixins.</li>
+</ul>
+<p>Note that if the utility has other states, <code>js</code> and <code>nojs</code> should be indicated first: <code>js-h_Bgc-mn0</code>, <code>nojs-sp_D-f</code>.</p>
+<p>This mechanism is implemented using the <a href="section-core-scripts.html#kssref-core-scripts-init">init.js</a> script.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 278
+        </div>
+
+    </section>
+    <section id="kssref-concepts-utility-creation" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-concepts-utility-creation">
+            <span class="kss-title__ref">
+              2.5.5
+              <span class="kss-title__permalink-hash">
+                  #concepts.utility.creation
+              </span>
+            </span>
+            Creation
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>For convenient creation of frequently used utilities, a <a href="section-sass-tools.html#kssref-sass-tools-mixins-util_wrappers">group of mixins</a> has been prepared. They are wrappers over the main mixins for creating utilities:</p>
+<ul>
+<li><a href="section-sass-tools.html#kssref-sass-tools-mixins-mk_util">mk-util</a></li>
+<li><a href="section-sass-tools.html#kssref-sass-tools-mixins-mk_util_dir">mk-util-directions</a></li>
+<li><a href="section-sass-tools.html#kssref-sass-tools-mixins-mk_state">mk-state</a></li>
+</ul>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 265
+        </div>
+
+    </section>
+    <section id="kssref-concepts-su" class="kss-section kss-section--depth-2 ">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-concepts-su">
+            <span class="kss-title__ref">
+              2.6
+              <span class="kss-title__permalink-hash">
+                  #concepts.su
+              </span>
+            </span>
+            Space unit
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>Abbreviated '<code>su</code>'. Units of measure for any dimensions. Widths, indents, line height, etc. By default, 1su is 4px. All sizes and indents in MLUT are multiple 1su.</p>
+<p>You can set value of <code>su</code> in <a href="section-sass-tools.html#kssref-sass-tools-settings-general">settings</a>.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 308
+        </div>
+
+    </section>
+    <section id="kssref-concepts-grid" class="kss-section kss-section--depth-2 ">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-concepts-grid">
+            <span class="kss-title__ref">
+              2.7
+              <span class="kss-title__permalink-hash">
+                  #concepts.grid
+              </span>
+            </span>
+            Modular grid
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>Space on the page divided into a certain number of columns with gutters.</p>
+<p>In MLUT on the <code>xs</code> and <code>sm</code> breakpoint, the grid has 4 columns. On <code>md</code> and above - 12. This means that the grid divides the space into 4 equal parts on <code>sm</code> and 12 parts on <code>md</code> and above. These parts called <strong>columns</strong>. Columns are separated by indents which are called <strong>gutters</strong>.</p>
+<p>The gutters have different widths at different breakpoints. From <code>xs</code> to <code>lg</code> gutter is 12px. From <code>lg</code> gutter is 16px.</p>
+<p>Using the <a href="section-core-blocks.html#kssref-core-blocks-grid-debug">grid-debug</a> block you can see the graphic display of the grid.</p>
+<h3>Grid units</h3>
+<p>These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 4 types of grid units:</p>
+<ul>
+<li><strong>variable columns</strong> - abbreviated <code>c</code>. 1c is 1 column width which changes dynamically depending on the <a href="section-core-blocks.html#kssref-core-blocks-row-row__col">formula</a>. Using <a href="section-core-utils.html#kssref-core-utils-custom">custom utilities</a>, you can get values equal to both <code>gc</code> and <code>gs</code>.</li>
+<li><strong>grid-columns</strong> - <code>gc</code>. 1gc is width of 1 column.</li>
+<li><strong>grid-spans</strong> - <code>gs</code>. 1gs is width of 1 column with 2 gutters.</li>
+<li><strong>grid-gutters</strong> - <code>gg</code>. 1gg is width of 1 gutter.</li>
+</ul>
+<p>In the standard MLUT build, only <code>c</code> and <code>gg</code> are used. Other units can be used in some <a href="section-sass-tools.html#kssref-sass-tools-mixins-w">mixins</a>.</p>
+<p>Modular grid are generated depending on this <a href="section-sass-tools.html#kssref-sass-tools-settings-grid">settings</a>.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 320
+        </div>
+
+    </section>
+</article>
+</main>
+
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
+<script src="kss-assets/mlut.min.js"></script>
+
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>

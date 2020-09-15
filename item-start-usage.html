@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>MLUT documentation</title>
+
+  <meta name="description" content=""/>
+  <meta name="generator" content="kss-node"/>
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="kss-assets/kss.css"/>
+  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+<link rel="stylesheet" href="kss-assets/test.css"/>
+
+</head>
+<body id="kss-node" class="kss-fullscreen-mode">
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">MLUT documentation</h1>
+  </header>
+  <nav class="kss-nav" aria-label="Style Guide">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-start.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Getting started</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-concepts.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Basic concepts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-blocks.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Core blocks</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-utils.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-styles.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-scripts.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass-tools.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass_modules.html">
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-examples.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<main class="kss-main" aria-label="Content">
+  <article>
+
+    <div id="kssref-start-usage" class="kss-section kss-section--depth-2 is-fullscreen">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-start-usage">
+            <span class="kss-title__ref">
+              1.2
+              <span class="kss-title__permalink-hash">
+                  #start.usage
+              </span>
+            </span>
+            Usage
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <h3>HTML</h3>
+<p>Before starting work, make sure you have the correct HTML5 doctype:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+</code></pre>
+<p>and the responsive viewport meta tag:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1"</span>&gt;</span>
+</code></pre>
+<h3>Distributive</h3>
+<p>You can get assembled MLUT code and include it to your project. There are some ways to get a distributive.</p>
+<ul>
+<li>just plug in with CDN</li>
+<li>if used <code>git clone</code>, files are located in the <code>dist/</code> folder</li>
+<li>if used <code>npm</code>, files are in <code>node_modules/mlut/dist/</code></li>
+</ul>
+<p>Add the file to your page like here:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"css/mlut.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"js/mlut.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>And just add MLUT classes to markup:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row D-f"</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W3c_md"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Simple text<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+</code></pre>
+<p>Try <a href="section-examples.html">examples</a> with ready HTML.</p>
+<h3>Toolkit</h3>
+<p>To use all MLUT features you need an assembly. There are 3 ways:</p>
+<ul>
+<li>Use <a href="https://github.com/mr150/mlut-project">MLUT project template</a></li>
+<li>Use <a href="#kssref-start-install">npm</a>, import tools from <code>node_modules/mlut/src/</code> and setup assembly based on <a href="./">technologies list</a></li>
+<li><a href="#kssref-start-install">Clone</a> MLUT repo and use configured assembly from it</li>
+</ul>
+<h4>Assembly</h4>
+<p>If you cloned git repo:</p>
+<pre class="hljs"><code class="language-">npm i
+</code></pre>
+<p>Run dev server with live reload, code linting and documentation building:</p>
+<pre class="hljs"><code class="language-">npm run dev
+</code></pre>
+<p>or</p>
+<pre class="hljs"><code class="language-">gulp
+</code></pre>
+<p>Build without dev server:</p>
+<pre class="hljs"><code class="language-">npm run build
+</code></pre>
+<h4>Styles</h4>
+<p>Once the assembly is configured, import sass tools and settings to your <code>style.scss</code></p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@import</span> <span class="hljs-string">"tools/settings"</span>;
+<span class="hljs-keyword">@import</span> <span class="hljs-string">"tools/functions"</span>;
+<span class="hljs-keyword">@import</span> <span class="hljs-string">"tools/mixins"</span>;
+</code></pre>
+<p>Then you can import blocks and utilities how it is done in the <a href="https://github.com/mr150/mlut/blob/master/src/sass/mlut.scss">src/sass/mlut.scss</a> to get the standard build. Or you can import only what you need:</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@import</span> <span class="hljs-string">"core/blocks/wrapper"</span>;
+<span class="hljs-keyword">@import</span> <span class="hljs-string">"core/utils/display"</span>;
+
+<span class="hljs-keyword">@include</span> mlu-bpm(<span class="hljs-string">"md"</span>) {
+	<span class="hljs-selector-class">.inp--common</span> {
+		<span class="hljs-attribute">padding</span>: mlu-px2em(<span class="hljs-number">16px</span>) <span class="hljs-number">16px</span>;
+	}
+}
+</code></pre>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/sass/tools/_settings.scss</code>, line 44
+        </div>
+
+    </div>
+</article>
+</main>
+
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
+<script src="kss-assets/mlut.min.js"></script>
+
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>
