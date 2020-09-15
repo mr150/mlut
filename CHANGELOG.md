@@ -1,5 +1,29 @@
 # Changelog
 
+## 3.2.0 (2020-09-15)
+
+### Fixed
+- `background: none` in `btn` block.
+- Moved import of `btn` and `inp` blocks before `row` block.
+- Internal links in documentation.
+
+### Added
+- `.editorconfig`
+#### New utilities
+- Position: `T100p`, `R100p`, `B100p`, `L100p`
+- Position: `Pos-s`, `mX0`, `mY0`
+- Visual formatting: `V`
+- Flex: `Fxd-cr`
+- Text: `Td-o`, responsive `Ta`, `Ta-c`, `Ta-r`
+
+### Changed
+- Iteration of elements in `init.js`.
+- Info about toolkit usage in documentation.
+
+### Removed
+- Android <4.4.4 from `browserslist`.
+- `Td-o` utility from `core-extend` module.
+
 ## 3.1.0 (2019-10-11)
 
 ### Fixed

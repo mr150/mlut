@@ -1,7 +1,7 @@
 /*
 Row
 
-Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-visual-d), you can change the layout technology to flexbox.
+Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-bxz-d), you can change the layout technology to flexbox.
 
 if the [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags) = 2, then the styles for correct work of layouts which using inline-blocks will be disabled.
 

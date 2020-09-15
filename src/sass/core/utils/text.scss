@@ -17,9 +17,9 @@ Ta
 
 Text alignment.
 
-initial - left.
-c - center.
-r - right.
+initial - left *Responsive*.
+c - center *Responsive*.
+r - right *Responsive*.
 
 Styleguide: core-utils.text.ta
 */
@@ -45,6 +45,7 @@ Text decoration.
 initial - remove text decoration.
 u - <u>underline</u>.
 l - ~~strikethrough~~.
+o - overline.
 
 Styleguide: core-utils.text.td
 */
@@ -71,15 +72,16 @@ Styleguide: core-utils.text.mtov
 */
 
 @include mlu-mk-util("Ta", "text-align", (
-	"": left,
-	"c": center,
-	"r": right,
+	"_all": left,
+	"c_all": center,
+	"r_all": right,
 ));
 
 @include mlu-mk-util("Td", "text-decoration", (
 	"": none,
 	"u": underline,
 	"l": line-through,
+	"o": overline,
 ));
 
 @include mlu-mk-util("Tt", "text-transform", (

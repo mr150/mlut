@@ -6,7 +6,7 @@ Atomic CSS based, modular and lightweight toolkit with progressive enhancement.
 
 ## Features ##
 - Strong naming conventions: [Emmet](https://github.com/emmetio) abbreviations and BEM naming
-- Lightweight: CSS core ~3.8KB, themes from 0.8KB
+- Lightweight: CSS core ~3.9KB, themes from 0.8KB
 - Modular and easily extensible
 - Designed with progressive enhancement
 - Well customizable
@@ -58,5 +58,5 @@ Autoprefixer use [this](https://github.com/mr150/mlut/blob/master/.browserslistr
 	- Edge
 	- IE9+ with progressive enhancement
 - Mobile
-	- Android 4.4+
+	- Android 4.4.4
 	- IOS
