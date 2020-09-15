@@ -3,6 +3,7 @@ Visual formatting
 
 * `Ol0`
 * `Op0`
+* `V`
 
 Styleguide: core-utils.visual
 */
@@ -29,6 +30,10 @@ Styleguide: core-utils.visual.mv
 
 .Op0 {
 	opacity: 0;
+}
+
+.V {
+	visibility: hidden;
 }
 
 @include mlu-bp-all(".mV-vh") {

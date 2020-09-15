@@ -22,6 +22,7 @@ Flex direction.
 
 Fxd-rr - row-reverse. *Responsive*
 Fxd-c - column
+Fxd-cr - column-reverse
 
 Markup: ../../../docs/examples/core-utils/flex/fxd.hbs
 
@@ -131,6 +132,7 @@ Styleguide: core-utils.flex.mai
 	"rr_all": row-reverse,
 	"r_bp": row,
 	"c": column,
+	"cr": column-reverse,
 ));
 
 .Fxg1 {
