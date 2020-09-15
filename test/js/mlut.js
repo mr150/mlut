@@ -16,13 +16,12 @@ Styleguide: core-scripts.init
 ;(function(){
 	"use strict"
 
-	var nodesWithJsUtils = document.querySelectorAll("[class*='js']"),
-			i = 0;
+	var elmsWithUtils = document.querySelectorAll("[class*='js']");
 
-	for(i = 0; i < nodesWithJsUtils.length; i++) {
-		nodesWithJsUtils[i].className = nodesWithJsUtils[i].className
+	Array.prototype.forEach.call(elmsWithUtils, function(item) {
+		item.className = item.className
 			.replace(/(\ |^)nojs[_\-](?:[^\ \n]*)/g, "")
 			.replace(/(\ |^)js[_\-]/g, " ")
 			.trim();
-	}
+	});
 }());

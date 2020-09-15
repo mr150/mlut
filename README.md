@@ -6,7 +6,7 @@ Atomic CSS based, modular and lightweight toolkit with progressive enhancement.
 
 ## Features ##
 - Strong naming conventions: [Emmet](https://github.com/emmetio) abbreviations and BEM naming
-- Lightweight: CSS core ~3.8KB, themes from 0.8KB
+- Lightweight: CSS core ~3.9KB, themes from 0.8KB
 - Modular and easily extensible
 - Designed with progressive enhancement
 - Well customizable
@@ -90,9 +90,9 @@ And just add MLUT classes to markup:
 #### Toolkit ####
 To use all MLUT features you need an assembly. There are 3 ways:
 
-- Recommended to use [MLUT project template](https://github.com/mr150/mlut-project)
+- Use [MLUT project template](https://github.com/mr150/mlut-project)
+- Use [npm](#npm), import tools from `node_modules/mlut/src/` and setup assembly based on [technologies list](https://mr150.github.io/mlut/)
 - [Clone](#git) this repo and use configured assembly from it
-- Setup assembly yourself use [technologies list](https://mr150.github.io/mlut/)
 
 Further instructions see [here](https://mr150.github.io/mlut/section-start.html#kssref-start-usage)
 
