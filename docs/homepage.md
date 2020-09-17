@@ -37,7 +37,7 @@ Sass tools include:
 Most modules use existing MLUT Sass tools, but some may contain new ones or entirely consist of them.
 
 ## Technologies ##
-- [LibSass](https://github.com/sass/libsass)
+- [Dart Sass](https://github.com/sass/dart-sass)
 ### Assembly ###
 - [Gulp](https://github.com/gulpjs/gulp)
 - [Clean-css](https://github.com/jakubpawlowicz/clean-css)
