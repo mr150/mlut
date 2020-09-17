@@ -54,6 +54,7 @@
 		"gulp-tabify": "0.0.2",
 		"gulp-uglify": "^3.0.2",
 		"kss": "^3.0.1",
+		"sass-migrator": "^1.2.3",
 		"stylelint": "^13.7.1",
 		"stylelint-order": "^4.0.0",
 		"vinyl-ftp": "^0.6.1"

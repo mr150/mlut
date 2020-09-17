@@ -1,3 +1,4 @@
+@use "sass:map";
 /*
 Custom
 
@@ -79,7 +80,7 @@ Styleguide: core-utils.custom.gcr
 
 	@each $key, $value in $mlu-grid-cols {
 		@if $key != $mlu-bp-sm and $sm-cols != $mlu-grid-default-gtr {
-			$mlu--Gc-map: map-merge($mlu--Gc-map, ($mlu-bp-sm + "_" + $key: $sm-cols));
+			$mlu--Gc-map: map.merge($mlu--Gc-map, ($mlu-bp-sm + "_" + $key: $sm-cols));
 		}
 	}
 

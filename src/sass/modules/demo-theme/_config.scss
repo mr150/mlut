@@ -1,3 +1,4 @@
+@use "sass:map";
 /*
 Demo theme
 
@@ -64,7 +65,7 @@ $mt-demo-C-states: (
 	"f": #fff,
 ) !default;
 
-$mt-demo-Bgc: map-merge($mt-demo-Bgc, $mt-demo-C);
+$mt-demo-Bgc: map.merge($mt-demo-Bgc, $mt-demo-C);
 
 $mt-demo-Bdc: (
 	"pr0": $mt-demo-primary-color,

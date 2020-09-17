@@ -1,3 +1,4 @@
+@use "sass:map";
 /*
 Border
 
@@ -44,10 +45,10 @@ $mlu-Bdxy-map: (
 );
 
 @each $key, $value in $mlu-main-directions {
-	$mlu-Bdxy-map: map-merge($mlu-Bdxy-map, ($key: 1px solid));
+	$mlu-Bdxy-map: map.merge($mlu-Bdxy-map, ($key: 1px solid));
 }
 
-$mlu-Bdxy-map: map-merge($mlu-Bdxy-map,
+$mlu-Bdxy-map: map.merge($mlu-Bdxy-map,
 (
 	"y": 1px solid,
 	"x": 1px solid,

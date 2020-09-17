@@ -1,3 +1,4 @@
+@use "sass:map";
 /*
 Padding
 
@@ -26,10 +27,10 @@ $mlu-P-map: (
 
 @for $i from 1 through $mlu-P-range {
 	$value: $i * 1su;
-	$mlu-P-map: map-merge($mlu-P-map, ("xy" + $value: $value));
+	$mlu-P-map: map.merge($mlu-P-map, ("xy" + $value: $value));
 }
 
-$mlu-P-map: map-merge($mlu-P-map,
+$mlu-P-map: map.merge($mlu-P-map,
 (
 	"xy1gg": 1gg,
 	"t1gg": 1gg,

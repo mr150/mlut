@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /*
 Getting started
 
@@ -637,9 +639,9 @@ $mlu-util-states: (
 	"nojs": null,
 ) !default;
 
-$mlu-util-states: map-merge($mlu-util-states, $mlu-util-states-psd-cls);
+$mlu-util-states: map.merge($mlu-util-states, $mlu-util-states-psd-cls);
 
-$mlu-util-states: map-merge($mlu-util-states, $mlu-util-states-psd-elm);
+$mlu-util-states: map.merge($mlu-util-states, $mlu-util-states-psd-elm);
 
 // Grid system
 //

@@ -1,3 +1,9 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
+@use "sass:string";
+
 /*
 Functions
 
@@ -19,8 +25,8 @@ Styleguide: sass-tools.functions
 // Styleguide: sass-tools.functions.bp
 
 @function mlu-bp($name, $error-handler: 1) {
-	@if map-has-key($mlu-breakpoints, $name) or $error-handler == 0 {
-		@return map-get($mlu-breakpoints, $name);
+	@if map.has-key($mlu-breakpoints, $name) or $error-handler == 0 {
+		@return map.get($mlu-breakpoints, $name);
 	}
 
 	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-breakpoints";
@@ -40,14 +46,14 @@ Styleguide: sass-tools.functions
 // Styleguide: sass-tools.functions.bp_next
 
 @function mlu-bp-next($bp: 0, $data-type: "value") {
-	@if $bp == 0 or map-has-key($mlu-breakpoints, $bp) {
-		$bp-keys: map-keys($mlu-breakpoints);
-		$bp-index: if($bp != 0, index($bp-keys, $bp), 0);
+	@if $bp == 0 or map.has-key($mlu-breakpoints, $bp) {
+		$bp-keys: map.keys($mlu-breakpoints);
+		$bp-index: if($bp != 0, list.index($bp-keys, $bp), 0);
 
 		@if $data-type == "name" {
-			@return if($bp-index < length($bp-keys), nth(map-keys($mlu-breakpoints), $bp-index + 1), 0);
+			@return if($bp-index < list.length($bp-keys), list.nth(map.keys($mlu-breakpoints), $bp-index + 1), 0);
 		} @else {
-			@return if($bp-index < length($bp-keys), nth(map-values($mlu-breakpoints), $bp-index + 1), 0);
+			@return if($bp-index < list.length($bp-keys), list.nth(map.values($mlu-breakpoints), $bp-index + 1), 0);
 		}
 	}
 
@@ -83,14 +89,14 @@ Styleguide: sass-tools.functions
 // Styleguide: sass-tools.functions.bp_prev
 
 @function mlu-bp-prev($bp: 0, $data-type: "value") {
-	@if $bp == 0 or map-has-key($mlu-breakpoints, $bp) {
-		$bp-keys: map-keys($mlu-breakpoints);
-		$bp-index: if($bp != 0, index($bp-keys, $bp), length($bp-keys) + 1);
+	@if $bp == 0 or map.has-key($mlu-breakpoints, $bp) {
+		$bp-keys: map.keys($mlu-breakpoints);
+		$bp-index: if($bp != 0, list.index($bp-keys, $bp), list.length($bp-keys) + 1);
 
 		@if $data-type == "name" {
-			@return if($bp-index > 1, nth(map-keys($mlu-breakpoints), $bp-index - 1), 0);
+			@return if($bp-index > 1, list.nth(map.keys($mlu-breakpoints), $bp-index - 1), 0);
 		} @else {
-			@return if($bp-index > 1, nth(map-values($mlu-breakpoints), $bp-index - 1), 0);
+			@return if($bp-index > 1, list.nth(map.values($mlu-breakpoints), $bp-index - 1), 0);
 		}
 	}
 
@@ -126,8 +132,8 @@ Styleguide: sass-tools.functions
 // Styleguide: sass-tools.functions.grid_gtr
 
 @function mlu-grid-gtr($name, $error-handler: 1) {
-	@if map-has-key($mlu-grid-gutters, $name) or $error-handler == 0 {
-		@return map-get($mlu-grid-gutters, $name);
+	@if map.has-key($mlu-grid-gutters, $name) or $error-handler == 0 {
+		@return map.get($mlu-grid-gutters, $name);
 	}
 
 	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-grid-gutters";
@@ -146,8 +152,8 @@ Styleguide: sass-tools.functions
 // Styleguide: sass-tools.functions.grid_cols_count
 
 @function mlu-grid-cols-count($name, $error-handler: 1) {
-	@if map-has-key($mlu-grid-cols, $name) or $error-handler == 0 {
-		@return map-get($mlu-grid-cols, $name);
+	@if map.has-key($mlu-grid-cols, $name) or $error-handler == 0 {
+		@return map.get($mlu-grid-cols, $name);
 	}
 
 	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-grid-cols";
@@ -166,8 +172,8 @@ Styleguide: sass-tools.functions
 // Styleguide: sass-tools.functions.css_var
 
 @function mlu-css-var($name, $error-handler: 1) {
-	@if map-has-key($mlu-css-vars, $name) or $error-handler == 0 {
-		@return map-get($mlu-css-vars, $name);
+	@if map.has-key($mlu-css-vars, $name) or $error-handler == 0 {
+		@return map.get($mlu-css-vars, $name);
 	}
 
 	@error "Invalid custom property name. '#{$name}' is not defined in $mlu-css-vars";
@@ -189,12 +195,12 @@ Styleguide: sass-tools.functions
 @function mlu-decimal-round($number, $pos, $type: "round") {
 	$n: 1;
 
-	@if type-of($number) != "number" {
-		@error "Wrong type of argument $number: '#{type-of($number)}'. Expected number";
+	@if meta.type-of($number) != "number" {
+		@error "Wrong type of argument $number: '#{meta.type-of($number)}'. Expected number";
 	}
 
-	@if type-of($pos) != "number" {
-		@error "Wrong type of argument $pos: '#{type-of($pos)}'. Expected 'number'";
+	@if meta.type-of($pos) != "number" {
+		@error "Wrong type of argument $pos: '#{meta.type-of($pos)}'. Expected 'number'";
 	}
 
 	@for $i from 0 to $pos {
@@ -202,11 +208,11 @@ Styleguide: sass-tools.functions
 	}
 
 	@if $type == "round" {
-		@return round($number * $n) / $n;
+		@return math.round($number * $n) / $n;
 	} @else if $type == "ceil" {
-		@return ceil($number * $n) / $n;
+		@return math.ceil($number * $n) / $n;
 	} @else if $type == "floor" {
-		@return floor($number * $n) / $n;
+		@return math.floor($number * $n) / $n;
 	} @else {
 		@error "Invalid round type: '#{$type}'";
 	}
@@ -261,10 +267,10 @@ Styleguide: sass-tools.functions
 // Styleguide: sass-tools.functions.px2em
 
 @function mlu-px2em($number, $divider: $mlu-base-font-size, $unit: "em") {
-	@if unitless($number) {
+	@if math.is-unitless($number) {
 		@warn "Assuming #{$number} to be in pixels in mlu-px2em. Convert it to px";
 		@return mlu-px2em($number * 1px, $divider, $unit);
-	} @else if unit($number) == $unit {
+	} @else if math.unit($number) == $unit {
 		@return $number;
 	}
 
@@ -329,22 +335,22 @@ Styleguide: sass-tools.functions
 // Styleguide: sass-tools.functions.ston
 
 @function mlu-ston($str, $strict: false) {
-	@if type-of($str) == "number" {
+	@if meta.type-of($str) == "number" {
 		@return $str;
 	}
 
-	@if type-of($str) != "string" {
-		@error "Wrong type of argument $str: '#{type-of($str)}'. Expected 'string'";
+	@if meta.type-of($str) != "string" {
+		@error "Wrong type of argument $str: '#{meta.type-of($str)}'. Expected 'string'";
 	}
 
 	$digits: "0123456789";
-	$negative: str-slice($str, 1, 1) == "-";
+	$negative: string.slice($str, 1, 1) == "-";
 	$result: 0;
 	$decimal: false;
 
-	@for $i from if($negative, 2, 1) through str-length($str) {
-		$char: str-slice($str, $i, $i);
-		$digit: str-index($digits, $char);
+	@for $i from if($negative, 2, 1) through string.length($str) {
+		$char: string.slice($str, $i, $i);
+		$digit: string.index($digits, $char);
 
 		@if $digit and not $decimal {
 			$result: $result * 10 + ($digit - 1);
@@ -381,10 +387,10 @@ Styleguide: sass-tools.functions
 	$name: $name + "";
 
 	@if $only-name {
-		@return if(str-slice($name, 1, 1) == ".", str-slice($name, 2), $name);
+		@return if(string.slice($name, 1, 1) == ".", string.slice($name, 2), $name);
 	}
 
-	@return if(str-slice($name, 1, 1) == ".", $name, "." + $name);
+	@return if(string.slice($name, 1, 1) == ".", $name, "." + $name);
 }
 
 @import "utils-map-getters";

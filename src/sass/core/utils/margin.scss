@@ -1,3 +1,4 @@
+@use "sass:map";
 /*
 Margin
 
@@ -67,10 +68,10 @@ $mlu-M-map: (
 );
 
 @each $key, $value in $mlu-main-directions {
-	$mlu-M-map: map-merge($mlu-M-map, ($key + "0": 0));
+	$mlu-M-map: map.merge($mlu-M-map, ($key + "0": 0));
 }
 
-$mlu-M-map: map-merge($mlu-M-map,
+$mlu-M-map: map.merge($mlu-M-map,
 (
 	"b0_bp": 0,
 	"x0_bp": 0,
@@ -80,11 +81,11 @@ $mlu-M-map: map-merge($mlu-M-map,
 
 @for $i from $mlu-My-range through 1 {
 	$value: $i * 1gg;
-	$mlu-M-map: map-merge($mlu-M-map, ("t" + $value: $value));
-	$mlu-M-map: map-merge($mlu-M-map, ("b" + $value: $value));
+	$mlu-M-map: map.merge($mlu-M-map, ("t" + $value: $value));
+	$mlu-M-map: map.merge($mlu-M-map, ("b" + $value: $value));
 }
 
-$mlu-M-map: map-merge($mlu-M-map,
+$mlu-M-map: map.merge($mlu-M-map,
 (
 	"b-2gg": -2gg,
 	"b1su": 1su,

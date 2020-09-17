@@ -1,3 +1,8 @@
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
 /*
 Styling helpers
 
@@ -136,7 +141,7 @@ Styleguide: sass_modules.styl_help
 @mixin msh-bgi-hexagon($edge-ang: 150deg, $edge-cs: 50%, $bgc: #000,
 $body-size: (100% 48%), $change: false) {
 
-	@if not (type-of($edge-ang) == "number" and unit($edge-ang) == "deg") {
+	@if not (meta.type-of($edge-ang) == "number" and math.unit($edge-ang) == "deg") {
 		@error "Invalid value of argument $edge-and - '#{$edge-ang}'. Expected angle in deg.";
 	}
 
@@ -145,20 +150,20 @@ $body-size: (100% 48%), $change: false) {
 	$body-gradient: ($bgc, $bgc);
 	$edge-ang-bot: $edge-ang + 180;
 
-	@if type-of($bgc) == "list" {
-		$first-color: nth(nth($bgc, 1), 1);
-		$val-type: type-of($first-color);
+	@if meta.type-of($bgc) == "list" {
+		$first-color: list.nth(list.nth($bgc, 1), 1);
+		$val-type: meta.type-of($first-color);
 
-		@if $val-type == "number" and unit($first-color) == "deg" {
-			$first-color: nth(nth($bgc, 2), 1);
-		} @else if $val-type != "color" or ($val-type == "number" and unitless(nth($bgc, 1))) {
+		@if $val-type == "number" and math.unit($first-color) == "deg" {
+			$first-color: list.nth(list.nth($bgc, 2), 1);
+		} @else if $val-type != "color" or ($val-type == "number" and math.is-unitless(list.nth($bgc, 1))) {
 			@error "Invalid gradient format: first value can be angle in deg or color but now value is '#{$first-color}'";
 		}
 
-		$last-color: nth(nth($bgc, length($bgc)), 1);
+		$last-color: list.nth(list.nth($bgc, list.length($bgc)), 1);
 		$body-gradient: $bgc;
-	} @else if type-of($bgc) != "color" {
-		@error "Wrong type of argument $bgc: '#{type-of($bgc)}'. Expected 'color' or 'list'";
+	} @else if meta.type-of($bgc) != "color" {
+		@error "Wrong type of argument $bgc: '#{meta.type-of($bgc)}'. Expected 'color' or 'list'";
 	}
 
 	@if not $change {
@@ -213,11 +218,11 @@ $body-size: (100% 48%), $change: false) {
 
 	&:hover,
 	&:focus {
-		#{$prop}: lighten($color, $lighten);
+		#{$prop}: color.adjust($color, $lightness: $lighten);
 	}
 
 	&:active {
-		#{$prop}: darken($color, $darken);
+		#{$prop}: color.adjust($color, $lightness: -$darken);
 	}
 }
 
@@ -288,54 +293,54 @@ $body-size: (100% 48%), $change: false) {
 // Styleguide: sass_modules.styl_help.sprite_mods
 
 @mixin msh-sprite-mods($sprite, $pseudo: "before") {
-	@if type-of($sprite) != "map" {
-		@error "Wrong type of argument $sprite: '#{type-of($sprite)}'. Expected 'map'";
+	@if meta.type-of($sprite) != "map" {
+		@error "Wrong type of argument $sprite: '#{meta.type-of($sprite)}'. Expected 'map'";
 	}
 
 	$diff-prop-flags: (false, false, false, false);
-	$icons-data-list: map-values($sprite);
+	$icons-data-list: map.values($sprite);
 
 	@each $value in $icons-data-list {
-		$i: index($icons-data-list, $value);
+		$i: list.index($icons-data-list, $value);
 
 		@if $i > 1 {
-			$prev-value: nth($icons-data-list, $i - 1);
+			$prev-value: list.nth($icons-data-list, $i - 1);
 
-			@if length($value) != length($prev-value) {
+			@if list.length($value) != list.length($prev-value) {
 				@error "Invalid format of sprite item data: all icons data lists must have equal count of parameters";
 			}
 
-			@for $j from 1 through length($value) {
-				@if nth($value, $j) != nth($prev-value, $j) {
-					$diff-prop-flags: set-nth($diff-prop-flags, $j, 1);
+			@for $j from 1 through list.length($value) {
+				@if list.nth($value, $j) != list.nth($prev-value, $j) {
+					$diff-prop-flags: list.set-nth($diff-prop-flags, $j, 1);
 				}
 			}
 		}
 	}
 
 	@each $key, $value in $sprite {
-		$val-length: length($value);
+		$val-length: list.length($value);
 
 		@at-root {
 			&--#{$key}:#{$pseudo} {
 				@if $val-length == 4 {
-					@if nth($diff-prop-flags, 1) {
-						width: nth($value, 1);
+					@if list.nth($diff-prop-flags, 1) {
+						width: list.nth($value, 1);
 					}
 
-					@if nth($diff-prop-flags, 2) {
-						height: nth($value, 2);
+					@if list.nth($diff-prop-flags, 2) {
+						height: list.nth($value, 2);
 					}
 				} @else if $val-length != 2 {
 					@error "Invalid format of sprite item data: '(#{$value})'. Expected 2 or 4 parameters";
 				}
 
-				@if nth($diff-prop-flags, $val-length - 1) and nth($diff-prop-flags, $val-length) {
-					background-position: nth($value, $val-length - 1) nth($value, $val-length);
-				} @else if nth($diff-prop-flags, $val-length - 1) {
-					background-position-x: nth($value, $val-length - 1);
-				} @else if nth($diff-prop-flags, $val-length) {
-					background-position-y: nth($value, $val-length);
+				@if list.nth($diff-prop-flags, $val-length - 1) and list.nth($diff-prop-flags, $val-length) {
+					background-position: list.nth($value, $val-length - 1) list.nth($value, $val-length);
+				} @else if list.nth($diff-prop-flags, $val-length - 1) {
+					background-position-x: list.nth($value, $val-length - 1);
+				} @else if list.nth($diff-prop-flags, $val-length) {
+					background-position-y: list.nth($value, $val-length);
 				}
 			}
 		}

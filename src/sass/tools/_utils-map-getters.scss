@@ -1,3 +1,4 @@
+@use "sass:map";
 // Getters from utils map
 //
 // Functions for conveniently retrieving values from a map of utility values. They help to use utilities values in common CSS rules. If there is no value in the map, an error will occur.
@@ -25,8 +26,8 @@
 $mlu-C-map: () !default;
 
 @function mlu-c($key) {
-	@if map-has-key($mlu-C-map, $key) {
-		@return map-get($mlu-C-map, $key);
+	@if map.has-key($mlu-C-map, $key) {
+		@return map.get($mlu-C-map, $key);
 	}
 
 	@error "Invalid color name. '#{$key}' is not defined in $mlu-C-map";
@@ -35,8 +36,8 @@ $mlu-C-map: () !default;
 $mlu-Fz-map: () !default;
 
 @function mlu-fz($key) {
-	@if map-has-key($mlu-Fz-map, $key) {
-		@return map-get($mlu-Fz-map, $key);
+	@if map.has-key($mlu-Fz-map, $key) {
+		@return map.get($mlu-Fz-map, $key);
 	}
 
 	@error "Invalid font-size name. '#{$key}' is not defined in $mlu-Fz-map";
@@ -45,8 +46,8 @@ $mlu-Fz-map: () !default;
 $mlu-Bgi-map: () !default;
 
 @function mlu-bgi($key) {
-	@if map-has-key($mlu-Bgi-map, $key) {
-		@return map-get($mlu-Bgi-map, $key);
+	@if map.has-key($mlu-Bgi-map, $key) {
+		@return map.get($mlu-Bgi-map, $key);
 	}
 
 	@error "Invalid background-image name. '#{$key}' is not defined in $mlu-Bgi-map";

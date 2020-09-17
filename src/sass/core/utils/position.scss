@@ -1,3 +1,5 @@
+@use "sass:list";
+@use "sass:map";
 /*
 Position
 
@@ -45,12 +47,12 @@ Styleguide: core-utils.pos.xy
 
 $mlu-Xy-map: ();
 
-@each $dir in join(map-keys($mlu-main-directions), ("x", "y", "xy")) {
-	$mlu-Xy-map: map-merge($mlu-Xy-map, ($dir + 0: 0));
+@each $dir in list.join(map.keys($mlu-main-directions), ("x", "y", "xy")) {
+	$mlu-Xy-map: map.merge($mlu-Xy-map, ($dir + 0: 0));
 }
 
-@each $dir in map-keys($mlu-main-directions) {
-	$mlu-Xy-map: map-merge($mlu-Xy-map, ($dir + "100p": 100%));
+@each $dir in map.keys($mlu-main-directions) {
+	$mlu-Xy-map: map.merge($mlu-Xy-map, ($dir + "100p": 100%));
 }
 
 @include mlu-mk-Xy($mlu-Xy-map);
@@ -67,7 +69,7 @@ $mlu-Z-map: (
 );
 
 @for $i from 0 to $mlu-Z-range {
-	$mlu-Z-map: map-merge($mlu-Z-map, ($i: $i));
+	$mlu-Z-map: map.merge($mlu-Z-map, ($i: $i));
 }
 
 @include mlu-mk-Z($mlu-Z-map);

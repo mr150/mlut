@@ -1,3 +1,4 @@
+@use "sass:map";
 /*
 Flex
 
@@ -186,7 +187,7 @@ $mlu-As-map: (
 		vertical-align: bottom;
 	}
 } @else {
-	$mlu-As-map: map-merge($mlu-As-map,
+	$mlu-As-map: map.merge($mlu-As-map,
 	(
 		"fs": flex-start,
 		"fe": flex-end,
