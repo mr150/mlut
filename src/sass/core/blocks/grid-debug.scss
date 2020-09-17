@@ -14,11 +14,11 @@ Styleguide: core-blocks.grid-debug
 
 .grid-debug {
 	/* autoprefixer: off */
-	padding: calc(var(#{$--mlu-gg-rem}) * 3) 0px;
+	padding: calc(var(#{$var-gg-rem}) * 3) 0px;
 	background-image: linear-gradient(90deg,
-	$mlu-debug-gutter-color var(#{$--mlu-gg}),
-	$mlu-debug-col-color var(#{$--mlu-gg}),
-	$mlu-debug-col-color calc(100% - var(#{$--mlu-gg})),
+	$mlu-debug-gutter-color var(#{$var-gg}),
+	$mlu-debug-col-color var(#{$var-gg}),
+	$mlu-debug-col-color calc(100% - var(#{$var-gg})),
 	$mlu-debug-gutter-color 0);
-	background-size: calc(1 / var(#{$--mlu-grid-cols}) * 100%);
+	background-size: calc(1 / var(#{$var-grid-cols}) * 100%);
 }

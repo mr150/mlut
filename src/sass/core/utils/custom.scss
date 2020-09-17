@@ -65,8 +65,8 @@ Styleguide: core-utils.custom.gcr
 
 @for $i from 1 through $mlu--Gg-range {
 	@include mlu-bp-all(".-Gg#{$i}su") {
-		#{$--mlu-gg}: $i * $mlu-su;
-		#{$--mlu-gg-rem}: mlu-px2rem($i * $mlu-su);
+		#{$var-gg}: $i * $mlu-su;
+		#{$var-gg-rem}: mlu-px2rem($i * $mlu-su);
 	}
 }
 
@@ -86,11 +86,11 @@ Styleguide: core-utils.custom.gcr
 
 	@at-root {
 		.chl_-Gcc-#{$mlu-bp-sm} > * {
-			#{$--mlu-grid-cols}: $sm-cols;
+			#{$var-grid-cols}: $sm-cols;
 		}
 
 		.chl_-Gcc10 > * {
-			#{$--mlu-grid-cols}: 10;
+			#{$var-grid-cols}: 10;
 		}
 
 		@include mlu-mk--Gcc($mlu--Gc-map);
@@ -102,10 +102,10 @@ Styleguide: core-utils.custom.gcr
 }
 
 .-Gcd1gg {
-	--gc-diff: var(#{$--mlu-gg});
+	--gc-diff: var(#{$var-gg});
 }
 
 .-Gcr {
-	--gc-rule: calc((var(--gc) - 0.0001) / var(#{$--mlu-grid-cols}) * 100% - var(--gc-diff, var(#{$--mlu-gg})) * 2);
-	--mgc-rule: calc((var(--mgc) - 0.0001) / var(#{$--mlu-grid-cols}) * 100% + var(--gc-diff, var(#{$--mlu-gg})));
+	--gc-rule: calc((var(--gc) - 0.0001) / var(#{$var-grid-cols}) * 100% - var(--gc-diff, var(#{$var-gg})) * 2);
+	--mgc-rule: calc((var(--mgc) - 0.0001) / var(#{$var-grid-cols}) * 100% + var(--gc-diff, var(#{$var-gg})));
 }

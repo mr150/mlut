@@ -26,14 +26,14 @@ Styleguide: core-styles.css_vars
 	:root {
 		$prev-value: $mlu-grid-cols-xs;
 
-		@include mlu-mk-gtr($type: $--mlu-gg, $css-vars: false);
-		@include mlu-mk-gtr(mlu-px2rem($mlu-gtr-sm), $type: $--mlu-gg-rem, $css-vars: false);
-		#{$--mlu-grid-cols}: $mlu-grid-cols-xs;
+		@include mlu-mk-gtr($type: $var-gg, $css-vars: false);
+		@include mlu-mk-gtr(mlu-px2rem($mlu-gtr-sm), $type: $var-gg-rem, $css-vars: false);
+		#{$var-grid-cols}: $mlu-grid-cols-xs;
 
 		@each $key, $value in $mlu-grid-cols {
 			@if $value != $prev-value {
 				@include mlu-bpm($key) {
-					#{$--mlu-grid-cols}: $value;
+					#{$var-grid-cols}: $value;
 				}
 			}
 

@@ -123,5 +123,5 @@
 }
 
 @mixin mlu-mk--Gcc($map, $bp: null, $states: null) {
-	@include mlu-mk-util("-Gcc", $--mlu-grid-cols, $map, $bp, $states);
+	@include mlu-mk-util("-Gcc", $var-grid-cols, $map, $bp, $states);
 }

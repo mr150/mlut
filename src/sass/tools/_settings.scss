@@ -725,18 +725,18 @@ $mlu-grid-gutters: (
 // In addition to variables, the names of custom properties are contained in the map `$mlu-css-vars`.
 // Below are the names of the variables, the corresponding keys in the map and names of custom properties.
 //
-// $--mlu-gg = --mlu-gg - `gg`.
-// $--mlu-gg-rem = --mlu-gg-rem - `gg-rem`.
-// $--mlu-grid-cols = --mlu-grid-cols - `grid-cols`.
+// $var-gg = --mlu-gg - `gg`.
+// $var-gg-rem = --mlu-gg-rem - `gg-rem`.
+// $var-grid-cols = --mlu-grid-cols - `grid-cols`.
 //
 // Styleguide: sass-tools.settings.css_vars.names
 
-$--mlu-gg: "--mlu-gg" !default;
-$--mlu-gg-rem: "--mlu-gg-rem" !default;
-$--mlu-grid-cols: "--mlu-grid-cols" !default;
+$var-gg: "--mlu-gg" !default;
+$var-gg-rem: "--mlu-gg-rem" !default;
+$var-grid-cols: "--mlu-grid-cols" !default;
 
 $mlu-css-vars: (
-	"gg": $--mlu-gg,
-	"gg-rem": $--mlu-gg-rem,
-	"grid-cols": $--mlu-grid-cols,
+	"gg": $var-gg,
+	"gg-rem": $var-gg-rem,
+	"grid-cols": $var-grid-cols,
 ) !default;

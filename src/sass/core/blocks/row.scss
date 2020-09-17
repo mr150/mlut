@@ -203,8 +203,8 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 .row__col,
 .row__item {
 	--gc-diff: 0px;
-	--gc-rule: calc((var(--gc) - 0.0001) / var(#{$--mlu-grid-cols}) * 100% - var(--gc-diff) * 2);
-	--mgc-rule: calc((var(--mgc) - 0.0001) / var(#{$--mlu-grid-cols}) * 100% + var(--gc-diff));
+	--gc-rule: calc((var(--gc) - 0.0001) / var(#{$var-grid-cols}) * 100% - var(--gc-diff) * 2);
+	--mgc-rule: calc((var(--mgc) - 0.0001) / var(#{$var-grid-cols}) * 100% + var(--gc-diff));
 
 	position: relative;
 	display: inline-block;
@@ -237,7 +237,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 }
 
 .row__col {
-	--gc-diff: var(#{$--mlu-gg});
+	--gc-diff: var(#{$var-gg});
 
 	@include mlu-W(12gc);
 

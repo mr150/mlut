@@ -221,12 +221,12 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 
 	@if $init-gutter and $init-gutter != -1 {
 		$var-value: if($coef != 1,
-		calc(var(#{$--mlu-gg}) * #{$coef}),
-		var(#{$--mlu-gg}));
+		calc(var(#{$var-gg}) * #{$coef}),
+		var(#{$var-gg}));
 
 		$var-value-rem: if($coef != 1,
-		calc(var(#{$--mlu-gg-rem}) * #{$coef}),
-		var(#{$--mlu-gg-rem}));
+		calc(var(#{$var-gg-rem}) * #{$coef}),
+		var(#{$var-gg-rem}));
 
 		$tmp-val: if($calc, calc(#{$prev-value * $coef}), $prev-value * $coef);
 
@@ -551,12 +551,12 @@ $calc: false, $prop: "width", $css-vars: false) {
 	$var-width: if(meta.type-of($unit) == "number", $unit, null);
 	$unit: if($var-width, "gc", $unit);
 	$calc-val: calc(#{$width} - #{$gutter * 2});
-	$var-val: calc(#{$width} - var(#{$--mlu-gg}) * 2);
+	$var-val: calc(#{$width} - var(#{$var-gg}) * 2);
 	$width-fallback: if($calc, mlu-decimal-floor($width, 3) - ($mlu-grid-gutter-fallback * 2), 0);
 
 	@if $prop == "margin-left" {
 		$calc-val: calc(#{$width} + #{$gutter});
-		$var-val: calc(#{$width} + var(#{$--mlu-gg}));
+		$var-val: calc(#{$width} + var(#{$var-gg}));
 		$width-fallback: if($calc, mlu-decimal-floor($width, 3) + $mlu-grid-gutter-fallback, 0);
 	}
 
@@ -647,8 +647,8 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	}
 
 	@if $css-vars {
-		--gc-rule: calc(var(--gc) / var(#{$--mlu-grid-cols}) * 100% - var(--gc-diff) * 2);
-		--mgc-rule: calc(var(--mgc) / var(#{$--mlu-grid-cols}) * 100% + var(--gc-diff));
+		--gc-rule: calc(var(--gc) / var(#{$var-grid-cols}) * 100% - var(--gc-diff) * 2);
+		--mgc-rule: calc(var(--mgc) / var(#{$var-grid-cols}) * 100% + var(--gc-diff));
 	}
 
 	position: relative;
@@ -668,7 +668,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 	}
 
 	@if $type == "col" {
-		--gc-diff: var(#{$--mlu-gg});
+		--gc-diff: var(#{$var-gg});
 
 		@include mlu-W(12gc, $gutters: $grid-gutters, $css-vars: $css-vars, $calc: $calc);
 
