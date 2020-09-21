@@ -312,7 +312,7 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 			$prev-gutter: $mlu-grid-default-gtr;
 		}
 
-		@include _mlu-mk-width($col-width, $custom-unit, $prev-gutter, $calc-fallback, $type, $css-vars);
+		@include -mlu-mk-width($col-width, $custom-unit, $prev-gutter, $calc-fallback, $type, $css-vars);
 		$calc-fallback: false;
 
 		// Repeat generation utility with new gutter if it changed on breakpoint.
@@ -322,7 +322,7 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 			@each $key, $value in $grid-gutters {
 				@if $value != $prev-gutter and $custom-unit == "gc" {
 					@include mlu-bpm($key) {
-						@include _mlu-mk-width($col-width, $custom-unit, $value, $calc-fallback, $type);
+						@include -mlu-mk-width($col-width, $custom-unit, $value, $calc-fallback, $type);
 					}
 				}
 
@@ -341,7 +341,7 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 			// Repeat generation utility with new gutter if it changed on breakpoint.
 			@if $key == $bp or ($value > $col-gutter and $value != $prev-gutter) {
 				@include mlu-bpm($key) {
-					@include _mlu-mk-width($col-width, $custom-unit, $value, $calc-fallback, $type);
+					@include -mlu-mk-width($col-width, $custom-unit, $value, $calc-fallback, $type);
 					$calc-fallback: false;
 				}
 
@@ -350,7 +350,7 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 		}
 	} @else {
 		@include mlu-bpm($bp) {
-			@include _mlu-mk-width($col-width, $custom-unit, $mlu-grid-default-gtr, $calc, $type, $css-vars);
+			@include -mlu-mk-width($col-width, $custom-unit, $mlu-grid-default-gtr, $calc, $type, $css-vars);
 		}
 	}
 }
@@ -402,7 +402,7 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 
 // Private mixin for width and grid offset generation from 'mlu-W'.
 
-@mixin _mlu-mk-width($width, $unit, $gutter: $mlu-gtr-sm,
+@mixin -mlu-mk-width($width, $unit, $gutter: $mlu-gtr-sm,
 $calc: false, $prop: "width", $css-vars: false) {
 	$prop-abbr: (
 		"width": "",
