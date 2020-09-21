@@ -3,11 +3,11 @@
 @use "sass:math";
 
 /*
-Mixins
+General
 
-Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sass/tools/_mixins.scss`.
+General purpose mixins.
 
-Styleguide: sass-tools.mixins
+Styleguide: sass-tools.mixins.general
 */
 
 // mlu-bpm
@@ -65,7 +65,7 @@ Styleguide: sass-tools.mixins
 // `$type` depends on availability `$from` and `$to`
 // @content - CSS relus that will be placed into mediaquery.
 //
-// Styleguide: sass-tools.mixins.bpm
+// Styleguide: sass-tools.mixins.general.bpm
 
 @mixin mlu-bpm($from: false, $to: false, $opt: false, $prop: "width") {
 	$type: "min";
@@ -135,7 +135,7 @@ Styleguide: sass-tools.mixins
 //}
 // ```
 //
-// Styleguide: sass-tools.mixins.mcl
+// Styleguide: sass-tools.mixins.general.mcl
 
 @mixin mlu-mCl {
 	&:after {

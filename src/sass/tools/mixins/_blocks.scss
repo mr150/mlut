@@ -1,5 +1,13 @@
 @use "sass:meta";
 
+/*
+Blocks
+
+Mixins for creating blocks and working with them.
+
+Styleguide: sass-tools.mixins.blocks
+*/
+
 // mlu-row
 //
 // Generate [row](section-core-blocks.html#kssref-core-blocks-row) block styles.
@@ -11,7 +19,7 @@
 //
 // $display = block - display type. Can be value of CSS `display` property.
 //
-// Styleguide: sass-tools.mixins.row
+// Styleguide: sass-tools.mixins.blocks.row
 
 @mixin mlu-row($display: block, $css-vars: $MLU-FLAG-CSS-VARS) {
 	position: relative;
@@ -48,7 +56,7 @@
 // $css-vars = $MLU-FLAG-CSS-VARS - use CSS custom properties for gutters.
 // Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
 //
-// Styleguide: sass-tools.mixins.row_col
+// Styleguide: sass-tools.mixins.blocks.row_col
 
 @mixin mlu-row-col($display: inline-block, $gutters: $mlu-grid-gutters,
 $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
@@ -127,7 +135,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 //
 // $display = inline-block - display type. Can be value of CSS `display` property.
 //
-// Styleguide: sass-tools.mixins.row_item
+// Styleguide: sass-tools.mixins.blocks.row_item
 
 @mixin mlu-row-item($display: inline-block) {
 	@include mlu-row-col($display, $type: "item");

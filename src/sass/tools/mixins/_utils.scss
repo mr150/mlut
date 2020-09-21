@@ -7,6 +7,14 @@
 $-su-rem: mlu-px2rem($mlu-su);
 $-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 
+/*
+Utilities
+
+Mixins for creating utilities and working with them.
+
+Styleguide: sass-tools.mixins.utils
+*/
+
 // mlu-bp-all
 //
 // Generates the CSS rule on breakpoints, adding the name of the breakpoint to the selector, inside the corresponding media query.
@@ -58,7 +66,7 @@ $-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 // $selector = & - selector of CSS rule. Can be `string` or `&`.
 // $xs = 1 - any type flag. If equal to 1, then the rule will first be generated outside of breakpoints(in `xs`).
 //
-// Styleguide: sass-tools.mixins.bp_all
+// Styleguide: sass-tools.mixins.utils.bp_all
 
 @mixin mlu-bp-all($selector: &, $xs: 1) {
 	@if not $selector {
@@ -106,7 +114,7 @@ $-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 // $states = map-keys($mlu-util-states) -  list of state names to be generated.
 // $no-state = 1 - number flag. If equal to 1, then a value without state will be generated as in the example above.
 //
-// Styleguide: sass-tools.mixins.mk_state
+// Styleguide: sass-tools.mixins.utils.mk_state
 
 @mixin mlu-mk-state($selector: &, $states: map.keys($mlu-util-states), $no-state: 1) {
 	@if not $selector {
@@ -195,7 +203,7 @@ $-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 // $states = false - list of state names. For each value of the utility, all states from this list will be generated. Info about states see [here](section-concepts.html#kssref-concepts-utility-states).
 // $direct = null - service argument which used only by [mk-util-directions](#kssref-sass-tools-mixins-mk_util_dir).
 //
-// Styleguide: sass-tools.mixins.mk_util
+// Styleguide: sass-tools.mixins.utils.mk_util
 
 @mixin mlu-mk-util($name, $prop, $map, $bp: false, $states: false, $direct: null) {
 	$name: mlu-check-class($name);
@@ -290,7 +298,7 @@ $-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
 // $bp = null - breakpoint on which utility values will be generated.
 // $states = null - list of state names.
 //
-// Styleguide: sass-tools.mixins.mk_util_dir
+// Styleguide: sass-tools.mixins.utils.mk_util_dir
 
 @mixin mlu-mk-util-directions($map, $name: null, $prop: null, $bp: null, $states: null) {
 	@each $key, $value in $map {

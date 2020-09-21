@@ -4,6 +4,14 @@
 @use "sass:math";
 @use "sass:string";
 
+/*
+Grid system
+
+Mixins that implement the grid system.
+
+Styleguide: sass-tools.mixins.grid
+*/
+
 // mlu-mk-gtr
 //
 // Generate fields or indents in grid-gutters on different breakpoints.
@@ -47,7 +55,7 @@
 // $css-vars = $MLU-FLAG-CSS-VARS - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
 // Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
 //
-// Styleguide: sass-tools.mixins.mk_gtr
+// Styleguide: sass-tools.mixins.grid.mk_gtr
 
 @mixin mlu-mk-gtr($init-gutter: $mlu-gtr-sm, $type: "margin",
 $gutters: $mlu-grid-gutters, $calc: $MLU-FLAG-CALC-FALLBACK, $direct: "x",
@@ -258,7 +266,7 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 // $css-vars = $MLU-FLAG-CSS-VARS - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
 // Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
 //
-// Styleguide: sass-tools.mixins.w
+// Styleguide: sass-tools.mixins.grid.w
 
 @mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "width") {
 	$col-width: 0;
@@ -386,7 +394,7 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 //
 // $offset - takes the same values as `$width` in `mlu-W`.
 //
-// Styleguide: sass-tools.mixins.ml
+// Styleguide: sass-tools.mixins.grid.ml
 
 @mixin mlu-Ml($offset, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK) {
 	@include mlu-W($offset, $bp, $cols, $gutters, $css-vars, $calc, "margin-left");

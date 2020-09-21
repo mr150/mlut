@@ -44,7 +44,7 @@
 // $bp = null - breakpoint on which utility values will be generated.
 // $states = null - list of state names.
 //
-// Styleguide: sass-tools.mixins.util_wrappers
+// Styleguide: sass-tools.mixins.utils.util_wrappers
 
 @mixin mlu-mk-Xy($map, $bp: null, $states: null) {
 	@include mlu-mk-util-directions($map, $bp: $bp, $states: $states);

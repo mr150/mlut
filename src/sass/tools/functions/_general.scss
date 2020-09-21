@@ -2,11 +2,11 @@
 @use "sass:string";
 
 /*
-Functions
+General
 
-Useful functions. All MLUT functions have 'mlu' prefix. You can find all functions in `sass/tools/_functions.scss`.
+General purpose functions.
 
-Styleguide: sass-tools.functions
+Styleguide: sass-tools.functions.general
 */
 
 // mlu-ston
@@ -21,7 +21,7 @@ Styleguide: sass-tools.functions
 // $str - string to be converted.
 // $strict = false - bool flag for stricter conversion. If it on and $str contains non-number, then function return `null`. See example above.
 //
-// Styleguide: sass-tools.functions.ston
+// Styleguide: sass-tools.functions.general.ston
 
 @function mlu-ston($str, $strict: false) {
 	@if meta.type-of($str) == "number" {
@@ -70,7 +70,7 @@ Styleguide: sass-tools.functions
 // $name - class name string.
 // $only-name = null - bool flag. In you want to get class name without dot pass 1. Else, a value with a dot will be returned.
 //
-// Styleguide: sass-tools.functions.check_class
+// Styleguide: sass-tools.functions.general.check_class
 
 @function mlu-check-class($name, $only-name: null) {
 	$name: $name + "";

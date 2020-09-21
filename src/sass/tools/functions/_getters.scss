@@ -1,6 +1,14 @@
 @use "sass:list";
 @use "sass:map";
 
+/*
+Getters
+
+Functions-getters from settings maps and more.
+
+Styleguide: sass-tools.functions.getters
+*/
+
 // mlu-bp
 //
 // Get breakpoint value from [$mlu-breakpoints](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints) map.
@@ -11,7 +19,7 @@
 // $name - breakpoint name. Type: string.
 // $error-handler = 1 - bool flag for enable strict error handling. If it is enabled, then when an invalid breakpoint name is passed, the compiler will generate an error.
 //
-// Styleguide: sass-tools.functions.bp
+// Styleguide: sass-tools.functions.getters.bp
 
 @function mlu-bp($name, $error-handler: 1) {
 	@if map.has-key($mlu-breakpoints, $name) or $error-handler == 0 {
@@ -32,7 +40,7 @@
 // If pass last breakpoint, function return 0. With default value, function return first breakpoint. Type: string.
 // $data-type = "value" - service parameter for functions-wrappers. Type: string.
 //
-// Styleguide: sass-tools.functions.bp_next
+// Styleguide: sass-tools.functions.getters.bp_next
 
 @function mlu-bp-next($bp: 0, $data-type: "value") {
 	@if $bp == 0 or map.has-key($mlu-breakpoints, $bp) {
@@ -58,7 +66,7 @@
 //
 // $bp = 0 - breakpoint name. Type: string.
 //
-// Styleguide: sass-tools.functions.bp_next_name
+// Styleguide: sass-tools.functions.getters.bp_next_name
 
 @function mlu-bp-next-name($bp: 0) {
 	@return mlu-bp-next($bp, "name");
@@ -75,7 +83,7 @@
 // If pass firts breakpoint, function return 0. With default value, function return last breakpoint. Type: string.
 // $data-type = "value" - service parameter for functions-wrappers. Type: string.
 //
-// Styleguide: sass-tools.functions.bp_prev
+// Styleguide: sass-tools.functions.getters.bp_prev
 
 @function mlu-bp-prev($bp: 0, $data-type: "value") {
 	@if $bp == 0 or map.has-key($mlu-breakpoints, $bp) {
@@ -101,7 +109,7 @@
 //
 // $bp = 0 - breakpoint name. Type: string.
 //
-// Styleguide: sass-tools.functions.bp_prev_name
+// Styleguide: sass-tools.functions.getters.bp_prev_name
 
 @function mlu-bp-prev-name($bp: 0) {
 	@return mlu-bp-prev($bp, "name");
@@ -117,7 +125,7 @@
 // $name - breakpoint name. Type: string.
 // $error-handler = 1 - works similarly like [here](#kssref-sass-tools-functions-bp).
 //
-// Styleguide: sass-tools.functions.grid_gtr
+// Styleguide: sass-tools.functions.getters.grid_gtr
 
 @function mlu-grid-gtr($name, $error-handler: 1) {
 	@if map.has-key($mlu-grid-gutters, $name) or $error-handler == 0 {
@@ -137,7 +145,7 @@
 // $name - breakpoint name. Type: string.
 // $error-handler = 1 - works similarly like [here](#kssref-sass-tools-functions-bp).
 //
-// Styleguide: sass-tools.functions.grid_cols_count
+// Styleguide: sass-tools.functions.getters.grid_cols_count
 
 @function mlu-grid-cols-count($name, $error-handler: 1) {
 	@if map.has-key($mlu-grid-cols, $name) or $error-handler == 0 {
@@ -157,7 +165,7 @@
 // $name - custom property name. Type: string.
 // $error-handler = 1 - works similarly like [here](#kssref-sass-tools-functions-bp).
 //
-// Styleguide: sass-tools.functions.css_var
+// Styleguide: sass-tools.functions.getters.css_var
 
 @function mlu-css-var($name, $error-handler: 1) {
 	@if map.has-key($mlu-css-vars, $name) or $error-handler == 0 {

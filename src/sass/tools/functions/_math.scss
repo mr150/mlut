@@ -1,6 +1,14 @@
 @use "sass:math";
 @use "sass:meta";
 
+/*
+Math
+
+Functions for calculations.
+
+Styleguide: sass-tools.functions.math
+*/
+
 // mlu-decimal-round
 //
 // Decimal rounding.
@@ -12,7 +20,7 @@
 // $pos - the number of decimal places.
 // $type = "round" - service parameter for functions-wrappers.
 //
-// Styleguide: sass-tools.functions.decimal_round
+// Styleguide: sass-tools.functions.math.decimal_round
 
 @function mlu-decimal-round($number, $pos, $type: "round") {
 	$n: 1;
@@ -50,7 +58,7 @@
 // $number - decimal to be rounded. Type: number.
 // $pos - the number of decimal places.
 //
-// Styleguide: sass-tools.functions.decimal_ceil
+// Styleguide: sass-tools.functions.math.decimal_ceil
 
 @function mlu-decimal-ceil($number, $pos) {
 	@return mlu-decimal-round($number, $pos, "ceil");
@@ -67,7 +75,7 @@
 // $number - decimal to be rounded. Type: number.
 // $pos - the number of decimal places.
 //
-// Styleguide: sass-tools.functions.decimal_floor
+// Styleguide: sass-tools.functions.math.decimal_floor
 
 @function mlu-decimal-floor($number, $pos) {
 	@return mlu-decimal-round($number, $pos, "floor");
@@ -86,7 +94,7 @@
 // $divider = $mlu-base-font-size - parent font size in `px`.
 // $unit = "em" - service parameter for functions-wrappers.
 //
-// Styleguide: sass-tools.functions.px2em
+// Styleguide: sass-tools.functions.math.px2em
 
 @function mlu-px2em($number, $divider: $mlu-base-font-size, $unit: "em") {
 	@if math.is-unitless($number) {
@@ -118,7 +126,7 @@
 // $number - number in `px` that will be converted.
 // $divider = $MLU-BROWSER-FONT-SIZE - browser default font size in `px`.
 //
-// Styleguide: sass-tools.functions.px2rem
+// Styleguide: sass-tools.functions.math.px2rem
 
 @function mlu-px2rem($number, $divider: $MLU-BROWSER-FONT-SIZE) {
 	@return mlu-px2em($number, $divider, "rem");
@@ -136,7 +144,7 @@
 // $number - number in `px` that will be converted.
 // $divider = $mlu-base-font-size - parent font size in `px`.
 //
-// Styleguide: sass-tools.functions.px2lh
+// Styleguide: sass-tools.functions.math.px2lh
 
 @function mlu-px2lh($number, $divider: $mlu-base-font-size) {
 	@return mlu-px2em($number, $divider, "no");
