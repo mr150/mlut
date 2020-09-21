@@ -2,18 +2,18 @@
 //
 // Flags for core compilation.
 //
-// $MLU-FLAG-CALC-FALLBACK = false - turn on CSS `calc()` fallback for grid utils on `md+` breakpoints. Type: `bool`.
-// $MLU-FLAG-COL-OFFSET = true - turn on generation grid columns offset [utils](section-core-utils.html#kssref-core-utils-margin-ml). Type: `bool`.
-// $MLU-FLAG-CSS-VARS = 1 - turn on usage of [CSS variables](section-core-styles.html#kssref-core-styles-css_vars).
+// $mlu-flag-calc-fallback = false - turn on CSS `calc()` fallback for grid utils on `md+` breakpoints. Type: `bool`.
+// $mlu-flag-col-offset = true - turn on generation grid columns offset [utils](section-core-utils.html#kssref-core-utils-margin-ml). Type: `bool`.
+// $mlu-flag-css-vars = 1 - turn on usage of [CSS variables](section-core-styles.html#kssref-core-styles-css_vars).
 // Allowable values: <br>
 // `false` \- turn off <br>
 // `1` \- turn on with fallback <br>
 // `2` \- turn on. With this value, most fallbacks will be disabled for browsers that don't support custom properties. Be careful. <br>
-// $MLU-FLAG-FLEX-PE = false - turn on utilities with progressive enhancement for flexbox.
+// $mlu-flag-flex-pe = false - turn on utilities with progressive enhancement for flexbox.
 //
 // Styleguide: sass-tools.settings.flags
 
-$MLU-FLAG-CALC-FALLBACK: false !default;
-$MLU-FLAG-COL-OFFSET: true !default;
-$MLU-FLAG-CSS-VARS: 1 !default;
-$MLU-FLAG-FLEX-PE: false !default;
+$mlu-flag-calc-fallback: false !default;
+$mlu-flag-col-offset: true !default;
+$mlu-flag-css-vars: 1 !default;
+$mlu-flag-flex-pe: false !default;

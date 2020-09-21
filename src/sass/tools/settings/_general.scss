@@ -2,22 +2,22 @@
 //
 // Settings that affect the work of the mixins, functions and all toolkit.
 //
-// $MLU-BROWSER-FONT-SIZE = 16px - font size for converting [px to rem](section-sass-tools.html#kssref-sass-tools-functions-px2rem). 16px used because is default font size in settings of most browsers.
+// $mlu-browser-font-size = 16px - font size for converting [px to rem](section-sass-tools.html#kssref-sass-tools-functions-px2rem). 16px used because is default font size in settings of most browsers.
 // $mlu-su-cf = 4 - value of [space unit](section-concepts.html#kssref-concepts-su). Use this factor to change su and for calculations.
 // $mlu-su = 4px - space unit in px. Depends on `$mlu-su-cf`. Use this variable to set the values in px.
-// $mlu-base-font-size = $MLU-BROWSER-FONT-SIZE - base font size on website. Is used for `rems` fallback in [row elements](section-core-blocks.html#kssref-core-blocks-row) and in [mlu-px2em](section-sass-tools.html#kssref-sass-tools-functions-px2em) default font size.
+// $mlu-base-font-size = $mlu-browser-font-size - base font size on website. Is used for `rems` fallback in [row elements](section-core-blocks.html#kssref-core-blocks-row) and in [mlu-px2em](section-sass-tools.html#kssref-sass-tools-functions-px2em) default font size.
 // $mlu-main-directions - Map with directions for css properties and values generation. The keys are the first letters of the directions, and the values are directions. <br> Example: `("t": top)`.
 // $mlu-breakpoints - map with main breakpoints. First breakpoint is `$mlu-bp-sm`.
 //
 // Styleguide: sass-tools.settings.general
 
-$MLU-BROWSER-FONT-SIZE: 16px !default;
+$mlu-browser-font-size: 16px !default;
 
 $mlu-su-cf: 4 !default;
 
 $mlu-su: $mlu-su-cf * 1px;
 
-$mlu-base-font-size: $MLU-BROWSER-FONT-SIZE !default;
+$mlu-base-font-size: $mlu-browser-font-size !default;
 
 $mlu-main-directions: (
 	"t": top,

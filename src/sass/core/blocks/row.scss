@@ -3,7 +3,7 @@ Row
 
 Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-bxz-d), you can change the layout technology to flexbox.
 
-if the [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags) = 2, then the styles for correct work of layouts which using inline-blocks will be disabled.
+if the [$mlu-flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 2, then the styles for correct work of layouts which using inline-blocks will be disabled.
 
 Parts of the layout within a `row` are created using the elements:
 * [row__col](#kssref-core-blocks-row-row__col)
@@ -33,7 +33,7 @@ margin-left: var(--mlu-gg);
 margin-bottom: 2rem;
 margin-bottom: calc(var(--mlu-gg-rem) * 2);
 ```
-similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags) = 1.
+similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$mlu-flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 1.
 
 The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-default-gtr`.
 
@@ -212,11 +212,11 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	box-sizing: border-box;
 	vertical-align: top;
 
-	@if $MLU-FLAG-CSS-VARS != 2 {
+	@if $mlu-flag-css-vars != 2 {
 		font-size: $mlu-base-font-size;
 		font-size: mlu-px2rem($mlu-base-font-size);
 
-		@if $MLU-FLAG-FLEX-PE {
+		@if $mlu-flag-flex-pe {
 			text-align: left;
 			white-space: normal;
 			direction: ltr;

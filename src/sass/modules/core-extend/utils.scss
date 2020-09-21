@@ -62,7 +62,7 @@ Styleguide: sass_modules.core_extend.utils.flex
 			align-items: stretch;
 		}
 
-		@if $MLU-FLAG-FLEX-PE {
+		@if $mlu-flag-flex-pe {
 			.mAi-fs_#{$key} {
 				align-items: flex-start;
 

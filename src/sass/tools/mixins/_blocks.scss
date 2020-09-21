@@ -21,7 +21,7 @@ Styleguide: sass-tools.mixins.blocks
 //
 // Styleguide: sass-tools.mixins.blocks.row
 
-@mixin mlu-row($display: block, $css-vars: $MLU-FLAG-CSS-VARS) {
+@mixin mlu-row($display: block, $css-vars: $mlu-flag-css-vars) {
 	position: relative;
 	display: $display;
 	margin: 0px;
@@ -53,13 +53,13 @@ Styleguide: sass-tools.mixins.blocks
 // $type = "col" - service parameter which used only by mixins-wrappers.
 // It needed for reusable `mlu-row-col` for making other
 // `row` elements, because the most of styles for them is the same.
-// $css-vars = $MLU-FLAG-CSS-VARS - use CSS custom properties for gutters.
+// $css-vars = $mlu-flag-css-vars - use CSS custom properties for gutters.
 // Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
 //
 // Styleguide: sass-tools.mixins.blocks.row_col
 
 @mixin mlu-row-col($display: inline-block, $gutters: $mlu-grid-gutters,
-$css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
+$css-vars: $mlu-flag-css-vars, $calc: $mlu-flag-calc-fallback, $type: "col") {
 	$grid-gutters: $gutters;
 
 	@if meta.type-of($gutters) == "number" {
@@ -84,7 +84,7 @@ $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "col") {
 		font-size: mlu-px2rem($mlu-base-font-size);
 		text-align: left;
 		white-space: normal;
-		@if $MLU-FLAG-FLEX-PE {
+		@if $mlu-flag-flex-pe {
 			direction: ltr;
 		}
 	}

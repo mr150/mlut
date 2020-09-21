@@ -53,7 +53,7 @@ Styleguide: core-utils.text.td
 /*
 Dir
 
-Direction. Unility available if [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags) turned on. Sets direction of text and order items in row-layout.
+Direction. Unility available if [$mlu-flag-flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags) turned on. Sets direction of text and order items in row-layout.
 
 l - left to right *Responsive* only.
 r - right to left *Responsive*.
@@ -111,7 +111,7 @@ Styleguide: core-utils.text.mtov
 	"p": pre,
 ));
 
-@if $MLU-FLAG-FLEX-PE {
+@if $mlu-flag-flex-pe {
 	@include mlu-mk-util("Dir", "direction", (
 		"r_all": rtl,
 		"l_bp": ltr,

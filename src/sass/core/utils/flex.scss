@@ -4,7 +4,7 @@ Flex
 
 A group of utilities for managing flex-containers and flex-elements.
 
-Most of modified flex utilities **turned off** and available with flag [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+Most of modified flex utilities **turned off** and available with flag [$mlu-flag-flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
 
 * `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
@@ -166,7 +166,7 @@ $mlu-As-map: (
 	"s": stretch,
 );
 
-@if $MLU-FLAG-FLEX-PE {
+@if $mlu-flag-flex-pe {
 	.mAs-b {
 		align-self: baseline;
 		vertical-align: baseline;
@@ -206,7 +206,7 @@ $mlu-As-map: (
 	"sb_all": space-between,
 ));
 
-@if $MLU-FLAG-FLEX-PE {
+@if $mlu-flag-flex-pe {
 	@include mlu-bp-all(".mJc-fs", 0) {
 		justify-content: flex-start;
 		text-align: left;
@@ -221,14 +221,14 @@ $mlu-As-map: (
 		justify-content: flex-end;
 		text-align: right;
 	}
-} @else if $MLU-FLAG-CSS-VARS != 2 {
+} @else if $mlu-flag-css-vars != 2 {
 	.mJc-c {
 		justify-content: center;
 		text-align: center;
 	}
 }
 
-@if $MLU-FLAG-FLEX-PE {
+@if $mlu-flag-flex-pe {
 	.mAi-fs {
 		align-items: flex-start;
 

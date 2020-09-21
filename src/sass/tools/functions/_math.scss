@@ -124,11 +124,11 @@ Styleguide: sass-tools.functions.math
 // ```
 //
 // $number - number in `px` that will be converted.
-// $divider = $MLU-BROWSER-FONT-SIZE - browser default font size in `px`.
+// $divider = $mlu-browser-font-size - browser default font size in `px`.
 //
 // Styleguide: sass-tools.functions.math.px2rem
 
-@function mlu-px2rem($number, $divider: $MLU-BROWSER-FONT-SIZE) {
+@function mlu-px2rem($number, $divider: $mlu-browser-font-size) {
 	@return mlu-px2em($number, $divider, "rem");
 }
 

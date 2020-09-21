@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-/* This comment needed for add @charset "utf-8"; in source because sass compiler erased this at-rule without it: утф8 */
-
 /*
 Getting started
 
@@ -454,25 +452,97 @@ Styleguide: examples
 /*
 Settings
 
-Grid settings, compilation flags, constants and more. All core settings are in the `sass/tools/_settings.scss`.
+Grid settings, compilation flags, constants and more. All core settings are in the `sass/tools/settings/`.
 
 Styleguide: sass-tools.settings
 */
 
 /*
+Columns and gutters
+
+Columns count and gutters value on breakpoints.
+
+Breakpoint | Columns | Gutter
+:---:  | :---: | :---:
+xs | 4 | 12px
+sm | 4 | 12px
+md | 12 | 12px
+lg | 12 | 16px
+xl | 12 | 16px
+
+Styleguide: sass-tools.settings.grid.cols
+*/
+
+/*
 Functions
 
-Useful functions. All MLUT functions have 'mlu' prefix. You can find all functions in `sass/tools/_functions.scss`.
+Useful functions. All MLUT functions have 'mlu' prefix. You can find all functions in `sass/tools/functions/`.
 
 Styleguide: sass-tools.functions
 */
 
 /*
+General
+
+General purpose functions.
+
+Styleguide: sass-tools.functions.general
+*/
+
+/*
+Math
+
+Functions for calculations.
+
+Styleguide: sass-tools.functions.math
+*/
+
+/*
+Getters
+
+Functions-getters from settings maps and more.
+
+Styleguide: sass-tools.functions.getters
+*/
+
+/*
 Mixins
 
-Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sass/tools/_mixins.scss`.
+Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sass/tools/mixins/`.
 
 Styleguide: sass-tools.mixins
+*/
+
+/*
+General
+
+General purpose mixins.
+
+Styleguide: sass-tools.mixins.general
+*/
+
+/*
+Grid system
+
+Mixins that implement the grid system.
+
+Styleguide: sass-tools.mixins.grid
+*/
+
+/*
+Blocks
+
+Mixins for creating blocks and working with them.
+
+Styleguide: sass-tools.mixins.blocks
+*/
+
+/*
+Utilities
+
+Mixins for creating utilities and working with them.
+
+Styleguide: sass-tools.mixins.utils
 */
 
 /*
@@ -482,7 +552,7 @@ Global CSS custom properties which used in MLUT. Their names are stored in varia
 
 The values and meaning of many custom properties correspond to the [SASS settings](section-sass-tools.html#kssref-sass-tools-settings) of MLUT core. But unlike them, custom properties can be changed dynamically without recompiling.
 
-Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags).
+Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$mlu-flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags).
 
 Remember that custom properties do not work in all browsers. This means that part of the settings, such as dynamically changing the gutters and the number of columns in the grid system, also does not work everywhere.
 
@@ -585,7 +655,7 @@ Row
 
 Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-bxz-d), you can change the layout technology to flexbox.
 
-if the [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags) = 2, then the styles for correct work of layouts which using inline-blocks will be disabled.
+if the [$mlu-flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 2, then the styles for correct work of layouts which using inline-blocks will be disabled.
 
 Parts of the layout within a `row` are created using the elements:
 * [row__col](#kssref-core-blocks-row-row__col)
@@ -615,7 +685,7 @@ margin-left: var(--mlu-gg);
 margin-bottom: 2rem;
 margin-bottom: calc(var(--mlu-gg-rem) * 2);
 ```
-similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags) = 1.
+similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$mlu-flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 1.
 
 The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-default-gtr`.
 
@@ -1285,7 +1355,7 @@ Flex
 
 A group of utilities for managing flex-containers and flex-elements.
 
-Most of modified flex utilities **turned off** and available with flag [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+Most of modified flex utilities **turned off** and available with flag [$mlu-flag-flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
 
 * `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
@@ -2064,7 +2134,7 @@ Styleguide: core-utils.text.td
 /*
 Dir
 
-Direction. Unility available if [$MLU-FLAG-FLEX-PE](section-sass-tools.html#kssref-sass-tools-settings-flags) turned on. Sets direction of text and order items in row-layout.
+Direction. Unility available if [$mlu-flag-flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags) turned on. Sets direction of text and order items in row-layout.
 
 l - left to right *Responsive* only.
 r - right to left *Responsive*.
@@ -2518,7 +2588,7 @@ Styleguide: core-utils.visual.mv
 
 /*===DESIGN-UTILS===*/
 
-@media (min-width: 520px) {
+@media (min-width:520px) {
 	.-Gg1su_sm {
 		--mlu-gg: 4px;
 		--mlu-gg-rem: 0.25rem;
@@ -2732,7 +2802,7 @@ Styleguide: core-utils.visual.mv
 	}
 }
 
-@media (min-width: 760px) {
+@media (min-width:760px) {
 	:root {
 		--mlu-grid-cols: 12;
 	}
@@ -3062,7 +3132,7 @@ Styleguide: core-utils.visual.mv
 	}
 }
 
-@media (min-width: 960px) {
+@media (min-width:960px) {
 	:root {
 		--mlu-gg: 16px;
 	}
@@ -3396,7 +3466,7 @@ Styleguide: core-utils.visual.mv
 	}
 }
 
-@media (min-width: 1168px) {
+@media (min-width:1168px) {
 	.-Gg1su_xl {
 		--mlu-gg: 4px;
 		--mlu-gg-rem: 0.25rem;

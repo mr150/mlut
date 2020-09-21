@@ -50,16 +50,16 @@ Styleguide: sass-tools.mixins.grid
 // $direct = "x" - any of 7 [directions](section-concepts.html#kssref-concepts-utility-dirs).
 // $gutters = $mlu-grid-gutters - map with gutters values on breakpoints.
 // Map item example: `"sm": 12px`. Custom gutters only work when the `$css-vars = false`.
-// $calc = $MLU-FLAG-CALC-FALLBACK - bool flag for generation CSS `calc()` fallback for old browsers.
+// $calc = $mlu-flag-calc-fallback - bool flag for generation CSS `calc()` fallback for old browsers.
 // $coef = 1 - coefficient by which the gutter value is multiplied.
-// $css-vars = $MLU-FLAG-CSS-VARS - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
+// $css-vars = $mlu-flag-css-vars - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
 // Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
 //
 // Styleguide: sass-tools.mixins.grid.mk_gtr
 
 @mixin mlu-mk-gtr($init-gutter: $mlu-gtr-sm, $type: "margin",
-$gutters: $mlu-grid-gutters, $calc: $MLU-FLAG-CALC-FALLBACK, $direct: "x",
-$coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
+$gutters: $mlu-grid-gutters, $calc: $mlu-flag-calc-fallback, $direct: "x",
+$coef: 1, $css-vars: $mlu-flag-css-vars) {
 	$custom-prop: null;
 	$prev-value: $mlu-grid-default-gtr;
 	$direct-val: null;
@@ -263,12 +263,12 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 // $type = "width" - service argument which used only by mixins-wrappers.
 // It needed for reusable `mlu-W` for generating grid offset,
 // because the algorithm for generating them is the same.
-// $css-vars = $MLU-FLAG-CSS-VARS - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
+// $css-vars = $mlu-flag-css-vars - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
 // Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
 //
 // Styleguide: sass-tools.mixins.grid.w
 
-@mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK, $type: "width") {
+@mixin mlu-W($width, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: $mlu-flag-css-vars, $calc: $mlu-flag-calc-fallback, $type: "width") {
 	$col-width: 0;
 	$columns: $cols;
 	$grid-gutters: $gutters;
@@ -396,7 +396,7 @@ $coef: 1, $css-vars: $MLU-FLAG-CSS-VARS) {
 //
 // Styleguide: sass-tools.mixins.grid.ml
 
-@mixin mlu-Ml($offset, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: $MLU-FLAG-CSS-VARS, $calc: $MLU-FLAG-CALC-FALLBACK) {
+@mixin mlu-Ml($offset, $bp: $mlu-bp-xs, $cols: $mlu-grid-default-cols, $gutters: $mlu-grid-gutters, $css-vars: $mlu-flag-css-vars, $calc: $mlu-flag-calc-fallback) {
 	@include mlu-W($offset, $bp, $cols, $gutters, $css-vars, $calc, "margin-left");
 }
 

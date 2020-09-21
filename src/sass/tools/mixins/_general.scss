@@ -89,9 +89,9 @@ Styleguide: sass-tools.mixins.general
 			$item-to: $item;
 
 			@if math.unit($item) == "em" {
-				$item-to: mlu-px2em((($item / 1em) * $MLU-BROWSER-FONT-SIZE) - 1, $MLU-BROWSER-FONT-SIZE);
+				$item-to: mlu-px2em((($item / 1em) * $mlu-browser-font-size) - 1, $mlu-browser-font-size);
 			} @else if math.unit($item) == "rem" {
-				$item-to: mlu-px2rem((($item / 1rem) * $MLU-BROWSER-FONT-SIZE) - 1, $MLU-BROWSER-FONT-SIZE);
+				$item-to: mlu-px2rem((($item / 1rem) * $mlu-browser-font-size) - 1, $mlu-browser-font-size);
 			} @else if math.unit($item) == "px" {
 				$item-to: $item - 1;
 			}

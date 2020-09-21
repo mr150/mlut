@@ -32,7 +32,7 @@ Styleguide: core-utils.bxz.w
 		// Offsets start generate from $mlu-bp-md and if offset flag turn on.
 		// '$i < mlu-grid-cols-count($gtr-key) - 1' because
 		// offset like 'Ml11c' makes no sense
-		@if $MLU-FLAG-COL-OFFSET and
+		@if $mlu-flag-col-offset and
 			mlu-bp($key) > mlu-bp($mlu-bp-sm) and
 			$i < $value - 1 {
 			.Ml#{$i}c_#{$key} {

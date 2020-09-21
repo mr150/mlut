@@ -5,7 +5,7 @@ Global CSS custom properties which used in MLUT. Their names are stored in varia
 
 The values and meaning of many custom properties correspond to the [SASS settings](section-sass-tools.html#kssref-sass-tools-settings) of MLUT core. But unlike them, custom properties can be changed dynamically without recompiling.
 
-Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$MLU-FLAG-CSS-VARS](section-sass-tools.html#kssref-sass-tools-settings-flags).
+Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$mlu-flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags).
 
 Remember that custom properties do not work in all browsers. This means that part of the settings, such as dynamically changing the gutters and the number of columns in the grid system, also does not work everywhere.
 
@@ -22,7 +22,7 @@ Fallback is [$mlu-grid-default-gtr](section-sass-tools.html#kssref-sass-tools-se
 Styleguide: core-styles.css_vars
 */
 
-@if $MLU-FLAG-CSS-VARS {
+@if $mlu-flag-css-vars {
 	:root {
 		$prev-value: $mlu-grid-cols-xs;
 
