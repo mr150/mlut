@@ -1,0 +1,83 @@
+@use "sass:meta";
+@use "sass:string";
+
+/*
+Functions
+
+Useful functions. All MLUT functions have 'mlu' prefix. You can find all functions in `sass/tools/_functions.scss`.
+
+Styleguide: sass-tools.functions
+*/
+
+// mlu-ston
+//
+// Convert string to number.
+// ```scss
+//mlu-ston("1.5") => 1.5
+//mlu-ston("1x5") => 1
+//mlu-ston("1x5", 1) => null
+// ```
+//
+// $str - string to be converted.
+// $strict = false - bool flag for stricter conversion. If it on and $str contains non-number, then function return `null`. See example above.
+//
+// Styleguide: sass-tools.functions.ston
+
+@function mlu-ston($str, $strict: false) {
+	@if meta.type-of($str) == "number" {
+		@return $str;
+	}
+
+	@if meta.type-of($str) != "string" {
+		@error "Wrong type of argument $str: '#{meta.type-of($str)}'. Expected 'string'";
+	}
+
+	$digits: "0123456789";
+	$negative: string.slice($str, 1, 1) == "-";
+	$result: 0;
+	$decimal: false;
+
+	@for $i from if($negative, 2, 1) through string.length($str) {
+		$char: string.slice($str, $i, $i);
+		$digit: string.index($digits, $char);
+
+		@if $digit and not $decimal {
+			$result: $result * 10 + ($digit - 1);
+		} @else if $digit and $decimal {
+			$result: $result + ($digit - 1) / $decimal;
+			$decimal: $decimal * 10;
+		} @else if $char == "." and not $decimal {
+			$decimal: 10;
+		} @else if $strict or ($i == 1 and not $negative) or ($i == 2 and $negative) {
+			@return null;
+		} @else {
+			@return if($negative, -$result, $result);
+		}
+	}
+
+	@return if($negative, -$result, $result);
+}
+
+// mlu-check-class
+//
+// Checks for a dot in the CSS class name depending on the flag.
+// ```scss
+//mlu-check-class(".block") => ".block"
+//mlu-check-class("block") => ".block"
+//mlu-check-class(".block", 1) => "block"
+// ```
+//
+// $name - class name string.
+// $only-name = null - bool flag. In you want to get class name without dot pass 1. Else, a value with a dot will be returned.
+//
+// Styleguide: sass-tools.functions.check_class
+
+@function mlu-check-class($name, $only-name: null) {
+	$name: $name + "";
+
+	@if $only-name {
+		@return if(string.slice($name, 1, 1) == ".", string.slice($name, 2), $name);
+	}
+
+	@return if(string.slice($name, 1, 1) == ".", $name, "." + $name);
+}

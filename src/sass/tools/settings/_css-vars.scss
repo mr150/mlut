@@ -1,0 +1,26 @@
+// CSS variables
+//
+// Settings of global [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) which used in MLUT.
+//
+// Styleguide: sass-tools.settings.css_vars
+
+// Names
+//
+// In addition to variables, the names of custom properties are contained in the map `$mlu-css-vars`.
+// Below are the names of the variables, the corresponding keys in the map and names of custom properties.
+//
+// $var-gg = --mlu-gg - `gg`.
+// $var-gg-rem = --mlu-gg-rem - `gg-rem`.
+// $var-grid-cols = --mlu-grid-cols - `grid-cols`.
+//
+// Styleguide: sass-tools.settings.css_vars.names
+
+$var-gg: "--mlu-gg" !default;
+$var-gg-rem: "--mlu-gg-rem" !default;
+$var-grid-cols: "--mlu-grid-cols" !default;
+
+$mlu-css-vars: (
+	"gg": $var-gg,
+	"gg-rem": $var-gg-rem,
+	"grid-cols": $var-grid-cols,
+) !default;

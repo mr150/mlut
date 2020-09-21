@@ -242,7 +242,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	@include mlu-W(12gc);
 
 	@include mlu-mk-gtr();
-	@include mlu-mk-gtr($mlu-gtr-sm-rem, $direct: "b", $coef: 2);
+	@include mlu-mk-gtr(mlu-px2rem($mlu-gtr-sm), $direct: "b", $coef: 2);
 
 	&.row {
 		margin-bottom: 0px;

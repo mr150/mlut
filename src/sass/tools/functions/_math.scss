@@ -1,0 +1,143 @@
+@use "sass:math";
+@use "sass:meta";
+
+// mlu-decimal-round
+//
+// Decimal rounding.
+// ```scss
+//mlu-decimal-round(33.33333%, 2) => 33.33%
+//```
+//
+// $number - decimal to be rounded. Type: number.
+// $pos - the number of decimal places.
+// $type = "round" - service parameter for functions-wrappers.
+//
+// Styleguide: sass-tools.functions.decimal_round
+
+@function mlu-decimal-round($number, $pos, $type: "round") {
+	$n: 1;
+
+	@if meta.type-of($number) != "number" {
+		@error "Wrong type of argument $number: '#{meta.type-of($number)}'. Expected number";
+	}
+
+	@if meta.type-of($pos) != "number" {
+		@error "Wrong type of argument $pos: '#{meta.type-of($pos)}'. Expected 'number'";
+	}
+
+	@for $i from 0 to $pos {
+		$n: $n * 10;
+	}
+
+	@if $type == "round" {
+		@return math.round($number * $n) / $n;
+	} @else if $type == "ceil" {
+		@return math.ceil($number * $n) / $n;
+	} @else if $type == "floor" {
+		@return math.floor($number * $n) / $n;
+	} @else {
+		@error "Invalid round type: '#{$type}'";
+	}
+}
+
+// mlu-decimal-ceil
+//
+// Wrapper on [mlu-decimal-round](#kssref-sass-tools-functions-decimal_round) for ceil round.
+// ```scss
+//mlu-decimal-ceil(33.33333%, 2) => 33.34%
+//```
+//
+// $number - decimal to be rounded. Type: number.
+// $pos - the number of decimal places.
+//
+// Styleguide: sass-tools.functions.decimal_ceil
+
+@function mlu-decimal-ceil($number, $pos) {
+	@return mlu-decimal-round($number, $pos, "ceil");
+}
+
+
+// mlu-decimal-floor
+//
+// Wrapper on [mlu-decimal-round](#kssref-sass-tools-functions-decimal_round) for floor round.
+// ```scss
+//mlu-decimal-floor(33.33333%, 2) => 33.33%
+//```
+//
+// $number - decimal to be rounded. Type: number.
+// $pos - the number of decimal places.
+//
+// Styleguide: sass-tools.functions.decimal_floor
+
+@function mlu-decimal-floor($number, $pos) {
+	@return mlu-decimal-round($number, $pos, "floor");
+}
+
+// mlu-px2em
+//
+// Convert pixels to `ems`.
+// Final value in ems rounded because accuracy more than two decimal places does not make sense.
+// ```scss
+//mlu-px2em(24px, 18px) => 1.33em
+//mlu-px2em(24px) => 1.5em
+// ```
+//
+// $number - number in `px` that will be converted.
+// $divider = $mlu-base-font-size - parent font size in `px`.
+// $unit = "em" - service parameter for functions-wrappers.
+//
+// Styleguide: sass-tools.functions.px2em
+
+@function mlu-px2em($number, $divider: $mlu-base-font-size, $unit: "em") {
+	@if math.is-unitless($number) {
+		@warn "Assuming #{$number} to be in pixels in mlu-px2em. Convert it to px";
+		@return mlu-px2em($number * 1px, $divider, $unit);
+	} @else if math.unit($number) == $unit {
+		@return $number;
+	}
+
+	@if $unit == "rem" {
+		@return mlu-decimal-round($number / $divider, 2) * 1rem;
+	}
+
+	@if $unit == "no" {
+		@return mlu-decimal-round($number / $divider, 2);
+	}
+
+	@return mlu-decimal-round($number / $divider, 2) * 1em;
+}
+
+
+// mlu-px2rem
+//
+// Wrapper on [mlu-px2em](#kssref-sass-tools-functions-px2em) for converting to `rems`. Works similarly.
+// ```scss
+//mlu-px2rem(24px) => 1.5rem
+// ```
+//
+// $number - number in `px` that will be converted.
+// $divider = $MLU-BROWSER-FONT-SIZE - browser default font size in `px`.
+//
+// Styleguide: sass-tools.functions.px2rem
+
+@function mlu-px2rem($number, $divider: $MLU-BROWSER-FONT-SIZE) {
+	@return mlu-px2em($number, $divider, "rem");
+}
+
+
+// mlu-px2lh
+//
+// Wrapper on [mlu-px2em](#kssref-sass-tools-functions-px2em) for converting to `line-height` units. Works similarly.
+// ```scss
+//mlu-px2lh(24px, 14px) => 1.71
+//mlu-px2lh(24px) => 1.5
+// ```
+//
+// $number - number in `px` that will be converted.
+// $divider = $mlu-base-font-size - parent font size in `px`.
+//
+// Styleguide: sass-tools.functions.px2lh
+
+@function mlu-px2lh($number, $divider: $mlu-base-font-size) {
+	@return mlu-px2em($number, $divider, "no");
+}

@@ -1,0 +1,66 @@
+// Grid system
+//
+// Settings that affect the work of grid system.
+//
+// $mlu-grid-default-cols = 12 - default columns count on large width screen (>960px).
+// $mlu-grid-default-gtr = 16px - default gutter on large width screen. Used as fallback for [--mlu-gg](section-core-styles.html#kssref-core-styles-css_vars).
+// $mlu-grid-gutter-fallback = 1.5% - Fallback for grid gutter's width if CSS `calc()` not supported
+// $mlu-grid-cols - columls count on breakpoints.
+// $mlu-grid-cols-xs - columls count on `$mlu-bp-xs` (without breakpoints).
+// $mlu-grid-gutters - map with grid gutters on breakpoints.
+//
+// Styleguide: sass-tools.settings.grid
+
+$mlu-grid-default-cols: 12 !default;
+
+$mlu-grid-cols-xs: 4 !default;
+
+$mlu-grid-default-gtr: ($mlu-su * 4) !default;
+
+$mlu-grid-gutter-fallback: 1.5% !default;
+
+/*
+Columns and gutters
+
+Columns count and gutters value on breakpoints.
+
+Breakpoint | Columns | Gutter
+:---:  | :---: | :---:
+xs | 4 | 12px
+sm | 4 | 12px
+md | 12 | 12px
+lg | 12 | 16px
+xl | 12 | 16px
+
+Styleguide: sass-tools.settings.grid.cols
+*/
+
+$mlu-grid-cols: (
+	$mlu-bp-sm: 4,
+	$mlu-bp-md: 12,
+	$mlu-bp-lg: $mlu-grid-default-cols,
+	$mlu-bp-xl: $mlu-grid-default-cols,
+) !default;
+
+// Gutters
+//
+// Gutters variables and their values ​​in the source
+//
+// - `$mlu-gtr-sm = ` `$mlu-su * 3`
+// - `$mlu-gtr-md = ` `$mlu-gtr-sm`
+// - `$mlu-gtr-lg = ` `$mlu-grid-default-gtr`
+// - `$mlu-gtr-xl = ` `$mlu-gtr-lg`
+//
+// Styleguide: sass-tools.settings.grid.gtr
+
+$mlu-gtr-sm: ($mlu-su * 3) !default;
+$mlu-gtr-md: $mlu-gtr-sm !default;
+$mlu-gtr-lg: $mlu-grid-default-gtr !default;
+$mlu-gtr-xl: $mlu-gtr-lg !default;
+
+$mlu-grid-gutters: (
+	$mlu-bp-sm: $mlu-gtr-sm,
+	$mlu-bp-md: $mlu-gtr-md,
+	$mlu-bp-lg: $mlu-gtr-lg,
+	$mlu-bp-xl: $mlu-gtr-xl,
+) !default;

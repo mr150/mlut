@@ -1,5 +1,3 @@
-@use "sass:map";
-
 /*
 Getting started
 
@@ -461,26 +459,6 @@ Grid settings, compilation flags, constants and more. All core settings are in t
 Styleguide: sass-tools.settings
 */
 
-// Flags
-//
-// Flags for core compilation.
-//
-// $MLU-FLAG-CALC-FALLBACK = false - turn on CSS `calc()` fallback for grid utils on `md+` breakpoints. Type: `bool`.
-// $MLU-FLAG-COL-OFFSET = true - turn on generation grid columns offset [utils](section-core-utils.html#kssref-core-utils-margin-ml). Type: `bool`.
-// $MLU-FLAG-CSS-VARS = 1 - turn on usage of [CSS variables](section-core-styles.html#kssref-core-styles-css_vars).
-// Allowable values: <br>
-// `false` \- turn off <br>
-// `1` \- turn on with fallback <br>
-// `2` \- turn on. With this value, most fallbacks will be disabled for browsers that don't support custom properties. Be careful. <br>
-// $MLU-FLAG-FLEX-PE = false - turn on utilities with progressive enhancement for flexbox.
-//
-// Styleguide: sass-tools.settings.flags
-
-$MLU-FLAG-CALC-FALLBACK: false !default;
-$MLU-FLAG-COL-OFFSET: true !default;
-$MLU-FLAG-CSS-VARS: 1 !default;
-$MLU-FLAG-FLEX-PE: false !default;
-
 // General
 //
 // Settings that affect the work of the mixins, functions and all toolkit.
@@ -489,9 +467,8 @@ $MLU-FLAG-FLEX-PE: false !default;
 // $mlu-su-cf = 4 - value of [space unit](section-concepts.html#kssref-concepts-su). Use this factor to change su and for calculations.
 // $mlu-su = 4px - space unit in px. Depends on `$mlu-su-cf`. Use this variable to set the values in px.
 // $mlu-base-font-size = $MLU-BROWSER-FONT-SIZE - base font size on website. Is used for `rems` fallback in [row elements](section-core-blocks.html#kssref-core-blocks-row) and in [mlu-px2em](section-sass-tools.html#kssref-sass-tools-functions-px2em) default font size.
-// $mlu-grid-default-gtr = 16px - default gutter on large width screen. Used as fallback for [--mlu-gg](section-core-styles.html#kssref-core-styles-css_vars).
 // $mlu-main-directions - Map with directions for css properties and values generation. The keys are the first letters of the directions, and the values are directions. <br> Example: `("t": top)`.
-// $mlu-grid-gutter-fallback = 1.5% - Fallback for grid gutter's width if CSS `calc()` not supported
+// $mlu-breakpoints - map with main breakpoints. First breakpoint is `$mlu-bp-sm`.
 //
 // Styleguide: sass-tools.settings.general
 
@@ -503,10 +480,6 @@ $mlu-su: $mlu-su-cf * 1px;
 
 $mlu-base-font-size: $MLU-BROWSER-FONT-SIZE !default;
 
-$mlu-grid-default-gtr: ($mlu-su * 4) !default;
-
-$mlu-grid-gutter-fallback: 1.5% !default;
-
 $mlu-main-directions: (
 	"t": top,
 	"r": right,
@@ -514,158 +487,17 @@ $mlu-main-directions: (
 	"l": left,
 ) !default;
 
-// Blocks
-//
-// Settings affecting the styles of the core blocks.
-//
-// $mlu-wrapper-max-width = 1200px - [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper) `max-width`.
-// $mlu-debug-col-color = #d15 - column color of [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block.
-// $mlu-debug-gutter-color = #336 - gutter color of [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block.
-//
-// Styleguide: sass-tools.settings.blocks
-
-$mlu-wrapper-max-width: 1200px !default;
-
-$mlu-debug-col-color: #d15 !default;
-$mlu-debug-gutter-color: #336 !default;
-
-// Utilities
-//
-// Settings affecting the values and generation of the core utilities.
-//
-// $mlu-Maw-fx0 = 288px - fixed width for cards. This is value for [Maw-fx0](section-core-utils.html#kssref-core-utils-bxz-maw) utility.
-// $mlu-My-range = 4 - count of [Mt](section-core-utils.html#kssref-core-utils-margin) and [Mb](section-core-utils.html#kssref-core-utils-margin-mb) utilities.
-// $mlu-P-range = 4 - count of [P](section-core-utils.html#kssref-core-utils-padding) utilities.
-// $mlu--Gg-range = 5 - number of [-Gg](section-core-utils.html#kssref-core-utils-custom-gg) utility values in `su`.
-// $mlu-Z-range = 4 - [z-index](section-core-utils.html#kssref-core-utils-pos-z) range. Counted from zero.
-// $mlu-Z-max = 9999 - `z-index` max value.
-// $mlu-Ord-range = 4 - [order](section-core-utils.html#kssref-core-utils-flex) range. Counted from -1.
-// $mlu-Ff-ss0 - sans serif font stack contains default fonts on different OS.
-// $mlu-Ff-m0 - monospace font stack contains default fonts on different OS.
-// $mlu-Trsdu-df0 = 0.3s - default [transition](section-core-utils.html#kssref-core-utils-anim) duration.
-// $mlu-util-states-psd-cls - map with abbreviations of pseudo-classes for utilities.
-// $mlu-util-states-psd-elm - map with pseudo-elements abbreviations for utilities.
-// $mlu-util-states - map with abbreviations of utility state names. Maps of pseudo-classes and pseudo-elements merge into it.
-//
-// Styleguide: sass-tools.settings.utils
-
-$mlu--Gg-range: 5 !default;
-
-$mlu-Z-max: 9999 !default;
-$mlu-Z-range: 4 !default;
-
-$mlu-Maw-fx0: 288px !default;
-
-$mlu-My-range: 4 !default;
-
-$mlu-P-range: 4 !default;
-
-$mlu-Ord-range: 4 !default;
-
-// stylelint-disable
-$mlu-Ff-ss0: (
-	-apple-system,
-	BlinkMacSystemFont,
-	"Segoe UI",
-	Roboto,
-	Oxygen,
-	Cantarell,
-	Ubuntu,
-	"Fira Sans",
-	"Droid Sans",
-	"Helvetica Neue",
-	Arial,
-	sans-serif
-) !default;
-
-$mlu-Ff-m0: (
-	SFMono-Regular,
-	Menlo,
-	Monaco,
-	Consolas,
-	"Liberation Mono",
-	"Courier New",
-	monospace
-) !default;
-// stylelint-enable
-
-$mlu-Trsdu-df0: 0.3s !default;
-
-// Maps with utilities states
-//
-// ```scss
-//$mlu-util-states-psd-cls: (
-//		"h": "hover",
-//		"f": "focus",
-//		"fw": "focus-within",
-//		"h-f": ("hover", "focus"),
-//		"a": "active",
-//		"vl": "valid",
-//		"iv": "invalid",
-//);
-//
-//$mlu-util-states-psd-elm: (
-//		"bf": "before",
-//		"af": "after",
-//		"fln": "first-line",
-//		"flt": "first-letter",
-//);
-//
-//$mlu-util-states: (
-//		"nojs": null,
-//);
-// ```
-//
-// Styleguide: sass-tools.settings.utils.states
-
-$mlu-util-states-psd-cls: (
-	"h": "hover",
-	"f": "focus",
-	"fw": "focus-within",
-	"a": "active",
-	"vl": "valid",
-	"iv": "invalid",
-	"h-f": ("hover", "focus"),
-) !default;
-
-$mlu-util-states-psd-elm: (
-	"bf": "before",
-	"af": "after",
-	"fln": "first-line",
-	"flt": "first-letter",
-) !default;
-
-$mlu-util-states: (
-	"nojs": null,
-) !default;
-
-$mlu-util-states: map.merge($mlu-util-states, $mlu-util-states-psd-cls);
-
-$mlu-util-states: map.merge($mlu-util-states, $mlu-util-states-psd-elm);
-
-// Grid system
-//
-// Settings that affect the work of grid system.
-//
-// $mlu-grid-default-cols = 12 - default columns count on large width screen (>960px).
-// $mlu-breakpoints - map with main breakpoints. First breakpoint is `$mlu-bp-sm`.
-// $mlu-grid-cols - columls count on breakpoints.
-// $mlu-grid-cols-xs - columls count on `$mlu-bp-xs` (without breakpoints).
-// $mlu-grid-gutters - map with grid gutters on breakpoints.
-//
-// Styleguide: sass-tools.settings.grid
-
 // Breakpoints
 //
-// Name, value and columns count on breakpoint.
+// Breakpoint names and values.
 //
-// $mlu-bp-xs = 0 - `xs`, 4
-// $mlu-bp-sm = 520px - `sm`, 4
-// $mlu-bp-md = 760px - `md`, 12
-// $mlu-bp-lg = 960px - `lg`, 12
-// $mlu-bp-xl = 1168px - `xl`, 12
+// $mlu-bp-xs = 0 - `xs`
+// $mlu-bp-sm = 520px - `sm`
+// $mlu-bp-md = 760px - `md`
+// $mlu-bp-lg = 960px - `lg`
+// $mlu-bp-xl = 1168px - `xl`
 //
-// Styleguide: sass-tools.settings.grid.breakpoints
+// Styleguide: sass-tools.settings.general.breakpoints
 
 $mlu-bp-xs: "xs" !default;
 $mlu-bp-sm: "sm" !default;
@@ -678,65 +510,4 @@ $mlu-breakpoints: (
 	$mlu-bp-md: 760px,
 	$mlu-bp-lg: 960px,
 	$mlu-bp-xl: 1168px,
-) !default;
-
-$mlu-grid-default-cols: 12 !default;
-
-$mlu-grid-cols-xs: 4 !default;
-
-$mlu-grid-cols: (
-	$mlu-bp-sm: 4,
-	$mlu-bp-md: 12,
-	$mlu-bp-lg: $mlu-grid-default-cols,
-	$mlu-bp-xl: $mlu-grid-default-cols,
-) !default;
-
-// Gutters
-//
-// Gutters value on breakpoints. Gutter on `xs` equal gutter on `sm`.
-//
-// $mlu-gtr-sm - 12px
-// $mlu-gtr-md - 12px
-// $mlu-gtr-lg - 16px
-// $mlu-gtr-xl - 16px
-//
-// Styleguide: sass-tools.settings.grid.gutters
-
-$mlu-gtr-sm: ($mlu-su * 3) !default;
-$mlu-gtr-md: $mlu-gtr-sm !default;
-$mlu-gtr-lg: $mlu-grid-default-gtr !default;
-$mlu-gtr-xl: $mlu-gtr-lg !default;
-
-$mlu-grid-gutters: (
-	$mlu-bp-sm: $mlu-gtr-sm,
-	$mlu-bp-md: $mlu-gtr-md,
-	$mlu-bp-lg: $mlu-gtr-lg,
-	$mlu-bp-xl: $mlu-gtr-xl,
-) !default;
-
-// CSS variables
-//
-// Settings of global [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) which used in MLUT.
-//
-// Styleguide: sass-tools.settings.css_vars
-
-// Names
-//
-// In addition to variables, the names of custom properties are contained in the map `$mlu-css-vars`.
-// Below are the names of the variables, the corresponding keys in the map and names of custom properties.
-//
-// $var-gg = --mlu-gg - `gg`.
-// $var-gg-rem = --mlu-gg-rem - `gg-rem`.
-// $var-grid-cols = --mlu-grid-cols - `grid-cols`.
-//
-// Styleguide: sass-tools.settings.css_vars.names
-
-$var-gg: "--mlu-gg" !default;
-$var-gg-rem: "--mlu-gg-rem" !default;
-$var-grid-cols: "--mlu-grid-cols" !default;
-
-$mlu-css-vars: (
-	"gg": $var-gg,
-	"gg-rem": $var-gg-rem,
-	"grid-cols": $var-grid-cols,
 ) !default;

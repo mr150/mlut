@@ -1,0 +1,14 @@
+// Blocks
+//
+// Settings affecting the styles of the core blocks.
+//
+// $mlu-wrapper-max-width = 1200px - [wrapper](section-core-blocks.html#kssref-core-blocks-wrapper) `max-width`.
+// $mlu-debug-col-color = #d15 - column color of [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block.
+// $mlu-debug-gutter-color = #336 - gutter color of [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block.
+//
+// Styleguide: sass-tools.settings.blocks
+
+$mlu-wrapper-max-width: 1200px !default;
+
+$mlu-debug-col-color: #d15 !default;
+$mlu-debug-gutter-color: #336 !default;
