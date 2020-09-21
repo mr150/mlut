@@ -77,3 +77,21 @@
 .kss-parameters {
 	max-width: 872px;
 }
+
+.kss-description table:not([class]) td,
+.kss-description table:not([class]) th {
+	padding: 6px;
+	border: 1px solid #dfe2e5;
+  margin-bottom: 24px;
+}
+
+@media (min-width:520px) {
+	.kss-description table:not([class]) td,
+	.kss-description table:not([class]) th {
+		padding: 8px 12px;
+	}
+}
+
+.kss-description table:not([class]) {
+  margin-bottom: 24px;
+}
