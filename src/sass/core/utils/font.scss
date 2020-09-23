@@ -1,3 +1,5 @@
+@use "../../tools" as mlu;
+
 /*
 Font
 
@@ -27,15 +29,15 @@ Styleguide: core-utils.f.mfz
 }
 
 .Ff-ss0 {
-	font-family: $mlu-Ff-ss0;
+	font-family: mlu.$Ff-ss0;
 }
 
-@include mlu-mk-Fw((
+@include mlu.mk-Fw((
 	400: 400,
 	700: 700,
 ));
 
-@include mlu-mk-util("Fs", "font-style", (
+@include mlu.mk-util("Fs", "font-style", (
 	"": italic,
 	"n": normal,
 ));

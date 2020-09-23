@@ -1,7 +1,9 @@
+@use "../../tools" as mlu;
+
 /*
 Mixins-wrappers
 
-Additional [mixins wrappers](section-sass-tools.html#kssref-sass-tools-mixins-util_wrappers) over mk-util to create utilities. Note that the naming for these mixins is the same as for the rest of the similar ones - their names begin with `mlu-mk-`.
+Additional [mixins wrappers](section-sass-tools.html#kssref-sass-tools-mixins-util_wrappers) over mk-util to create utilities. Note that the naming for these mixins is the same as for the rest of the similar ones - their names begin with `mlu.mk-`.
 
 * Typografy: `Lts`, `Tsh`
 * Visual: `Bxsh`, `Ol`
@@ -12,22 +14,22 @@ Weight: 0
 Styleguide: sass_modules.core_extend.mixins
 */
 
-@mixin mlu-mk-Bxsh($map, $bp: null, $states: null) {
-	@include mlu-mk-util("Bxsh", "box-shadow", $map, $bp, $states);
+@mixin mk-Bxsh($map, $bp: null, $states: null) {
+	@include mlu.mk-util("Bxsh", "box-shadow", $map, $bp, $states);
 }
 
-@mixin mlu-mk-Lts($map, $bp: null, $states: null) {
-	@include mlu-mk-util("Lts", "letter-spacing", $map, $bp, $states);
+@mixin mk-Lts($map, $bp: null, $states: null) {
+	@include mlu.mk-util("Lts", "letter-spacing", $map, $bp, $states);
 }
 
-@mixin mlu-mk-Trs($map, $bp: null, $states: null) {
-	@include mlu-mk-util("Trs", "transition", $map, $bp, $states);
+@mixin mk-Trs($map, $bp: null, $states: null) {
+	@include mlu.mk-util("Trs", "transition", $map, $bp, $states);
 }
 
-@mixin mlu-mk-Tsh($map, $bp: null, $states: null) {
-	@include mlu-mk-util("Tsh", "text-shadow", $map, $bp, $states);
+@mixin mk-Tsh($map, $bp: null, $states: null) {
+	@include mlu.mk-util("Tsh", "text-shadow", $map, $bp, $states);
 }
 
-@mixin mlu-mk-Ol($map, $bp: null, $states: null) {
-	@include mlu-mk-util("Ol", "outline", $map, $bp, $states);
+@mixin mk-Ol($map, $bp: null, $states: null) {
+	@include mlu.mk-util("Ol", "outline", $map, $bp, $states);
 }

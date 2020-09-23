@@ -1,3 +1,5 @@
+@use "tools" as mlu;
+
 /*
 Wrapper
 
@@ -9,8 +11,8 @@ Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `var()`
 ```scss
 padding-right: 16px;
 padding-left: 16px;
-padding-right: var(--mlu-gg);
-padding-left: var(--mlu-gg);
+padding-right: var(--mlu.gg);
+padding-left: var(--mlu.gg);
 ```
 
 Markup: ../../../docs/examples/core-blocks/wrapper/wrapper.html
@@ -20,7 +22,7 @@ Styleguide: core-blocks.wrapper
 
 .wrapper {
 	display: block;
-	max-width: $mlu-wrapper-max-width;
+	max-width: mlu.$wrapper-max-width;
 	margin: 0 auto;
-	@include mlu-mk-gtr($type: "padding");
+	@include mlu.mk-gtr($type: "padding");
 }

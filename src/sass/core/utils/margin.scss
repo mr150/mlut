@@ -1,4 +1,7 @@
 @use "sass:map";
+
+@use "../../tools" as mlu;
+
 /*
 Margin
 
@@ -61,17 +64,17 @@ Markup: ../../../docs/examples/core-utils/margin/mx.html
 Styleguide: core-utils.margin.mx
 */
 
-$mlu-M-map: (
+$M-map: (
 	"xy0": 0,
 	"xy-a": auto,
 	"xy-i": inherit,
 );
 
-@each $key, $value in $mlu-main-directions {
-	$mlu-M-map: map.merge($mlu-M-map, ($key + "0": 0));
+@each $key, $value in mlu.$main-directions {
+	$M-map: map.merge($M-map, ($key + "0": 0));
 }
 
-$mlu-M-map: map.merge($mlu-M-map,
+$M-map: map.merge($M-map,
 (
 	"b0_bp": 0,
 	"x0_bp": 0,
@@ -79,13 +82,13 @@ $mlu-M-map: map.merge($mlu-M-map,
 	"x-a_all": auto,
 ));
 
-@for $i from $mlu-My-range through 1 {
+@for $i from mlu.$My-range through 1 {
 	$value: $i * 1gg;
-	$mlu-M-map: map.merge($mlu-M-map, ("t" + $value: $value));
-	$mlu-M-map: map.merge($mlu-M-map, ("b" + $value: $value));
+	$M-map: map.merge($M-map, ("t" + $value: $value));
+	$M-map: map.merge($M-map, ("b" + $value: $value));
 }
 
-$mlu-M-map: map.merge($mlu-M-map,
+$M-map: map.merge($M-map,
 (
 	"b-2gg": -2gg,
 	"b1su": 1su,
@@ -103,4 +106,4 @@ $mlu-M-map: map.merge($mlu-M-map,
 	"l2gg": 2gg,
 ));
 
-@include mlu-mk-M($mlu-M-map);
+@include mlu.mk-M($M-map);

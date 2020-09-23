@@ -4,8 +4,12 @@
 @use "sass:math";
 @use "sass:string";
 
-$-su-rem: mlu-px2rem($mlu-su);
-$-gtr-sm-rem: mlu-px2rem($mlu-gtr-sm);
+@use "forward-tools" as mlu;
+@use "general" as mgen;
+@use "grid" as mgs;
+
+$-su-rem: mlu.px2rem(mlu.$su);
+$-gtr-sm-rem: mlu.px2rem(mlu.$gtr-sm);
 
 /*
 Utilities
@@ -15,12 +19,12 @@ Mixins for creating utilities and working with them.
 Styleguide: sass-tools.mixins.utils
 */
 
-// mlu-bp-all
+// bp-all
 //
 // Generates the CSS rule on breakpoints, adding the name of the breakpoint to the selector, inside the corresponding media query.
 //
 // ```scss
-//@include mlu-bp-all(".Bdw1") {
+//@include bp-all(".Bdw1") {
 //		border-width: 1px;
 //}
 // ```
@@ -57,7 +61,7 @@ Styleguide: sass-tools.mixins.utils
 // You can also use mixin inside the rule. This will work as well as the example above:
 // ```scss
 //.Bdw1 {
-//		@include mlu-bp-all() {
+//		@include bp-all() {
 //			border-width: 1px;
 //		}
 //}
@@ -68,7 +72,7 @@ Styleguide: sass-tools.mixins.utils
 //
 // Styleguide: sass-tools.mixins.utils.bp_all
 
-@mixin mlu-bp-all($selector: &, $xs: 1) {
+@mixin bp-all($selector: &, $xs: 1) {
 	@if not $selector {
 		@error "'$selector' argument must not be null.";
 	}
@@ -80,8 +84,8 @@ Styleguide: sass-tools.mixins.utils
 			}
 		}
 
-		@each $key, $value in $mlu-breakpoints {
-			@include mlu-bpm($key) {
+		@each $key, $value in mlu.$breakpoints {
+			@include mgen.bpm($key) {
 				#{$selector}_#{$key} {
 					@content;
 				}
@@ -90,12 +94,12 @@ Styleguide: sass-tools.mixins.utils
 	}
 }
 
-// mlu-mk-state
+// mk-state
 //
-// Generates values for utilities in various [states](section-concepts.html#kssref-concepts-utility-states). Names and values of states are set in the [settings](#kssref-sass-tools-settings-utils-states). Usually this mixin is not used separately because it is called inside [mlu-mk-util](#kssref-sass-tools-mixins-mk_util).
+// Generates values for utilities in various [states](section-concepts.html#kssref-concepts-utility-states). Names and values of states are set in the [settings](#kssref-sass-tools-settings-utils-states). Usually this mixin is not used separately because it is called inside [mk-util](#kssref-sass-tools-mixins-mk_util).
 //
 // ```scss
-//@include mlu-mk-state(".Bgc-mn0", ("h")) {
+//@include mk-state(".Bgc-mn0", ("h")) {
 //		background-color: #60f;
 //}
 // ```
@@ -111,12 +115,12 @@ Styleguide: sass-tools.mixins.utils
 // ```
 //
 // $selector = & - selector of CSS rule. Can be `string` or `&`.
-// $states = map-keys($mlu-util-states) -  list of state names to be generated.
+// $states = map-keys(settings.$util-states) -  list of state names to be generated.
 // $no-state = 1 - number flag. If equal to 1, then a value without state will be generated as in the example above.
 //
 // Styleguide: sass-tools.mixins.utils.mk_state
 
-@mixin mlu-mk-state($selector: &, $states: map.keys($mlu-util-states), $no-state: 1) {
+@mixin mk-state($selector: &, $states: map.keys(mlu.$util-states), $no-state: 1) {
 	@if not $selector {
 		@error "'$selector' argument must not be null.";
 	}
@@ -128,9 +132,9 @@ Styleguide: sass-tools.mixins.utils
 			}
 		}
 
-		$selector: mlu-check-class($selector, 1);
+		$selector: mlu.check-class($selector, 1);
 
-		@each $key, $value in $mlu-util-states {
+		@each $key, $value in mlu.$util-states {
 			@if list.index($states, $key) {
 				$prefix: "." + $key;
 
@@ -158,7 +162,7 @@ Styleguide: sass-tools.mixins.utils
 	}
 }
 
-// mlu-mk-util
+// mk-util
 //
 // Сreates utilities based on a map in which the *keys* are the values of the utilities, and the *values* are the values of the CSS properties.
 //
@@ -177,7 +181,7 @@ Styleguide: sass-tools.mixins.utils
 //		"mn1": #c05,
 //);
 //
-//@include mlu-mk-util("Bgc", "background-color", $Bgc-map);
+//@include mk-util("Bgc", "background-color", $Bgc-map);
 // ```
 // CSS
 // ```css
@@ -205,8 +209,8 @@ Styleguide: sass-tools.mixins.utils
 //
 // Styleguide: sass-tools.mixins.utils.mk_util
 
-@mixin mlu-mk-util($name, $prop, $map, $bp: false, $states: false, $direct: null) {
-	$name: mlu-check-class($name);
+@mixin mk-util($name, $prop, $map, $bp: false, $states: false, $direct: null) {
+	$name: mlu.check-class($name);
 
 	@each $key, $value in $map {
 		$bp-name: $bp;
@@ -218,38 +222,38 @@ Styleguide: sass-tools.mixins.utils
 			$util-val: string.slice($util-val, 1, $separator - 1);
 		}
 
-		$separator: if(mlu-ston($util-val), "", "-");
+		$separator: if(mlu.ston($util-val), "", "-");
 		$selector: $name + $separator + $util-val;
 
 		@if $bp-name == "all" or $bp-name == "bp" {
-			@include mlu-bp-all($selector, if($bp-name == "all", 1, 0)) {
-				@include mlu-mk-state(&, $states, if($states, 0, 1)) {
-					@include -mlu-check-util-direction($direct, $prop, $value);
+			@include bp-all($selector, if($bp-name == "all", 1, 0)) {
+				@include mk-state(&, $states, if($states, 0, 1)) {
+					@include -check-util-direction($direct, $prop, $value);
 				}
 			}
 		} @else if $bp-name {
-			@include mlu-bpm($bp-name) {
+			@include mgen.bpm($bp-name) {
 				#{$selector}_#{$bp-name} {
-					@include mlu-mk-state(&, $states, if($states, 0, 1)) {
-						@include -mlu-check-util-direction($direct, $prop, $value);
+					@include mk-state(&, $states, if($states, 0, 1)) {
+						@include -check-util-direction($direct, $prop, $value);
 					}
 				}
 			}
 		} @else {
 			#{$selector} {
-				@include mlu-mk-state(&, $states, if($states, 0, 1)) {
-					@include -mlu-check-util-direction($direct, $prop, $value);
+				@include mk-state(&, $states, if($states, 0, 1)) {
+					@include -check-util-direction($direct, $prop, $value);
 				}
 			}
 		}
 	}
 }
 
-// mlu-mk-util-directions
+// mk-util-directions
 //
 // Creates utility groups that have different directions. For example [margin](section-core-utils.html#kssref-core-utils-margin) and [padding](section-core-utils.html#kssref-core-utils-padding).
 //
-// The [mlu-mk-util](#kssref-sass-tools-mixins-mk_util) functionality is mainly used, but the map of values for creating utilities is slightly different.
+// The [mk-util](#kssref-sass-tools-mixins-mk_util) functionality is mainly used, but the map of values for creating utilities is slightly different.
 // Before the utility value, one or two letters indicate the [direction](section-concepts.html#kssref-concepts-utility-dirs). Keywords and variables are separated by a hyphen from direction. Examples: `l4su`, `xy1gg`, `t-b8_lg`.
 //
 // A mixin can create [positioning](section-core-utils.html#kssref-core-utils-pos) utilities that match the CSS properties: `top` , `right` etc. To do this, just pass the map with the data.
@@ -263,9 +267,9 @@ Styleguide: sass-tools.mixins.utils
 //		l4su: 4su,
 //);
 //
-//@include mlu-mk-util-directions($Xy-map, "P", "padding");
+//@include mk-util-directions($Xy-map, "P", "padding");
 //
-//@include mlu-mk-Xy($Xy-map);
+//@include mk-Xy($Xy-map);
 // ```
 // CSS
 // ```css
@@ -300,36 +304,36 @@ Styleguide: sass-tools.mixins.utils
 //
 // Styleguide: sass-tools.mixins.utils.mk_util_dir
 
-@mixin mlu-mk-util-directions($map, $name: null, $prop: null, $bp: null, $states: null) {
+@mixin mk-util-directions($map, $name: null, $prop: null, $bp: null, $states: null) {
 	@each $key, $value in $map {
 		@if meta.type-of($key) != "string" {
 			@error "Invalid key format '#{$key}' for '#{$name}' in map of values";
 		}
 
 		$dir: string.slice($key, 1, 1);
-		$dir-val: map.get($mlu-main-directions, $dir);
-		$util-val: if(not mlu-ston(string.slice($key, 2)), string.slice($key, 3), string.slice($key, 2));
+		$dir-val: map.get(mlu.$main-directions, $dir);
+		$util-val: if(not mlu.ston(string.slice($key, 2)), string.slice($key, 3), string.slice($key, 2));
 		$tmp-map: ($util-val: $value);
 
 		@if $dir-val {
 			@if $name {
-				@include mlu-mk-util($name + $dir, $prop + "-" + $dir-val, $tmp-map, $bp, $states, $dir);
+				@include mk-util($name + $dir, $prop + "-" + $dir-val, $tmp-map, $bp, $states, $dir);
 			} @else {
-				@include mlu-mk-util(string.to-upper-case($dir), $dir-val, $tmp-map, $bp, $states);
+				@include mk-util(string.to-upper-case($dir), $dir-val, $tmp-map, $bp, $states);
 			}
 		} @else if $dir == "x" and string.slice($key, 2, 2) == "y" {
-			$util-val: if(not mlu-ston(string.slice($key, 3)), string.slice($key, 4), string.slice($key, 3));
+			$util-val: if(not mlu.ston(string.slice($key, 3)), string.slice($key, 4), string.slice($key, 3));
 
 			@if $name {
-				@include mlu-mk-util($name, $prop, ($util-val: $value), $bp, $states);
+				@include mk-util($name, $prop, ($util-val: $value), $bp, $states);
 			} @else {
-				@include mlu-mk-util("mXy", null, ($util-val: $value), $bp, $states, "xy");
+				@include mk-util("mXy", null, ($util-val: $value), $bp, $states, "xy");
 			}
 		} @else if $dir == "x" or $dir == "y" {
 			@if $name {
-				@include mlu-mk-util($name + $dir, $prop, $tmp-map, $bp, $states, $dir);
+				@include mk-util($name + $dir, $prop, $tmp-map, $bp, $states, $dir);
 			} @else {
-				@include mlu-mk-util("m" + string.to-upper-case($dir), null, $tmp-map, $bp, $states, $dir);
+				@include mk-util("m" + string.to-upper-case($dir), null, $tmp-map, $bp, $states, $dir);
 			}
 		} @else {
 			@error "Invalid direction '#{$dir}' for '#{$name}' in map of values";
@@ -339,29 +343,29 @@ Styleguide: sass-tools.mixins.utils
 
 // Private mixin that parses combined directions and identifies positioning utilities.
 
-@mixin -mlu-check-util-direction($dir, $prop, $value) {
+@mixin -check-util-direction($dir, $prop, $value) {
 	@if $dir == "x" {
 		$prop: if($prop, $prop + "-", "");
-		@include -mlu-parse-unit($prop + "right", $value, "r");
-		@include -mlu-parse-unit($prop + "left", $value, "l");
+		@include -parse-unit($prop + "right", $value, "r");
+		@include -parse-unit($prop + "left", $value, "l");
 	} @else if $dir == "y" {
 		$prop: if($prop, $prop + "-", "");
-		@include -mlu-parse-unit($prop + "top", $value, "t");
-		@include -mlu-parse-unit($prop + "bottom", $value, "b");
+		@include -parse-unit($prop + "top", $value, "t");
+		@include -parse-unit($prop + "bottom", $value, "b");
 	} @else if $dir == "xy" {
 		$prop: if($prop, $prop + "-", "");
-		@each $item in map.values($mlu-main-directions) {
-			@include -mlu-parse-unit($prop + $item, $value, string.slice($item, 1, 1));
+		@each $item in map.values(mlu.$main-directions) {
+			@include -parse-unit($prop + $item, $value, string.slice($item, 1, 1));
 		}
 	} @else {
-		@include -mlu-parse-unit($prop, $value, $dir);
+		@include -parse-unit($prop, $value, $dir);
 	}
 }
 
 // Private mixin that parses custom units based on directions.
 
-@mixin -mlu-parse-unit($prop, $value, $dir) {
-	$coef-val: mlu-ston($value + "");
+@mixin -parse-unit($prop, $value, $dir) {
+	$coef-val: mlu.ston($value + "");
 	$dir: if($dir, $dir, "xy");
 
 	@if meta.type-of($value) == "number" and math.unit($value) == "gg" {
@@ -374,12 +378,12 @@ Styleguide: sass-tools.mixins.utils
 			$dir: "xy";
 		}
 
-		@include mlu-mk-gtr($tmp-val, $type: $prop, $direct: $dir, $coef: $coef-val);
+		@include mgs.mk-gtr($tmp-val, $type: $prop, $direct: $dir, $coef: $coef-val);
 	} @else if meta.type-of($value) == "number" and math.unit($value) == "su" {
 		@if $dir == "xy" {
-			@include -mlu-mk-gtr-xy($prop, $mlu-su * $coef-val, $-su-rem * $coef-val);
+			@include mgs.mk-gtr-xy($prop, mlu.$su * $coef-val, $-su-rem * $coef-val);
 		} @else {
-			$tmp-val: if($dir == "t" or $dir == "b", $-su-rem, $mlu-su);
+			$tmp-val: if($dir == "t" or $dir == "b", $-su-rem, mlu.$su);
 			#{$prop}: $tmp-val * $coef-val;
 		}
 	} @else {

@@ -1,3 +1,5 @@
+@use "../../tools" as mlu;
+
 /*
 Animation
 
@@ -8,5 +10,5 @@ Styleguide: core-utils.anim
 
 .Trs-all {
 	/* autoprefixer: off */
-	transition: all $mlu-Trsdu-df0;
+	transition: all mlu.$Trsdu-df0;
 }

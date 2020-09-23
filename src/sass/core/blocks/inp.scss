@@ -1,3 +1,5 @@
+@use "../../tools" as mlu;
+
 /*
 Inp
 
@@ -13,6 +15,6 @@ Styleguide: core-blocks.inp
 	box-sizing: border-box;
 	margin: 0px;
 	font-family: inherit;
-	font-size: mlu-px2rem($mlu-base-font-size);
+	font-size: mlu.px2rem(mlu.$base-font-size);
 	border: 0;
 }

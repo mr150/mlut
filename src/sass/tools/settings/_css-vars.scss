@@ -19,7 +19,7 @@ $var-gg: "--mlu-gg" !default;
 $var-gg-rem: "--mlu-gg-rem" !default;
 $var-grid-cols: "--mlu-grid-cols" !default;
 
-$mlu-css-vars: (
+$css-vars: (
 	"gg": $var-gg,
 	"gg-rem": $var-gg-rem,
 	"grid-cols": $var-grid-cols,

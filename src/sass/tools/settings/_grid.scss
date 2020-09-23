@@ -1,3 +1,5 @@
+@use "general" as mlu;
+
 // Grid system
 //
 // Settings that affect the work of grid system.
@@ -11,13 +13,13 @@
 //
 // Styleguide: sass-tools.settings.grid
 
-$mlu-grid-default-cols: 12 !default;
+$grid-default-cols: 12 !default;
 
-$mlu-grid-cols-xs: 4 !default;
+$grid-cols-xs: 4 !default;
 
-$mlu-grid-default-gtr: ($mlu-su * 4) !default;
+$grid-default-gtr: (mlu.$su * 4) !default;
 
-$mlu-grid-gutter-fallback: 1.5% !default;
+$grid-gutter-fallback: 1.5% !default;
 
 /*
 Columns and gutters
@@ -35,11 +37,11 @@ xl | 12 | 16px
 Styleguide: sass-tools.settings.grid.cols
 */
 
-$mlu-grid-cols: (
-	$mlu-bp-sm: 4,
-	$mlu-bp-md: 12,
-	$mlu-bp-lg: $mlu-grid-default-cols,
-	$mlu-bp-xl: $mlu-grid-default-cols,
+$grid-cols: (
+	mlu.$bp-sm: 4,
+	mlu.$bp-md: 12,
+	mlu.$bp-lg: $grid-default-cols,
+	mlu.$bp-xl: $grid-default-cols,
 ) !default;
 
 // Gutters
@@ -53,14 +55,14 @@ $mlu-grid-cols: (
 //
 // Styleguide: sass-tools.settings.grid.gtr
 
-$mlu-gtr-sm: ($mlu-su * 3) !default;
-$mlu-gtr-md: $mlu-gtr-sm !default;
-$mlu-gtr-lg: $mlu-grid-default-gtr !default;
-$mlu-gtr-xl: $mlu-gtr-lg !default;
+$gtr-sm: (mlu.$su * 3) !default;
+$gtr-md: $gtr-sm !default;
+$gtr-lg: $grid-default-gtr !default;
+$gtr-xl: $gtr-lg !default;
 
-$mlu-grid-gutters: (
-	$mlu-bp-sm: $mlu-gtr-sm,
-	$mlu-bp-md: $mlu-gtr-md,
-	$mlu-bp-lg: $mlu-gtr-lg,
-	$mlu-bp-xl: $mlu-gtr-xl,
+$grid-gutters: (
+	mlu.$bp-sm: $gtr-sm,
+	mlu.$bp-md: $gtr-md,
+	mlu.$bp-lg: $gtr-lg,
+	mlu.$bp-xl: $gtr-xl,
 ) !default;

@@ -20,21 +20,21 @@
 //
 // Styleguide: sass-tools.settings.utils
 
-$mlu--Gg-range: 5 !default;
+$cGg-range: 5 !default;
 
-$mlu-Z-max: 9999 !default;
-$mlu-Z-range: 4 !default;
+$Z-max: 9999 !default;
+$Z-range: 4 !default;
 
-$mlu-Maw-fx0: 288px !default;
+$Maw-fx0: 288px !default;
 
-$mlu-My-range: 4 !default;
+$My-range: 4 !default;
 
-$mlu-P-range: 4 !default;
+$P-range: 4 !default;
 
-$mlu-Ord-range: 4 !default;
+$Ord-range: 4 !default;
 
 // stylelint-disable
-$mlu-Ff-ss0: (
+$Ff-ss0: (
 	-apple-system,
 	BlinkMacSystemFont,
 	"Segoe UI",
@@ -49,7 +49,7 @@ $mlu-Ff-ss0: (
 	sans-serif
 ) !default;
 
-$mlu-Ff-m0: (
+$Ff-m0: (
 	SFMono-Regular,
 	Menlo,
 	Monaco,
@@ -60,7 +60,7 @@ $mlu-Ff-m0: (
 ) !default;
 // stylelint-enable
 
-$mlu-Trsdu-df0: 0.3s !default;
+$Trsdu-df0: 0.3s !default;
 
 // Maps with utilities states
 //
@@ -89,7 +89,7 @@ $mlu-Trsdu-df0: 0.3s !default;
 //
 // Styleguide: sass-tools.settings.utils.states
 
-$mlu-util-states-psd-cls: (
+$util-states-psd-cls: (
 	"h": "hover",
 	"f": "focus",
 	"fw": "focus-within",
@@ -99,17 +99,17 @@ $mlu-util-states-psd-cls: (
 	"h-f": ("hover", "focus"),
 ) !default;
 
-$mlu-util-states-psd-elm: (
+$util-states-psd-elm: (
 	"bf": "before",
 	"af": "after",
 	"fln": "first-line",
 	"flt": "first-letter",
 ) !default;
 
-$mlu-util-states: (
+$util-states: (
 	"nojs": null,
 ) !default;
 
-$mlu-util-states: map.merge($mlu-util-states, $mlu-util-states-psd-cls);
+$util-states: map.merge($util-states, $util-states-psd-cls);
 
-$mlu-util-states: map.merge($mlu-util-states, $mlu-util-states-psd-elm);
+$util-states: map.merge($util-states, $util-states-psd-elm);

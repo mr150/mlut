@@ -1,9 +1,11 @@
+@use "../../tools" as mlu;
+
 /*
 Row
 
 Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-bxz-d), you can change the layout technology to flexbox.
 
-if the [$mlu-flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 2, then the styles for correct work of layouts which using inline-blocks will be disabled.
+if the [mlu.$flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 2, then the styles for correct work of layouts which using inline-blocks will be disabled.
 
 Parts of the layout within a `row` are created using the elements:
 * [row__col](#kssref-core-blocks-row-row__col)
@@ -11,7 +13,7 @@ Parts of the layout within a `row` are created using the elements:
 
 `Rows` can be put into each other an unlimited number of times.
 
-`Row` contains CSS counter named `mlu-row-item`.
+`Row` contains CSS counter named `mlu.row-item`.
 
 Markup: ../../../docs/examples/core-blocks/row/row.html
 
@@ -28,23 +30,23 @@ If `var()` is not supported by the browser, then fallback are provided:
 ```scss
 margin-right: 16px;
 margin-left: 16px;
-margin-right: var(--mlu-gg);
-margin-left: var(--mlu-gg);
+margin-right: var(--mlu.gg);
+margin-left: var(--mlu.gg);
 margin-bottom: 2rem;
-margin-bottom: calc(var(--mlu-gg-rem) * 2);
+margin-bottom: calc(var(--mlu.gg-rem) * 2);
 ```
-similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$mlu-flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 1.
+similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [mlu.$flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 1.
 
-The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-default-gtr`.
+The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `mlu.$grid-default-gtr`.
 
 Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row). The formulas for calculating the width and offset for the column are stored in the custom properties. In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
 ```scss
---gc-rule: calc((var(--gc) - 0.0001) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
---mgc-rule: calc((var(--mgc) - 0.0001) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
+--gc-rule: calc((var(--gc) - 0.0001) / var(--mlu.grid-cols) * 100% - var(--gc-diff) * 2);
+--mgc-rule: calc((var(--mgc) - 0.0001) / var(--mlu.grid-cols) * 100% + var(--gc-diff));
 ```
 `--gc` or `--mgc` is the value of the width or offset in the grid columns. This is a custom property of the utility.<br>
 `(var(--gc) - 0.0001)` - fix for calc() [bug](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/15637241/) in Edge 16-18.<br>
-`--mlu-grid-cols` - the number of columns in the grid system. This is a [global](section-core-styles.html#kssref-core-styles-css_vars) custom property that can be changed on any DOM node.<br>
+`--mlu.grid-cols` - the number of columns in the grid system. This is a [global](section-core-styles.html#kssref-core-styles-css_vars) custom property that can be changed on any DOM node.<br>
 `--gc-diff` - variable is equal to the gutter if the gutter at the columns is created using margin. In `row__col` is equal 1gg.<br>
 Some of these variables can be changed using [custom utilities](section-core-utils.html#kssref-core-utils-custom).
 
@@ -197,14 +199,14 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 */
 
 .row {
-	@include mlu-row;
+	@include mlu.row;
 }
 
 .row__col,
 .row__item {
 	--gc-diff: 0px;
-	--gc-rule: calc((var(--gc) - 0.0001) / var(#{$var-grid-cols}) * 100% - var(--gc-diff) * 2);
-	--mgc-rule: calc((var(--mgc) - 0.0001) / var(#{$var-grid-cols}) * 100% + var(--gc-diff));
+	--gc-rule: calc((var(--gc) - 0.0001) / var(#{mlu.$var-grid-cols}) * 100% - var(--gc-diff) * 2);
+	--mgc-rule: calc((var(--mgc) - 0.0001) / var(#{mlu.$var-grid-cols}) * 100% + var(--gc-diff));
 
 	position: relative;
 	display: inline-block;
@@ -212,11 +214,11 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	box-sizing: border-box;
 	vertical-align: top;
 
-	@if $mlu-flag-css-vars != 2 {
-		font-size: $mlu-base-font-size;
-		font-size: mlu-px2rem($mlu-base-font-size);
+	@if mlu.$flag-css-vars != 2 {
+		font-size: mlu.$base-font-size;
+		font-size: mlu.px2rem(mlu.$base-font-size);
 
-		@if $mlu-flag-flex-pe {
+		@if mlu.$flag-flex-pe {
 			text-align: left;
 			white-space: normal;
 			direction: ltr;
@@ -237,12 +239,12 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 }
 
 .row__col {
-	--gc-diff: var(#{$var-gg});
+	--gc-diff: var(#{mlu.$var-gg});
 
-	@include mlu-W(12gc);
+	@include mlu.W(12gc);
 
-	@include mlu-mk-gtr();
-	@include mlu-mk-gtr(mlu-px2rem($mlu-gtr-sm), $direct: "b", $coef: 2);
+	@include mlu.mk-gtr();
+	@include mlu.mk-gtr(mlu.px2rem(mlu.$gtr-sm), $direct: "b", $coef: 2);
 
 	&.row {
 		margin-bottom: 0px;

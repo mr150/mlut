@@ -1,3 +1,5 @@
+@use "../../tools" as mlu;
+
 /*
 Btn
 
@@ -13,7 +15,7 @@ Styleguide: core-blocks.btn
 	box-sizing: border-box;
 	margin: 0;
 	font-family: inherit;
-	font-size: mlu-px2rem($mlu-base-font-size);
+	font-size: mlu.px2rem(mlu.$base-font-size);
 	line-height: normal;
 	text-align: center;
 	text-decoration: none;

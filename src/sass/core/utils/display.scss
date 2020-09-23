@@ -1,3 +1,5 @@
+@use "../../tools" as mlu;
+
 /*
 D
 
@@ -32,7 +34,7 @@ mD-if - `D-if` with `Fxw-w`.
 Styleguide: core-utils.bxz.md
 */
 
-$mlu-D-map: (
+$D-map: (
 	"_all": block,
 	"ib_all": inline-block,
 	"tb": table,
@@ -45,7 +47,7 @@ $mlu-D-map: (
 	"n_all": none,
 );
 
-@include mlu-mk-util("D", "display", $mlu-D-map);
+@include mlu.mk-util("D", "display", $D-map);
 
 .mD-f {
 	display: flex;

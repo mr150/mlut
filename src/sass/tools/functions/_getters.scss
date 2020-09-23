@@ -1,6 +1,8 @@
 @use "sass:list";
 @use "sass:map";
 
+@use "../settings" as mlu;
+
 /*
 Getters
 
@@ -21,9 +23,9 @@ Styleguide: sass-tools.functions.getters
 //
 // Styleguide: sass-tools.functions.getters.bp
 
-@function mlu-bp($name, $error-handler: 1) {
-	@if map.has-key($mlu-breakpoints, $name) or $error-handler == 0 {
-		@return map.get($mlu-breakpoints, $name);
+@function bp($name, $error-handler: 1) {
+	@if map.has-key(mlu.$breakpoints, $name) or $error-handler == 0 {
+		@return map.get(mlu.$breakpoints, $name);
 	}
 
 	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-breakpoints";
@@ -42,15 +44,15 @@ Styleguide: sass-tools.functions.getters
 //
 // Styleguide: sass-tools.functions.getters.bp_next
 
-@function mlu-bp-next($bp: 0, $data-type: "value") {
-	@if $bp == 0 or map.has-key($mlu-breakpoints, $bp) {
-		$bp-keys: map.keys($mlu-breakpoints);
+@function bp-next($bp: 0, $data-type: "value") {
+	@if $bp == 0 or map.has-key(mlu.$breakpoints, $bp) {
+		$bp-keys: map.keys(mlu.$breakpoints);
 		$bp-index: if($bp != 0, list.index($bp-keys, $bp), 0);
 
 		@if $data-type == "name" {
-			@return if($bp-index < list.length($bp-keys), list.nth(map.keys($mlu-breakpoints), $bp-index + 1), 0);
+			@return if($bp-index < list.length($bp-keys), list.nth(map.keys(mlu.$breakpoints), $bp-index + 1), 0);
 		} @else {
-			@return if($bp-index < list.length($bp-keys), list.nth(map.values($mlu-breakpoints), $bp-index + 1), 0);
+			@return if($bp-index < list.length($bp-keys), list.nth(map.values(mlu.$breakpoints), $bp-index + 1), 0);
 		}
 	}
 
@@ -68,8 +70,8 @@ Styleguide: sass-tools.functions.getters
 //
 // Styleguide: sass-tools.functions.getters.bp_next_name
 
-@function mlu-bp-next-name($bp: 0) {
-	@return mlu-bp-next($bp, "name");
+@function bp-next-name($bp: 0) {
+	@return bp-next($bp, "name");
 }
 
 // mlu-bp-prev
@@ -85,15 +87,15 @@ Styleguide: sass-tools.functions.getters
 //
 // Styleguide: sass-tools.functions.getters.bp_prev
 
-@function mlu-bp-prev($bp: 0, $data-type: "value") {
-	@if $bp == 0 or map.has-key($mlu-breakpoints, $bp) {
-		$bp-keys: map.keys($mlu-breakpoints);
+@function bp-prev($bp: 0, $data-type: "value") {
+	@if $bp == 0 or map.has-key(mlu.$breakpoints, $bp) {
+		$bp-keys: map.keys(mlu.$breakpoints);
 		$bp-index: if($bp != 0, list.index($bp-keys, $bp), list.length($bp-keys) + 1);
 
 		@if $data-type == "name" {
-			@return if($bp-index > 1, list.nth(map.keys($mlu-breakpoints), $bp-index - 1), 0);
+			@return if($bp-index > 1, list.nth(map.keys(mlu.$breakpoints), $bp-index - 1), 0);
 		} @else {
-			@return if($bp-index > 1, list.nth(map.values($mlu-breakpoints), $bp-index - 1), 0);
+			@return if($bp-index > 1, list.nth(map.values(mlu.$breakpoints), $bp-index - 1), 0);
 		}
 	}
 
@@ -111,8 +113,8 @@ Styleguide: sass-tools.functions.getters
 //
 // Styleguide: sass-tools.functions.getters.bp_prev_name
 
-@function mlu-bp-prev-name($bp: 0) {
-	@return mlu-bp-prev($bp, "name");
+@function bp-prev-name($bp: 0) {
+	@return bp-prev($bp, "name");
 }
 
 // mlu-grid-gtr
@@ -127,9 +129,9 @@ Styleguide: sass-tools.functions.getters
 //
 // Styleguide: sass-tools.functions.getters.grid_gtr
 
-@function mlu-grid-gtr($name, $error-handler: 1) {
-	@if map.has-key($mlu-grid-gutters, $name) or $error-handler == 0 {
-		@return map.get($mlu-grid-gutters, $name);
+@function grid-gtr($name, $error-handler: 1) {
+	@if map.has-key(mlu.$grid-gutters, $name) or $error-handler == 0 {
+		@return map.get(mlu.$grid-gutters, $name);
 	}
 
 	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-grid-gutters";
@@ -147,9 +149,9 @@ Styleguide: sass-tools.functions.getters
 //
 // Styleguide: sass-tools.functions.getters.grid_cols_count
 
-@function mlu-grid-cols-count($name, $error-handler: 1) {
-	@if map.has-key($mlu-grid-cols, $name) or $error-handler == 0 {
-		@return map.get($mlu-grid-cols, $name);
+@function grid-cols-count($name, $error-handler: 1) {
+	@if map.has-key(mlu.$grid-cols, $name) or $error-handler == 0 {
+		@return map.get(mlu.$grid-cols, $name);
 	}
 
 	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-grid-cols";
@@ -167,9 +169,9 @@ Styleguide: sass-tools.functions.getters
 //
 // Styleguide: sass-tools.functions.getters.css_var
 
-@function mlu-css-var($name, $error-handler: 1) {
-	@if map.has-key($mlu-css-vars, $name) or $error-handler == 0 {
-		@return map.get($mlu-css-vars, $name);
+@function css-var($name, $error-handler: 1) {
+	@if map.has-key(mlu.$css-vars, $name) or $error-handler == 0 {
+		@return map.get(mlu.$css-vars, $name);
 	}
 
 	@error "Invalid custom property name. '#{$name}' is not defined in $mlu-css-vars";

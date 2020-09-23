@@ -24,31 +24,31 @@
 //
 // Styleguide: sass-tools.functions.getters.utils_getters
 
-$mlu-C-map: () !default;
+$C-map: () !default;
 
-@function mlu-c($key) {
-	@if map.has-key($mlu-C-map, $key) {
-		@return map.get($mlu-C-map, $key);
+@function c($key) {
+	@if map.has-key($C-map, $key) {
+		@return map.get($C-map, $key);
 	}
 
 	@error "Invalid color name. '#{$key}' is not defined in $mlu-C-map";
 }
 
-$mlu-Fz-map: () !default;
+$Fz-map: () !default;
 
-@function mlu-fz($key) {
-	@if map.has-key($mlu-Fz-map, $key) {
-		@return map.get($mlu-Fz-map, $key);
+@function fz($key) {
+	@if map.has-key($Fz-map, $key) {
+		@return map.get($Fz-map, $key);
 	}
 
 	@error "Invalid font-size name. '#{$key}' is not defined in $mlu-Fz-map";
 }
 
-$mlu-Bgi-map: () !default;
+$Bgi-map: () !default;
 
-@function mlu-bgi($key) {
-	@if map.has-key($mlu-Bgi-map, $key) {
-		@return map.get($mlu-Bgi-map, $key);
+@function bgi($key) {
+	@if map.has-key($Bgi-map, $key) {
+		@return map.get($Bgi-map, $key);
 	}
 
 	@error "Invalid background-image name. '#{$key}' is not defined in $mlu-Bgi-map";

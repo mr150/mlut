@@ -11,15 +11,15 @@
 //
 // Styleguide: sass-tools.settings.general
 
-$mlu-browser-font-size: 16px !default;
+$browser-font-size: 16px !default;
 
-$mlu-su-cf: 4 !default;
+$su-cf: 4 !default;
 
-$mlu-su: $mlu-su-cf * 1px;
+$su: $su-cf * 1px;
 
-$mlu-base-font-size: $mlu-browser-font-size !default;
+$base-font-size: $browser-font-size !default;
 
-$mlu-main-directions: (
+$main-directions: (
 	"t": top,
 	"r": right,
 	"b": bottom,
@@ -38,15 +38,15 @@ $mlu-main-directions: (
 //
 // Styleguide: sass-tools.settings.general.breakpoints
 
-$mlu-bp-xs: "xs" !default;
-$mlu-bp-sm: "sm" !default;
-$mlu-bp-md: "md" !default;
-$mlu-bp-lg: "lg" !default;
-$mlu-bp-xl: "xl" !default;
+$bp-xs: "xs" !default;
+$bp-sm: "sm" !default;
+$bp-md: "md" !default;
+$bp-lg: "lg" !default;
+$bp-xl: "xl" !default;
 
-$mlu-breakpoints: (
-	$mlu-bp-sm: 520px,
-	$mlu-bp-md: 760px,
-	$mlu-bp-lg: 960px,
-	$mlu-bp-xl: 1168px,
+$breakpoints: (
+	$bp-sm: 520px,
+	$bp-md: 760px,
+	$bp-lg: 960px,
+	$bp-xl: 1168px,
 ) !default;

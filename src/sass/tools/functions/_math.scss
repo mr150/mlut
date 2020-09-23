@@ -1,6 +1,8 @@
 @use "sass:math";
 @use "sass:meta";
 
+@use "../settings" as mlu;
+
 /*
 Math
 
@@ -22,7 +24,7 @@ Styleguide: sass-tools.functions.math
 //
 // Styleguide: sass-tools.functions.math.decimal_round
 
-@function mlu-decimal-round($number, $pos, $type: "round") {
+@function decimal-round($number, $pos, $type: "round") {
 	$n: 1;
 
 	@if meta.type-of($number) != "number" {
@@ -60,8 +62,8 @@ Styleguide: sass-tools.functions.math
 //
 // Styleguide: sass-tools.functions.math.decimal_ceil
 
-@function mlu-decimal-ceil($number, $pos) {
-	@return mlu-decimal-round($number, $pos, "ceil");
+@function decimal-ceil($number, $pos) {
+	@return decimal-round($number, $pos, "ceil");
 }
 
 
@@ -77,8 +79,8 @@ Styleguide: sass-tools.functions.math
 //
 // Styleguide: sass-tools.functions.math.decimal_floor
 
-@function mlu-decimal-floor($number, $pos) {
-	@return mlu-decimal-round($number, $pos, "floor");
+@function decimal-floor($number, $pos) {
+	@return decimal-round($number, $pos, "floor");
 }
 
 // mlu-px2em
@@ -96,23 +98,23 @@ Styleguide: sass-tools.functions.math
 //
 // Styleguide: sass-tools.functions.math.px2em
 
-@function mlu-px2em($number, $divider: $mlu-base-font-size, $unit: "em") {
+@function px2em($number, $divider: mlu.$base-font-size, $unit: "em") {
 	@if math.is-unitless($number) {
 		@warn "Assuming #{$number} to be in pixels in mlu-px2em. Convert it to px";
-		@return mlu-px2em($number * 1px, $divider, $unit);
+		@return px2em($number * 1px, $divider, $unit);
 	} @else if math.unit($number) == $unit {
 		@return $number;
 	}
 
 	@if $unit == "rem" {
-		@return mlu-decimal-round($number / $divider, 2) * 1rem;
+		@return decimal-round($number / $divider, 2) * 1rem;
 	}
 
 	@if $unit == "no" {
-		@return mlu-decimal-round($number / $divider, 2);
+		@return decimal-round($number / $divider, 2);
 	}
 
-	@return mlu-decimal-round($number / $divider, 2) * 1em;
+	@return decimal-round($number / $divider, 2) * 1em;
 }
 
 
@@ -128,8 +130,8 @@ Styleguide: sass-tools.functions.math
 //
 // Styleguide: sass-tools.functions.math.px2rem
 
-@function mlu-px2rem($number, $divider: $mlu-browser-font-size) {
-	@return mlu-px2em($number, $divider, "rem");
+@function px2rem($number, $divider: mlu.$browser-font-size) {
+	@return px2em($number, $divider, "rem");
 }
 
 
@@ -146,6 +148,6 @@ Styleguide: sass-tools.functions.math
 //
 // Styleguide: sass-tools.functions.math.px2lh
 
-@function mlu-px2lh($number, $divider: $mlu-base-font-size) {
-	@return mlu-px2em($number, $divider, "no");
+@function px2lh($number, $divider: mlu.$base-font-size) {
+	@return px2em($number, $divider, "no");
 }

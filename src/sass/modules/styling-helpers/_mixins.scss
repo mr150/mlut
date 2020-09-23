@@ -3,6 +3,7 @@
 @use "sass:map";
 @use "sass:math";
 @use "sass:meta";
+
 /*
 Styling helpers
 
@@ -13,12 +14,12 @@ Weight: 0
 Styleguide: sass_modules.styl_help
 */
 
-// msh-restore-Ol
+// restore-Ol
 //
 // Restore default browser outline on focus state.
 // ```scss
 //.link {
-//		@include msh-restore-Ol;
+//		@include restore-Ol;
 //}
 // ```
 // CSS
@@ -31,19 +32,19 @@ Styleguide: sass_modules.styl_help
 //
 // Styleguide: sass_modules.styl_help.restore_ol
 
-@mixin msh-restore-Ol {
+@mixin restore-Ol {
 	&:focus {
 		outline: 1px dotted #212121;
 		outline: -webkit-focus-ring-color auto 5px;
 	}
 }
 
-// msh-circle
+// circle
 //
 // Generate circle.
 // ```scss
 //.block {
-//		@include msh-circle(32px, #f00);
+//		@include circle(32px, #f00);
 //}
 // ```
 // CSS
@@ -61,19 +62,19 @@ Styleguide: sass_modules.styl_help
 //
 // Styleguide: sass_modules.styl_help.circle
 
-@mixin msh-circle($diametr, $bgc: transparent) {
+@mixin circle($diametr, $bgc: transparent) {
 	width: $diametr;
 	height: $diametr;
 	background-color: $bgc;
 	border-radius: 50%;
 }
 
-// msh-triangle
+// triangle
 //
 // Generate blank for border triangle.
 // ```scss
 //.block {
-//		@include msh-triangle(14px);
+//		@include triangle(14px);
 //}
 // ```
 // CSS
@@ -92,18 +93,18 @@ Styleguide: sass_modules.styl_help
 //
 // Styleguide: sass_modules.styl_help.triangle
 
-@mixin msh-triangle($size) {
+@mixin triangle($size) {
 	width: 0px;
 	height: 0px;
 	border: $size transparent solid;
 }
 
-// msh-bgi-hexagon
+// bgi-hexagon
 //
 // Generate hexagon with CSS `linear-gradient()` in `background-image`. See demo [here](section-examples.html#kssref-examples-other-hexagon).
 // ```scss
 //.block {
-//		@include msh-bgi-hexagon($bgc: (#306, #d15));
+//		@include bgi-hexagon($bgc: (#306, #d15));
 //}
 // ```
 // CSS
@@ -131,14 +132,14 @@ Styleguide: sass_modules.styl_help
 
 // Hexagon
 //
-// Hexagon demo generated with [msh-bgi-hexagon](section-sass_modules.html#kssref-sass_modules-styl_help-bgi_hexagon) mixin.
+// Hexagon demo generated with [bgi-hexagon](section-sass_modules.html#kssref-sass_modules-styl_help-bgi_hexagon) mixin.
 //
 // Markup:
 // <div class="test-hex"></div>
 //
 // Styleguide: examples.other.hexagon
 
-@mixin msh-bgi-hexagon($edge-ang: 150deg, $edge-cs: 50%, $bgc: #000,
+@mixin bgi-hexagon($edge-ang: 150deg, $edge-cs: 50%, $bgc: #000,
 $body-size: (100% 48%), $change: false) {
 
 	@if not (meta.type-of($edge-ang) == "number" and math.unit($edge-ang) == "deg") {
@@ -183,13 +184,13 @@ $body-size: (100% 48%), $change: false) {
 		linear-gradient($edge-ang-bot, transparent $edge-cs, $last-color $edge-cs);
 }
 
-// msh-def-hover
+// def-hover
 //
 // Simple hover wich change color
 // to lighter on hover and darker on active.
 // ```scss
 //.btn--common {
-//		@include msh-def-hover(#f00);
+//		@include def-hover(#f00);
 //}
 // ```
 // CSS
@@ -213,7 +214,7 @@ $body-size: (100% 48%), $change: false) {
 //
 // Styleguide: sass_modules.styl_help.def_hover
 
-@mixin msh-def-hover($color, $prop: "bgc", $lighten: 8%, $darken: ($lighten - 3)) {
+@mixin def-hover($color, $prop: "bgc", $lighten: 8%, $darken: ($lighten - 3)) {
 	$prop: if($prop == "bgc", "background-color", $prop);
 
 	&:hover,
@@ -226,12 +227,12 @@ $body-size: (100% 48%), $change: false) {
 	}
 }
 
-// msh-ie11-Ai-c
+// ie11-Ai-c
 //
 // Hack for [bug](https://github.com/philipwalton/flexbugs/issues/231) with `align-items: center` and `min-height` in IE11. No side effects were noticed in other browsers, but be careful using this.
 // ```scss
 //.foo {
-//		@include msh-ie11-Ai-c;
+//		@include ie11-Ai-c;
 //}
 // ```
 // CSS
@@ -245,7 +246,7 @@ $body-size: (100% 48%), $change: false) {
 //
 // Styleguide: sass_modules.styl_help.ie11_aic
 
-@mixin msh-ie11-Ai-c {
+@mixin ie11-Ai-c {
 	&:after {
 		min-height: inherit;
 		font-size: 0;
@@ -253,7 +254,7 @@ $body-size: (100% 48%), $change: false) {
 	}
 }
 
-// msh-sprite-mods
+// sprite-mods
 //
 // Generator BEM modifiers for block with [icon](#kssref-sass_modules-styl_help-sprite_icon).
 // ```scss
@@ -263,7 +264,7 @@ $body-size: (100% 48%), $change: false) {
 //);
 //
 //.soc-icon {
-//		@include msh-sprite-mods($icons);
+//		@include sprite-mods($icons);
 //}
 // ```
 // CSS
@@ -292,7 +293,7 @@ $body-size: (100% 48%), $change: false) {
 //
 // Styleguide: sass_modules.styl_help.sprite_mods
 
-@mixin msh-sprite-mods($sprite, $pseudo: "before") {
+@mixin sprite-mods($sprite, $pseudo: "before") {
 	@if meta.type-of($sprite) != "map" {
 		@error "Wrong type of argument $sprite: '#{meta.type-of($sprite)}'. Expected 'map'";
 	}
@@ -347,12 +348,12 @@ $body-size: (100% 48%), $change: false) {
 	}
 }
 
-// msh-sprite-icon
+// sprite-icon
 //
 // Generate block with icon from css-sprite in pseudo-element.
 // ```scss
 //.icon {
-//		@include msh-sprite-icon();
+//		@include sprite-icon();
 //}
 // ```
 // CSS
@@ -375,7 +376,7 @@ $body-size: (100% 48%), $change: false) {
 //
 // Styleguide: sass_modules.styl_help.sprite_icon
 
-@mixin msh-sprite-icon($sprite: "../img/css_sprites.png", $pseudo: "before") {
+@mixin sprite-icon($sprite: "../img/css_sprites.png", $pseudo: "before") {
 	position: relative;
 
 	&:#{$pseudo} {

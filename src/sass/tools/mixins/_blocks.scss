@@ -1,5 +1,8 @@
 @use "sass:meta";
 
+@use "forward-tools" as mlu;
+@use "grid" as mgs;
+
 /*
 Blocks
 
@@ -8,12 +11,12 @@ Mixins for creating blocks and working with them.
 Styleguide: sass-tools.mixins.blocks
 */
 
-// mlu-row
+// row
 //
 // Generate [row](section-core-blocks.html#kssref-core-blocks-row) block styles.
 // ```scss
 //.block {
-//		@include mlu-row;
+//		@include row;
 //}
 // ```
 //
@@ -21,7 +24,7 @@ Styleguide: sass-tools.mixins.blocks
 //
 // Styleguide: sass-tools.mixins.blocks.row
 
-@mixin mlu-row($display: block, $css-vars: $mlu-flag-css-vars) {
+@mixin row($display: block, $css-vars: mlu.$flag-css-vars) {
 	position: relative;
 	display: $display;
 	margin: 0px;
@@ -35,42 +38,42 @@ Styleguide: sass-tools.mixins.blocks
 	counter-reset: mlu-row-item;
 }
 
-// mlu-row-col
+// row-col
 //
 // Generate styles for [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) element.
 // ```scss
 //.item {
-//		@include mlu-row-col;
+//		@include row-col;
 //}
 // ```
 //
 // $display = inline-block - display type. Can be value of CSS `display` property.
-// $gutters = $mlu-grid-gutters - map with column gutters values on breakpoints.
+// $gutters = settings.$grid-gutters - map with column gutters values on breakpoints.
 // You can also pass a number if you need the same gutter on all breakpoints.
 // Custom gutters only work when the `$css-vars = false`.
 // $calc = false - bool flag for generation CSS `calc()` fallback. It can needed only
 // for "col" `$type`.
 // $type = "col" - service parameter which used only by mixins-wrappers.
-// It needed for reusable `mlu-row-col` for making other
+// It needed for reusable `row-col` for making other
 // `row` elements, because the most of styles for them is the same.
-// $css-vars = $mlu-flag-css-vars - use CSS custom properties for gutters.
+// $css-vars = settings.$flag-css-vars - use CSS custom properties for gutters.
 // Works as a [similar flag](section-sass-tools.html#kssref-sass-tools-settings-flags) in the settings.
 //
 // Styleguide: sass-tools.mixins.blocks.row_col
 
-@mixin mlu-row-col($display: inline-block, $gutters: $mlu-grid-gutters,
-$css-vars: $mlu-flag-css-vars, $calc: $mlu-flag-calc-fallback, $type: "col") {
+@mixin row-col($display: inline-block, $gutters: mlu.$grid-gutters,
+$css-vars: mlu.$flag-css-vars, $calc: mlu.$flag-calc-fallback, $type: "col") {
 	$grid-gutters: $gutters;
 
 	@if meta.type-of($gutters) == "number" {
-		$grid-gutters: ($mlu-bp-xs: $gutters);
+		$grid-gutters: (mlu.$bp-xs: $gutters);
 	} @else if meta.type-of($gutters) != "map" {
 		@error "Wrong type of argument $gutters: '#{meta.type-of($gutters)}'. Expected 'number' or 'map'";
 	}
 
 	@if $css-vars {
-		--gc-rule: calc(var(--gc) / var(#{$var-grid-cols}) * 100% - var(--gc-diff) * 2);
-		--mgc-rule: calc(var(--mgc) / var(#{$var-grid-cols}) * 100% + var(--gc-diff));
+		--gc-rule: calc(var(--gc) / var(#{mlu.$var-grid-cols}) * 100% - var(--gc-diff) * 2);
+		--mgc-rule: calc(var(--mgc) / var(#{mlu.$var-grid-cols}) * 100% + var(--gc-diff));
 	}
 
 	position: relative;
@@ -80,22 +83,22 @@ $css-vars: $mlu-flag-css-vars, $calc: $mlu-flag-calc-fallback, $type: "col") {
 	vertical-align: top;
 
 	@if $css-vars != 2 {
-		font-size: $mlu-base-font-size;
-		font-size: mlu-px2rem($mlu-base-font-size);
+		font-size: mlu.$base-font-size;
+		font-size: mlu.px2rem(mlu.$base-font-size);
 		text-align: left;
 		white-space: normal;
-		@if $mlu-flag-flex-pe {
+		@if mlu.$flag-flex-pe {
 			direction: ltr;
 		}
 	}
 
 	@if $type == "col" {
-		--gc-diff: var(#{$var-gg});
+		--gc-diff: var(#{mlu.$var-gg});
 
-		@include mlu-W(12gc, $gutters: $grid-gutters, $css-vars: $css-vars, $calc: $calc);
+		@include mgs.W(12gc, $gutters: $grid-gutters, $css-vars: $css-vars, $calc: $calc);
 
-		@include mlu-mk-gtr($mlu-gtr-sm, $gutters: $grid-gutters, $calc: $calc, $css-vars: $css-vars);
-		@include mlu-mk-gtr($mlu-gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: "b", $coef: 2, $css-vars: $css-vars);
+		@include mgs.mk-gtr(mlu.$gtr-sm, $gutters: $grid-gutters, $calc: $calc, $css-vars: $css-vars);
+		@include mgs.mk-gtr(mlu.$gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: "b", $coef: 2, $css-vars: $css-vars);
 
 		&.row {
 			margin-bottom: 0px;
@@ -122,14 +125,14 @@ $css-vars: $mlu-flag-css-vars, $calc: $mlu-flag-calc-fallback, $type: "col") {
 	}
 }
 
-// mlu-row-item
+// row-item
 //
 // Generate styles for [row__item](section-core-blocks.html#kssref-core-blocks-row-row__item) element.
 //
-// It mixin-wrapper on `mlu-row-col` because most of styles the same.
+// It mixin-wrapper on `row-col` because most of styles the same.
 // ```scss
 //.item {
-//		@include mlu-row-item;
+//		@include row-item;
 //}
 // ```
 //
@@ -137,6 +140,6 @@ $css-vars: $mlu-flag-css-vars, $calc: $mlu-flag-calc-fallback, $type: "col") {
 //
 // Styleguide: sass-tools.mixins.blocks.row_item
 
-@mixin mlu-row-item($display: inline-block) {
-	@include mlu-row-col($display, $type: "item");
+@mixin row-item($display: inline-block) {
+	@include row-col($display, $type: "item");
 }

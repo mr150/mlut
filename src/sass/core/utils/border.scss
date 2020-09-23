@@ -1,4 +1,7 @@
 @use "sass:map";
+
+@use "../../tools" as mlu;
+
 /*
 Border
 
@@ -40,34 +43,34 @@ ds - <div class="Bd Bdw1su Bds-ds P2su">dashed</div>
 Styleguide: core-utils.bd.bds
 */
 
-$mlu-Bdxy-map: (
+$Bdxy-map: (
 	"xy": 1px solid,
 );
 
-@each $key, $value in $mlu-main-directions {
-	$mlu-Bdxy-map: map.merge($mlu-Bdxy-map, ($key: 1px solid));
+@each $key, $value in mlu.$main-directions {
+	$Bdxy-map: map.merge($Bdxy-map, ($key: 1px solid));
 }
 
-$mlu-Bdxy-map: map.merge($mlu-Bdxy-map,
+$Bdxy-map: map.merge($Bdxy-map,
 (
 	"y": 1px solid,
 	"x": 1px solid,
 ));
 
-@include mlu-mk-Bdxy($mlu-Bdxy-map);
+@include mlu.mk-Bdxy($Bdxy-map);
 
-@include mlu-mk-util("Bds", "border-style", (
+@include mlu.mk-util("Bds", "border-style", (
 	"dt": dotted,
 	"ds": dashed,
 ));
 
-$mlu-Bdw-map: (
+$Bdw-map: (
 	0: 0,
 	2: 2px,
 	1su: 1su,
 );
 
-@include mlu-mk-Bdw($mlu-Bdw-map);
+@include mlu.mk-Bdw($Bdw-map);
 
 .Bdcl-c {
 	border-collapse: collapse;

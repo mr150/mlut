@@ -1,4 +1,7 @@
 @use "sass:map";
+
+@use "../../tools" as mlu;
+
 /*
 Background
 
@@ -49,37 +52,37 @@ ct - contain. Stretches the background image to the maximum possible size so it 
 Styleguide: core-utils.bg.bgsz
 */
 
-@include mlu-mk-util("Bgr", "background-repeat", (
+@include mlu.mk-util("Bgr", "background-repeat", (
 	"n": no-repeat,
 	"x": repeat-x,
 	"y": repeat-y,
 ));
 
-$mlu-Bgp-map: (
+$Bgp-map: (
 	"c": center,
 );
 
-@each $key, $value in $mlu-main-directions {
+@each $key, $value in mlu.$main-directions {
 	@if $key != "l" {
-		$mlu-Bgp-map: map.merge($mlu-Bgp-map, ($key: $value));
+		$Bgp-map: map.merge($Bgp-map, ($key: $value));
 	}
 }
 
-$mlu-Bgp-map: map.merge($mlu-Bgp-map,
+$Bgp-map: map.merge($Bgp-map,
 (
 	"rt": right top,
 	"rb": right bottom,
 	"lb": left bottom,
 ));
 
-@include mlu-mk-util("Bgp", "background-position", $mlu-Bgp-map);
+@include mlu.mk-util("Bgp", "background-position", $Bgp-map);
 
-@include mlu-mk-util("Bgsz", "background-size", (
+@include mlu.mk-util("Bgsz", "background-size", (
 	"cv": cover,
 	"ct": contain,
 ));
 
-@include mlu-mk-util("Bga", "background-attachment", (
+@include mlu.mk-util("Bga", "background-attachment", (
 	"f": fixed,
 	"l": local,
 ));

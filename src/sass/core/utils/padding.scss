@@ -1,4 +1,7 @@
 @use "sass:map";
+
+@use "../../tools" as mlu;
+
 /*
 Padding
 
@@ -21,16 +24,16 @@ Padding on X axis. Sets left and right padding.
 Styleguide: core-utils.padding.px
 */
 
-$mlu-P-map: (
+$P-map: (
 	"xy0": 0,
 );
 
-@for $i from 1 through $mlu-P-range {
+@for $i from 1 through mlu.$P-range {
 	$value: $i * 1su;
-	$mlu-P-map: map.merge($mlu-P-map, ("xy" + $value: $value));
+	$P-map: map.merge($P-map, ("xy" + $value: $value));
 }
 
-$mlu-P-map: map.merge($mlu-P-map,
+$P-map: map.merge($P-map,
 (
 	"xy1gg": 1gg,
 	"t1gg": 1gg,
@@ -41,4 +44,4 @@ $mlu-P-map: map.merge($mlu-P-map,
 	"x1gg": 1gg,
 ));
 
-@include mlu-mk-P($mlu-P-map);
+@include mlu.mk-P($P-map);

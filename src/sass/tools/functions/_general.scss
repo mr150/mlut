@@ -23,7 +23,7 @@ Styleguide: sass-tools.functions.general
 //
 // Styleguide: sass-tools.functions.general.ston
 
-@function mlu-ston($str, $strict: false) {
+@function ston($str, $strict: false) {
 	@if meta.type-of($str) == "number" {
 		@return $str;
 	}
@@ -72,7 +72,7 @@ Styleguide: sass-tools.functions.general
 //
 // Styleguide: sass-tools.functions.general.check_class
 
-@function mlu-check-class($name, $only-name: null) {
+@function check-class($name, $only-name: null) {
 	$name: $name + "";
 
 	@if $only-name {
