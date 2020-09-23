@@ -1,6 +1,22 @@
 @charset "UTF-8";
 
 /*
+Columns and gutters
+
+Columns count and gutters value on breakpoints.
+
+Breakpoint | Columns | Gutter
+:---:  | :---: | :---:
+xs | 4 | 12px
+sm | 4 | 12px
+md | 12 | 12px
+lg | 12 | 16px
+xl | 12 | 16px
+
+Styleguide: sass-tools.settings.grid.cols
+*/
+
+/*
 Getting started
 
 There are 2 ways to start using MLUT:
@@ -458,30 +474,6 @@ Styleguide: sass-tools.settings
 */
 
 /*
-Columns and gutters
-
-Columns count and gutters value on breakpoints.
-
-Breakpoint | Columns | Gutter
-:---:  | :---: | :---:
-xs | 4 | 12px
-sm | 4 | 12px
-md | 12 | 12px
-lg | 12 | 16px
-xl | 12 | 16px
-
-Styleguide: sass-tools.settings.grid.cols
-*/
-
-/*
-Functions
-
-Useful functions. All MLUT functions have 'mlu' prefix. You can find all functions in `sass/tools/functions/`.
-
-Styleguide: sass-tools.functions
-*/
-
-/*
 General
 
 General purpose functions.
@@ -506,11 +498,11 @@ Styleguide: sass-tools.functions.getters
 */
 
 /*
-Mixins
+Functions
 
-Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sass/tools/mixins/`.
+Useful functions. All MLUT functions have 'mlu' prefix. You can find all functions in `sass/tools/functions/`.
 
-Styleguide: sass-tools.mixins
+Styleguide: sass-tools.functions
 */
 
 /*
@@ -546,13 +538,21 @@ Styleguide: sass-tools.mixins.utils
 */
 
 /*
+Mixins
+
+Useful mixins. All MLUT mixins have 'mlu' prefix. You can find all mixins in `sass/tools/mixins/`.
+
+Styleguide: sass-tools.mixins
+*/
+
+/*
 CSS variables
 
 Global CSS custom properties which used in MLUT. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties. Global custom properties names begin with the `mlu` prefix.
 
 The values and meaning of many custom properties correspond to the [SASS settings](section-sass-tools.html#kssref-sass-tools-settings) of MLUT core. But unlike them, custom properties can be changed dynamically without recompiling.
 
-Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [$mlu-flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags).
+Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [mlu.$flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags).
 
 Remember that custom properties do not work in all browsers. This means that part of the settings, such as dynamically changing the gutters and the number of columns in the grid system, also does not work everywhere.
 
@@ -560,11 +560,11 @@ In some blocks and utilities, custom properties are also used. Look for info abo
 
 You can find global CSS variables in `sass/core/variables.scss`.
 
---mlu-gg = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
+--mlu.gg = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
 Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
-Fallback is [$mlu-grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).
---mlu-gg-rem = 0.75rem - grid gutter in `rem`.
---mlu-grid-cols = 4 - number of columns in the [grid system](section-concepts.html#kssref-concepts-grid). Sets by [$mlu-grid-cols-xs](section-sass-tools.html#kssref-sass-tools-settings-grid) and changes on breakpoints according to the [settings](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints).
+Fallback is [mlu.$grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).
+--mlu.gg-rem = 0.75rem - grid gutter in `rem`.
+--mlu.grid-cols = 4 - number of columns in the [grid system](section-concepts.html#kssref-concepts-grid). Sets by [mlu.$grid-cols-xs](section-sass-tools.html#kssref-sass-tools-settings-grid) and changes on breakpoints according to the [settings](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints).
 
 Styleguide: core-styles.css_vars
 */
@@ -603,8 +603,6 @@ legend {
 [hidden] {
 	display: none !important;
 }
-
-/*===CORE-BLOCKS===*/
 
 /*
 Btn
@@ -655,7 +653,7 @@ Row
 
 Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, `inline-block` technology is used for layouts. Using [D utility](section-core-utils.html#kssref-core-utils-bxz-d), you can change the layout technology to flexbox.
 
-if the [$mlu-flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 2, then the styles for correct work of layouts which using inline-blocks will be disabled.
+if the [mlu.$flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 2, then the styles for correct work of layouts which using inline-blocks will be disabled.
 
 Parts of the layout within a `row` are created using the elements:
 * [row__col](#kssref-core-blocks-row-row__col)
@@ -663,7 +661,7 @@ Parts of the layout within a `row` are created using the elements:
 
 `Rows` can be put into each other an unlimited number of times.
 
-`Row` contains CSS counter named `mlu-row-item`.
+`Row` contains CSS counter named `mlu.row-item`.
 
 Markup: ../../../docs/examples/core-blocks/row/row.html
 
@@ -680,23 +678,23 @@ If `var()` is not supported by the browser, then fallback are provided:
 ```scss
 margin-right: 16px;
 margin-left: 16px;
-margin-right: var(--mlu-gg);
-margin-left: var(--mlu-gg);
+margin-right: var(--mlu.gg);
+margin-left: var(--mlu.gg);
 margin-bottom: 2rem;
-margin-bottom: calc(var(--mlu-gg-rem) * 2);
+margin-bottom: calc(var(--mlu.gg-rem) * 2);
 ```
-similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [$mlu-flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 1.
+similar fallback used in the [wrapper](#kssref-core-blocks-wrapper) for fields and everywhere for gutters if [mlu.$flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags) = 1.
 
-The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$mlu-grid-default-gtr`.
+The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `mlu.$grid-default-gtr`.
 
 Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-blocks-row). The formulas for calculating the width and offset for the column are stored in the custom properties. In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
 ```scss
---gc-rule: calc((var(--gc) - 0.0001) / var(--mlu-grid-cols) * 100% - var(--gc-diff) * 2);
---mgc-rule: calc((var(--mgc) - 0.0001) / var(--mlu-grid-cols) * 100% + var(--gc-diff));
+--gc-rule: calc((var(--gc) - 0.0001) / var(--mlu.grid-cols) * 100% - var(--gc-diff) * 2);
+--mgc-rule: calc((var(--mgc) - 0.0001) / var(--mlu.grid-cols) * 100% + var(--gc-diff));
 ```
 `--gc` or `--mgc` is the value of the width or offset in the grid columns. This is a custom property of the utility.<br>
 `(var(--gc) - 0.0001)` - fix for calc() [bug](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/15637241/) in Edge 16-18.<br>
-`--mlu-grid-cols` - the number of columns in the grid system. This is a [global](section-core-styles.html#kssref-core-styles-css_vars) custom property that can be changed on any DOM node.<br>
+`--mlu.grid-cols` - the number of columns in the grid system. This is a [global](section-core-styles.html#kssref-core-styles-css_vars) custom property that can be changed on any DOM node.<br>
 `--gc-diff` - variable is equal to the gutter if the gutter at the columns is created using margin. In `row__col` is equal 1gg.<br>
 Some of these variables can be changed using [custom utilities](section-core-utils.html#kssref-core-utils-custom).
 
@@ -916,8 +914,8 @@ Like in [row__col](#kssref-core-blocks-row-row__col), in wrapper is used `var()`
 ```scss
 padding-right: 16px;
 padding-left: 16px;
-padding-right: var(--mlu-gg);
-padding-left: var(--mlu-gg);
+padding-right: var(--mlu.gg);
+padding-left: var(--mlu.gg);
 ```
 
 Markup: ../../../docs/examples/core-blocks/wrapper/wrapper.html
@@ -998,20 +996,6 @@ Styleguide: examples.other.responsive_iframe
 }
 
 /*
-Styling helpers
-
-Useful tools set for designing mockup.
-
-Weight: 0
-
-Styleguide: sass_modules.styl_help
-*/
-
-/*===DESIGN-STYLES===*/
-
-/*===CORE-UTILS===*/
-
-/*
 Custom
 
 Utilities that manage [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) which used in MLUT.
@@ -1022,7 +1006,7 @@ Styleguide: core-utils.custom
 /*
 -Gg
 
-Controls gutters: `--mlu--gg` and `--mlu-gg-rem`.
+Controls gutters: `--mlu.-gg` and `--mlu.gg-rem`.
 
 * `-Gg1su..-Gg5su` \- *Responsive*.
 
@@ -1037,9 +1021,9 @@ Styleguide: core-utils.custom.gg
 /*
 -Gcc
 
-Grid columns count. Sets number of columns in grid system on DOM node. Controls `--mlu-grid-cols`.
+Grid columns count. Sets number of columns in grid system on DOM node. Controls `--mlu.grid-cols`.
 
-* `-Gcc` \- columns number is equal [$mlu-grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
+* `-Gcc` \- columns number is equal [mlu.$grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
 
 -Gcc-sm - keyword that means number of columns on `sm` breakpoint. There is on all breakpoints except `sm`.<br> Available selector modifier `chl`. See [example](section-examples.html#kssref-examples-layouts-2ec4ecin2_nd).
 -Gcc10_md - only *Responsive*. Available `chl` state.
@@ -1068,7 +1052,7 @@ Styleguide: core-utils.custom.gcd
 
 Grid columns rule. Controls `--gc-rule` and `--mgc-rule` .
 
--Gcr - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the column widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu-gg`.
+-Gcr - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the column widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu.gg`.
 
 Markup: ../../../docs/examples/core-utils/custom/gcr.hbs
 
@@ -1355,7 +1339,7 @@ Flex
 
 A group of utilities for managing flex-containers and flex-elements.
 
-Most of modified flex utilities **turned off** and available with flag [$mlu-flag-flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+Most of modified flex utilities **turned off** and available with flag [mlu.$flag-flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
 
 * `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
@@ -2134,7 +2118,7 @@ Styleguide: core-utils.text.td
 /*
 Dir
 
-Direction. Unility available if [$mlu-flag-flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags) turned on. Sets direction of text and order items in row-layout.
+Direction. Unility available if [mlu.$flag-flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags) turned on. Sets direction of text and order items in row-layout.
 
 l - left to right *Responsive* only.
 r - right to left *Responsive*.
@@ -2585,8 +2569,6 @@ Styleguide: core-utils.visual.mv
 	border: 0px;
 	clip: rect(0 0 0 0);
 }
-
-/*===DESIGN-UTILS===*/
 
 @media (min-width:520px) {
 	.-Gg1su_sm {
