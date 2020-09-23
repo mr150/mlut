@@ -22,8 +22,8 @@ Styleguide: sass_modules.demo_theme
 
 //stylelint-disable
 
-$primary-color: #0363cd;
-$second-color: #282828;
+$primary-color: #0363cd !default;
+$second-color: #282828 !default;
 
 $Maw: (
 	"xs0": 480px,
