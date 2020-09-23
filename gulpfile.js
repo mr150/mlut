@@ -122,7 +122,10 @@ gulp.task("style", gulp.series("css-lint", function(){
 			level: 2,
 			compatibility: "ie8"
 		}))
-		.pipe(rename({suffix: ".min"}))
+		.pipe(rename(function(path) {
+			if(path.basename === "index") path.basename = "mlut";
+			path.basename += ".min";
+		}))
 		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build.css))
 		.pipe(gulp.dest(dirs.docs + "styleguide/kss-assets/"))
