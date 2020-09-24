@@ -26,7 +26,7 @@
 
 $C-map: () !default;
 
-@function c($key) {
+@function c-($key) {
 	@if map.has-key($C-map, $key) {
 		@return map.get($C-map, $key);
 	}
@@ -36,7 +36,7 @@ $C-map: () !default;
 
 $Fz-map: () !default;
 
-@function fz($key) {
+@function fz-($key) {
 	@if map.has-key($Fz-map, $key) {
 		@return map.get($Fz-map, $key);
 	}
@@ -46,7 +46,7 @@ $Fz-map: () !default;
 
 $Bgi-map: () !default;
 
-@function bgi($key) {
+@function bgi-($key) {
 	@if map.has-key($Bgi-map, $key) {
 		@return map.get($Bgi-map, $key);
 	}

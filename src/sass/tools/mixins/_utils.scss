@@ -222,7 +222,7 @@ Styleguide: sass-tools.mixins.utils
 			$util-val: string.slice($util-val, 1, $separator - 1);
 		}
 
-		$separator: if(mlu.ston($util-val), "", "-");
+		$separator: if(mlu.str2n($util-val), "", "-");
 		$selector: $name + $separator + $util-val;
 
 		@if $bp-name == "all" or $bp-name == "bp" {
@@ -312,7 +312,7 @@ Styleguide: sass-tools.mixins.utils
 
 		$dir: string.slice($key, 1, 1);
 		$dir-val: map.get(mlu.$main-directions, $dir);
-		$util-val: if(not mlu.ston(string.slice($key, 2)), string.slice($key, 3), string.slice($key, 2));
+		$util-val: if(not mlu.str2n(string.slice($key, 2)), string.slice($key, 3), string.slice($key, 2));
 		$tmp-map: ($util-val: $value);
 
 		@if $dir-val {
@@ -322,7 +322,7 @@ Styleguide: sass-tools.mixins.utils
 				@include mk-util(string.to-upper-case($dir), $dir-val, $tmp-map, $bp, $states);
 			}
 		} @else if $dir == "x" and string.slice($key, 2, 2) == "y" {
-			$util-val: if(not mlu.ston(string.slice($key, 3)), string.slice($key, 4), string.slice($key, 3));
+			$util-val: if(not mlu.str2n(string.slice($key, 3)), string.slice($key, 4), string.slice($key, 3));
 
 			@if $name {
 				@include mk-util($name, $prop, ($util-val: $value), $bp, $states);
@@ -365,7 +365,7 @@ Styleguide: sass-tools.mixins.utils
 // Private mixin that parses custom units based on directions.
 
 @mixin -parse-unit($prop, $value, $dir) {
-	$coef-val: mlu.ston($value + "");
+	$coef-val: mlu.str2n($value + "");
 	$dir: if($dir, $dir, "xy");
 
 	@if meta.type-of($value) == "number" and math.unit($value) == "gg" {

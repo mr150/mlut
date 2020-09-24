@@ -9,21 +9,21 @@ General purpose functions.
 Styleguide: sass-tools.functions.general
 */
 
-// mlu-ston
+// mlu-str2n
 //
 // Convert string to number.
 // ```scss
-//mlu-ston("1.5") => 1.5
-//mlu-ston("1x5") => 1
-//mlu-ston("1x5", 1) => null
+//mlu-str2n("1.5") => 1.5
+//mlu-str2n("1x5") => 1
+//mlu-str2n("1x5", 1) => null
 // ```
 //
 // $str - string to be converted.
 // $strict = false - bool flag for stricter conversion. If it on and $str contains non-number, then function return `null`. See example above.
 //
-// Styleguide: sass-tools.functions.general.ston
+// Styleguide: sass-tools.functions.general.str2n
 
-@function ston($str, $strict: false) {
+@function str2n($str, $strict: false) {
 	@if meta.type-of($str) == "number" {
 		@return $str;
 	}
