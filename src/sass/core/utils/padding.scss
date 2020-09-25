@@ -44,4 +44,4 @@ $P-map: map.merge($P-map,
 	"x1gg": 1gg,
 ));
 
-@include mlu.mk-P($P-map);
+@include mlu.mk-util("P", $P-map);

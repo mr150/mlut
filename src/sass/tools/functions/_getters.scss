@@ -176,3 +176,23 @@ Styleguide: sass-tools.functions.getters
 
 	@error "Invalid custom property name. '#{$name}' is not defined in $mlu-css-vars";
 }
+
+// util-prop
+//
+// Get the CSS property, which corresponds to the utility from [$mlu-utils-map](section-sass-tools.html#kssref-sass-tools-settings-utils).
+// ```scss
+//mlu-util-prop("D") => "display"
+//```
+//
+// $name - utility name. Type: string.
+// $error-handler = 1 - works similarly like [here](#kssref-sass-tools-functions-bp).
+//
+// Styleguide: sass-tools.functions.getters.util_prop
+
+@function util-prop($name, $error-handler: 1) {
+	@if map.has-key(mlu.$utils-map, $name) or $error-handler == 0 {
+		@return map.get(mlu.$utils-map, $name);
+	}
+
+	@error "Invalid utility name. '#{$name}' is not defined in $mlu-utils-map";
+}

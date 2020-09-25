@@ -132,7 +132,7 @@ Can be used to vertically align an elements in row-layouts. Partially works with
 Styleguide: core-utils.flex.mai
 */
 
-@include mlu.mk-util("Fxd", "flex-direction", (
+@include mlu.mk-util("Fxd", (
 	"rr_all": row-reverse,
 	"r_bp": row,
 	"c": column,
@@ -151,13 +151,13 @@ Styleguide: core-utils.flex.mai
 	flex: inherit;
 }
 
-@include mlu.mk-util("Fxw", "flex-wrap", (
+@include mlu.mk-util("Fxw", (
 	"wr": wrap-reverse,
 	"w_all": wrap,
 	"n_bp": nowrap,
 ));
 
-@include mlu.mk-util("Ac", "align-content", (
+@include mlu.mk-util("Ac", (
 	"fs": flex-start,
 	"fe": flex-end,
 	"c": center,
@@ -199,9 +199,9 @@ $As-map: (
 	));
 }
 
-@include mlu.mk-util("As", "align-self", $As-map);
+@include mlu.mk-util("As", $As-map);
 
-@include mlu.mk-util("Jc", "justify-content", (
+@include mlu.mk-util("Jc", (
 	"fs_bp": flex-start,
 	"fe_all": flex-end,
 	"c_all": center,
@@ -264,7 +264,7 @@ $As-map: (
 		}
 	}
 } @else {
-	@include mlu.mk-util("Ai", "align-items", (
+	@include mlu.mk-util("Ai", (
 		"s_bp": stretch,
 		"fs_all": flex-start,
 		"fe_all": flex-end,

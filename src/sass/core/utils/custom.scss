@@ -96,7 +96,7 @@ Styleguide: core-utils.custom.gcr
 			#{mlu.$var-grid-cols}: 10;
 		}
 
-		@include mlu.mk--Gcc($Gc-map);
+		@include mlu.mk-util("-Gcc", $Gc-map);
 	}
 }
 

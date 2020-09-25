@@ -57,9 +57,9 @@ $Bdxy-map: map.merge($Bdxy-map,
 	"x": 1px solid,
 ));
 
-@include mlu.mk-Bdxy($Bdxy-map);
+@include mlu.mk-util("Bd", $Bdxy-map);
 
-@include mlu.mk-util("Bds", "border-style", (
+@include mlu.mk-util("Bds", (
 	"dt": dotted,
 	"ds": dashed,
 ));
@@ -70,7 +70,7 @@ $Bdw-map: (
 	1su: 1su,
 );
 
-@include mlu.mk-Bdw($Bdw-map);
+@include mlu.mk-util("Bdw", $Bdw-map);
 
 .Bdcl-c {
 	border-collapse: collapse;

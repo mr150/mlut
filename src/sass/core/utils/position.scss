@@ -41,7 +41,7 @@ X and Y coordinate axes. Change `top` or `bottom` and `right` or `left`.
 Styleguide: core-utils.pos.xy
 */
 
-@include mlu.mk-util("Pos", "position", (
+@include mlu.mk-util("Pos", (
 	"": relative,
 	"s": static,
 	"a_all": absolute,
@@ -58,7 +58,7 @@ $Xy-map: ();
 	$Xy-map: map.merge($Xy-map, ($dir + "100p": 100%));
 }
 
-@include mlu.mk-Xy($Xy-map);
+@include mlu.mk-util("mXy", $Xy-map);
 
 .mXy50p {
 	top: 50%;
@@ -75,4 +75,4 @@ $Z-map: (
 	$Z-map: map.merge($Z-map, ($i: $i));
 }
 
-@include mlu.mk-Z($Z-map);
+@include mlu.mk-util("Z", $Z-map);

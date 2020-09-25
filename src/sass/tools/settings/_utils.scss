@@ -1,4 +1,7 @@
 @use "sass:map";
+@use "sass:list";
+
+@use "css-vars" as mlu;
 
 // Utilities
 //
@@ -61,6 +64,86 @@ $Ff-m0: (
 // stylelint-enable
 
 $Trsdu-df0: 0.3s !default;
+
+$utils-map: (
+	"-Gcc": mlu.$var-grid-cols,
+	"-Gg": mlu.$var-gg,
+	"Pos": "position",
+	"mX": null,
+	"mY": null,
+	"mXy": null,
+	"Z": "z-index",
+	"D": "display",
+	"Fxd": "flex-direction",
+	"Fxw": "flex-wrap",
+	"Ac": "align-content",
+	"As": "align-self",
+	"Ai": "align-items",
+	"Jc": "justify-content",
+	"Ord": "order",
+	"Fl": "float",
+	"Bxz": "box-sizing",
+	"W": "width",
+	"Maw": "max-width",
+	"H": "height",
+	"Mih": "min-height",
+	"M": "margin",
+	"P": "padding",
+	"Ov": "overflow",
+	"C": "color",
+	"F": "font",
+	"Fw": "font-weight",
+	"Fz": "font-size",
+	"Ff": "font-family",
+	"Fs": "font-style",
+	"Lh": "line-height",
+	"Dir": "direction",
+	"Lts": "letter-spacing",
+	"Whs": "white-space",
+	"Ta": "text-align",
+	"Tt": "text-transform",
+	"Td": "text-decoration",
+	"Tsh": "text-shadow",
+	"Va": "vertical-align",
+	"Bgc": "background-color",
+	"Bgr": "background-repeat",
+	"Bgp": "background-position",
+	"Bgsz": "background-size",
+	"Bga": "background-attachment",
+	"Ol": "outline",
+	"Bxsh": "box-shadow",
+	"Trf": "transform",
+	"V": "visibility",
+	"Cur": "cursor",
+	"Op": "opacity",
+	"Bd": "border",
+	"Bdc": "border-color",
+	"Bds": "border-style",
+	"Bdw": "border-width",
+	"Bdrs": "border-radius",
+	"Trs": "transition",
+	"Anim": "animation",
+	"Rsz": "resize",
+) !default;
+
+$utils-extend: (
+) !default;
+
+$utils-map: map.merge($utils-map, $utils-extend);
+
+$utils-directed: (
+	"M",
+	"P",
+	"Bd",
+	"mX",
+	"mY",
+	"mXy",
+) !default;
+
+$utils-directed-extend: (
+) !default;
+
+$utils-directed: list.join($utils-directed, $utils-directed-extend);
 
 // Maps with utilities states
 //

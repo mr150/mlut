@@ -32,12 +32,12 @@ Styleguide: core-utils.f.mfz
 	font-family: mlu.$Ff-ss0;
 }
 
-@include mlu.mk-Fw((
+@include mlu.mk-util("Fw", (
 	400: 400,
 	700: 700,
 ));
 
-@include mlu.mk-util("Fs", "font-style", (
+@include mlu.mk-util("Fs", (
 	"": italic,
 	"n": normal,
 ));

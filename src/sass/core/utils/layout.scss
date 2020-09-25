@@ -44,7 +44,7 @@ Styleguide: core-utils.bxz.w
 	}
 }
 
-@include mlu.mk-W((
+@include mlu.mk-util("W", (
 	"100p": 100%,
 	"a_all": auto,
 	"i_all": inherit,

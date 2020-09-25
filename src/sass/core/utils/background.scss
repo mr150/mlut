@@ -52,7 +52,7 @@ ct - contain. Stretches the background image to the maximum possible size so it 
 Styleguide: core-utils.bg.bgsz
 */
 
-@include mlu.mk-util("Bgr", "background-repeat", (
+@include mlu.mk-util("Bgr", (
 	"n": no-repeat,
 	"x": repeat-x,
 	"y": repeat-y,
@@ -75,14 +75,14 @@ $Bgp-map: map.merge($Bgp-map,
 	"lb": left bottom,
 ));
 
-@include mlu.mk-util("Bgp", "background-position", $Bgp-map);
+@include mlu.mk-util("Bgp", $Bgp-map);
 
-@include mlu.mk-util("Bgsz", "background-size", (
+@include mlu.mk-util("Bgsz", (
 	"cv": cover,
 	"ct": contain,
 ));
 
-@include mlu.mk-util("Bga", "background-attachment", (
+@include mlu.mk-util("Bga", (
 	"f": fixed,
 	"l": local,
 ));

@@ -34,7 +34,7 @@ tbfg - table-footer-group.
 Styleguide: sass_modules.core_extend.utils.d
 */
 
-@include mlu.mk-util("D", "display", (
+@include mlu.mk-util("D", (
 	"i": inline,
 	"tbcl": table-column,
 	"tbfg": table-footer-group,
@@ -50,7 +50,7 @@ Flex
 Styleguide: sass_modules.core_extend.utils.flex
 */
 
-@include mlu.mk-util("Ac", "align-content", (
+@include mlu.mk-util("Ac", (
 	"fs": flex-start,
 	"fe": flex-end,
 	"c": center,

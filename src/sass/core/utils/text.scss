@@ -73,20 +73,20 @@ Markup: ../../../docs/examples/core-utils/text/mtov.html
 Styleguide: core-utils.text.mtov
 */
 
-@include mlu.mk-util("Ta", "text-align", (
+@include mlu.mk-util("Ta", (
 	"_all": left,
 	"c_all": center,
 	"r_all": right,
 ));
 
-@include mlu.mk-util("Td", "text-decoration", (
+@include mlu.mk-util("Td", (
 	"": none,
 	"u": underline,
 	"l": line-through,
 	"o": overline,
 ));
 
-@include mlu.mk-util("Tt", "text-transform", (
+@include mlu.mk-util("Tt", (
 	"": uppercase,
 	"n": none,
 	"l": lowercase,
@@ -103,18 +103,18 @@ Styleguide: core-utils.text.mtov
 	color: inherit;
 }
 
-@include mlu.mk-Lh((
+@include mlu.mk-util("Lh", (
 	"n": normal,
 	1: 1,
 ));
 
-@include mlu.mk-util("Whs", "white-space", (
+@include mlu.mk-util("Whs", (
 	"nw": nowrap,
 	"p": pre,
 ));
 
 @if mlu.$flag-flex-pe {
-	@include mlu.mk-util("Dir", "direction", (
+	@include mlu.mk-util("Dir", (
 		"r_all": rtl,
 		"l_bp": ltr,
 	));

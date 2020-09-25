@@ -47,7 +47,7 @@ $D-map: (
 	"n_all": none,
 );
 
-@include mlu.mk-util("D", "display", $D-map);
+@include mlu.mk-util("D", $D-map);
 
 .mD-f {
 	display: flex;
