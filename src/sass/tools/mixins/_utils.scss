@@ -203,133 +203,68 @@ Styleguide: sass-tools.mixins.utils
 // $bp = false - breakpoint on which utility values will be generated. Can be any breakpoint from the settings or a special value: `bp` and `all`.
 // $states = false - list of state names. For each value of the utility, all states from this list will be generated. Info about states see [here](section-concepts.html#kssref-concepts-utility-states).
 // $prop = false - CSS property name.
-// $direct = null - service argument which used only by [mk-util-directions](#kssref-sass-tools-mixins-mk_util_dir).
 //
 // Styleguide: sass-tools.mixins.utils.mk_util
 
-@mixin mk-util($name, $map, $bp: false, $states: false, $prop: false, $direct: null) {
-	$name: mlu.check-class($name);
-
+@mixin mk-util($name, $map, $bp: null, $states: null, $prop: null) {
 	$util-name: mlu.check-class($name, 1);
-	$util-prop: if($prop, $prop, mlu.util-prop($util-name));
+	$prop: if($prop, $prop, mlu.util-prop($util-name));
 
-	@if list.index(mlu.$utils-directed, $util-name) and not $direct {
-		$util-name: if($util-prop, $util-name, null);
-		@include mk-util-directions($map, $util-name, $util-prop, $bp, $states);
-	} @else {
-		@each $key, $value in $map {
-			$bp-name: $bp;
-			$util-val: $key;
-			$separator: if(meta.type-of($key) == "string", string.index($key, "_"), false);
+	@if list.index(mlu.$utils-directed, $util-name) {
+		$util-name: if($prop, $util-name, null);
+		$utils-data-list: mlu.parse-util-directions($map, $util-name);
+		$utils-directions: map.keys(list.nth($utils-data-list, 1));
+		$utils-props: map.values(list.nth($utils-data-list, 1));
+		$utils-map: list.nth($utils-data-list, 2);
 
-			@if $separator {
-				$bp-name: string.slice($util-val, $separator + 1);
-				$util-val: string.slice($util-val, 1, $separator - 1);
-			}
+		@each $key, $value in $utils-map {
+			$util-index: list.index($utils-map, ($key $value));
 
-			$separator: if(mlu.str2n($util-val), "", "-");
-			$selector: $name + $separator + $util-val;
-
-			@if $bp-name == "all" or $bp-name == "bp" {
-				@include bp-all($selector, if($bp-name == "all", 1, 0)) {
-					@include mk-state(&, $states, if($states, 0, 1)) {
-						@include -check-util-direction($direct, $util-prop, $value);
-					}
-				}
-			} @else if $bp-name {
-				@include mgen.bpm($bp-name) {
-					#{$selector}_#{$bp-name} {
-						@include mk-state(&, $states, if($states, 0, 1)) {
-							@include -check-util-direction($direct, $util-prop, $value);
-						}
-					}
-				}
-			} @else {
-				#{$selector} {
-					@include mk-state(&, $states, if($states, 0, 1)) {
-						@include -check-util-direction($direct, $util-prop, $value);
-					}
-				}
-			}
+			@include -generate-util(
+				$key,
+				$value,
+				$bp,
+				$states,
+				list.nth($utils-props, $util-index),
+				list.nth($utils-directions, $util-index)
+			);
 		}
+	} @else {
+		@include -generate-util($name, $map, $bp, $states, $prop);
 	}
 }
 
-// mk-util-directions
-//
-// Creates utility groups that have different directions. For example [margin](section-core-utils.html#kssref-core-utils-margin) and [padding](section-core-utils.html#kssref-core-utils-padding).
-//
-// The [mk-util](#kssref-sass-tools-mixins-mk_util) functionality is mainly used, but the map of values for creating utilities is slightly different.
-// Before the utility value, one or two letters indicate the [direction](section-concepts.html#kssref-concepts-utility-dirs). Keywords and variables are separated by a hyphen from direction. Examples: `l4su`, `xy1gg`, `t-b8_lg`.
-//
-// A mixin can create [positioning](section-core-utils.html#kssref-core-utils-pos) utilities that match the CSS properties: `top` , `right` etc. To do this, just pass the map with the data.
-// Each of the 4 main directions will correspond to the CSS property. If the direction is combined,
-// then a modified utility `mX`, `mY` or `mXy` will be created. These utilities changes several properties.
-//
-// All parameters are the same as in `mk-util`. Only their order and default values differ.
-// ```scss
-//$Xy-map: (
-//		x3gg: 3gg,
-//		l4su: 4su,
-//);
-//
-//@include mk-util-directions($Xy-map, "P", "padding");
-// ```
-// CSS
-// ```css
-//.Px3gg {
-//		padding-right: 48px;
-//		padding-right: calc(var(--mlu-gg) * 3);
-//		padding-left: 48px;
-//		padding-left: calc(var(--mlu-gg) * 3);
-//}
-//
-//.Pl4su {
-//		padding-left: 16px;
-//}
-// ```
-//
-// $map - map with utilities names values and CSS properties values.
-// $name = null - the name of the utility.
-// $prop = null - CSS property name.
-// $bp = null - breakpoint on which utility values will be generated.
-// $states = null - list of state names.
-//
-// Styleguide: sass-tools.mixins.utils.mk_util_dir
+// Private mixin that generate utilities CSS.
 
-@mixin mk-util-directions($map, $name: null, $prop: null, $bp: null, $states: null) {
+@mixin -generate-util($name, $map, $bp: null, $states: null, $prop: null, $direct: null) {
+	$name: mlu.check-class($name);
+
 	@each $key, $value in $map {
-		@if meta.type-of($key) != "string" {
-			@error "Invalid key format '#{$key}' for '#{$name}' in map of values";
-		}
+		$util-val-map: mlu.parse-util($key);
+		$bp-name: map.get($util-val-map, "mq");
+		$bp-name: if($bp-name, $bp-name, $bp);
+		$selector: $name + map.get($util-val-map, "value");
 
-		$dir: string.slice($key, 1, 1);
-		$dir-val: map.get(mlu.$main-directions, $dir);
-		$util-val: if(not mlu.str2n(string.slice($key, 2)), string.slice($key, 3), string.slice($key, 2));
-		$tmp-map: ($util-val: $value);
-
-		@if $dir-val {
-			@if $name {
-				@include mk-util($name + $dir, $tmp-map, $bp, $states, $prop + "-" + $dir-val, $dir);
-			} @else {
-				@include mk-util(string.to-upper-case($dir), $tmp-map, $bp, $states, $dir-val, "xy");
+		@if $bp-name == "all" or $bp-name == "bp" {
+			@include bp-all($selector, if($bp-name == "all", 1, 0)) {
+				@include mk-state(&, $states, if($states, 0, 1)) {
+					@include -check-util-direction($direct, $prop, $value);
+				}
 			}
-		} @else if $dir == "x" and string.slice($key, 2, 2) == "y" {
-			$util-val: if(not mlu.str2n(string.slice($key, 3)), string.slice($key, 4), string.slice($key, 3));
-
-			@if $name {
-				@include mk-util($name, ($util-val: $value), $bp, $states, $prop,  "xy");
-			} @else {
-				@include mk-util("mXy", ($util-val: $value), $bp, $states, null, "all");
-			}
-		} @else if $dir == "x" or $dir == "y" {
-			@if $name {
-				@include mk-util($name + $dir, $tmp-map, $bp, $states, $prop, $dir);
-			} @else {
-				@include mk-util("m" + string.to-upper-case($dir), $tmp-map, $bp, $states, null, $dir);
+		} @else if $bp-name {
+			@include mgen.bpm($bp-name) {
+				#{$selector}_#{$bp-name} {
+					@include mk-state(&, $states, if($states, 0, 1)) {
+						@include -check-util-direction($direct, $prop, $value);
+					}
+				}
 			}
 		} @else {
-			@error "Invalid direction '#{$dir}' for '#{$name}' in map of values";
+			#{$selector} {
+				@include mk-state(&, $states, if($states, 0, 1)) {
+					@include -check-util-direction($direct, $prop, $value);
+				}
+			}
 		}
 	}
 }

@@ -1,0 +1,141 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "sass:string";
+
+@use "../settings" as mlu;
+@use "general" as mgen;
+@use "getters" as mget;
+
+/*
+Utilities
+
+Functions for working with utilities.
+
+Styleguide: sass-tools.functions.utils
+*/
+
+// parse-util
+//
+// Parse utility value or name. Return map with passed value components:
+// - `value` - pure value or name
+// - `mq` - breakpoint or any mediaquery
+// ```scss
+//parse-util("1su_md") => ("value": "1su", "mq": "md")
+// ```
+//
+// $util-val - utility value or name. Type string.
+//
+// Styleguide: sass-tools.functions.utils.parse_util
+
+@function parse-util($util-val) {
+	$divider-pos: if(meta.type-of($util-val) == "string", string.index($util-val, "_"), false);
+	$mq: null;
+
+	@if $divider-pos {
+		$mq: string.slice($util-val, $divider-pos + 1);
+		$util-val: string.slice($util-val, 1, $divider-pos - 1);
+	}
+
+	$separator: if(mgen.str2n($util-val) or mget.util-prop($util-val, 0), "", "-");
+
+	@return (
+		"value": $separator + $util-val,
+		"mq": $mq,
+	);
+}
+
+// parse-util-directions
+//
+// Parse map with directed utility values. Return list with two maps:
+// - `(direction: property)`
+// - `(util-name: (util-value: css-value)`
+// ```scss
+//$M-map: (
+//   "b-2gg": -2gg,
+//   "b1su": 1su,
+//   "y-1gg": -1gg,
+//   "xy-auto": auto,
+//);
+//
+//parse-util-directions($M-map, "M") => (
+//   ("b": "margin-bottom", "y": "margin", "xy":  "margin"),
+//   (
+//    "Mb": ("-2gg": -2gg, "1su": 1su),
+//    "My": ("-bar_lg": calc(5vw - 1.5rem)),
+//    "M": ("auto_all": auto)
+//  )
+//)
+// ```
+//
+// $map - map with directed utility values.
+// $name = null - directed utility name.
+//
+// Styleguide: sass-tools.functions.utils.parse_util_dir
+
+@function parse-util-directions($map, $name: null) {
+	$utils-map: ();
+	$prop-direct-map: ();
+
+	@each $key, $value in $map {
+		@if meta.type-of($key) != "string" {
+			@error "Invalid key format '#{$key}' for '#{$name}' in map of values";
+		}
+
+		$dir: string.slice($key, 1, 1);
+		$dir-val: map.get(mlu.$main-directions, $dir);
+		$util-prop: mget.util-prop($name, 0);
+		$util-name: "";
+
+		$utils-map-item-val: if(
+			not mgen.str2n(string.slice($key, 2)),
+			(string.slice($key, 3): $value),
+			(string.slice($key, 2): $value),
+		);
+
+		@if $dir-val {
+			@if $name {
+				$util-name: $name + $dir;
+				$util-prop: $util-prop + "-" + $dir-val;
+			} @else {
+				$util-name: string.to-upper-case($dir);
+				$util-prop: $dir-val;
+			}
+		} @else if $dir == "x" and string.slice($key, 2, 2) == "y" {
+			$utils-map-item-val: if(
+				not mgen.str2n(string.slice($key, 3)),
+				(string.slice($key, 4): $value),
+				(string.slice($key, 3): $value),
+			);
+
+			@if $name {
+				$util-name: $name;
+				$dir: "xy";
+			} @else {
+				$util-name: "mXy";
+				$dir: "all";
+			}
+		} @else if $dir == "x" or $dir == "y" {
+			@if $name {
+				$util-name: $name + $dir;
+			} @else {
+				$util-name: "m" + string.to-upper-case($dir);
+			}
+		} @else {
+			@error "Invalid direction '#{$dir}' for '#{$name}' in map of values";
+		}
+
+		@if not map.has-key($utils-map, $util-name) {
+			$utils-map: map.merge($utils-map, ($util-name: $utils-map-item-val));
+			$prop-direct-map: map.merge($prop-direct-map, ($dir: $util-prop));
+		} @else {
+			//This will be refactored when Sass nested map functions will be released
+			$utils-map: map.merge(
+				$utils-map,
+				($util-name: map.merge(map.get($utils-map, $util-name), $utils-map-item-val))
+			);
+		}
+	}
+
+	@return ($prop-direct-map, $utils-map);
+}
