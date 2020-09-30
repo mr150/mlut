@@ -54,7 +54,7 @@ Styleguide: core-utils.bxz.ov
 */
 
 @include mlu.mk-util("Maw", (
-	"fx0": mlu.$Maw-fx0,
+	"-fx0": mlu.$Maw--fx0,
 	"100p": 100%,
 	"n": none,
 ));

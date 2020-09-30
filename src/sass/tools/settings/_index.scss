@@ -200,12 +200,11 @@ Utility class names are formed according to the scheme:
 	* number
 	* CSS or MLUT keywords
 	* MLUT variables
-	* [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars).
 
-	Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). Keywords and variables are separated by a hyphen '-' from utility name. Custom property is separated from the utility name by two hyphens. Its name may contain lowercase letters and numbers.
-1. optional breakpoint name: `sm`, `lg`, etc. Separated from the utility value by underscore '_'.
+	Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). Keywords are separated from the utility name with a hyphen `-`, and variables by two hyphens  `--`.
+1. optional breakpoint name: `sm`, `lg`, etc. Separated from the utility value by underscore `_`.
 
-Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-bd0`, `Fz--gg-rem`.
+Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-bd0`, `Fz--h1`.
 
 There are some special abbreviations for color utilities:
 * `t` - `transparent`
@@ -253,7 +252,7 @@ MLUT keywords and variables
 * `min` and `max`. Allowed to use only in utils with number values
 * abbreviations for invented values that are not in the CSS specification. Allowed to use only in custom and modified utilities
 
-**MLUT variables** exist only at the agreement level. Essentially, they are similar to Sass variables, which are compiled into CSS values. They can take any value, including CSS custom properties. Variable name can contain only lowercase letters and numbers, and must also end in a number: `bd0`, `gr2` etc. Example: [Maw-fx0](section-core-utils.html#kssref-core-utils-bxz-maw).
+**MLUT variables** exist only at the agreement level. Essentially, they are similar to Sass variables, which are compiled into CSS values. They can take any value, including CSS custom properties. Variable name can contain only lowercase letters, numbers and hyphens: `bd0`, `action`, `my-bxsh` etc. Example: [Maw--fx0](section-core-utils.html#kssref-core-utils-bxz-maw).
 
 Weight: 1
 
