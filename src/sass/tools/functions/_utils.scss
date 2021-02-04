@@ -1,6 +1,7 @@
 @use "sass:list";
 @use "sass:map";
 @use "sass:meta";
+@use "sass:math";
 @use "sass:string";
 
 @use "../settings" as mlu;
@@ -37,10 +38,12 @@ Styleguide: sass-tools.functions.utils
 		$util-val: string.slice($util-val, 1, $divider-pos - 1);
 	}
 
-	$separator: if(mgen.str2n($util-val) or mget.util-prop($util-val, 0), "", "-");
-
 	@return (
-		"value": $separator + $util-val,
+		"value": if(
+			mgen.str2n($util-val) or mget.util-prop($util-val, 0),
+			$util-val,
+			"-" + $util-val
+		),
 		"mq": $mq,
 	);
 }
@@ -139,3 +142,109 @@ Styleguide: sass-tools.functions.utils
 
 	@return ($prop-direct-map, $utils-map);
 }
+
+// convert-util-value
+//
+// Determines the type of utility and, depending on type, calls the converter from the `$util-value-converters` map. If the utility type is not recognized, the [default converter](#kssref-sass-tools-functions-utils-convert_util_value_def) is called. If the `$utils-value-converters` does not contain a converter for this type, the utility value is returned without conversion. Else the result of the converter work is returned.
+// ```scss
+//@debug mlu.convert-util-value("2r", "Fz"); // 2rem
+//@debug mlu.convert-util-value(100, "Fw"); // 100
+// ```
+//
+// $util-val - utility value
+// $name - utility name
+//
+// Styleguide: sass-tools.functions.utils.convert_util_value
+
+@function convert-util-value($util-val, $name) {
+	$util-type: "";
+
+	@each $key, $value in mlu.$util-value-types {
+		@if list.index($value, $name) {
+			$util-type: $key;
+		}
+	}
+
+	@return if(
+		map.has-key($util-value-converters, $util-type),
+		meta.call(
+			map.get($util-value-converters, $util-type),
+			$util-val
+		),
+		$util-val
+	);
+}
+
+// convert-util-value-default
+//
+// Default converter for utility value to CSS value. Converts global CSS keywords, and numbers with unit aliases.
+// ```scss
+//@debug mlu.convert-util-value-default(480) // 480px
+//@debug mlu.convert-util-value-default("n") // none
+// ```
+//
+// $value - utility value.
+//
+// Styleguide: sass-tools.functions.utils.value_converters.def
+
+@function convert-util-value-default($value) {
+	$val-unit: "";
+	$val-number: mgen.str2n($value + "");
+
+	@if meta.type-of($value) == "number" {
+		$val-unit: map.get(mlu.$util-units-map, math.unit($value));
+	} @else if meta.type-of($value) == "string" and  $val-number {
+		$util-unit: string.slice($value, string.length($val-number + "") + 1);
+		$val-unit: map.get(mlu.$util-units-map, $util-unit);
+	}
+
+	@if $val-unit != "" {
+		// Maybe in the future there will be processing of all CSS units, but so far a number with an unknown unit is returned as a string
+		@return if(
+			$val-unit,
+			$val-number * $val-unit,
+			string.unquote($value + "")
+		);
+	}
+
+	@return convert-util-value-keyword($value);
+}
+
+// convert-util-value-keyword
+//
+// Converts aliases to global CSS keywords. If the alias is not found in the `$util-css-keywords`, returns the value without conversion.
+// ```scss
+//@debug mlu.convert-util-value-keyword("i") // inherit
+//@debug mlu.convert-util-value-keyword("b") // "b"
+// ```
+//
+// $value - utility value.
+//
+// Styleguide: sass-tools.functions.utils.value_converters.kw
+
+@function convert-util-value-keyword($value) {
+	@return if(
+		map.has-key(mlu.$util-css-keywords, $value),
+		map.get(mlu.$util-css-keywords, $value),
+		$value
+	);
+}
+
+// Utilities value converters
+//
+// All converters are contained in the `$util-value-converters` map. The keys in this map are the utility types and the values are the conversion functions. As in other settings, you can add additional converters in `$util-value-converters-ext`.
+//
+// Styleguide: sass-tools.functions.utils.value_converters
+
+$util-value-converters: (
+	"": meta.get-function("convert-util-value-default"),
+	"unitless": meta.get-function("convert-util-value-keyword"),
+) !default;
+
+$util-value-converters-ext: (
+) !default;
+
+$util-value-converters: map.merge(
+	$util-value-converters,
+	$util-value-converters-ext
+);
