@@ -164,7 +164,7 @@ Styleguide: sass-tools.mixins.utils
 
 // mk-util
 //
-// Сreates utilities based on a map in which the *keys* are the values of the utilities, and the *values* are the values of the CSS properties.
+// Creates utilities based on a map or a list with values.
 //
 // Utility values are set according to the utility [naming rules](section-concepts.html#kssref-concepts-utility). They can be a string (including empty) or a number. Also, the value can indicate the breakpoint on which it should work - `"tb_lg"`. Even if the breakpoint is passed as a parameter when this mixin is called, then the data about breakpoints from the values map will be more priority. In addition to a specific breakpoint, 2 special values are valid:
 // * `bp` - create a value only on breakpoints:	`"r_bp"`, "4gg_bp"
@@ -179,7 +179,7 @@ Styleguide: sass-tools.mixins.utils
 //		"mn1": #c05,
 //);
 //
-//@include mk-util("Bgc", $Bgc-map);
+//@include mlu.mk-util("Bgc", $Bgc-map);
 // ```
 // CSS
 // ```css
@@ -197,22 +197,42 @@ Styleguide: sass-tools.mixins.utils
 //		}
 //}
 // ```
+// or with list
+// ```scss
+//@include mlu.mk-util("Maw", ("100_sm", 32p, 7su));
+// ```
+// CSS
+// ```css
+//.Maw32p {
+//		max-width: 32%;
+//}
+//
+//.Maw7su {
+//		max-width: 28px;
+//}
+//
+//@media (min-width: 520px) {
+//		.Maw100_sm {
+//			max-width: 100px;
+//		}
+//}
+// ```
 //
 // $name - the name of the utility. It can be specified as a CSS class (with a dot) or just a `string`.
-// $map - map with utilities names values and CSS properties values.
-// $bp = false - breakpoint on which utility values will be generated. Can be any breakpoint from the settings or a special value: `bp` and `all`.
-// $states = false - list of state names. For each value of the utility, all states from this list will be generated. Info about states see [here](section-concepts.html#kssref-concepts-utility-states).
-// $prop = false - CSS property name.
+// $values - `map` with utility values and CSS properties values. Also you can pass a `list` containing only utility values. It will be converted to CSS values with [convert-util-value](section-sass-tools.html#kssref-sass-tools-functions-utils-convert_util_value).
+// $bp = null - breakpoint on which utility values will be generated. Can be any breakpoint from the settings or a special value: `bp` and `all`.
+// $states = null - list of state names. For each value of the utility, all states from this list will be generated. Info about states see [here](section-concepts.html#kssref-concepts-utility-states).
+// $prop = null - CSS property name.
 //
 // Styleguide: sass-tools.mixins.utils.mk_util
 
-@mixin mk-util($name, $map, $bp: null, $states: null, $prop: null) {
+@mixin mk-util($name, $values, $bp: null, $states: null, $prop: null) {
 	$util-name: mlu.check-class($name, 1);
 	$prop: if($prop, $prop, mlu.util-prop($util-name));
 
 	@if list.index(mlu.$utils-directed, $util-name) {
 		$util-name: if($prop, $util-name, null);
-		$utils-data-list: mlu.parse-util-directions($map, $util-name);
+		$utils-data-list: mlu.parse-util-directions($values, $util-name);
 		$utils-directions: map.keys(list.nth($utils-data-list, 1));
 		$utils-props: map.values(list.nth($utils-data-list, 1));
 		$utils-map: list.nth($utils-data-list, 2);
@@ -230,39 +250,42 @@ Styleguide: sass-tools.mixins.utils
 			);
 		}
 	} @else {
-		@include -generate-util($name, $map, $bp, $states, $prop);
+		@include -generate-util($name, $values, $bp, $states, $prop);
 	}
 }
 
 // Private mixin that generate utilities CSS.
 
-@mixin -generate-util($name, $map, $bp: null, $states: null, $prop: null, $direct: null) {
+@mixin -generate-util($name, $values, $bp: null, $states: null, $prop: null, $direct: null) {
 	$name: mlu.check-class($name);
 
-	@each $key, $value in $map {
-		$util-val-map: mlu.parse-util($key);
-		$bp-name: map.get($util-val-map, "mq");
+	@each $key, $value in $values {
+		$util-val-data: mlu.parse-util($key);
+		$bp-name: map.get($util-val-data, "mq");
 		$bp-name: if($bp-name, $bp-name, $bp);
-		$selector: $name + map.get($util-val-map, "value");
+		$util-parsed-val: map.get($util-val-data, "value");
+
+		$selector: $name + $util-parsed-val;
+		$css-value: if($value, $value, mlu.convert-util-value($util-parsed-val, $name));
 
 		@if $bp-name == "all" or $bp-name == "bp" {
 			@include bp-all($selector, if($bp-name == "all", 1, 0)) {
 				@include mk-state(&, $states, if($states, 0, 1)) {
-					@include -check-util-direction($direct, $prop, $value);
+					@include -check-util-direction($direct, $prop, $css-value);
 				}
 			}
 		} @else if $bp-name {
 			@include mgen.bpm($bp-name) {
 				#{$selector}_#{$bp-name} {
 					@include mk-state(&, $states, if($states, 0, 1)) {
-						@include -check-util-direction($direct, $prop, $value);
+						@include -check-util-direction($direct, $prop, $css-value);
 					}
 				}
 			}
 		} @else {
 			#{$selector} {
 				@include mk-state(&, $states, if($states, 0, 1)) {
-					@include -check-util-direction($direct, $prop, $value);
+					@include -check-util-direction($direct, $prop, $css-value);
 				}
 			}
 		}

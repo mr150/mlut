@@ -50,9 +50,10 @@ Styleguide: sass-tools.functions.utils
 
 // parse-util-directions
 //
-// Parse map with directed utility values. Return list with two maps:
+// Parse map or list with directed utility values. Return list with two maps:
 // - `(direction: property)`
-// - `(util-name: (util-value: css-value)`
+// - if passed map: `(util-name: (util-value: css-value)`
+// - passed list: `(util-name: (util-value, util-value)`
 // ```scss
 //$M-map: (
 //   "b-2gg": -2gg,
@@ -79,6 +80,11 @@ Styleguide: sass-tools.functions.utils
 @function parse-util-directions($map, $name: null) {
 	$utils-map: ();
 	$prop-direct-map: ();
+	$append-item-val: if(
+		meta.type-of($map) == "map",
+		meta.get-function("merge", false, map),
+		meta.get-function("append", false, list)
+	);
 
 	@each $key, $value in $map {
 		@if meta.type-of($key) != "string" {
@@ -90,11 +96,7 @@ Styleguide: sass-tools.functions.utils
 		$util-prop: mget.util-prop($name, 0);
 		$util-name: "";
 
-		$utils-map-item-val: if(
-			not mgen.str2n(string.slice($key, 2)),
-			(string.slice($key, 3): $value),
-			(string.slice($key, 2): $value),
-		);
+		$utils-map-item-val: -cut-map-item-val($key, $value, 2);
 
 		@if $dir-val {
 			@if $name {
@@ -105,11 +107,7 @@ Styleguide: sass-tools.functions.utils
 				$util-prop: $dir-val;
 			}
 		} @else if $dir == "x" and string.slice($key, 2, 2) == "y" {
-			$utils-map-item-val: if(
-				not mgen.str2n(string.slice($key, 3)),
-				(string.slice($key, 4): $value),
-				(string.slice($key, 3): $value),
-			);
+			$utils-map-item-val: -cut-map-item-val($key, $value, 3);
 
 			@if $name {
 				$util-name: $name;
@@ -135,7 +133,7 @@ Styleguide: sass-tools.functions.utils
 			//This will be refactored when Sass nested map functions will be released
 			$utils-map: map.merge(
 				$utils-map,
-				($util-name: map.merge(map.get($utils-map, $util-name), $utils-map-item-val))
+				($util-name: meta.call($append-item-val, map.get($utils-map, $util-name), $utils-map-item-val))
 			);
 		}
 	}
@@ -143,9 +141,25 @@ Styleguide: sass-tools.functions.utils
 	@return ($prop-direct-map, $utils-map);
 }
 
+// Private function that cuts utility value from string with direction
+
+@function -cut-map-item-val($raw-val, $css-val, $val-pos) {
+	$util-val: if(
+		not mgen.str2n(string.slice($raw-val, $val-pos)),
+		string.slice($raw-val, $val-pos + 1),
+		string.slice($raw-val, $val-pos)
+	);
+
+	@if $css-val {
+		@return ($util-val: $css-val);
+	}
+
+	@return $util-val;
+}
+
 // convert-util-value
 //
-// Determines the type of utility and, depending on type, calls the converter from the `$util-value-converters` map. If the utility type is not recognized, the [default converter](#kssref-sass-tools-functions-utils-convert_util_value_def) is called. If the `$utils-value-converters` does not contain a converter for this type, the utility value is returned without conversion. Else the result of the converter work is returned.
+// Determines the type of utility and, depending on type, calls the converter from the `$util-value-converters` map. If the utility type is not recognized, the [default converter](#kssref-sass-tools-functions-utils-value_converters-def) is called. If the `$utils-value-converters` does not contain a converter for this type, the utility value is returned without conversion. Else the result of the converter work is returned.
 // ```scss
 //@debug mlu.convert-util-value("2r", "Fz"); // 2rem
 //@debug mlu.convert-util-value(100, "Fw"); // 100
