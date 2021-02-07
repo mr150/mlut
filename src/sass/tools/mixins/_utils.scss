@@ -322,7 +322,7 @@ Styleguide: sass-tools.mixins.utils
 		$tmp-val: if($dir == "t" or $dir == "b", $-gtr-sm-rem, 1);
 		$dash-pos: string.index($prop, "-");
 
-		@if $dash-pos and $dir != "xy" {
+		@if $dash-pos and $dir and $dir != "xy" {
 			$prop: string.slice($prop, 1, $dash-pos - 1);
 		} @else if $dir != "xy" {
 			$dir: "xy";
