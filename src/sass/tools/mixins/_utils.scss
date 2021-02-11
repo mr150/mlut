@@ -170,7 +170,7 @@ Styleguide: sass-tools.mixins.utils
 // * `bp` - create a value only on breakpoints:	`"r_bp"`, "4gg_bp"
 // * `all` - create a normal value and on breakpoints: `"ib_all"`, `"_all"`.
 //
-// Values for CSS properties can be any CSS values, as well as numbers with `gg` and `su` units. Values with  `gg` units are created using the [mk-gtr](#kssref-sass-tools-mixins-mk_gtr) mixin.
+// Values for CSS properties can be any CSS values, as well as numbers with `gg` and `su` units. Values with `gg` units are created using the [mk-gtr](#kssref-sass-tools-mixins-mk_gtr) mixin.
 //
 // ```scss
 //$Bgc-map: (
@@ -232,10 +232,8 @@ Styleguide: sass-tools.mixins.utils
 
 	@if list.index(mlu.$utils-directed, $util-name) {
 		$util-name: if($prop, $util-name, null);
-		$utils-data-list: mlu.parse-util-directions($values, $util-name);
-		$utils-directions: map.keys(list.nth($utils-data-list, 1));
-		$utils-props: map.values(list.nth($utils-data-list, 1));
-		$utils-map: list.nth($utils-data-list, 2);
+		$utils-data: mlu.parse-util-directions($values, $util-name);
+		$utils-map: map.get($utils-data, "utils-map");
 
 		@each $key, $value in $utils-map {
 			$util-index: list.index($utils-map, ($key $value));
@@ -245,8 +243,8 @@ Styleguide: sass-tools.mixins.utils
 				$value,
 				$bp,
 				$states,
-				list.nth($utils-props, $util-index),
-				list.nth($utils-directions, $util-index)
+				list.nth(map.get($utils-data, "props"), $util-index),
+				list.nth(map.get($utils-data, "directions"), $util-index)
 			);
 		}
 	} @else {

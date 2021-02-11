@@ -50,43 +50,57 @@ Styleguide: sass-tools.functions.utils
 
 // parse-util-directions
 //
-// Parse map or list with directed utility values. Return list with two maps:
-// - `(direction: property)`
-// - if passed map: `(util-name: (util-value: css-value)`
-// - passed list: `(util-name: (util-value, util-value)`
+// Parse a map or list with directed utility values. If utility name is not passed, then the directions in the values will become the names of the utilities: t - T, x - mX etc. Returns a map with parsed data.
 // ```scss
 //$M-map: (
 //   "b-2gg": -2gg,
+//   "y--bar_lg": calc(5vw - 1.5rem),
 //   "b1su": 1su,
-//   "y-1gg": -1gg,
-//   "xy-auto": auto,
+//   "xy-auto_all": auto,
 //);
 //
-//parse-util-directions($M-map, "M") => (
-//   ("b": "margin-bottom", "y": "margin", "xy":  "margin"),
-//   (
+//@debug mlu.parse-util-directions($M-map, "M");
+///* (
+//  "utils-map": (
 //    "Mb": ("-2gg": -2gg, "1su": 1su),
 //    "My": ("-bar_lg": calc(5vw - 1.5rem)),
 //    "M": ("auto_all": auto)
 //  )
-//)
+//  "props": ("margin-bottom", "margin", "margin"),
+//  "directions": ("b", "y", "xy"),
+//) */
+// ```
+// or with list
+// ```scss
+//@debug mlu.parse-util-directions(("y23", "r2r", "x5gg", "r32su"), "P");
+///* (
+//  "utils-map": (
+//    "Py": "23",
+//    "Pr": ("2r", "32su"),
+//    "Px": "5gg"
+//  )
+//  "props": ("padding", "padding-right", "padding"),
+//  "directions": ("y", "r", "x"),
+//) */
 // ```
 //
-// $map - map with directed utility values.
+// $values - `map` or `list` with values.
 // $name = null - directed utility name.
 //
 // Styleguide: sass-tools.functions.utils.parse_util_dir
 
-@function parse-util-directions($map, $name: null) {
+@function parse-util-directions($values, $name: null) {
 	$utils-map: ();
-	$prop-direct-map: ();
+	$util-directions: ();
+	$directed-props: ();
+
 	$append-item-val: if(
-		meta.type-of($map) == "map",
+		meta.type-of($values) == "map",
 		meta.get-function("merge", false, map),
 		meta.get-function("append", false, list)
 	);
 
-	@each $key, $value in $map {
+	@each $key, $value in $values {
 		@if meta.type-of($key) != "string" {
 			@error "Invalid key format '#{$key}' for '#{$name}' in map of values";
 		}
@@ -128,7 +142,8 @@ Styleguide: sass-tools.functions.utils
 
 		@if not map.has-key($utils-map, $util-name) {
 			$utils-map: map.merge($utils-map, ($util-name: $utils-map-item-val));
-			$prop-direct-map: map.merge($prop-direct-map, ($dir: $util-prop));
+			$util-directions: list.append($util-directions, $dir);
+			$directed-props: list.append($directed-props, $util-prop);
 		} @else {
 			//This will be refactored when Sass nested map functions will be released
 			$utils-map: map.merge(
@@ -138,7 +153,11 @@ Styleguide: sass-tools.functions.utils
 		}
 	}
 
-	@return ($prop-direct-map, $utils-map);
+	@return (
+		"utils-map": $utils-map,
+		"props": $directed-props,
+		"directions": $util-directions,
+	);
 }
 
 // Private function that cuts utility value from string with direction
