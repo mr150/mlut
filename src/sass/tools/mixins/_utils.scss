@@ -217,6 +217,27 @@ Styleguide: sass-tools.mixins.utils
 //		}
 //}
 // ```
+// To create position utilities like `T`, `R` etc, pass `mXy` as utility name and add directions to the values:
+// ```scss
+//@include mlu.mk-util("mXy", ("y23", "r2gg", "x5x"));
+// ```
+// CSS
+// ```css
+//.mY23 {
+//		top: 23px;
+//		bottom: 23px;
+//}
+//
+//.R2gg {
+//		right: 32px;
+//		right: calc(var(--mlu-gg) * 2);
+//}
+//
+//.mX5x {
+//		right: 5ex;
+//		left: 5ex;
+//}
+// ```
 //
 // $name - the name of the utility. It can be specified as a CSS class (with a dot) or just a `string`.
 // $values - `map` with utility values and CSS properties values. Also you can pass a `list` containing only utility values. It will be converted to CSS values with [convert-util-value](section-sass-tools.html#kssref-sass-tools-functions-utils-convert_util_value).
