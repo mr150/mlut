@@ -1,4 +1,4 @@
-@use "../../tools" as mlu;
+@use '../../tools' as mlu;
 
 /*
 Box sizing
@@ -53,19 +53,19 @@ Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
 Styleguide: core-utils.bxz.ov
 */
 
-@include mlu.mk-util("Maw", (
-	"-fx0": mlu.$Maw--fx0,
-	"100p": 100%,
-	"n": none,
+@include mlu.mk-util('Maw', (
+	'-fx0': mlu.$Maw--fx0,
+	'100p': 100%,
+	'n': none,
 ));
 
-@include mlu.mk-util("H", (
-	"100p": 100%,
+@include mlu.mk-util('H', (
+	'100p': 100%,
 	0: 0,
 ));
 
-@include mlu.mk-util("Mih", (
-	"100p": 100%,
+@include mlu.mk-util('Mih', (
+	'100p': 100%,
 	100vh: 100vh,
 ));
 
@@ -73,18 +73,18 @@ Styleguide: core-utils.bxz.ov
 	box-sizing: border-box;
 }
 
-@include mlu.mk-util("Fl", (
-	"": left,
-	"r": right,
+@include mlu.mk-util('Fl', (
+	'': left,
+	'r': right,
 ));
 
 .mCl {
 	@include mlu.mCl;
 }
 
-@include mlu.mk-util("Ov", (
-	"": hidden,
-	"a": auto,
+@include mlu.mk-util('Ov', (
+	'': hidden,
+	'a': auto,
 ));
 
 .Ovx-a {

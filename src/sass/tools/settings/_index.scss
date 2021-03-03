@@ -100,16 +100,16 @@ npm run build
 #### Styles ####
 Once the assembly is configured, import sass tools and settings to your `style.scss`
 ```scss
-@import "tools/settings";
-@import "tools/functions";
-@import "tools/mixins";
+@import 'tools/settings';
+@import 'tools/functions';
+@import 'tools/mixins';
 ```
 Then you can import blocks and utilities how it is done in the [src/sass/mlut.scss](https://github.com/mr150/mlut/blob/master/src/sass/mlut.scss) to get the standard build. Or you can import only what you need:
 ```scss
-@import "core/blocks/wrapper";
-@import "core/utils/display";
+@import 'core/blocks/wrapper';
+@import 'core/utils/display';
 
-@include mlu-bpm("md") {
+@include mlu-bpm('md') {
 	.inp--common {
 		padding: mlu-px2em(16px) 16px;
 	}
@@ -146,7 +146,7 @@ Element
 
 A part of a block that cannot be used without it.
 
-The names of the elements are constructed according to the scheme: `block-name__element-name`. The element name is separated from the block name by two underscores '__'.
+The names of the elements are constructed according to the scheme: `block-name__element-name`. The element name is separated from the block name by two underscores `__`.
 
 Note that the *element* and the *HTML-element* are different concepts.
 
@@ -194,7 +194,7 @@ Utility
 An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
 
 Utility class names are formed according to the scheme:
-1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `nojs` - javascript disabled etc. Allowed several states in the same class. States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore '_'. More about states [below](#kssref-concepts-utility-states).
+1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `nojs` - javascript disabled etc. Allowed several states in the same class. States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore `_`. More about states [below](#kssref-concepts-utility-states).
 1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations([pdf](https://yadi.sk/i/VcKfz5u7DBHrLA)).
 1. optional value. Valid are:
 	* number
@@ -223,7 +223,7 @@ Utilities in MLUT come in 3 types:
 
 * **Common** \- named and work like CSS properties.
 * **Custom** \- manage one or more related CSS [custom properties](section-core-styles.html#kssref-core-styles-css_vars). Their names begin with a hyphen and are abbreviations of the names of the corresponding properties. Examples: `-Gg`.
-* **Modified** \- affect several CSS properties. The names of such utilities begin with 'm' prefix.
+* **Modified** \- affect several CSS properties. The names of such utilities begin with `m` prefix.
 
 Weight: 0
 
@@ -278,9 +278,9 @@ States in MLUT called the implementation of some features of the CSS using utili
 States also include utilities values that work under certain conditions that are not related with CSS.
 Available states for utilities are listed in the [settings](section-sass-tools.html#kssref-sass-tools-settings-utils-states).
 States are created using the [mk-state](section-sass-tools.html#kssref-sass-tools-mixins-mk_state) mixin. It can create 3 types of states based on the types of values in the states map:
-1. pseudo-classes and pseudo-elements. In states map the value is a string - `"h": "hover"`
-1. multiple selectors with pseudo-classes. State value is a list - `"h-f": ("hover", "focus")`
-1. just the utilities values that work under certain conditions. State value is a null - `"nojs": null`
+1. pseudo-classes and pseudo-elements. In states map the value is a string - `'h': 'hover'`
+1. multiple selectors with pseudo-classes. State value is a list - `'h-f': ('hover', 'focus')`
+1. just the utilities values that work under certain conditions. State value is a null - `'nojs': null`
 
 In the core there are utilities with states whose creation has not yet been implemented:
 * `sp` \- utility inside the @supports at-rule. It will only work if the CSS property, value, or @supports supported by the browser.
@@ -368,7 +368,7 @@ Some utilities responsive by design or have only responsive values. It will be i
 
 For some utilities, there is a description for non-developers.
 
-In the examples of the work of some utilities for demonstration, other utilities may be used like this: '`Util1.Util2`'. In the markup, instead of a dot, you need to use a space to separate utilities, like this: "`Util1 Util2`"
+In the examples of the work of some utilities for demonstration, other utilities may be used like this: '`Util1.Util2`'. In the markup, instead of a dot, you need to use a space to separate utilities, like this: '`Util1 Util2`'
 
 Weight: 3
 
@@ -457,9 +457,9 @@ Grid settings, compilation flags, constants and more. All core settings are in t
 Styleguide: sass-tools.settings
 */
 
-@forward "flags";
-@forward "general";
-@forward "grid";
-@forward "blocks";
-@forward "css-vars";
-@forward "utils";
+@forward 'flags';
+@forward 'general';
+@forward 'grid';
+@forward 'blocks';
+@forward 'css-vars';
+@forward 'utils';

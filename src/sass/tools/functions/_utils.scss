@@ -1,12 +1,12 @@
-@use "sass:list";
-@use "sass:map";
-@use "sass:meta";
-@use "sass:math";
-@use "sass:string";
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
 
-@use "../settings" as mlu;
-@use "general" as mgen;
-@use "getters" as mget;
+@use '../settings' as mlu;
+@use 'general' as mgen;
+@use 'getters' as mget;
 
 /*
 Utilities
@@ -22,7 +22,7 @@ Styleguide: sass-tools.functions.utils
 // - `value` - pure value or name
 // - `mq` - breakpoint or any mediaquery
 // ```scss
-//parse-util("1su_md") => ("value": "1su", "mq": "md")
+//parse-util('1su_md') => ('value': '1su', 'mq': 'md')
 // ```
 //
 // $util-val - utility value or name. Type string.
@@ -30,7 +30,7 @@ Styleguide: sass-tools.functions.utils
 // Styleguide: sass-tools.functions.utils.parse_util
 
 @function parse-util($util-val) {
-	$divider-pos: if(meta.type-of($util-val) == "string", string.index($util-val, "_"), false);
+	$divider-pos: if(meta.type-of($util-val) == 'string', string.index($util-val, '_'), false);
 	$mq: null;
 
 	@if $divider-pos {
@@ -39,12 +39,12 @@ Styleguide: sass-tools.functions.utils
 	}
 
 	@return (
-		"value": if(
+		'value': if(
 			mgen.str2n($util-val) or mget.util-prop($util-val, 0),
 			$util-val,
-			"-" + $util-val
+			'-' + $util-val
 		),
-		"mq": $mq,
+		'mq': $mq,
 	);
 }
 
@@ -53,34 +53,34 @@ Styleguide: sass-tools.functions.utils
 // Parse a map or list with directed utility values. If utility name is not passed, then the directions in the values will become the names of the utilities: t - T, x - mX etc. Returns a map with parsed data.
 // ```scss
 //$M-map: (
-//   "b-2gg": -2gg,
-//   "y--bar_lg": calc(5vw - 1.5rem),
-//   "b1su": 1su,
-//   "xy-auto_all": auto,
+//   'b-2gg': -2gg,
+//   'y--bar_lg': calc(5vw - 1.5rem),
+//   'b1su': 1su,
+//   'xy-auto_all': auto,
 //);
 //
-//@debug mlu.parse-util-directions($M-map, "M");
+//@debug mlu.parse-util-directions($M-map, 'M');
 ///* (
-//  "utils-map": (
-//    "Mb": ("-2gg": -2gg, "1su": 1su),
-//    "My": ("-bar_lg": calc(5vw - 1.5rem)),
-//    "M": ("auto_all": auto)
+//  'utils-map': (
+//    'Mb': ('-2gg': -2gg, '1su': 1su),
+//    'My': ('-bar_lg': calc(5vw - 1.5rem)),
+//    'M': ('auto_all': auto)
 //  )
-//  "props": ("margin-bottom", "margin", "margin"),
-//  "directions": ("b", "y", "xy"),
+//  'props': ('margin-bottom', 'margin', 'margin'),
+//  'directions': ('b', 'y', 'xy'),
 //) */
 // ```
 // or with list
 // ```scss
-//@debug mlu.parse-util-directions(("y23", "r2r", "x5gg", "r32su"), "P");
+//@debug mlu.parse-util-directions(('y23', 'r2r', 'x5gg', 'r32su'), 'P');
 ///* (
-//  "utils-map": (
-//    "Py": "23",
-//    "Pr": ("2r", "32su"),
-//    "Px": "5gg"
+//  'utils-map': (
+//    'Py': '23',
+//    'Pr': ('2r', '32su'),
+//    'Px': '5gg'
 //  )
-//  "props": ("padding", "padding-right", "padding"),
-//  "directions": ("y", "r", "x"),
+//  'props': ('padding', 'padding-right', 'padding'),
+//  'directions': ('y', 'r', 'x'),
 //) */
 // ```
 //
@@ -95,49 +95,49 @@ Styleguide: sass-tools.functions.utils
 	$directed-props: ();
 
 	$append-item-val: if(
-		meta.type-of($values) == "map",
-		meta.get-function("merge", false, map),
-		meta.get-function("append", false, list)
+		meta.type-of($values) == 'map',
+		meta.get-function('merge', false, map),
+		meta.get-function('append', false, list)
 	);
 
 	@each $key, $value in $values {
-		@if meta.type-of($key) != "string" {
-			@error "Invalid key format '#{$key}' for '#{$name}' in map of values";
+		@if meta.type-of($key) != 'string' {
+			@error 'Invalid key format `#{$key}` for `#{$name}` in map of values';
 		}
 
 		$dir: string.slice($key, 1, 1);
 		$dir-val: map.get(mlu.$main-directions, $dir);
 		$util-prop: mget.util-prop($name, 0);
-		$util-name: "";
+		$util-name: '';
 
 		$utils-map-item-val: -cut-map-item-val($key, $value, 2);
 
 		@if $dir-val {
 			@if $name {
 				$util-name: $name + $dir;
-				$util-prop: $util-prop + "-" + $dir-val;
+				$util-prop: $util-prop + '-' + $dir-val;
 			} @else {
 				$util-name: string.to-upper-case($dir);
 				$util-prop: $dir-val;
 			}
-		} @else if $dir == "x" and string.slice($key, 2, 2) == "y" {
+		} @else if $dir == 'x' and string.slice($key, 2, 2) == 'y' {
 			$utils-map-item-val: -cut-map-item-val($key, $value, 3);
 
 			@if $name {
 				$util-name: $name;
-				$dir: "xy";
+				$dir: 'xy';
 			} @else {
-				$util-name: "mXy";
-				$dir: "all";
+				$util-name: 'mXy';
+				$dir: 'all';
 			}
-		} @else if $dir == "x" or $dir == "y" {
+		} @else if $dir == 'x' or $dir == 'y' {
 			@if $name {
 				$util-name: $name + $dir;
 			} @else {
-				$util-name: "m" + string.to-upper-case($dir);
+				$util-name: 'm' + string.to-upper-case($dir);
 			}
 		} @else {
-			@error "Invalid direction '#{$dir}' for '#{$name}' in map of values";
+			@error 'Invalid direction `#{$dir}` for `#{$name}` in map of values';
 		}
 
 		@if not map.has-key($utils-map, $util-name) {
@@ -154,9 +154,9 @@ Styleguide: sass-tools.functions.utils
 	}
 
 	@return (
-		"utils-map": $utils-map,
-		"props": $directed-props,
-		"directions": $util-directions,
+		'utils-map': $utils-map,
+		'props': $directed-props,
+		'directions': $util-directions,
 	);
 }
 
@@ -180,8 +180,8 @@ Styleguide: sass-tools.functions.utils
 //
 // Determines the type of utility and, depending on type, calls the converter from the `$util-value-converters` map. If the utility type is not recognized, the [default converter](#kssref-sass-tools-functions-utils-value_converters-def) is called. If the `$utils-value-converters` does not contain a converter for this type, the utility value is returned without conversion. Else the result of the converter work is returned.
 // ```scss
-//@debug mlu.convert-util-value("2r", "Fz"); // 2rem
-//@debug mlu.convert-util-value(100, "Fw"); // 100
+//@debug mlu.convert-util-value('2r', 'Fz'); // 2rem
+//@debug mlu.convert-util-value(100, 'Fw'); // 100
 // ```
 //
 // $util-val - utility value
@@ -190,7 +190,7 @@ Styleguide: sass-tools.functions.utils
 // Styleguide: sass-tools.functions.utils.convert_util_value
 
 @function convert-util-value($util-val, $name) {
-	$util-type: "";
+	$util-type: '';
 
 	@each $key, $value in mlu.$util-value-types {
 		@if list.index($value, $name) {
@@ -213,7 +213,7 @@ Styleguide: sass-tools.functions.utils
 // Default converter for utility value to CSS value. Converts global CSS keywords, and numbers with unit aliases.
 // ```scss
 //@debug mlu.convert-util-value-default(480) // 480px
-//@debug mlu.convert-util-value-default("n") // none
+//@debug mlu.convert-util-value-default('n') // none
 // ```
 //
 // $value - utility value.
@@ -221,22 +221,22 @@ Styleguide: sass-tools.functions.utils
 // Styleguide: sass-tools.functions.utils.value_converters.def
 
 @function convert-util-value-default($value) {
-	$val-unit: "";
-	$val-number: mgen.str2n($value + "");
+	$val-unit: '';
+	$val-number: mgen.str2n($value + '');
 
-	@if meta.type-of($value) == "number" {
+	@if meta.type-of($value) == 'number' {
 		$val-unit: map.get(mlu.$util-units-map, math.unit($value));
-	} @else if meta.type-of($value) == "string" and  $val-number {
-		$util-unit: string.slice($value, string.length($val-number + "") + 1);
+	} @else if meta.type-of($value) == 'string' and  $val-number {
+		$util-unit: string.slice($value, string.length($val-number + '') + 1);
 		$val-unit: map.get(mlu.$util-units-map, $util-unit);
 	}
 
-	@if $val-unit != "" {
+	@if $val-unit != '' {
 		// Maybe in the future there will be processing of all CSS units, but so far a number with an unknown unit is returned as a string
 		@return if(
 			$val-unit,
 			$val-number * $val-unit,
-			string.unquote($value + "")
+			string.unquote($value + '')
 		);
 	}
 
@@ -247,8 +247,8 @@ Styleguide: sass-tools.functions.utils
 //
 // Converts aliases to global CSS keywords. If the alias is not found in the `$util-css-keywords`, returns the value without conversion.
 // ```scss
-//@debug mlu.convert-util-value-keyword("i") // inherit
-//@debug mlu.convert-util-value-keyword("b") // "b"
+//@debug mlu.convert-util-value-keyword('i') // inherit
+//@debug mlu.convert-util-value-keyword('b') // 'b'
 // ```
 //
 // $value - utility value.
@@ -270,8 +270,8 @@ Styleguide: sass-tools.functions.utils
 // Styleguide: sass-tools.functions.utils.value_converters
 
 $util-value-converters: (
-	"": meta.get-function("convert-util-value-default"),
-	"unitless": meta.get-function("convert-util-value-keyword"),
+	'': meta.get-function('convert-util-value-default'),
+	'unitless': meta.get-function('convert-util-value-keyword'),
 ) !default;
 
 $util-value-converters-ext: (

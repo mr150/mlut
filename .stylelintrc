@@ -145,7 +145,7 @@
 		"selector-max-empty-lines": 0,
 		"selector-max-type": 1,
 		"selector-no-qualifying-type": true,
-		"string-quotes": "double",
+		"string-quotes": "single",
 		"string-no-newline": true,
 		"unit-case": "lower",
 		"value-list-comma-newline-after": "always-multi-line",

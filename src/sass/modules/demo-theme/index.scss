@@ -1,8 +1,8 @@
-@forward "config";
+@forward 'config';
 
-@use "../../tools" as mlu;
-@use "config" as mt-demo;
-@use "../core-extend/mixins" as mlu-ext;
+@use '../../tools' as mlu;
+@use 'config' as mt-demo;
+@use '../core-extend/mixins' as mlu-ext;
 
 @include mlu.mk-Maw(mt-demo.$Maw);
 
@@ -22,10 +22,10 @@
 
 @include mlu.mk-Trf(mt-demo.$Trf);
 
-@include mlu.mk-Op(mt-demo.$Op, $states: ("h-f"));
+@include mlu.mk-Op(mt-demo.$Op, $states: ('h-f'));
 
-@include mlu.mk-C(mt-demo.$C-states, $states: ("h-f", "a"));
+@include mlu.mk-C(mt-demo.$C-states, $states: ('h-f', 'a'));
 
-@include mlu.mk-Bgc(mt-demo.$C-states, $states: ("h-f", "a"));
+@include mlu.mk-Bgc(mt-demo.$C-states, $states: ('h-f', 'a'));
 
-@include mlu-ext.mk-Bxsh(mt-demo.$Bxsh-states, $states: ("h-f"));
+@include mlu-ext.mk-Bxsh(mt-demo.$Bxsh-states, $states: ('h-f'));

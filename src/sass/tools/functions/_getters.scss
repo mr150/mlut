@@ -1,7 +1,7 @@
-@use "sass:list";
-@use "sass:map";
+@use 'sass:list';
+@use 'sass:map';
 
-@use "../settings" as mlu;
+@use '../settings' as mlu;
 
 /*
 Getters
@@ -15,7 +15,7 @@ Styleguide: sass-tools.functions.getters
 //
 // Get breakpoint value from [$mlu-breakpoints](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints) map.
 // ```scss
-//mlu-bp("md") => 760px
+//mlu-bp('md') => 760px
 //```
 //
 // $name - breakpoint name. Type: string.
@@ -28,42 +28,42 @@ Styleguide: sass-tools.functions.getters
 		@return map.get(mlu.$breakpoints, $name);
 	}
 
-	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-breakpoints";
+	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $mlu-breakpoints';
 }
 
 // mlu-bp-next
 //
 // Get next breakpoint value.
 // ```scss
-//mlu-bp-next("md") => 960px
+//mlu-bp-next('md') => 960px
 //```
 //
 // $bp = 0 - breakpoint name.
 // If pass last breakpoint, function return 0. With default value, function return first breakpoint. Type: string.
-// $data-type = "value" - service parameter for functions-wrappers. Type: string.
+// $data-type = 'value' - service parameter for functions-wrappers. Type: string.
 //
 // Styleguide: sass-tools.functions.getters.bp_next
 
-@function bp-next($bp: 0, $data-type: "value") {
+@function bp-next($bp: 0, $data-type: 'value') {
 	@if $bp == 0 or map.has-key(mlu.$breakpoints, $bp) {
 		$bp-keys: map.keys(mlu.$breakpoints);
 		$bp-index: if($bp != 0, list.index($bp-keys, $bp), 0);
 
-		@if $data-type == "name" {
+		@if $data-type == 'name' {
 			@return if($bp-index < list.length($bp-keys), list.nth(map.keys(mlu.$breakpoints), $bp-index + 1), 0);
 		} @else {
 			@return if($bp-index < list.length($bp-keys), list.nth(map.values(mlu.$breakpoints), $bp-index + 1), 0);
 		}
 	}
 
-	@error "Invalid breakpoint name: '#{$bp}'. '#{$bp}' is not defined in $mlu-breakpoints";
+	@error 'Invalid breakpoint name: `#{$bp}`. `#{$bp}` is not defined in $mlu-breakpoints';
 }
 
 // mlu-bp-next-name
 //
 // Wrapper on [mlu-bp-next](#kssref-sass-tools-functions-bp_next) for get breakpoint's name. Works similarly.
 // ```scss
-//mlu-bp-next-name("md") => "lg"
+//mlu-bp-next-name('md') => 'lg'
 //```
 //
 // $bp = 0 - breakpoint name. Type: string.
@@ -71,42 +71,42 @@ Styleguide: sass-tools.functions.getters
 // Styleguide: sass-tools.functions.getters.bp_next_name
 
 @function bp-next-name($bp: 0) {
-	@return bp-next($bp, "name");
+	@return bp-next($bp, 'name');
 }
 
 // mlu-bp-prev
 //
 // Get previous breakpoint value.
 // ```scss
-//mlu-bp-prev("md") => 520px
+//mlu-bp-prev('md') => 520px
 //```
 //
 // $bp = 0 - breakpoint name.
 // If pass firts breakpoint, function return 0. With default value, function return last breakpoint. Type: string.
-// $data-type = "value" - service parameter for functions-wrappers. Type: string.
+// $data-type = 'value' - service parameter for functions-wrappers. Type: string.
 //
 // Styleguide: sass-tools.functions.getters.bp_prev
 
-@function bp-prev($bp: 0, $data-type: "value") {
+@function bp-prev($bp: 0, $data-type: 'value') {
 	@if $bp == 0 or map.has-key(mlu.$breakpoints, $bp) {
 		$bp-keys: map.keys(mlu.$breakpoints);
 		$bp-index: if($bp != 0, list.index($bp-keys, $bp), list.length($bp-keys) + 1);
 
-		@if $data-type == "name" {
+		@if $data-type == 'name' {
 			@return if($bp-index > 1, list.nth(map.keys(mlu.$breakpoints), $bp-index - 1), 0);
 		} @else {
 			@return if($bp-index > 1, list.nth(map.values(mlu.$breakpoints), $bp-index - 1), 0);
 		}
 	}
 
-	@error "Invalid breakpoint name: '#{$bp}'. '#{$bp}' is not defined in $mlu-breakpoints";
+	@error 'Invalid breakpoint name: `#{$bp}`. `#{$bp}` is not defined in $mlu-breakpoints';
 }
 
 // mlu-bp-prev-name
 //
 // Wrapper on [mlu-bp-prev](#kssref-sass-tools-functions-bp_prev) for get breakpoint's name. Works similarly.
 // ```scss
-//mlu-bp-prev-name("md") => "sm"
+//mlu-bp-prev-name('md') => 'sm'
 //```
 //
 // $bp = 0 - breakpoint name. Type: string.
@@ -114,14 +114,14 @@ Styleguide: sass-tools.functions.getters
 // Styleguide: sass-tools.functions.getters.bp_prev_name
 
 @function bp-prev-name($bp: 0) {
-	@return bp-prev($bp, "name");
+	@return bp-prev($bp, 'name');
 }
 
 // mlu-grid-gtr
 //
 // Get grid gutter on breakpoint from [$mlu-grid-gutters](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters) map.
 // ```scss
-//mlu-grid-gtr("md") => 12px
+//mlu-grid-gtr('md') => 12px
 //```
 //
 // $name - breakpoint name. Type: string.
@@ -134,14 +134,14 @@ Styleguide: sass-tools.functions.getters
 		@return map.get(mlu.$grid-gutters, $name);
 	}
 
-	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-grid-gutters";
+	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $mlu-grid-gutters';
 }
 
 // mlu-grid-cols-count
 //
 // Get columns count on breakpoint from [$mlu-grid-cols](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints) map.
 // ```scss
-//mlu-grid-cols-count("sm") => 4
+//mlu-grid-cols-count('sm') => 4
 //```
 //
 // $name - breakpoint name. Type: string.
@@ -154,14 +154,14 @@ Styleguide: sass-tools.functions.getters
 		@return map.get(mlu.$grid-cols, $name);
 	}
 
-	@error "Invalid breakpoint name: '#{$name}'. '#{$name}' is not defined in $mlu-grid-cols";
+	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $mlu-grid-cols';
 }
 
 // mlu-css-var
 //
 // Get name of CSS custom property from [$mlu-css-vars](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names) map.
 // ```scss
-//mlu-css-var("gg") => "--mlu-gg"
+//mlu-css-var('gg') => '--mlu-gg'
 //```
 //
 // $name - custom property name. Type: string.
@@ -174,14 +174,14 @@ Styleguide: sass-tools.functions.getters
 		@return map.get(mlu.$css-vars, $name);
 	}
 
-	@error "Invalid custom property name. '#{$name}' is not defined in $mlu-css-vars";
+	@error 'Invalid custom property name. `#{$name}` is not defined in $mlu-css-vars';
 }
 
 // util-prop
 //
 // Get the CSS property, which corresponds to the utility from [$mlu-utils-map](section-sass-tools.html#kssref-sass-tools-settings-utils).
 // ```scss
-//mlu-util-prop("D") => "display"
+//mlu-util-prop('D') => 'display'
 //```
 //
 // $name - utility name. Type: string.
@@ -194,5 +194,5 @@ Styleguide: sass-tools.functions.getters
 		@return map.get(mlu.$utils-map, $name);
 	}
 
-	@error "Invalid utility name. '#{$name}' is not defined in $mlu-utils-map";
+	@error 'Invalid utility name. `#{$name}` is not defined in $mlu-utils-map';
 }

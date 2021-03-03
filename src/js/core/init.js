@@ -14,14 +14,14 @@ Styleguide: core-scripts.init
 */
 
 ;(function(){
-	"use strict"
+	'use strict'
 
-	var elmsWithUtils = document.querySelectorAll("[class*='js']");
+	var elmsWithUtils = document.querySelectorAll('[class*="js"]');
 
 	Array.prototype.forEach.call(elmsWithUtils, function(item) {
 		item.className = item.className
-			.replace(/(\ |^)nojs[_\-](?:[^\ \n]*)/g, "")
-			.replace(/(\ |^)js[_\-]/g, " ")
+			.replace(/(\ |^)nojs[_\-](?:[^\ \n]*)/g, '')
+			.replace(/(\ |^)js[_\-]/g, ' ')
 			.trim();
 	});
 }());

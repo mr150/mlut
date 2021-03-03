@@ -15,12 +15,12 @@
 //
 // Styleguide: sass-tools.settings.css_vars.names
 
-$var-gg: "--mlu-gg" !default;
-$var-gg-rem: "--mlu-gg-rem" !default;
-$var-grid-cols: "--mlu-grid-cols" !default;
+$var-gg: '--mlu-gg' !default;
+$var-gg-rem: '--mlu-gg-rem' !default;
+$var-grid-cols: '--mlu-grid-cols' !default;
 
 $css-vars: (
-	"gg": $var-gg,
-	"gg-rem": $var-gg-rem,
-	"grid-cols": $var-grid-cols,
+	'gg': $var-gg,
+	'gg-rem': $var-gg-rem,
+	'grid-cols': $var-grid-cols,
 ) !default;

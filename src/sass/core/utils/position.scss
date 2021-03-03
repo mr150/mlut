@@ -1,7 +1,7 @@
-@use "sass:list";
-@use "sass:map";
+@use 'sass:list';
+@use 'sass:map';
 
-@use "../../tools" as mlu;
+@use '../../tools' as mlu;
 
 /*
 Position
@@ -41,24 +41,24 @@ X and Y coordinate axes. Change `top` or `bottom` and `right` or `left`.
 Styleguide: core-utils.pos.xy
 */
 
-@include mlu.mk-util("Pos", (
-	"": relative,
-	"s": static,
-	"a_all": absolute,
-	"f": fixed,
+@include mlu.mk-util('Pos', (
+	'': relative,
+	's': static,
+	'a_all': absolute,
+	'f': fixed,
 ));
 
 $Xy-map: ();
 
-@each $dir in list.join(map.keys(mlu.$main-directions), ("x", "y", "xy")) {
+@each $dir in list.join(map.keys(mlu.$main-directions), ('x', 'y', 'xy')) {
 	$Xy-map: map.merge($Xy-map, ($dir + 0: 0));
 }
 
 @each $dir in map.keys(mlu.$main-directions) {
-	$Xy-map: map.merge($Xy-map, ($dir + "100p": 100%));
+	$Xy-map: map.merge($Xy-map, ($dir + '100p': 100%));
 }
 
-@include mlu.mk-util("mXy", $Xy-map);
+@include mlu.mk-util('mXy', $Xy-map);
 
 .mXy50p {
 	top: 50%;
@@ -67,7 +67,7 @@ $Xy-map: ();
 }
 
 $Z-map: (
-	"max": mlu.$Z-max,
+	'max': mlu.$Z-max,
 	-1: -1,
 );
 
@@ -75,4 +75,4 @@ $Z-map: (
 	$Z-map: map.merge($Z-map, ($i: $i));
 }
 
-@include mlu.mk-util("Z", $Z-map);
+@include mlu.mk-util('Z', $Z-map);

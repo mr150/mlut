@@ -1,7 +1,7 @@
-@use "sass:meta";
+@use 'sass:meta';
 
-@use "forward-tools" as mlu;
-@use "grid" as mgs;
+@use 'forward-tools' as mlu;
+@use 'grid' as mgs;
 
 /*
 Blocks
@@ -52,8 +52,8 @@ Styleguide: sass-tools.mixins.blocks
 // You can also pass a number if you need the same gutter on all breakpoints.
 // Custom gutters only work when the `$css-vars = false`.
 // $calc = false - bool flag for generation CSS `calc()` fallback. It can needed only
-// for "col" `$type`.
-// $type = "col" - service parameter which used only by mixins-wrappers.
+// for 'col' `$type`.
+// $type = 'col' - service parameter which used only by mixins-wrappers.
 // It needed for reusable `row-col` for making other
 // `row` elements, because the most of styles for them is the same.
 // $css-vars = settings.$flag-css-vars - use CSS custom properties for gutters.
@@ -62,13 +62,13 @@ Styleguide: sass-tools.mixins.blocks
 // Styleguide: sass-tools.mixins.blocks.row_col
 
 @mixin row-col($display: inline-block, $gutters: mlu.$grid-gutters,
-$css-vars: mlu.$flag-css-vars, $calc: mlu.$flag-calc-fallback, $type: "col") {
+$css-vars: mlu.$flag-css-vars, $calc: mlu.$flag-calc-fallback, $type: 'col') {
 	$grid-gutters: $gutters;
 
-	@if meta.type-of($gutters) == "number" {
+	@if meta.type-of($gutters) == 'number' {
 		$grid-gutters: (mlu.$bp-xs: $gutters);
-	} @else if meta.type-of($gutters) != "map" {
-		@error "Wrong type of argument $gutters: '#{meta.type-of($gutters)}'. Expected 'number' or 'map'";
+	} @else if meta.type-of($gutters) != 'map' {
+		@error 'Wrong type of argument $gutters: `#{meta.type-of($gutters)}`. Expected `number` or `map`';
 	}
 
 	@if $css-vars {
@@ -92,13 +92,13 @@ $css-vars: mlu.$flag-css-vars, $calc: mlu.$flag-calc-fallback, $type: "col") {
 		}
 	}
 
-	@if $type == "col" {
+	@if $type == 'col' {
 		--gc-diff: var(#{mlu.$var-gg});
 
 		@include mgs.W(12gc, $gutters: $grid-gutters, $css-vars: $css-vars, $calc: $calc);
 
 		@include mgs.mk-gtr(mlu.$gtr-sm, $gutters: $grid-gutters, $calc: $calc, $css-vars: $css-vars);
-		@include mgs.mk-gtr(mlu.$gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: "b", $coef: 2, $css-vars: $css-vars);
+		@include mgs.mk-gtr(mlu.$gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: 'b', $coef: 2, $css-vars: $css-vars);
 
 		&.row {
 			margin-bottom: 0px;
@@ -141,5 +141,5 @@ $css-vars: mlu.$flag-css-vars, $calc: mlu.$flag-calc-fallback, $type: "col") {
 // Styleguide: sass-tools.mixins.blocks.row_item
 
 @mixin row-item($display: inline-block) {
-	@include row-col($display, $type: "item");
+	@include row-col($display, $type: 'item');
 }

@@ -1,6 +1,6 @@
-@use "sass:map";
+@use 'sass:map';
 
-@use "../../tools" as mlu;
+@use '../../tools' as mlu;
 
 /*
 Margin
@@ -65,45 +65,45 @@ Styleguide: core-utils.margin.mx
 */
 
 $M-map: (
-	"xy0": 0,
-	"xy-a": auto,
-	"xy-i": inherit,
+	'xy0': 0,
+	'xy-a': auto,
+	'xy-i': inherit,
 );
 
 @each $key, $value in mlu.$main-directions {
-	$M-map: map.merge($M-map, ($key + "0": 0));
+	$M-map: map.merge($M-map, ($key + '0': 0));
 }
 
 $M-map: map.merge($M-map,
 (
-	"b0_bp": 0,
-	"x0_bp": 0,
-	"l-a_all": auto,
-	"x-a_all": auto,
+	'b0_bp': 0,
+	'x0_bp': 0,
+	'l-a_all': auto,
+	'x-a_all': auto,
 ));
 
 @for $i from mlu.$My-range through 1 {
 	$value: $i * 1gg;
-	$M-map: map.merge($M-map, ("t" + $value: $value));
-	$M-map: map.merge($M-map, ("b" + $value: $value));
+	$M-map: map.merge($M-map, ('t' + $value: $value));
+	$M-map: map.merge($M-map, ('b' + $value: $value));
 }
 
 $M-map: map.merge($M-map,
 (
-	"b-2gg": -2gg,
-	"b1su": 1su,
-	"b2su": 2su,
-	"b3su": 3su,
-	"b4su": 4su,
-	"b5su": 5su,
-	"b6su": 6su,
-	"b2gg_bp": 2gg,
-	"x-1gg": -1gg,
-	"x1gg_all": 1gg,
-	"l-2gg": -2gg,
-	"l-1gg": -1gg,
-	"l1gg_all": 1gg,
-	"l2gg": 2gg,
+	'b-2gg': -2gg,
+	'b1su': 1su,
+	'b2su': 2su,
+	'b3su': 3su,
+	'b4su': 4su,
+	'b5su': 5su,
+	'b6su': 6su,
+	'b2gg_bp': 2gg,
+	'x-1gg': -1gg,
+	'x1gg_all': 1gg,
+	'l-2gg': -2gg,
+	'l-1gg': -1gg,
+	'l1gg_all': 1gg,
+	'l2gg': 2gg,
 ));
 
-@include mlu.mk-util("M", $M-map);
+@include mlu.mk-util('M', $M-map);

@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 
 // Getters from utils map
 //
@@ -7,13 +7,13 @@
 // Functions names have the same form: `mlu-#{utility name}`. Each function has 1 argument - a *key* in the map. Each function corresponds to a map whose name has the form of a `mlu-#{Utility name}-map`. By default, these maps are empty. To start using the functions, add your values to the map you need, as in the example below.
 // ```scss
 //$C-map: (
-//		"f": #fff,
-//		"mn1": #c05,
+//		'f': #fff,
+//		'mn1': #c05,
 //);
 //
 //$mlu-C-map: $C-map;
 //
-//mlu-c("mn1") => #co5
+//mlu-c('mn1') => #co5
 // ```
 // Available functions and maps corresponding to them:
 // * `mlu-c` \- `$mlu-C-map`
@@ -31,7 +31,7 @@ $C-map: () !default;
 		@return map.get($C-map, $key);
 	}
 
-	@error "Invalid color name. '#{$key}' is not defined in $mlu-C-map";
+	@error 'Invalid color name. `#{$key}` is not defined in $mlu-C-map';
 }
 
 $Fz-map: () !default;
@@ -41,7 +41,7 @@ $Fz-map: () !default;
 		@return map.get($Fz-map, $key);
 	}
 
-	@error "Invalid font-size name. '#{$key}' is not defined in $mlu-Fz-map";
+	@error 'Invalid font-size name. `#{$key}` is not defined in $mlu-Fz-map';
 }
 
 $Bgi-map: () !default;
@@ -51,5 +51,5 @@ $Bgi-map: () !default;
 		@return map.get($Bgi-map, $key);
 	}
 
-	@error "Invalid background-image name. '#{$key}' is not defined in $mlu-Bgi-map";
+	@error 'Invalid background-image name. `#{$key}` is not defined in $mlu-Bgi-map';
 }

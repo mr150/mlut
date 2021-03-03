@@ -1,4 +1,4 @@
-@use "../../tools" as mlu;
+@use '../../tools' as mlu;
 
 /*
 D
@@ -35,19 +35,19 @@ Styleguide: core-utils.bxz.md
 */
 
 $D-map: (
-	"_all": block,
-	"ib_all": inline-block,
-	"tb": table,
-	"tbc": table-cell,
-	"tbr": table-row,
-	"itb": inline-table,
-	"f_all": flex,
-	"if_all": inline-flex,
-	"g_all": grid,
-	"n_all": none,
+	'_all': block,
+	'ib_all': inline-block,
+	'tb': table,
+	'tbc': table-cell,
+	'tbr': table-row,
+	'itb': inline-table,
+	'f_all': flex,
+	'if_all': inline-flex,
+	'g_all': grid,
+	'n_all': none,
 );
 
-@include mlu.mk-util("D", $D-map);
+@include mlu.mk-util('D', $D-map);
 
 .mD-f {
 	display: flex;

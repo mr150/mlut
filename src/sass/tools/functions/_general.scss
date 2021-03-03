@@ -1,5 +1,5 @@
-@use "sass:meta";
-@use "sass:string";
+@use 'sass:meta';
+@use 'sass:string';
 
 /*
 General
@@ -13,9 +13,9 @@ Styleguide: sass-tools.functions.general
 //
 // Convert string to number.
 // ```scss
-//mlu-str2n("1.5") => 1.5
-//mlu-str2n("1x5") => 1
-//mlu-str2n("1x5", 1) => null
+//mlu-str2n('1.5') => 1.5
+//mlu-str2n('1x5') => 1
+//mlu-str2n('1x5', 1) => null
 // ```
 //
 // $str - string to be converted.
@@ -24,16 +24,16 @@ Styleguide: sass-tools.functions.general
 // Styleguide: sass-tools.functions.general.str2n
 
 @function str2n($str, $strict: false) {
-	@if meta.type-of($str) == "number" {
+	@if meta.type-of($str) == 'number' {
 		@return $str;
 	}
 
-	@if meta.type-of($str) != "string" {
-		@error "Wrong type of argument $str: '#{meta.type-of($str)}'. Expected 'string'";
+	@if meta.type-of($str) != 'string' {
+		@error 'Wrong type of argument $str: `#{meta.type-of($str)}`. Expected `string`';
 	}
 
-	$digits: "0123456789";
-	$negative: string.slice($str, 1, 1) == "-";
+	$digits: '0123456789';
+	$negative: string.slice($str, 1, 1) == '-';
 	$result: 0;
 	$decimal: false;
 
@@ -46,7 +46,7 @@ Styleguide: sass-tools.functions.general
 		} @else if $digit and $decimal {
 			$result: $result + ($digit - 1) / $decimal;
 			$decimal: $decimal * 10;
-		} @else if $char == "." and not $decimal {
+		} @else if $char == '.' and not $decimal {
 			$decimal: 10;
 		} @else if $strict or ($i == 1 and not $negative) or ($i == 2 and $negative) {
 			@return null;
@@ -62,9 +62,9 @@ Styleguide: sass-tools.functions.general
 //
 // Checks for a dot in the CSS class name depending on the flag.
 // ```scss
-//mlu-check-class(".block") => ".block"
-//mlu-check-class("block") => ".block"
-//mlu-check-class(".block", 1) => "block"
+//mlu-check-class('.block') => '.block'
+//mlu-check-class('block') => '.block'
+//mlu-check-class('.block', 1) => 'block'
 // ```
 //
 // $name - class name string.
@@ -73,11 +73,11 @@ Styleguide: sass-tools.functions.general
 // Styleguide: sass-tools.functions.general.check_class
 
 @function check-class($name, $only-name: null) {
-	$name: $name + "";
+	$name: $name + '';
 
 	@if $only-name {
-		@return if(string.slice($name, 1, 1) == ".", string.slice($name, 2), $name);
+		@return if(string.slice($name, 1, 1) == '.', string.slice($name, 2), $name);
 	}
 
-	@return if(string.slice($name, 1, 1) == ".", $name, "." + $name);
+	@return if(string.slice($name, 1, 1) == '.', $name, '.' + $name);
 }

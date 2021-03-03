@@ -1,7 +1,7 @@
-@use "sass:map";
-@use "sass:list";
+@use 'sass:map';
+@use 'sass:list';
 
-@use "css-vars" as mlu;
+@use 'css-vars' as mlu;
 
 // Utilities
 //
@@ -40,14 +40,14 @@ $Ord-range: 4 !default;
 $Ff--ss0: (
 	-apple-system,
 	BlinkMacSystemFont,
-	"Segoe UI",
+	'Segoe UI',
 	Roboto,
 	Oxygen,
 	Cantarell,
 	Ubuntu,
-	"Fira Sans",
-	"Droid Sans",
-	"Helvetica Neue",
+	'Fira Sans',
+	'Droid Sans',
+	'Helvetica Neue',
 	Arial,
 	sans-serif
 ) !default;
@@ -57,8 +57,8 @@ $Ff--m0: (
 	Menlo,
 	Monaco,
 	Consolas,
-	"Liberation Mono",
-	"Courier New",
+	'Liberation Mono',
+	'Courier New',
 	monospace
 ) !default;
 // stylelint-enable
@@ -66,64 +66,64 @@ $Ff--m0: (
 $Trsdu--def: 0.3s !default;
 
 $utils-map: (
-	"-Gcc": mlu.$var-grid-cols,
-	"-Gg": mlu.$var-gg,
-	"Pos": "position",
-	"mX": null,
-	"mY": null,
-	"mXy": null,
-	"Z": "z-index",
-	"D": "display",
-	"Fxd": "flex-direction",
-	"Fxw": "flex-wrap",
-	"Ac": "align-content",
-	"As": "align-self",
-	"Ai": "align-items",
-	"Jc": "justify-content",
-	"Ord": "order",
-	"Fl": "float",
-	"Bxz": "box-sizing",
-	"W": "width",
-	"Maw": "max-width",
-	"H": "height",
-	"Mih": "min-height",
-	"M": "margin",
-	"P": "padding",
-	"Ov": "overflow",
-	"C": "color",
-	"F": "font",
-	"Fw": "font-weight",
-	"Fz": "font-size",
-	"Ff": "font-family",
-	"Fs": "font-style",
-	"Lh": "line-height",
-	"Dir": "direction",
-	"Lts": "letter-spacing",
-	"Whs": "white-space",
-	"Ta": "text-align",
-	"Tt": "text-transform",
-	"Td": "text-decoration",
-	"Tsh": "text-shadow",
-	"Va": "vertical-align",
-	"Bgc": "background-color",
-	"Bgr": "background-repeat",
-	"Bgp": "background-position",
-	"Bgsz": "background-size",
-	"Bga": "background-attachment",
-	"Ol": "outline",
-	"Bxsh": "box-shadow",
-	"Trf": "transform",
-	"V": "visibility",
-	"Cur": "cursor",
-	"Op": "opacity",
-	"Bd": "border",
-	"Bdc": "border-color",
-	"Bds": "border-style",
-	"Bdw": "border-width",
-	"Bdrs": "border-radius",
-	"Trs": "transition",
-	"Anim": "animation",
-	"Rsz": "resize",
+	'-Gcc': mlu.$var-grid-cols,
+	'-Gg': mlu.$var-gg,
+	'Pos': 'position',
+	'mX': null,
+	'mY': null,
+	'mXy': null,
+	'Z': 'z-index',
+	'D': 'display',
+	'Fxd': 'flex-direction',
+	'Fxw': 'flex-wrap',
+	'Ac': 'align-content',
+	'As': 'align-self',
+	'Ai': 'align-items',
+	'Jc': 'justify-content',
+	'Ord': 'order',
+	'Fl': 'float',
+	'Bxz': 'box-sizing',
+	'W': 'width',
+	'Maw': 'max-width',
+	'H': 'height',
+	'Mih': 'min-height',
+	'M': 'margin',
+	'P': 'padding',
+	'Ov': 'overflow',
+	'C': 'color',
+	'F': 'font',
+	'Fw': 'font-weight',
+	'Fz': 'font-size',
+	'Ff': 'font-family',
+	'Fs': 'font-style',
+	'Lh': 'line-height',
+	'Dir': 'direction',
+	'Lts': 'letter-spacing',
+	'Whs': 'white-space',
+	'Ta': 'text-align',
+	'Tt': 'text-transform',
+	'Td': 'text-decoration',
+	'Tsh': 'text-shadow',
+	'Va': 'vertical-align',
+	'Bgc': 'background-color',
+	'Bgr': 'background-repeat',
+	'Bgp': 'background-position',
+	'Bgsz': 'background-size',
+	'Bga': 'background-attachment',
+	'Ol': 'outline',
+	'Bxsh': 'box-shadow',
+	'Trf': 'transform',
+	'V': 'visibility',
+	'Cur': 'cursor',
+	'Op': 'opacity',
+	'Bd': 'border',
+	'Bdc': 'border-color',
+	'Bds': 'border-style',
+	'Bdw': 'border-width',
+	'Bdrs': 'border-radius',
+	'Trs': 'transition',
+	'Anim': 'animation',
+	'Rsz': 'resize',
 ) !default;
 
 $utils-ext: (
@@ -132,12 +132,12 @@ $utils-ext: (
 $utils-map: map.merge($utils-map, $utils-ext);
 
 $utils-directed: (
-	"M",
-	"P",
-	"Bd",
-	"mX",
-	"mY",
-	"mXy",
+	'M',
+	'P',
+	'Bd',
+	'mX',
+	'mY',
+	'mXy',
 ) !default;
 
 $utils-directed-ext: (
@@ -157,7 +157,7 @@ $utils-directed: list.join($utils-directed, $utils-directed-ext);
 // Styleguide: sass-tools.settings.utils.conversion
 
 $util-value-types: (
-	"unitless": ("Z", "Lh", "Op", "Fw", "Fxg", "Fxsh"),
+	'unitless': ('Z', 'Lh', 'Op', 'Fw', 'Fxg', 'Fxsh'),
 ) !default;
 
 $util-value-types-ext: (
@@ -166,11 +166,11 @@ $util-value-types-ext: (
 $util-value-types: map.merge($util-value-types, $util-value-types-ext);
 
 $util-unit-aliases: (
-	"": 1px,
-	"e": 1em,
-	"p": 1%,
-	"x": 1ex,
-	"r": 1rem,
+	'': 1px,
+	'e': 1em,
+	'p': 1%,
+	'x': 1ex,
+	'r': 1rem,
 ) !default;
 
 $util-unit-aliases-ext: (
@@ -179,8 +179,8 @@ $util-unit-aliases-ext: (
 $util-unit-aliases: map.merge($util-unit-aliases, $util-unit-aliases-ext);
 
 $util-custom-units: (
-	"gg": 1gg,
-	"su": 1su,
+	'gg': 1gg,
+	'su': 1su,
 ) !default;
 
 $util-custom-units-ext: (
@@ -190,10 +190,10 @@ $util-custom-units: map.merge($util-custom-units, $util-custom-units-ext);
 $util-units-map: map.merge($util-custom-units, $util-unit-aliases);
 
 $util-css-keywords: (
-	"a": auto,
-	"i": inherit,
-	"u": unset,
-	"n": none,
+	'a': auto,
+	'i': inherit,
+	'u': unset,
+	'n': none,
 ) !default;
 
 $util-css-keywords-ext: (
@@ -205,48 +205,48 @@ $util-css-keywords: map.merge($util-css-keywords, $util-css-keywords-ext);
 //
 // ```scss
 //$mlu-util-states-psd-cls: (
-//		"h": "hover",
-//		"f": "focus",
-//		"fw": "focus-within",
-//		"h-f": ("hover", "focus"),
-//		"a": "active",
-//		"vl": "valid",
-//		"iv": "invalid",
+//		'h': 'hover',
+//		'f': 'focus',
+//		'fw': 'focus-within',
+//		'h-f': ('hover', 'focus'),
+//		'a': 'active',
+//		'vl': 'valid',
+//		'iv': 'invalid',
 //);
 //
 //$mlu-util-states-psd-elm: (
-//		"bf": "before",
-//		"af": "after",
-//		"fln": "first-line",
-//		"flt": "first-letter",
+//		'bf': 'before',
+//		'af': 'after',
+//		'fln': 'first-line',
+//		'flt': 'first-letter',
 //);
 //
 //$mlu-util-states: (
-//		"nojs": null,
+//		'nojs': null,
 //);
 // ```
 //
 // Styleguide: sass-tools.settings.utils.states
 
 $util-states-psd-cls: (
-	"h": "hover",
-	"f": "focus",
-	"fw": "focus-within",
-	"a": "active",
-	"vl": "valid",
-	"iv": "invalid",
-	"h-f": ("hover", "focus"),
+	'h': 'hover',
+	'f': 'focus',
+	'fw': 'focus-within',
+	'a': 'active',
+	'vl': 'valid',
+	'iv': 'invalid',
+	'h-f': ('hover', 'focus'),
 ) !default;
 
 $util-states-psd-elm: (
-	"bf": "before",
-	"af": "after",
-	"fln": "first-line",
-	"flt": "first-letter",
+	'bf': 'before',
+	'af': 'after',
+	'fln': 'first-line',
+	'flt': 'first-letter',
 ) !default;
 
 $util-states: (
-	"nojs": null,
+	'nojs': null,
 ) !default;
 
 $util-states: map.merge($util-states, $util-states-psd-cls);

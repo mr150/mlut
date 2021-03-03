@@ -26,7 +26,7 @@ The library part of toolkit united in itself ideas from [Atomic CSS](https://acs
 - Core - all that can be used at any project. This layer contains BEM blocks, CSS utilities and simple optional scripts.
 - Modules - themes, utilities sets and scripts, that can be reused in different projects.
 
-In most projects, you will probably need to add another "design" layer that will be specific to your interface. It may contain any styles and scripts.
+In most projects, you will probably need to add another 'design' layer that will be specific to your interface. It may contain any styles and scripts.
 
 ### Tools ###
 Sass tools include:

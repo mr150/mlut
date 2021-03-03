@@ -1,11 +1,11 @@
-@use "sass:meta";
-@use "sass:list";
-@use "sass:map";
-@use "sass:math";
-@use "sass:string";
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
 
-@use "forward-tools" as mlu;
-@use "general" as mgen;
+@use 'forward-tools' as mlu;
+@use 'general' as mgen;
 
 /*
 Grid system
@@ -20,11 +20,11 @@ Styleguide: sass-tools.mixins.grid
 // Generate fields or indents in grid-gutters on different breakpoints.
 // ```scss
 //.block {
-//		@include mk-gtr($direct: "r", $coef: 2);
+//		@include mk-gtr($direct: 'r', $coef: 2);
 //}
 //
 //.foo {
-//		@include mk-gtr($direct: "r", $coef: 2, $css-vars: false);
+//		@include mk-gtr($direct: 'r', $coef: 2, $css-vars: false);
 //}
 // ```
 // CSS
@@ -49,10 +49,10 @@ Styleguide: sass-tools.mixins.grid
 // Can be number. If passed '-1', initial gutter will not be generated.
 // If you need a gutter in `rem`, pass value in `rem`.
 // $type = margin - can be any CSS property, including custom.
-// If no `margin`, `padding` or custom property is used, then `$direct` = "xy" must be specified.
-// $direct = "x" - any of 7 [directions](section-concepts.html#kssref-concepts-utility-dirs).
+// If no `margin`, `padding` or custom property is used, then `$direct` = 'xy' must be specified.
+// $direct = 'x' - any of 7 [directions](section-concepts.html#kssref-concepts-utility-dirs).
 // $gutters = settings.$grid-gutters - map with gutters values on breakpoints.
-// Map item example: `"sm": 12px`. Custom gutters only work when the `$css-vars = false`.
+// Map item example: `'sm': 12px`. Custom gutters only work when the `$css-vars = false`.
 // $calc = settings.$flag-calc-fallback - bool flag for generation CSS `calc()` fallback for old browsers.
 // $coef = 1 - coefficient by which the gutter value is multiplied.
 // $css-vars = settings.$flag-css-vars - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
@@ -60,20 +60,20 @@ Styleguide: sass-tools.mixins.grid
 //
 // Styleguide: sass-tools.mixins.grid.mk_gtr
 
-@mixin mk-gtr($init-gutter: mlu.$gtr-sm, $type: "margin",
-$gutters: mlu.$grid-gutters, $calc: mlu.$flag-calc-fallback, $direct: "x",
+@mixin mk-gtr($init-gutter: mlu.$gtr-sm, $type: 'margin',
+$gutters: mlu.$grid-gutters, $calc: mlu.$flag-calc-fallback, $direct: 'x',
 $coef: 1, $css-vars: mlu.$flag-css-vars) {
 	$custom-prop: null;
 	$prev-value: mlu.$grid-default-gtr;
 	$direct-val: null;
 
-	@if string.slice($type, 1, 2) == "--" {
-		$direct: "xy";
+	@if string.slice($type, 1, 2) == '--' {
+		$direct: 'xy';
 		$custom-prop: $type;
 	}
 
-	@if meta.type-of($gutters) != "map" {
-		@error "Wrong type of argument $gutters: '#{meta.type-of($gutters)}'. Expected 'map'";
+	@if meta.type-of($gutters) != 'map' {
+		@error 'Wrong type of argument $gutters: `#{meta.type-of($gutters)}`. Expected `map`';
 	}
 
 	@if map.has-key(mlu.$main-directions, $direct) {
@@ -99,13 +99,13 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 		calc(#{mlu.px2rem($prev-value) * $coef}),
 		mlu.px2rem($prev-value) * $coef);
 
-		@if math.unit($init-gutter) == "rem" {
+		@if math.unit($init-gutter) == 'rem' {
 			$prev-value: mlu.px2rem($prev-value);
 			$tmp-val: $tmp-val-rem;
 			$var-value: $var-value-rem;
 		}
 
-		@if $direct == "x" {
+		@if $direct == 'x' {
 			@if not $css-vars or $css-vars == 1 {
 				#{$type}-right: if($calc, (mlu.$grid-gutter-fallback * $coef), $tmp-val);
 				#{$type}-left: if($calc, (mlu.$grid-gutter-fallback * $coef), $tmp-val);
@@ -117,7 +117,7 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 				#{$type}-right: $var-value;
 				#{$type}-left: $var-value;
 			}
-		} @else if $direct == "y" {
+		} @else if $direct == 'y' {
 			@if not $css-vars or $css-vars == 1 {
 				#{$type}-top: if($calc, (mlu.$gtr-sm * $coef), $tmp-val);
 				#{$type}-bottom: if($calc, (mlu.$gtr-sm * $coef), $tmp-val);
@@ -129,7 +129,7 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 				#{$type}-top: $var-value;
 				#{$type}-bottom: $var-value;
 			}
-		} @else if $direct == "xy" {
+		} @else if $direct == 'xy' {
 			@if not $css-vars or $css-vars == 1 {
 				@if $calc {
 					#{$type}: (mlu.$gtr-sm * $coef) (mlu.$grid-gutter-fallback * $coef);
@@ -151,7 +151,7 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 				#{$type}-#{$direct-val}: $var-value;
 			}
 		} @else {
-			@error "Invalid gutter direction - '#{$direct}'";
+			@error 'Invalid gutter direction - `#{$direct}`';
 		}
 	}
 
@@ -159,10 +159,10 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 		@each $key, $value in $gutters {
 			$cur-val: $value;
 
-			@if $prev-value and math.unit($prev-value) == "rem" {
+			@if $prev-value and math.unit($prev-value) == 'rem' {
 				$cur-val: mlu.px2rem($value);
 			} @else if $prev-value and math.is-unitless($prev-value) and $prev-value > -1 {
-				$cur-val: mlu.str2n($value + "");
+				$cur-val: mlu.str2n($value + '');
 			}
 
 			@if $prev-value != -1 and $cur-val != $prev-value {
@@ -172,18 +172,18 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 				mlu.px2rem($cur-val) * $coef);
 
 				@include mgen.bpm($key) {
-					@if $direct == "x" {
+					@if $direct == 'x' {
 						#{$type}-right: $tmp-val;
 						#{$type}-left: $tmp-val;
-					} @else if $direct == "y" {
+					} @else if $direct == 'y' {
 						#{$type}-top: $tmp-val;
 						#{$type}-bottom: $tmp-val;
-					} @else if $direct == "xy" {
+					} @else if $direct == 'xy' {
 						@include mk-gtr-xy($type, $tmp-val, $tmp-val-rem);
 					} @else if $direct-val {
 						#{$type}-#{$direct-val}: $tmp-val;
 					} @else {
-						@error "Invalid gutter direction - '#{$direct}'";
+						@error 'Invalid gutter direction - `#{$direct}`';
 					}
 				}
 			}
@@ -196,7 +196,7 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 // Private mixin to create gutters in the 'xy' direction.
 
 @mixin mk-gtr-xy($type, $value, $value-rem) {
-	@if ($type == "padding" or $type == "margin") and ($value != $value-rem) {
+	@if ($type == 'padding' or $type == 'margin') and ($value != $value-rem) {
 		#{$type}: $value-rem $value;
 	} @else {
 		#{$type}: $value;
@@ -209,13 +209,13 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 // It works similarly like [W utility](section-core-utils.html#kssref-core-utils-bxz-w).
 // ```scss
 //.block {
-//		@include W(2c, "sm");
-//		@include W(3gc, "md");
-//		@include W(4gs, "lg");
+//		@include W(2c, 'sm');
+//		@include W(3gc, 'md');
+//		@include W(4gs, 'lg');
 //}
 //
 //.foo {
-//		@include W(2gc, "sm", $css-vars: false);
+//		@include W(2gc, 'sm', $css-vars: false);
 //}
 // ```
 // CSS
@@ -260,10 +260,10 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 // $bp = settings.$bp-xs - breakpoint on which `$width` will sets. Can be number or breakpoint name.
 // $cols = settings.$grid-default-cols - columns count in grid. Can be number or breakpoint name.
 // $gutters = settings.$grid-gutters - map with gutters values on breakpoints.
-// Map item example: `"sm": 12px`. Custom gutters only work when the `$css-vars = false`.
+// Map item example: `'sm': 12px`. Custom gutters only work when the `$css-vars = false`.
 // $calc = false - bool flag for generation CSS `calc()` fallback. It can needed only if
 // $width set in 'gc' unit.
-// $type = "width" - service argument which used only by mixins-wrappers.
+// $type = 'width' - service argument which used only by mixins-wrappers.
 // It needed for reusable `W` for generating grid offset,
 // because the algorithm for generating them is the same.
 // $css-vars = settings.$flag-css-vars - use [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) for gutters.
@@ -271,42 +271,42 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 //
 // Styleguide: sass-tools.mixins.grid.w
 
-@mixin W($width, $bp: mlu.$bp-xs, $cols: mlu.$grid-default-cols, $gutters: mlu.$grid-gutters, $css-vars: mlu.$flag-css-vars, $calc: mlu.$flag-calc-fallback, $type: "width") {
+@mixin W($width, $bp: mlu.$bp-xs, $cols: mlu.$grid-default-cols, $gutters: mlu.$grid-gutters, $css-vars: mlu.$flag-css-vars, $calc: mlu.$flag-calc-fallback, $type: 'width') {
 	$col-width: 0;
 	$columns: $cols;
 	$grid-gutters: $gutters;
 	$xs-gutter: false;
 	$calc-fallback: $calc;
-	$custom-unit: "";
+	$custom-unit: '';
 	$valid-values: (
-		"auto",
-		"inherit",
+		'auto',
+		'inherit',
 	);
 
-	@if meta.type-of($cols) == "string" {
+	@if meta.type-of($cols) == 'string' {
 		$columns: mlu.grid-cols-count($cols);
-	} @else if meta.type-of($cols) != "number" {
-		@error "Invalid value of argument $cols: '#{$cols}'. Expected number value or breakpoint name";
+	} @else if meta.type-of($cols) != 'number' {
+		@error 'Invalid value of argument $cols: `#{$cols}`. Expected number value or breakpoint name';
 	}
 
-	@if meta.type-of($width) == "number" and
-		(math.unit($width) == "c" or math.unit($width) == "gc" or math.unit($width) == "gs") {
-		$tmp-val: mlu.str2n($width + "");
+	@if meta.type-of($width) == 'number' and
+		(math.unit($width) == 'c' or math.unit($width) == 'gc' or math.unit($width) == 'gs') {
+		$tmp-val: mlu.str2n($width + '');
 		$col-width: mlu.decimal-floor($tmp-val / $columns * 100%, 3);
-		$custom-unit: if(math.unit($width) == "gc", "gc", "gs");
-		$custom-unit: if(math.unit($width) == "c", $tmp-val, $custom-unit);
-	} @else if meta.type-of($width) == "number" or list.index($valid-values, $width) {
+		$custom-unit: if(math.unit($width) == 'gc', 'gc', 'gs');
+		$custom-unit: if(math.unit($width) == 'c', $tmp-val, $custom-unit);
+	} @else if meta.type-of($width) == 'number' or list.index($valid-values, $width) {
 		$col-width: $width;
-	} @else if meta.type-of($width) != "number" {
-		@error "Invalid value of argument $width: '#{$width}'. Expected number value or CSS keyword";
+	} @else if meta.type-of($width) != 'number' {
+		@error 'Invalid value of argument $width: `#{$width}`. Expected number value or CSS keyword';
 	}
 
-	@if meta.type-of($gutters) == "number" {
+	@if meta.type-of($gutters) == 'number' {
 		$grid-gutters: (if($bp == mlu.$bp-xs, mlu.$bp-sm, $bp): $gutters);
-	} @else if meta.type-of($gutters) == "map" {
+	} @else if meta.type-of($gutters) == 'map' {
 		$xs-gutter: map.get($gutters, mlu.$bp-xs);
 	} @else {
-		@error "Wrong type of argument $gutters: '#{meta.type-of($gutters)}'. Expected 'number' or 'map'";
+		@error 'Wrong type of argument $gutters: `#{meta.type-of($gutters)}`. Expected `number` or `map`';
 	}
 
 	@if $bp == mlu.$bp-xs {
@@ -323,7 +323,7 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 		// on larger breakpoints with changed gutter
 		@if not $css-vars {
 			@each $key, $value in $grid-gutters {
-				@if $value != $prev-gutter and $custom-unit == "gc" {
+				@if $value != $prev-gutter and $custom-unit == 'gc' {
 					@include mgen.bpm($key) {
 						@include -mk-width($col-width, $custom-unit, $value, $calc-fallback, $type);
 					}
@@ -332,7 +332,7 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 				$prev-gutter: $value;
 			}
 		}
-	} @else if $custom-unit == "gc" and not $css-vars {
+	} @else if $custom-unit == 'gc' and not $css-vars {
 		@if not map.has-key($grid-gutters, $bp) {
 			$grid-gutters: map.merge($grid-gutters, ($bp: list.nth(list.nth($grid-gutters, list.length($grid-gutters)), 2)));
 		}
@@ -368,9 +368,9 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 // All parameters are the same as in `W`. Only the first parameter is called `$offset`.
 // ```scss
 //.block {
-//		@include Ml(1c, "sm");
-//		@include Ml(3gc, "lg");
-//		@include Ml(4gs, "lg");
+//		@include Ml(1c, 'sm');
+//		@include Ml(3gc, 'lg');
+//		@include Ml(4gs, 'lg');
 //}
 // ```
 // CSS
@@ -400,37 +400,37 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 // Styleguide: sass-tools.mixins.grid.ml
 
 @mixin Ml($offset, $bp: mlu.$bp-xs, $cols: mlu.$grid-default-cols, $gutters: mlu.$grid-gutters, $css-vars: mlu.$flag-css-vars, $calc: mlu.$flag-calc-fallback) {
-	@include W($offset, $bp, $cols, $gutters, $css-vars, $calc, "margin-left");
+	@include W($offset, $bp, $cols, $gutters, $css-vars, $calc, 'margin-left');
 }
 
 // Private mixin for width and grid offset generation from 'mlu.W'.
 
 @mixin -mk-width($width, $unit, $gutter: mlu.$gtr-sm,
-$calc: false, $prop: "width", $css-vars: false) {
+$calc: false, $prop: 'width', $css-vars: false) {
 	$prop-abbr: (
-		"width": "",
-		"margin-left": "m",
-		"max-width": "maw",
+		'width': '',
+		'margin-left': 'm',
+		'max-width': 'maw',
 	);
 
-	$var-width: if(meta.type-of($unit) == "number", $unit, null);
-	$unit: if($var-width, "gc", $unit);
+	$var-width: if(meta.type-of($unit) == 'number', $unit, null);
+	$unit: if($var-width, 'gc', $unit);
 	$calc-val: calc(#{$width} - #{$gutter * 2});
 	$var-val: calc(#{$width} - var(#{mlu.$var-gg}) * 2);
 	$width-fallback: if($calc, mlu.decimal-floor($width, 3) - (mlu.$grid-gutter-fallback * 2), 0);
 
-	@if $prop == "margin-left" {
+	@if $prop == 'margin-left' {
 		$calc-val: calc(#{$width} + #{$gutter});
 		$var-val: calc(#{$width} + var(#{mlu.$var-gg}));
 		$width-fallback: if($calc, mlu.decimal-floor($width, 3) + mlu.$grid-gutter-fallback, 0);
 	}
 
 	// Generation calc() fallback
-	@if $calc and $unit == "gc" {
+	@if $calc and $unit == 'gc' {
 		#{$prop}: $width-fallback;
 	}
 
-	@if $unit == "gc" {
+	@if $unit == 'gc' {
 		$abbr: map.get($prop-abbr, $prop);
 
 		@if $var-width {

@@ -1,4 +1,4 @@
-@use "../../tools" as mlu;
+@use '../../tools' as mlu;
 
 /*
 Core extend
@@ -34,10 +34,10 @@ tbfg - table-footer-group.
 Styleguide: sass_modules.core_extend.utils.d
 */
 
-@include mlu.mk-util("D", (
-	"i": inline,
-	"tbcl": table-column,
-	"tbfg": table-footer-group,
+@include mlu.mk-util('D', (
+	'i': inline,
+	'tbcl': table-column,
+	'tbfg': table-footer-group,
 ));
 
 /*
@@ -50,13 +50,13 @@ Flex
 Styleguide: sass_modules.core_extend.utils.flex
 */
 
-@include mlu.mk-util("Ac", (
-	"fs": flex-start,
-	"fe": flex-end,
-	"c": center,
-	"sa": space-around,
-	"sb": space-between,
-), "bp");
+@include mlu.mk-util('Ac', (
+	'fs': flex-start,
+	'fe': flex-end,
+	'c': center,
+	'sa': space-around,
+	'sb': space-between,
+), 'bp');
 
 @each $key, $value in mlu.$grid-cols {
 	@include mlu.bpm($key) {

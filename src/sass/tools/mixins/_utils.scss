@@ -1,12 +1,12 @@
-@use "sass:meta";
-@use "sass:list";
-@use "sass:map";
-@use "sass:math";
-@use "sass:string";
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
 
-@use "forward-tools" as mlu;
-@use "general" as mgen;
-@use "grid" as mgs;
+@use 'forward-tools' as mlu;
+@use 'general' as mgen;
+@use 'grid' as mgs;
 
 $-su-rem: mlu.px2rem(mlu.$su);
 $-gtr-sm-rem: mlu.px2rem(mlu.$gtr-sm);
@@ -24,7 +24,7 @@ Styleguide: sass-tools.mixins.utils
 // Generates the CSS rule on breakpoints, adding the name of the breakpoint to the selector, inside the corresponding media query.
 //
 // ```scss
-//@include bp-all(".Bdw1") {
+//@include bp-all('.Bdw1') {
 //		border-width: 1px;
 //}
 // ```
@@ -74,7 +74,7 @@ Styleguide: sass-tools.mixins.utils
 
 @mixin bp-all($selector: &, $xs: 1) {
 	@if not $selector {
-		@error "'$selector' argument must not be null.";
+		@error '`$selector` argument must not be null.';
 	}
 
 	@at-root {
@@ -99,7 +99,7 @@ Styleguide: sass-tools.mixins.utils
 // Generates values for utilities in various [states](section-concepts.html#kssref-concepts-utility-states). Names and values of states are set in the [settings](#kssref-sass-tools-settings-utils-states). Usually this mixin is not used separately because it is called inside [mk-util](#kssref-sass-tools-mixins-mk_util).
 //
 // ```scss
-//@include mk-state(".Bgc-mn0", ("h")) {
+//@include mk-state('.Bgc-mn0', ('h')) {
 //		background-color: #60f;
 //}
 // ```
@@ -122,7 +122,7 @@ Styleguide: sass-tools.mixins.utils
 
 @mixin mk-state($selector: &, $states: map.keys(mlu.$util-states), $no-state: 1) {
 	@if not $selector {
-		@error "'$selector' argument must not be null.";
+		@error '`$selector` argument must not be null.';
 	}
 
 	@at-root {
@@ -136,17 +136,17 @@ Styleguide: sass-tools.mixins.utils
 
 		@each $key, $value in mlu.$util-states {
 			@if list.index($states, $key) {
-				$prefix: "." + $key;
+				$prefix: '.' + $key;
 
-				@if meta.type-of($value) == "string" {
+				@if meta.type-of($value) == 'string' {
 					#{$prefix}_#{$selector}:#{$value} {
 						@content;
 					}
-				} @else if meta.type-of($value) == "list" {
+				} @else if meta.type-of($value) == 'list' {
 					$multi-selector: ();
 
 					@each $item in $value {
-						$multi-selector: list.append($multi-selector, $prefix + "_" + $selector + ":" + $item, comma);
+						$multi-selector: list.append($multi-selector, $prefix + '_' + $selector + ':' + $item, comma);
 					}
 
 					#{$multi-selector} {
@@ -166,20 +166,20 @@ Styleguide: sass-tools.mixins.utils
 //
 // Creates utilities based on a map or a list with values.
 //
-// Utility values are set according to the utility [naming rules](section-concepts.html#kssref-concepts-utility). They can be a string (including empty) or a number. Also, the value can indicate the breakpoint on which it should work - `"tb_lg"`. Even if the breakpoint is passed as a parameter when this mixin is called, then the data about breakpoints from the values map will be more priority. In addition to a specific breakpoint, 2 special values are valid:
-// * `bp` - create a value only on breakpoints:	`"r_bp"`, "4gg_bp"
-// * `all` - create a normal value and on breakpoints: `"ib_all"`, `"_all"`.
+// Utility values are set according to the utility [naming rules](section-concepts.html#kssref-concepts-utility). They can be a string (including empty) or a number. Also, the value can indicate the breakpoint on which it should work - `'tb_lg'`. Even if the breakpoint is passed as a parameter when this mixin is called, then the data about breakpoints from the values map will be more priority. In addition to a specific breakpoint, 2 special values are valid:
+// * `bp` - create a value only on breakpoints:	`'r_bp'`, '4gg_bp'
+// * `all` - create a normal value and on breakpoints: `'ib_all'`, `'_all'`.
 //
 // Values for CSS properties can be any CSS values, as well as numbers with `gg` and `su` units. Values with `gg` units are created using the [mk-gtr](#kssref-sass-tools-mixins-mk_gtr) mixin.
 //
 // ```scss
 //$Bgc-map: (
-//		"f": #fff,
-//		"mn0_lg": #60f,
-//		"mn1": #c05,
+//		'f': #fff,
+//		'mn0_lg': #60f,
+//		'mn1': #c05,
 //);
 //
-//@include mlu.mk-util("Bgc", $Bgc-map);
+//@include mlu.mk-util('Bgc', $Bgc-map);
 // ```
 // CSS
 // ```css
@@ -199,7 +199,7 @@ Styleguide: sass-tools.mixins.utils
 // ```
 // or with list
 // ```scss
-//@include mlu.mk-util("Maw", ("100_sm", 32p, 7su));
+//@include mlu.mk-util('Maw', ('100_sm', 32p, 7su));
 // ```
 // CSS
 // ```css
@@ -219,7 +219,7 @@ Styleguide: sass-tools.mixins.utils
 // ```
 // To create position utilities like `T`, `R` etc, pass `mXy` as utility name and add directions to the values:
 // ```scss
-//@include mlu.mk-util("mXy", ("y23", "r2gg", "x5x"));
+//@include mlu.mk-util('mXy', ('y23', 'r2gg', 'x5x'));
 // ```
 // CSS
 // ```css
@@ -254,7 +254,7 @@ Styleguide: sass-tools.mixins.utils
 	@if list.index(mlu.$utils-directed, $util-name) {
 		$util-name: if($prop, $util-name, null);
 		$utils-data: mlu.parse-util-directions($values, $util-name);
-		$utils-map: map.get($utils-data, "utils-map");
+		$utils-map: map.get($utils-data, 'utils-map');
 
 		@each $key, $value in $utils-map {
 			$util-index: list.index($utils-map, ($key $value));
@@ -264,8 +264,8 @@ Styleguide: sass-tools.mixins.utils
 				$value,
 				$bp,
 				$states,
-				list.nth(map.get($utils-data, "props"), $util-index),
-				list.nth(map.get($utils-data, "directions"), $util-index)
+				list.nth(map.get($utils-data, 'props'), $util-index),
+				list.nth(map.get($utils-data, 'directions'), $util-index)
 			);
 		}
 	} @else {
@@ -280,15 +280,15 @@ Styleguide: sass-tools.mixins.utils
 
 	@each $key, $value in $values {
 		$util-val-data: mlu.parse-util($key);
-		$bp-name: map.get($util-val-data, "mq");
+		$bp-name: map.get($util-val-data, 'mq');
 		$bp-name: if($bp-name, $bp-name, $bp);
-		$util-parsed-val: map.get($util-val-data, "value");
+		$util-parsed-val: map.get($util-val-data, 'value');
 
 		$selector: $name + $util-parsed-val;
 		$css-value: if($value, $value, mlu.convert-util-value($util-parsed-val, $name));
 
-		@if $bp-name == "all" or $bp-name == "bp" {
-			@include bp-all($selector, if($bp-name == "all", 1, 0)) {
+		@if $bp-name == 'all' or $bp-name == 'bp' {
+			@include bp-all($selector, if($bp-name == 'all', 1, 0)) {
 				@include mk-state(&, $states, if($states, 0, 1)) {
 					@include -check-util-direction($direct, $prop, $css-value);
 				}
@@ -314,16 +314,16 @@ Styleguide: sass-tools.mixins.utils
 // Private mixin that parses combined directions and identifies positioning utilities.
 
 @mixin -check-util-direction($dir, $prop, $value) {
-	@if $dir == "x" {
-		$prop: if($prop, $prop + "-", "");
-		@include -parse-unit($prop + "right", $value, "r");
-		@include -parse-unit($prop + "left", $value, "l");
-	} @else if $dir == "y" {
-		$prop: if($prop, $prop + "-", "");
-		@include -parse-unit($prop + "top", $value, "t");
-		@include -parse-unit($prop + "bottom", $value, "b");
-	} @else if $dir == "all" {
-		$prop: if($prop, $prop + "-", "");
+	@if $dir == 'x' {
+		$prop: if($prop, $prop + '-', '');
+		@include -parse-unit($prop + 'right', $value, 'r');
+		@include -parse-unit($prop + 'left', $value, 'l');
+	} @else if $dir == 'y' {
+		$prop: if($prop, $prop + '-', '');
+		@include -parse-unit($prop + 'top', $value, 't');
+		@include -parse-unit($prop + 'bottom', $value, 'b');
+	} @else if $dir == 'all' {
+		$prop: if($prop, $prop + '-', '');
 		@each $item in map.values(mlu.$main-directions) {
 			@include -parse-unit($prop + $item, $value, string.slice($item, 1, 1));
 		}
@@ -335,24 +335,24 @@ Styleguide: sass-tools.mixins.utils
 // Private mixin that parses custom units based on directions.
 
 @mixin -parse-unit($prop, $value, $dir) {
-	$coef-val: mlu.str2n($value + "");
+	$coef-val: mlu.str2n($value + '');
 
-	@if meta.type-of($value) == "number" and math.unit($value) == "gg" {
-		$tmp-val: if($dir == "t" or $dir == "b", $-gtr-sm-rem, 1);
-		$dash-pos: string.index($prop, "-");
+	@if meta.type-of($value) == 'number' and math.unit($value) == 'gg' {
+		$tmp-val: if($dir == 't' or $dir == 'b', $-gtr-sm-rem, 1);
+		$dash-pos: string.index($prop, '-');
 
-		@if $dash-pos and $dir and $dir != "xy" {
+		@if $dash-pos and $dir and $dir != 'xy' {
 			$prop: string.slice($prop, 1, $dash-pos - 1);
-		} @else if $dir != "xy" {
-			$dir: "xy";
+		} @else if $dir != 'xy' {
+			$dir: 'xy';
 		}
 
 		@include mgs.mk-gtr($tmp-val, $type: $prop, $direct: $dir, $coef: $coef-val);
-	} @else if meta.type-of($value) == "number" and math.unit($value) == "su" {
-		@if $dir == "xy" {
+	} @else if meta.type-of($value) == 'number' and math.unit($value) == 'su' {
+		@if $dir == 'xy' {
 			@include mgs.mk-gtr-xy($prop, mlu.$su * $coef-val, $-su-rem * $coef-val);
 		} @else {
-			$tmp-val: if($dir == "t" or $dir == "b", $-su-rem, mlu.$su);
+			$tmp-val: if($dir == 't' or $dir == 'b', $-su-rem, mlu.$su);
 			#{$prop}: $tmp-val * $coef-val;
 		}
 	} @else {

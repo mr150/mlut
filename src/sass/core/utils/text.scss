@@ -1,4 +1,4 @@
-@use "../../tools" as mlu;
+@use '../../tools' as mlu;
 
 /*
 Text
@@ -73,24 +73,24 @@ Markup: ../../../docs/examples/core-utils/text/mtov.html
 Styleguide: core-utils.text.mtov
 */
 
-@include mlu.mk-util("Ta", (
-	"_all": left,
-	"c_all": center,
-	"r_all": right,
+@include mlu.mk-util('Ta', (
+	'_all': left,
+	'c_all': center,
+	'r_all': right,
 ));
 
-@include mlu.mk-util("Td", (
-	"": none,
-	"u": underline,
-	"l": line-through,
-	"o": overline,
+@include mlu.mk-util('Td', (
+	'': none,
+	'u': underline,
+	'l': line-through,
+	'o': overline,
 ));
 
-@include mlu.mk-util("Tt", (
-	"": uppercase,
-	"n": none,
-	"l": lowercase,
-	"c": capitalize,
+@include mlu.mk-util('Tt', (
+	'': uppercase,
+	'n': none,
+	'l': lowercase,
+	'c': capitalize,
 ));
 
 .mTov {
@@ -103,19 +103,19 @@ Styleguide: core-utils.text.mtov
 	color: inherit;
 }
 
-@include mlu.mk-util("Lh", (
-	"n": normal,
+@include mlu.mk-util('Lh', (
+	'n': normal,
 	1: 1,
 ));
 
-@include mlu.mk-util("Whs", (
-	"nw": nowrap,
-	"p": pre,
+@include mlu.mk-util('Whs', (
+	'nw': nowrap,
+	'p': pre,
 ));
 
 @if mlu.$flag-flex-pe {
-	@include mlu.mk-util("Dir", (
-		"r_all": rtl,
-		"l_bp": ltr,
+	@include mlu.mk-util('Dir', (
+		'r_all': rtl,
+		'l_bp': ltr,
 	));
 }

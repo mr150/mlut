@@ -1,6 +1,6 @@
-@use "sass:map";
+@use 'sass:map';
 
-@use "../../tools" as mlu;
+@use '../../tools' as mlu;
 
 /*
 Border
@@ -44,7 +44,7 @@ Styleguide: core-utils.bd.bds
 */
 
 $Bdxy-map: (
-	"xy": 1px solid,
+	'xy': 1px solid,
 );
 
 @each $key, $value in mlu.$main-directions {
@@ -53,15 +53,15 @@ $Bdxy-map: (
 
 $Bdxy-map: map.merge($Bdxy-map,
 (
-	"y": 1px solid,
-	"x": 1px solid,
+	'y': 1px solid,
+	'x': 1px solid,
 ));
 
-@include mlu.mk-util("Bd", $Bdxy-map);
+@include mlu.mk-util('Bd', $Bdxy-map);
 
-@include mlu.mk-util("Bds", (
-	"dt": dotted,
-	"ds": dashed,
+@include mlu.mk-util('Bds', (
+	'dt': dotted,
+	'ds': dashed,
 ));
 
 $Bdw-map: (
@@ -70,7 +70,7 @@ $Bdw-map: (
 	1su: 1su,
 );
 
-@include mlu.mk-util("Bdw", $Bdw-map);
+@include mlu.mk-util('Bdw', $Bdw-map);
 
 .Bdcl-c {
 	border-collapse: collapse;

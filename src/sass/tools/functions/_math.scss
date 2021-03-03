@@ -1,7 +1,7 @@
-@use "sass:math";
-@use "sass:meta";
+@use 'sass:math';
+@use 'sass:meta';
 
-@use "../settings" as mlu;
+@use '../settings' as mlu;
 
 /*
 Math
@@ -20,33 +20,33 @@ Styleguide: sass-tools.functions.math
 //
 // $number - decimal to be rounded. Type: number.
 // $pos - the number of decimal places.
-// $type = "round" - service parameter for functions-wrappers.
+// $type = 'round' - service parameter for functions-wrappers.
 //
 // Styleguide: sass-tools.functions.math.decimal_round
 
-@function decimal-round($number, $pos, $type: "round") {
+@function decimal-round($number, $pos, $type: 'round') {
 	$n: 1;
 
-	@if meta.type-of($number) != "number" {
-		@error "Wrong type of argument $number: '#{meta.type-of($number)}'. Expected number";
+	@if meta.type-of($number) != 'number' {
+		@error 'Wrong type of argument $number: `#{meta.type-of($number)}`. Expected number';
 	}
 
-	@if meta.type-of($pos) != "number" {
-		@error "Wrong type of argument $pos: '#{meta.type-of($pos)}'. Expected 'number'";
+	@if meta.type-of($pos) != 'number' {
+		@error 'Wrong type of argument $pos: `#{meta.type-of($pos)}`. Expected `number`';
 	}
 
 	@for $i from 0 to $pos {
 		$n: $n * 10;
 	}
 
-	@if $type == "round" {
+	@if $type == 'round' {
 		@return math.round($number * $n) / $n;
-	} @else if $type == "ceil" {
+	} @else if $type == 'ceil' {
 		@return math.ceil($number * $n) / $n;
-	} @else if $type == "floor" {
+	} @else if $type == 'floor' {
 		@return math.floor($number * $n) / $n;
 	} @else {
-		@error "Invalid round type: '#{$type}'";
+		@error 'Invalid round type: `#{$type}`';
 	}
 }
 
@@ -63,7 +63,7 @@ Styleguide: sass-tools.functions.math
 // Styleguide: sass-tools.functions.math.decimal_ceil
 
 @function decimal-ceil($number, $pos) {
-	@return decimal-round($number, $pos, "ceil");
+	@return decimal-round($number, $pos, 'ceil');
 }
 
 
@@ -80,7 +80,7 @@ Styleguide: sass-tools.functions.math
 // Styleguide: sass-tools.functions.math.decimal_floor
 
 @function decimal-floor($number, $pos) {
-	@return decimal-round($number, $pos, "floor");
+	@return decimal-round($number, $pos, 'floor');
 }
 
 // mlu-px2em
@@ -94,23 +94,23 @@ Styleguide: sass-tools.functions.math
 //
 // $number - number in `px` that will be converted.
 // $divider = $mlu-base-font-size - parent font size in `px`.
-// $unit = "em" - service parameter for functions-wrappers.
+// $unit = 'em' - service parameter for functions-wrappers.
 //
 // Styleguide: sass-tools.functions.math.px2em
 
-@function px2em($number, $divider: mlu.$base-font-size, $unit: "em") {
+@function px2em($number, $divider: mlu.$base-font-size, $unit: 'em') {
 	@if math.is-unitless($number) {
-		@warn "Assuming #{$number} to be in pixels in mlu-px2em. Convert it to px";
+		@warn 'Assuming #{$number} to be in pixels in mlu-px2em. Convert it to px';
 		@return px2em($number * 1px, $divider, $unit);
 	} @else if math.unit($number) == $unit {
 		@return $number;
 	}
 
-	@if $unit == "rem" {
+	@if $unit == 'rem' {
 		@return decimal-round($number / $divider, 2) * 1rem;
 	}
 
-	@if $unit == "no" {
+	@if $unit == 'no' {
 		@return decimal-round($number / $divider, 2);
 	}
 
@@ -131,7 +131,7 @@ Styleguide: sass-tools.functions.math
 // Styleguide: sass-tools.functions.math.px2rem
 
 @function px2rem($number, $divider: mlu.$browser-font-size) {
-	@return px2em($number, $divider, "rem");
+	@return px2em($number, $divider, 'rem');
 }
 
 
@@ -149,5 +149,5 @@ Styleguide: sass-tools.functions.math
 // Styleguide: sass-tools.functions.math.px2lh
 
 @function px2lh($number, $divider: mlu.$base-font-size) {
-	@return px2em($number, $divider, "no");
+	@return px2em($number, $divider, 'no');
 }

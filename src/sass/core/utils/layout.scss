@@ -1,4 +1,4 @@
-@use "../../tools" as mlu;
+@use '../../tools' as mlu;
 
 /*
 W
@@ -44,8 +44,8 @@ Styleguide: core-utils.bxz.w
 	}
 }
 
-@include mlu.mk-util("W", (
-	"100p": 100%,
-	"a_all": auto,
-	"i_all": inherit,
+@include mlu.mk-util('W', (
+	'100p': 100%,
+	'a_all': auto,
+	'i_all': inherit,
 ));
