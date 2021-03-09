@@ -219,11 +219,10 @@ Styleguide: concepts.utility
 /*
 Types
 
-Utilities in MLUT come in 3 types:
+Utilities in MLUT come in 2 types:
 
 * **Common** \- named and work like CSS properties.
-* **Custom** \- manage one or more related CSS [custom properties](section-core-styles.html#kssref-core-styles-css_vars). Their names begin with a hyphen and are abbreviations of the names of the corresponding properties. Examples: `-Gg`.
-* **Modified** \- affect several CSS properties. The names of such utilities begin with `m` prefix.
+* **Custom** \- affects several common CSS properties or manages custom properties. Their names begin with a hyphen. Examples: `-D`, `-Xy`, `-Gg`.
 
 Weight: 0
 
@@ -248,9 +247,9 @@ Styleguide: concepts.utility.dirs
 MLUT keywords and variables
 
 **MLUT keywords** are strings values. Their names can only contain lowercase letters. Keywords include:
-* names of breakpoints - `sm`, `lg`, etc. Permissible to use only in custom and modified utilities
+* names of breakpoints - `sm`, `lg`, etc. Permissible to use only in custom utilities
 * `min` and `max`. Allowed to use only in utils with number values
-* abbreviations for invented values that are not in the CSS specification. Allowed to use only in custom and modified utilities
+* abbreviations for invented values that are not in the CSS specification. Allowed to use only in custom utilities.
 
 **MLUT variables** exist only at the agreement level. Essentially, they are similar to Sass variables, which are compiled into CSS values. They can take any value, including CSS custom properties. Variable name can contain only lowercase letters, numbers and hyphens: `bd0`, `action`, `my-bxsh` etc. Example: [Maw--fx0](section-core-utils.html#kssref-core-utils-bxz-maw).
 
@@ -358,7 +357,7 @@ Core utilities
 
 Set of utilities that can be used on any project.
 
-Utilities are grouped by sections. The description of each section lists the values of the utilities that relate to it and are included in the MLUT core. Modified utilities, utilities with more values and non-standard values are allocated in subsections. Values of common utilities correspond to [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations([pdf](https://yadi.sk/i/VcKfz5u7DBHrLA)). If written that all values are available in the utility, you can see them in the Emmet cheat sheet from the link above.
+Utilities are grouped by sections. The description of each section lists the values of the utilities that relate to it and are included in the MLUT core. Custom utilities, utilities with more values and non-standard values are allocated in subsections. Values of common utilities correspond to [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations([pdf](https://yadi.sk/i/VcKfz5u7DBHrLA)). If written that all values are available in the utility, you can see them in the Emmet cheat sheet from the link above.
 
 In the description of the utilities, there may be a '**Parameters**' item in which the available values are listed. Instead of the utility value, the '`initial`' keyword may be specified. We will get this effect when using the utility with no value. The range of values can be specified as `0..3`.
 
@@ -398,7 +397,7 @@ Styleguide: core-scripts
 /*
 Sass tools
 
-Available when using MLUT as a [toolkit](section-start.html#kssref-start-usage).
+Available when using MLUT as a [toolkit](section-start.html#kssref-start-usage). Names of tools that are associated with custom utilities begin with 'c' prefix. Examples: [$cGg-range](#kssref-sass-tools-settings-utils), [cCl](#kssref-sass-tools-mixins-general--cl) mixin.
 
 Weight: 6
 

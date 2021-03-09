@@ -64,13 +64,13 @@ Styleguide: core-utils.text.dir
 */
 
 /*
-mTov
+-Tov
 
-Modified text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container. DOM node with `mTov` should have a width limit.
+Custom text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container. DOM node with `-Tov` should have a width limit.
 
-Markup: ../../../docs/examples/core-utils/text/mtov.html
+Markup: ../../../docs/examples/core-utils/text/-tov.html
 
-Styleguide: core-utils.text.mtov
+Styleguide: core-utils.text.-tov
 */
 
 @include mlu.mk-util('Ta', (
@@ -93,7 +93,7 @@ Styleguide: core-utils.text.mtov
 	'c': capitalize,
 ));
 
-.mTov {
+.-Tov {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

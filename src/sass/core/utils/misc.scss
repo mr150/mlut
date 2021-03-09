@@ -7,9 +7,9 @@ Styleguide: core-utils.misc
 */
 
 /*
-mAll
+-All
 
-Modified `all`.
+Custom `all`.
 
 * `sr` \- soft reset, reset some default browser styles:
 	* `margin`
@@ -18,16 +18,16 @@ Modified `all`.
 	* `font`
 	* `list-style`
 
-Markup: ../../../docs/examples/core-utils/visual-formatting/mall.html
+Markup: ../../../docs/examples/core-utils/visual-formatting/-all.html
 
-Styleguide: core-utils.misc.mall
+Styleguide: core-utils.misc.-all
 */
 
 .Rsz-n {
 	resize: none;
 }
 
-.mAll-sr {
+.-All-sr {
 	margin: 0;
 	padding: 0;
 	font: inherit;

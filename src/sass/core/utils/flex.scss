@@ -7,7 +7,7 @@ Flex
 
 A group of utilities for managing flex-containers and flex-elements.
 
-Most of modified flex utilities **turned off** and available with flag [mlu.$flag-flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
+Most of custom flex utilities **turned off** and available with flag [mlu.$flag-flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags). They are needed to manage [row-layouts](section-core-blocks.html#kssref-core-blocks-row) and their elements.
 
 * `Fxg1` \- flex-element occupies the remaining free space in the line.
 * `Fxsh0`
@@ -101,35 +101,35 @@ Styleguide: core-utils.flex.ac
 */
 
 /*
-mAs
+-As
 
-Modified align self. Set `vertical-align` for common DOM nodes and `align-self` for flex-element.
+Custom align self. Set `vertical-align` for common DOM nodes and `align-self` for flex-element.
 
 Can be used to vertically align an element in row-layouts. Partially works without flex-container. Has the same values as `As`.
 
-Styleguide: core-utils.flex.mas
+Styleguide: core-utils.flex.-as
 */
 
 /*
-mJc
+-Jc
 
-Modified justify content. Combines [Ta](#kssref-core-utils-text-ta) and [Jc](#kssref-core-utils-flex-jc) utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts.
+Custom justify content. Combines [Ta](#kssref-core-utils-text-ta) and [Jc](#kssref-core-utils-flex-jc) utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts.
 
 All values are available and correspond to `Jc` if [flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags) flag turned on. By default available one value.
 
-mJc-c - center.
+-Jc-c - center.
 
-Styleguide: core-utils.flex.mjc
+Styleguide: core-utils.flex.-jc
 */
 
 /*
-mAi
+-Ai
 
-Modified align items. Set `vertical-align` for child DOM nodes and `align-items` for flex-container.
+Custom align items. Set `vertical-align` for child DOM nodes and `align-items` for flex-container.
 
 Can be used to vertically align an elements in row-layouts. Partially works without flex-container. Has the same values as `Ai`.
 
-Styleguide: core-utils.flex.mai
+Styleguide: core-utils.flex.-ai
 */
 
 @include mlu.mk-util('Fxd', (
@@ -170,22 +170,22 @@ $As-map: (
 );
 
 @if mlu.$flag-flex-pe {
-	.mAs-b {
+	.-As-b {
 		align-self: baseline;
 		vertical-align: baseline;
 	}
 
-	.mAs-fs {
+	.-As-fs {
 		align-self: flex-start;
 		vertical-align: top;
 	}
 
-	.mAs-c {
+	.-As-c {
 		align-self: center;
 		vertical-align: middle;
 	}
 
-	.mAs-fe {
+	.-As-fe {
 		align-self: flex-end;
 		vertical-align: bottom;
 	}
@@ -210,29 +210,29 @@ $As-map: (
 ));
 
 @if mlu.$flag-flex-pe {
-	@include mlu.bp-all('.mJc-fs', 0) {
+	@include mlu.bp-all('.-Jc-fs', 0) {
 		justify-content: flex-start;
 		text-align: left;
 	}
 
-	@include mlu.bp-all('.mJc-c') {
+	@include mlu.bp-all('.-Jc-c') {
 		justify-content: center;
 		text-align: center;
 	}
 
-	@include mlu.bp-all('.mJc-fe') {
+	@include mlu.bp-all('.-Jc-fe') {
 		justify-content: flex-end;
 		text-align: right;
 	}
 } @else if mlu.$flag-css-vars != 2 {
-	.mJc-c {
+	.-Jc-c {
 		justify-content: center;
 		text-align: center;
 	}
 }
 
 @if mlu.$flag-flex-pe {
-	.mAi-fs {
+	.-Ai-fs {
 		align-items: flex-start;
 
 		> * {
@@ -240,7 +240,7 @@ $As-map: (
 		}
 	}
 
-	.mAi-c {
+	.-Ai-c {
 		align-items: center;
 
 		> * {
@@ -248,7 +248,7 @@ $As-map: (
 		}
 	}
 
-	.mAi-fe {
+	.-Ai-fe {
 		align-items: flex-end;
 
 		> * {
@@ -256,7 +256,7 @@ $As-map: (
 		}
 	}
 
-	.mAi-b {
+	.-Ai-b {
 		align-items: baseline;
 
 		> * {

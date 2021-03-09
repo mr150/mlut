@@ -217,9 +217,9 @@ Styleguide: sass-tools.mixins.utils
 //		}
 //}
 // ```
-// To create position utilities like `T`, `R` etc, pass `mXy` as utility name and add directions to the values:
+// To create position utilities like `T`, `R` etc, pass `-Xy` as utility name and add directions to the values:
 // ```scss
-//@include mlu.mk-util('mXy', ('y23', 'r2gg', 'x5x'));
+//@include mlu.mk-util('-Xy', ('y23', 'r2gg', 'x5x'));
 // ```
 // CSS
 // ```css
@@ -233,7 +233,7 @@ Styleguide: sass-tools.mixins.utils
 //		right: calc(var(--mlu-gg) * 2);
 //}
 //
-//.mX5x {
+//.-X5x {
 //		right: 5ex;
 //		left: 5ex;
 //}

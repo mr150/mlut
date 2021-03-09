@@ -29,13 +29,13 @@ Styleguide: core-utils.bxz.maw
 */
 
 /*
-mCl
+-Cl
 
-Modified clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
+Custom clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
 
-Markup: ../../../docs/examples/core-utils/visual-formatting/mcl.html
+Markup: ../../../docs/examples/core-utils/visual-formatting/-cl.html
 
-Styleguide: core-utils.bxz.mcl
+Styleguide: core-utils.bxz.-cl
 */
 
 /*
@@ -78,8 +78,8 @@ Styleguide: core-utils.bxz.ov
 	'r': right,
 ));
 
-.mCl {
-	@include mlu.mCl;
+.-Cl {
+	@include mlu.cCl;
 }
 
 @include mlu.mk-util('Ov', (

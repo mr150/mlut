@@ -120,12 +120,12 @@ Styleguide: sass-tools.mixins.general
 	}
 }
 
-// mCl
+// cCl
 //
 // Generate clearfix for float layout.
 // ```scss
 //.block {
-//		@include mCl;
+//		@include cCl;
 //}
 // ```
 // CSS
@@ -137,9 +137,9 @@ Styleguide: sass-tools.mixins.general
 //}
 // ```
 //
-// Styleguide: sass-tools.mixins.general.mcl
+// Styleguide: sass-tools.mixins.general.-cl
 
-@mixin mCl {
+@mixin cCl {
 	&:after {
 		display: table;
 		clear: both;

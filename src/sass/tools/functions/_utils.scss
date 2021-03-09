@@ -50,7 +50,7 @@ Styleguide: sass-tools.functions.utils
 
 // parse-util-directions
 //
-// Parse a map or list with directed utility values. If utility name is not passed, then the directions in the values will become the names of the utilities: t - T, x - mX etc. Returns a map with parsed data.
+// Parse a map or list with directed utility values. If utility name is not passed, then the directions in the values will become the names of the utilities: t - T, x - -X etc. Returns a map with parsed data.
 // ```scss
 //$M-map: (
 //   'b-2gg': -2gg,
@@ -127,14 +127,14 @@ Styleguide: sass-tools.functions.utils
 				$util-name: $name;
 				$dir: 'xy';
 			} @else {
-				$util-name: 'mXy';
+				$util-name: '-Xy';
 				$dir: 'all';
 			}
 		} @else if $dir == 'x' or $dir == 'y' {
 			@if $name {
 				$util-name: $name + $dir;
 			} @else {
-				$util-name: 'm' + string.to-upper-case($dir);
+				$util-name: '-' + string.to-upper-case($dir);
 			}
 		} @else {
 			@error 'Invalid direction `#{$dir}` for `#{$name}` in map of values';

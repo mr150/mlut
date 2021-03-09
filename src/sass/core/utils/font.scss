@@ -15,13 +15,13 @@ Styleguide: core-utils.f
 */
 
 /*
-mFz
+-Fz
 
-Modified font size.
+Custom font size.
 
 0 - Accessibly hides the text inside the DOM node.
 
-Styleguide: core-utils.f.mfz
+Styleguide: core-utils.f.-fz
 */
 
 .F-i {
@@ -46,7 +46,7 @@ Styleguide: core-utils.f.mfz
 	font-size: inherit;
 }
 
-.mFz0 {
+.-Fz0 {
 	overflow: hidden;
 	text-indent: 120%;
 	white-space: nowrap;

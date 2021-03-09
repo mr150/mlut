@@ -69,9 +69,9 @@ $utils-map: (
 	'-Gcc': mlu.$var-grid-cols,
 	'-Gg': mlu.$var-gg,
 	'Pos': 'position',
-	'mX': null,
-	'mY': null,
-	'mXy': null,
+	'-X': null,
+	'-Y': null,
+	'-Xy': null,
 	'Z': 'z-index',
 	'D': 'display',
 	'Fxd': 'flex-direction',
@@ -135,9 +135,9 @@ $utils-directed: (
 	'M',
 	'P',
 	'Bd',
-	'mX',
-	'mY',
-	'mXy',
+	'-X',
+	'-Y',
+	'-Xy',
 ) !default;
 
 $utils-directed-ext: (

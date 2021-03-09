@@ -45,7 +45,7 @@ Flex
 
 * `Ac` \- all values *Responsive*.
 * `Ai-s` \- *Responsive*.
-* `mAi-s` \- *Responsive*. Available if [flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags) flag turned on.
+* `-Ai-s` \- *Responsive*. Available if [flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags) flag turned on.
 
 Styleguide: sass_modules.core_extend.utils.flex
 */
@@ -65,7 +65,7 @@ Styleguide: sass_modules.core_extend.utils.flex
 		}
 
 		@if mlu.$flag-flex-pe {
-			.mAi-fs_#{$key} {
+			.-Ai-fs_#{$key} {
 				align-items: flex-start;
 
 				> * {
@@ -73,7 +73,7 @@ Styleguide: sass_modules.core_extend.utils.flex
 				}
 			}
 
-			.mAi-c_#{$key} {
+			.-Ai-c_#{$key} {
 				align-items: center;
 
 				> * {
@@ -81,7 +81,7 @@ Styleguide: sass_modules.core_extend.utils.flex
 				}
 			}
 
-			.mAi-fe_#{$key} {
+			.-Ai-fe_#{$key} {
 				align-items: flex-end;
 
 				> * {
@@ -89,7 +89,7 @@ Styleguide: sass_modules.core_extend.utils.flex
 				}
 			}
 
-			.mAi-b_#{$key} {
+			.-Ai-b_#{$key} {
 				align-items: baseline;
 
 				> * {

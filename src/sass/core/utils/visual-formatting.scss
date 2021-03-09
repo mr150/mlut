@@ -11,15 +11,15 @@ Styleguide: core-utils.visual
 */
 
 /*
-mV
+-V
 
-Modified visibility.
+Custom visibility.
 
-mV-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all. *Responsive*.
+-V-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all. *Responsive*.
 
-Markup: ../../../docs/examples/core-utils/visual-formatting/mv.hbs
+Markup: ../../../docs/examples/core-utils/visual-formatting/-v.hbs
 
-Styleguide: core-utils.visual.mv
+Styleguide: core-utils.visual.-v
 */
 
 .Ol0 {
@@ -38,7 +38,7 @@ Styleguide: core-utils.visual.mv
 	visibility: hidden;
 }
 
-@include mlu.bp-all('.mV-vh') {
+@include mlu.bp-all('.-V-vh') {
 	position: absolute;
 	width: 1px;
 	height: 1px;

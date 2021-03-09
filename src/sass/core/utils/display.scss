@@ -24,14 +24,14 @@ Styleguide: core-utils.bxz.d
 */
 
 /*
-mD
+-D
 
-Modified display.
+Custom display.
 
-mD-f - `D-f` with line breaks.
-mD-if - `D-if` with `Fxw-w`.
+-D-f - `D-f` with line breaks.
+-D-if - `D-if` with `Fxw-w`.
 
-Styleguide: core-utils.bxz.md
+Styleguide: core-utils.bxz.-d
 */
 
 $D-map: (
@@ -49,12 +49,12 @@ $D-map: (
 
 @include mlu.mk-util('D', $D-map);
 
-.mD-f {
+.-D-f {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.mD-if {
+.-D-if {
 	display: inline-flex;
 	flex-wrap: wrap;
 }
