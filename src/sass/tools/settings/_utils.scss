@@ -23,7 +23,7 @@
 //
 // Styleguide: sass-tools.settings.utils
 
-$cGg-range: 5 !default;
+$cGsg-range: 5 !default;
 
 $Z-max: 9999 !default;
 $Z-range: 4 !default;
@@ -66,8 +66,8 @@ $Ff--m0: (
 $Trsdu--def: 0.3s !default;
 
 $utils-map: (
-	'-Gcc': mlu.$var-grid-cols,
-	'-Gg': mlu.$var-gg,
+	'-Gsc': mlu.$var-grid-cols,
+	'-Gsg': mlu.$var-gg,
 	'Pos': 'position',
 	'-X': null,
 	'-Y': null,
