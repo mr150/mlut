@@ -194,7 +194,7 @@ Utility
 An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
 
 Utility class names are formed according to the scheme:
-1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `nojs` - javascript disabled etc. Allowed several states in the same class. States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore `_`. More about states [below](#kssref-concepts-utility-states).
+1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `noJs` - javascript disabled etc. Allowed several states in the same class. States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore `_`. More about states [below](#kssref-concepts-utility-states).
 1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations([pdf](https://yadi.sk/i/VcKfz5u7DBHrLA)).
 1. optional value. Valid are:
 	* number
@@ -275,11 +275,12 @@ States
 
 States in MLUT called the implementation of some features of the CSS using utilities, such as pseudo-classes, selectors combinators etc.
 States also include utilities values that work under certain conditions that are not related with CSS.
+The state name is written in lower camelCase.
 Available states for utilities are listed in the [settings](section-sass-tools.html#kssref-sass-tools-settings-utils-states).
 States are created using the [mk-state](section-sass-tools.html#kssref-sass-tools-mixins-mk_state) mixin. It can create 3 types of states based on the types of values in the states map:
 1. pseudo-classes and pseudo-elements. In states map the value is a string - `'h': 'hover'`
 1. multiple selectors with pseudo-classes. State value is a list - `'h-f': ('hover', 'focus')`
-1. just the utilities values that work under certain conditions. State value is a null - `'nojs': null`
+1. just the utilities values that work under certain conditions. State value is a null - `'noJs': null`
 
 In the core there are utilities with states whose creation has not yet been implemented:
 * `sp` \- utility inside the @supports at-rule. It will only work if the CSS property, value, or @supports supported by the browser.
@@ -287,11 +288,11 @@ In the core there are utilities with states whose creation has not yet been impl
 
 #### Javascript on/off
 
-Using the `js` and `nojs` states, you can add utilities that work depending on the presence of javascript in the browser.
+Using the `js` and `noJs` states, you can add utilities that work depending on the presence of javascript in the browser.
 * if you want the utility to work only when javascript is loaded, just add the `js` state to it in the markup.
-* if the utility should work only without javascript, create a value for it with the `nojs` state using a mixins.
+* if the utility should work only without javascript, create a value for it with the `noJs` state using a mixins.
 
-Note that if the utility has other states, `js` and `nojs` should be indicated first: `js-h_Bgc-mn0`, `nojs-sp_D-f`.
+Note that if the utility has other states, `js` and `noJs` should be indicated first: `js-h_Bgc-mn0`, `noJs-sp_D-f`.
 
 This mechanism is implemented using the [init.js](section-core-scripts.html#kssref-core-scripts-init) script.
 

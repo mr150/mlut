@@ -222,7 +222,7 @@ $util-css-keywords: map.merge($util-css-keywords, $util-css-keywords-ext);
 //);
 //
 //$mlu-util-states: (
-//		'nojs': null,
+//		'noJs': null,
 //);
 // ```
 //
@@ -246,7 +246,7 @@ $util-states-psd-elm: (
 ) !default;
 
 $util-states: (
-	'nojs': null,
+	'noJs': null,
 ) !default;
 
 $util-states: map.merge($util-states, $util-states-psd-cls);
