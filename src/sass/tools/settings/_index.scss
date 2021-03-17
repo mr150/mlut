@@ -251,7 +251,7 @@ MLUT keywords and variables
 * `min` and `max`. Allowed to use only in utils with number values
 * abbreviations for invented values that are not in the CSS specification. Allowed to use only in custom utilities.
 
-**MLUT variables** exist only at the agreement level. Essentially, they are similar to Sass variables, which are compiled into CSS values. They can take any value, including CSS custom properties. Variable name can contain only lowercase letters, numbers and hyphens: `bd0`, `action`, `my-bxsh` etc. Example: [Maw--fx0](section-core-utils.html#kssref-core-utils-bxz-maw).
+**MLUT variables** exist only at the agreement level. Essentially, they are similar to Sass variables, which are compiled into CSS values. They can take any value, including CSS custom properties. Variable name is written in lower camelCase, may contain letters and numbers: `bd0`, `myBxsh` etc. Example: [Maw--fx0](section-core-utils.html#kssref-core-utils-bxz-maw).
 
 Weight: 1
 
