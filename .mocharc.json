@@ -1,0 +1,4 @@
+{
+	"require": ["mocha-clean"],
+  "reporter": "min"
+}
