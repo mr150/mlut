@@ -38,6 +38,7 @@ var path = {
 	},
 	test: {
 		css: dirs.test + 'css/',
+		sass: dirs.test + 'sass/',
 		js: dirs.test + 'js/',
 		pug: dirs.test + 'pug/'
 	}
@@ -102,12 +103,21 @@ gulp.task('css-lint', function(){
 		}));
 });
 
+gulp.task('sass-test', shell.task(
+	`node_modules/.bin/mocha ${path.test.sass}index.js`,
+	{ignoreErrors: process.env.NODE_ENV !== 'production'}
+));
+
 gulp.task('style', gulp.series('css-lint', function(){
 	return gulp.src(path.src.sass + '*.scss')
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sass({
 			indentType: 'tab',
+			includePaths: [
+				'node_modules',
+				'src/sass',
+			],
 			outputStyle: 'expanded',
 			indentWidth: 1
 		}))
@@ -173,7 +183,11 @@ gulp.task('kss', shell.task([
 ]));
 
 gulp.task('default', gulp.parallel('server', 'style', 'pug', 'scripts', function(){
-	gulp.watch(path.watch.styles, gulp.parallel('style', 'kss'));
+	gulp.watch(path.watch.styles, gulp.parallel(
+		gulp.series('style', 'sass-test'),
+		'kss'
+	));
+
 	gulp.watch(path.watch.pug, gulp.series('pug'));
 	gulp.watch(path.watch.html, gulp.series('html'));
 	gulp.watch(path.watch.js, gulp.series('scripts', 'kss'));
@@ -192,4 +206,4 @@ gulp.task('clear', function(cb){
 	cb();
 });
 
-gulp.task('build', gulp.series('clear', 'style', 'pug', 'scripts', 'kss'));
+gulp.task('build', gulp.series('clear', 'style', 'sass-test', 'pug', 'scripts', 'kss'));
