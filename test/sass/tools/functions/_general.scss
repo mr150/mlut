@@ -1,0 +1,39 @@
+@use 'sass-true' as *;
+@use 'tools/functions/general' as mlu;
+
+@include describe('general functions') {
+	@include describe('str-split') {
+		@include it('split string into list with delimiter') {
+			@include assert-equal(
+				mlu.str-split('text__with__double__underscores', '__'),
+				'text' 'with' 'double' 'underscores',
+			);
+
+			@include assert-equal(
+				mlu.str-split(' one two  3', ' '),
+				'' 'one' 'two' '' '3',
+			);
+		}
+
+		@include it('split string into list without delimiter') {
+			@include assert-equal(
+				mlu.str-split('testou'),
+				't' 'e' 's' 't' 'o' 'u',
+			);
+		}
+	}
+
+	@include describe('str-trim') {
+		@include it('trim trailing and leading whitespaces') {
+			@include assert-equal(
+				mlu.str-trim('  testou   '),
+				'testou',
+			);
+
+			@include assert-equal(
+				mlu.str-trim('   '),
+				'',
+			);
+		}
+	}
+}

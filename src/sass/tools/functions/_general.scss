@@ -1,5 +1,7 @@
 @use 'sass:meta';
+@use 'sass:map';
 @use 'sass:string';
+@use 'sass:list';
 
 /*
 General
@@ -80,4 +82,44 @@ Styleguide: sass-tools.functions.general
 	}
 
 	@return if(string.slice($name, 1, 1) == '.', $name, '.' + $name);
+}
+
+// Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.
+
+@function str-split($str, $delimiter: '') {
+	$result: ();
+	$del-length: string.length($delimiter);
+
+	@if $del-length == 0 {
+		@for $i from 1 through string.length($str) {
+			$result: list.append($result, string.slice($str, $i, $i));
+		}
+
+		@return $result;
+	}
+
+	@while 1 {
+		$del-pos: string.index($str, $delimiter);
+
+		@if $del-pos {
+			$result: list.append($result, string.slice($str, 1, $del-pos - 1));
+			$str: string.slice($str, $del-pos + $del-length);
+		} @else {
+			@return list.append($result, $str);
+		}
+	}
+}
+
+//Trim so simple because common usage will trim one or zero spaces in one side.
+
+@function str-trim($str) {
+	@while 1 {
+		@if string.slice($str, 1, 1) == ' ' {
+			$str: string.slice($str, 2);
+		} @else if string.slice($str, -1) == ' ' {
+			$str: string.slice($str, 1, -2);
+		} @else {
+			@return $str;
+		}
+	}
 }
