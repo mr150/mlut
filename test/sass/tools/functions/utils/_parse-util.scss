@@ -3,8 +3,8 @@
 );
 @use 'tools/functions' as mlu;
 
-@include describe('utils functions') {
-	@include describe('new-parse-util') {
+@include describe('tools/functions/utils/') {
+	@include describe('parse-util') {
 		@include it('simple value') {
 			@include assert-equal(
 				mlu.new-parse-util(1gg),

@@ -1,7 +1,7 @@
 @use 'sass-true' as *;
 @use 'tools/functions/general' as mlu;
 
-@include describe('general functions') {
+@include describe('tools/functions/general') {
 	@include describe('str-split') {
 		@include it('split string into list with delimiter') {
 			@include assert-equal(
