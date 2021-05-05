@@ -48,6 +48,56 @@ Styleguide: sass-tools.functions.utils
 	);
 }
 
+@function new-parse-util($raw-value) {
+	$raw-value-parts: mgen.str-split($raw-value + '', '_');
+	$result: ();
+	$at-rules: null;
+	$value: null;
+
+	@if list.length($raw-value-parts) > 1 {
+		@each $component in $raw-value-parts {
+			$component-list: mgen.str-split(mgen.str-trim($component), ' ');
+			$component-item: list.nth($component-list, 1);
+
+			$part: list.nth(mgen.str-split(
+				list.nth(mgen.str-split($component-item, ','), 1),
+				':'
+			), 1);
+			@if not $at-rules and (
+				string.index($part, '@') == 1 or map.has-key(mlu.$mq-aliases, $part)
+			) {
+				$at-rules: $component-list;
+			} @else if (string.index($component, ' ') or $value) and
+				map.has-key(mlu.$util-states, $part) {
+				$result: map.set($result, 'post-states', $component-list);
+			} @else if list.index(
+				'^' '/' ':',
+				string.slice($component-item, 1, 1)
+			) {
+				$result: map.set(
+					$result,
+					if($value, 'post-states', 'pre-states'),
+					$component-list
+				);
+			} @else {
+				$value: $component-list;
+			}
+		}
+	} @else {
+		$value: $raw-value;
+	}
+
+	@if not $value {
+		$value: $at-rules;
+	} @else if $at-rules {
+		$result: map.set($result, 'at-rules', $at-rules);
+	}
+
+	$result: map.set($result, 'value', $value);
+
+	@return $result;
+}
+
 // parse-util-directions
 //
 // Parse a map or list with directed utility values. If utility name is not passed, then the directions in the values will become the names of the utilities: t - T, x - -X etc. Returns a map with parsed data.

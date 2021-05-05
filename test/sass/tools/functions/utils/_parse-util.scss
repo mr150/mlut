@@ -1,0 +1,229 @@
+@use 'sass-true' as * with (
+	$terminal-output: false,
+);
+@use 'tools/functions' as mlu;
+
+@include describe('utils functions') {
+	@include describe('new-parse-util') {
+		@include it('simple value') {
+			@include assert-equal(
+				mlu.new-parse-util(1gg),
+				('value': 1gg),
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('xl'),
+				('value': 'xl'),
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util(''),
+				('value': ''),
+			);
+		}
+
+		@include it('value with only at-rule') {
+			@include assert-equal(
+				mlu.new-parse-util('xl_1gg'),
+				(
+					'at-rules': 'xl',
+					'value': '1gg',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('md_'),
+				(
+					'at-rules': 'md',
+					'value': '',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('xs:sm,lg_1gg'),
+				(
+					'at-rules': 'xs:sm,lg',
+					'value': '1gg',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('@:md:ori-l,print:-myMq_1gg'),
+				(
+					'at-rules': '@:md:ori-l,print:-myMq',
+					'value': '1gg',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('md xl_Spaces'),
+				(
+					'at-rules': 'md' 'xl',
+					'value': 'Spaces',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('lg_lg'),
+				(
+					'at-rules': 'lg',
+					'value': 'lg',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with only pre-states') {
+			@include assert-equal(
+				mlu.new-parse-util('^ctx_D'),
+				(
+					'pre-states': '^ctx',
+					'value': 'D',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('^ctx /a> _2su'),
+				(
+					'pre-states': '^ctx' '/a>',
+					'value': '2su',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with only post-states') {
+			@include assert-equal(
+				mlu.new-parse-util('a_h'),
+				(
+					'post-states': 'h',
+					'value': 'a',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('inh_ :fw:^'),
+				(
+					'post-states': ':fw:^',
+					'value': 'inh',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('a_h f'),
+				(
+					'post-states': 'h' 'f',
+					'value': 'a',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('md_af,bf '),
+				(
+					'post-states': 'af,bf',
+					'value': 'md',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('_vl'),
+				(
+					'post-states': 'vl',
+					'value': '',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with at-rule and pre state') {
+			@include assert-equal(
+				mlu.new-parse-util('xl_^:h_50p'),
+				(
+					'pre-states': '^:h',
+					'at-rules': 'xl',
+					'value': '50p',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('md_^1:f_md'),
+				(
+					'pre-states': '^1:f',
+					'at-rules': 'md',
+					'value': 'md',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with at-rule and post state') {
+			@include assert-equal(
+				mlu.new-parse-util('BpAll_n_f,a'),
+				(
+					'post-states': 'f,a',
+					'at-rules': 'BpAll',
+					'value': 'n',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('xl_xl_h:af'),
+				(
+					'post-states': 'h:af',
+					'at-rules': 'xl',
+					'value': 'xl',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with post and pre states') {
+			@include assert-equal(
+				mlu.new-parse-util('/a>_cc_f:bf'),
+				(
+					'pre-states': '/a>',
+					'post-states': 'f:bf',
+					'value': 'cc',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with all components') {
+			@include assert-equal(
+				mlu.new-parse-util('xs:sm_:f:/>_0_h::^sub'),
+				(
+					'pre-states': ':f:/>',
+					'post-states': 'h::^sub',
+					'at-rules': 'xs:sm',
+					'value': '0',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('xs:sm_:f:/>__noJs:h'),
+				(
+					'pre-states': ':f:/>',
+					'post-states': 'noJs:h',
+					'at-rules': 'xs:sm',
+					'value': '',
+				),
+				$inspect: true,
+			);
+
+		}
+	}
+}
