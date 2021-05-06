@@ -98,16 +98,16 @@ Styleguide: sass-tools.functions.general
 		@return $result;
 	}
 
-	@while 1 {
-		$del-pos: string.index($str, $delimiter);
+	$del-pos: string.index($str, $delimiter);
 
-		@if $del-pos {
-			$result: list.append($result, string.slice($str, 1, $del-pos - 1));
-			$str: string.slice($str, $del-pos + $del-length);
-		} @else {
-			@return list.append($result, $str);
-		}
+	@while $del-pos != null {
+		$result: list.append($result, string.slice($str, 1, $del-pos - 1));
+		$str: string.slice($str, $del-pos + $del-length);
+
+		$del-pos: string.index($str, $delimiter);
 	}
+
+	@return list.append($result, $str);
 }
 
 //Trim so simple because common usage will trim one or zero spaces in one side.
