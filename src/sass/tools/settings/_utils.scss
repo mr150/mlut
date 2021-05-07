@@ -65,86 +65,6 @@ $Ff--m0: (
 
 $Trsdu--def: 0.3s !default;
 
-$utils-map: (
-	'-Gsc': mlu.$var-grid-cols,
-	'-Gsg': mlu.$var-gg,
-	'Pos': 'position',
-	'-X': null,
-	'-Y': null,
-	'-Xy': null,
-	'Z': 'z-index',
-	'D': 'display',
-	'Fxd': 'flex-direction',
-	'Fxw': 'flex-wrap',
-	'Ac': 'align-content',
-	'As': 'align-self',
-	'Ai': 'align-items',
-	'Jc': 'justify-content',
-	'Ord': 'order',
-	'Fl': 'float',
-	'Bxz': 'box-sizing',
-	'W': 'width',
-	'Maw': 'max-width',
-	'H': 'height',
-	'Mih': 'min-height',
-	'M': 'margin',
-	'P': 'padding',
-	'Ov': 'overflow',
-	'C': 'color',
-	'F': 'font',
-	'Fw': 'font-weight',
-	'Fz': 'font-size',
-	'Ff': 'font-family',
-	'Fs': 'font-style',
-	'Lh': 'line-height',
-	'Dir': 'direction',
-	'Lts': 'letter-spacing',
-	'Whs': 'white-space',
-	'Ta': 'text-align',
-	'Tt': 'text-transform',
-	'Td': 'text-decoration',
-	'Tsh': 'text-shadow',
-	'Va': 'vertical-align',
-	'Bgc': 'background-color',
-	'Bgr': 'background-repeat',
-	'Bgp': 'background-position',
-	'Bgsz': 'background-size',
-	'Bga': 'background-attachment',
-	'Ol': 'outline',
-	'Bxsh': 'box-shadow',
-	'Trf': 'transform',
-	'V': 'visibility',
-	'Cur': 'cursor',
-	'Op': 'opacity',
-	'Bd': 'border',
-	'Bdc': 'border-color',
-	'Bds': 'border-style',
-	'Bdw': 'border-width',
-	'Bdrs': 'border-radius',
-	'Trs': 'transition',
-	'Anim': 'animation',
-	'Rsz': 'resize',
-) !default;
-
-$utils-ext: (
-) !default;
-
-$utils-map: map.merge($utils-map, $utils-ext);
-
-$utils-directed: (
-	'M',
-	'P',
-	'Bd',
-	'-X',
-	'-Y',
-	'-Xy',
-) !default;
-
-$utils-directed-ext: (
-) !default;
-
-$utils-directed: list.join($utils-directed, $utils-directed-ext);
-
 // Conversion to CSS
 //
 // Settings of conversion utilitie values to CSS values. All variables below are maps.
@@ -156,69 +76,24 @@ $utils-directed: list.join($utils-directed, $utils-directed-ext);
 //
 // Styleguide: sass-tools.settings.utils.conversion
 
-$util-value-types: (
-	'unitless': ('Z', 'Lh', 'Op', 'Fw', 'Fxg', 'Fxsh'),
-) !default;
-
-$util-value-types-ext: (
-) !default;
-
-$util-value-types: map.merge($util-value-types, $util-value-types-ext);
-
-$util-unit-aliases: (
-	'': 1px,
-	'e': 1em,
-	'p': 1%,
-	'x': 1ex,
-	'r': 1rem,
-) !default;
-
-$util-unit-aliases-ext: (
-) !default;
-
-$util-unit-aliases: map.merge($util-unit-aliases, $util-unit-aliases-ext);
-
-$util-custom-units: (
-	'gg': 1gg,
-	'su': 1su,
-) !default;
-
-$util-custom-units-ext: (
-) !default;
-
-$util-custom-units: map.merge($util-custom-units, $util-custom-units-ext);
-$util-units-map: map.merge($util-custom-units, $util-unit-aliases);
-
-$util-css-keywords: (
-	'a': auto,
-	'i': inherit,
-	'u': unset,
-	'n': none,
-) !default;
-
-$util-css-keywords-ext: (
-) !default;
-
-$util-css-keywords: map.merge($util-css-keywords, $util-css-keywords-ext);
-
 // Maps with utilities states
 //
 // ```scss
 //$mlu-util-states-psd-cls: (
-//		'h': 'hover',
-//		'f': 'focus',
-//		'fw': 'focus-within',
-//		'h-f': ('hover', 'focus'),
-//		'a': 'active',
-//		'vl': 'valid',
-//		'iv': 'invalid',
+//		'h': hover,
+//		'f': focus,
+//		'fw': focus-within,
+//		'h-f': (hover, focus),
+//		'a': active,
+//		'vl': valid,
+//		'iv': invalid,
 //);
 //
 //$mlu-util-states-psd-elm: (
-//		'bf': 'before',
-//		'af': 'after',
-//		'fln': 'first-line',
-//		'flt': 'first-letter',
+//		'bf': before,
+//		'af': after,
+//		'fln': first-line,
+//		'flt': first-letter,
 //);
 //
 //$mlu-util-states: (
@@ -228,27 +103,144 @@ $util-css-keywords: map.merge($util-css-keywords, $util-css-keywords-ext);
 //
 // Styleguide: sass-tools.settings.utils.states
 
-$util-states-psd-cls: (
-	'h': 'hover',
-	'f': 'focus',
-	'fw': 'focus-within',
-	'a': 'active',
-	'vl': 'valid',
-	'iv': 'invalid',
-	'h-f': ('hover', 'focus'),
+//stylelint-disable
+$utils-data: (
+	'map': (
+		'-Gsc': mlu.$var-grid-cols,
+		'-Gsg': mlu.$var-gg,
+		'Pos': position,
+		'-X': null,
+		'-Y': null,
+		'-Xy': null,
+		'Z': z-index,
+		'D': display,
+		'Fxd': flex-direction,
+		'Fxw': flex-wrap,
+		'Ac': align-content,
+		'As': align-self,
+		'Ai': align-items,
+		'Jc': justify-content,
+		'Ord': order,
+		'Fl': float,
+		'Bxz': box-sizing,
+		'W': width,
+		'Maw': max-width,
+		'H': height,
+		'Mih': min-height,
+		'M': margin,
+		'P': padding,
+		'Ov': overflow,
+		'C': color,
+		'F': font,
+		'Fw': font-weight,
+		'Fz': font-size,
+		'Ff': font-family,
+		'Fs': font-style,
+		'Lh': line-height,
+		'Dir': direction,
+		'Lts': letter-spacing,
+		'Whs': white-space,
+		'Ta': text-align,
+		'Tt': text-transform,
+		'Td': text-decoration,
+		'Tsh': text-shadow,
+		'Va': vertical-align,
+		'Bgc': background-color,
+		'Bgr': background-repeat,
+		'Bgp': background-position,
+		'Bgsz': background-size,
+		'Bga': background-attachment,
+		'Ol': outline,
+		'Bxsh': box-shadow,
+		'Trf': transform,
+		'V': visibility,
+		'Cur': cursor,
+		'Op': opacity,
+		'Bd': border,
+		'Bdc': border-color,
+		'Bds': border-style,
+		'Bdw': border-width,
+		'Bdrs': border-radius,
+		'Trs': transition,
+		'Anim': animation,
+		'Rsz': resize,
+	),
+
+	'directed': (
+		'M',
+		'P',
+		'Bd',
+		'-X',
+		'-Y',
+		'-Xy',
+	),
+
+	'value-types': (
+		'unitless': ('Z', 'Lh', 'Op', 'Fw', 'Fxg', 'Fxsh'),
+	),
+
+	'value-converters': (),
+
+	'unit-aliases': (
+		'': 1px,
+		'e': 1em,
+		'p': 1%,
+		'x': 1ex,
+		'r': 1rem,
+	),
+
+	'custom-units': (
+		'gg': 1gg,
+		'su': 1su,
+	),
+
+	'css-keywords': (
+		'a': auto,
+		'i': inherit,
+		'u': unset,
+		'n': none,
+	),
+
+	'states': (
+		'pseudo-cls': (
+			'h': hover,
+			'f': focus,
+			'fw': focus-within,
+			'a': active,
+			'vl': valid,
+			'iv': invalid,
+			'h-f': (hover, focus),
+	  ),
+		'pseudo-elm': (
+			'bf': before,
+			'af': after,
+			'fln': first-line,
+			'flt': first-letter,
+		),
+		'custom': (
+		),
+		'special': (
+			'': ' ',
+			'noJs': null,
+		),
+	),
 ) !default;
 
-$util-states-psd-elm: (
-	'bf': 'before',
-	'af': 'after',
-	'fln': 'first-line',
-	'flt': 'first-letter',
-) !default;
+$utils: () !default;
 
-$util-states: (
-	'noJs': null,
-) !default;
+$utils-data: map.deep-merge($utils-data, $utils);
 
-$util-states: map.merge($util-states, $util-states-psd-cls);
+$util-states: map.merge(
+	map.get($utils-data, 'states', 'pseudo-cls'),
+	map.get($utils-data, 'states', 'pseudo-elm'),
+);
 
-$util-states: map.merge($util-states, $util-states-psd-elm);
+$util-states: map.merge(
+	$util-states,
+	map.get($utils-data, 'states', 'special'),
+);
+
+$util-units-map: map.merge(
+	map.get($utils-data, 'unit-aliases'),
+	map.get($utils-data, 'custom-units'),
+);

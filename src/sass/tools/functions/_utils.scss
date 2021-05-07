@@ -64,7 +64,7 @@ Styleguide: sass-tools.functions.utils
 				':'
 			), 1);
 			@if not $at-rules and (
-				string.index($part, '@') == 1 or map.has-key(mlu.$mq-aliases, $part)
+				string.index($part, '@') == 1 or map.has-key(mlu.$general-data, 'mq-aliases', $part)
 			) {
 				$at-rules: $component-list;
 			} @else if (string.index($component, ' ') or $value) and
@@ -239,10 +239,12 @@ Styleguide: sass-tools.functions.utils
 //
 // Styleguide: sass-tools.functions.utils.convert_util_value
 
+$-util-value-types: map.get(mlu.$utils-data, 'value-types');
+
 @function convert-util-value($util-val, $name) {
 	$util-type: '';
 
-	@each $key, $value in mlu.$util-value-types {
+	@each $key, $value in $-util-value-types {
 		@if list.index($value, $name) {
 			$util-type: $key;
 		}
@@ -307,8 +309,8 @@ Styleguide: sass-tools.functions.utils
 
 @function convert-util-value-keyword($value) {
 	@return if(
-		map.has-key(mlu.$util-css-keywords, $value),
-		map.get(mlu.$util-css-keywords, $value),
+		map.has-key(mlu.$utils-data, 'css-keywords', $value),
+		map.get(mlu.$utils-data, 'css-keywords', $value),
 		$value
 	);
 }
@@ -324,10 +326,7 @@ $util-value-converters: (
 	'unitless': meta.get-function('convert-util-value-keyword'),
 ) !default;
 
-$util-value-converters-ext: (
-) !default;
-
 $util-value-converters: map.merge(
 	$util-value-converters,
-	$util-value-converters-ext
+	map.get(mlu.$utils-data, 'value-converters'),
 );

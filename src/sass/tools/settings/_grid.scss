@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use 'general' as mlu;
 
 // Grid system
@@ -37,13 +38,6 @@ xl | 12 | 16px
 Styleguide: sass-tools.settings.grid.cols
 */
 
-$grid-cols: (
-	mlu.$bp-sm: 4,
-	mlu.$bp-md: 12,
-	mlu.$bp-lg: $grid-default-cols,
-	mlu.$bp-xl: $grid-default-cols,
-) !default;
-
 // Gutters
 //
 // Gutters variables and their values ​​in the source
@@ -60,9 +54,24 @@ $gtr-md: $gtr-sm !default;
 $gtr-lg: $grid-default-gtr !default;
 $gtr-xl: $gtr-lg !default;
 
-$grid-gutters: (
-	mlu.$bp-sm: $gtr-sm,
-	mlu.$bp-md: $gtr-md,
-	mlu.$bp-lg: $gtr-lg,
-	mlu.$bp-xl: $gtr-xl,
+$grid-data: (
+	'gutters': (
+		mlu.$bp-sm: $gtr-sm,
+		mlu.$bp-md: $gtr-md,
+		mlu.$bp-lg: $gtr-lg,
+		mlu.$bp-xl: $gtr-xl,
+	),
+	'cols': (
+		mlu.$bp-sm: 4,
+		mlu.$bp-md: 12,
+		mlu.$bp-lg: $grid-default-cols,
+		mlu.$bp-xl: $grid-default-cols,
+	),
 ) !default;
+
+$grid-map: () !default;
+
+$grid-data: map.deep-merge($grid-data, $grid-map);
+
+$grid-gutters: map.get($grid-data, 'gutters');
+$grid-cols: map.get($grid-data, 'cols');

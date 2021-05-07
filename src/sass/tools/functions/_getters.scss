@@ -190,8 +190,8 @@ Styleguide: sass-tools.functions.getters
 // Styleguide: sass-tools.functions.getters.util_prop
 
 @function util-prop($name, $error-handler: 1) {
-	@if map.has-key(mlu.$utils-map, $name) or $error-handler == 0 {
-		@return map.get(mlu.$utils-map, $name);
+	@if map.has-key(mlu.$utils-data, 'map', $name) or $error-handler == 0 {
+		@return map.get(mlu.$utils-data, 'map', $name);
 	}
 
 	@error 'Invalid utility name. `#{$name}` is not defined in $mlu-utils-map';

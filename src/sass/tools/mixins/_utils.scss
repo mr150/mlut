@@ -11,6 +11,8 @@
 $-su-rem: mlu.px2rem(mlu.$su);
 $-gtr-sm-rem: mlu.px2rem(mlu.$gtr-sm);
 
+$-utils-directed: map.get(mlu.$utils-data, 'directed');
+
 /*
 Utilities
 
@@ -251,7 +253,7 @@ Styleguide: sass-tools.mixins.utils
 	$util-name: mlu.check-class($name, 1);
 	$prop: if($prop, $prop, mlu.util-prop($util-name));
 
-	@if list.index(mlu.$utils-directed, $util-name) {
+	@if list.index($-utils-directed, $util-name) {
 		$util-name: if($prop, $util-name, null);
 		$utils-data: mlu.parse-util-directions($values, $util-name);
 		$utils-map: map.get($utils-data, 'utils-map');

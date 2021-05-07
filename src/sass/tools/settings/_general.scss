@@ -22,13 +22,6 @@ $su: $su-cf * 1px;
 
 $base-font-size: $browser-font-size !default;
 
-$main-directions: (
-	't': top,
-	'r': right,
-	'b': bottom,
-	'l': left,
-) !default;
-
 // Breakpoints
 //
 // Breakpoint names and values.
@@ -47,17 +40,35 @@ $bp-md: 'md' !default;
 $bp-lg: 'lg' !default;
 $bp-xl: 'xl' !default;
 
-$breakpoints: (
-	$bp-sm: 520px,
-	$bp-md: 760px,
-	$bp-lg: 960px,
-	$bp-xl: 1168px,
+$general-data: (
+	'breakpoints': (
+		$bp-sm: 520px,
+		$bp-md: 760px,
+		$bp-lg: 960px,
+		$bp-xl: 1168px,
+	),
+	'mq-aliases': (
+		'Bp': '',
+		'BpAll': '',
+		$bp-xs: 0,
+	),
+	'main-directions': (
+		't': top,
+		'r': right,
+		'b': bottom,
+		'l': left,
+	),
 ) !default;
 
-$mq-aliases: (
-	'Bp': '',
-	'BpAll': '',
-	$bp-xs: 0,
-) !default;
+$general-data: map.merge(
+	$general-data,
+	'mq-aliases',
+	map.get($general-data, 'breakpoints')
+);
 
-$mq-aliases: map.merge($mq-aliases, $breakpoints);
+$general-map: () !default;
+
+$general-data: map.deep-merge($general-data, $general-map);
+
+$breakpoints: map.get($general-data, 'breakpoints');
+$main-directions: map.get($general-data, 'main-directions');
