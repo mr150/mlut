@@ -1,0 +1,121 @@
+// At-rules
+//
+// Settings for media queries and other CSS at-rules.
+//
+// $at-rules - main map with settings.
+//
+// Styleguide: sass-tools.settings.at_rules
+
+@use 'sass:map';
+
+// Breakpoints
+//
+// Breakpoint names and values.
+//
+// $mlu-bp-xs = 0 - `xs`
+// $mlu-bp-sm = 520px - `sm`
+// $mlu-bp-md = 760px - `md`
+// $mlu-bp-lg = 960px - `lg`
+// $mlu-bp-xl = 1168px - `xl`
+//
+// Styleguide: sass-tools.settings.at_rules.breakpoints
+
+$bp-xs: 'xs' !default;
+$bp-sm: 'sm' !default;
+$bp-md: 'md' !default;
+$bp-lg: 'lg' !default;
+$bp-xl: 'xl' !default;
+$bp-only: 'Bp' !default;
+$bp-all: 'BpAll' !default;
+
+$at-rules-data: (
+	'breakpoints': (
+		$bp-sm: 520px,
+		$bp-md: 760px,
+		$bp-lg: 960px,
+		$bp-xl: 1168px,
+	),
+	'all-breakpoints': (
+		$bp-xs: 0,
+	),
+	'media': (
+		'types': (
+			'prn': print,
+			'scr': screen,
+		),
+		'custom': (
+		),
+		'registry': (
+			'hv': hover,
+			'ahv': any-hover,
+			'pn': pointer,
+			'apn': any-pointer,
+			'cg': color-gamut,
+			'fc': forced-colors,
+			'dm': display-mode,
+			'ori': orientation,
+			'prfcs': prefers-color-scheme,
+			'prfrm': prefers-reduced-motion,
+			'mn': (
+				'props': monochrome,
+				'value-type': 'unitless',
+			),
+			'ar': (
+				'props': aspect-ratio,
+				'value-type': 'unitless',
+			),
+			'rsl': (
+				'props': resolution,
+				'value-type': 'resolution',
+			),
+		),
+		'map': (
+			'pn': (
+				'c': coarse,
+				'f': fine,
+			),
+			'apn': (
+				'c': coarse,
+				'f': fine,
+			),
+			'cg': (
+				'p': p3,
+				's': 'srgb',
+				'r': rec2020,
+			),
+			'dm': (
+				'': fullscreen,
+				's': standalone,
+				'mu': minimal-ui,
+				'b': browser,
+			),
+			'ori': (
+				'': landscape,
+				'p': portrait,
+			),
+			'prfcs': (
+				'': dark,
+				'l': light,
+			),
+			'rsl': (
+				'i': infinite,
+			),
+		),
+	),
+	'supports': (
+		'custom': (
+		),
+	),
+) !default;
+
+$at-rules-data: map.merge(
+	$at-rules-data,
+	'all-breakpoints',
+	map.get($at-rules-data, 'breakpoints')
+);
+
+$at-rules: () !default;
+
+$at-rules-data: map.deep-merge($at-rules-data, $at-rules);
+
+$breakpoints: map.get($at-rules-data, 'breakpoints');
