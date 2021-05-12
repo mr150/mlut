@@ -1,0 +1,46 @@
+/*
+At-rules
+
+Functions for working with at-rules.
+
+Styleguide: sass-tools.functions.at_rules
+*/
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+
+@use 'getters' as mget;
+@use 'general' as mgen;
+@use '../settings' as mlu;
+
+@function convert-bp-list($bp-list) {
+	$from: list.nth($bp-list, 1);
+	$from-value: map.get(mlu.$at-rules-data, 'all-breakpoints', $from);
+
+	@if not $from-value {
+		@error 'Invalid breakpoint name: `#{$from}`. Allowed only breakpoints and "no breakpoint" keyword';
+	}
+
+	$to: if(list.length($bp-list) >= 2, list.nth($bp-list, 2), null);
+	$media-str: '(min-width: #{$from-value})';
+
+	@if $to and $from-value == 0 {
+		$media-str: '(max-width: #{mget.bp($to) - 1px})';
+	} @else if $to {
+		$media-str: $media-str + ' and (max-width: #{mget.bp($to) - 1px})';
+	}
+
+	@return $media-str;
+}
+
+@function convert-ar-bp($ar) {
+	$result: '';
+	$queries: mgen.str-split($ar, ',');
+
+	@each $queary in $queries {
+		$result: $result + convert-bp-list(mgen.str-split($queary, ':')) + ',';
+	}
+
+	@return string.slice($result, 1, -2);
+}

@@ -1,0 +1,51 @@
+@use 'sass-true' as *;
+@use 'tools/functions' as mlu;
+
+@include describe('tools/functions/at-rules/') {
+	@include describe('convert-ar-bp') {
+		@include it('converts single breakpoint') {
+			@include assert-equal(
+				mlu.convert-ar-bp('md'),
+				'(min-width: #{mlu.bp(md)})',
+			);
+		}
+
+		@include it('converts max-width breakpoint') {
+			@include assert-equal(
+				mlu.convert-ar-bp('xs:sm'),
+				'(max-width: #{mlu.bp(sm) - 1px})',
+			);
+		}
+
+		@include it('converts breakpoints range') {
+			@include assert-equal(
+				mlu.convert-ar-bp('sm:lg'),
+				'(min-width: #{mlu.bp(sm)}) and (max-width: #{mlu.bp(lg) - 1px})',
+			);
+		}
+
+		@include it('converts comma-separated max-width breakpoint and single breakpoint') {
+			@include assert-equal(
+				mlu.convert-ar-bp('xs:md,xl'),
+				'(max-width: #{mlu.bp(md) - 1px}),(min-width: #{mlu.bp(xl)})',
+			);
+		}
+
+		@include it('converts comma-separated ranges and breakpoints') {
+			@include assert-equal(
+				mlu.convert-ar-bp('sm:md,xl'),
+				'(min-width: #{mlu.bp(sm)}) and (max-width: #{mlu.bp(md) - 1px}),(min-width: #{mlu.bp(xl)})',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-bp('sm:md,lg:xl'),
+				'(min-width: #{mlu.bp(sm)}) and (max-width: #{mlu.bp(md) - 1px}),(min-width: #{mlu.bp(lg)}) and (max-width: #{mlu.bp(xl) - 1px})',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-bp('xs:sm,md:lg,xl'),
+				'(max-width: #{mlu.bp(sm) - 1px}),(min-width: #{mlu.bp(md)}) and (max-width: #{mlu.bp(lg) - 1px}),(min-width: #{mlu.bp(xl)})',
+			);
+		}
+	}
+}
