@@ -9,8 +9,6 @@
 // $mlu-su = 4px - space unit in px. Depends on `$mlu-su-cf`. Use this variable to set the values in px.
 // $mlu-base-font-size = $mlu-browser-font-size - base font size on website. Is used for `rems` fallback in [row elements](section-core-blocks.html#kssref-core-blocks-row) and in [mlu-px2em](section-sass-tools.html#kssref-sass-tools-functions-px2em) default font size.
 // $mlu-main-directions - Map with directions for css properties and values generation. The keys are the first letters of the directions, and the values are directions. <br> Example: `('t': top)`.
-// $mlu-breakpoints - map with main breakpoints. First breakpoint is `$mlu-bp-sm`.
-// $mq-aliases - map with aliases, based on which media queries are generated.
 //
 // Styleguide: sass-tools.settings.general
 
@@ -22,36 +20,7 @@ $su: $su-cf * 1px;
 
 $base-font-size: $browser-font-size !default;
 
-// Breakpoints
-//
-// Breakpoint names and values.
-//
-// $mlu-bp-xs = 0 - `xs`
-// $mlu-bp-sm = 520px - `sm`
-// $mlu-bp-md = 760px - `md`
-// $mlu-bp-lg = 960px - `lg`
-// $mlu-bp-xl = 1168px - `xl`
-//
-// Styleguide: sass-tools.settings.general.breakpoints
-
-$bp-xs: 'xs' !default;
-$bp-sm: 'sm' !default;
-$bp-md: 'md' !default;
-$bp-lg: 'lg' !default;
-$bp-xl: 'xl' !default;
-
 $general-data: (
-	'breakpoints': (
-		$bp-sm: 520px,
-		$bp-md: 760px,
-		$bp-lg: 960px,
-		$bp-xl: 1168px,
-	),
-	'mq-aliases': (
-		'Bp': '',
-		'BpAll': '',
-		$bp-xs: 0,
-	),
 	'main-directions': (
 		't': top,
 		'r': right,
@@ -60,15 +29,8 @@ $general-data: (
 	),
 ) !default;
 
-$general-data: map.merge(
-	$general-data,
-	'mq-aliases',
-	map.get($general-data, 'breakpoints')
-);
+$general: () !default;
 
-$general-map: () !default;
+$general-data: map.deep-merge($general-data, $general);
 
-$general-data: map.deep-merge($general-data, $general-map);
-
-$breakpoints: map.get($general-data, 'breakpoints');
 $main-directions: map.get($general-data, 'main-directions');

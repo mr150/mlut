@@ -29,6 +29,11 @@ Styleguide: sass-tools.functions.utils
 //
 // Styleguide: sass-tools.functions.utils.parse_util
 
+$-mq-keywords: list.join(
+	map.keys(map.get(mlu.$at-rules-data, 'all-breakpoints')),
+	(mlu.$bp-only mlu.$bp-all)
+);
+
 @function parse-util($util-val) {
 	$divider-pos: if(meta.type-of($util-val) == 'string', string.index($util-val, '_'), false);
 	$mq: null;
@@ -64,7 +69,7 @@ Styleguide: sass-tools.functions.utils
 				':'
 			), 1);
 			@if not $at-rules and (
-				string.index($part, '@') == 1 or map.has-key(mlu.$general-data, 'mq-aliases', $part)
+				string.index($part, '@') == 1 or list.index($-mq-keywords, $part)
 			) {
 				$at-rules: $component-list;
 			} @else if (string.index($component, ' ') or $value) and

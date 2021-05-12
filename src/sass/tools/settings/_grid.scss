@@ -1,5 +1,6 @@
 @use 'sass:map';
-@use 'general' as mlu;
+@use 'general' as mgen;
+@use 'at-rules' as mar;
 
 // Grid system
 //
@@ -18,7 +19,7 @@ $grid-default-cols: 12 !default;
 
 $grid-cols-xs: 4 !default;
 
-$grid-default-gtr: (mlu.$su * 4) !default;
+$grid-default-gtr: (mgen.$su * 4) !default;
 
 $grid-gutter-fallback: 1.5% !default;
 
@@ -49,23 +50,23 @@ Styleguide: sass-tools.settings.grid.cols
 //
 // Styleguide: sass-tools.settings.grid.gtr
 
-$gtr-sm: (mlu.$su * 3) !default;
+$gtr-sm: (mgen.$su * 3) !default;
 $gtr-md: $gtr-sm !default;
 $gtr-lg: $grid-default-gtr !default;
 $gtr-xl: $gtr-lg !default;
 
 $grid-data: (
 	'gutters': (
-		mlu.$bp-sm: $gtr-sm,
-		mlu.$bp-md: $gtr-md,
-		mlu.$bp-lg: $gtr-lg,
-		mlu.$bp-xl: $gtr-xl,
+		mar.$bp-sm: $gtr-sm,
+		mar.$bp-md: $gtr-md,
+		mar.$bp-lg: $gtr-lg,
+		mar.$bp-xl: $gtr-xl,
 	),
 	'cols': (
-		mlu.$bp-sm: 4,
-		mlu.$bp-md: 12,
-		mlu.$bp-lg: $grid-default-cols,
-		mlu.$bp-xl: $grid-default-cols,
+		mar.$bp-sm: 4,
+		mar.$bp-md: 12,
+		mar.$bp-lg: $grid-default-cols,
+		mar.$bp-xl: $grid-default-cols,
 	),
 ) !default;
 
