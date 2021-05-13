@@ -1,1 +1,4 @@
+@use 'tools/settings' with (
+	$flag-test-env: true
+);
 @use 'tools/functions';
