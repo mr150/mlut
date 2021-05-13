@@ -3,6 +3,8 @@
 @use 'sass:string';
 @use 'sass:list';
 
+@use '../settings/flags' as mlu;
+
 /*
 General
 
@@ -82,6 +84,23 @@ Styleguide: sass-tools.functions.general
 	}
 
 	@return if(string.slice($name, 1, 1) == '.', $name, '.' + $name);
+}
+
+// error
+//
+// Shows the error text in the test environment or throws an exception in the production.
+//
+// $message - error message
+// $catch = $flag-test-env - bool flag. Catch the error if `true` else throws an exception
+//
+// Styleguide: sass-tools.functions.general.error
+
+@function error($message, $catch: mlu.$flag-test-env) {
+	@if $catch {
+		@return 'ERROR: #{$message}';
+	}
+
+	@error '#{$message}';
 }
 
 // Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.
