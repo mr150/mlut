@@ -8,6 +8,11 @@
 				mlu.convert-ar-bp('md'),
 				'(min-width: #{mlu.bp(md)})',
 			);
+
+			@include assert-equal(
+				mlu.convert-ar-bp('NO'),
+				'ERROR: Invalid breakpoint name: `NO`. Allowed only breakpoints and "no breakpoint" keyword',
+			);
 		}
 
 		@include it('converts max-width breakpoint') {

@@ -19,7 +19,9 @@ Styleguide: sass-tools.functions.at_rules
 	$from-value: map.get(mlu.$at-rules-data, 'all-breakpoints', $from);
 
 	@if not $from-value {
-		@error 'Invalid breakpoint name: `#{$from}`. Allowed only breakpoints and "no breakpoint" keyword';
+		@return mgen.error(
+			'Invalid breakpoint name: `#{$from}`. Allowed only breakpoints and "no breakpoint" keyword',
+		);
 	}
 
 	$to: if(list.length($bp-list) >= 2, list.nth($bp-list, 2), null);
