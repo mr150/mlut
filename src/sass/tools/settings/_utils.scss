@@ -123,14 +123,11 @@ $utils-data: (
 		'Ord': order,
 		'Fl': float,
 		'Bxz': box-sizing,
-		'W': width,
 		'Maw': max-width,
-		'H': height,
 		'Mih': min-height,
 		'M': margin,
 		'P': padding,
 		'Ov': overflow,
-		'C': color,
 		'F': font,
 		'Fw': font-weight,
 		'Fz': font-size,
@@ -164,6 +161,14 @@ $utils-data: (
 		'Trs': transition,
 		'Anim': animation,
 		'Rsz': resize,
+	),
+
+	'general-registry': (
+		'H': height,
+		'W': width,
+		'Ar': aspect-ratio,
+		'C': color,
+		'Gd': grid,
 	),
 
 	'directed': (
@@ -225,6 +230,12 @@ $utils-data: (
 		),
 	),
 ) !default;
+
+$utils-data: map.merge(
+	$utils-data,
+	'map',
+	map.get($utils-data, 'general-registry')
+);
 
 $utils: () !default;
 
