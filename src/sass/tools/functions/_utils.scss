@@ -267,10 +267,10 @@ $-util-value-types: map.get(mlu.$utils-data, 'value-types');
 
 // convert-util-value-default
 //
-// Default converter for utility value to CSS value. Converts global CSS keywords, and numbers with unit aliases.
+// Default converter for utility value to CSS value. Converts numbers with unit aliases.
 // ```scss
-//@debug mlu.convert-util-value-default(480) // 480px
-//@debug mlu.convert-util-value-default('n') // none
+//@debug mlu.convert-util-value-default(480); // 480px
+//@debug mlu.convert-util-value-default('n'); // none
 // ```
 //
 // $value - utility value.
@@ -300,12 +300,34 @@ $-util-value-types: map.get(mlu.$utils-data, 'value-types');
 	@return convert-util-value-keyword($value);
 }
 
+// convert-util-value-unitless
+//
+// Convert unitless numbers from string to numbers.
+// ```scss
+//@debug mlu.convert-util-value-unitless('200'); // 200
+//@debug mlu.convert-util-value-unitless('a'); // auto
+// ```
+//
+// $value - utility value.
+//
+// Styleguide: sass-tools.functions.utils.value_converters.unitless
+
+@function convert-util-value-unitless($value) {
+	$val-number: mgen.str2n($value);
+
+	@return if(
+		$val-number,
+		$val-number,
+		convert-util-value-keyword($value)
+	);
+}
+
 // convert-util-value-keyword
 //
 // Converts aliases to global CSS keywords. If the alias is not found in the `$util-css-keywords`, returns the value without conversion.
 // ```scss
-//@debug mlu.convert-util-value-keyword('i') // inherit
-//@debug mlu.convert-util-value-keyword('b') // 'b'
+//@debug mlu.convert-util-value-keyword('i'); // inherit
+//@debug mlu.convert-util-value-keyword('b'); // 'b'
 // ```
 //
 // $value - utility value.
@@ -324,11 +346,13 @@ $-util-value-types: map.get(mlu.$utils-data, 'value-types');
 //
 // All converters are contained in the `$util-value-converters` map. The keys in this map are the utility types and the values are the conversion functions. As in other settings, you can add additional converters in `$util-value-converters-ext`.
 //
+// At the end of the work, each function, passes the result to the [global CSS keywords converter](#kssref-sass-tools-functions-utils-value_converters-kw).
+//
 // Styleguide: sass-tools.functions.utils.value_converters
 
 $util-value-converters: (
 	'': meta.get-function('convert-util-value-default'),
-	'unitless': meta.get-function('convert-util-value-keyword'),
+	'unitless': meta.get-function('convert-util-value-unitless'),
 ) !default;
 
 $util-value-converters: map.merge(
