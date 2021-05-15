@@ -244,16 +244,12 @@ $-mq-keywords: list.join(
 //
 // Styleguide: sass-tools.functions.utils.convert_util_value
 
-$-util-value-types: map.get(mlu.$utils-data, 'value-types');
-
 @function convert-util-value($util-val, $name) {
-	$util-type: '';
-
-	@each $key, $value in $-util-value-types {
-		@if list.index($value, $name) {
-			$util-type: $key;
-		}
-	}
+	$util-type: if(
+		map.has-key(mlu.$utils-data, 'registry', $name, 'type'),
+		map.get(mlu.$utils-data, 'registry', $name, 'type'),
+		''
+	);
 
 	@return if(
 		map.has-key($util-value-converters, $util-type),

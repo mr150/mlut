@@ -112,10 +112,21 @@ $utils-data: (
 		'-X': null,
 		'-Y': null,
 		'-Xy': null,
-		'Z': z-index,
+		'Z': (
+			'props': z-index,
+			'type': 'unitless',
+		),
 		'D': display,
 		'Fxd': flex-direction,
 		'Fxw': flex-wrap,
+		'Fxg': (
+			'props': flex-grow,
+			'type': 'unitless',
+		),
+		'Fxsh': (
+			'props': flex-shrink,
+			'type': 'unitless',
+		),
 		'Ac': align-content,
 		'As': align-self,
 		'Ai': align-items,
@@ -129,11 +140,17 @@ $utils-data: (
 		'P': padding,
 		'Ov': overflow,
 		'F': font,
-		'Fw': font-weight,
+		'Fw': (
+			'props': font-weight,
+			'type': 'unitless',
+		),
 		'Fz': font-size,
 		'Ff': font-family,
 		'Fs': font-style,
-		'Lh': line-height,
+		'Lh': (
+			'props': line-height,
+			'type': 'unitless',
+		),
 		'Dir': direction,
 		'Lts': letter-spacing,
 		'Whs': white-space,
@@ -152,7 +169,10 @@ $utils-data: (
 		'Trf': transform,
 		'V': visibility,
 		'Cur': cursor,
-		'Op': opacity,
+		'Op': (
+			'props': opacity,
+			'type': 'unitless',
+		),
 		'Bd': border,
 		'Bdc': border-color,
 		'Bds': border-style,
@@ -180,10 +200,6 @@ $utils-data: (
 		'-X',
 		'-Y',
 		'-Xy',
-	),
-
-	'value-types': (
-		'unitless': ('Z', 'Lh', 'Op', 'Fw', 'Fxg', 'Fxsh'),
 	),
 
 	'value-converters': (),

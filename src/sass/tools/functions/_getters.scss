@@ -1,5 +1,6 @@
 @use 'sass:list';
 @use 'sass:map';
+@use 'sass:meta';
 
 @use '../settings' as mlu;
 
@@ -191,7 +192,13 @@ Styleguide: sass-tools.functions.getters
 
 @function util-prop($name, $error-handler: 1) {
 	@if map.has-key(mlu.$utils-data, 'registry', $name) or $error-handler == 0 {
-		@return map.get(mlu.$utils-data, 'registry', $name);
+		$options: map.get(mlu.$utils-data, 'registry', $name);
+
+		@return if(
+			meta.type-of($options) == 'map',
+			map.get($options, 'props'),
+			$options
+		);
 	}
 
 	@error 'Invalid utility name. `#{$name}` is not defined in $mlu-utils-map';

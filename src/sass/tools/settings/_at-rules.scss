@@ -58,15 +58,15 @@ $at-rules-data: (
 			'prfrm': prefers-reduced-motion,
 			'mn': (
 				'props': monochrome,
-				'value-type': 'unitless',
+				'type': 'unitless',
 			),
 			'ar': (
 				'props': aspect-ratio,
-				'value-type': 'unitless',
+				'type': 'unitless',
 			),
 			'rsl': (
 				'props': resolution,
-				'value-type': 'resolution',
+				'type': 'resolution',
 			),
 		),
 		'map': (
