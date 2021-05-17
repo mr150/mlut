@@ -190,9 +190,9 @@ Styleguide: sass-tools.functions.getters
 //
 // Styleguide: sass-tools.functions.getters.util_prop
 
-@function util-prop($name, $error-handler: 1) {
-	@if map.has-key(mlu.$utils-data, 'registry', $name) or $error-handler == 0 {
-		$options: map.get(mlu.$utils-data, 'registry', $name);
+@function util-prop($name, $error-handler: 1, $section: 'utils') {
+	@if map.has-key(mlu.$utils-data, $section, 'registry', $name) or $error-handler == 0 {
+		$options: map.get(mlu.$utils-data, $section, 'registry', $name);
 
 		@return if(
 			meta.type-of($options) == 'map',

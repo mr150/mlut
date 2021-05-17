@@ -11,7 +11,7 @@
 $-su-rem: mlu.px2rem(mlu.$su);
 $-gtr-sm-rem: mlu.px2rem(mlu.$gtr-sm);
 
-$-utils-directed: map.get(mlu.$utils-data, 'directed');
+$-utils-directed: map.get(mlu.$utils-config, 'directed');
 
 /*
 Utilities

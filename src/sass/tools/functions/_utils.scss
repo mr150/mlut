@@ -244,10 +244,10 @@ $-mq-keywords: list.join(
 //
 // Styleguide: sass-tools.functions.utils.convert_util_value
 
-@function convert-util-value($util-val, $name) {
+@function convert-util-value($util-val, $name, $section: 'utils') {
 	$util-type: if(
-		map.has-key(mlu.$utils-data, 'registry', $name, 'type'),
-		map.get(mlu.$utils-data, 'registry', $name, 'type'),
+		map.has-key(mlu.$utils-data, $section, 'registry', $name, 'type'),
+		map.get(mlu.$utils-data, $section, 'registry', $name, 'type'),
 		''
 	);
 
@@ -332,8 +332,8 @@ $-mq-keywords: list.join(
 
 @function convert-util-value-keyword($value) {
 	@return if(
-		map.has-key(mlu.$utils-data, 'css-keywords', $value),
-		map.get(mlu.$utils-data, 'css-keywords', $value),
+		map.has-key(mlu.$utils-config, 'css-keywords', $value),
+		map.get(mlu.$utils-config, 'css-keywords', $value),
 		$value
 	);
 }
@@ -353,5 +353,5 @@ $util-value-converters: (
 
 $util-value-converters: map.merge(
 	$util-value-converters,
-	map.get(mlu.$utils-data, 'value-converters'),
+	map.get(mlu.$utils-config, 'value-converters'),
 );

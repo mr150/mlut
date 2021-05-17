@@ -105,85 +105,86 @@ $Trsdu--def: 0.3s !default;
 
 //stylelint-disable
 $utils-data: (
-	'registry': (
-		'-Gsc': mlu.$var-grid-cols,
-		'-Gsg': mlu.$var-gg,
-		'Pos': position,
-		'-X': null,
-		'-Y': null,
-		'-Xy': null,
-		'Z': (
-			'props': z-index,
-			'type': 'unitless',
+	'utils': (
+		'registry': (
+			'-Gsc': mlu.$var-grid-cols,
+			'-Gsg': mlu.$var-gg,
+			'Pos': position,
+			'-X': null,
+			'-Y': null,
+			'-Xy': null,
+			'Z': (
+				'props': z-index,
+				'type': 'unitless',
+			),
+			'D': display,
+			'Fxd': flex-direction,
+			'Fxw': flex-wrap,
+			'Fxg': (
+				'props': flex-grow,
+				'type': 'unitless',
+			),
+			'Fxsh': (
+				'props': flex-shrink,
+				'type': 'unitless',
+			),
+			'Ac': align-content,
+			'As': align-self,
+			'Ai': align-items,
+			'Jc': justify-content,
+			'Ord': order,
+			'Fl': float,
+			'Bxz': box-sizing,
+			'Maw': max-width,
+			'Mih': min-height,
+			'M': margin,
+			'P': padding,
+			'Ov': overflow,
+			'F': font,
+			'Fw': (
+				'props': font-weight,
+				'type': 'unitless',
+			),
+			'Fz': font-size,
+			'Ff': font-family,
+			'Fs': font-style,
+			'Lh': (
+				'props': line-height,
+				'type': 'unitless',
+			),
+			'Dir': direction,
+			'Lts': letter-spacing,
+			'Whs': white-space,
+			'Ta': text-align,
+			'Tt': text-transform,
+			'Td': text-decoration,
+			'Tsh': text-shadow,
+			'Va': vertical-align,
+			'Bgc': background-color,
+			'Bgr': background-repeat,
+			'Bgp': background-position,
+			'Bgsz': background-size,
+			'Bga': background-attachment,
+			'Ol': outline,
+			'Bxsh': box-shadow,
+			'Trf': transform,
+			'V': visibility,
+			'Cur': cursor,
+			'Op': (
+				'props': opacity,
+				'type': 'unitless',
+			),
+			'Bd': border,
+			'Bdc': border-color,
+			'Bds': border-style,
+			'Bdw': border-width,
+			'Bdrs': border-radius,
+			'Trs': transition,
+			'Anim': animation,
+			'Rsz': resize,
 		),
-		'D': display,
-		'Fxd': flex-direction,
-		'Fxw': flex-wrap,
-		'Fxg': (
-			'props': flex-grow,
-			'type': 'unitless',
-		),
-		'Fxsh': (
-			'props': flex-shrink,
-			'type': 'unitless',
-		),
-		'Ac': align-content,
-		'As': align-self,
-		'Ai': align-items,
-		'Jc': justify-content,
-		'Ord': order,
-		'Fl': float,
-		'Bxz': box-sizing,
-		'Maw': max-width,
-		'Mih': min-height,
-		'M': margin,
-		'P': padding,
-		'Ov': overflow,
-		'F': font,
-		'Fw': (
-			'props': font-weight,
-			'type': 'unitless',
-		),
-		'Fz': font-size,
-		'Ff': font-family,
-		'Fs': font-style,
-		'Lh': (
-			'props': line-height,
-			'type': 'unitless',
-		),
-		'Dir': direction,
-		'Lts': letter-spacing,
-		'Whs': white-space,
-		'Ta': text-align,
-		'Tt': text-transform,
-		'Td': text-decoration,
-		'Tsh': text-shadow,
-		'Va': vertical-align,
-		'Bgc': background-color,
-		'Bgr': background-repeat,
-		'Bgp': background-position,
-		'Bgsz': background-size,
-		'Bga': background-attachment,
-		'Ol': outline,
-		'Bxsh': box-shadow,
-		'Trf': transform,
-		'V': visibility,
-		'Cur': cursor,
-		'Op': (
-			'props': opacity,
-			'type': 'unitless',
-		),
-		'Bd': border,
-		'Bdc': border-color,
-		'Bds': border-style,
-		'Bdw': border-width,
-		'Bdrs': border-radius,
-		'Trs': transition,
-		'Anim': animation,
-		'Rsz': resize,
+		'map': (),
 	),
-
-	'map': (),
 
 	'general-registry': (
 		'H': height,
@@ -192,7 +193,46 @@ $utils-data: (
 		'C': color,
 		'Gd': grid,
 	),
+) !default;
 
+$utils: () !default;
+
+@function merge-utils-data($target, $data, $section) {
+	$registry: if(
+		map.has-key($data, 'registry'),
+		map.get($data, 'registry'),
+		()
+	);
+
+	$map: if(
+		map.has-key($data, 'map'),
+		map.get($data, 'map'),
+		()
+	);
+
+	@return map.deep-merge(
+		$target,
+		($section:
+		 (
+			 'registry': $registry,
+			 'map': $map,
+		 ),
+		)
+	);
+}
+
+$utils-data: map.merge(
+	$utils-data,
+	'utils',
+	'registry',
+	map.get($utils-data, 'general-registry')
+);
+
+$utils-data: merge-utils-data($utils-data, $utils, 'utils');
+$utils: map.remove($utils, 'registry');
+$utils: map.remove($utils, 'map');
+
+$utils-config: (
 	'directed': (
 		'M',
 		'P',
@@ -249,27 +289,19 @@ $utils-data: (
 	),
 ) !default;
 
-$utils-data: map.merge(
-	$utils-data,
-	'registry',
-	map.get($utils-data, 'general-registry')
-);
-
-$utils: () !default;
-
-$utils-data: map.deep-merge($utils-data, $utils);
+$utils-config: map.deep-merge($utils-config, $utils);
 
 $util-states: map.merge(
-	map.get($utils-data, 'states', 'pseudo-cls'),
-	map.get($utils-data, 'states', 'pseudo-elm'),
+	map.get($utils-config, 'states', 'pseudo-cls'),
+	map.get($utils-config, 'states', 'pseudo-elm'),
 );
 
 $util-states: map.merge(
 	$util-states,
-	map.get($utils-data, 'states', 'special'),
+	map.get($utils-config, 'states', 'special'),
 );
 
 $util-units-map: map.merge(
-	map.get($utils-data, 'unit-aliases'),
-	map.get($utils-data, 'custom-units'),
+	map.get($utils-config, 'unit-aliases'),
+	map.get($utils-config, 'custom-units'),
 );

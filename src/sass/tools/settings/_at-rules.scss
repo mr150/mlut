@@ -7,6 +7,7 @@
 // Styleguide: sass-tools.settings.at_rules
 
 @use 'sass:map';
+@use 'utils' as mlu;
 
 // Breakpoints
 //
@@ -45,6 +46,17 @@ $at-rules-data: (
 		),
 		'custom': (
 		),
+	),
+	'supports': (
+		'custom': (
+		),
+	),
+) !default;
+
+mlu.$utils-data: map.set(
+	mlu.$utils-data,
+	'media',
+	(
 		'registry': (
 			'hv': hover,
 			'ahv': any-hover,
@@ -102,11 +114,7 @@ $at-rules-data: (
 			),
 		),
 	),
-	'supports': (
-		'custom': (
-		),
-	),
-) !default;
+);
 
 $at-rules-data: map.merge(
 	$at-rules-data,
@@ -115,6 +123,8 @@ $at-rules-data: map.merge(
 );
 
 $at-rules: () !default;
+
+mlu.$utils-data: mlu.merge-utils-data(mlu.$utils-data, $at-rules, 'media');
 
 $at-rules-data: map.deep-merge($at-rules-data, $at-rules);
 
