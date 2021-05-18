@@ -318,6 +318,22 @@ $-mq-keywords: list.join(
 	);
 }
 
+// convert-util-value-resolution
+//
+// Convert numbers with resolution units aliases.
+// ```scss
+//@debug mlu.convert-util-value-resolution(2x); // 2dppx
+//@debug mlu.convert-util-value-resolution('300i'); // 300dpi
+// ```
+//
+// $value - utility value.
+//
+// Styleguide: sass-tools.functions.utils.value_converters.rsl
+
+@function convert-util-value-resolution($value) {
+	@return convert-util-value-default($value, 'resolution');
+}
+
 // convert-util-value-keyword
 //
 // Converts aliases to global CSS keywords. If the alias is not found in the `$util-css-keywords`, returns the value without conversion.
@@ -349,6 +365,7 @@ $-mq-keywords: list.join(
 $util-value-converters: (
 	'': meta.get-function('convert-util-value-default'),
 	'unitless': meta.get-function('convert-util-value-unitless'),
+	'resolution': meta.get-function('convert-util-value-resolution'),
 ) !default;
 
 $util-value-converters: map.merge(
