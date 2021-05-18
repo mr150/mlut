@@ -7,6 +7,7 @@
 // Styleguide: sass-tools.settings.at_rules
 
 @use 'sass:map';
+@use 'sass:string';
 @use 'utils' as mlu;
 
 // Breakpoints
@@ -53,32 +54,49 @@ $at-rules-data: (
 	),
 ) !default;
 
+$-general-registry: ();
+
+@each $key, $value in map.get(mlu.$utils-data, 'general-registry') {
+	$-general-registry: map.set(
+		$-general-registry,
+		string.to-lower-case($key),
+		$value
+	);
+}
+
 mlu.$utils-data: map.set(
 	mlu.$utils-data,
 	'media',
 	(
-		'registry': (
-			'hv': hover,
-			'ahv': any-hover,
-			'pn': pointer,
-			'apn': any-pointer,
-			'cg': color-gamut,
-			'fc': forced-colors,
-			'dm': display-mode,
-			'ori': orientation,
-			'prfcs': prefers-color-scheme,
-			'prfrm': prefers-reduced-motion,
-			'mn': (
-				'props': monochrome,
-				'type': 'unitless',
-			),
-			'ar': (
-				'props': aspect-ratio,
-				'type': 'unitless',
-			),
-			'rsl': (
-				'props': resolution,
-				'type': 'resolution',
+		'registry': map.deep-merge(
+			$-general-registry,
+			(
+				'hv': hover,
+				'ahv': any-hover,
+				'pn': pointer,
+				'apn': any-pointer,
+				'cg': color-gamut,
+				'fc': forced-colors,
+				'dm': display-mode,
+				'ori': orientation,
+				'prfcs': prefers-color-scheme,
+				'prfrm': prefers-reduced-motion,
+				'mn': (
+					'props': monochrome,
+					'type': 'unitless',
+				),
+				'gd': (
+					'props': grid,
+					'type': 'unitless',
+				),
+				'c': (
+					'props': color,
+					'type': 'unitless',
+				),
+				'rsl': (
+					'props': resolution,
+					'type': 'resolution',
+				),
 			),
 		),
 		'map': (
