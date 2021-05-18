@@ -133,6 +133,7 @@ $utils-data: (
 			'Ai': align-items,
 			'Jc': justify-content,
 			'Ord': order,
+			'Gd': grid,
 			'Fl': float,
 			'Bxz': box-sizing,
 			'Maw': max-width,
@@ -140,6 +141,7 @@ $utils-data: (
 			'M': margin,
 			'P': padding,
 			'Ov': overflow,
+			'C': color,
 			'F': font,
 			'Fw': (
 				'props': font-weight,
@@ -190,8 +192,6 @@ $utils-data: (
 		'H': height,
 		'W': width,
 		'Ar': aspect-ratio,
-		'C': color,
-		'Gd': grid,
 	),
 ) !default;
 
