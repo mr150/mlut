@@ -244,17 +244,18 @@ $utils-config: (
 
 	'value-converters': (),
 
-	'unit-aliases': (
-		'': 1px,
-		'e': 1em,
-		'p': 1%,
-		'x': 1ex,
-		'r': 1rem,
-	),
-
-	'custom-units': (
-		'gg': 1gg,
-		'su': 1su,
+	'units': (
+		'default': (
+			'': 1px,
+			'e': 1em,
+			'p': 1%,
+			'x': 1ex,
+			'r': 1rem,
+		),
+		'custom': (
+			'gg': 1gg,
+			'su': 1su,
+		),
 	),
 
 	'css-keywords': (
@@ -301,7 +302,12 @@ $util-states: map.merge(
 	map.get($utils-config, 'states', 'special'),
 );
 
-$util-units-map: map.merge(
-	map.get($utils-config, 'unit-aliases'),
-	map.get($utils-config, 'custom-units'),
+$utils-config: map.set(
+	$utils-config,
+	'units',
+	'default-set',
+	map.merge(
+		map.get($utils-config, 'units', 'default'),
+		map.get($utils-config, 'units', 'custom'),
+	)
 );

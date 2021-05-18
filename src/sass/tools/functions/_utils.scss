@@ -273,15 +273,15 @@ $-mq-keywords: list.join(
 //
 // Styleguide: sass-tools.functions.utils.value_converters.def
 
-@function convert-util-value-default($value) {
+@function convert-util-value-default($value, $units-key: 'default-set') {
 	$val-unit: '';
 	$val-number: mgen.str2n($value + '');
 
 	@if meta.type-of($value) == 'number' {
-		$val-unit: map.get(mlu.$util-units-map, math.unit($value));
+		$val-unit: map.get(mlu.$utils-config, 'units', $units-key, math.unit($value));
 	} @else if meta.type-of($value) == 'string' and  $val-number {
 		$util-unit: string.slice($value, string.length($val-number + '') + 1);
-		$val-unit: map.get(mlu.$util-units-map, $util-unit);
+		$val-unit: map.get(mlu.$utils-config, 'units', $units-key, $util-unit);
 	}
 
 	@if $val-unit != '' {
