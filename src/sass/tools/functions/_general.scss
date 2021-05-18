@@ -103,6 +103,32 @@ Styleguide: sass-tools.functions.general
 	@error '#{$message}';
 }
 
+// str-digit-index
+//
+// Returns the first index of digit in $str, or `null` if digits not found
+// ```scss
+//@debug mlu.str-digit-index('Mb55'); // 3
+//@debug mlu.str-digit-index('Mt-a'); // null
+// ```
+//
+// $str - string for search
+//
+// Styleguide: sass-tools.functions.general.str_digit_index
+
+@function str-digit-index($str) {
+	@if meta.type-of($str) != 'string' {
+		@return error('Wrong type of argument $str: `#{meta.type-of($str)}`. Expected `string`');
+	}
+
+	@for $i from 1 through string.length($str) {
+		@if string.index('0123456789', string.slice($str, $i, $i)) {
+			@return $i;
+		}
+	}
+
+	@return null;
+}
+
 // Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.
 
 @function str-split($str, $delimiter: '') {

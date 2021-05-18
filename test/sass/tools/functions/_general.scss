@@ -36,4 +36,27 @@
 			);
 		}
 	}
+
+	@include describe('str-digit-index') {
+		@include it('find the first index of digit in string') {
+			@include assert-equal(
+				mlu.str-digit-index('Mb55'),
+				3,
+			);
+		}
+
+		@include it('wrong type of argument') {
+			@include assert-equal(
+				mlu.str-digit-index((55)),
+				'ERROR: Wrong type of argument $str: `number`. Expected `string`',
+			);
+		}
+
+		@include it('digits not found') {
+			@include assert-equal(
+				mlu.str-digit-index('Mt-a'),
+				null,
+			);
+		}
+	}
 }
