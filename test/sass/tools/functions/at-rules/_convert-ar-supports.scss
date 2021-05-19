@@ -1,0 +1,77 @@
+@use 'sass:map';
+@use 'sass-true' as *;
+@use 'tools' as mlu;
+
+mlu.$at-rules-data: map.set(
+	mlu.$at-rules-data, 'supports', 'custom', 'testou', '(clip-path: url(#c1)) and selector(:is(ul))'
+);
+
+mlu.$utils-data: map.deep-merge(
+	mlu.$utils-data,
+	('utils':
+	 (
+		 'map': (
+			 'D': ('ig': inline-grid),
+			 'Jc': ('se': space-evenly),
+			 'Pos': ('sk': sticky),
+		 ),
+	 )
+	)
+);
+
+@include describe('tools/functions/at-rules/') {
+	@include describe('convert-ar-supports') {
+		@include it('converts current util') {
+			@include assert-equal(
+				mlu.convert-ar-supports('', 'D-ig'),
+				'(display: inline-grid)',
+			);
+		}
+
+		@include it('converts custom condition') {
+			@include assert-equal(
+				mlu.convert-ar-supports('-testou'),
+				'(clip-path: url(#c1)) and selector(:is(ul))',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-supports('-myCond'),
+				'ERROR: Undefined custom supports condition: `-myCond`',
+			);
+		}
+
+		@include it('converts single expression') {
+			@include assert-equal(
+				mlu.convert-ar-supports('jc-se'),
+				'(justify-content: space-evenly)',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-supports('ar1/1'),
+				'(aspect-ratio: 1/1)',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-supports('!d-ig'),
+				'(not (display: inline-grid))',
+			);
+		}
+
+		@include it('converts complex condition') {
+			@include assert-equal(
+				mlu.convert-ar-supports('pos-sk,h100vh'),
+				'(position: sticky) or (height: 100vh)',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-supports('m-a:bdw1vmin'),
+				'(margin: auto) and (border-width: 1vmin)',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-supports('!-testou:ar4/3:!pos-sk'),
+				'(not (clip-path: url(#c1)) and selector(:is(ul))) and (aspect-ratio: 4/3) and (not (position: sticky))',
+			);
+		}
+	}
+}

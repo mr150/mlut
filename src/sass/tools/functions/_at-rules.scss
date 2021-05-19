@@ -207,3 +207,44 @@ Styleguide: sass-tools.functions.at_rules
 
 	@return string.slice($result, 1, -(1 + string.length($or)));
 }
+
+@function convert-ar-supports($ar, $current-util: null) {
+	@if $current-util {
+		@return convert-feature-abbr($current-util);
+	}
+
+	$result: '';
+	$delimiter: ':';
+	$operator: ' and ';
+
+	@if string.index($ar, ',') {
+		$delimiter: ',';
+		$operator: ' or ';
+	}
+
+	@each $item in mgen.str-split($ar, $delimiter) {
+		$converted: '';
+		$not: string.slice($item, 1, 1) == '!';
+		$expr: if($not, string.slice($item, 2), $item);
+
+		@if string.slice($expr, 1, 1) == '-' {
+			$expr-name: string.slice($expr, 2);
+
+			@if map.has-key(mlu.$at-rules-data, 'supports', 'custom', $expr-name) {
+				$converted: map.get(mlu.$at-rules-data, 'supports', 'custom', $expr-name);
+			} @else {
+				@return mgen.error('Undefined custom supports condition: `#{$expr}`');
+			}
+		} @else {
+			$converted: convert-feature-abbr(mgen.str-ucfirst($expr));
+		}
+
+		@if $not {
+			$converted: '(not #{$converted})';
+		}
+
+		$result: $result + $converted + $operator;
+	}
+
+	@return string.slice($result, 1, -(1 + string.length($operator)));
+}
