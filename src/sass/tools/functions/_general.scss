@@ -129,6 +129,25 @@ Styleguide: sass-tools.functions.general
 	@return null;
 }
 
+// str-ucfirst
+//
+// Converts the first letter of string to uppercase
+// ```scss
+//@debug mlu.str-ucfirst('fxg1'); // 'Fxg1'
+// ```
+//
+// $str - string for converting
+//
+// Styleguide: sass-tools.functions.general.str_ucfirst
+
+@function str-ucfirst($str) {
+	@if meta.type-of($str) != 'string' {
+		@return error('Wrong type of argument $str: `#{meta.type-of($str)}`. Expected `string`');
+	}
+
+	@return string.to-upper-case(string.slice($str, 1, 1)) + string.slice($str, 2);
+}
+
 // Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.
 
 @function str-split($str, $delimiter: '') {

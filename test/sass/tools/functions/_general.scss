@@ -59,4 +59,20 @@
 			);
 		}
 	}
+
+	@include describe('str-ucfirst') {
+		@include it('converts the first letter to uppercase') {
+			@include assert-equal(
+				mlu.str-ucfirst('fxg1'),
+				'Fxg1',
+			);
+		}
+
+		@include it('wrong type of argument') {
+			@include assert-equal(
+				mlu.str-ucfirst(1),
+				'ERROR: Wrong type of argument $str: `number`. Expected `string`',
+			);
+		}
+	}
 }
