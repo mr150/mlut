@@ -40,6 +40,13 @@ $at-rules-data: (
 	'all-breakpoints': (
 		$bp-xs: 0,
 	),
+	'abbr-delimiters': (
+		'-',
+		'<=',
+		'>=',
+		'>',
+		'<',
+	),
 	'media': (
 		'types': (
 			'prn': print,
