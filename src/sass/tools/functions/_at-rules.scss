@@ -39,6 +39,12 @@ Styleguide: sass-tools.functions.at_rules
 	@return $media-str;
 }
 
+// Converters
+//
+// Converts abbreviations to at-rules.
+//
+// Styleguide: sass-tools.functions.at_rules.converters
+
 @function convert-ar-bp($ar) {
 	$result: '';
 	$queries: mgen.str-split($ar, ',');
@@ -132,4 +138,72 @@ Styleguide: sass-tools.functions.at_rules
 	}
 
 	@return '(#{$feat-prefix + $feature}: #{$feat-value})';
+}
+
+// convert-ar-media
+//
+// Converts abbreviations and breakpoints to media query list.
+// ```scss
+//@debug mlu.convert-ar-media('scr:fc'); // 'screen and (forced-colors)'
+//@debug mlu.convert-ar-media('c<256,-xs:-sm'); // '(max-color: 255),(max-width: 519px)'
+// ```
+//
+// $ar - string with abbreviations
+//
+// Styleguide: sass-tools.functions.at_rules.converters.media
+
+@function convert-ar-media($ar) {
+	$result: '';
+	$queries: mgen.str-split($ar, ',');
+	$and: ' and ';
+	$or: ',';
+
+	@each $queary in $queries {
+		$queary-list: mgen.str-split($queary, ':');
+		$bp-range: false;
+
+		@each $item in $queary-list {
+			@if map.has-key(mlu.$at-rules-data, 'media', 'types', $item) {
+				$result: $result + map.get(mlu.$at-rules-data, 'media', 'types', $item);
+			} @else if string.slice($item, 1, 1) == '-' {
+				$item-name: string.slice($item, 2);
+
+				@if map.has-key(mlu.$at-rules-data, 'all-breakpoints', $item-name) and not $bp-range {
+					$bp-list: ($item-name);
+					$next-item-name: null;
+					$item-index: list.index($queary-list, $item);
+
+					@if $item-index < list.length($queary-list) {
+						$next-item: list.nth($queary-list, $item-index + 1);
+						$next-item-name: if(
+							string.slice($next-item, 1, 1) == '-',
+							string.slice($next-item, 2),
+							null,
+						);
+					}
+
+					@if map.has-key(mlu.$at-rules-data, 'all-breakpoints', $next-item-name) {
+						$bp-list: list.append($bp-list, $next-item-name);
+						$bp-range: true;
+					}
+
+					$result: $result + convert-bp-list($bp-list);
+				} @else if map.has-key(mlu.$at-rules-data, 'media', 'custom', $item-name) {
+					$result: $result + map.get(mlu.$at-rules-data, 'media', 'custom', $item-name);
+				} @else if $bp-range {
+					$result: string.slice($result, 1, -(1 + string.length($and)));
+				} @else {
+					@return mgen.error('Undefined custom media query: `#{$item}`');
+				}
+			} @else {
+				$result: $result + convert-feature-abbr($item, 'media');
+			}
+
+			$result: $result + $and;
+		}
+
+		$result: string.slice($result, 1, -(1 + string.length($and))) + $or;
+	}
+
+	@return string.slice($result, 1, -(1 + string.length($or)));
 }

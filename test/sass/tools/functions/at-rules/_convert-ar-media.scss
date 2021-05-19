@@ -1,0 +1,71 @@
+@use 'sass:map';
+@use 'sass-true' as *;
+@use 'tools' as mlu;
+
+mlu.$at-rules-data: map.set(
+	mlu.$at-rules-data, 'media', 'custom', 'testou', '(orientation: landscape) and (min-height: 20rem)'
+);
+
+@include describe('tools/functions/at-rules/') {
+	@include describe('convert-ar-media') {
+		@include it('converts media types') {
+			@include assert-equal(
+				mlu.convert-ar-media('prn'),
+				'print',
+			);
+		}
+
+		@include it('converts breakpoints') {
+			@include assert-equal(
+				mlu.convert-ar-media('-md'),
+				'(min-width: #{mlu.bp(md)})',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-media('-xs:-sm'),
+				'(max-width: #{mlu.bp(sm) - 1px})',
+			);
+		}
+
+		@include it('converts custom mq') {
+			@include assert-equal(
+				mlu.convert-ar-media('-testou'),
+				'(orientation: landscape) and (min-height: 20rem)',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-media('-undefined'),
+				'ERROR: Undefined custom media query: `-undefined`',
+			);
+		}
+
+		@include it('converts media features') {
+			@include assert-equal(
+				mlu.convert-ar-media('ahv'),
+				'(any-hover)',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-media('cg-p'),
+				'(color-gamut: p3)',
+			);
+		}
+
+		@include it('converts complex mq') {
+			@include assert-equal(
+				mlu.convert-ar-media('scr:fc'),
+				'screen and (forced-colors)',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-media('prn,hv'),
+				'print,(hover)',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-media('prn:-lg:-xl:dm,pn-c:w>=90r,c<256:-xs:-sm'),
+				'print and (min-width: 960px) and (max-width: 1167px) and (display-mode: fullscreen),(pointer: coarse) and (min-width: 90rem),(max-color: 255) and (max-width: 519px)',
+			);
+		}
+	}
+}
