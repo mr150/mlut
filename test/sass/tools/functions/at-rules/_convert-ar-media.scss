@@ -64,7 +64,7 @@ mlu.$at-rules-data: map.set(
 
 			@include assert-equal(
 				mlu.convert-ar-media('prn:-lg:-xl:dm,pn-c:w>=90r,c<256:-xs:-sm'),
-				'print and (min-width: 960px) and (max-width: 1167px) and (display-mode: fullscreen),(pointer: coarse) and (min-width: 90rem),(max-color: 255) and (max-width: 519px)',
+				'print and (min-width: #{mlu.bp(lg)}) and (max-width: #{mlu.bp(xl) - 1px}) and (display-mode: fullscreen),(pointer: coarse) and (min-width: 90rem),(max-color: 255) and (max-width: #{mlu.bp(sm) - 1px})',
 			);
 		}
 	}
