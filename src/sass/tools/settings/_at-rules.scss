@@ -31,22 +31,6 @@ $bp-only: 'Bp' !default;
 $bp-all: 'BpAll' !default;
 
 $at-rules-data: (
-	'breakpoints': (
-		$bp-sm: 520px,
-		$bp-md: 760px,
-		$bp-lg: 960px,
-		$bp-xl: 1168px,
-	),
-	'all-breakpoints': (
-		$bp-xs: 0,
-	),
-	'abbr-delimiters': (
-		'-',
-		'<=',
-		'>=',
-		'>',
-		'<',
-	),
 	'media': (
 		'types': (
 			'prn': print,
@@ -58,6 +42,25 @@ $at-rules-data: (
 	'supports': (
 		'custom': (
 		),
+	),
+) !default;
+
+$at-rules-cfg: (
+	'abbr-delimiters': (
+		'-',
+		'<=',
+		'>=',
+		'>',
+		'<',
+	),
+	'breakpoints': (
+		$bp-sm: 520px,
+		$bp-md: 760px,
+		$bp-lg: 960px,
+		$bp-xl: 1168px,
+	),
+	'all-breakpoints': (
+		$bp-xs: 0,
 	),
 ) !default;
 
@@ -141,16 +144,18 @@ mlu.$utils-data: map.set(
 	),
 );
 
-$at-rules-data: map.merge(
-	$at-rules-data,
+$at-rules-cfg: map.merge(
+	$at-rules-cfg,
 	'all-breakpoints',
-	map.get($at-rules-data, 'breakpoints')
+	map.get($at-rules-cfg, 'breakpoints')
 );
 
 $at-rules: () !default;
+$at-rules-conf: () !default;
 
 mlu.$utils-data: mlu.merge-utils-data(mlu.$utils-data, $at-rules, 'media');
 
 $at-rules-data: map.deep-merge($at-rules-data, $at-rules);
+$at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-conf);
 
-$breakpoints: map.get($at-rules-data, 'breakpoints');
+$breakpoints: map.get($at-rules-cfg, 'breakpoints');

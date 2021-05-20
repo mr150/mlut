@@ -30,7 +30,7 @@ Styleguide: sass-tools.functions.utils
 // Styleguide: sass-tools.functions.utils.parse_util
 
 $-mq-keywords: list.join(
-	map.keys(map.get(mlu.$at-rules-data, 'all-breakpoints')),
+	map.keys(map.get(mlu.$at-rules-cfg, 'all-breakpoints')),
 	(mlu.$bp-only mlu.$bp-all)
 );
 
