@@ -2,17 +2,6 @@
 @use 'sass-true' as *;
 @use 'tools' as mlu;
 
-mlu.$utils-data: map.deep-merge(
-	mlu.$utils-data,
-	('utils':
-	 (
-		 'map': (
-			 'Pos': ('sk': sticky),
-		 ),
-	 )
-	)
-);
-
 @include describe('tools/functions/at-rules/') {
 	@include describe('convert-feature-abbr') {
 		@include it('converts abbr without delimiter') {

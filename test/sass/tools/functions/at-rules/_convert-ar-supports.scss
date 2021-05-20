@@ -6,19 +6,6 @@ mlu.$at-rules-data: map.set(
 	mlu.$at-rules-data, 'supports', 'custom', 'testou', '(clip-path: url(#c1)) and selector(:is(ul))'
 );
 
-mlu.$utils-data: map.deep-merge(
-	mlu.$utils-data,
-	('utils':
-	 (
-		 'map': (
-			 'D': ('ig': inline-grid),
-			 'Jc': ('se': space-evenly),
-			 'Pos': ('sk': sticky),
-		 ),
-	 )
-	)
-);
-
 @include describe('tools/functions/at-rules/') {
 	@include describe('convert-ar-supports') {
 		@include it('converts current util') {

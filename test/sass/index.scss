@@ -1,4 +1,19 @@
-@use 'tools/settings' with (
+@use 'sass:map';
+@use 'tools/settings' as mlu with (
 	$flag-test-env: true
 );
+
+mlu.$utils-data: map.deep-merge(
+	mlu.$utils-data,
+	('utils':
+	 (
+		 'map': (
+			 'D': ('ig': inline-grid),
+			 'Jc': ('se': space-evenly),
+			 'Pos': ('sk': sticky),
+		 ),
+	 )
+	)
+);
+
 @use 'tools/functions';
