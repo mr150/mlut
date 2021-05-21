@@ -252,3 +252,11 @@ Styleguide: sass-tools.functions.at_rules
 
 	@return string.slice($result, 1, -(1 + string.length($operator)));
 }
+
+@each $key, $value in mlu.$at-rules-data {
+	@if meta.function-exists('convert-ar-#{$key}') {
+		mlu.$at-rules-data: map.set(
+			mlu.$at-rules-data, $key, 'converter', meta.get-function('convert-ar-#{$key}')
+		);
+	}
+}
