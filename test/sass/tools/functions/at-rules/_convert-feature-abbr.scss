@@ -16,6 +16,11 @@
 			);
 
 			@include assert-equal(
+				mlu.convert-feature-abbr(''),
+				'ERROR: Passed empty string',
+			);
+
+			@include assert-equal(
 				mlu.convert-feature-abbr('ic'),
 				'ERROR: Invalid feature abbreviation: `ic`. `ic` is not defined in `utils` section of $utils-data map',
 			);

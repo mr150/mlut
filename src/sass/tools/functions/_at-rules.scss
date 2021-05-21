@@ -57,6 +57,10 @@ Styleguide: sass-tools.functions.at_rules
 }
 
 @function convert-feature-abbr($abbr, $section: 'utils') {
+	@if $abbr == '' {
+		@return mgen.error('Passed empty string');
+	}
+
 	$result: '';
 	$feature: mget.util-prop($abbr, 0, $section);
 
