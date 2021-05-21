@@ -188,10 +188,12 @@ $utils-data: (
 		'map': (),
 	),
 
-	'general-registry': (
-		'H': height,
-		'W': width,
-		'Ar': aspect-ratio,
+	'general': (
+		'registry': (
+			'H': height,
+			'W': width,
+			'Ar': aspect-ratio,
+		),
 	),
 ) !default;
 
@@ -225,7 +227,7 @@ $utils-data: map.merge(
 	$utils-data,
 	'utils',
 	'registry',
-	map.get($utils-data, 'general-registry')
+	map.get($utils-data, 'general', 'registry')
 );
 
 $utils-data: merge-utils-data($utils-data, $utils, 'utils');
