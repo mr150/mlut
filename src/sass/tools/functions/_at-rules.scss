@@ -209,7 +209,7 @@ Styleguide: sass-tools.functions.at_rules
 }
 
 @function convert-ar-supports($ar, $current-util: null) {
-	@if $current-util {
+	@if $ar == '' and $current-util {
 		@return convert-feature-abbr($current-util);
 	}
 
