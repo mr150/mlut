@@ -56,7 +56,8 @@ path = Object.assign({
 	watch: {
 		styles: [
 			dirs.libs + files.styles,
-			path.src.sass + files.styles
+			path.src.sass + files.styles,
+			path.test.sass + files.styles,
 		],
 		pug: dirs.test + files.pug,
 		html: dirs.test + files.html,
