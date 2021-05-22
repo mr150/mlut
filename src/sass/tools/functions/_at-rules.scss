@@ -45,7 +45,7 @@ Styleguide: sass-tools.functions.at_rules
 //
 // Styleguide: sass-tools.functions.at_rules.converters
 
-@function convert-ar-bp($ar) {
+@function convert-ar-bp($ar, $current-util: null) {
 	$result: '';
 	$queries: mgen.str-split($ar, ',');
 
@@ -156,7 +156,7 @@ Styleguide: sass-tools.functions.at_rules
 //
 // Styleguide: sass-tools.functions.at_rules.converters.media
 
-@function convert-ar-media($ar) {
+@function convert-ar-media($ar, $current-util: null) {
 	$result: '';
 	$queries: mgen.str-split($ar, ',');
 	$and: ' and ';
