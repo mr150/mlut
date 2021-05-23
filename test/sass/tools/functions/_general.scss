@@ -1,6 +1,8 @@
 @use 'sass-true' as *;
 @use 'tools/functions/general' as mlu;
 
+$test-list: (0, 1, 2, 3);
+
 @include describe('tools/functions/general') {
 	@include describe('str-split') {
 		@include it('split string into list with delimiter') {
@@ -72,6 +74,29 @@
 			@include assert-equal(
 				mlu.str-ucfirst(1),
 				'ERROR: Wrong type of argument $str: `number`. Expected `string`',
+			);
+		}
+	}
+
+	@include describe('remove-nth') {
+		@include it('removes element from the list by index') {
+			@include assert-equal(
+				mlu.remove-nth($test-list, 3),
+				0 1 3,
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.remove-nth($test-list, 8),
+				0 1 2 3,
+				$inspect: true,
+			);
+		}
+
+		@include it('wrong type of index argument') {
+			@include assert-equal(
+				mlu.remove-nth($test-list, '3'),
+				'ERROR: Wrong type of argument $index: `string`. Expected `number`',
 			);
 		}
 	}
