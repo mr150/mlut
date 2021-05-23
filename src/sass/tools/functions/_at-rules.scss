@@ -50,10 +50,10 @@ Styleguide: sass-tools.functions.at_rules
 	$queries: mgen.str-split($ar, ',');
 
 	@each $queary in $queries {
-		$result: $result + convert-bp-list(mgen.str-split($queary, ':')) + ',';
+		$result: $result + convert-bp-list(mgen.str-split($queary, ':')) + ', ';
 	}
 
-	@return string.slice($result, 1, -2);
+	@return string.slice($result, 1, -3);
 }
 
 @function convert-feature-abbr($abbr, $section: 'utils') {
@@ -160,7 +160,7 @@ Styleguide: sass-tools.functions.at_rules
 	$result: '';
 	$queries: mgen.str-split($ar, ',');
 	$and: ' and ';
-	$or: ',';
+	$or: ', ';
 
 	@each $queary in $queries {
 		$queary-list: mgen.str-split($queary, ':');

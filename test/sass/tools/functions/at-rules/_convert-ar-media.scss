@@ -59,12 +59,12 @@ mlu.$at-rules-data: map.set(
 
 			@include assert-equal(
 				mlu.convert-ar-media('prn,hv'),
-				'print,(hover)',
+				'print, (hover)',
 			);
 
 			@include assert-equal(
 				mlu.convert-ar-media('prn:-lg:-xl:dm,pn-c:w>=90r,c<256:-xs:-sm'),
-				'print and (min-width: #{mlu.bp(lg)}) and (max-width: #{mlu.bp(xl) - 1px}) and (display-mode: fullscreen),(pointer: coarse) and (min-width: 90rem),(max-color: 255) and (max-width: #{mlu.bp(sm) - 1px})',
+				'print and (min-width: #{mlu.bp(lg)}) and (max-width: #{mlu.bp(xl) - 1px}) and (display-mode: fullscreen), (pointer: coarse) and (min-width: 90rem), (max-color: 255) and (max-width: #{mlu.bp(sm) - 1px})',
 			);
 		}
 	}
