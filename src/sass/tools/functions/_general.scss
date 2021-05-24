@@ -206,3 +206,25 @@ Styleguide: sass-tools.functions.general
 
 	@return $result;
 }
+
+@function str-replace($str, $old, $new: '') {
+	$old-pos: string.index($str, $old);
+
+	@if $old-pos {
+		@return string.slice($str, 1, $old-pos - 1) + $new + string.slice($str, $old-pos + string.length($old));
+	}
+
+	@return $str;
+}
+
+@function str-replace-all($str, $old, $new: '') {
+	$old-pos: string.index($str, $old);
+	$old-length: string.length($old);
+
+	@while $old-pos {
+		$str: string.slice($str, 1, $old-pos - 1) + $new + string.slice($str, $old-pos + $old-length);
+		$old-pos: string.index($str, $old);
+	}
+
+	@return $str;
+}

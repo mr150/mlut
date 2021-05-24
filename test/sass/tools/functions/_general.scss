@@ -100,4 +100,32 @@ $test-list: (0, 1, 2, 3);
 			);
 		}
 	}
+
+	@include describe('str-replace') {
+		@include it('replaces substring by another substring') {
+			@include assert-equal(
+				mlu.str-replace('@:prn BpAll@s BpAll', 'BpAll', 'lg'),
+				'@:prn lg@s BpAll',
+			);
+
+			@include assert-equal(
+				mlu.str-replace('BpAll@s BpAll', 'All'),
+				'Bp@s BpAll',
+			);
+		}
+	}
+
+	@include describe('str-replace-all') {
+		@include it('replaces all the entries of substring by another substring') {
+			@include assert-equal(
+				mlu.str-replace-all('sm@:prn sm@s', 'sm', 'xl'),
+				'xl@:prn xl@s',
+			);
+
+			@include assert-equal(
+				mlu.str-replace-all('sm@:prn sm@s', 'sm'),
+				'@:prn @s',
+			);
+		}
+	}
 }
