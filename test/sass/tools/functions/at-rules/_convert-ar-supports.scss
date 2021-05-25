@@ -40,7 +40,7 @@ mlu.$at-rules-data: map.set(
 
 			@include assert-equal(
 				mlu.convert-ar-supports('!&'),
-				'ERROR: `&` cannot be used because $current-util is not passed',
+				'ERROR: `&` cannot be used because $this-util is not passed',
 			);
 
 			@include assert-equal(

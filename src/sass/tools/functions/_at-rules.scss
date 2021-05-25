@@ -45,7 +45,7 @@ Styleguide: sass-tools.functions.at_rules
 //
 // Styleguide: sass-tools.functions.at_rules.converters
 
-@function convert-ar-bp($ar, $current-util: null) {
+@function convert-ar-bp($ar, $this-util: null) {
 	$result: '';
 	$queries: mgen.str-split($ar, ',');
 
@@ -156,7 +156,7 @@ Styleguide: sass-tools.functions.at_rules
 //
 // Styleguide: sass-tools.functions.at_rules.converters.media
 
-@function convert-ar-media($ar, $current-util: null) {
+@function convert-ar-media($ar, $this-util: null) {
 	$result: '';
 	$queries: mgen.str-split($ar, ',');
 	$and: ' and ';
@@ -212,9 +212,9 @@ Styleguide: sass-tools.functions.at_rules
 	@return string.slice($result, 1, -(1 + string.length($or)));
 }
 
-@function convert-ar-supports($ar, $current-util: null) {
-	@if $ar == '' and $current-util {
-		@return convert-feature-abbr($current-util);
+@function convert-ar-supports($ar, $this-util: null) {
+	@if $ar == '' and $this-util {
+		@return convert-feature-abbr($this-util);
 	}
 
 	$result: '';
@@ -244,11 +244,11 @@ Styleguide: sass-tools.functions.at_rules
 				@return mgen.error('Undefined custom supports condition: `#{$expr}`');
 			}
 		} @else if $expr == '&' {
-			@if not $current-util {
-				@return mgen.error('`&` cannot be used because $current-util is not passed');
+			@if not $this-util {
+				@return mgen.error('`&` cannot be used because $this-util is not passed');
 			}
 
-			$converted: convert-feature-abbr($current-util);
+			$converted: convert-feature-abbr($this-util);
 		} @else {
 			$converted: convert-feature-abbr(mgen.str-ucfirst($expr));
 		}
