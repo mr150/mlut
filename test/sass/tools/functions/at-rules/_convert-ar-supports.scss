@@ -51,6 +51,11 @@ mlu.$at-rules-data: map.set(
 			);
 
 			@include assert-equal(
+				mlu.convert-ar-supports('pos-sk,h1vh:m-a'),
+				'ERROR: Different delimiters are not allowed in one abbreviations list',
+			);
+
+			@include assert-equal(
 				mlu.convert-ar-supports('m-a:bdw1vmin'),
 				'(margin: auto) and (border-width: 1vmin)',
 			);

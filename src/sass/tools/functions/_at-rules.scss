@@ -222,6 +222,10 @@ Styleguide: sass-tools.functions.at_rules
 	$operator: ' and ';
 
 	@if string.index($ar, ',') {
+		@if string.index($ar, ':') {
+			@return mgen.error('Different delimiters are not allowed in one abbreviations list');
+		}
+
 		$delimiter: ',';
 		$operator: ' or ';
 	}
