@@ -39,6 +39,16 @@ mlu.$at-rules-data: map.set(
 			);
 
 			@include assert-equal(
+				mlu.convert-ar-supports('!&'),
+				'ERROR: `&` cannot be used because $current-util is not passed',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-supports('!&', 'D-ig'),
+				'(not (display: inline-grid))',
+			);
+
+			@include assert-equal(
 				mlu.convert-ar-supports('!d-ig'),
 				'(not (display: inline-grid))',
 			);
@@ -53,6 +63,11 @@ mlu.$at-rules-data: map.set(
 			@include assert-equal(
 				mlu.convert-ar-supports('pos-sk,h1vh:m-a'),
 				'ERROR: Different delimiters are not allowed in one abbreviations list',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-supports('d-ig:&', 'Jc-se'),
+				'(display: inline-grid) and (justify-content: space-evenly)',
 			);
 
 			@include assert-equal(

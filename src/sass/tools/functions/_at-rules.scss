@@ -243,6 +243,12 @@ Styleguide: sass-tools.functions.at_rules
 			} @else {
 				@return mgen.error('Undefined custom supports condition: `#{$expr}`');
 			}
+		} @else if $expr == '&' {
+			@if not $current-util {
+				@return mgen.error('`&` cannot be used because $current-util is not passed');
+			}
+
+			$converted: convert-feature-abbr($current-util);
 		} @else {
 			$converted: convert-feature-abbr(mgen.str-ucfirst($expr));
 		}
