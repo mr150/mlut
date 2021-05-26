@@ -176,17 +176,7 @@ Styleguide: sass-tools.mixins.general
 // Styleguide: sass-tools.mixins.general.mk_ar
 
 @mixin mk-ar($at-rules, $this-util: null) {
-	@each $item in $at-rules {
-		$keyword-pos: string.index($item, mlu.$bp-all);
-
-		@if $keyword-pos {
-			$at-rules: mgen.remove-nth($at-rules, list.index($at-rules, $item));
-
-			@each $bp in map.keys(mlu.$breakpoints) {
-				$at-rules: list.append($at-rules, mgen.str-replace($item, mlu.$bp-all, $bp));
-			}
-		}
-	}
+	$at-rules: mgen.replace-keyword($at-rules, mlu.$bp-all, map.keys(mlu.$breakpoints));
 
 	@each $item in $at-rules {
 		$ar-list: mgen.str-split($item, '@');

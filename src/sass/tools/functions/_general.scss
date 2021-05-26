@@ -148,6 +148,22 @@ Styleguide: sass-tools.functions.general
 	@return string.to-upper-case(string.slice($str, 1, 1)) + string.slice($str, 2);
 }
 
+@function replace-keyword($list, $keyword, $replacement) {
+	@each $item in $list {
+		$keyword-pos: string.index($item, $keyword);
+
+		@if $keyword-pos {
+			$list: remove-nth($list, list.index($list, $item));
+
+			@each $rep-item in $replacement {
+				$list: list.append($list, str-replace($item, $keyword, $rep-item));
+			}
+		}
+	}
+
+	@return $list;
+}
+
 // Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.
 
 @function str-split($str, $delimiter: '') {
