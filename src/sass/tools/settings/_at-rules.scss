@@ -32,6 +32,7 @@ $bp-all: 'BpAll' !default;
 
 $at-rules-data: (
 	'media': (
+		'alias': '',
 		'types': (
 			'prn': print,
 			'scr': screen,
@@ -40,6 +41,7 @@ $at-rules-data: (
 		),
 	),
 	'supports': (
+		'alias': 's',
 		'custom': (
 		),
 	),
