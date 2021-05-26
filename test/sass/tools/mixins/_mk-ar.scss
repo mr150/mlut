@@ -1,0 +1,173 @@
+@use 'sass-true' as *;
+@use 'tools/mixins/general' as mlu;
+@use 'tools/functions' as mlf;
+@use 'tools/settings' as mls;
+
+@include describe('tools/mixins/general') {
+	@include describe('mk-ar') {
+		@include it('make only media queries from breakpoints') {
+			@include assert() {
+				@include output() {
+					@include mlu.mk-ar('xs:sm,md:lg,xl') {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (max-width: (mlf.bp(sm) - 1px)),(min-width: mlf.bp(md)) and (max-width: (mlf.bp(lg) - 1px)),(min-width: mlf.bp(xl)){
+						width: 50%;
+					}
+				}
+			}
+		}
+
+		@include it('make only media queries from abbreviations') {
+			@include assert('complex') {
+				@include output() {
+					@include mlu.mk-ar('@:prn:-xl:dm,pn-c:w>=90r') {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media print and (min-width: mlf.bp(xl)) and (display-mode: fullscreen),(pointer: coarse) and (min-width: 90rem) {
+						width: 50%;
+					}
+				}
+			}
+		}
+
+		@include it('make only feature queries from abbreviations') {
+			@include assert('simple') {
+				@include output(false) {
+					@include mlu.mk-ar('@s', 'D-ig') {
+						.D-ig {
+							display: inline-grid;
+						}
+					}
+				}
+
+				@include expect(false) {
+					@supports (display: inline-grid) {
+						.D-ig {
+							display: inline-grid;
+						}
+					}
+				}
+			}
+
+			@include assert('complex') {
+				@include output() {
+					@include mlu.mk-ar('@s:pos-sk,h100vh') {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@supports (position: sticky) or (height: 100vh) {
+						width: 50%;
+					}
+				}
+			}
+		}
+
+		@include it('make at-rules from abbreviations and breakpoints') {
+			@include assert() {
+				@include output() {
+					@include mlu.mk-ar('@s:ar4/3@:dm') {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@supports (aspect-ratio: 4/3) {
+						@media (display-mode: fullscreen) {
+							width: 50%;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output() {
+					@include mlu.mk-ar('sm@s:pos-sk') {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (min-width: mlf.bp(sm)) {
+						@supports (position: sticky) {
+							width: 50%;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output() {
+					@include mlu.mk-ar(mls.$bp-all + '@s:d-ig') {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@each $bp, $value in mls.$breakpoints {
+						@media (min-width: $value) {
+							@supports (display: inline-grid) {
+								width: 50%;
+							}
+						}
+					}
+				}
+			}
+
+			// no tests for media with breakpoints(like `md@:ori`) because Sass compiler
+			// in test runner merges expected nested media queries and test always failed
+		}
+
+		@include it('make several at-rules from list') {
+			@include assert() {
+				@include output() {
+					@include mlu.mk-ar(('lg' '@:scr' '@s:d-ig')) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (min-width: mlf.bp(lg)) {
+						width: 50%;
+					}
+
+					@media screen {
+						width: 50%;
+					}
+
+					@supports (display: inline-grid) {
+						width: 50%;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output() {
+					@include mlu.mk-ar((mls.$bp-all, '@s:d-ig')) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@supports (display: inline-grid) {
+						width: 50%;
+					}
+
+					@each $bp, $value in mls.$breakpoints {
+						@media (min-width: $value) {
+							width: 50%;
+						}
+					}
+				}
+			}
+		}
+	}
+}
