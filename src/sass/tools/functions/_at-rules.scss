@@ -233,24 +233,27 @@ Styleguide: sass-tools.functions.at_rules
 	@each $item in mgen.str-split($ar, $delimiter) {
 		$converted: '';
 		$not: string.slice($item, 1, 1) == '!';
-		$expr: if($not, string.slice($item, 2), $item);
 
-		@if string.slice($expr, 1, 1) == '-' {
-			$expr-name: string.slice($expr, 2);
+		@if $not {
+			$item: string.slice($item, 2);
+		}
 
-			@if map.has-key(mlu.$at-rules-data, 'supports', 'custom', $expr-name) {
-				$converted: map.get(mlu.$at-rules-data, 'supports', 'custom', $expr-name);
+		@if string.slice($item, 1, 1) == '-' {
+			$item-name: string.slice($item, 2);
+
+			@if map.has-key(mlu.$at-rules-data, 'supports', 'custom', $item-name) {
+				$converted: map.get(mlu.$at-rules-data, 'supports', 'custom', $item-name);
 			} @else {
-				@return mgen.error('Undefined custom supports condition: `#{$expr}`');
+				@return mgen.error('Undefined custom supports condition: `#{$item}`');
 			}
-		} @else if $expr == '&' {
+		} @else if $item == '&' {
 			@if not $this-util {
 				@return mgen.error('`&` cannot be used because $this-util is not passed');
 			}
 
 			$converted: convert-feature-abbr($this-util);
 		} @else {
-			$converted: convert-feature-abbr(mgen.str-ucfirst($expr));
+			$converted: convert-feature-abbr(mgen.str-ucfirst($item));
 		}
 
 		@if $not {
