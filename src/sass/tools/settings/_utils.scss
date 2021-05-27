@@ -273,25 +273,21 @@ $utils-config: (
 	),
 
 	'states': (
-		'pseudo-cls': (
+		'pseudo': (
 			'h': hover,
 			'f': focus,
 			'fw': focus-within,
 			'a': active,
 			'vl': valid,
 			'iv': invalid,
-			'h-f': (hover, focus),
+			'bf': ':before',
+			'af': ':after',
+			'fln': ':first-line',
+			'flt': ':first-letter',
 	  ),
-		'pseudo-elm': (
-			'bf': before,
-			'af': after,
-			'fln': first-line,
-			'flt': first-letter,
-		),
 		'custom': (
 		),
 		'special': (
-			'': ' ',
 			'noJs': null,
 		),
 	),
@@ -300,12 +296,7 @@ $utils-config: (
 $utils-config: map.deep-merge($utils-config, $utils);
 
 $util-states: map.merge(
-	map.get($utils-config, 'states', 'pseudo-cls'),
-	map.get($utils-config, 'states', 'pseudo-elm'),
-);
-
-$util-states: map.merge(
-	$util-states,
+	map.get($utils-config, 'states', 'pseudo'),
 	map.get($utils-config, 'states', 'special'),
 );
 
