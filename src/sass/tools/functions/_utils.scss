@@ -64,10 +64,15 @@ $-mq-keywords: list.join(
 			$component-list: mgen.str-split(mgen.str-trim($component), ' ');
 			$component-item: list.nth($component-list, 1);
 
+			@if string.slice($component-item, 1, 1) == '!' {
+				$component-item: string.slice($component-item, 2);
+			}
+
 			$part: list.nth(mgen.str-split(
 				list.nth(mgen.str-split($component-item, ','), 1),
 				':'
 			), 1);
+
 			@if not $at-rules and (
 				string.index($part, '@') == 1 or list.index($-mq-keywords, $part)
 			) {

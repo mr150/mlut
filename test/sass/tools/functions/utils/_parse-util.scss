@@ -89,6 +89,15 @@
 			);
 
 			@include assert-equal(
+				mlu.new-parse-util('!/p_!'),
+				(
+					'pre-states': '!/p',
+					'value': '!',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
 				mlu.new-parse-util('^ctx /a> _2su'),
 				(
 					'pre-states': '^ctx' '/a>',
@@ -113,6 +122,15 @@
 				(
 					'post-states': ':fw:^',
 					'value': 'inh',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('!_!f'),
+				(
+					'post-states': '!f',
+					'value': '!',
 				),
 				$inspect: true,
 			);
