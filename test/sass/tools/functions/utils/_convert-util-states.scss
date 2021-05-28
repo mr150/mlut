@@ -1,0 +1,97 @@
+@use 'sass:map';
+@use 'sass-true' as *;
+@use 'tools' as mlu;
+
+mlu.$utils-config: map.set(
+	mlu.$utils-config, 'states', 'custom', 'testou', '.pa.ro.voz'
+);
+
+@include describe('tools/functions/utils/') {
+	@include describe('convert-util-states') {
+		@include it('converts simple state') {
+			@include assert-equal(
+				mlu.convert-util-states('h'),
+				('&:hover'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('NO'),
+				('ERROR: Invalid state: `NO`'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('^', '', true),
+				('.-Ctx'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('af'),
+				('&::after'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('-testou'),
+				('&.pa.ro.voz'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('-NO'),
+				('ERROR: Undefined custom state: `-NO`'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('&'),
+				('ERROR: `&` cannot be used because $this-util is not passed'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('/>*'),
+				('&>*'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('noJs'),
+				('&noJs'),
+			);
+		}
+
+		@include it('converts complex state') {
+			@include assert-equal(
+				mlu.convert-util-states('h:bf'),
+				('&:hover::before'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('!h'),
+				('&:not(:hover)'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('&:&', 'D-n'),
+				('&.D-n.D-n'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states(':^:&::^2:/+a.link:h', 'Mr5su'),
+				('& .-Ctx.Mr5su .-Ctx2+a.link:hover'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('^ct0:/>*:h:!&', 'Bgc--prm0', true),
+				('.-Ctx-ct0>*:hover:not(.Bgc--prm0)'),
+			);
+		}
+
+		@include it('converts states list') {
+			@include assert-equal(
+				mlu.convert-util-states('h,f'),
+				('&:hover, &:focus'),
+			);
+
+			@include assert-equal(
+				mlu.convert-util-states('h:a:bf,noJs:-testou:a,:^:!-testou:!/h2'),
+				('&:hover:active::before, &noJs.pa.ro.voz:active, & .-Ctx:not(.pa.ro.voz):not(h2)'),
+			);
+		}
+	}
+}
