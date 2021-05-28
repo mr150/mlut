@@ -117,12 +117,12 @@ Styleguide: sass-tools.mixins.utils
 // ```
 //
 // $selector = & - selector of CSS rule. Can be `string` or `&`.
-// $states = map-keys(settings.$util-states) -  list of state names to be generated.
+// $states = map-keys(settings.$utils-states) -  list of state names to be generated.
 // $no-state = 1 - number flag. If equal to 1, then a value without state will be generated as in the example above.
 //
 // Styleguide: sass-tools.mixins.utils.mk_state
 
-@mixin mk-state($selector: &, $states: map.keys(mlu.$util-states), $no-state: 1) {
+@mixin mk-state($selector: &, $states: map.keys(mlu.$utils-states), $no-state: 1) {
 	@if not $selector {
 		@error '`$selector` argument must not be null.';
 	}
@@ -136,7 +136,7 @@ Styleguide: sass-tools.mixins.utils
 
 		$selector: mlu.check-class($selector, 1);
 
-		@each $key, $value in mlu.$util-states {
+		@each $key, $value in mlu.$utils-states {
 			@if list.index($states, $key) {
 				$prefix: '.' + $key;
 

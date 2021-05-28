@@ -17,9 +17,9 @@
 // $mlu-Ff--ss0 - sans serif font stack contains default fonts on different OS.
 // $mlu-Ff--m0 - monospace font stack contains default fonts on different OS.
 // $mlu-Trsdu--def = 0.3s - default [transition](section-core-utils.html#kssref-core-utils-anim) duration.
-// $mlu-util-states-psd-cls - map with abbreviations of pseudo-classes for utilities.
-// $mlu-util-states-psd-elm - map with pseudo-elements abbreviations for utilities.
-// $mlu-util-states - map with abbreviations of utility state names. Maps of pseudo-classes and pseudo-elements merge into it.
+// $mlu-utils-states-psd-cls - map with abbreviations of pseudo-classes for utilities.
+// $mlu-utils-states-psd-elm - map with pseudo-elements abbreviations for utilities.
+// $mlu-utils-states - map with abbreviations of utility state names. Maps of pseudo-classes and pseudo-elements merge into it.
 //
 // Styleguide: sass-tools.settings.utils
 
@@ -81,7 +81,7 @@ $cCtx: '-Ctx' !default;
 // Maps with utilities states
 //
 // ```scss
-//$mlu-util-states-psd-cls: (
+//$mlu-utils-states-psd-cls: (
 //		'h': hover,
 //		'f': focus,
 //		'fw': focus-within,
@@ -91,14 +91,14 @@ $cCtx: '-Ctx' !default;
 //		'iv': invalid,
 //);
 //
-//$mlu-util-states-psd-elm: (
+//$mlu-utils-states-psd-elm: (
 //		'bf': before,
 //		'af': after,
 //		'fln': first-line,
 //		'flt': first-letter,
 //);
 //
-//$mlu-util-states: (
+//$mlu-utils-states: (
 //		'noJs': null,
 //);
 // ```
@@ -297,7 +297,7 @@ $utils-config: (
 
 $utils-config: map.deep-merge($utils-config, $utils);
 
-$util-states: map.merge(
+$utils-states: map.merge(
 	map.get($utils-config, 'states', 'pseudo'),
 	map.get($utils-config, 'states', 'special'),
 );

@@ -78,7 +78,7 @@ $-mq-keywords: list.join(
 			) {
 				$at-rules: $component-list;
 			} @else if (string.index($component, ' ') or $value) and
-				map.has-key(mlu.$util-states, $part) {
+				map.has-key(mlu.$utils-states, $part) {
 				$result: map.set($result, 'post-states', $component-list);
 			} @else if list.index(
 				'^' '/' ':',
