@@ -95,7 +95,8 @@ ftpConfig = {
 
 gulp.task('css-lint', function(){
 	return gulp.src([
-		path.src.sass + files.styles
+		path.src.sass + files.styles,
+		`!${path.src.sass}tools/mixins/_general.scss`,
 	])
 		.pipe(stylelint({
 			reporters:[
