@@ -4,6 +4,29 @@
 $test-list: (0, 1, 2, 3);
 
 @include describe('tools/functions/general') {
+	@include describe('remove-nth') {
+		@include it('removes element from the list by index') {
+			@include assert-equal(
+				mlu.remove-nth($test-list, 3),
+				0 1 3,
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.remove-nth($test-list, 8),
+				0 1 2 3,
+				$inspect: true,
+			);
+		}
+
+		@include it('wrong type of index argument') {
+			@include assert-equal(
+				mlu.remove-nth($test-list, '3'),
+				'ERROR: Wrong type of argument $index: `string`. Expected `number`',
+			);
+		}
+	}
+
 	@include describe('str-split') {
 		@include it('split string into list with delimiter') {
 			@include assert-equal(
@@ -78,29 +101,6 @@ $test-list: (0, 1, 2, 3);
 		}
 	}
 
-	@include describe('remove-nth') {
-		@include it('removes element from the list by index') {
-			@include assert-equal(
-				mlu.remove-nth($test-list, 3),
-				0 1 3,
-				$inspect: true,
-			);
-
-			@include assert-equal(
-				mlu.remove-nth($test-list, 8),
-				0 1 2 3,
-				$inspect: true,
-			);
-		}
-
-		@include it('wrong type of index argument') {
-			@include assert-equal(
-				mlu.remove-nth($test-list, '3'),
-				'ERROR: Wrong type of argument $index: `string`. Expected `number`',
-			);
-		}
-	}
-
 	@include describe('str-replace') {
 		@include it('replaces substring by another substring') {
 			@include assert-equal(
@@ -118,8 +118,8 @@ $test-list: (0, 1, 2, 3);
 	@include describe('str-replace-all') {
 		@include it('replaces all the entries of substring by another substring') {
 			@include assert-equal(
-				mlu.str-replace-all('sm@:prn sm@s', 'sm', 'xl'),
-				'xl@:prn xl@s',
+				mlu.str-replace-all('BpAll sm@:prn sm@s', 'sm', 'smx'),
+				'BpAll smx@:prn smx@s',
 			);
 
 			@include assert-equal(

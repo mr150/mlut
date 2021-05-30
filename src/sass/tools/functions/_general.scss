@@ -62,47 +62,6 @@ Styleguide: sass-tools.functions.general
 	@return if($negative, -$result, $result);
 }
 
-// mlu-check-class
-//
-// Checks for a dot in the CSS class name depending on the flag.
-// ```scss
-//mlu-check-class('.block') => '.block'
-//mlu-check-class('block') => '.block'
-//mlu-check-class('.block', 1) => 'block'
-// ```
-//
-// $name - class name string.
-// $only-name = null - bool flag. In you want to get class name without dot pass 1. Else, a value with a dot will be returned.
-//
-// Styleguide: sass-tools.functions.general.check_class
-
-@function check-class($name, $only-name: null) {
-	$name: $name + '';
-
-	@if $only-name {
-		@return if(string.slice($name, 1, 1) == '.', string.slice($name, 2), $name);
-	}
-
-	@return if(string.slice($name, 1, 1) == '.', $name, '.' + $name);
-}
-
-// error
-//
-// Shows the error text in the test environment or throws an exception in the production.
-//
-// $message - error message
-// $catch = $flag-test-env - bool flag. Catch the error if `true` else throws an exception
-//
-// Styleguide: sass-tools.functions.general.error
-
-@function error($message, $catch: mlu.$flag-test-env) {
-	@if $catch {
-		@return 'ERROR: #{$message}';
-	}
-
-	@error '#{$message}';
-}
-
 // str-digit-index
 //
 // Returns the first index of digit in $str, or `null` if digits not found
@@ -148,6 +107,47 @@ Styleguide: sass-tools.functions.general
 	@return string.to-upper-case(string.slice($str, 1, 1)) + string.slice($str, 2);
 }
 
+// mlu-check-class
+//
+// Checks for a dot in the CSS class name depending on the flag.
+// ```scss
+//mlu-check-class('.block') => '.block'
+//mlu-check-class('block') => '.block'
+//mlu-check-class('.block', 1) => 'block'
+// ```
+//
+// $name - class name string.
+// $only-name = null - bool flag. In you want to get class name without dot pass 1. Else, a value with a dot will be returned.
+//
+// Styleguide: sass-tools.functions.general.check_class
+
+@function check-class($name, $only-name: null) {
+	$name: $name + '';
+
+	@if $only-name {
+		@return if(string.slice($name, 1, 1) == '.', string.slice($name, 2), $name);
+	}
+
+	@return if(string.slice($name, 1, 1) == '.', $name, '.' + $name);
+}
+
+// error
+//
+// Shows the error text in the test environment or throws an exception in the production.
+//
+// $message - error message
+// $catch = $flag-test-env - bool flag. Catch the error if `true` else throws an exception
+//
+// Styleguide: sass-tools.functions.general.error
+
+@function error($message, $catch: mlu.$flag-test-env) {
+	@if $catch {
+		@return 'ERROR: #{$message}';
+	}
+
+	@error '#{$message}';
+}
+
 @function replace-keyword($list, $keyword, $replacement) {
 	@each $item in $list {
 		$keyword-pos: string.index($item, $keyword);
@@ -165,6 +165,25 @@ Styleguide: sass-tools.functions.general
 }
 
 // Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.
+
+@function remove-nth($list, $index) {
+	@if meta.type-of($index) != 'number' {
+		@return error('Wrong type of argument $index: `#{meta.type-of($index)}`. Expected `number`');
+	}
+
+	$result: ();
+	$i: 1;
+
+	@each $item in $list {
+		@if $i != $index {
+			$result: list.append($result, $item);
+		}
+
+		$i: $i + 1;
+	}
+
+	@return $result;
+}
 
 @function str-split($str, $delimiter: '') {
 	$result: ();
@@ -204,25 +223,6 @@ Styleguide: sass-tools.functions.general
 	}
 }
 
-@function remove-nth($list, $index) {
-	@if meta.type-of($index) != 'number' {
-		@return error('Wrong type of argument $index: `#{meta.type-of($index)}`. Expected `number`');
-	}
-
-	$result: ();
-	$i: 1;
-
-	@each $item in $list {
-		@if $i != $index {
-			$result: list.append($result, $item);
-		}
-
-		$i: $i + 1;
-	}
-
-	@return $result;
-}
-
 @function str-replace($str, $old, $new: '') {
 	$old-pos: string.index($str, $old);
 
@@ -236,11 +236,13 @@ Styleguide: sass-tools.functions.general
 @function str-replace-all($str, $old, $new: '') {
 	$old-pos: string.index($str, $old);
 	$old-length: string.length($old);
+	$result: '';
 
 	@while $old-pos {
-		$str: string.slice($str, 1, $old-pos - 1) + $new + string.slice($str, $old-pos + $old-length);
+		$result: $result + string.slice($str, 1, $old-pos - 1) + $new;
+		$str: string.slice($str, $old-pos + $old-length);
 		$old-pos: string.index($str, $old);
 	}
 
-	@return $str;
+	@return $result + $str;
 }
