@@ -107,6 +107,36 @@ Styleguide: sass-tools.functions.general
 	@return string.to-upper-case(string.slice($str, 1, 1)) + string.slice($str, 2);
 }
 
+// str-escape
+//
+// Escape special characters in value for using it in CSS selector.
+// ```scss
+//@debug mlu.str-escape(':^:&:h'); // '\\:\\^\\:\\&\\:h'
+//@debug mlu.str-escape(1.5); // '1\\.5'
+// ```
+//
+// $value - value for escaping
+//
+// Styleguide: sass-tools.functions.general.str_escape
+
+@function str-escape($value) {
+	$str: $value + '';
+	$spec-chars: (' ' '!' '#' '$' '%' '&' '(' ')' '*' '+' ',' '.' '/' ':' ';' '<' '=' '>' '?' '@' '[' ']' '^' '`' '{' '|' '}' '~');
+	$escaped: '';
+
+	@for $i from 1 through string.length($str) {
+		$char: string.slice($str, $i, $i);
+
+		@if list.index($spec-chars, $char) {
+			$char: '\\' + $char;
+		}
+
+		$escaped: $escaped + $char;
+	}
+
+	@return $escaped;
+}
+
 // mlu-check-class
 //
 // Checks for a dot in the CSS class name depending on the flag.

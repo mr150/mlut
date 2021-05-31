@@ -128,4 +128,18 @@ $test-list: (0, 1, 2, 3);
 			);
 		}
 	}
+
+	@include describe('str-escape') {
+		@include it('escape special characters in value') {
+			@include assert-equal(
+				mlu.str-escape(':^:&::^2:/+a.link:h'),
+				'\\:\\^\\:\\&\\:\\:\\^2\\:\\/\\+a\\.link\\:h',
+			);
+
+			@include assert-equal(
+				mlu.str-escape(1.5),
+				'1\\.5',
+			);
+		}
+	}
 }
