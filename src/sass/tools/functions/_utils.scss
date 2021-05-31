@@ -250,11 +250,8 @@ $-mq-keywords: list.join(
 				$item: string.slice($item, 2);
 			}
 
-			@if map.has-key(mlu.$utils-config, 'states', 'pseudo', $item) {
-				$converted: ':' + map.get(mlu.$utils-config, 'states', 'pseudo', $item);
-			} @else if map.has-key(mlu.$utils-config, 'states', 'special', $item) {
-				$value: map.get(mlu.$utils-config, 'states', 'special', $item);
-				$converted: if($value, $value, $item);
+			@if map.has-key(mlu.$utils-states, $item) {
+				$converted: map.get(mlu.$utils-states, $item);
 			} @else if string.slice($item, 1, 1) == '-' {
 				$item-name: string.slice($item, 2);
 

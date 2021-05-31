@@ -51,7 +51,7 @@ mlu.$utils-config: map.set(
 
 			@include assert-equal(
 				mlu.convert-util-states('noJs'),
-				('&noJs'),
+				('&'),
 			);
 		}
 
@@ -90,7 +90,7 @@ mlu.$utils-config: map.set(
 
 			@include assert-equal(
 				mlu.convert-util-states('h:a:bf,noJs:-testou:a,:^:!-testou:!/h2'),
-				('&:hover:active::before, &noJs.pa.ro.voz:active, & .-Ctx:not(.pa.ro.voz):not(h2)'),
+				('&:hover:active::before, &.pa.ro.voz:active, & .-Ctx:not(.pa.ro.voz):not(h2)'),
 			);
 		}
 	}

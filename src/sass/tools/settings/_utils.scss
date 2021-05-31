@@ -276,16 +276,16 @@ $utils-config: (
 
 	'states': (
 		'pseudo': (
-			'h': hover,
-			'f': focus,
-			'fw': focus-within,
-			'a': active,
-			'vl': valid,
-			'iv': invalid,
-			'bf': ':before',
-			'af': ':after',
-			'fln': ':first-line',
-			'flt': ':first-letter',
+			'h': ':hover',
+			'f': ':focus',
+			'fw': ':focus-within',
+			'a': ':active',
+			'vl': ':valid',
+			'iv': ':invalid',
+			'bf': '::before',
+			'af': '::after',
+			'fln': '::first-line',
+			'flt': '::first-letter',
 	  ),
 		'custom': (
 		),
