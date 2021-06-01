@@ -21,7 +21,7 @@ mlu.$utils-config: map.set(
 
 			@include assert-equal(
 				mlu.convert-util-states('^', '', true),
-				('.-Ctx'),
+				('.-Ctx '),
 			);
 
 			@include assert-equal(
@@ -78,7 +78,7 @@ mlu.$utils-config: map.set(
 
 			@include assert-equal(
 				mlu.convert-util-states('^ct0:/>*:h:!&', 'Bgc--prm0', true),
-				('.-Ctx-ct0>*:hover:not(.Bgc--prm0)'),
+				('.-Ctx-ct0>*:hover:not(.Bgc--prm0) '),
 			);
 		}
 

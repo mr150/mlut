@@ -237,7 +237,19 @@ $-mq-keywords: list.join(
 }
 
 @function convert-util-states($states, $this-util: null, $pre: false) {
-	$prefix: if($pre, '', '&');
+	$prefix: '&';
+	$suffix: '';
+
+	@if $pre {
+		$prefix: '';
+
+		@if string.slice($states, -1) == '.' {
+			$states: string.slice($states, 1, -2);
+		} @else {
+			$suffix: ' ';
+		}
+	}
+
 	$result: $prefix;
 	$or: ', ';
 
@@ -286,7 +298,7 @@ $-mq-keywords: list.join(
 			$result: $result + $converted;
 		}
 
-		$result:  $result + $or + $prefix;
+		$result:  $result + $suffix + $or + $prefix;
 	}
 
 	@return string.slice($result, 1, -(1 + string.length($or) + string.length($prefix)));
