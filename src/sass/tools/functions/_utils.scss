@@ -61,8 +61,8 @@ $-mq-keywords: list.join(
 
 	@if list.length($raw-value-parts) > 1 {
 		@each $component in $raw-value-parts {
-			$component-list: mgen.str-split(mgen.str-trim($component), ' ');
-			$component-item: list.nth($component-list, 1);
+			$component-trimmed: mgen.str-trim($component);
+			$component-item: list.nth(mgen.str-split($component-trimmed, ' '), 1);
 
 			@if string.slice($component-item, 1, 1) == '!' {
 				$component-item: string.slice($component-item, 2);
@@ -76,10 +76,10 @@ $-mq-keywords: list.join(
 			@if not $at-rules and (
 				string.index($part, '@') == 1 or list.index($-mq-keywords, $part)
 			) {
-				$at-rules: $component-list;
+				$at-rules: $component-trimmed;
 			} @else if (string.index($component, ' ') or $value) and
 				map.has-key(mlu.$utils-states, $part) {
-				$result: map.set($result, 'post-states', $component-list);
+				$result: map.set($result, 'post-states', $component-trimmed);
 			} @else if list.index(
 				'^' '/' ':',
 				string.slice($component-item, 1, 1)
@@ -87,10 +87,10 @@ $-mq-keywords: list.join(
 				$result: map.set(
 					$result,
 					if($value, 'post-states', 'pre-states'),
-					$component-list
+					$component-trimmed
 				);
 			} @else {
-				$value: $component-list;
+				$value: $component-trimmed;
 			}
 		}
 	} @else {

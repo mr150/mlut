@@ -62,7 +62,7 @@
 			@include assert-equal(
 				mlu.new-parse-util('md xl_Spaces'),
 				(
-					'at-rules': 'md' 'xl',
+					'at-rules': 'md xl',
 					'value': 'Spaces',
 				),
 				$inspect: true,
@@ -100,7 +100,7 @@
 			@include assert-equal(
 				mlu.new-parse-util('^ctx /a> _2su'),
 				(
-					'pre-states': '^ctx' '/a>',
+					'pre-states': '^ctx /a>',
 					'value': '2su',
 				),
 				$inspect: true,
@@ -138,7 +138,7 @@
 			@include assert-equal(
 				mlu.new-parse-util('a_h f'),
 				(
-					'post-states': 'h' 'f',
+					'post-states': 'h f',
 					'value': 'a',
 				),
 				$inspect: true,

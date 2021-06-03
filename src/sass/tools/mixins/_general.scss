@@ -152,7 +152,7 @@ Styleguide: sass-tools.mixins.general
 
 // mk-ar
 //
-// Generate at-rules from list of abbreviations.
+// Generate at-rules from the string with space separated abbreviations.
 //
 // ```scss
 //@include mlu.mk-ar('@s', 'D-ig') {
@@ -170,15 +170,16 @@ Styleguide: sass-tools.mixins.general
 //}
 // ```
 //
-// $at-rules - abbreviations list
+// $at-rules - string with abbreviations
 // $this-util = null - utility for which the at-rules will be generated
 //
 // Styleguide: sass-tools.mixins.general.mk_ar
 
 @mixin mk-ar($at-rules, $this-util: null) {
-	$at-rules: mgen.replace-keyword($at-rules, mlu.$bp-all, map.keys(mlu.$breakpoints));
+	$abbr-list: mgen.str-split($at-rules, ' ');
+	$abbr-list: mgen.replace-keyword($abbr-list, mlu.$bp-all, map.keys(mlu.$breakpoints));
 
-	@each $item in $at-rules {
+	@each $item in $abbr-list {
 		$ar-list: mgen.str-split($item, '@');
 
 		@if list.nth($ar-list, 1) == '' {

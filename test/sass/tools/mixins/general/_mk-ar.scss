@@ -129,7 +129,7 @@
 		@include it('make several at-rules from list') {
 			@include assert() {
 				@include output() {
-					@include mlu.mk-ar(('lg' '@:scr' '@s:d-ig')) {
+					@include mlu.mk-ar('lg @:scr @s:d-ig') {
 						width: 50%;
 					}
 				}
@@ -151,7 +151,7 @@
 
 			@include assert() {
 				@include output() {
-					@include mlu.mk-ar((mls.$bp-all, '@s:d-ig')) {
+					@include mlu.mk-ar(mls.$bp-all + ' @s:d-ig') {
 						width: 50%;
 					}
 				}
