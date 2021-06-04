@@ -1,7 +1,7 @@
 @use 'sass-true' as * with (
 	$terminal-output: false,
 );
-@use 'tools/functions' as mlu;
+@use 'tools' as mlu;
 
 @include describe('tools/functions/utils/') {
 	@include describe('parse-util') {
@@ -98,6 +98,20 @@
 			);
 
 			@include assert-equal(
+				mlu.new-parse-util('#{mlu.$states-ps} _#{mlu.$states-ps}'),
+				(
+					'pre-states': '#{mlu.$states-ps}',
+					'value': '#{mlu.$states-ps}',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('^_^'),
+				'ERROR: Not specified value or name in string `^_^`',
+			);
+
+			@include assert-equal(
 				mlu.new-parse-util('^ctx /a> _2su'),
 				(
 					'pre-states': '^ctx /a>',
@@ -167,8 +181,8 @@
 			@include assert-equal(
 				mlu.new-parse-util('xl_^:h_50p'),
 				(
-					'pre-states': '^:h',
 					'at-rules': 'xl',
+					'pre-states': '^:h',
 					'value': '50p',
 				),
 				$inspect: true,
@@ -177,8 +191,8 @@
 			@include assert-equal(
 				mlu.new-parse-util('md_^1:f_md'),
 				(
-					'pre-states': '^1:f',
 					'at-rules': 'md',
+					'pre-states': '^1:f',
 					'value': 'md',
 				),
 				$inspect: true,
@@ -189,8 +203,8 @@
 			@include assert-equal(
 				mlu.new-parse-util('BpAll_n_f,a'),
 				(
-					'post-states': 'f,a',
 					'at-rules': 'BpAll',
+					'post-states': 'f,a',
 					'value': 'n',
 				),
 				$inspect: true,
@@ -199,8 +213,8 @@
 			@include assert-equal(
 				mlu.new-parse-util('xl_xl_h:af'),
 				(
-					'post-states': 'h:af',
 					'at-rules': 'xl',
+					'post-states': 'h:af',
 					'value': 'xl',
 				),
 				$inspect: true,
@@ -217,15 +231,25 @@
 				),
 				$inspect: true,
 			);
+
+			@include assert-equal(
+				mlu.new-parse-util('#{mlu.$states-cmb} ^:f_f_#{mlu.$states-cmb} af'),
+				(
+					'pre-states': '#{mlu.$states-cmb} ^:f',
+					'post-states': '#{mlu.$states-cmb} af',
+					'value': 'f',
+				),
+				$inspect: true,
+			);
 		}
 
 		@include it('value with all components') {
 			@include assert-equal(
 				mlu.new-parse-util('xs:sm_:f:/>_0_h::^sub'),
 				(
+					'at-rules': 'xs:sm',
 					'pre-states': ':f:/>',
 					'post-states': 'h::^sub',
-					'at-rules': 'xs:sm',
 					'value': '0',
 				),
 				$inspect: true,
@@ -234,9 +258,9 @@
 			@include assert-equal(
 				mlu.new-parse-util('xs:sm_:f:/>__noJs:h'),
 				(
+					'at-rules': 'xs:sm',
 					'pre-states': ':f:/>',
 					'post-states': 'noJs:h',
-					'at-rules': 'xs:sm',
 					'value': '',
 				),
 				$inspect: true,

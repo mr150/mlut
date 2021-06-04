@@ -34,6 +34,13 @@ $-mq-keywords: list.join(
 	(mlu.$bp-only mlu.$bp-all)
 );
 
+$-states-keywords: map.keys(map.get(mlu.$utils-config, 'states', 'keywords'));
+
+$-states-abbrs: list.join(
+	map.keys(mlu.$utils-states),
+	$-states-keywords
+);
+
 @function parse-util($util-val) {
 	$divider-pos: if(meta.type-of($util-val) == 'string', string.index($util-val, '_'), false);
 	$mq: null;
@@ -58,6 +65,9 @@ $-mq-keywords: list.join(
 	$result: ();
 	$at-rules: null;
 	$value: null;
+	$states: ();
+	$comp-indexes: ();
+	$i: 1;
 
 	@if list.length($raw-value-parts) > 1 {
 		@each $component in $raw-value-parts {
@@ -77,21 +87,20 @@ $-mq-keywords: list.join(
 				string.index($part, '@') == 1 or list.index($-mq-keywords, $part)
 			) {
 				$at-rules: $component-trimmed;
+				$comp-indexes: map.set($comp-indexes, 'ar', $i);
 			} @else if (string.index($component, ' ') or $value) and
-				map.has-key(mlu.$utils-states, $part) {
-				$result: map.set($result, 'post-states', $component-trimmed);
-			} @else if list.index(
-				'^' '/' ':',
-				string.slice($component-item, 1, 1)
-			) {
-				$result: map.set(
-					$result,
-					if($value, 'post-states', 'pre-states'),
-					$component-trimmed
+				list.index($-states-abbrs, $part) or
+				list.index('^' '/' ':', string.slice($component-item, 1, 1)) {
+				$states: list.append($states, $component-trimmed);
+				$comp-indexes: map.set(
+					$comp-indexes, 'state' + list.length($states), $i
 				);
 			} @else {
 				$value: $component-trimmed;
+				$comp-indexes: map.set($comp-indexes, 'value', $i);
 			}
+
+			$i: $i + 1;
 		}
 	} @else {
 		$value: $raw-value;
@@ -99,8 +108,25 @@ $-mq-keywords: list.join(
 
 	@if not $value {
 		$value: $at-rules;
+		$comp-indexes: map.set($comp-indexes, 'value', map.get($comp-indexes, 'ar'));
 	} @else if $at-rules {
 		$result: map.set($result, 'at-rules', $at-rules);
+	}
+
+	@if not $value {
+		@return mgen.error('Not specified value or name in string `#{$raw-value}`');
+	}
+
+	$i: 1;
+
+	@each $item in $states {
+		@if map.get($comp-indexes, 'state' + $i) < map.get($comp-indexes, 'value') {
+			$result: map.set($result, 'pre-states', $item);
+		} @else {
+			$result: map.set($result, 'post-states', $item);
+		}
+
+		$i: $i + 1;
 	}
 
 	$result: map.set($result, 'value', $value);
