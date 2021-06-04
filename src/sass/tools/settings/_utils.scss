@@ -67,6 +67,9 @@ $Trsdu--def: 0.3s !default;
 
 $cCtx: '-Ctx' !default;
 
+$states-ps: 'StPs' !default;
+$states-cmb: 'StCmb' !default;
+
 // Conversion to CSS
 //
 // Settings of conversion utilitie values to CSS values. All variables below are maps.
@@ -288,6 +291,10 @@ $utils-config: (
 			'flt': '::first-letter',
 	  ),
 		'custom': (
+		),
+		'keywords': (
+			$states-ps: 'pseudo',
+			$states-cmb: null,
 		),
 		'special': (
 			'noJs': null,
