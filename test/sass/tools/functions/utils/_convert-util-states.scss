@@ -67,6 +67,11 @@ mlu.$utils-config: map.set(
 			);
 
 			@include assert-equal(
+				mlu.convert-util-states('+:h'),
+				('&+:hover'),
+			);
+
+			@include assert-equal(
 				mlu.convert-util-states('&:&', 'D-n'),
 				('&.D-n.D-n'),
 			);
