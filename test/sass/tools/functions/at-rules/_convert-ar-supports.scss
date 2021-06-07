@@ -10,7 +10,7 @@ mlu.$at-rules-data: map.set(
 	@include describe('convert-ar-supports') {
 		@include it('converts current util') {
 			@include assert-equal(
-				mlu.convert-ar-supports('', 'D-ig'),
+				mlu.convert-ar-supports('', ('name': 'D', 'value': '-ig')),
 				'(display: inline-grid)',
 			);
 		}
@@ -44,8 +44,13 @@ mlu.$at-rules-data: map.set(
 			);
 
 			@include assert-equal(
-				mlu.convert-ar-supports('!&', 'D-ig'),
-				'(not (display: inline-grid))',
+				mlu.convert-ar-supports('!&', ('name': 'D', 'value': '-ig')),
+				'(not (display: initial))',
+			);
+
+			@include assert-equal(
+				mlu.convert-ar-supports('!&-sk', ('name': 'Pos', 'value': '')),
+				'(not (position: sticky))',
 			);
 
 			@include assert-equal(
@@ -66,7 +71,7 @@ mlu.$at-rules-data: map.set(
 			);
 
 			@include assert-equal(
-				mlu.convert-ar-supports('d-ig:&', 'Jc-se'),
+				mlu.convert-ar-supports('d-ig:&-', ('name': 'Jc', 'value': '-se')),
 				'(display: inline-grid) and (justify-content: space-evenly)',
 			);
 

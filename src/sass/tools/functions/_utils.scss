@@ -288,9 +288,11 @@ $-states-abbrs: list.join(
 				$item: string.slice($item, 2);
 			}
 
+			$fchar: string.slice($item, 1, 1);
+
 			@if map.has-key(mlu.$utils-states, $item) {
 				$converted: map.get(mlu.$utils-states, $item);
-			} @else if string.slice($item, 1, 1) == '-' {
+			} @else if $fchar == '-' {
 				$item-name: string.slice($item, 2);
 
 				@if map.has-key(mlu.$utils-config, 'states', 'custom', $item-name) {
@@ -298,19 +300,23 @@ $-states-abbrs: list.join(
 				} @else {
 					@return mgen.error('Undefined custom state: `#{$item}`');
 				}
-			} @else if string.slice($item, 1, 1) == '^' {
+			} @else if $fchar == '^' {
 				$ctx-value: string.slice($item, 2);
 				$converted: '.' + mlu.$cCtx + if(
 					(mgen.str2n($ctx-value) or $ctx-value == ''), '', '-'
 				) + $ctx-value;
-			} @else if string.slice($item, 1, 1) == '/' {
+			} @else if $fchar == '/' {
 				$converted: string.slice($item, 2);
-			} @else if $item == '&' {
+			} @else if $fchar == '&' {
 				@if not $this-util {
 					@return mgen.error('`&` cannot be used because $this-util is not passed');
 				}
 
-				$converted: mgen.check-class($this-util);
+				@if $item == '&-' {
+					$converted: '\\&-';
+				} @else {
+					$converted: mgen.check-class($this-util + string.slice($item, 2));
+				}
 			} @else if $item == '' {
 				$converted: ' ';
 			} @else {

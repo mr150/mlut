@@ -40,7 +40,7 @@
 		@include it('make only feature queries from abbreviations') {
 			@include assert('simple') {
 				@include output(false) {
-					@include mlu.mk-ar('@s', 'D-ig') {
+					@include mlu.mk-ar('@s', ('name': 'D', 'value': '-ig')) {
 						.D-ig {
 							display: inline-grid;
 						}

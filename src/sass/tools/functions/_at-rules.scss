@@ -214,7 +214,9 @@ Styleguide: sass-tools.functions.at_rules
 
 @function convert-ar-supports($ar, $this-util: null) {
 	@if $ar == '' and $this-util {
-		@return convert-feature-abbr($this-util);
+		@return convert-feature-abbr(
+			map.get($this-util, 'name') + map.get($this-util, 'value')
+		);
 	}
 
 	$result: '';
@@ -238,7 +240,9 @@ Styleguide: sass-tools.functions.at_rules
 			$item: string.slice($item, 2);
 		}
 
-		@if string.slice($item, 1, 1) == '-' {
+		$fchar: string.slice($item, 1, 1);
+
+		@if $fchar == '-' {
 			$item-name: string.slice($item, 2);
 
 			@if map.has-key(mlu.$at-rules-data, 'supports', 'custom', $item-name) {
@@ -246,12 +250,20 @@ Styleguide: sass-tools.functions.at_rules
 			} @else {
 				@return mgen.error('Undefined custom supports condition: `#{$item}`');
 			}
-		} @else if $item == '&' {
+		} @else if $fchar == '&' {
 			@if not $this-util {
 				@return mgen.error('`&` cannot be used because $this-util is not passed');
 			}
 
-			$converted: convert-feature-abbr($this-util);
+			$value: '-initial';
+
+			@if $item == '&-' {
+				$value: map.get($this-util, 'value');
+			} @else if $item != '&' {
+				$value: string.slice($item, 2);
+			}
+
+			$converted: convert-feature-abbr(map.get($this-util, 'name') + $value);
 		} @else {
 			$converted: convert-feature-abbr(mgen.str-ucfirst($item));
 		}
