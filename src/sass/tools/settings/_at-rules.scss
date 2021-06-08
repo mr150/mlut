@@ -64,6 +64,9 @@ $at-rules-cfg: (
 	'all-breakpoints': (
 		$bp-xs: 0,
 	),
+	'keywords': (
+		$bp-all: 'breakpoints',
+	),
 ) !default;
 
 $-general-registry: ();
