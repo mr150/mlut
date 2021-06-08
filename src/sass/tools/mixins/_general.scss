@@ -177,7 +177,14 @@ Styleguide: sass-tools.mixins.general
 
 @mixin mk-ar($at-rules, $this-util: null) {
 	$abbr-list: mgen.str-split($at-rules, ' ');
-	$abbr-list: mgen.replace-keyword($abbr-list, mlu.$bp-all, map.keys(mlu.$breakpoints));
+
+	@each $key, $value in map.get(mlu.$at-rules-cfg, 'keywords') {
+		@if meta.type-of($value) == 'string' {
+			$value: map.keys(map.get(mlu.$at-rules-cfg, $value));
+		}
+
+		$abbr-list: mgen.replace-keyword($abbr-list, $key, $value);
+	}
 
 	@each $item in $abbr-list {
 		$ar-list: mgen.str-split($item, '@');

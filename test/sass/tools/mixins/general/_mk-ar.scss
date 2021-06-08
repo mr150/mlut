@@ -1,7 +1,8 @@
 @use 'sass-true' as *;
-@use 'tools/mixins/general' as mlu;
-@use 'tools/functions' as mlf;
-@use 'tools/settings' as mls;
+@use 'sass:map';
+@use 'tools' as mlu;
+
+mlu.$at-rules-cfg: map.set(mlu.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 @include describe('tools/mixins/general') {
 	@include describe('mk-ar') {
@@ -14,7 +15,7 @@
 				}
 
 				@include expect() {
-					@media (max-width: (mlf.bp(sm) - 1px)),(min-width: mlf.bp(md)) and (max-width: (mlf.bp(lg) - 1px)),(min-width: mlf.bp(xl)){
+					@media (max-width: (mlu.bp(sm) - 1px)),(min-width: mlu.bp(md)) and (max-width: (mlu.bp(lg) - 1px)),(min-width: mlu.bp(xl)){
 						width: 50%;
 					}
 				}
@@ -30,7 +31,7 @@
 				}
 
 				@include expect() {
-					@media print and (min-width: mlf.bp(xl)) and (display-mode: fullscreen),(pointer: coarse) and (min-width: 90rem) {
+					@media print and (min-width: mlu.bp(xl)) and (display-mode: fullscreen),(pointer: coarse) and (min-width: 90rem) {
 						width: 50%;
 					}
 				}
@@ -96,7 +97,7 @@
 				}
 
 				@include expect() {
-					@media (min-width: mlf.bp(sm)) {
+					@media (min-width: mlu.bp(sm)) {
 						@supports (position: sticky) {
 							width: 50%;
 						}
@@ -106,14 +107,32 @@
 
 			@include assert() {
 				@include output() {
-					@include mlu.mk-ar(mls.$bp-all + '@s:d-ig') {
+					@include mlu.mk-ar(mlu.$bp-all + '@s:d-ig') {
 						width: 50%;
 					}
 				}
 
 				@include expect() {
-					@each $bp, $value in mls.$breakpoints {
+					@each $bp, $value in mlu.$breakpoints {
 						@media (min-width: $value) {
+							@supports (display: inline-grid) {
+								width: 50%;
+							}
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output() {
+					@include mlu.mk-ar('bp2@s:d-ig') {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@each $value in map.get(mlu.$at-rules-cfg, 'keywords', 'bp2') {
+						@media (min-width: mlu.bp($value)) {
 							@supports (display: inline-grid) {
 								width: 50%;
 							}
@@ -135,7 +154,7 @@
 				}
 
 				@include expect() {
-					@media (min-width: mlf.bp(lg)) {
+					@media (min-width: mlu.bp(lg)) {
 						width: 50%;
 					}
 
@@ -151,7 +170,7 @@
 
 			@include assert() {
 				@include output() {
-					@include mlu.mk-ar(mls.$bp-all + ' @s:d-ig') {
+					@include mlu.mk-ar(mlu.$bp-all + ' @s:d-ig') {
 						width: 50%;
 					}
 				}
@@ -161,7 +180,7 @@
 						width: 50%;
 					}
 
-					@each $bp, $value in mls.$breakpoints {
+					@each $bp, $value in mlu.$breakpoints {
 						@media (min-width: $value) {
 							width: 50%;
 						}
