@@ -53,29 +53,29 @@ Styleguide: sass-tools.functions.at_rules
 		@return '(#{$feature})';
 	}
 
-	$delimiter: null;
+	$separator: null;
 	$abbr-feature: null;
 	$abbr-value: null;
 	$feat-prefix: '';
 
-	@each $item in map.get(mlu.$at-rules-cfg, 'abbr-delimiters') {
-		@if not $delimiter and string.index($abbr, $item) {
-			$delimiter: $item;
+	@each $item in map.get(mlu.$at-rules-cfg, 'abbr-operators') {
+		@if not $separator and string.index($abbr, $item) {
+			$separator: $item;
 		}
 	}
 
-	@if $delimiter {
-		$abbr-parts: mgen.str-split($abbr, $delimiter);
+	@if $separator {
+		$abbr-parts: mgen.str-split($abbr, $separator);
 		$abbr-feature: list.nth($abbr-parts, 1);
 		$abbr-value: list.nth($abbr-parts, 2);
 
-		@if string.index($delimiter, '<') {
+		@if string.index($separator, '<') {
 			$feat-prefix: 'max-';
-		} @else if string.index($delimiter, '>') {
+		} @else if string.index($separator, '>') {
 			$feat-prefix: 'min-';
 		}
 
-		@if mlu.$tANv == '' and $delimiter == '-' and mgen.str2n($abbr-value) {
+		@if mlu.$tANv == '' and $separator == '-' and mgen.str2n($abbr-value) {
 			$abbr-value: '-' + $abbr-value;
 		}
 	} @else if mlu.$tANv == '' {
@@ -108,7 +108,7 @@ Styleguide: sass-tools.functions.at_rules
 			$feat-value: ($feat-value / 1su * mlu.$su);
 		}
 
-		@if $delimiter == '<' or $delimiter == '>' {
+		@if $separator == '<' or $separator == '>' {
 			$value-diff: $feat-value / mgen.str2n($feat-value + '');
 
 			@if $value-unit == 'rem' or $value-unit == 'em' {
@@ -118,7 +118,7 @@ Styleguide: sass-tools.functions.at_rules
 				$value-diff: $value-diff * 0.01;
 			}
 
-			@if $delimiter == '<' {
+			@if $separator == '<' {
 				$value-diff: $value-diff * -1;
 			}
 
@@ -222,19 +222,19 @@ Styleguide: sass-tools.functions.at_rules
 	}
 
 	$result: '';
-	$delimiter: mlu.$tAAnd;
+	$separator: mlu.$tAAnd;
 	$operator: ' and ';
 
 	@if string.index($ar, mlu.$tAOr) {
 		@if string.index($ar, mlu.$tAAnd) {
-			@return mgen.error('Different delimiters are not allowed in one abbreviations list');
+			@return mgen.error('Different operators are not allowed in one abbreviations list');
 		}
 
-		$delimiter: mlu.$tAOr;
+		$separator: mlu.$tAOr;
 		$operator: ' or ';
 	}
 
-	@each $item in mgen.str-split($ar, $delimiter) {
+	@each $item in mgen.str-split($ar, $separator) {
 		$converted: '';
 		$not: string.slice($item, 1, 1) == mlu.$tANot;
 

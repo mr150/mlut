@@ -300,13 +300,13 @@ $-states-abbrs: list.join(
 				}
 			} @else if mgen.str-starts($item, mlu.$tSCn) {
 				$ctx-value: string.slice($item, 2);
-				$delimiter: '';
+				$separator: '';
 
 				@if $ctx-value != '' {
-					$delimiter: if(mgen.str2n($ctx-value), mlu.$tUNv, mlu.$tUSv);
+					$separator: if(mgen.str2n($ctx-value), mlu.$tUNv, mlu.$tUSv);
 				}
 
-				$converted: '.' + mgen.str-escape(mlu.$cCtx + $delimiter + $ctx-value);
+				$converted: '.' + mgen.str-escape(mlu.$cCtx + $separator + $ctx-value);
 			} @else if mgen.str-starts($item, mlu.$tSRaw) {
 				$converted: string.slice($item, 2);
 			} @else if mgen.str-starts($item, mlu.$tSTu) {

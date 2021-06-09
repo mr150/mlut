@@ -202,8 +202,8 @@ mlu.$at-rules-cfg: map.set(mlu.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 			mlu.$at-rules-cfg: map.set(
 				mlu.$at-rules-cfg,
-				'abbr-delimiters',
-				list.set-nth(map.get(mlu.$at-rules-cfg, 'abbr-delimiters'), 1, '=')
+				'abbr-operators',
+				list.set-nth(map.get(mlu.$at-rules-cfg, 'abbr-operators'), 1, '=')
 			);
 
 			@include assert() {

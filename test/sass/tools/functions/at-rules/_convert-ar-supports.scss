@@ -67,7 +67,7 @@ mlu.$at-rules-data: map.set(
 
 			@include assert-equal(
 				mlu.convert-ar-supports('pos-sk,h1vh:m-a'),
-				'ERROR: Different delimiters are not allowed in one abbreviations list',
+				'ERROR: Different operators are not allowed in one abbreviations list',
 			);
 
 			@include assert-equal(

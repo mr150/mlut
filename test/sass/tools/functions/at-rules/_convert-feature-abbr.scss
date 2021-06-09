@@ -4,7 +4,7 @@
 
 @include describe('tools/functions/at-rules/') {
 	@include describe('convert-feature-abbr') {
-		@include it('converts abbr without delimiter') {
+		@include it('converts abbr without separator') {
 			@include assert-equal(
 				mlu.convert-feature-abbr('Ov'),
 				'(overflow)',

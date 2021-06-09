@@ -28,7 +28,7 @@ $test-list: (0, 1, 2, 3);
 	}
 
 	@include describe('str-split') {
-		@include it('split string into list with delimiter') {
+		@include it('split string into list with separator') {
 			@include assert-equal(
 				mlu.str-split('text__with__double__underscores', '__'),
 				'text' 'with' 'double' 'underscores',
@@ -40,7 +40,7 @@ $test-list: (0, 1, 2, 3);
 			);
 		}
 
-		@include it('split string into list without delimiter') {
+		@include it('split string into list without separator') {
 			@include assert-equal(
 				mlu.str-split('testou'),
 				't' 'e' 's' 't' 'o' 'u',

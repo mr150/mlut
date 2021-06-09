@@ -215,11 +215,11 @@ Styleguide: sass-tools.functions.general
 	@return $result;
 }
 
-@function str-split($str, $delimiter: '') {
+@function str-split($str, $separator: '') {
 	$result: ();
-	$del-length: string.length($delimiter);
+	$sep-length: string.length($separator);
 
-	@if $del-length == 0 {
+	@if $sep-length == 0 {
 		@for $i from 1 through string.length($str) {
 			$result: list.append($result, string.slice($str, $i, $i));
 		}
@@ -227,13 +227,13 @@ Styleguide: sass-tools.functions.general
 		@return $result;
 	}
 
-	$del-pos: string.index($str, $delimiter);
+	$sep-pos: string.index($str, $separator);
 
-	@while $del-pos != null {
-		$result: list.append($result, string.slice($str, 1, $del-pos - 1));
-		$str: string.slice($str, $del-pos + $del-length);
+	@while $sep-pos != null {
+		$result: list.append($result, string.slice($str, 1, $sep-pos - 1));
+		$str: string.slice($str, $sep-pos + $sep-length);
 
-		$del-pos: string.index($str, $delimiter);
+		$sep-pos: string.index($str, $separator);
 	}
 
 	@return list.append($result, $str);
