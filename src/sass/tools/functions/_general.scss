@@ -276,3 +276,11 @@ Styleguide: sass-tools.functions.general
 
 	@return $result + $str;
 }
+
+@function str-starts($str, $substr) {
+	@if meta.type-of($str) != 'string' {
+		@return error('Wrong type of argument $str: `#{meta.type-of($str)}`. Expected `string`');
+	}
+
+	@return string.slice($str, 1, string.length($substr)) == $substr;
+}

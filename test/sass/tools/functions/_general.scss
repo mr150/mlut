@@ -142,4 +142,23 @@ $test-list: (0, 1, 2, 3);
 			);
 		}
 	}
+
+	@include describe('str-starts') {
+		@include it('checks whether the string starts with the substring') {
+			@include assert-equal(
+				mlu.str-starts('@:prn', '@:'),
+				true,
+			);
+
+			@include assert-equal(
+				mlu.str-starts('BpAll@:scr', '@:'),
+				false,
+			);
+
+			@include assert-equal(
+				mlu.str-starts('xs', 'BpAll'),
+				false,
+			);
+		}
+	}
 }

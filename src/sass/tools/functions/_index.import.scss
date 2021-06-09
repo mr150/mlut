@@ -1,4 +1,4 @@
-@forward 'general' as mlu-* hide str-split, str-trim, remove-nth, str-replace, str-replace-one;
+@forward 'general' as mlu-* hide str-split, str-trim, remove-nth, str-replace, str-replace-all, str-starts;
 @forward 'getters' as mlu-*;
 @forward 'math' as mlu-*;
 @forward 'utils-getters' as mlu-*;
