@@ -75,21 +75,23 @@ Styleguide: sass-tools.functions.at_rules
 			$feat-prefix: 'min-';
 		}
 
-		@if $delimiter == '-' and mgen.str2n($abbr-value) {
+		@if mlu.$tANv == '' and $delimiter == '-' and mgen.str2n($abbr-value) {
 			$abbr-value: '-' + $abbr-value;
 		}
-	} @else {
+	} @else if mlu.$tANv == '' {
 
 		$number-index: mgen.str-digit-index($abbr);
 
 		@if $number-index {
 			$abbr-feature: string.slice($abbr, 1, $number-index - 1);
 			$abbr-value: string.slice($abbr, $number-index);
-		} @else {
-			@return mgen.error(
-				'Invalid feature abbreviation: `#{$abbr}`. `#{$abbr}` is not defined in `#{$section}` section of $utils-data map'
-			);
 		}
+	}
+
+	@if not $abbr-feature {
+		@return mgen.error(
+			'Invalid feature abbreviation: `#{$abbr}`. `#{$abbr}` is not defined in `#{$section}` section of $utils-data map'
+		);
 	}
 
 	$feature: mget.util-prop($abbr-feature, 0, $section);
@@ -147,10 +149,10 @@ Styleguide: sass-tools.functions.at_rules
 
 @function convert-ar-bp($ar, $this-util: null) {
 	$result: '';
-	$queries: mgen.str-split($ar, ',');
+	$queries: mgen.str-split($ar, mlu.$tAOr);
 
 	@each $queary in $queries {
-		$result: $result + convert-bp-list(mgen.str-split($queary, ':')) + ', ';
+		$result: $result + convert-bp-list(mgen.str-split($queary, mlu.$tAAnd)) + ', ';
 	}
 
 	@return string.slice($result, 1, -3);
@@ -158,18 +160,18 @@ Styleguide: sass-tools.functions.at_rules
 
 @function convert-ar-media($ar, $this-util: null) {
 	$result: '';
-	$queries: mgen.str-split($ar, ',');
+	$queries: mgen.str-split($ar, mlu.$tAOr);
 	$and: ' and ';
 	$or: ', ';
 
 	@each $queary in $queries {
-		$queary-list: mgen.str-split($queary, ':');
+		$queary-list: mgen.str-split($queary, mlu.$tAAnd);
 		$bp-range: false;
 
 		@each $item in $queary-list {
 			@if map.has-key(mlu.$at-rules-data, 'media', 'types', $item) {
 				$result: $result + map.get(mlu.$at-rules-data, 'media', 'types', $item);
-			} @else if string.slice($item, 1, 1) == '-' {
+			} @else if string.slice($item, 1, 1) == mlu.$tACs {
 				$item-name: string.slice($item, 2);
 
 				@if map.has-key(mlu.$at-rules-cfg, 'all-breakpoints', $item-name) and not $bp-range {
@@ -180,7 +182,7 @@ Styleguide: sass-tools.functions.at_rules
 					@if $item-index < list.length($queary-list) {
 						$next-item: list.nth($queary-list, $item-index + 1);
 						$next-item-name: if(
-							string.slice($next-item, 1, 1) == '-',
+							string.slice($next-item, 1, 1) == mlu.$tACs,
 							string.slice($next-item, 2),
 							null,
 						);
@@ -220,29 +222,27 @@ Styleguide: sass-tools.functions.at_rules
 	}
 
 	$result: '';
-	$delimiter: ':';
+	$delimiter: mlu.$tAAnd;
 	$operator: ' and ';
 
-	@if string.index($ar, ',') {
-		@if string.index($ar, ':') {
+	@if string.index($ar, mlu.$tAOr) {
+		@if string.index($ar, mlu.$tAAnd) {
 			@return mgen.error('Different delimiters are not allowed in one abbreviations list');
 		}
 
-		$delimiter: ',';
+		$delimiter: mlu.$tAOr;
 		$operator: ' or ';
 	}
 
 	@each $item in mgen.str-split($ar, $delimiter) {
 		$converted: '';
-		$not: string.slice($item, 1, 1) == '!';
+		$not: string.slice($item, 1, 1) == mlu.$tANot;
 
 		@if $not {
 			$item: string.slice($item, 2);
 		}
 
-		$fchar: string.slice($item, 1, 1);
-
-		@if $fchar == '-' {
+		@if mgen.str-starts($item, mlu.$tACs) {
 			$item-name: string.slice($item, 2);
 
 			@if map.has-key(mlu.$at-rules-data, 'supports', 'custom', $item-name) {
@@ -250,16 +250,16 @@ Styleguide: sass-tools.functions.at_rules
 			} @else {
 				@return mgen.error('Undefined custom supports condition: `#{$item}`');
 			}
-		} @else if $fchar == '&' {
+		} @else if mgen.str-starts($item, mlu.$tATu) {
 			@if not $this-util {
-				@return mgen.error('`&` cannot be used because $this-util is not passed');
+				@return mgen.error('`#{mlu.$tATu}` cannot be used because $this-util is not passed');
 			}
 
-			$value: '-initial';
+			$value: mlu.$tASv + 'initial';
 
-			@if $item == '&-' {
+			@if $item == mlu.$tATu + mlu.$tASv {
 				$value: map.get($this-util, 'value');
-			} @else if $item != '&' {
+			} @else if $item != mlu.$tATu {
 				$value: string.slice($item, 2);
 			}
 

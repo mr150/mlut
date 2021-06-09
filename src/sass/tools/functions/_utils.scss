@@ -61,7 +61,7 @@ $-states-abbrs: list.join(
 }
 
 @function new-parse-util($raw-value) {
-	$raw-value-parts: mgen.str-split($raw-value + '', '_');
+	$raw-value-parts: mgen.str-split($raw-value + '', mlu.$tUCm);
 	$result: ();
 	$at-rules: null;
 	$value: null;
@@ -74,23 +74,23 @@ $-states-abbrs: list.join(
 			$component-trimmed: mgen.str-trim($component);
 			$component-item: list.nth(mgen.str-split($component-trimmed, ' '), 1);
 
-			@if string.slice($component-item, 1, 1) == '!' {
+			@if string.slice($component-item, 1, 1) == mlu.$tSNot {
 				$component-item: string.slice($component-item, 2);
 			}
 
 			$part: list.nth(mgen.str-split(
-				list.nth(mgen.str-split($component-item, ','), 1),
-				':'
+				list.nth(mgen.str-split($component-item, mlu.$tSOr), 1),
+				mlu.$tSAnd
 			), 1);
 
 			@if not $at-rules and (
-				string.index($part, '@') == 1 or list.index($-mq-keywords, $part)
+				string.index($part, mlu.$tAAr) == 1 or list.index($-mq-keywords, $part)
 			) {
 				$at-rules: $component-trimmed;
 				$comp-indexes: map.set($comp-indexes, 'ar', $i);
 			} @else if (string.index($component, ' ') or $value) and
 				list.index($-states-abbrs, $part) or
-				list.index('^' '/' ':', string.slice($component-item, 1, 1)) {
+				list.index(mlu.$tSCn mlu.$tSRaw mlu.$tSAnd, string.slice($component-item, 1, 1)) {
 				$states: list.append($states, $component-trimmed);
 				$comp-indexes: map.set(
 					$comp-indexes, 'state' + list.length($states), $i
@@ -279,20 +279,18 @@ $-states-abbrs: list.join(
 	$result: $prefix;
 	$or: ', ';
 
-	@each $state in mgen.str-split($states, ',') {
-		@each $item in mgen.str-split($state, ':') {
+	@each $state in mgen.str-split($states, mlu.$tSOr) {
+		@each $item in mgen.str-split($state, mlu.$tSAnd) {
 			$converted: '';
-			$not: string.slice($item, 1, 1) == '!';
+			$not: string.slice($item, 1, 1) == mlu.$tSNot;
 
 			@if $not {
 				$item: string.slice($item, 2);
 			}
 
-			$fchar: string.slice($item, 1, 1);
-
 			@if map.has-key(mlu.$utils-states, $item) {
 				$converted: map.get(mlu.$utils-states, $item);
-			} @else if $fchar == '-' {
+			} @else if mgen.str-starts($item, mlu.$tSCs) {
 				$item-name: string.slice($item, 2);
 
 				@if map.has-key(mlu.$utils-config, 'states', 'custom', $item-name) {
@@ -300,22 +298,26 @@ $-states-abbrs: list.join(
 				} @else {
 					@return mgen.error('Undefined custom state: `#{$item}`');
 				}
-			} @else if $fchar == '^' {
+			} @else if mgen.str-starts($item, mlu.$tSCn) {
 				$ctx-value: string.slice($item, 2);
-				$converted: '.' + mlu.$cCtx + if(
-					(mgen.str2n($ctx-value) or $ctx-value == ''), '', '-'
-				) + $ctx-value;
-			} @else if $fchar == '/' {
-				$converted: string.slice($item, 2);
-			} @else if $fchar == '&' {
-				@if not $this-util {
-					@return mgen.error('`&` cannot be used because $this-util is not passed');
+				$delimiter: '';
+
+				@if $ctx-value != '' {
+					$delimiter: if(mgen.str2n($ctx-value), mlu.$tUNv, mlu.$tUSv);
 				}
 
-				@if $item == '&-' {
-					$converted: '\\&-';
+				$converted: '.' + mgen.str-escape(mlu.$cCtx + $delimiter + $ctx-value);
+			} @else if mgen.str-starts($item, mlu.$tSRaw) {
+				$converted: string.slice($item, 2);
+			} @else if mgen.str-starts($item, mlu.$tSTu) {
+				@if not $this-util {
+					@return mgen.error('`#{mlu.$tSTu}` cannot be used because $this-util is not passed');
+				}
+
+				@if $item == mlu.$tSTucv {
+					$converted: mgen.str-escape(mlu.$tSTucv);
 				} @else {
-					$converted: mgen.check-class($this-util + string.slice($item, 2));
+					$converted: mgen.check-class($this-util + mgen.str-escape(string.slice($item, 2)));
 				}
 			} @else if $item == '' {
 				$converted: ' ';

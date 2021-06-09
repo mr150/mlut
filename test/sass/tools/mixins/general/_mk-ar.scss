@@ -1,5 +1,6 @@
 @use 'sass-true' as *;
 @use 'sass:map';
+@use 'sass:list';
 @use 'tools' as mlu;
 
 mlu.$at-rules-cfg: map.set(mlu.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
@@ -187,6 +188,56 @@ mlu.$at-rules-cfg: map.set(mlu.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 					}
 				}
 			}
+		}
+
+		@include it('make at-rules with custom tokens') {
+			mlu.$tASv: '=';
+			mlu.$tANv: '=';
+			mlu.$tAOr: 'OR';
+			mlu.$tAAnd: '&';
+			mlu.$tACs: '#';
+			mlu.$tAAr: '%';
+			mlu.$tATu: '$';
+			mlu.$tANot: '^';
+
+			mlu.$at-rules-cfg: map.set(
+				mlu.$at-rules-cfg,
+				'abbr-delimiters',
+				list.set-nth(map.get(mlu.$at-rules-cfg, 'abbr-delimiters'), 1, '=')
+			);
+
+			@include assert() {
+				@include output() {
+					@include mlu.mk-ar('%s&ar=4/3OR^$=%&prn&dm=s&#xlOR#testou', ('name': 'D', 'value': '=ig')) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@supports (aspect-ratio: 4/3) or (not (display: inline-grid)) {
+						@media print and (display-mode: standalone) and (min-width: mlu.bp(xl)), (orientation: landscape) and (min-height: 20rem) {
+							width: 50%;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output() {
+					@include mlu.mk-ar('xs&smORmd&lgORxl%s&pos=sk') {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (max-width: (mlu.bp(sm) - 1px)),(min-width: mlu.bp(md)) and (max-width: (mlu.bp(lg) - 1px)),(min-width: mlu.bp(xl)) {
+						@supports (position: sticky) {
+							width: 50%;
+						}
+					}
+				}
+			}
+
 		}
 	}
 }

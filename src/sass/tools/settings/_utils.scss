@@ -277,6 +277,24 @@ $utils-config: (
 		'n': none,
 	),
 
+	'tokens': (
+		'util': (
+			'str-value': '-',
+			'num-value': '',
+			'custom-value': '-',
+			'component': '_',
+		),
+		'states': (
+			'or': ',',
+			'and': ':',
+			'not': '!',
+			'custom': '-',
+			'this-util': '&',
+			'context': '^',
+			'raw': '/',
+		),
+	),
+
 	'states': (
 		'pseudo': (
 			'h': ':hover',
@@ -321,3 +339,16 @@ $utils-config: map.set(
 		map.get($utils-config, 'units', 'custom'),
 	)
 );
+
+$tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
+$tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
+$tUCv: map.get($utils-config, 'tokens', 'util', 'custom-value');
+$tUCm: map.get($utils-config, 'tokens', 'util', 'component');
+$tSOr: map.get($utils-config, 'tokens', 'states', 'or');
+$tSAnd: map.get($utils-config, 'tokens', 'states', 'and');
+$tSNot: map.get($utils-config, 'tokens', 'states', 'not');
+$tSCs: map.get($utils-config, 'tokens', 'states', 'custom');
+$tSTu: map.get($utils-config, 'tokens', 'states', 'this-util');
+$tSCn: map.get($utils-config, 'tokens', 'states', 'context');
+$tSRaw: map.get($utils-config, 'tokens', 'states', 'raw');
+$tSTucv: $tSTu + $tUSv;

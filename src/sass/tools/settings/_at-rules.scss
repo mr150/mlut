@@ -49,11 +49,21 @@ $at-rules-data: (
 
 $at-rules-cfg: (
 	'abbr-delimiters': (
-		'-',
+		mlu.$tUSv,
 		'<=',
 		'>=',
 		'>',
 		'<',
+	),
+	'tokens': (
+		'str-value': mlu.$tUSv,
+		'num-value': mlu.$tUNv,
+		'or': mlu.$tSOr,
+		'and': mlu.$tSAnd,
+		'custom': mlu.$tSCs,
+		'not': mlu.$tSNot,
+		'ar': '@',
+		'this-util': mlu.$tSTu,
 	),
 	'breakpoints': (
 		$bp-sm: 520px,
@@ -164,3 +174,12 @@ $at-rules-data: map.deep-merge($at-rules-data, $at-rules);
 $at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-conf);
 
 $breakpoints: map.get($at-rules-cfg, 'breakpoints');
+
+$tASv: map.get($at-rules-cfg, 'tokens', 'str-value');
+$tANv: map.get($at-rules-cfg, 'tokens', 'num-value');
+$tAOr: map.get($at-rules-cfg, 'tokens', 'or');
+$tAAnd: map.get($at-rules-cfg, 'tokens', 'and');
+$tANot: map.get($at-rules-cfg, 'tokens', 'not');
+$tACs: map.get($at-rules-cfg, 'tokens', 'custom');
+$tAAr: map.get($at-rules-cfg, 'tokens', 'ar');
+$tATu: map.get($at-rules-cfg, 'tokens', 'this-util');

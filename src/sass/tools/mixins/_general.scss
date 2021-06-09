@@ -187,7 +187,7 @@ Styleguide: sass-tools.mixins.general
 	}
 
 	@each $item in $abbr-list {
-		$ar-list: mgen.str-split($item, '@');
+		$ar-list: mgen.str-split($item, mlu.$tAAr);
 
 		@if list.nth($ar-list, 1) == '' {
 			$ar-list: mgen.remove-nth($ar-list, 1);
@@ -201,12 +201,12 @@ Styleguide: sass-tools.mixins.general
 
 @mixin -generate-ar($at-rules, $this-util, $ar-list, $cur-index, $last-index) {
 	$item: list.nth($ar-list, $cur-index);
-	$ar-alias: list.nth(mgen.str-split($item, ':'), 1);
+	$ar-alias: list.nth(mgen.str-split($item, mlu.$tAAnd), 1);
 	$ar-name: null;
 	$converter: null;
 	$ar-str: $item;
 
-	@if string.index($at-rules, '@') == 1 or $cur-index > 1 {
+	@if string.index($at-rules, mlu.$tAAr) == 1 or $cur-index > 1 {
 		@each $key, $value in mlu.$at-rules-data {
 			@if map.get(mlu.$at-rules-data, $key, 'alias') == $ar-alias {
 				$ar-name: $key;
