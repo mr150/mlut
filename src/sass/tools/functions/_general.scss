@@ -1,9 +1,10 @@
 @use 'sass:meta';
 @use 'sass:map';
+@use 'sass:math';
 @use 'sass:string';
 @use 'sass:list';
 
-@use '../settings/flags' as mlu;
+@use '../settings' as mlu;
 
 /*
 General
@@ -192,6 +193,37 @@ Styleguide: sass-tools.functions.general
 	}
 
 	@return $list;
+}
+
+// space unit converters
+//
+// Converts space units to CSS value. Available converters:
+// - `su()` - `su` to `px`
+// - `sur()` - `su` to `rem`
+// ```scss
+//@debug mlu.su(3); // 12px
+//@debug mlu.sur(3su); // 0.75rem
+// ```
+//
+// $n - unitless number or number with `su` unit
+// $unit = 'px' - `su` will be converted to that units. Service argument in `su()` for create converters for any units
+//
+// Styleguide: sass-tools.functions.general.su
+
+@function su($n, $unit: 'px') {
+	@if meta.type-of($n) != 'number' {
+		@return error('Wrong type of argument $n: `#{meta.type-of($n)}`. Expected `number`');
+	}
+
+	@if math.unit($n) == 'su' {
+		$n: $n / 1su;
+	}
+
+	@return map.get(mlu.$general-data, 'su-values', $unit) * $n;
+}
+
+@function sur($n) {
+	@return su($n, 'rem');
 }
 
 // Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.

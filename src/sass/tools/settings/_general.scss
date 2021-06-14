@@ -16,8 +16,6 @@ $browser-font-size: 16px !default;
 
 $su-cf: 4 !default;
 
-$su: $su-cf * 1px;
-
 $base-font-size: $browser-font-size !default;
 
 $general-data: (
@@ -27,10 +25,17 @@ $general-data: (
 		'b': bottom,
 		'l': left,
 	),
+	'su-values': (
+		'px': $su-cf * 1px,
+		'rem': (1px / $browser-font-size * $su-cf) * 1rem,
+	),
 ) !default;
 
 $general: () !default;
 
 $general-data: map.deep-merge($general-data, $general);
+
+$su: map.get($general-data, 'su-values', 'px');
+$su-rem: map.get($general-data, 'su-values', 'rem');
 
 $main-directions: map.get($general-data, 'main-directions');
