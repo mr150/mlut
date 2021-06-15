@@ -105,7 +105,7 @@ Styleguide: sass-tools.functions.at_rules
 		$value-unit: math.unit($feat-value);
 
 		@if $value-unit == 'su' {
-			$feat-value: ($feat-value / 1su * mlu.$su);
+			$feat-value: mgen.su($feat-value);
 		}
 
 		@if $separator == '<' or $separator == '>' {
