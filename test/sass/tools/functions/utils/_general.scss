@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use 'sass-true' as *;
+@use 'tools' as mlu;
+
+@include describe('tools/functions/utils/general') {
+	@include describe('util-separated-value') {
+		@include it('returns the util value with separator') {
+			@include assert-equal(
+				mlu.util-separated-value(3),
+				'3'
+			);
+
+			@include assert-equal(
+				mlu.util-separated-value('3'),
+				'3'
+			);
+
+			@include assert-equal(
+				mlu.util-separated-value(''),
+				''
+			);
+
+			@include assert-equal(
+				mlu.util-separated-value('a'),
+				'-a'
+			);
+		}
+	}
+}

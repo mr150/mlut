@@ -300,13 +300,9 @@ $-states-abbrs: list.join(
 				}
 			} @else if mgen.str-starts($item, mlu.$tSCn) {
 				$ctx-value: string.slice($item, 2);
-				$separator: '';
-
-				@if $ctx-value != '' {
-					$separator: if(mgen.str2n($ctx-value), mlu.$tUNv, mlu.$tUSv);
-				}
-
-				$converted: '.' + mgen.str-escape(mlu.$cCtx + $separator + $ctx-value);
+				$converted: '.' + mgen.str-escape(
+					mlu.$cCtx + util-separated-value($ctx-value)
+				);
 			} @else if mgen.str-starts($item, mlu.$tSRaw) {
 				$converted: string.slice($item, 2);
 			} @else if mgen.str-starts($item, mlu.$tSTu) {
@@ -336,6 +332,18 @@ $-states-abbrs: list.join(
 	}
 
 	@return string.slice($result, 1, -(1 + string.length($or) + string.length($prefix)));
+}
+
+@function util-separated-value($value) {
+	@if $value == '' {
+		@return '';
+	}
+
+	@return if(
+		mgen.str2n($value) or $value == '',
+		mlu.$tUNv + $value,
+		mlu.$tUSv + $value
+	);
 }
 
 // convert-util-value
