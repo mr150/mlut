@@ -29,6 +29,48 @@ $general-data: (
 		'px': $su-cf * 1px,
 		'rem': (1px / $browser-font-size * $su-cf) * 1rem,
 	),
+	'units': (
+		'css': (
+			'px': 1px,
+			'cm': 1cm,
+			'mm': 1mm,
+			'q': 1q,
+			'rem': 1rem,
+			'%': 1%,
+			'fr': 1fr,
+			'ch': 1ch,
+			'pc': 1pc,
+			'in': 1in,
+			'em': 1em,
+			'pt': 1pt,
+			'ex': 1ex,
+			'vw': 1vw,
+			'vh': 1vh,
+			'vmin': 1vmin,
+			'vmax': 1vmax,
+			'deg': 1deg,
+			'turn': 1turn,
+			'grad': 1grad,
+			'rad': 1rad,
+			's': 1s,
+			'ms': 1ms,
+			'hz': 1hz,
+			'khz': 1khz,
+			'dpi': 1dpi,
+			'dpcm': 1dpcm,
+			'dppx': 1dppx,
+			'x': 1x,
+		),
+		'custom': (
+			'gg': 1gg,
+			'su': 1su,
+			'e': 1e,
+			'p': 1p,
+			'r': 1r,
+			'i': 1i,
+			'c': 1c,
+		),
+	),
 ) !default;
 
 $general: () !default;
@@ -39,3 +81,8 @@ $su: map.get($general-data, 'su-values', 'px');
 $su-rem: map.get($general-data, 'su-values', 'rem');
 
 $main-directions: map.get($general-data, 'main-directions');
+
+$units-all: map.merge(
+	map.get($general-data, 'units', 'css'),
+	map.get($general-data, 'units', 'custom'),
+);

@@ -16,19 +16,20 @@ Styleguide: sass-tools.functions.general
 
 // mlu-str2n
 //
-// Convert string to number.
+// Convert string to number. Returns null if conversion is not possible.
 // ```scss
-//mlu-str2n('1.5') => 1.5
-//mlu-str2n('1x5') => 1
-//mlu-str2n('1x5', 1) => null
+//@debug mlu.str2n('1.5'); // 1.5
+//@debug mlu.str2n('1x5'); // 1
+//@debug mlu.str2n('xx'); // null
+//@debug mlu.str2n('1x5', 1); // 1x5
 // ```
 //
-// $str - string to be converted.
-// $strict = false - bool flag for stricter conversion. If it on and $str contains non-number, then function return `null`. See example above.
+// $str - string to be converted
+// $skip-unknown = false - bool flag. If it on and the string contains an unknown sequence of characters after the number, then the it is returned as is
 //
 // Styleguide: sass-tools.functions.general.str2n
 
-@function str2n($str, $strict: false) {
+@function str2n($str, $skip-unknown: false) {
 	@if meta.type-of($str) == 'number' {
 		@return $str;
 	}
@@ -53,10 +54,20 @@ Styleguide: sass-tools.functions.general
 			$decimal: $decimal * 10;
 		} @else if $char == '.' and not $decimal {
 			$decimal: 10;
-		} @else if $strict or ($i == 1 and not $negative) or ($i == 2 and $negative) {
+		} @else if ($i == 1 and not $negative) or ($i == 2 and $negative) {
 			@return null;
 		} @else {
-			@return if($negative, -$result, $result);
+			$unit: map.get(mlu.$units-all, string.to-lower-case(string.slice($str, $i)));
+
+			@if not $unit {
+				@if $skip-unknown {
+					@return $str;
+				}
+
+				$unit: 1;
+			}
+
+			@return if($negative, -$result, $result) * $unit;
 		}
 	}
 

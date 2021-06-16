@@ -190,4 +190,38 @@ $test-list: (0, 1, 2, 3);
 			);
 		}
 	}
+
+	@include describe('str2n') {
+		@include it('converts string to number with unit') {
+			@include assert-equal(
+				mlu.str2n('3px'),
+				3px,
+			);
+
+			@include assert-equal(
+				mlu.str2n('3Hz'),
+				3hz,
+			);
+
+			@include assert-equal(
+				mlu.str2n('25p'),
+				25p,
+			);
+
+			@include assert-equal(
+				mlu.str2n('25%'),
+				25%,
+			);
+
+			@include assert-equal(
+				mlu.str2n('-25rem'),
+				-25rem,
+			);
+
+			@include assert-equal(
+				mlu.str2n('3px0'),
+				3,
+			);
+		}
+	}
 }

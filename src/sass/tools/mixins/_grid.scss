@@ -162,7 +162,7 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 			@if $prev-value and math.unit($prev-value) == 'rem' {
 				$cur-val: mlu.px2rem($value);
 			} @else if $prev-value and math.is-unitless($prev-value) and $prev-value > -1 {
-				$cur-val: mlu.str2n($value + '');
+				$cur-val: mlu.str2n($value + '_');
 			}
 
 			@if $prev-value != -1 and $cur-val != $prev-value {
@@ -291,7 +291,7 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 
 	@if meta.type-of($width) == 'number' and
 		(math.unit($width) == 'c' or math.unit($width) == 'gc' or math.unit($width) == 'gs') {
-		$tmp-val: mlu.str2n($width + '');
+		$tmp-val: mlu.str2n($width + '_');
 		$col-width: mlu.decimal-floor($tmp-val / $columns * 100%, 3);
 		$custom-unit: if(math.unit($width) == 'gc', 'gc', 'gs');
 		$custom-unit: if(math.unit($width) == 'c', $tmp-val, $custom-unit);

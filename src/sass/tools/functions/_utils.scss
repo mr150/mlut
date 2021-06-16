@@ -390,7 +390,7 @@ $-states-abbrs: list.join(
 
 @function convert-util-value-default($value, $units-key: 'default-set') {
 	$val-unit: '';
-	$val-number: mgen.str2n($value + '');
+	$val-number: mgen.str2n($value + '_');
 
 	@if meta.type-of($value) == 'number' {
 		$val-unit: map.get(mlu.$utils-config, 'units', $units-key, math.unit($value));
