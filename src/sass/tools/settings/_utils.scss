@@ -259,10 +259,6 @@ $utils-config: (
 			'x': 1ex,
 			'r': 1rem,
 		),
-		'custom': (
-			'gg': 1gg,
-			'su': 1su,
-		),
 		'resolution': (
 			'i': 1dpi,
 			'c': 1dpcm,
@@ -328,16 +324,6 @@ $utils-config: map.deep-merge($utils-config, $utils);
 $utils-states: map.merge(
 	map.get($utils-config, 'states', 'pseudo'),
 	map.get($utils-config, 'states', 'special'),
-);
-
-$utils-config: map.set(
-	$utils-config,
-	'units',
-	'default-set',
-	map.merge(
-		map.get($utils-config, 'units', 'default'),
-		map.get($utils-config, 'units', 'custom'),
-	)
 );
 
 $tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
