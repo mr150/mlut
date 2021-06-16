@@ -388,27 +388,23 @@ $-states-abbrs: list.join(
 //
 // Styleguide: sass-tools.functions.utils.value_converters.def
 
-@function convert-util-value-default($value, $units-key: 'default-set') {
-	$val-unit: '';
-	$val-number: mgen.str2n($value + '_');
+@function convert-util-value-default($value, $units-key: 'default') {
+	$val-unit: 0;
+	$val-number: mgen.str2n($value, true);
 
-	@if meta.type-of($value) == 'number' {
-		$val-unit: map.get(mlu.$utils-config, 'units', $units-key, math.unit($value));
-	} @else if meta.type-of($value) == 'string' and  $val-number {
-		$util-unit: string.slice($value, string.length($val-number + '') + 1);
-		$val-unit: map.get(mlu.$utils-config, 'units', $units-key, $util-unit);
+	@if meta.type-of($val-number) == 'number' {
+		$val-unit: map.get(mlu.$utils-config, 'units', $units-key, math.unit($val-number));
 	}
 
-	@if $val-unit != '' {
-		// Maybe in the future there will be processing of all CSS units, but so far a number with an unknown unit is returned as a string
+	@if $val-unit != 0 {
 		@return if(
 			$val-unit,
-			$val-number * $val-unit,
-			string.unquote($value + '')
+			mgen.str2n($value + '_') * $val-unit,
+			$val-number
 		);
 	}
 
-	@return convert-util-value-keyword($value);
+	@return convert-util-value-keyword(string.unquote($value));
 }
 
 // convert-util-value-unitless
