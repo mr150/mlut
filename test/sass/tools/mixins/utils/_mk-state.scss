@@ -509,7 +509,7 @@ mlu.$utils-config: map.set(
 
 			@include assert() {
 				@include output(false) {
-					.D-f {
+					.xs\:md__D-f {
 						@include mlu.new-mk-state(
 							'$= $=ib&#testou&af',
 							'%one&*a|%&?>*',
@@ -523,16 +523,16 @@ mlu.$utils-config: map.set(
 				}
 
 				@include expect(false) {
-					.-Ctx\=one:not(:active) .\%one\&\*a\|\%\&\?\>\*__D-f,
-					.-Ctx>* .\%one\&\*a\|\%\&\?\>\*__D-f {
+					.-Ctx\=one:not(:active) .xs\:md__\%one\&\*a\|\%\&\?\>\*__D-f,
+					.-Ctx>* .xs\:md__\%one\&\*a\|\%\&\?\>\*__D-f {
 						display: flex;
 					}
 
-					.D-f__\$\=.D-f__\$\= {
+					.xs\:md__D-f__\$\=.xs\:md__D-f__\$\= {
 							display: flex;
 					}
 
-					.D-f__\$\=ib\&\#testou\&af.D\=ib.pa.ro.voz::after {
+					.xs\:md__D-f__\$\=ib\&\#testou\&af.D\=ib.pa.ro.voz::after {
 						display: flex;
 					}
 				}

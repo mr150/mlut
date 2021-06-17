@@ -241,7 +241,19 @@ Styleguide: sass-tools.mixins.utils
 		@each $part in mgf.str-split(
 			mlu.convert-util-states($item, $this, true), ','
 		) {
-			$selector-list: $selector-list + '#{$part}.#{mlu.str-escape($item + mlu.$tUCm)}#{$selector},';
+			$escaped-token: mlu.str-escape(mlu.$tUCm);
+			$state-prefix: mlu.str-escape($item) + $escaped-token;
+			$ar-separator: string.index($selector, $escaped-token + $this);
+
+			$cur-selector: if(
+				$ar-separator,
+				string.insert(
+					$selector, $state-prefix, $ar-separator + string.length($escaped-token)
+				),
+				$state-prefix + $selector
+			);
+
+			$selector-list: $selector-list + '#{$part}.#{$cur-selector},';
 		}
 
 		$result: list.append($result, string.slice($selector-list, 1, -2));
