@@ -463,7 +463,7 @@ Styleguide: sass-tools.mixins.utils
 // Private mixin that parses custom units based on directions.
 
 @mixin -parse-unit($prop, $value, $dir) {
-	$coef-val: mlu.str2n($value + '');
+	$coef-val: mlu.str2n($value + '_');
 
 	@if meta.type-of($value) == 'number' and math.unit($value) == 'gg' {
 		$tmp-val: if($dir == 't' or $dir == 'b', $-gtr-sm-rem, 1);
