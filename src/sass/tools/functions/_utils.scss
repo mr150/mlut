@@ -84,7 +84,7 @@ $-states-abbrs: list.join(
 			), 1);
 
 			@if not $at-rules and (
-				string.index($part, mlu.$tAAr) == 1 or list.index($-mq-keywords, $part)
+				string.index($part, mlu.$tAAr) or list.index($-mq-keywords, $part)
 			) {
 				$at-rules: $component-trimmed;
 				$comp-indexes: map.set($comp-indexes, 'ar', $i);

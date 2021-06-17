@@ -211,6 +211,16 @@
 			);
 
 			@include assert-equal(
+				mlu.new-parse-util('sm@s:&-_f_f'),
+				(
+					'at-rules': 'sm@s:&-',
+					'post-states': 'f',
+					'value': 'f',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
 				mlu.new-parse-util('xl_xl_h:af'),
 				(
 					'at-rules': 'xl',
