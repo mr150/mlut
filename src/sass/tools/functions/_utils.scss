@@ -29,9 +29,9 @@ Styleguide: sass-tools.functions.utils
 //
 // Styleguide: sass-tools.functions.utils.parse_util
 
-$-mq-keywords: list.join(
+$-ar-keywords: list.join(
 	map.keys(map.get(mlu.$at-rules-cfg, 'all-breakpoints')),
-	(mlu.$bp-only mlu.$bp-all)
+	map.keys(map.get(mlu.$at-rules-cfg, 'keywords')),
 );
 
 $-states-keywords: map.keys(map.get(mlu.$utils-config, 'states', 'keywords'));
@@ -84,7 +84,7 @@ $-states-abbrs: list.join(
 			), 1);
 
 			@if not $at-rules and (
-				string.index($part, mlu.$tAAr) or list.index($-mq-keywords, $part)
+				string.index($part, mlu.$tAAr) or list.index($-ar-keywords, $part)
 			) {
 				$at-rules: $component-trimmed;
 				$comp-indexes: map.set($comp-indexes, 'ar', $i);

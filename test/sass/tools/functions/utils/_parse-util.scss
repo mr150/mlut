@@ -211,6 +211,16 @@
 			);
 
 			@include assert-equal(
+				mlu.new-parse-util(mlu.$kArStOnly + ' @:prn_f_vl'),
+				(
+					'at-rules': mlu.$kArStOnly + ' @:prn',
+					'post-states': 'vl',
+					'value': 'f',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
 				mlu.new-parse-util('sm@s:&-_f_f'),
 				(
 					'at-rules': 'sm@s:&-',

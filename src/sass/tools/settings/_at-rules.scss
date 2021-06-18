@@ -27,8 +27,10 @@ $bp-sm: 'sm' !default;
 $bp-md: 'md' !default;
 $bp-lg: 'lg' !default;
 $bp-xl: 'xl' !default;
-$bp-only: 'Bp' !default;
 $bp-all: 'BpAll' !default;
+$kArOnly: 'ArOnly' !default;
+$kArSt: 'ArSt' !default;
+$kArStOnly: 'ArStOnly' !default;
 
 $at-rules-data: (
 	'media': (
@@ -76,6 +78,9 @@ $at-rules-cfg: (
 	),
 	'keywords': (
 		$bp-all: 'breakpoints',
+		$kArOnly: null,
+		$kArSt: null,
+		$kArStOnly: null,
 	),
 ) !default;
 

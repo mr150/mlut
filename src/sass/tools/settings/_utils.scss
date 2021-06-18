@@ -69,6 +69,7 @@ $cCtx: '-Ctx' !default;
 
 $states-ps: 'StPs' !default;
 $states-cmb: 'StCmb' !default;
+$kStOnly: 'StOnly' !default;
 
 // Conversion to CSS
 //
@@ -309,6 +310,7 @@ $utils-config: (
 		'keywords': (
 			$states-ps: 'pseudo',
 			$states-cmb: null,
+			$kStOnly: null,
 		),
 		'special': (
 			'noJs': null,
