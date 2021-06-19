@@ -198,7 +198,11 @@ Styleguide: sass-tools.functions.general
 			$list: remove-nth($list, list.index($list, $item));
 
 			@each $rep-item in $replacement {
-				$list: list.append($list, str-replace($item, $keyword, $rep-item));
+				$item-with-kw: str-replace($item, $keyword, $rep-item);
+
+				@if $item-with-kw != '' {
+					$list: list.append($list, $item-with-kw);
+				}
 			}
 		}
 	}
