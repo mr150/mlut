@@ -243,6 +243,16 @@ Styleguide: sass-tools.functions.general
 
 // Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.
 
+@function ls-join($list, $separator: '') {
+	$result: '';
+
+	@each $item in $list {
+		$result: $result + $item + $separator;
+	}
+
+	@return string.slice($result, 1, -1 - string.length($separator));
+}
+
 @function remove-nth($list, $index) {
 	@if meta.type-of($index) != 'number' {
 		@return error('Wrong type of argument $index: `#{meta.type-of($index)}`. Expected `number`');
