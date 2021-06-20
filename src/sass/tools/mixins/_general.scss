@@ -194,7 +194,7 @@ Styleguide: sass-tools.mixins.general
 		}
 
 		@include -generate-ar($item, $this-util, $ar-list, 1, list.length($ar-list)) {
-			@content;
+			@content($item);
 		}
 	}
 }
