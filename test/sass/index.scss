@@ -8,9 +8,12 @@ mlu.$utils-data: map.deep-merge(
 	('utils':
 	 (
 		 'map': (
-			 'D': ('ig': inline-grid),
-			 'Jc': ('se': space-evenly),
-			 'Pos': ('sk': sticky),
+			'D': (
+				'ig': inline-grid,
+				'f': flex,
+			),
+			'Jc': ('se': space-evenly),
+			'Pos': ('sk': sticky),
 		 ),
 	 )
 	)

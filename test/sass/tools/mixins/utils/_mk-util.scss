@@ -1,0 +1,474 @@
+@use 'sass-true' as *;
+@use 'tools' as mlu;
+@use 'sass:map';
+
+mlu.$utils-config: map.set(
+	mlu.$utils-config, 'states', 'keywords', 'st1', ('iv' 'vl')
+);
+
+@include describe('tools/mixins/utils') {
+	@include describe('mk-util') {
+		@include it('make util from map of values') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'D', (
+						'ib': inline-block,
+						'': block,
+						150: 150q,
+					));
+				}
+
+				@include expect(false) {
+					.D-ib {
+						display: inline-block;
+					}
+
+					.D {
+						display: block;
+					}
+
+					.D150 {
+						display: 150q;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'xl_D_+:h', (
+						'sm@s:&-_^:h_f_af f': flex,
+						'_h,f': block,
+						'ib': inline-block,
+					));
+				}
+
+				@include expect(false) {
+					.D-f {
+						display: flex;
+					}
+
+					.-Ctx:hover .\^\:h_D-f {
+						display: flex;
+					}
+
+					.D-f_af::after {
+						display: flex;
+					}
+
+					.D-f_f:focus {
+						display: flex;
+					}
+
+					@media (min-width: mlu.bp(sm)) {
+						@supports (display: flex) {
+							.sm\@s\:\&-_D-f {
+								display: flex;
+							}
+						}
+					}
+
+					.D {
+						display: block;
+					}
+
+					.D_h\,f:hover,
+					.D_h\,f:focus {
+						display: block;
+					}
+
+					.D-ib {
+						display: inline-block;
+					}
+
+					.D-ib_\+\:h+:hover {
+						display: inline-block;
+					}
+
+					@media (min-width: mlu.bp(xl)) {
+						.xl_D-ib {
+							display: inline-block;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Maw', (
+						500: false,
+						'n': null,
+						[5x, 7]: null,
+						'sm0': 560px,
+					));
+				}
+
+				@include expect(false) {
+					.Maw500 {
+						max-width: 500;
+					}
+
+					.Maw-n {
+						max-width: none;
+					}
+
+					@for $i from 5 through 7 {
+						.Maw#{$i}x {
+							max-width: $i * 1ex;
+						}
+					}
+
+					.Maw-sm0 {
+						max-width: 560px;
+					}
+				}
+			}
+		}
+
+		@include it('make util from list of values') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Maw', (
+						10, 4vw, 'a', 2su,
+					));
+				}
+
+				@include expect(false) {
+					.Maw10 {
+						max-width: 10px;
+					}
+
+					.Maw4vw {
+						max-width: 4vw;
+					}
+
+					.Maw-a {
+						max-width: auto;
+					}
+
+					.Maw2su {
+						max-width: mlu.su(2);
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Maw', (
+						':f_100_+:h',
+						'xl @:-sm:ori_32p_vl',
+					));
+				}
+
+				@include expect(false) {
+					.Maw100 {
+						max-width: 100px;
+					}
+
+					:focus .\:f_Maw100 {
+						max-width: 100px;
+					}
+
+					.Maw100_\+\:h+:hover {
+						max-width: 100px;
+					}
+
+					.Maw32p {
+						max-width: 32%;
+					}
+
+					.Maw32p_vl:valid {
+						max-width: 32%;
+					}
+
+					@media (min-width: mlu.bp(xl)) {
+						.xl_Maw32p {
+							max-width: 32%;
+						}
+					}
+
+					@media (min-width: mlu.bp(sm)) and (orientation: landscape) {
+						.\@\:-sm\:ori_Maw32p {
+							max-width: 32%;
+						}
+					}
+				}
+			}
+		}
+
+		@include it('make util from list of ranges') {
+			@include assert() {
+				$step: 2;
+
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Bdw', (
+						[2, 4],
+						5,
+						[2su, 4, $step],
+					));
+				}
+
+				@include expect(false) {
+					@for $i from 2 through 4 {
+						.Bdw#{$i} {
+							border-width: $i * 1px;
+						}
+					}
+
+					.Bdw5 {
+						border-width: 5px;
+					}
+
+					$i: 2;
+
+					@while $i <= 4 {
+						.Bdw#{$i * 1su} {
+							border-width: mlu.su($i);
+						}
+
+						$i: $i + $step;
+					}
+				}
+			}
+
+			@include assert() {
+				$start: 0.5;
+				$end: 2;
+				$step: 0.7;
+
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Bdw', (
+						['lg_#{$start}r_h', $end, $step],
+					));
+				}
+
+				@include expect(false) {
+					$i: $start;
+
+					@while $i <= $end {
+						$value: mlu.str-escape($i * 1r);
+						$css-value: $i * 1rem;
+
+						.Bdw#{$value} {
+							border-width: $css-value;
+						}
+
+						.Bdw#{$value}_h:hover {
+							border-width: $css-value;
+						}
+
+						@media (min-width: mlu.bp(lg)) {
+							.lg_Bdw#{$value} {
+								border-width: $css-value;
+							}
+						}
+
+						$i: $i + $step;
+					}
+				}
+			}
+		}
+
+		@include it('make util from mixin arguments') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Ovcm', (5su, 'xl_a'),
+						(
+							'at-rules': 'lg @s',
+							'post-states': 'h,f',
+						),
+						overflow-clip-margin,
+					);
+				}
+
+				@include expect(false) {
+					.Ovcm5su {
+						overflow-clip-margin: mlu.su(5);
+					}
+
+					.Ovcm5su_h\,f:hover,
+					.Ovcm5su_h\,f:focus {
+						overflow-clip-margin: mlu.su(5);
+					}
+
+					@media (min-width: mlu.bp(lg)) {
+						.lg_Ovcm5su {
+							overflow-clip-margin: mlu.su(5);
+						}
+					}
+
+					@supports (overflow-clip-margin: 20px) {
+						.\@s_Ovcm5su {
+							overflow-clip-margin: mlu.su(5);
+						}
+					}
+
+					.Ovcm-a {
+						overflow-clip-margin: auto;
+					}
+
+					@media (min-width: mlu.bp(xl)) {
+						.xl_Ovcm-a {
+							overflow-clip-margin: auto;
+						}
+					}
+				}
+			}
+
+			mlu.$utils-data: map.deep-remove(
+				mlu.$utils-data, 'utils', 'registry', 'Ovcm'
+			);
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Ovcm', (5, 'i_f'),
+						(
+							'post-states': 'h',
+						),
+						(
+							'props': overflow-clip-margin,
+							'type': 'unitless',
+						)
+					);
+				}
+
+				@include expect(false) {
+					.Ovcm5 {
+						overflow-clip-margin: 5;
+					}
+
+					.Ovcm5_h:hover {
+						overflow-clip-margin: 5;
+					}
+
+					.Ovcm-i {
+						overflow-clip-margin: inherit;
+					}
+
+					.Ovcm-i_f:focus {
+						overflow-clip-margin: inherit;
+					}
+				}
+			}
+
+		}
+
+		@include it('make util at-rules and states taking into account keywords') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Maw', (
+						'@:prn_100_+:h ' + mlu.$kStOnly,
+						mlu.$kArOnly + ' @:prn_32p_+:h',
+						'#{mlu.$kArOnly} @:prn_50p_vl #{mlu.$kStOnly}',
+					));
+				}
+
+				@include expect(false) {
+					.Maw100_\+\:h+:hover {
+						max-width: 100px;
+					}
+
+					@media print {
+						.\@\:prn_Maw100 {
+							max-width: 100px;
+						}
+					}
+
+					@media print {
+						.\@\:prn_Maw32p {
+							max-width: 32%;
+						}
+					}
+
+					@media print {
+						.\@\:prn_Maw50p {
+							max-width: 50%;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Maw', (
+						mlu.$kArSt + ' @:prn_200_+:h',
+						'#{mlu.$kArSt} #{mlu.$kArOnly} @:prn_a_vl',
+					));
+				}
+
+				@include expect(false) {
+					.Maw200 {
+						max-width: 200px;
+					}
+
+					.Maw200_\+\:h+:hover {
+						max-width: 200px;
+					}
+
+					@media print {
+						.\@\:prn_Maw200 {
+							max-width: 200px;
+						}
+
+						.\@\:prn_Maw200_\+\:h+:hover {
+							max-width: 200px;
+						}
+					}
+
+					@media print {
+						.\@\:prn_Maw-a {
+							max-width: auto;
+						}
+
+						.\@\:prn_Maw-a_vl:valid {
+							max-width: auto;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Maw', (
+						'#{mlu.$kArSt} @:prn_300_+:h #{mlu.$kStOnly}',
+						mlu.$kArStOnly + ' @:prn_n_vl',
+					));
+				}
+
+				@include expect(false) {
+					.Maw300_\+\:h+:hover {
+						max-width: 300px;
+					}
+
+					@media print {
+						.\@\:prn_Maw300 {
+							max-width: 300px;
+						}
+
+						.\@\:prn_Maw300_\+\:h+:hover {
+							max-width: 300px;
+						}
+					}
+
+					@media print {
+						.\@\:prn_Maw-n_vl:valid {
+							max-width: none;
+						}
+					}
+				}
+			}
+		}
+
+	}
+}
