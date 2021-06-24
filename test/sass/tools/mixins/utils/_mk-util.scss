@@ -6,6 +6,35 @@ mlu.$utils-config: map.set(
 	mlu.$utils-config, 'states', 'keywords', 'st1', ('iv' 'vl')
 );
 
+mlu.$utils-data: map.deep-merge(
+	mlu.$utils-data,
+	('utils':
+	(
+		'registry': (
+			'-Xy': (
+				'props': (
+					top,
+					right,
+					bottom,
+					left
+				),
+				'name': 'Stretched',
+		),
+			'-Posed': (
+				'props': (
+					'position': absolute,
+					'top': null,
+					'z-index': null,
+				),
+				'type': 'unitless',
+				'repeat-props-values': false,
+			),
+	),
+	)
+	)
+);
+
+
 @include describe('tools/mixins/utils') {
 	@include describe('mk-util') {
 		@include it('make util from map of values') {
@@ -464,6 +493,99 @@ mlu.$utils-config: map.set(
 					@media print {
 						.\@\:prn_Maw-n_vl:valid {
 							max-width: none;
+						}
+					}
+				}
+			}
+		}
+
+		@include it('make utils with multiple properties') {
+			@include assert('props list and custom util name') {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'-Xy', (
+						0: null,
+						'sm0:xs0_h': (1rem, 20px),
+						(1r, 10, 2r): null,
+						'md0': (2rem, 20px, 1rem, 12px),
+					));
+				}
+
+				@include expect(false) {
+					.Stretched0 {
+						@each $key, $value in mlu.$main-directions { #{$value}: 0px; }
+					}
+
+					.Stretched-sm0\:xs0 {
+            top: 1rem;
+						right: 20px;
+            bottom: 1rem;
+						left: 20px;
+
+						&_h:hover {
+							top: 1rem;
+							right: 20px;
+							bottom: 1rem;
+							left: 20px;
+						}
+					}
+
+					.Stretched1r\:10\:2r {
+            top: 1rem;
+						right: 10px;
+            bottom: 2rem;
+						left: 1rem;
+					}
+
+					.Stretched-md0 {
+            top: 2rem;
+						right: 20px;
+            bottom: 1rem;
+						left: 12px;
+					}
+
+				}
+			}
+
+			@include assert('props map with one static item and no repeating values') {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'-Posed', (
+						0: null,
+						'sm0': (1rem, 2),
+						'lg1': (null, 5),
+						('lg_a', -1): null,
+					));
+				}
+
+				@include expect(false) {
+					.-Posed0 {
+						position: absolute;
+						top: 0;
+					}
+
+					.-Posed-sm0 {
+						position: absolute;
+            top: 1rem;
+						z-index: 2;
+					}
+
+					.-Posed-lg1 {
+						position: absolute;
+						z-index: 5;
+					}
+
+					.-Posed-a\:-1 {
+						position: absolute;
+						top: auto;
+						z-index: -1;
+					}
+
+					@media (min-width: mlu.bp(lg)) {
+						.lg_-Posed-a\:-1 {
+							position: absolute;
+							top: auto;
+							z-index: -1;
 						}
 					}
 				}

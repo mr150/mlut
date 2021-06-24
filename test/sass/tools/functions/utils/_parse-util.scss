@@ -119,6 +119,15 @@
 				),
 				$inspect: true,
 			);
+
+			@include assert-equal(
+				mlu.new-parse-util(':h:a_h:a'),
+				(
+					'pre-states': ':h:a',
+					'value': 'h:a',
+				),
+				$inspect: true,
+			);
 		}
 
 		@include it('value with only post-states') {
@@ -172,6 +181,15 @@
 				(
 					'post-states': 'vl',
 					'value': '',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('sm:lg_ h'),
+				(
+					'post-states': 'h',
+					'value': 'sm:lg',
 				),
 				$inspect: true,
 			);

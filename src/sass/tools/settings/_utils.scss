@@ -278,6 +278,7 @@ $utils-config: (
 		'util': (
 			'str-value': '-',
 			'num-value': '',
+			'space': ':',
 			'custom-value': '-',
 			'component': '_',
 		),
@@ -332,6 +333,7 @@ $tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
 $tUCv: map.get($utils-config, 'tokens', 'util', 'custom-value');
 $tUCm: map.get($utils-config, 'tokens', 'util', 'component');
+$tUSp: map.get($utils-config, 'tokens', 'util', 'space');
 $tSOr: map.get($utils-config, 'tokens', 'states', 'or');
 $tSAnd: map.get($utils-config, 'tokens', 'states', 'and');
 $tSNot: map.get($utils-config, 'tokens', 'states', 'not');
