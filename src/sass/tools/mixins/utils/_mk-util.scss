@@ -70,7 +70,11 @@
 				$util-value: string.slice($util-value, 1, -1 - string.length(mlu.$tUSp));
 			}
 
-			$separated-value: mlu.util-separated-value($util-value);
+			$separated-value: if(
+				$util-name == '',
+				$util-value,
+				mlu.util-separated-value($util-value),
+			);
 
 			$selector: mlu.str-escape($util-name + $separated-value);
 			$this-util: (

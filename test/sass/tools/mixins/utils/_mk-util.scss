@@ -20,6 +20,10 @@ mlu.$utils-data: map.deep-merge(
 				),
 				'name': 'Stretched',
 		),
+			'-AltPos': (
+				'name': '',
+				'props': position,
+			),
 			'-Posed': (
 				'props': (
 					'position': absolute,
@@ -587,6 +591,32 @@ mlu.$utils-data: map.deep-merge(
 							top: auto;
 							z-index: -1;
 						}
+					}
+				}
+			}
+		}
+
+		@include it('make util with empty name') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'-AltPos', (
+						'relative': null,
+						':h_abs': absolute,
+					));
+				}
+
+				@include expect(false) {
+					.relative {
+						position: relative;
+					}
+
+					.abs {
+						position: absolute;
+					}
+
+					:hover .\:h_abs {
+						position: absolute;
 					}
 				}
 			}
