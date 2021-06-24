@@ -243,7 +243,7 @@ Styleguide: sass-tools.functions.general
 
 // Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.
 
-@function ls-join($list, $separator: '') {
+@function ls-implode($list, $separator: '') {
 	$result: '';
 
 	@each $item in $list {

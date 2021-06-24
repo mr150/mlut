@@ -82,7 +82,7 @@
 				'value': $separated-value
 			);
 
-			$val-feat-str: mgf.ls-join(
+			$val-feat-str: mgf.ls-implode(
 				map.values(map.remove($util-val-data, 'value')), ' '
 			);
 

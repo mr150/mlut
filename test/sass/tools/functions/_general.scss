@@ -225,7 +225,7 @@ $test-list: (0, 1, 2, 3);
 		}
 	}
 
-	@include describe('ls-join') {
+	@include describe('ls-implode') {
 		$-tests: (
 		('xl' ':h' 'D', ' _ ',):  'xl _ :h _ D',
 		('e' 'ver' 'more',): 'evermore',
@@ -236,7 +236,7 @@ $test-list: (0, 1, 2, 3);
 		@include it('concatenates the elements of the list into a string with separator') {
 			@each $args, $expect in $-tests {
 				@include assert-equal(
-					mlu.ls-join($args...),
+					mlu.ls-implode($args...),
 					$expect,
 				);
 			}
