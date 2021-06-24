@@ -622,5 +622,36 @@ mlu.$utils-data: map.deep-merge(
 			}
 		}
 
+		@include it('make util with multiple values for one property') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Bdrs', (
+						('^:+_5', 10): null,
+						(50p, 50p, 12, 12): null,
+						'xs0': 0 8px 50%,
+					));
+				}
+
+				@include expect(false) {
+					.Bdrs5\:10 {
+						border-radius: 5px 10px;
+					}
+
+					.-Ctx+.\^\:\+_Bdrs5\:10 {
+						border-radius: 5px 10px;
+					}
+
+					.Bdrs50p\:50p\:12\:12 {
+						border-radius: 50% 50% 12px 12px;
+					}
+
+					.Bdrs-xs0 {
+						border-radius: 0 8px 50%;
+					}
+				}
+			}
+		}
+
 	}
 }
