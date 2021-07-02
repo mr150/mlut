@@ -4,36 +4,14 @@
 @use 'sass-true' as *;
 @use 'tools' as mlu;
 
-$default-type: map.get(mlu.$utils-config, 'default-value-type');
-$unitless-type: list.set-nth($default-type, 1, 'new-unitless');
-
 mlu.$utils-data: map.deep-merge(
 	mlu.$utils-data,
 	('utils':
 	(
 		'registry': (
-			'Fw': (
-				'value-type': $unitless-type,
-			),
-			'Fz': (
-				'props': font-size,
-				'affects-height': true,
-			),
-			'Trs': (
-				'props': transition,
-				'value-type': list.join('abbr', $default-type),
-			),
-			'Bdrs': (
-				'props': border-radius,
-				'multi-list-separator': '/',
-			),
-			'P': (
-				'props': padding,
-				'directed': true,
-			),
 			'Gc': (
 				'props': grid-column,
-				'value-type': $unitless-type,
+				'value-type': ('unitless', 'css-kw'),
 				'multi-list-separator': '/',
 			),
 	),
@@ -42,7 +20,7 @@ mlu.$utils-data: map.deep-merge(
 );
 
 @include describe('tools/functions/utils/') {
-	@include describe('convert-util-value-list') {
+	@include describe('convert-util-value') {
 		$-tests: (
 			'converts number': (
 				(200, 'W'): 200px,
@@ -52,7 +30,7 @@ mlu.$utils-data: map.deep-merge(
 				(2su, 'Fz'): mlu.sur(2),
 				(2su, 'P'): mlu.sur(2) mlu.su(2),
 				(200x, 'W'): 200ex,
-				('16/9', 'Ar'): '16/9',
+				('16/9', 'Ar'): string.unquote('16/9'),
 			),
 			'converts global CSS keyword': (
 				('a', 'W'): auto,
@@ -78,7 +56,7 @@ mlu.$utils-data: map.deep-merge(
 			@include it($test) {
 				@each $args, $expect in $data {
 					@include assert-equal(
-						mlu.convert-util-value-list($args...),
+						mlu.convert-util-value($args...),
 						$expect,
 						$inspect: true,
 					);

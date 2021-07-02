@@ -348,7 +348,7 @@ $-states-abbrs: list.join(
 	);
 }
 
-@function parse-util-value-range($range, $util: null) {
+@function parse-util-value-range($range, $util) {
 	$value-data: new-parse-util(list.nth($range, 1));
 	$start: map.get($value-data, 'value');
 	$start-number: mgen.str2n($start, true);
@@ -367,9 +367,18 @@ $-states-abbrs: list.join(
 		()
 	);
 
-	$value-unit: map.get(mlu.$units-all, math.unit($start-number));
-	$converted-start: convert-util-value($start-number, $util);
-	$css-value-unit: map.get(mlu.$units-all, math.unit($converted-start));
+	$value-unit-name: math.unit($start-number);
+	$value-unit: map.get(mlu.$units-all, $value-unit-name);
+	$converted-start: converters.convert-util-value($start-number, $util);
+	$css-value-unit-name: math.unit($converted-start);
+	$css-value-unit: map.get(mlu.$units-all, $css-value-unit-name);
+
+	@if map.has-key(mlu.$general-data, 'units', 'custom', $value-unit-name) and
+		map.has-key(mlu.$general-data, '#{$value-unit-name}-values', $css-value-unit-name) {
+		$css-value-unit: map.get(
+			mlu.$general-data, '#{$value-unit-name}-values', $css-value-unit-name
+		);
+	}
 
 	$step: if((list.length($range) > 2), list.nth($range, 3), 1);
 	$values: ();
@@ -390,159 +399,21 @@ $-states-abbrs: list.join(
 	@return $result;
 }
 
-// convert-util-value
-//
-// Determines the type of utility and, depending on type, calls the converter from the `$util-value-converters` map. If the utility type is not recognized, the [default converter](#kssref-sass-tools-functions-utils-value_converters-def) is called. If the `$utils-value-converters` does not contain a converter for this type, the utility value is returned without conversion. Else the result of the converter work is returned.
-// ```scss
-//@debug mlu.convert-util-value('2r', 'Fz'); // 2rem
-//@debug mlu.convert-util-value(100, 'Fw'); // 100
-// ```
-//
-// $util-val - utility value
-// $name - utility name
-//
-// Styleguide: sass-tools.functions.utils.convert_util_value
-
-@function convert-util-value($util-val, $name, $section: 'utils') {
-	$util-type: if(
-		map.has-key(mlu.$utils-data, $section, 'registry', $name, 'type'),
-		map.get(mlu.$utils-data, $section, 'registry', $name, 'type'),
-		''
-	);
-
-	@return if(
-		map.has-key($util-value-converters, $util-type),
-		meta.call(
-			map.get($util-value-converters, $util-type),
-			$util-val
-		),
-		$util-val
-	);
-}
-
-// convert-util-value-default
-//
-// Default converter for utility value to CSS value. Converts numbers with unit aliases.
-// ```scss
-//@debug mlu.convert-util-value-default(480); // 480px
-//@debug mlu.convert-util-value-default('n'); // none
-// ```
-//
-// $value - utility value.
-//
-// Styleguide: sass-tools.functions.utils.value_converters.def
-
-@function convert-util-value-default($value, $units-key: 'default') {
-	$val-unit: 0;
-	$val-number: mgen.str2n($value, true);
-
-	@if meta.type-of($val-number) == 'number' {
-		$val-unit: map.get(mlu.$utils-config, 'units', $units-key, math.unit($val-number));
-	}
-
-	@if $val-unit != 0 {
-		@return if(
-			$val-unit,
-			mgen.str2n($value + '_') * $val-unit,
-			$val-number
-		);
-	}
-
-	@return convert-util-value-keyword(string.unquote($value));
-}
-
-// convert-util-value-unitless
-//
-// Convert unitless numbers from string to numbers.
-// ```scss
-//@debug mlu.convert-util-value-unitless('200'); // 200
-//@debug mlu.convert-util-value-unitless('a'); // auto
-// ```
-//
-// $value - utility value.
-//
-// Styleguide: sass-tools.functions.utils.value_converters.unitless
-
-@function convert-util-value-unitless($value) {
-	$val-number: mgen.str2n($value);
-
-	@return if(
-		$val-number,
-		$val-number,
-		convert-util-value-keyword($value)
-	);
-}
-
-// convert-util-value-resolution
-//
-// Convert numbers with resolution units aliases.
-// ```scss
-//@debug mlu.convert-util-value-resolution(2x); // 2dppx
-//@debug mlu.convert-util-value-resolution('300i'); // 300dpi
-// ```
-//
-// $value - utility value.
-//
-// Styleguide: sass-tools.functions.utils.value_converters.rsl
-
-@function convert-util-value-resolution($value) {
-	@return convert-util-value-default($value, 'resolution');
-}
-
-// convert-util-value-keyword
-//
-// Converts aliases to global CSS keywords. If the alias is not found in the `$util-css-keywords`, returns the value without conversion.
-// ```scss
-//@debug mlu.convert-util-value-keyword('i'); // inherit
-//@debug mlu.convert-util-value-keyword('b'); // 'b'
-// ```
-//
-// $value - utility value.
-//
-// Styleguide: sass-tools.functions.utils.value_converters.kw
-
-@function convert-util-value-keyword($value) {
-	@return if(
-		map.has-key(mlu.$utils-config, 'css-keywords', $value),
-		map.get(mlu.$utils-config, 'css-keywords', $value),
-		$value
-	);
-}
-
-// Utilities value converters
-//
-// All converters are contained in the `$util-value-converters` map. The keys in this map are the utility types and the values are the conversion functions. As in other settings, you can add additional converters in `$util-value-converters-ext`.
-//
-// At the end of the work, each function, passes the result to the [global CSS keywords converter](#kssref-sass-tools-functions-utils-value_converters-kw).
-//
-// Styleguide: sass-tools.functions.utils.value_converters
-
-$util-value-converters: (
-	'': meta.get-function('convert-util-value-default'),
-	'unitless': meta.get-function('convert-util-value-unitless'),
-	'resolution': meta.get-function('convert-util-value-resolution'),
-) !default;
-
-$new-util-value-converters: ();
-
-$util-value-converters: map.merge(
-	$util-value-converters,
-	map.get(mlu.$utils-config, 'value-converters'),
-);
+$util-value-converters: ();
 
 $-fn-name-prefix: 'convert-util-value-';
 $-fn-prefix-length: string.length($-fn-name-prefix);
 
 @each $key, $value in meta.module-functions(converters) {
 	@if string.index($key, $-fn-name-prefix) {
-		$new-util-value-converters: map.set(
-			$new-util-value-converters, string.slice($key, $-fn-prefix-length + 1), $value
+		$util-value-converters: map.set(
+			$util-value-converters, string.slice($key, $-fn-prefix-length + 1), $value
 		);
 	}
 }
 
 mlu.$utils-config: map.set(
 	mlu.$utils-config,
-	'new-value-converters',
-	map.merge($new-util-value-converters, map.get(mlu.$utils-config, 'new-value-converters'))
+	'value-converters',
+	map.merge($util-value-converters, map.get(mlu.$utils-config, 'value-converters'))
 );

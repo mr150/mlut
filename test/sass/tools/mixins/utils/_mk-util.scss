@@ -30,7 +30,7 @@ mlu.$utils-data: map.deep-merge(
 					'top': null,
 					'z-index': null,
 				),
-				'type': 'unitless',
+				'value-type': mlu.$util-type-unitless,
 				'repeat-props-values': false,
 			),
 	),
@@ -368,7 +368,7 @@ mlu.$utils-data: map.deep-merge(
 						),
 						(
 							'props': overflow-clip-margin,
-							'type': 'unitless',
+							'value-type': mlu.$util-type-unitless,
 						)
 					);
 				}

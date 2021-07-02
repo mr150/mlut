@@ -109,137 +109,9 @@ $kStOnly: 'StOnly' !default;
 //
 // Styleguide: sass-tools.settings.utils.states
 
-//stylelint-disable
-$utils-data: (
-	'utils': (
-		'registry': (
-			'-Gsc': mlu.$var-grid-cols,
-			'-Gsg': mlu.$var-gg,
-			'Pos': position,
-			'-X': null,
-			'-Y': null,
-			'-Xy': null,
-			'Z': (
-				'props': z-index,
-				'type': 'unitless',
-			),
-			'D': display,
-			'Fxd': flex-direction,
-			'Fxw': flex-wrap,
-			'Fxg': (
-				'props': flex-grow,
-				'type': 'unitless',
-			),
-			'Fxsh': (
-				'props': flex-shrink,
-				'type': 'unitless',
-			),
-			'Ac': align-content,
-			'As': align-self,
-			'Ai': align-items,
-			'Jc': justify-content,
-			'Ord': order,
-			'Gd': grid,
-			'Fl': float,
-			'Bxz': box-sizing,
-			'Maw': max-width,
-			'Mih': min-height,
-			'M': margin,
-			'P': padding,
-			'Ov': overflow,
-			'C': color,
-			'F': font,
-			'Fw': (
-				'props': font-weight,
-				'type': 'unitless',
-			),
-			'Fz': font-size,
-			'Ff': font-family,
-			'Fs': font-style,
-			'Lh': (
-				'props': line-height,
-				'type': 'unitless',
-			),
-			'Dir': direction,
-			'Lts': letter-spacing,
-			'Whs': white-space,
-			'Ta': text-align,
-			'Tt': text-transform,
-			'Td': text-decoration,
-			'Tsh': text-shadow,
-			'Va': vertical-align,
-			'Bgc': background-color,
-			'Bgr': background-repeat,
-			'Bgp': background-position,
-			'Bgsz': background-size,
-			'Bga': background-attachment,
-			'Ol': outline,
-			'Bxsh': box-shadow,
-			'Trf': transform,
-			'V': visibility,
-			'Cur': cursor,
-			'Op': (
-				'props': opacity,
-				'type': 'unitless',
-			),
-			'Bd': border,
-			'Bdc': border-color,
-			'Bds': border-style,
-			'Bdw': border-width,
-			'Bdrs': border-radius,
-			'Trs': transition,
-			'Anim': animation,
-			'Rsz': resize,
-		),
-		'map': (),
-	),
-
-	'general': (
-		'registry': (
-			'H': height,
-			'W': width,
-			'Ar': aspect-ratio,
-		),
-	),
-) !default;
-
 $utils: () !default;
 
-@function merge-utils-data($target, $data, $section) {
-	$registry: if(
-		map.has-key($data, 'registry'),
-		map.get($data, 'registry'),
-		()
-	);
-
-	$map: if(
-		map.has-key($data, 'map'),
-		map.get($data, 'map'),
-		()
-	);
-
-	@return map.deep-merge(
-		$target,
-		($section:
-		 (
-			 'registry': $registry,
-			 'map': $map,
-		 ),
-		)
-	);
-}
-
-$utils-data: map.merge(
-	$utils-data,
-	'utils',
-	'registry',
-	map.get($utils-data, 'general', 'registry')
-);
-
-$utils-data: merge-utils-data($utils-data, $utils, 'utils');
-$utils: map.remove($utils, 'registry');
-$utils: map.remove($utils, 'map');
-
+//stylelint-disable
 $utils-config: (
 	'directed': (
 		'M',
@@ -253,8 +125,6 @@ $utils-config: (
 	'default-value-type': ('number', 'css-kw'),
 
 	'value-converters': (),
-
-	'new-value-converters': (),
 
 	'units': (
 		'default': (
@@ -310,7 +180,7 @@ $utils-config: (
 			'af': '::after',
 			'fln': '::first-line',
 			'flt': '::first-letter',
-	  ),
+		),
 		'custom': (
 		),
 		'keywords': (
@@ -328,6 +198,153 @@ $utils-config: (
 ) !default;
 
 $utils-config: map.deep-merge($utils-config, $utils);
+
+$util-type-default: map.get($utils-config, 'default-value-type');
+$util-type-unitless: list.set-nth($util-type-default, 1, 'unitless');
+$-abbr-type: list.join('abbr', $util-type-default);
+
+$utils-data: (
+	'utils': (
+		'registry': (
+			'-Gsc': mlu.$var-grid-cols,
+			'-Gsg': mlu.$var-gg,
+			'Pos': position,
+			'-X': null,
+			'-Y': null,
+			'-Xy': null,
+			'Z': (
+				'props': z-index,
+				'value-type': $util-type-unitless,
+			),
+			'D': display,
+			'Fxd': flex-direction,
+			'Fxw': flex-wrap,
+			'Fxg': (
+				'props': flex-grow,
+				'value-type': $util-type-unitless,
+			),
+			'Fxsh': (
+				'props': flex-shrink,
+				'value-type': $util-type-unitless,
+			),
+			'Ac': align-content,
+			'As': align-self,
+			'Ai': align-items,
+			'Jc': justify-content,
+			'Ord': order,
+			'Gd': grid,
+			'Fl': float,
+			'Bxz': box-sizing,
+			'Maw': max-width,
+			'Mih': min-height,
+			'M': (
+				'props': margin,
+				'directions': true,
+			),
+			'P': (
+				'props': padding,
+				'directions': true,
+			),
+			'Ov': overflow,
+			'C': color,
+			'F': font,
+			'Fw': (
+				'props': font-weight,
+				'value-type': $util-type-unitless,
+			),
+			'Fz': (
+				'props': font-size,
+				'affects-height': true,
+			),
+			'Ff': font-family,
+			'Fs': font-style,
+			'Lh': (
+				'props': line-height,
+				'value-type': $util-type-unitless,
+			),
+			'Dir': direction,
+			'Lts': letter-spacing,
+			'Whs': white-space,
+			'Ta': text-align,
+			'Tt': text-transform,
+			'Td': text-decoration,
+			'Tsh': text-shadow,
+			'Va': vertical-align,
+			'Bgc': background-color,
+			'Bgr': background-repeat,
+			'Bgp': background-position,
+			'Bgsz': background-size,
+			'Bga': background-attachment,
+			'Ol': outline,
+			'Bxsh': box-shadow,
+			'Trf': transform,
+			'V': visibility,
+			'Cur': cursor,
+			'Op': (
+				'props': opacity,
+				'value-type': $util-type-unitless,
+			),
+			'Bd': border,
+			'Bdc': border-color,
+			'Bds': border-style,
+			'Bdw': border-width,
+			'Bdrs': (
+				'props': border-radius,
+				'multi-list-separator': '/',
+			),
+			'Trs': (
+				'props': transition,
+				'value-type': $-abbr-type,
+			),
+			'Anim': animation,
+			'Rsz': resize,
+		),
+		'map': (),
+	),
+
+	'general': (
+		'registry': (
+			'H': height,
+			'W': width,
+			'Ar': aspect-ratio,
+		),
+	),
+) !default;
+
+@function merge-utils-data($target, $data, $section) {
+	$registry: if(
+		map.has-key($data, 'registry'),
+		map.get($data, 'registry'),
+		()
+	);
+
+	$map: if(
+		map.has-key($data, 'map'),
+		map.get($data, 'map'),
+		()
+	);
+
+	@return map.deep-merge(
+		$target,
+		($section:
+		 (
+			 'registry': $registry,
+			 'map': $map,
+		 ),
+		)
+	);
+}
+
+$utils-data: map.merge(
+	$utils-data,
+	'utils',
+	'registry',
+	map.get($utils-data, 'general', 'registry')
+);
+
+$utils-data: merge-utils-data($utils-data, $utils, 'utils');
+$utils: map.remove($utils, 'registry');
+$utils: map.remove($utils, 'map');
 
 $utils-states: map.merge(
 	map.get($utils-config, 'states', 'pseudo'),

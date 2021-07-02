@@ -6,9 +6,21 @@
 	@include describe('parse-util-value-range') {
 		@include it('parse simple range') {
 			@include assert-equal(
-				mlu.parse-util-value-range([2, 4]),
+				mlu.parse-util-value-range([2, 4], 'Bdw'),
 				(
 					'values': (2: 2px, 3: 3px, 4: 4px),
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.parse-util-value-range([2su, 4], 'Fz'),
+				(
+					'values': (
+						2su: mlu.sur(2),
+						3su: mlu.sur(3),
+						4su: mlu.sur(4),
+					)
 				),
 				$inspect: true,
 			);
@@ -39,7 +51,7 @@
 			);
 
 			@include assert-equal(
-				mlu.parse-util-value-range([-2, -4]),
+				mlu.parse-util-value-range([-2, -4], 'Bdw'),
 				(
 					'values': ()
 				),
@@ -47,24 +59,24 @@
 			);
 
 			@include assert-equal(
-				mlu.parse-util-value-range('a'),
+				mlu.parse-util-value-range('a', 'W'),
 				'ERROR: Invalid $start value in range: `a`'
 			);
 
 			@include assert-equal(
-				mlu.parse-util-value-range('1no1'),
+				mlu.parse-util-value-range('1no1', 'W'),
 				'ERROR: Unknown unit in $start value in range: `1no1`'
 			);
 		}
 
 		@include it('parse range with step') {
 			@include assert-equal(
-				mlu.parse-util-value-range([2su, 6, 2]),
+				mlu.parse-util-value-range([2su, 6, 2], 'W'),
 				(
 					'values': (
-					2su: 2su,
-					4su: 4su,
-					6su: 6su,
+					2su: mlu.su(2),
+					4su: mlu.su(4),
+					6su: mlu.su(6),
 				)
 				),
 				$inspect: true,
@@ -85,7 +97,7 @@
 
 		@include it('parse range with features') {
 			@include assert-equal(
-				mlu.parse-util-value-range(['xs:sm_:f:>_1r_h::^sub', 7, 3]),
+				mlu.parse-util-value-range(['xs:sm_:f:>_1r_h::^sub', 7, 3], 'W'),
 				(
 					'features': (
 					'at-rules': 'xs:sm',

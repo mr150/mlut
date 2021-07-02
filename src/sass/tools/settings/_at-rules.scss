@@ -7,6 +7,7 @@
 // Styleguide: sass-tools.settings.at_rules
 
 @use 'sass:map';
+@use 'sass:list';
 @use 'sass:string';
 @use 'utils' as mlu;
 
@@ -113,19 +114,19 @@ mlu.$utils-data: map.set(
 				'prfrm': prefers-reduced-motion,
 				'mn': (
 					'props': monochrome,
-					'type': 'unitless',
+					'value-type': mlu.$util-type-unitless,
 				),
 				'gd': (
 					'props': grid,
-					'type': 'unitless',
+					'value-type': mlu.$util-type-unitless,
 				),
 				'c': (
 					'props': color,
-					'type': 'unitless',
+					'value-type': mlu.$util-type-unitless,
 				),
 				'rsl': (
 					'props': resolution,
-					'type': 'resolution',
+					'value-type': list.set-nth(mlu.$util-type-default, 1, 'resolution'),
 				),
 			),
 		),

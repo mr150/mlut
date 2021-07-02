@@ -8,7 +8,37 @@
 @use '../general' as mgen;
 @use '../getters' as mget;
 
-@function convert-util-value-list($util-val, $name, $section: 'utils') {
+// convert-util-value
+//
+// Determines the type of utility and, depending on type, calls the converter from the `$util-value-converters` map. If the utility type is not recognized, the [default converter](#kssref-sass-tools-functions-utils-value_converters-def) is called. If the `$utils-value-converters` does not contain a converter for this type, the utility value is returned without conversion. Else the result of the converter work is returned.
+// ```scss
+//@debug mlu.convert-util-value('2r', 'Fz'); // 2rem
+//@debug mlu.convert-util-value(100, 'Fw'); // 100
+// ```
+//
+// $util-val - utility value
+// $name - utility name
+// $section = 'utils' - section in the registry in which utility was defined
+//
+// Styleguide: sass-tools.functions.utils.convert_util_value
+
+// Value converters
+//
+// Available converters:
+// ```scss
+//@debug mlu.convert-util-value-number(10); // 10px
+//@debug mlu.convert-util-value-unitless(10); // 10
+//@debug mlu.convert-util-value-resolution(2x); // 2dppx
+//@debug mlu.convert-util-value-css-kw('a'); // auto
+//@debug mlu.convert-util-value-abbr('bgc'); // background-color
+// ```
+//
+// $value - value for converting
+// $data = () - map with data required for converting
+//
+// Styleguide: sass-tools.functions.utils.value_converters
+
+@function convert-util-value($util-val, $name, $section: 'utils') {
 	@if meta.type-of($util-val) == 'string' {
 		$space: ' ';
 
@@ -51,7 +81,13 @@
 		}
 	}
 
-	@return apply-value-converter($util-val, $name, $section);
+	$converted: apply-value-converter($util-val, $name, $section);
+
+	@return if(
+		meta.type-of($converted) == 'string',
+		string.unquote($converted),
+		$converted
+	);
 }
 
 @function apply-value-converter($util-val, $name, $section, $list-length: 1) {
@@ -62,9 +98,9 @@
 	);
 
 	@each $item in $value-type {
-		@if map.has-key(mlu.$utils-config, 'new-value-converters', $item) {
+		@if map.has-key(mlu.$utils-config, 'value-converters', $item) {
 			$util-val: meta.call(
-				map.get(mlu.$utils-config, 'new-value-converters', $item),
+				map.get(mlu.$utils-config, 'value-converters', $item),
 				$util-val,
 				(
 					'name': $name,
@@ -97,7 +133,7 @@
 
 		@if $unit == 'su' {
 			@if map.get(
-				mlu.$utils-data, $section, 'registry', $name, 'directed'
+				mlu.$utils-data, $section, 'registry', $name, 'directions'
 			) and map.get($data, 'list-length') == 1 {
 				@return mgen.sur($val-number) mgen.su($val-number);
 			}
@@ -129,7 +165,13 @@
 	);
 }
 
-@function convert-util-value-new-unitless($value, $data: ()) {
+@function convert-util-value-resolution($value, $data: ()) {
+	@return convert-util-value-number(
+		$value, ('units-key': 'resolution')
+	);
+}
+
+@function convert-util-value-unitless($value, $data: ()) {
 	@return mgen.str2n($value) or $value;
 }
 
