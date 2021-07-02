@@ -1,0 +1,151 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
+
+@use '../../settings' as mlu;
+@use '../general' as mgen;
+@use '../getters' as mget;
+
+@function convert-util-value-list($util-val, $name, $section: 'utils') {
+	@if meta.type-of($util-val) == 'string' {
+		$space: ' ';
+
+		$multi-list-sep: if(
+			map.has-key(mlu.$utils-data, $section, 'registry', $name, 'multi-list-separator'),
+			map.get(mlu.$utils-data, $section, 'registry', $name, 'multi-list-separator'),
+			mlu.$tULv
+		);
+
+		@if string.index($util-val, $multi-list-sep) or string.index($util-val, mlu.$tUSp) {
+			$result: '';
+			$separator: $multi-list-sep + $space;
+
+			@each $list in mgen.str-split($util-val, $multi-list-sep) {
+				$items: mgen.str-split($list, mlu.$tUSp);
+				$length: list.length($items);
+
+				@each $value in $items {
+					$converted: '';
+
+					@if string.slice($value, 1, 1) == '=' {
+						$converted: string.slice($value, 2);
+					} @else {
+						$converted: apply-value-converter($value, $name, $section, $length);
+					}
+
+					$result: $result + $converted + $space;
+				}
+
+				$result: $result + $separator;
+			}
+
+			@return string.unquote(
+				string.slice($result, 1, -(1 + string.length($separator + $space)))
+			);
+		}
+
+		@if string.slice($util-val, 1, 1) == '=' {
+			@return string.unquote(string.slice($util-val, 2));
+		}
+	}
+
+	@return apply-value-converter($util-val, $name, $section);
+}
+
+@function apply-value-converter($util-val, $name, $section, $list-length: 1) {
+	$value-type: if(
+		map.has-key(mlu.$utils-data, $section, 'registry', $name, 'value-type'),
+		map.get(mlu.$utils-data, $section, 'registry', $name, 'value-type'),
+		map.get(mlu.$utils-config, 'default-value-type'),
+	);
+
+	@each $item in $value-type {
+		@if map.has-key(mlu.$utils-config, 'new-value-converters', $item) {
+			$util-val: meta.call(
+				map.get(mlu.$utils-config, 'new-value-converters', $item),
+				$util-val,
+				(
+					'name': $name,
+					'section': $section,
+					'list-length': $list-length,
+				)
+			);
+		}
+	}
+
+	@return $util-val;
+}
+
+@function convert-util-value-number($value, $data: ()) {
+	$val-number: mgen.str2n($value, true);
+	$section: map.get($data, 'section');
+	$name: map.get($data, 'name');
+
+	@if meta.type-of($val-number) == 'number' {
+		$unit-number: 0;
+		$unit: math.unit($val-number);
+
+		$unit-number: map.get(
+			mlu.$utils-config, 'units', map.get($data, 'units-key') or 'default', $unit
+		);
+
+		@if $unit-number {
+			@return mgen.str2n($value + '_') * $unit-number;
+		}
+
+		@if $unit == 'su' {
+			@if map.get(
+				mlu.$utils-data, $section, 'registry', $name, 'directed'
+			) and map.get($data, 'list-length') == 1 {
+				@return mgen.sur($val-number) mgen.su($val-number);
+			}
+
+			@return if(
+				-rem-util($name, $section),
+				mgen.sur($val-number),
+				mgen.su($val-number)
+			);
+		}
+
+		@return $val-number;
+	}
+
+	@return $value;
+}
+
+@function -rem-util($name, $section) {
+	@if map.get(mlu.$utils-data, $section, 'registry', $name, 'affects-height') {
+		@return true;
+	}
+
+	$prop: mget.util-prop($name, 0, $section);
+
+	@return if(
+		string.index($prop, 'top') or string.index($prop, 'bottom'),
+		true,
+		false
+	);
+}
+
+@function convert-util-value-new-unitless($value, $data: ()) {
+	@return mgen.str2n($value) or $value;
+}
+
+@function convert-util-value-css-kw($value, $data: ()) {
+	@return if(
+		map.has-key(mlu.$utils-config, 'css-keywords', $value),
+		map.get(mlu.$utils-config, 'css-keywords', $value),
+		$value
+	);
+}
+
+@function convert-util-value-abbr($value, $data: ()) {
+	@return (
+		mget.util-prop(mgen.str-ucfirst($value), 0, map.get($data, 'section')) or
+		// maybe in the future, the keys of utils in the registry will be unified
+		mget.util-prop($value, 0, map.get($data, 'section')) or
+		$value
+	);
+}

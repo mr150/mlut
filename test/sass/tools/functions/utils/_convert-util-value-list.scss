@@ -1,0 +1,89 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass-true' as *;
+@use 'tools' as mlu;
+
+$default-type: map.get(mlu.$utils-config, 'default-value-type');
+$unitless-type: list.set-nth($default-type, 1, 'new-unitless');
+
+mlu.$utils-data: map.deep-merge(
+	mlu.$utils-data,
+	('utils':
+	(
+		'registry': (
+			'Fw': (
+				'value-type': $unitless-type,
+			),
+			'Fz': (
+				'props': font-size,
+				'affects-height': true,
+			),
+			'Trs': (
+				'props': transition,
+				'value-type': list.join('abbr', $default-type),
+			),
+			'Bdrs': (
+				'props': border-radius,
+				'multi-list-separator': '/',
+			),
+			'P': (
+				'props': padding,
+				'directed': true,
+			),
+			'Gc': (
+				'props': grid-column,
+				'value-type': $unitless-type,
+				'multi-list-separator': '/',
+			),
+	),
+	)
+	)
+);
+
+@include describe('tools/functions/utils/') {
+	@include describe('convert-util-value-list') {
+		$-tests: (
+			'converts number': (
+				(200, 'W'): 200px,
+				('=200', 'W'): 200,
+				('20vw', 'W'): 20vw,
+				(300, 'Fw'): 300,
+				(2su, 'Fz'): mlu.sur(2),
+				(2su, 'P'): mlu.sur(2) mlu.su(2),
+				(200x, 'W'): 200ex,
+				('16/9', 'Ar'): '16/9',
+			),
+			'converts global CSS keyword': (
+				('a', 'W'): auto,
+				('=a', 'W'): a,
+			),
+			'converts property abbreviation': (
+				('bgc', 'Trs'): background-color,
+				('=bgc', 'Trs'): bgc,
+			),
+			'converts values list': (
+				('1r:2:5p', 'Bdrs'): 1rem 2px 5%,
+				('1r:=10x', 'M'): 1rem 10x,
+				('3su:16:a', 'M'): mlu.su(3) 16px auto,
+			),
+			'converts values multi list': (
+				('1r:2/5p', 'Bdrs'): string.unquote('1rem 2px / 5%'),
+				('bdc:3s,c:2s', 'Trs'): string.unquote('border-color 3s , color 2s'),
+				('3/5', 'Gc'): string.unquote('3 / 5'),
+			),
+		);
+
+		@each $test, $data in $-tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						mlu.convert-util-value-list($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
+}

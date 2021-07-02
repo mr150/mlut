@@ -7,6 +7,8 @@
 @use '../settings' as mlu;
 @use 'general' as mgen;
 @use 'getters' as mget;
+@use 'utils/value-converters' as converters;
+@forward 'utils/value-converters';
 
 /*
 Utilities
@@ -521,7 +523,26 @@ $util-value-converters: (
 	'resolution': meta.get-function('convert-util-value-resolution'),
 ) !default;
 
+$new-util-value-converters: ();
+
 $util-value-converters: map.merge(
 	$util-value-converters,
 	map.get(mlu.$utils-config, 'value-converters'),
+);
+
+$-fn-name-prefix: 'convert-util-value-';
+$-fn-prefix-length: string.length($-fn-name-prefix);
+
+@each $key, $value in meta.module-functions(converters) {
+	@if string.index($key, $-fn-name-prefix) {
+		$new-util-value-converters: map.set(
+			$new-util-value-converters, string.slice($key, $-fn-prefix-length + 1), $value
+		);
+	}
+}
+
+mlu.$utils-config: map.set(
+	mlu.$utils-config,
+	'new-value-converters',
+	map.merge($new-util-value-converters, map.get(mlu.$utils-config, 'new-value-converters'))
 );
