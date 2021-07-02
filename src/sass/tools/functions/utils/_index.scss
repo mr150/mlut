@@ -367,16 +367,19 @@ $-states-abbrs: list.join(
 		()
 	);
 
-	$value-unit-name: math.unit($start-number);
-	$value-unit: map.get(mlu.$units-all, $value-unit-name);
+	$unit-name: math.unit($start-number);
+	$unit: map.get(mlu.$units-all, $unit-name);
 	$converted-start: converters.convert-util-value($start-number, $util);
-	$css-value-unit-name: math.unit($converted-start);
-	$css-value-unit: map.get(mlu.$units-all, $css-value-unit-name);
+	$css-unit-name: math.unit($converted-start);
+	$css-unit: map.get(mlu.$units-all, $css-unit-name);
 
-	@if map.has-key(mlu.$general-data, 'units', 'custom', $value-unit-name) and
-		map.has-key(mlu.$general-data, '#{$value-unit-name}-values', $css-value-unit-name) {
-		$css-value-unit: map.get(
-			mlu.$general-data, '#{$value-unit-name}-values', $css-value-unit-name
+	//stylelint-disable
+	@if map.has-key(mlu.$general-data, 'units', 'custom', $unit-name) and
+	map.has-key(
+		mlu.$general-data, 'custom-unit-values', $unit-name, $css-unit-name
+	) {
+		$css-unit: map.get(
+			mlu.$general-data, 'custom-unit-values', $unit-name, $css-unit-name
 		);
 	}
 
@@ -386,11 +389,11 @@ $-states-abbrs: list.join(
 	$i: if(
 		math.is-unitless($start-number),
 		$start-number,
-		$converted-start / $css-value-unit
+		$converted-start / $css-unit
 	);
 
 	@while $i <= list.nth($range, 2) {
-		$values: map.set($values, $i * $value-unit, $i * $css-value-unit);
+		$values: map.set($values, $i * $unit, $i * $css-unit);
 		$i: $i + $step;
 	}
 

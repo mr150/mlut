@@ -234,7 +234,7 @@ Styleguide: sass-tools.functions.general
 		$n: $n / 1su;
 	}
 
-	@return map.get(mlu.$general-data, 'su-values', $unit) * $n;
+	@return map.get(mlu.$general-data, 'custom-unit-values', 'su', $unit) * $n;
 }
 
 @function sur($n) {

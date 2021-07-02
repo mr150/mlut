@@ -25,9 +25,11 @@ $general-data: (
 		'b': bottom,
 		'l': left,
 	),
-	'su-values': (
-		'px': $su-cf * 1px,
-		'rem': (1px / $browser-font-size * $su-cf) * 1rem,
+	'custom-unit-values': (
+		'su': (
+			'px': $su-cf * 1px,
+			'rem': (1px / $browser-font-size * $su-cf) * 1rem,
+		),
 	),
 	'units': (
 		'css': (
@@ -78,8 +80,8 @@ $general: () !default;
 
 $general-data: map.deep-merge($general-data, $general);
 
-$su: map.get($general-data, 'su-values', 'px');
-$su-rem: map.get($general-data, 'su-values', 'rem');
+$su: map.get($general-data, 'custom-unit-values', 'su', 'px');
+$su-rem: map.get($general-data, 'custom-unit-values', 'su', 'rem');
 
 $main-directions: map.get($general-data, 'main-directions');
 
