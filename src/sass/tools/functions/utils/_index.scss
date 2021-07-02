@@ -4,11 +4,11 @@
 @use 'sass:math';
 @use 'sass:string';
 
-@use '../settings' as mlu;
-@use 'general' as mgen;
-@use 'getters' as mget;
-@use 'utils/value-converters' as converters;
-@forward 'utils/value-converters';
+@use '../../settings' as mlu;
+@use '../general' as mgen;
+@use '../getters' as mget;
+@use 'value-converters' as converters;
+@forward 'value-converters';
 
 /*
 Utilities
