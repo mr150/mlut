@@ -50,7 +50,7 @@ Styleguide: sass-tools.functions.general
 		@if $digit and not $decimal {
 			$result: $result * 10 + ($digit - 1);
 		} @else if $digit and $decimal {
-			$result: $result + ($digit - 1) / $decimal;
+			$result: $result + math.div($digit - 1, $decimal);
 			$decimal: $decimal * 10;
 		} @else if $char == '.' and not $decimal {
 			$decimal: 10;
@@ -231,7 +231,7 @@ Styleguide: sass-tools.functions.general
 	}
 
 	@if math.unit($n) == 'su' {
-		$n: $n / 1su;
+		$n: math.div($n, 1su);
 	}
 
 	@return map.get(mlu.$general-data, 'custom-unit-values', 'su', $unit) * $n;

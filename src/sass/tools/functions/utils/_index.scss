@@ -389,7 +389,7 @@ $-states-abbrs: list.join(
 	$i: if(
 		math.is-unitless($start-number),
 		$start-number,
-		$converted-start / $css-unit
+		math.div($converted-start, $css-unit)
 	);
 
 	@while $i <= list.nth($range, 2) {

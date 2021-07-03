@@ -292,7 +292,7 @@ $coef: 1, $css-vars: mlu.$flag-css-vars) {
 	@if meta.type-of($width) == 'number' and
 		(math.unit($width) == 'c' or math.unit($width) == 'gc' or math.unit($width) == 'gs') {
 		$tmp-val: mlu.str2n($width + '_');
-		$col-width: mlu.decimal-floor($tmp-val / $columns * 100%, 3);
+		$col-width: mlu.decimal-floor(math.div($tmp-val, $columns) * 100%, 3);
 		$custom-unit: if(math.unit($width) == 'gc', 'gc', 'gs');
 		$custom-unit: if(math.unit($width) == 'c', $tmp-val, $custom-unit);
 	} @else if meta.type-of($width) == 'number' or list.index($valid-values, $width) {

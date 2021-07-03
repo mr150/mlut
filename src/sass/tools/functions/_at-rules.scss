@@ -109,7 +109,7 @@ Styleguide: sass-tools.functions.at_rules
 		}
 
 		@if $separator == '<' or $separator == '>' {
-			$value-diff: $feat-value / mgen.str2n($feat-value + '_');
+			$value-diff: math.div($feat-value, mgen.str2n($feat-value + '_'));
 
 			@if $value-unit == 'rem' or $value-unit == 'em' {
 				$value-diff: $value-diff * 0.06; // 1px = 0.062rem

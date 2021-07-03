@@ -40,11 +40,11 @@ Styleguide: sass-tools.functions.math
 	}
 
 	@if $type == 'round' {
-		@return math.round($number * $n) / $n;
+		@return math.div(math.round($number * $n), $n);
 	} @else if $type == 'ceil' {
-		@return math.ceil($number * $n) / $n;
+		@return math.div(math.ceil($number * $n), $n);
 	} @else if $type == 'floor' {
-		@return math.floor($number * $n) / $n;
+		@return math.div(math.floor($number * $n), $n);
 	} @else {
 		@error 'Invalid round type: `#{$type}`';
 	}
@@ -107,14 +107,14 @@ Styleguide: sass-tools.functions.math
 	}
 
 	@if $unit == 'rem' {
-		@return decimal-round($number / $divider, 2) * 1rem;
+		@return decimal-round(math.div($number, $divider), 2) * 1rem;
 	}
 
 	@if $unit == 'no' {
-		@return decimal-round($number / $divider, 2);
+		@return decimal-round(math.div($number, $divider), 2);
 	}
 
-	@return decimal-round($number / $divider, 2) * 1em;
+	@return decimal-round(math.div($number, $divider), 2) * 1em;
 }
 
 

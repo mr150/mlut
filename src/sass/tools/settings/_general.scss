@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:math';
 
 // General
 //
@@ -28,7 +29,7 @@ $general-data: (
 	'custom-unit-values': (
 		'su': (
 			'px': $su-cf * 1px,
-			'rem': (1px / $browser-font-size * $su-cf) * 1rem,
+			'rem': math.div(1px, $browser-font-size * $su-cf) * 1rem,
 		),
 	),
 	'units': (
