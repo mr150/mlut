@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-		sass = require('gulp-dart-sass'),
+		sass = require('gulp-sass')(require('sass')),
 		pug = require('gulp-pug'),
 		browserSync = require('browser-sync'),
 		rigger = require('gulp-rigger'),
