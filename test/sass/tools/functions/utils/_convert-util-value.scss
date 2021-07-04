@@ -46,9 +46,9 @@ mlu.$utils-data: map.deep-merge(
 				('3su:16:a', 'M'): mlu.su(3) 16px auto,
 			),
 			'converts values multi list': (
-				('1r:2/5p', 'Bdrs'): string.unquote('1rem 2px / 5%'),
-				('bdc:3s,c:2s', 'Trs'): string.unquote('border-color 3s , color 2s'),
-				('3/5', 'Gc'): string.unquote('3 / 5'),
+				('1r:2/5p', 'Bdrs'): list.slash(1rem 2px, 5%),
+				('bdc:3s,c:2s', 'Trs'): (border-color 3s, color 2s),
+				('3/5', 'Gc'): list.slash(3, 5),
 			),
 		);
 

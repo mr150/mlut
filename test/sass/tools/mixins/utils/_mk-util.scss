@@ -510,7 +510,7 @@ mlu.$utils-data: map.deep-merge(
 						'-Xy', (
 						0: null,
 						'sm0:xs0_h': (1rem, 20px),
-						(1r, 10, 2r): null,
+						'1r:10:2r': null,
 						'md0': (2rem, 20px, 1rem, 12px),
 					));
 				}
@@ -558,7 +558,7 @@ mlu.$utils-data: map.deep-merge(
 						0: null,
 						'sm0': (1rem, 2),
 						'lg1': (null, 5),
-						('lg_a', -1): null,
+						'lg_a:-1': null,
 					));
 				}
 
@@ -627,8 +627,8 @@ mlu.$utils-data: map.deep-merge(
 				@include output(false) {
 					@include mlu.new-mk-util(
 						'Bdrs', (
-						('^:+_5', 10): null,
-						(50p, 50p, 12, 12): null,
+						'^:+_5:10': null,
+						'50p:50p:12:12': null,
 						'xs0': 0 8px 50%,
 					));
 				}

@@ -51,29 +51,17 @@
 			$post-states: map.get($util-val-data, 'post-states');
 			$pre-states: map.get($util-val-data, 'pre-states');
 			$css-values: $value;
-			$util-value: $util-parsed-val;
 
-			@if not $css-values {
-				$css-values: ();
-				$util-value: '';
-
-				@each $item in list.set-nth($key, 1, $util-parsed-val) {
-					$css-values: list.append(
-						$css-values, if(
-							$value == null, mlu.convert-util-value($item, $key-name), $item,
-						)
-					);
-
-					$util-value: $util-value + $item + mlu.$tUSp;
-				}
-
-				$util-value: string.slice($util-value, 1, -1 - string.length(mlu.$tUSp));
+			@if $css-values == null {
+				$css-values: mlu.convert-util-value($util-parsed-val, $key-name);
+			} @else if $css-values == false {
+				$css-values: $util-parsed-val;
 			}
 
 			$separated-value: if(
 				$util-name == '',
-				$util-value,
-				mlu.util-separated-value($util-value),
+				$util-parsed-val,
+				mlu.util-separated-value($util-parsed-val),
 			);
 
 			$selector: mlu.str-escape($util-name + $separated-value);

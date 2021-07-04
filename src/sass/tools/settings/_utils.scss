@@ -151,10 +151,12 @@ $utils-config: (
 	'tokens': (
 		'util': (
 			'str-value': '-',
+			'raw-value': '=',
 			'num-value': '',
 			'space': ':',
 			'custom-value': '-',
-			'list-value': ',',
+			'list-separator1': ',',
+			'list-separator2': '/',
 			'component': '_',
 		),
 		'states': (
@@ -202,6 +204,32 @@ $utils-config: map.deep-merge($utils-config, $utils);
 $util-type-default: map.get($utils-config, 'default-value-type');
 $util-type-unitless: list.set-nth($util-type-default, 1, 'unitless');
 $-abbr-type: list.join('abbr', $util-type-default);
+
+$tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
+$tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
+$tURv: map.get($utils-config, 'tokens', 'util', 'raw-value');
+$tUCv: map.get($utils-config, 'tokens', 'util', 'custom-value');
+$tUCm: map.get($utils-config, 'tokens', 'util', 'component');
+$tUSp: map.get($utils-config, 'tokens', 'util', 'space');
+$tULs1: map.get($utils-config, 'tokens', 'util', 'list-separator1');
+$tULs2: map.get($utils-config, 'tokens', 'util', 'list-separator2');
+$tSOr: map.get($utils-config, 'tokens', 'states', 'or');
+$tSAnd: map.get($utils-config, 'tokens', 'states', 'and');
+$tSNot: map.get($utils-config, 'tokens', 'states', 'not');
+$tSCs: map.get($utils-config, 'tokens', 'states', 'custom');
+$tSTu: map.get($utils-config, 'tokens', 'states', 'this-util');
+$tSCn: map.get($utils-config, 'tokens', 'states', 'context');
+$tSRaw: map.get($utils-config, 'tokens', 'states', 'raw');
+$tSTucv: $tSTu + $tUSv;
+
+$utils-config: map.set(
+	$utils-config,
+	'tokens-values',
+	(
+		$tULs1: comma,
+		$tULs2: slash,
+	)
+);
 
 $utils-data: (
 	'utils': (
@@ -290,7 +318,7 @@ $utils-data: (
 			'Bdw': border-width,
 			'Bdrs': (
 				'props': border-radius,
-				'multi-list-separator': '/',
+				'multi-list-separator': $tULs2,
 			),
 			'Trs': (
 				'props': transition,
@@ -350,18 +378,3 @@ $utils-states: map.merge(
 	map.get($utils-config, 'states', 'pseudo'),
 	map.get($utils-config, 'states', 'special'),
 );
-
-$tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
-$tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
-$tUCv: map.get($utils-config, 'tokens', 'util', 'custom-value');
-$tUCm: map.get($utils-config, 'tokens', 'util', 'component');
-$tUSp: map.get($utils-config, 'tokens', 'util', 'space');
-$tULv: map.get($utils-config, 'tokens', 'util', 'list-value');
-$tSOr: map.get($utils-config, 'tokens', 'states', 'or');
-$tSAnd: map.get($utils-config, 'tokens', 'states', 'and');
-$tSNot: map.get($utils-config, 'tokens', 'states', 'not');
-$tSCs: map.get($utils-config, 'tokens', 'states', 'custom');
-$tSTu: map.get($utils-config, 'tokens', 'states', 'this-util');
-$tSCn: map.get($utils-config, 'tokens', 'states', 'context');
-$tSRaw: map.get($utils-config, 'tokens', 'states', 'raw');
-$tSTucv: $tSTu + $tUSv;

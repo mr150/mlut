@@ -45,38 +45,41 @@
 		$multi-list-sep: if(
 			map.has-key(mlu.$utils-data, $section, 'registry', $name, 'multi-list-separator'),
 			map.get(mlu.$utils-data, $section, 'registry', $name, 'multi-list-separator'),
-			mlu.$tULv
+			mlu.$tULs1
 		);
 
 		@if string.index($util-val, $multi-list-sep) or string.index($util-val, mlu.$tUSp) {
-			$result: '';
-			$separator: $multi-list-sep + $space;
+			$result: ();
+			$separator: map.get(mlu.$utils-config, 'tokens-values', $multi-list-sep);
 
 			@each $list in mgen.str-split($util-val, $multi-list-sep) {
 				$items: mgen.str-split($list, mlu.$tUSp);
 				$length: list.length($items);
+				$converted-items: ();
 
 				@each $value in $items {
 					$converted: '';
 
-					@if string.slice($value, 1, 1) == '=' {
-						$converted: string.slice($value, 2);
+					@if string.slice($value, 1, 1) == mlu.$tURv {
+						$converted: string.unquote(string.slice($value, 2));
 					} @else {
 						$converted: apply-value-converter($value, $name, $section, $length);
 					}
 
-					$result: $result + $converted + $space;
+					$converted-items: list.append($converted-items, $converted);
 				}
 
-				$result: $result + $separator;
+				$result: list.append($result, $converted-items, $separator);
 			}
 
-			@return string.unquote(
-				string.slice($result, 1, -(1 + string.length($separator + $space)))
+			@return if(
+				list.length($result) == 1,
+				list.nth($result, 1),
+				$result
 			);
 		}
 
-		@if string.slice($util-val, 1, 1) == '=' {
+		@if string.slice($util-val, 1, 1) == mlu.$tURv {
 			@return string.unquote(string.slice($util-val, 2));
 		}
 	}
