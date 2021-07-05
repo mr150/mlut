@@ -651,6 +651,26 @@ mlu.$utils-data: map.deep-merge(
 					}
 				}
 			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Bdrs', (
+						'=50:1r_h StOnly',
+						'12:=20'
+					));
+				}
+
+				@include expect(false) {
+					.Bdrs\=50\:1r_h:hover {
+						border-radius: 50 1rem;
+					}
+
+					.Bdrs12\:\=20 {
+						border-radius: 12px 20;
+					}
+				}
+			}
 		}
 
 	}

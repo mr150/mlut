@@ -341,9 +341,13 @@ $-states-abbrs: list.join(
 		@return '';
 	}
 
+	@if mgen.str2n($value) {
+		@return mlu.$tUNv + $value;
+	}
+
 	@return if(
-		mgen.str2n($value) or $value == '',
-		mlu.$tUNv + $value,
+		meta.type-of($value) == 'string' and string.slice($value, 1, 1) == mlu.$tURv,
+		$value,
 		mlu.$tUSv + $value
 	);
 }
