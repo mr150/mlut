@@ -159,7 +159,7 @@
 		@return true;
 	}
 
-	$prop: mget.util-prop($name, 0, $section);
+	$prop: mget.util-prop($name, $section);
 
 	@return if(
 		string.index($prop, 'top') or string.index($prop, 'bottom'),
@@ -188,9 +188,9 @@
 
 @function convert-util-value-abbr($value, $data: ()) {
 	@return (
-		mget.util-prop(mgen.str-ucfirst($value), 0, map.get($data, 'section')) or
+		mget.util-prop(mgen.str-ucfirst($value), map.get($data, 'section')) or
 		// maybe in the future, the keys of utils in the registry will be unified
-		mget.util-prop($value, 0, map.get($data, 'section')) or
+		mget.util-prop($value, map.get($data, 'section')) or
 		$value
 	);
 }

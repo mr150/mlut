@@ -45,7 +45,7 @@ Styleguide: sass-tools.functions.at_rules
 	}
 
 	$result: '';
-	$feature: mget.util-prop($abbr, 0, $section);
+	$feature: mget.util-prop($abbr, $section);
 
 	@if map.has-key(mlu.$utils-data, $section, 'map', $abbr, '') {
 		@return "(#{$feature}: #{map.get(mlu.$utils-data, $section, 'map', $abbr, '')})";
@@ -94,7 +94,7 @@ Styleguide: sass-tools.functions.at_rules
 		);
 	}
 
-	$feature: mget.util-prop($abbr-feature, 0, $section);
+	$feature: mget.util-prop($abbr-feature, $section);
 	$feat-value: map.get(mlu.$utils-data, $section, 'map', $abbr-feature, $abbr-value);
 
 	@if not $feat-value {

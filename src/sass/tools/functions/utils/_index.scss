@@ -54,7 +54,7 @@ $-states-abbrs: list.join(
 
 	@return (
 		'value': if(
-			mgen.str2n($util-val) or mget.util-prop($util-val, 0),
+			mgen.str2n($util-val) or mget.util-prop($util-val),
 			$util-val,
 			'-' + $util-val
 		),
@@ -195,7 +195,7 @@ $-states-abbrs: list.join(
 
 		$dir: string.slice($key, 1, 1);
 		$dir-val: map.get(mlu.$main-directions, $dir);
-		$util-prop: mget.util-prop($name, 0);
+		$util-prop: mget.util-prop($name);
 		$util-name: '';
 
 		$utils-map-item-val: -cut-map-item-val($key, $value, 2);

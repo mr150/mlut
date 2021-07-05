@@ -164,7 +164,7 @@
 	} @else if $options {
 		$prop: $options;
 	} @else {
-		$prop: mlu.util-prop($key-name, 0);
+		$prop: mlu.util-prop($key-name);
 	}
 
 	@if not $prop {

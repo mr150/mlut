@@ -186,20 +186,16 @@ Styleguide: sass-tools.functions.getters
 //```
 //
 // $name - utility name. Type: string.
-// $error-handler = 1 - works similarly like [here](#kssref-sass-tools-functions-bp).
+// $section = 'utils' - section in the registry in which utility was defined
 //
 // Styleguide: sass-tools.functions.getters.util_prop
 
-@function util-prop($name, $error-handler: 1, $section: 'utils') {
-	@if map.has-key(mlu.$utils-data, $section, 'registry', $name) or $error-handler == 0 {
-		$options: map.get(mlu.$utils-data, $section, 'registry', $name);
+@function util-prop($name, $section: 'utils') {
+	$options: map.get(mlu.$utils-data, $section, 'registry', $name);
 
-		@return if(
-			meta.type-of($options) == 'map',
-			map.get($options, 'props'),
-			$options
-		);
-	}
-
-	@error 'Invalid utility name. `#{$name}` is not defined in $mlu-utils-map';
+	@return if(
+		meta.type-of($options) == 'map',
+		map.get($options, 'props'),
+		$options
+	);
 }
