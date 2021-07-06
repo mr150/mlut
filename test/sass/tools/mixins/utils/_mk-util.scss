@@ -678,13 +678,13 @@ mlu.$utils-data: map.deep-merge(
 				@include output(false) {
 					@include mlu.new-mk-util(
 						'width', (
-						'a',
+						5su,
 					));
 				}
 
 				@include expect(false) {
-					.width-a {
-						width: auto;
+					.width5su {
+						width: mlu.su(5);
 					}
 				}
 			}
