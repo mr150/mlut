@@ -164,11 +164,7 @@
 	} @else if $options {
 		$prop: $options;
 	} @else {
-		$prop: mlu.util-prop($key-name);
-	}
-
-	@if not $prop {
-		$prop: $key-name;
+		$prop: mlu.util-prop($key-name, 'utils', true);
 	}
 
 	@return map.set($result, 'props', $prop);

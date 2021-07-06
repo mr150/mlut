@@ -673,5 +673,22 @@ mlu.$utils-data: map.deep-merge(
 			}
 		}
 
+		@include it('make util with name as a property') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'width', (
+						'a',
+					));
+				}
+
+				@include expect(false) {
+					.width-a {
+						width: auto;
+					}
+				}
+			}
+		}
+
 	}
 }
