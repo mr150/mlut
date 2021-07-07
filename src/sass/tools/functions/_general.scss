@@ -230,11 +230,17 @@ Styleguide: sass-tools.functions.general
 		@return error('Wrong type of argument $n: `#{meta.type-of($n)}`. Expected `number`');
 	}
 
+	$init-value: map.get(mlu.$general-data, 'custom-unit-values', 'su', $unit);
+
+	@if not $init-value {
+		@return error('No initial value for converting to `#{$unit}` unit');
+	}
+
 	@if math.unit($n) == 'su' {
 		$n: math.div($n, 1su);
 	}
 
-	@return map.get(mlu.$general-data, 'custom-unit-values', 'su', $unit) * $n;
+	@return $init-value * $n;
 }
 
 @function sur($n) {

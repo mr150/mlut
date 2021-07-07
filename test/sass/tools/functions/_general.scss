@@ -189,6 +189,13 @@ $test-list: (0, 1, 2, 3);
 				'ERROR: Wrong type of argument $n: `string`. Expected `number`',
 			);
 		}
+
+		@include it('unable convert to unit') {
+			@include assert-equal(
+				mlu.su(2, 'cm'),
+				 'ERROR: No initial value for converting to `cm` unit',
+			);
+		}
 	}
 
 	@include describe('str2n') {
