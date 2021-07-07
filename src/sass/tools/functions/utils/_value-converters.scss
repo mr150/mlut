@@ -141,10 +141,9 @@
 				@return mgen.sur($val-number) mgen.su($val-number);
 			}
 
-			@return if(
-				-rem-util($name, $section),
-				mgen.sur($val-number),
-				mgen.su($val-number)
+			@return mgen.su(
+				$val-number,
+				map.get(mlu.$utils-data, $section, 'registry', $name, 'default-unit')
 			);
 		}
 
@@ -152,20 +151,6 @@
 	}
 
 	@return $value;
-}
-
-@function -rem-util($name, $section) {
-	@if map.get(mlu.$utils-data, $section, 'registry', $name, 'affects-height') {
-		@return true;
-	}
-
-	$prop: mget.util-prop($name, $section, true);
-
-	@return if(
-		string.index($prop, 'top') or string.index($prop, 'bottom'),
-		true,
-		false
-	);
 }
 
 @function convert-util-value-resolution($value, $data: ()) {

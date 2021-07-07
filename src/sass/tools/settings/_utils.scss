@@ -282,7 +282,7 @@ $utils-data: (
 			),
 			'Fz': (
 				'props': font-size,
-				'affects-height': true,
+				'default-unit': 'rem',
 			),
 			'Ff': font-family,
 			'Fs': font-style,

@@ -230,7 +230,7 @@ Styleguide: sass-tools.functions.general
 		@return error('Wrong type of argument $n: `#{meta.type-of($n)}`. Expected `number`');
 	}
 
-	$init-value: map.get(mlu.$general-data, 'custom-unit-values', 'su', $unit);
+	$init-value: map.get(mlu.$general-data, 'custom-unit-values', 'su', $unit or 'px');
 
 	@if not $init-value {
 		@return error('No initial value for converting to `#{$unit}` unit');

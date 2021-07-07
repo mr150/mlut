@@ -231,6 +231,22 @@ mlu.$utils-data: map.deep-merge(
 					}
 				}
 			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Fz', (
+						3su,
+					));
+				}
+
+				@include expect(false) {
+					.Fz3su {
+						font-size: mlu.sur(3);
+					}
+				}
+			}
+
 		}
 
 		@include it('make util from list of ranges') {
