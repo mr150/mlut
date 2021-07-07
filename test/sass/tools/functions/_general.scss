@@ -198,6 +198,29 @@ $test-list: (0, 1, 2, 3);
 		}
 	}
 
+	@include describe('grid gutter unit converters') {
+		$-tests: (
+			'unable convert to unit': (
+				(3, 'cm'): 'ERROR: No CSS variable for converting to `cm` unit',
+			),
+			'wrong type of argument': (
+				'5': 'ERROR: Wrong type of argument $n: `string`. Expected `number`'
+			),
+	);
+
+		@each $test, $data in $-tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						mls.gg($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
+
 	@include describe('str2n') {
 		@include it('converts string to number with unit') {
 			@include assert-equal(

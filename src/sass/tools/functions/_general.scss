@@ -247,6 +247,36 @@ Styleguide: sass-tools.functions.general
 	@return su($n, 'rem');
 }
 
+@function gg($n, $unit: null) {
+	@if meta.type-of($n) != 'number' {
+		@return error('Wrong type of argument $n: `#{meta.type-of($n)}`. Expected `number`');
+	}
+
+	@if math.unit($n) == 'gg' {
+		$n: math.div($n, 1gg);
+	}
+
+	$var-name: if(
+		$unit,
+		'gg-' + $unit,
+		'gg'
+	);
+
+	@if not map.has-key(mlu.$css-vars, $var-name) {
+		@return error('No CSS variable for converting to `#{$unit}` unit');
+	}
+
+	@return string.unquote('calc(var(#{map.get(mlu.$css-vars, $var-name)}) * #{$n})');
+}
+
+@function ggr($n) {
+	@return gg($n, 'rem');
+}
+
+mlu.$general-data: map.set(
+	mlu.$general-data, 'custom-unit-values', 'gg', meta.get-function('gg', false)
+);
+
 // Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.
 
 @function ls-implode($list, $separator: '') {
