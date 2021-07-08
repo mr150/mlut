@@ -2,6 +2,22 @@
 @use 'sass-true' as *;
 @use 'tools' as mlu;
 
+mlu.$utils-data: map.deep-merge(
+	mlu.$utils-data,
+	('utils':
+	(
+		'registry': (
+			'Prop': (
+				'props': (
+					' --prop': 'fallback',
+					'--prop': null,
+				),
+			),
+	),
+	)
+	)
+);
+
 @include describe('tools/functions/at-rules/') {
 	@include describe('convert-feature-abbr') {
 		@include it('converts abbr without separator') {
@@ -84,6 +100,13 @@
 			@include assert-equal(
 				mlu.convert-feature-abbr('H<=100su'),
 				'(max-height: 400px)',
+			);
+		}
+
+		@include it('converts abbr of util with several properties') {
+			@include assert-equal(
+				mlu.convert-feature-abbr('Prop1gg'),
+				'(--prop: #{mlu.gg(1)})',
 			);
 		}
 	}
