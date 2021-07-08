@@ -374,30 +374,35 @@ $-states-abbrs: list.join(
 	$unit-name: math.unit($start-number);
 	$unit: map.get(mlu.$units-all, $unit-name);
 	$converted-start: converters.convert-util-value($start-number, $util);
-	$css-unit-name: math.unit($converted-start);
-	$css-unit: map.get(mlu.$units-all, $css-unit-name);
+	$css-unit-name: map.get(mlu.$utils-data, 'utils', 'registry', $util, 'default-unit');
+	$css-unit: null;
 
-	//stylelint-disable
-	@if map.has-key(mlu.$general-data, 'units', 'custom', $unit-name) and
-	map.has-key(
-		mlu.$general-data, 'custom-unit-values', $unit-name, $css-unit-name
-	) {
+	@if meta.type-of($converted-start) == 'number' {
+		$css-unit-name: math.unit($converted-start);
+		$css-unit: map.get(mlu.$units-all, $css-unit-name);
+	}
+
+	@if map.has-key(mlu.$general-data, 'custom-unit-values', $unit-name) {
 		$css-unit: map.get(
 			mlu.$general-data, 'custom-unit-values', $unit-name, $css-unit-name
-		);
+		) or map.get(mlu.$general-data, 'custom-unit-values', $unit-name);
 	}
 
 	$step: if((list.length($range) > 2), list.nth($range, 3), 1);
 	$values: ();
-
-	$i: if(
-		math.is-unitless($start-number),
-		$start-number,
-		math.div($converted-start, $css-unit)
-	);
+	$is-css-unit-fn: meta.type-of($css-unit) == 'function';
+	$i: math.div($start-number, $unit);
 
 	@while $i <= list.nth($range, 2) {
-		$values: map.set($values, $i * $unit, $i * $css-unit);
+		$values: map.set(
+			$values,
+			$i * $unit,
+			if(
+				$is-css-unit-fn,
+				meta.call($css-unit, $i, $css-unit-name),
+				$i * $css-unit
+			)
+		);
 		$i: $i + $step;
 	}
 

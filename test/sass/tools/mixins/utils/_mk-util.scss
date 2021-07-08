@@ -165,7 +165,7 @@ mlu.$utils-data: map.deep-merge(
 				@include output(false) {
 					@include mlu.new-mk-util(
 						'Maw', (
-						10, 4vw, 'a', 2su,
+						10, 4vw, 'a', 2su, 5gg
 					));
 				}
 
@@ -184,6 +184,10 @@ mlu.$utils-data: map.deep-merge(
 
 					.Maw2su {
 						max-width: mlu.su(2);
+					}
+
+					.Maw5gg {
+						max-width: calc(var(#{mlu.$var-gg}) * 5);
 					}
 				}
 			}
@@ -236,13 +240,34 @@ mlu.$utils-data: map.deep-merge(
 				@include output(false) {
 					@include mlu.new-mk-util(
 						'Fz', (
-						3su,
+						3su, 3gg,
 					));
 				}
 
 				@include expect(false) {
 					.Fz3su {
 						font-size: mlu.sur(3);
+					}
+
+					.Fz3gg {
+						//font-size: 3rem;
+						font-size: calc(var(#{mlu.$var-gg-rem}) * 3);
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'M', (
+						2gg,
+					));
+				}
+
+				@include expect(false) {
+					.M2gg {
+						//margin: 2rem 32px;
+						margin: mlu.ggr(2) mlu.gg(2);
 					}
 				}
 			}
@@ -319,6 +344,27 @@ mlu.$utils-data: map.deep-merge(
 						}
 
 						$i: $i + $step;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Bdw', (
+						[1gg, 2],
+					));
+				}
+
+				@include expect(false) {
+					.Bdw1gg {
+						//border-width: 16px;
+						border-width: mlu.gg(1);
+					}
+
+					.Bdw2gg {
+						//border-width: 32px;
+						border-width: mlu.gg(2);
 					}
 				}
 			}
