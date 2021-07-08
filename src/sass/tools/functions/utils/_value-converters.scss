@@ -4,9 +4,7 @@
 @use 'sass:math';
 @use 'sass:string';
 
-@use '../../settings' as mlu;
-@use '../general' as mgen;
-@use '../getters' as mget;
+@use 'forward-tools' as mlu;
 
 // convert-util-value
 //
@@ -52,8 +50,8 @@
 			$result: ();
 			$separator: map.get(mlu.$utils-config, 'tokens-values', $multi-list-sep);
 
-			@each $list in mgen.str-split($util-val, $multi-list-sep) {
-				$items: mgen.str-split($list, mlu.$tUSp);
+			@each $list in mlu.str-split($util-val, $multi-list-sep) {
+				$items: mlu.str-split($list, mlu.$tUSp);
 				$length: list.length($items);
 				$converted-items: ();
 
@@ -118,7 +116,7 @@
 }
 
 @function convert-util-value-number($value, $data: ()) {
-	$val-number: mgen.str2n($value, true);
+	$val-number: mlu.str2n($value, true);
 	$section: map.get($data, 'section');
 	$name: map.get($data, 'name');
 
@@ -131,11 +129,11 @@
 		);
 
 		@if $unit-number {
-			@return mgen.str2n($value + '_') * $unit-number;
+			@return mlu.str2n($value + '_') * $unit-number;
 		}
 
 		@if $unit == 'su' or $unit == 'gg' {
-			$unit-converter: meta.get-function($unit, false, mgen);
+			$unit-converter: meta.get-function($unit, false, mlu);
 
 			@if map.get(
 				mlu.$utils-data, $section, 'registry', $name, 'directions'
@@ -166,7 +164,7 @@
 }
 
 @function convert-util-value-unitless($value, $data: ()) {
-	@return mgen.str2n($value) or $value;
+	@return mlu.str2n($value) or $value;
 }
 
 @function convert-util-value-css-kw($value, $data: ()) {
@@ -179,9 +177,9 @@
 
 @function convert-util-value-abbr($value, $data: ()) {
 	@return (
-		mget.util-prop(mgen.str-ucfirst($value), map.get($data, 'section')) or
+		mlu.util-prop(mlu.str-ucfirst($value), map.get($data, 'section')) or
 		// maybe in the future, the keys of utils in the registry will be unified
-		mget.util-prop($value, map.get($data, 'section')) or
+		mlu.util-prop($value, map.get($data, 'section')) or
 		$value
 	);
 }
