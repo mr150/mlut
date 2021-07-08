@@ -163,64 +163,6 @@ $test-list: (0, 1, 2, 3);
 		}
 	}
 
-	@include describe('space unit converters') {
-		@include it('converts su to px') {
-			@include assert-equal(
-				mlu.su(3),
-				mls.$su * 3,
-			);
-
-			@include assert-equal(
-				mlu.su(4su),
-				mls.$su * 4,
-			);
-		}
-
-		@include it('converts su to rem') {
-			@include assert-equal(
-				mlu.sur(3),
-				mls.$su-rem * 3,
-			);
-		}
-
-		@include it('wrong type of argument') {
-			@include assert-equal(
-				mlu.su('1'),
-				'ERROR: Wrong type of argument $n: `string`. Expected `number`',
-			);
-		}
-
-		@include it('unable convert to unit') {
-			@include assert-equal(
-				mlu.su(2, 'cm'),
-				 'ERROR: No initial value for converting to `cm` unit',
-			);
-		}
-	}
-
-	@include describe('grid gutter unit converters') {
-		$-tests: (
-			'unable convert to unit': (
-				(3, 'cm'): 'ERROR: No CSS variable for converting to `cm` unit',
-			),
-			'wrong type of argument': (
-				'5': 'ERROR: Wrong type of argument $n: `string`. Expected `number`'
-			),
-	);
-
-		@each $test, $data in $-tests {
-			@include it($test) {
-				@each $args, $expect in $data {
-					@include assert-equal(
-						mls.gg($args...),
-						$expect,
-						$inspect: true,
-					);
-				}
-			}
-		}
-	}
-
 	@include describe('str2n') {
 		@include it('converts string to number with unit') {
 			@include assert-equal(
