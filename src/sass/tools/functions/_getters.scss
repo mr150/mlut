@@ -188,17 +188,34 @@ Styleguide: sass-tools.functions.getters
 // $name - utility name. Type: string.
 // $section = 'utils' - section in the registry in which utility was defined
 // $name-as-prop = false - return the utility name as a property if it was not found
+// $single = false - return one property of the utility, even if there are several
 //
 // Styleguide: sass-tools.functions.getters.util_prop
 
-@function util-prop($name, $section: 'utils', $name-as-prop: false) {
+@function util-prop(
+	$name, $section: 'utils', $name-as-prop: false, $single: false
+) {
 	$options: map.get(mlu.$utils-data, $section, 'registry', $name);
 
-	$prop: if(
-		meta.type-of($options) == 'map',
-		map.get($options, 'props'),
-		$options
-	);
+	$prop: null;
+
+	@if meta.type-of($options) == 'map' {
+		$prop-list: map.get($options, 'props');
+
+		@if $single and (
+			meta.type-of($prop-list) == 'map' or list.length($prop-list) > 1
+		) {
+			@each $key, $value in $prop-list {
+				@if not $prop and not $value {
+					$prop: $key;
+				}
+			}
+		} @else {
+			$prop: $prop-list;
+		}
+	} @else {
+		$prop: $options;
+	}
 
 	@return $prop or ($name-as-prop and $name);
 }
