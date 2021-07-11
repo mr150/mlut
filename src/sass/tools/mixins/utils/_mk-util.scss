@@ -17,7 +17,6 @@
 	$main-options: -util-main-options($key-name, $options);
 	$util-name: map.get($main-options, 'name');
 	$props: map.get($main-options, 'props');
-	$repeat-values: map.get($main-options, 'repeat-props-values');
 
 	@if not map.has-key(mlu.$utils-data, 'utils', 'registry', $key-name) {
 		mlu.$utils-data: map.set(
@@ -77,7 +76,12 @@
 			$st-only: string.index($val-feat-str, mlu.$kStOnly);
 			$ar-st-only: string.index($val-feat-str, mlu.$kArStOnly);
 			$ar-st: string.index($val-feat-str, mlu.$kArSt);
-			$args: ($props, $css-values, $repeat-values);
+			$args: (
+				$props,
+				$css-values,
+				map.get($main-options, 'repeat-props-values'),
+				map.get($main-options, 'preset-properties'),
+			);
 
 			@if not string.index($val-feat-str, mlu.$kArOnly) and not $ar-st-only {
 				@include mst.new-mk-state(
@@ -108,7 +112,7 @@
 	}
 }
 
-@mixin -generate-props($props, $values, $repeat-values) {
+@mixin -generate-props($props, $values, $repeat-values, $preset-props) {
 	$i: if($repeat-values == null, 0, 1);
 	$values-count: list.length($values);
 
@@ -118,34 +122,29 @@
 		$values
 	);
 
-	@each $key, $value in $props {
-		@if not $value {
-			@if $repeat-values == null {
-				@include -generate-value(
-					$key,	list.nth($css-values, ($i % $values-count) + 1)
-				);
-			} @else if $i <= $values-count {
-				@include -generate-value($key, list.nth($css-values, $i));
-			}
+	@each $key, $value in $preset-props {
+		@include -generate-value($key, $value);
+	}
 
-			$i: $i + 1;
-		} @else {
-			@include -generate-value($key, $value);
+	@each $item in $props {
+		@if $repeat-values == null {
+			@include -generate-value(
+				$item,	list.nth($css-values, ($i % $values-count) + 1)
+			);
+		} @else if $i <= $values-count {
+			@include -generate-value($item, list.nth($css-values, $i));
 		}
+
+		$i: $i + 1;
 	}
 }
 
 @mixin -generate-value($prop, $value) {
-	// FOR TESTS ONLY
-	@if meta.type-of($value) == 'number' and math.unit($value) == 'su' {
-		#{$prop}: mlu.su($value);
-	} @else {
-		#{$prop}: $value;
-	}
+	#{$prop}: $value;
 }
 
 @function -util-main-options($key-name, $options) {
-	$prop: '';
+	$prop: null;
 
 	$result: (
 		'name': if(
@@ -156,6 +155,9 @@
 		'repeat-props-values': map.get(
 			mlu.$utils-data, 'utils', 'registry', $key-name, 'repeat-props-values'
 		),
+		'preset-properties': map.get(
+			mlu.$utils-data, 'utils', 'registry', $key-name, 'preset-properties'
+		),
 	);
 
 	@if meta.type-of($options) == 'map' {
@@ -163,9 +165,9 @@
 		$result: map.merge($result, $options);
 	} @else if $options {
 		$prop: $options;
-	} @else {
-		$prop: mlu.util-prop($key-name, 'utils', true);
 	}
 
-	@return map.set($result, 'props', $prop);
+	@return map.set(
+		$result, 'props', $prop or mlu.util-prop($key-name, 'utils', true)
+	);
 }

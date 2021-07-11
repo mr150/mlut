@@ -9,8 +9,8 @@ mlu.$utils-data: map.deep-merge(
 		'registry': (
 			'Prop': (
 				'props': (
-					' --prop': 'fallback',
-					'--prop': null,
+					--prop,
+					--second-prop,
 				),
 			),
 	),

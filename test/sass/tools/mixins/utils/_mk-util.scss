@@ -25,10 +25,12 @@ mlu.$utils-data: map.deep-merge(
 				'props': position,
 			),
 			'-Posed': (
-				'props': (
+				'preset-properties': (
 					'position': absolute,
-					'top': null,
-					'z-index': null,
+				),
+				'props': (
+					top,
+					z-index,
 				),
 				'value-type': mlu.$util-type-unitless,
 				'repeat-props-values': false,
@@ -187,6 +189,7 @@ mlu.$utils-data: map.deep-merge(
 					}
 
 					.Maw5gg {
+						//max-width: 80px;
 						max-width: calc(var(#{mlu.$var-gg}) * 5);
 					}
 				}
@@ -733,6 +736,7 @@ mlu.$utils-data: map.deep-merge(
 					}
 				}
 			}
+
 		}
 
 		@include it('make util with name as a property') {
