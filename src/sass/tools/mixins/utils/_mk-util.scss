@@ -81,6 +81,8 @@
 				$css-values,
 				map.get($main-options, 'repeat-props-values'),
 				map.get($main-options, 'preset-properties'),
+				$key-name,
+				$util-parsed-val,
 			);
 
 			@if not string.index($val-feat-str, mlu.$kArOnly) and not $ar-st-only {
@@ -112,7 +114,9 @@
 	}
 }
 
-@mixin -generate-props($props, $values, $repeat-values, $preset-props) {
+@mixin -generate-props(
+	$props, $values, $repeat-values, $preset-props, $util, $util-value
+) {
 	$i: if($repeat-values == null, 0, 1);
 	$values-count: list.length($values);
 
@@ -122,8 +126,17 @@
 		$values
 	);
 
-	@each $key, $value in $preset-props {
-		@include -generate-value($key, $value);
+	@if $preset-props {
+		@each $key, $value in $preset-props {
+			@include -generate-value(
+				$key,
+				if(
+					meta.type-of($value) == 'function',
+					meta.call($value, $util, $util-value, $values),
+					$value
+				)
+			);
+		}
 	}
 
 	@each $item in $props {
