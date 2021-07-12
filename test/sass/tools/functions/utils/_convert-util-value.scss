@@ -10,7 +10,7 @@ mlu.$utils-data: map.deep-merge(
 	(
 		'registry': (
 			'Gc': (
-				'props': grid-column,
+				'properties': grid-column,
 				'value-type': ('unitless', 'css-kw'),
 				'multi-list-separator': '/',
 			),

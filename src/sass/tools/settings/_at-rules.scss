@@ -113,19 +113,19 @@ mlu.$utils-data: map.set(
 				'prfcs': prefers-color-scheme,
 				'prfrm': prefers-reduced-motion,
 				'mn': (
-					'props': monochrome,
+					'properties': monochrome,
 					'value-type': mlu.$util-type-unitless,
 				),
 				'gd': (
-					'props': grid,
+					'properties': grid,
 					'value-type': mlu.$util-type-unitless,
 				),
 				'c': (
-					'props': color,
+					'properties': color,
 					'value-type': mlu.$util-type-unitless,
 				),
 				'rsl': (
-					'props': resolution,
+					'properties': resolution,
 					'value-type': list.set-nth(mlu.$util-type-default, 1, 'resolution'),
 				),
 			),

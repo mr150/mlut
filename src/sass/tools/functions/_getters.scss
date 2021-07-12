@@ -199,7 +199,7 @@ Styleguide: sass-tools.functions.getters
 	$prop: null;
 
 	@if meta.type-of($options) == 'map' {
-		$prop-list: map.get($options, 'props');
+		$prop-list: map.get($options, 'properties');
 
 		@if $single {
 			$prop: list.nth($prop-list, 1);

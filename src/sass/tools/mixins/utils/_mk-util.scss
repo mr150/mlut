@@ -12,15 +12,15 @@
 
 @mixin new-mk-util($raw-name, $values, $features: (), $options: null) {
 	$util-data: mlu.new-parse-util($raw-name);
-	$key-name: map.get($util-data, 'value');
+	$util-name: map.get($util-data, 'value');
 
-	$main-options: -util-main-options($key-name, $options);
-	$util-name: map.get($main-options, 'name');
-	$props: map.get($main-options, 'props');
+	$main-options: -util-main-options($util-name, $options);
+	$class-name: map.get($main-options, 'class-name');
+	$props: map.get($main-options, 'properties');
 
-	@if not map.has-key(mlu.$utils-data, 'utils', 'registry', $key-name) {
+	@if not map.has-key(mlu.$utils-data, 'utils', 'registry', $util-name) {
 		mlu.$utils-data: map.set(
-			mlu.$utils-data, 'utils', 'registry', $key-name, if($options, $options, $props)
+			mlu.$utils-data, 'utils', 'registry', $util-name, if($options, $options, $props)
 		);
 	}
 
@@ -34,9 +34,9 @@
 
 		@if list.is-bracketed($range-list) {
 			@include new-mk-util(
-				$key-name,
+				$util-name,
 				$options: $options,
-				mlu.parse-util-value-range($range-list, $key-name)...
+				mlu.parse-util-value-range($range-list, $util-name)...
 			);
 		} @else {
 			$util-val-data: mlu.new-parse-util(list.nth($key, 1));
@@ -52,20 +52,20 @@
 			$css-values: $value;
 
 			@if $css-values == null {
-				$css-values: mlu.convert-util-value($util-parsed-val, $key-name);
+				$css-values: mlu.convert-util-value($util-parsed-val, $util-name);
 			} @else if $css-values == false {
 				$css-values: $util-parsed-val;
 			}
 
 			$separated-value: if(
-				$util-name == '',
+				$class-name == '',
 				$util-parsed-val,
 				mlu.util-separated-value($util-parsed-val),
 			);
 
-			$selector: mlu.str-escape($util-name + $separated-value);
+			$selector: mlu.str-escape($class-name + $separated-value);
 			$this-util: (
-				'name': $util-name,
+				'name': $class-name,
 				'value': $separated-value
 			);
 
@@ -79,15 +79,15 @@
 			$args: (
 				$props,
 				$css-values,
-				map.get($main-options, 'repeat-props-values'),
+				map.get($main-options, 'repeat-prop-values'),
 				map.get($main-options, 'preset-properties'),
-				$key-name,
+				$util-name,
 				$util-parsed-val,
 			);
 
 			@if not string.index($val-feat-str, mlu.$kArOnly) and not $ar-st-only {
 				@include mst.new-mk-state(
-					$post-states, $pre-states, not $st-only, $selector, $util-name
+					$post-states, $pre-states, not $st-only, $selector, $class-name
 				) {
 					@include -generate-props($args...);
 				}
@@ -101,7 +101,7 @@
 						}
 
 						@if $ar-st or $ar-st-only {
-							@include mst.new-mk-state($post-states, $pre-states, false, &, $util-name) {
+							@include mst.new-mk-state($post-states, $pre-states, false, &, $class-name) {
 								@include -generate-props($args...);
 							}
 						}
@@ -156,31 +156,31 @@
 	#{$prop}: $value;
 }
 
-@function -util-main-options($key-name, $options) {
+@function -util-main-options($name, $options) {
 	$prop: null;
 
 	$result: (
-		'name': if(
-			map.has-key(mlu.$utils-data, 'utils', 'registry', $key-name, 'name'),
-			map.get(mlu.$utils-data, 'utils', 'registry', $key-name, 'name'),
-			$key-name
+		'class-name': if(
+			map.has-key(mlu.$utils-data, 'utils', 'registry', $name, 'class-name'),
+			map.get(mlu.$utils-data, 'utils', 'registry', $name, 'class-name'),
+			$name
 		),
-		'repeat-props-values': map.get(
-			mlu.$utils-data, 'utils', 'registry', $key-name, 'repeat-props-values'
+		'repeat-prop-values': map.get(
+			mlu.$utils-data, 'utils', 'registry', $name, 'repeat-prop-values'
 		),
 		'preset-properties': map.get(
-			mlu.$utils-data, 'utils', 'registry', $key-name, 'preset-properties'
+			mlu.$utils-data, 'utils', 'registry', $name, 'preset-properties'
 		),
 	);
 
 	@if meta.type-of($options) == 'map' {
-		$prop: map.get($options, 'props');
+		$prop: map.get($options, 'properties');
 		$result: map.merge($result, $options);
 	} @else if $options {
 		$prop: $options;
 	}
 
 	@return map.set(
-		$result, 'props', $prop or mlu.util-prop($key-name, 'utils', true)
+		$result, 'properties', $prop or mlu.util-prop($name, 'utils', true)
 	);
 }

@@ -245,18 +245,18 @@ $utils-data: (
 			'-Y': null,
 			'-Xy': null,
 			'Z': (
-				'props': z-index,
+				'properties': z-index,
 				'value-type': $util-type-unitless,
 			),
 			'D': display,
 			'Fxd': flex-direction,
 			'Fxw': flex-wrap,
 			'Fxg': (
-				'props': flex-grow,
+				'properties': flex-grow,
 				'value-type': $util-type-unitless,
 			),
 			'Fxsh': (
-				'props': flex-shrink,
+				'properties': flex-shrink,
 				'value-type': $util-type-unitless,
 			),
 			'Ac': align-content,
@@ -270,28 +270,28 @@ $utils-data: (
 			'Maw': max-width,
 			'Mih': min-height,
 			'M': (
-				'props': margin,
+				'properties': margin,
 				'directions': true,
 			),
 			'P': (
-				'props': padding,
+				'properties': padding,
 				'directions': true,
 			),
 			'Ov': overflow,
 			'C': color,
 			'F': font,
 			'Fw': (
-				'props': font-weight,
+				'properties': font-weight,
 				'value-type': $util-type-unitless,
 			),
 			'Fz': (
-				'props': font-size,
+				'properties': font-size,
 				'default-unit': 'rem',
 			),
 			'Ff': font-family,
 			'Fs': font-style,
 			'Lh': (
-				'props': line-height,
+				'properties': line-height,
 				'value-type': $util-type-unitless,
 			),
 			'Dir': direction,
@@ -313,7 +313,7 @@ $utils-data: (
 			'V': visibility,
 			'Cur': cursor,
 			'Op': (
-				'props': opacity,
+				'properties': opacity,
 				'value-type': $util-type-unitless,
 			),
 			'Bd': border,
@@ -321,11 +321,11 @@ $utils-data: (
 			'Bds': border-style,
 			'Bdw': border-width,
 			'Bdrs': (
-				'props': border-radius,
+				'properties': border-radius,
 				'multi-list-separator': $tULs2,
 			),
 			'Trs': (
-				'props': transition,
+				'properties': transition,
 				'value-type': $-abbr-type,
 			),
 			'Anim': animation,

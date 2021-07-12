@@ -165,7 +165,7 @@ $-gtr-fallback-rem: mmt.px2rem(mlu.$grid-default-gtr);
 			$item,
 			(
 				'preset-properties': $props-map,
-				'props': $props-list
+				'properties': $props-list
 			)
 		);
 	}

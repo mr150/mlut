@@ -13,22 +13,22 @@ mlu.$utils-data: map.deep-merge(
 	(
 		'registry': (
 			'-Xy': (
-				'name': 'Stretched',
+				'class-name': 'Stretched',
 		),
 			'-AltPos': (
-				'name': '',
-				'props': position,
+				'class-name': '',
+				'properties': position,
 			),
 			'-Posed': (
 				'preset-properties': (
 					'position': absolute,
 				),
-				'props': (
+				'properties': (
 					top,
 					z-index,
 				),
 				'value-type': mlu.$util-type-unitless,
-				'repeat-props-values': false,
+				'repeat-prop-values': false,
 			),
 	),
 	)
@@ -427,7 +427,7 @@ mlu.$utils-data: map.deep-merge(
 							'post-states': 'h',
 						),
 						(
-							'props': overflow-clip-margin,
+							'properties': overflow-clip-margin,
 							'value-type': mlu.$util-type-unitless,
 						)
 					);
@@ -564,7 +564,7 @@ mlu.$utils-data: map.deep-merge(
 		}
 
 		@include it('make utils with multiple properties') {
-			@include assert('props list and custom util name') {
+			@include assert('properties list and custom util class name') {
 				@include output(false) {
 					@include mlu.new-mk-util(
 						'-Xy', (
@@ -618,7 +618,7 @@ mlu.$utils-data: map.deep-merge(
 				}
 			}
 
-			@include assert('props map with one static item and no repeating values') {
+			@include assert('properties map with one static item and no repeating values') {
 				@include output(false) {
 					@include mlu.new-mk-util(
 						'-Posed', (
@@ -663,7 +663,7 @@ mlu.$utils-data: map.deep-merge(
 			}
 		}
 
-		@include it('make util with empty name') {
+		@include it('make util with empty class name') {
 			@include assert() {
 				@include output(false) {
 					@include mlu.new-mk-util(
