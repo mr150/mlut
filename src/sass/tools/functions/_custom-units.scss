@@ -6,6 +6,8 @@
 
 @use '../settings' as mlu;
 @use 'general' as mgen;
+@use 'getters' as mget;
+@use 'math' as mmt;
 
 /*
 Custom units
@@ -81,3 +83,97 @@ Styleguide: sass-tools.functions.custom_units
 mlu.$general-data: map.set(
 	mlu.$general-data, 'custom-unit-values', 'gg', meta.get-function('gg', false)
 );
+
+$-gtr-fallback-rem: mmt.px2rem(mlu.$grid-default-gtr);
+
+@function gg-fallback($util, $util-value, $css-value) {
+	$value-part-init: 'calc(var(#{mget.css-var("gg")}';
+
+	@if not string.index(meta.inspect($css-value), $value-part-init) {
+		@return null;
+	}
+
+	$def-unit: map.get(mlu.$utils-data, 'utils', 'registry', $util, 'default-unit');
+
+	$value-part: $value-part-init + '#{$def-unit and "-" + $def-unit}) * ';
+	$fallback-list: ();
+	$multi-sep: list.separator($css-value);
+
+	$value-parts: (
+		(
+			$value-part,
+			string.length($value-part),
+			if(
+				$def-unit == 'rem',
+				$-gtr-fallback-rem,
+				mlu.$grid-default-gtr
+			)
+		),
+	);
+
+	@if map.get(mlu.$utils-data, 'utils', 'registry', $util, 'directions') {
+		$value-part: $value-part-init + '-rem) * ';
+		$value-parts: list.append(
+			$value-parts,
+			(
+				$value-part,
+				string.length($value-part),
+				$-gtr-fallback-rem,
+			)
+		);
+	}
+
+	@each $list in $css-value {
+		$converted-list: ();
+
+		@each $item in $list {
+			@if meta.type-of($item) == 'string' {
+				@each $part, $length, $fallback in $value-parts {
+					@if mgen.str-starts($item, $part) {
+						$converted-list: list.append(
+							$converted-list,
+							mgen.str2n(string.slice($item, $length + 1)) * $fallback
+						);
+					}
+				}
+			} @else {
+				$converted-list: list.append($converted-list, $item);
+			}
+		}
+
+		$fallback-list: list.append($fallback-list, $converted-list, $multi-sep);
+	}
+
+	@return $fallback-list;
+}
+
+@if mlu.$flag-css-vars == 1 {
+	$-utils-registry: ();
+
+	@each $item in map.get(mlu.$utils-config, 'gg-fallback-list') {
+		$props-map: ();
+		$props-list: mget.util-prop($item);
+
+		@each $item in $props-list {
+			$props-map: map.set(
+				$props-map, $item, meta.get-function('gg-fallback', false)
+			);
+		}
+
+		$-utils-registry: map.set(
+			$-utils-registry,
+			$item,
+			(
+				'preset-properties': $props-map,
+				'props': $props-list
+			)
+		);
+	}
+
+	mlu.$utils-data: map.deep-merge(
+		mlu.$utils-data,
+		(
+			'utils': ('registry': $-utils-registry)
+		)
+	);
+}

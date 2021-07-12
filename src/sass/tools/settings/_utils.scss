@@ -122,6 +122,10 @@ $utils-config: (
 		'-Xy',
 	),
 
+	'gg-fallback-list': (
+		'-X', '-Y', '-Xy', 'Maw', 'Miw', 'Mah', 'Mih', 'Fz', 'M', 'P', 'Lh', 'Lts', 'Tsh', 'Va', 'Bdw', 'Bd', 'Bdrs',
+	),
+
 	'default-value-type': ('number', 'css-kw'),
 
 	'value-converters': (),

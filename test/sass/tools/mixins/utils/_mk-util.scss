@@ -1,6 +1,7 @@
 @use 'sass-true' as *;
 @use 'tools' as mlu;
 @use 'sass:map';
+@use 'sass:list';
 
 mlu.$utils-config: map.set(
 	mlu.$utils-config, 'states', 'keywords', 'st1', ('iv' 'vl')
@@ -12,12 +13,6 @@ mlu.$utils-data: map.deep-merge(
 	(
 		'registry': (
 			'-Xy': (
-				'props': (
-					top,
-					right,
-					bottom,
-					left
-				),
 				'name': 'Stretched',
 		),
 			'-AltPos': (
@@ -189,7 +184,7 @@ mlu.$utils-data: map.deep-merge(
 					}
 
 					.Maw5gg {
-						//max-width: 80px;
+						max-width: 80px;
 						max-width: calc(var(#{mlu.$var-gg}) * 5);
 					}
 				}
@@ -253,7 +248,7 @@ mlu.$utils-data: map.deep-merge(
 					}
 
 					.Fz3gg {
-						//font-size: 3rem;
+						font-size: 3rem;
 						font-size: calc(var(#{mlu.$var-gg-rem}) * 3);
 					}
 				}
@@ -269,7 +264,7 @@ mlu.$utils-data: map.deep-merge(
 
 				@include expect(false) {
 					.M2gg {
-						//margin: 2rem 32px;
+						margin: 2rem 32px;
 						margin: mlu.ggr(2) mlu.gg(2);
 					}
 				}
@@ -361,12 +356,12 @@ mlu.$utils-data: map.deep-merge(
 
 				@include expect(false) {
 					.Bdw1gg {
-						//border-width: 16px;
+						border-width: 16px;
 						border-width: mlu.gg(1);
 					}
 
 					.Bdw2gg {
-						//border-width: 32px;
+						border-width: 32px;
 						border-width: mlu.gg(2);
 					}
 				}
@@ -574,6 +569,7 @@ mlu.$utils-data: map.deep-merge(
 					@include mlu.new-mk-util(
 						'-Xy', (
 						0: null,
+						1gg: null,
 						'sm0:xs0_h': (1rem, 20px),
 						'1r:10:2r': null,
 						'md0': (2rem, 20px, 1rem, 12px),
@@ -583,6 +579,12 @@ mlu.$utils-data: map.deep-merge(
 				@include expect(false) {
 					.Stretched0 {
 						@each $key, $value in mlu.$main-directions { #{$value}: 0px; }
+					}
+
+					.Stretched1gg {
+						@each $key, $value in mlu.$main-directions { #{$value}: mlu.$grid-default-gtr; }
+
+						@each $key, $value in mlu.$main-directions { #{$value}: mlu.gg(1); }
 					}
 
 					.Stretched-sm0\:xs0 {
@@ -737,6 +739,27 @@ mlu.$utils-data: map.deep-merge(
 				}
 			}
 
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Bdrs', (
+						'13:1gg_a StOnly',
+						'1gg:25/1.5gg',
+					));
+				}
+
+				@include expect(false) {
+					.Bdrs13\:1gg_a:active {
+						border-radius: 13px mlu.$grid-default-gtr;
+						border-radius: 13px mlu.gg(1);
+					}
+
+					.Bdrs1gg\:25\/1\.5gg {
+						border-radius: list.slash((mlu.$grid-default-gtr * 1) 25px, mlu.$grid-default-gtr * 1.5);
+						border-radius: list.slash(mlu.gg(1) 25px, mlu.gg(1.5));
+					}
+				}
+			}
 		}
 
 		@include it('make util with name as a property') {
@@ -744,13 +767,13 @@ mlu.$utils-data: map.deep-merge(
 				@include output(false) {
 					@include mlu.new-mk-util(
 						'width', (
-						5su,
+						5.3su,
 					));
 				}
 
 				@include expect(false) {
-					.width5su {
-						width: mlu.su(5);
+					.width5\.3su {
+						width: mlu.su(5.3);
 					}
 				}
 			}

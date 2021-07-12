@@ -1,22 +1,26 @@
 @use 'sass:map';
 @use 'tools/settings' as mlu with (
-	$flag-test-env: true
-);
-
-mlu.$utils-data: map.deep-merge(
-	mlu.$utils-data,
-	('utils':
-	 (
-		 'map': (
-			'D': (
-				'ig': inline-grid,
-				'f': flex,
+	$flag-test-env: true,
+	$utils: (
+		'registry': (
+			'-Xy': (
+				'props': (
+					top,
+					right,
+					bottom,
+					left
+				),
 			),
-			'Jc': ('se': space-evenly),
-			'Pos': ('sk': sticky),
-		 ),
-	 )
-	)
+		),
+		'map': (
+		'D': (
+			'ig': inline-grid,
+			'f': flex,
+		),
+		'Jc': ('se': space-evenly),
+		'Pos': ('sk': sticky),
+	),
+	),
 );
 
 @use 'tools/functions';
