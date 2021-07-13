@@ -83,6 +83,7 @@ $-states-abbrs: list.join(
 				mlu.$tSAnd
 			), 1);
 
+			//stylelint-disable
 			@if not $at-rules and (
 				string.index($part, mlu.$tAAr) or list.index($-ar-keywords, $part)
 			) {
@@ -90,7 +91,10 @@ $-states-abbrs: list.join(
 				$comp-indexes: map.set($comp-indexes, 'ar', $i);
 			} @else if (string.index($component, ' ') or $value) and
 				list.index($-states-abbrs, $part) or
-				list.index(mlu.$tSCn mlu.$tSRaw mlu.$tSAnd, string.slice($component-item, 1, 1)) {
+				list.index(
+					(mlu.$tSCn mlu.$tSRaw mlu.$tSAnd mlu.$tSTu),
+					string.slice($component-item, 1, 1)
+			) {
 				$states: list.append($states, $component-trimmed);
 				$comp-indexes: map.set(
 					$comp-indexes, 'state' + list.length($states), $i

@@ -195,6 +195,15 @@
 				),
 				$inspect: true,
 			);
+
+			@include assert-equal(
+				mlu.new-parse-util('1gg_&-'),
+				(
+					'post-states': '&-',
+					'value': '1gg',
+				),
+				$inspect: true,
+			);
 		}
 
 		@include it('value with at-rule and pre state') {
