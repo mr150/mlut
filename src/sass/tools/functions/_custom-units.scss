@@ -86,7 +86,7 @@ mlu.$general-data: map.set(
 
 $-gtr-fallback-rem: mmt.px2rem(mlu.$grid-default-gtr);
 
-@function gg-fallback($util, $util-value, $css-value) {
+@function gg-fallback($util, $util-value, $css-value, $important) {
 	$value-part-init: 'calc(var(#{mget.css-var("gg")}';
 
 	@if not string.index(meta.inspect($css-value), $value-part-init) {
@@ -144,7 +144,7 @@ $-gtr-fallback-rem: mmt.px2rem(mlu.$grid-default-gtr);
 		$fallback-list: list.append($fallback-list, $converted-list, $multi-sep);
 	}
 
-	@return $fallback-list;
+	@return $fallback-list $important;
 }
 
 @if mlu.$flag-css-vars == 1 {

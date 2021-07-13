@@ -159,6 +159,7 @@ $utils-config: (
 			'num-value': '',
 			'space': ':',
 			'custom-value': '-',
+			'important': '!',
 			'list-separator1': ',',
 			'list-separator2': '/',
 			'component': '_',
@@ -213,6 +214,7 @@ $tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
 $tURv: map.get($utils-config, 'tokens', 'util', 'raw-value');
 $tUCv: map.get($utils-config, 'tokens', 'util', 'custom-value');
+$tUIm: map.get($utils-config, 'tokens', 'util', 'important');
 $tUCm: map.get($utils-config, 'tokens', 'util', 'component');
 $tUSp: map.get($utils-config, 'tokens', 'util', 'space');
 $tULs1: map.get($utils-config, 'tokens', 'util', 'list-separator1');

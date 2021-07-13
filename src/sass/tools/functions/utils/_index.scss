@@ -129,9 +129,14 @@ $-states-abbrs: list.join(
 		$i: $i + 1;
 	}
 
-	$result: map.set($result, 'value', $value);
+	@if meta.type-of($value) == 'string' and (
+		string.slice($value, -(string.length(mlu.$tUIm))) == mlu.$tUIm
+	) {
+		$value: string.slice($value, 1, -(1 + string.length(mlu.$tUIm)));
+		$result: map.set($result, 'important', true);
+	}
 
-	@return $result;
+	@return map.set($result, 'value', $value);
 }
 
 // parse-util-directions

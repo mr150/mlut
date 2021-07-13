@@ -39,7 +39,7 @@
 				mlu.parse-util-value-range($range-list, $util-name)...
 			);
 		} @else {
-			$util-val-data: mlu.new-parse-util(list.nth($key, 1));
+			$util-val-data: mlu.new-parse-util($key);
 
 			@if list.length($util-val-data) < 2 {
 				$util-val-data: map.merge($util-data, $util-val-data);
@@ -49,6 +49,7 @@
 			$at-rules: map.get($util-val-data, 'at-rules');
 			$post-states: map.get($util-val-data, 'post-states');
 			$pre-states: map.get($util-val-data, 'pre-states');
+			$is-important: map.get($util-val-data, 'important');
 			$css-values: $value;
 
 			@if $css-values == null {
@@ -62,6 +63,10 @@
 				$util-parsed-val,
 				mlu.util-separated-value($util-parsed-val),
 			);
+
+			@if $is-important {
+				$separated-value: $separated-value + mlu.$tUIm;
+			}
 
 			$selector: mlu.str-escape($class-name + $separated-value);
 			$this-util: (
@@ -79,6 +84,7 @@
 			$args: (
 				$props,
 				$css-values,
+				$is-important,
 				map.get($main-options, 'repeat-prop-values'),
 				map.get($main-options, 'preset-properties'),
 				$util-name,
@@ -115,10 +121,11 @@
 }
 
 @mixin -generate-props(
-	$props, $values, $repeat-values, $preset-props, $util, $util-value
+	$props, $values, $is-important, $repeat-values, $preset-props, $util, $util-value
 ) {
 	$i: if($repeat-values == null, 0, 1);
 	$values-count: list.length($values);
+	$important: $is-important and string.unquote('!important');
 
 	$css-values: if(
 		list.length($props) < 2 and $values-count > 1,
@@ -128,32 +135,23 @@
 
 	@if $preset-props {
 		@each $key, $value in $preset-props {
-			@include -generate-value(
-				$key,
-				if(
-					meta.type-of($value) == 'function',
-					meta.call($value, $util, $util-value, $values),
-					$value
-				)
+			#{$key}: if(
+				meta.type-of($value) == 'function',
+				meta.call($value, $util, $util-value, $values, $important),
+				$value
 			);
 		}
 	}
 
 	@each $item in $props {
 		@if $repeat-values == null {
-			@include -generate-value(
-				$item,	list.nth($css-values, ($i % $values-count) + 1)
-			);
+			#{$item}: list.nth($css-values, ($i % $values-count) + 1) $important;
 		} @else if $i <= $values-count {
-			@include -generate-value($item, list.nth($css-values, $i));
+			#{$item}: list.nth($css-values, $i) $important;
 		}
 
 		$i: $i + 1;
 	}
-}
-
-@mixin -generate-value($prop, $value) {
-	#{$prop}: $value;
 }
 
 @function -util-main-options($name, $options) {

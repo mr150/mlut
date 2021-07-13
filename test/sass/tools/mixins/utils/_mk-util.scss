@@ -237,26 +237,6 @@ mlu.$utils-data: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include mlu.new-mk-util(
-						'Fz', (
-						3su, 3gg,
-					));
-				}
-
-				@include expect(false) {
-					.Fz3su {
-						font-size: mlu.sur(3);
-					}
-
-					.Fz3gg {
-						font-size: 3rem;
-						font-size: calc(var(#{mlu.$var-gg-rem}) * 3);
-					}
-				}
-			}
-
-			@include assert() {
-				@include output(false) {
-					@include mlu.new-mk-util(
 						'M', (
 						2gg,
 					));
@@ -774,6 +754,89 @@ mlu.$utils-data: map.deep-merge(
 				@include expect(false) {
 					.width5\.3su {
 						width: mlu.su(5.3);
+					}
+				}
+			}
+		}
+
+		@include it('make util with CSS !important') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'M', (
+						'!': auto,
+						 '25!_af StOnly': null,
+						 '2r:12!': null,
+					));
+				}
+
+				@include expect(false) {
+					.M\! {
+						margin: auto !important;
+					}
+
+					.M25\!_af::after {
+						margin: 25px !important;
+					}
+
+					.M2r\:12\! {
+						margin: 2rem 12px !important;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'-Xy', (
+						'2r:12!',
+					));
+				}
+
+				@include expect(false) {
+					.Stretched2r\:12\! {
+						top: 2rem !important;
+						right: 12px !important;
+						bottom: 2rem !important;
+						left: 12px !important;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Bdw', (
+						['1r!', 2],
+					));
+				}
+
+				@include expect(false) {
+					.Bdw1r\! {
+						border-width: 1rem !important;
+					}
+
+					.Bdw2r\! {
+						border-width: 2rem !important;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Fz!', (3su, 3gg)
+					);
+				}
+
+				@include expect(false) {
+					.Fz3su\! {
+						font-size: mlu.sur(3) !important;
+					}
+
+					.Fz3gg\! {
+						font-size: 3rem !important;
+						font-size: calc(var(#{mlu.$var-gg-rem}) * 3) !important;
 					}
 				}
 			}
