@@ -568,9 +568,9 @@ mlu.$utils-data: map.deep-merge(
 					}
 
 					.Stretched-sm0\:xs0 {
-            top: 1rem;
+						top: 1rem;
 						right: 20px;
-            bottom: 1rem;
+						bottom: 1rem;
 						left: 20px;
 
 						&_h:hover {
@@ -582,16 +582,16 @@ mlu.$utils-data: map.deep-merge(
 					}
 
 					.Stretched1r\:10\:2r {
-            top: 1rem;
+						top: 1rem;
 						right: 10px;
-            bottom: 2rem;
+						bottom: 2rem;
 						left: 1rem;
 					}
 
 					.Stretched-md0 {
-            top: 2rem;
+						top: 2rem;
 						right: 20px;
-            bottom: 1rem;
+						bottom: 1rem;
 						left: 12px;
 					}
 
@@ -617,7 +617,7 @@ mlu.$utils-data: map.deep-merge(
 
 					.-Posed-sm0 {
 						position: absolute;
-            top: 1rem;
+						top: 1rem;
 						z-index: 2;
 					}
 
@@ -839,6 +839,34 @@ mlu.$utils-data: map.deep-merge(
 						font-size: calc(var(#{mlu.$var-gg-rem}) * 3) !important;
 					}
 				}
+			}
+
+			@include assert() {
+				mlu.$flag-important: true;
+
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Bdw', (5)
+					);
+
+					@include mlu.new-mk-util(
+						'-Posed', ('10%:3')
+					);
+				}
+
+				@include expect(false) {
+					.Bdw5 {
+						border-width: 5px !important;
+					}
+
+					.-Posed10\%\:3 {
+						position: absolute !important;
+						top: 10% !important;
+						z-index: 3 !important;
+					}
+				}
+
+				mlu.$flag-important: false;
 			}
 		}
 

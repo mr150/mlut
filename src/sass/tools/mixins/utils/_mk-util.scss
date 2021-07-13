@@ -125,7 +125,9 @@
 ) {
 	$i: if($repeat-values == null, 0, 1);
 	$values-count: list.length($values);
-	$important: $is-important and string.unquote('!important');
+	$important: (
+		mlu.$flag-important or $is-important
+	) and string.unquote('!important');
 
 	$css-values: if(
 		list.length($props) < 2 and $values-count > 1,
@@ -135,11 +137,13 @@
 
 	@if $preset-props {
 		@each $key, $value in $preset-props {
-			#{$key}: if(
-				meta.type-of($value) == 'function',
-				meta.call($value, $util, $util-value, $values, $important),
-				$value
-			);
+			@if meta.type-of($value) == 'function' {
+				#{$key}: meta.call($value, $util, $util-value, $values, $important);
+			} @else if mlu.$flag-important {
+				#{$key}: $value $important;
+			} @else {
+				#{$key}: $value;
+			}
 		}
 	}
 
