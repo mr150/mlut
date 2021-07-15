@@ -1,8 +1,14 @@
+@use 'sass:meta';
+@use 'sass:string';
 @use 'sass-true' as *;
 @use 'tools/functions/general' as mlu;
 @use 'tools' as mls;
 
 $test-list: (0, 1, 2, 3);
+
+@function -greter-than($item, $i, $n) {
+	@return mlu.str2n($item) > $n;
+}
 
 @include describe('tools/functions/general') {
 	@include describe('remove-nth') {
@@ -211,6 +217,32 @@ $test-list: (0, 1, 2, 3);
 					mlu.ls-implode($args...),
 					$expect,
 				);
+			}
+		}
+	}
+
+	@include describe('ls-find') {
+		$list: (4, '5', 6, '777');
+
+		$-tests: (
+			'simple selector after utility': (
+				($list, meta.get-function('-greter-than'), 6): '777',
+				($list, meta.get-function('-greter-than'), 1000): null,
+			),
+			'wrong type of argument': (
+				($list, 'nope'): 'ERROR: Wrong type of argument $callback: `string`. Expected `function`',
+			),
+		);
+
+		@each $test, $data in $-tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						mlu.ls-find($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
 			}
 		}
 	}

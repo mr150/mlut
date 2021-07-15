@@ -222,6 +222,26 @@ Styleguide: sass-tools.functions.general
 	@return string.slice($result, 1, -1 - string.length($separator));
 }
 
+@function ls-find($list, $callback, $args...) {
+	@if meta.type-of($callback) != 'function' {
+		@return error(
+			'Wrong type of argument $callback: `#{meta.type-of($callback)}`. Expected `function`'
+		);
+	}
+
+	$i: 1;
+
+	@each $item in $list {
+		@if meta.call($callback, $item, $i, $args...) {
+			@return $item;
+		}
+
+		$i: $i + 1;
+	}
+
+	@return null;
+}
+
 @function remove-nth($list, $index) {
 	@if meta.type-of($index) != 'number' {
 		@return error('Wrong type of argument $index: `#{meta.type-of($index)}`. Expected `number`');
