@@ -1,0 +1,66 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass-true' as *;
+@use 'tools' as mlu;
+
+@include describe('tools/functions/utils/') {
+	@include describe('util-apply-selector') {
+		$escaped-sel: mlu.str-escape('^1_Red22_:^:h');
+		$selector-list: ('.Red22_h\\,f:hover','.Red22_h\\,f:focus');
+
+		$-tests: (
+			'selector after utility': (
+				('&::after', '.-Ct-red0'): '.-Ct-red0::after',
+				('&::after', '.-Ct-red0_h:hover'): '.-Ct-red0_h:hover::after',
+				('&::after', '.-Ct-red0_/>* >*'): '.-Ct-red0_/>* >*::after',
+				('&::after', $selector-list):
+					('.Red22_h\\,f:hover::after', '.Red22_h\\,f:focus::after'),
+			),
+			'selector before utility': (
+				('a.&', '.-Mut5gg'): 'a.-Mut5gg',
+				('.block.&', '.-Ctx .\\^_-Mut5gg'): '.-Ctx .block.\\^_-Mut5gg',
+				('#app &', '.-Ctx .^_-Mut5gg'): '#app .-Ctx .^_-Mut5gg',
+				('#app &', $selector-list):
+					('#app .Red22_h\\,f:hover', '#app .Red22_h\\,f:focus'),
+			),
+			'double this-util token': (
+				('&&', '.-Phc-red0'): '.-Phc-red0.-Phc-red0',
+				('&&', '.-Phc-red0_h:hover'): '.-Phc-red0_h:hover.-Phc-red0_h',
+				('&&', '.-Ctx1 .#{$escaped-sel} .-Ctx:hover'):
+					'.-Ctx1 .#{$escaped-sel} .-Ctx:hover.#{$escaped-sel}',
+				('&&', $selector-list):
+					('.Red22_h\\,f:hover.Red22_h\\,f', '.Red22_h\\,f:focus.Red22_h\\,f'),
+			),
+			'selector with prefix': (
+				('.pre-&', '.Mut5gg'): '.pre-Mut5gg',
+				('.pre-&', '.-Ctx1 .#{$escaped-sel} .-Ctx:hover'):
+					'.-Ctx1 .pre-#{$escaped-sel} .-Ctx:hover',
+				('.pre-&&', '.-Ctx .\\^_-Mut5gg'): '.-Ctx .pre-\\^_-Mut5gg.pre-\\^_-Mut5gg',
+				('.pre-&', $selector-list):
+					('.pre-Red22_h\\,f:hover', '.pre-Red22_h\\,f:focus'),
+			),
+			'selector on both sides': (
+				('.pre-&.fearless', '.Red22'): '.pre-Red22.fearless',
+				('.pre-&.lover', '.-Ctx1 .#{$escaped-sel} .-Ctx:hover'):
+					'.-Ctx1 .pre-#{$escaped-sel} .-Ctx:hover.lover',
+				('#app .pre-&.lover #wrap', '.-Ctx1 .#{$escaped-sel} .-Ctx:hover'):
+					'#app .-Ctx1 .pre-#{$escaped-sel} .-Ctx:hover.lover #wrap',
+				('#app .pre-&.lover #wrap', $selector-list):
+					('#app .pre-Red22_h\\,f:hover.lover #wrap', '#app .pre-Red22_h\\,f:focus.lover #wrap'),
+			),
+		);
+
+		@each $test, $data in $-tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						mlu.util-apply-selector($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
+}
