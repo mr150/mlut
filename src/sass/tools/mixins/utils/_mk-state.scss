@@ -12,7 +12,8 @@
 	$pre: null,
 	$no-state: true,
 	$selector: &,
-	$this-util: null
+	$this-util: null,
+	$custom-sel: null,
 ) {
 	@if not $selector {
 		@error '$selector argument must not be null.';
@@ -24,7 +25,7 @@
 
 	@at-root {
 		@if $no-state {
-			#{$selector} {
+			#{mlu.util-apply-selector($custom-sel, $selector)} {
 				@content;
 			}
 		}
@@ -65,7 +66,7 @@
 		}
 
 		@each $item in $final-selector-list {
-			#{$item} {
+			#{mlu.util-apply-selector($custom-sel, $item)} {
 				@content;
 			}
 		}

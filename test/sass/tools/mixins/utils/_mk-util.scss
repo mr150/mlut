@@ -30,6 +30,10 @@ mlu.$utils-data: map.deep-merge(
 				'value-type': mlu.$util-type-unitless,
 				'repeat-prop-values': false,
 			),
+			'Gx': (
+				'properties': margin-left,
+				'selector': '.my-& >*+*',
+			),
 	),
 	)
 	)
@@ -870,5 +874,36 @@ mlu.$utils-data: map.deep-merge(
 			}
 		}
 
+		@include it('make util with custom selector') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Gx', ('^ StCmb ^_20_h h,f StCmb :^0',));
+				}
+
+				@include expect(false) {
+					.my-Gx20 >*+* {
+						margin-left: 20px;
+					}
+
+					.-Ctx .my-\^_Gx20 >*+* {
+						margin-left: 20px;
+					}
+
+					.my-Gx20_h:hover >*+* {
+						margin-left: 20px;
+					}
+
+					.my-Gx20_h\,f:hover >*+*,
+					.my-Gx20_h\,f:focus >*+* {
+						margin-left: 20px;
+					}
+
+					.-Ctx .my-\^_Gx20_\:\^0 .-Ctx0 >*+* {
+						margin-left: 20px;
+					}
+				}
+			}
+		}
 	}
 }

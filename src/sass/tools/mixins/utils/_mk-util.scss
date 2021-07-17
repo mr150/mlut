@@ -17,6 +17,7 @@
 	$main-options: -util-main-options($util-name, $options);
 	$class-name: map.get($main-options, 'class-name');
 	$props: map.get($main-options, 'properties');
+	$custom-selector: map.get($main-options, 'selector');
 
 	@if not map.has-key(mlu.$utils-data, 'utils', 'registry', $util-name) {
 		mlu.$utils-data: map.set(
@@ -93,7 +94,12 @@
 
 			@if not string.index($val-feat-str, mlu.$kArOnly) and not $ar-st-only {
 				@include mst.new-mk-state(
-					$post-states, $pre-states, not $st-only, $selector, $class-name
+					$post-states,
+					$pre-states,
+					not $st-only,
+					$selector,
+					$class-name,
+					$custom-selector,
 				) {
 					@include -generate-props($args...);
 				}
@@ -101,15 +107,24 @@
 
 			@if $at-rules {
 				@include mgen.mk-ar($at-rules, $this-util) using ($ar) {
-					.#{mlu.str-escape($ar + mlu.$tUCm) + $selector} {
-						@if not $ar-st-only {
+					$util-selector: '.' + mlu.str-escape($ar + mlu.$tUCm) + $selector;
+
+					@if not $ar-st-only {
+						#{mlu.util-apply-selector($custom-selector, $util-selector)} {
 							@include -generate-props($args...);
 						}
+					}
 
-						@if $ar-st or $ar-st-only {
-							@include mst.new-mk-state($post-states, $pre-states, false, &, $class-name) {
-								@include -generate-props($args...);
-							}
+					@if $ar-st or $ar-st-only {
+						@include mst.new-mk-state(
+							$post-states,
+							$pre-states,
+							false,
+							$util-selector,
+							$class-name,
+							$custom-selector,
+						) {
+							@include -generate-props($args...);
 						}
 					}
 				}
@@ -172,6 +187,9 @@
 		),
 		'preset-properties': map.get(
 			mlu.$utils-data, 'utils', 'registry', $name, 'preset-properties'
+		),
+		'selector': map.get(
+			mlu.$utils-data, 'utils', 'registry', $name, 'selector'
 		),
 	);
 
