@@ -15,9 +15,13 @@ mlu.$utils-data: map.deep-merge(
 				'value-type': ('unitless', 'css-kw'),
 				'multi-list-separator': '/',
 			),
+			'Red': (
+				'properties': --reputation,
+				'value-type': ('number', mlu.$tGVcp, 'cust-prop', 'cp-suffix'),
+			),
 			'-Tst': (
 				'properties': --testou,
-				'value-type': ('cust-prop', 'cp-suffix'),
+				'value-type': ('cust-prop', mlu.$tGVcp, 'cp-suffix'),
 			),
 		),
 		'variables': (
@@ -29,7 +33,7 @@ mlu.$utils-data: map.deep-merge(
 );
 
 @function cp-suffix($value, $data: ()) {
-	@return string.insert($value, '-suf', -2);
+	@return string.insert($value + '', '-suf', -2);
 }
 
 mlu.$utils-config: map.set(
@@ -61,9 +65,11 @@ mlu.$utils-config: map.set(
 				('$undefVar', 'W'): string.unquote('ERROR: Undefined variable: `$undefVar`'),
 			),
 			'applys several converters as pipeline': (
+				('-css-var', 'Red'): var(--mlu-css-var-suf),
+				(22, 'Red'): 22px,
 				('-css-var', '-Tst'): var(--mlu-css-var),
 			),
-			'converts custom property': (
+			'converts property abbreviation': (
 				('bgc', 'Trs'): background-color,
 				('=bgc', 'Trs'): bgc,
 			),

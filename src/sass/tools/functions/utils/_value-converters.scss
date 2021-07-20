@@ -98,6 +98,9 @@
 		map.get(mlu.$utils-config, 'default-value-type'),
 	);
 
+	//$is-pipeline: list.nth($value-type, 1) == mlu.$tGVcp;
+	$is-pipeline: false;
+
 	@each $item in $value-type {
 		@if map.has-key(mlu.$utils-config, 'value-converters', $item) {
 			$prev-value: $util-val;
@@ -112,9 +115,11 @@
 				)
 			);
 
-			@if $util-val != $prev-value {
+			@if $util-val != $prev-value and not $is-pipeline {
 				@return $util-val;
 			}
+		} @else if $item == mlu.$tGVcp {
+			$is-pipeline: true;
 		}
 	}
 
