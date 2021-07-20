@@ -13,11 +13,31 @@
 //
 // Styleguide: sass-tools.settings.general
 
+// CSS variables
+//
+// Settings of global [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) which used in MLUT.
+//
+// Styleguide: sass-tools.settings.css_vars
+
+// Names
+//
+// In addition to variables, the names of custom properties are contained in the map `$mlu-css-vars`.
+// Below are the names of the variables, the corresponding keys in the map and names of custom properties.
+//
+// $var-gg = --mlu-gg - `gg`.
+// $var-gg-rem = --mlu-gg-rem - `gg-rem`.
+// $var-grid-cols = --mlu-grid-cols - `grid-cols`.
+//
+// Styleguide: sass-tools.settings.css_vars.names
+
+
 $browser-font-size: 16px !default;
 
 $su-cf: 4 !default;
 
 $base-font-size: $browser-font-size !default;
+
+$css-var-prefix: 'mlu-';
 
 $general-data: (
 	'main-directions': (
@@ -75,6 +95,11 @@ $general-data: (
 			'c': 1c,
 		),
 	),
+	'css-vars': (
+		'gg': 'gg',
+		'gg-rem': 'gg-rem',
+		'grid-cols': 'grid-cols',
+	),
 ) !default;
 
 $general: () !default;
@@ -90,3 +115,17 @@ $units-all: map.merge(
 	map.get($general-data, 'units', 'css'),
 	map.get($general-data, 'units', 'custom'),
 );
+
+$-prefixed-vars: ();
+
+@each $key, $value in map.get($general-data, 'css-vars') {
+	$-prefixed-vars: map.set(
+		$-prefixed-vars, $key, '--#{$css-var-prefix}#{$value}'
+	);
+}
+
+$general-data: map.set($general-data, 'css-vars', $-prefixed-vars);
+
+$var-gg: map.get($general-data, 'css-vars', 'gg');
+$var-gg-rem: map.get($general-data, 'css-vars', 'gg-rem');
+$var-grid-cols: map.get($general-data, 'css-vars', 'grid-cols');
