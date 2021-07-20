@@ -100,6 +100,8 @@
 
 	@each $item in $value-type {
 		@if map.has-key(mlu.$utils-config, 'value-converters', $item) {
+			$prev-value: $util-val;
+
 			$util-val: meta.call(
 				map.get(mlu.$utils-config, 'value-converters', $item),
 				$util-val,
@@ -109,6 +111,10 @@
 					'list-length': $list-length,
 				)
 			);
+
+			@if $util-val != $prev-value {
+				@return $util-val;
+			}
 		}
 	}
 
@@ -184,15 +190,17 @@
 	);
 }
 
+$-tUVar-length: string.length(mlu.$tUVar);
+
 @function convert-util-value-var($value, $data: ()) {
 	@if (
 		meta.type-of($value) != 'string' or
-		string.slice($value, 1, string.length(mlu.$tUVar)) != mlu.$tUVar
+		string.slice($value, 1, $-tUVar-length) != mlu.$tUVar
 	) {
 		@return $value;
 	}
 
-	$var-name: string.slice($value, string.length(mlu.$tUVar) + 1);
+	$var-name: string.slice($value, $-tUVar-length + 1);
 	$section: map.get($data, 'section');
 
 	$result: if(
@@ -208,17 +216,19 @@
 	@return $result;
 }
 
+$-tUCp-length: string.length(mlu.$tUCp);
+
 @function convert-util-value-cust-prop($value, $data: ()) {
 	@if (
 		meta.type-of($value) != 'string' or
-		string.slice($value, 1, string.length(mlu.$tUCp)) != mlu.$tUCp
+		string.slice($value, 1, $-tUCp-length) != mlu.$tUCp
 	) {
 		@return $value;
 	}
 
 	@return var(#{
 		'--' + mlu.$util-val-css-var-prefix + string.slice(
-			$value, string.length(mlu.$tUCp) + 1
+			$value, $-tUCp-length + 1
 		)
 	});
 }

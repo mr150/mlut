@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:list';
 @use 'sass:string';
+@use 'sass:meta';
 @use 'sass-true' as *;
 @use 'tools' as mlu;
 
@@ -14,6 +15,10 @@ mlu.$utils-data: map.deep-merge(
 				'value-type': ('unitless', 'css-kw'),
 				'multi-list-separator': '/',
 			),
+			'-Tst': (
+				'properties': --testou,
+				'value-type': ('cust-prop', 'cp-suffix'),
+			),
 		),
 		'variables': (
 			'testVar': 1989px,
@@ -21,6 +26,17 @@ mlu.$utils-data: map.deep-merge(
 		),
 	)
 	)
+);
+
+@function cp-suffix($value, $data: ()) {
+	@return string.insert($value, '-suf', -2);
+}
+
+mlu.$utils-config: map.set(
+	mlu.$utils-config,
+	'value-converters',
+	'cp-suffix',
+	meta.get-function('cp-suffix')
 );
 
 @include describe('tools/functions/utils/') {
@@ -44,10 +60,10 @@ mlu.$utils-data: map.deep-merge(
 				('$testVar', 'W'): map.get(mlu.$utils-data, 'utils', 'variables', 'testVar'),
 				('$undefVar', 'W'): string.unquote('ERROR: Undefined variable: `$undefVar`'),
 			),
-			'converts custom property': (
-				('-css-var', 'W'): var(--mlu-css-var),
+			'applys several converters as pipeline': (
+				('-css-var', '-Tst'): var(--mlu-css-var),
 			),
-			'converts property abbreviation': (
+			'converts custom property': (
 				('bgc', 'Trs'): background-color,
 				('=bgc', 'Trs'): bgc,
 			),
