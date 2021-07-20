@@ -71,6 +71,8 @@ $states-ps: 'StPs' !default;
 $states-cmb: 'StCmb' !default;
 $kStOnly: 'StOnly' !default;
 
+$util-val-css-var-prefix: mlu.$css-var-prefix !default;
+
 // Conversion to CSS
 //
 // Settings of conversion utilitie values to CSS values. All variables below are maps.
@@ -126,7 +128,7 @@ $utils-config: (
 		'-X', '-Y', '-Xy', 'Maw', 'Miw', 'Mah', 'Mih', 'Fz', 'M', 'P', 'Lh', 'Lts', 'Tsh', 'Va', 'Bdw', 'Bd', 'Bdrs',
 	),
 
-	'default-value-type': ('number', 'css-kw'),
+	'default-value-type': ('number', 'css-kw', 'var', 'cust-prop',),
 
 	'value-converters': (),
 
@@ -158,7 +160,8 @@ $utils-config: (
 			'raw-value': '=',
 			'num-value': '',
 			'space': ':',
-			'custom-value': '-',
+			'custom-property': '-',
+			'variable': '$',
 			'important': '!',
 			'list-separator1': ',',
 			'list-separator2': '/',
@@ -213,7 +216,8 @@ $-abbr-type: list.join('abbr', $util-type-default);
 $tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
 $tURv: map.get($utils-config, 'tokens', 'util', 'raw-value');
-$tUCv: map.get($utils-config, 'tokens', 'util', 'custom-value');
+$tUVar: map.get($utils-config, 'tokens', 'util', 'variable');
+$tUCp: map.get($utils-config, 'tokens', 'util', 'custom-property');
 $tUIm: map.get($utils-config, 'tokens', 'util', 'important');
 $tUCm: map.get($utils-config, 'tokens', 'util', 'component');
 $tUSp: map.get($utils-config, 'tokens', 'util', 'space');

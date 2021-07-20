@@ -183,3 +183,42 @@
 		$value
 	);
 }
+
+@function convert-util-value-var($value, $data: ()) {
+	@if (
+		meta.type-of($value) != 'string' or
+		string.slice($value, 1, string.length(mlu.$tUVar)) != mlu.$tUVar
+	) {
+		@return $value;
+	}
+
+	$var-name: string.slice($value, string.length(mlu.$tUVar) + 1);
+	$section: map.get($data, 'section');
+
+	$result: if(
+		map.has-key(mlu.$utils-data, $section, 'variables', $var-name),
+		map.get(mlu.$utils-data, $section, 'variables', $var-name),
+		map.get(mlu.$utils-data, 'general', 'variables', $var-name)
+	);
+
+	@if not $result {
+		@return mlu.error('Undefined variable: `#{$value}`');
+	}
+
+	@return $result;
+}
+
+@function convert-util-value-cust-prop($value, $data: ()) {
+	@if (
+		meta.type-of($value) != 'string' or
+		string.slice($value, 1, string.length(mlu.$tUCp)) != mlu.$tUCp
+	) {
+		@return $value;
+	}
+
+	@return var(#{
+		'--' + mlu.$util-val-css-var-prefix + string.slice(
+			$value, string.length(mlu.$tUCp) + 1
+		)
+	});
+}

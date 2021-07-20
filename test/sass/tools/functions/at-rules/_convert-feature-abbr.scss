@@ -14,7 +14,12 @@ mlu.$utils-data: map.deep-merge(
 				),
 			),
 	),
-	)
+	),
+		'media': (
+			'variables': (
+				'hXl': 800px,
+				),
+		),
 	)
 );
 
@@ -80,6 +85,16 @@ mlu.$utils-data: map.deep-merge(
 			@include assert-equal(
 				mlu.convert-feature-abbr('H>20r'),
 				'(min-height: 20.06rem)',
+			);
+
+			@include assert-equal(
+				mlu.convert-feature-abbr('h>$hXl', 'media'),
+				'(min-height: 801px)',
+			);
+
+			@include assert-equal(
+				mlu.convert-feature-abbr('h<$sm', 'media'),
+				'(max-height: 519px)',
 			);
 
 			@include assert-equal(

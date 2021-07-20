@@ -905,5 +905,28 @@ mlu.$utils-data: map.deep-merge(
 				}
 			}
 		}
+
+		@include it('make util with MLUT and CSS variables in value') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Maw', ('$testVar_af', '-card-sm'));
+				}
+
+				@include expect(false) {
+					.Maw-\$testVar {
+						max-width: map.get(mlu.$utils-data, 'utils', 'variables', 'testVar');
+					}
+
+					.Maw-\$testVar_af::after {
+						max-width: map.get(mlu.$utils-data, 'utils', 'variables', 'testVar');
+					}
+
+					.Maw--card-sm {
+						max-width: var(--mlu-card-sm);
+					}
+				}
+			}
+		}
 	}
 }

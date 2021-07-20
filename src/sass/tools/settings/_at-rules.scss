@@ -180,6 +180,7 @@ $at-rules-data: map.deep-merge($at-rules-data, $at-rules);
 $at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-conf);
 
 $breakpoints: map.get($at-rules-cfg, 'breakpoints');
+mlu.$utils-data: map.set(mlu.$utils-data, 'general', 'variables', $breakpoints);
 
 $tASv: map.get($at-rules-cfg, 'tokens', 'str-value');
 $tANv: map.get($at-rules-cfg, 'tokens', 'num-value');
