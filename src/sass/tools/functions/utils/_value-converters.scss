@@ -168,6 +168,33 @@
 	@return $value;
 }
 
+@function convert-util-value-keyword($value, $data: ()) {
+	$name: map.get($data, 'name');
+	$section: map.get($data, 'section');
+
+	@if map.has-key(
+		mlu.$utils-data, $section, 'registry', $name, 'keywords', $value
+	) {
+		@return map.get(
+			mlu.$utils-data, $section, 'registry', $name, 'keywords', $value
+		);
+	}
+
+	$link: map.get(
+		mlu.$utils-data, $section, 'registry', $name, 'keywords'
+	);
+
+	@if map.has-key(mlu.$utils-data, $section, 'keywords', $link, $value) {
+		@return map.get(mlu.$utils-data, $section, 'keywords', $link, $value);
+	}
+
+	@return if(
+		map.has-key(mlu.$utils-data, 'general', 'keywords', $link, $value),
+		map.get(mlu.$utils-data, 'general', 'keywords', $link, $value),
+		$value
+	);
+}
+
 @function convert-util-value-resolution($value, $data: ()) {
 	@return convert-util-value-number(
 		$value, ('units-key': 'resolution')
@@ -180,8 +207,8 @@
 
 @function convert-util-value-css-kw($value, $data: ()) {
 	@return if(
-		map.has-key(mlu.$utils-config, 'css-keywords', $value),
-		map.get(mlu.$utils-config, 'css-keywords', $value),
+		map.has-key(mlu.$utils-data, 'general', 'keywords', 'css', $value),
+		map.get(mlu.$utils-data, 'general', 'keywords', 'css', $value),
 		$value
 	);
 }

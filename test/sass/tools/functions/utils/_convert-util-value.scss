@@ -23,13 +23,35 @@ mlu.$utils-data: map.deep-merge(
 				'properties': --testou,
 				'value-type': ('cust-prop', mlu.$tGVcp, 'cp-suffix'),
 			),
+			'Ai': (
+				'keywords': (
+					'e': end,
+					'b': baseline,
+					'c': center,
+				),
+				'value-type': mlu.$util-type-keyword,
+			),
+			'Animtf': (
+				'keywords': 'timing-functions',
+				'value-type': mlu.$util-type-keyword,
+			),
+			'Trs': (
+				'keywords': 'timing-functions',
+			),
 		),
 		'variables': (
 			'testVar': 1989px,
 			'trsduDef': 0.3s,
 		),
-	)
-	)
+		'keywords': (
+			'timing-functions': (
+				'e': ease,
+				'ei': ease-in,
+				'eo': ease-out,
+			),
+		),
+	),
+	),
 );
 
 @function cp-suffix($value, $data: ()) {
@@ -73,11 +95,15 @@ mlu.$utils-config: map.set(
 				('bgc', 'Trs'): background-color,
 				('=bgc', 'Trs'): bgc,
 			),
+			'converts utility keyword': (
+				('c', 'Ai'): center,
+				('ei', 'Animtf'): ease-in,
+			),
 			'converts values list': (
 				('1r:2:5p', 'Bdrs'): 1rem 2px 5%,
 				('1r:=10x', 'M'): 1rem 10x,
 				('3su:16:a', 'M'): mlu.su(3) 16px auto,
-				('c:-trsdu', 'Trs'): color var(--mlu-trsdu),
+				('c:-trsdu:ei', 'Trs'): color var(--mlu-trsdu) ease-in,
 			),
 			'converts values multi list': (
 				('1r:2/5p', 'Bdrs'): list.slash(1rem 2px, 5%),

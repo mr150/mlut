@@ -147,13 +147,6 @@ $utils-config: (
 		),
 	),
 
-	'css-keywords': (
-		'a': auto,
-		'i': inherit,
-		'u': unset,
-		'n': none,
-	),
-
 	'tokens': (
 		'util': (
 			'str-value': '-',
@@ -214,7 +207,7 @@ $utils-config: map.deep-merge($utils-config, $utils);
 
 $util-type-default: map.get($utils-config, 'default-value-type');
 $util-type-unitless: list.set-nth($util-type-default, 1, 'unitless');
-$-abbr-type: list.join('abbr', $util-type-default);
+$util-type-keyword: list.set-nth($util-type-default, 1, 'keyword');
 
 $tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
@@ -336,7 +329,7 @@ $utils-data: (
 			),
 			'Trs': (
 				'properties': transition,
-				'value-type': $-abbr-type,
+				'value-type': list.join(('abbr', 'number'), $util-type-keyword),
 			),
 			'Anim': animation,
 			'Rsz': resize,
@@ -349,6 +342,14 @@ $utils-data: (
 			'H': height,
 			'W': width,
 			'Ar': aspect-ratio,
+		),
+		'keywords': (
+			'css': (
+				'a': auto,
+				'i': inherit,
+				'u': unset,
+				'n': none,
+			),
 		),
 	),
 ) !default;
