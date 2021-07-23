@@ -201,6 +201,13 @@ $test-list: (0, 1, 2, 3);
 				3,
 			);
 		}
+
+		@include it('returns `null` if not string was passed') {
+			@include assert-equal(
+				mlu.str2n(#f00),
+				null,
+			);
+		}
 	}
 
 	@include describe('ls-implode') {

@@ -30,12 +30,14 @@ Styleguide: sass-tools.functions.general
 // Styleguide: sass-tools.functions.general.str2n
 
 @function str2n($str, $skip-unknown: false) {
-	@if meta.type-of($str) == 'number' {
+	$value-type: meta.type-of($str);
+
+	@if $value-type == 'number' {
 		@return $str;
 	}
 
-	@if meta.type-of($str) != 'string' {
-		@error 'Wrong type of argument $str: `#{meta.type-of($str)}`. Expected `string`';
+	@if $value-type != 'string' {
+		@return null;
 	}
 
 	$digits: '0123456789';
