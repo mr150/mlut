@@ -10,6 +10,7 @@
 @use '../forward-tools' as mlu;
 @use '../general' as mgen;
 @use '../grid' as mgs;
+@use 'mk-util' as mmu;
 
 $-su-rem: mlu.px2rem(mlu.$su);
 $-gtr-sm-rem: mlu.px2rem(mlu.$gtr-sm);
@@ -362,5 +363,24 @@ Styleguide: sass-tools.mixins.utils
 		}
 	} @else {
 		#{$prop}: $value;
+	}
+}
+
+@mixin mk-utils-group($raw-name, $values, $components: ()) {
+	$group-data: mlu.new-parse-util($raw-name);
+	$group-name: map.get($group-data, 'value');
+
+	@if not map.has-key(mlu.$utils-data, 'groups', 'registry', $group-name) {
+		@error 'Group `#{$group-name}` not defined in registry';
+	}
+
+	@if list.length($components) > 0 {
+		$group-data: $components;
+	}
+
+	@each $util in map.get(mlu.$utils-data, 'groups', 'registry', $group-name) {
+		@include mmu.new-mk-util(
+			$util, $values, if(string.index($util, mlu.$tUCm), (), $group-data)
+		);
 	}
 }

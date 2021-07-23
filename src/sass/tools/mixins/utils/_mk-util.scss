@@ -26,7 +26,11 @@
 	}
 
 	$util-map: ();
-	$util-data: map.merge($util-data, $features);
+
+	@if list.length($features) > 0 {
+		$util-data: $features;
+	}
+
 	$is-values-map: meta.type-of($values) == 'map';
 	$i: 1;
 

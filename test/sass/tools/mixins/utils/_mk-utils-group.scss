@@ -1,0 +1,152 @@
+@use 'sass-true' as *;
+@use 'tools' as mlu;
+@use 'sass:map';
+@use 'sass:list';
+
+mlu.$utils-data: map.deep-merge(
+	mlu.$utils-data,
+	('groups':
+	(
+		'registry': (
+			'Spaces': (
+				'M', 'P',
+			),
+			'Colors': (
+				'C', 'Bgc_h StOnly',
+			),
+		),
+	)
+	)
+);
+
+
+@include describe('tools/mixins/utils') {
+	@include describe('mk-utils-group') {
+		@include it('make utils group') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.mk-utils-group(
+						'Spaces', (
+						'xs0': 100px,
+						150: null
+					));
+				}
+
+				@include expect(false) {
+					.M-xs0 {
+						margin: 100px;
+					}
+
+					.M150 {
+						margin: 150px;
+					}
+
+					.P-xs0 {
+						padding: 100px;
+					}
+
+					.P150 {
+						padding: 150px;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.mk-utils-group(
+						'ArOnly xl_Spaces', (
+							100, '150_af StOnly',
+					));
+				}
+
+				@include expect(false) {
+					@media (min-width: mlu.bp(xl)) {
+						.xl_M100 {
+							margin: 100px;
+						}
+					}
+
+					.M150_af::after {
+						margin: 150px;
+					}
+
+					@media (min-width: mlu.bp(xl)) {
+						.xl_P100 {
+							padding: 100px;
+						}
+					}
+
+					.P150_af::after {
+						padding: 150px;
+					}
+				}
+			}
+		}
+
+		@include it('make group of utils that have component') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.mk-utils-group(
+						'ArOnly xl_Colors', (
+						red, 'blue_f StOnly',
+					));
+				}
+
+				@include expect(false) {
+					@media (min-width: mlu.bp(xl)) {
+						.xl_C-red {
+							color: red;
+						}
+					}
+
+					.C-blue_f:focus {
+						color: blue;
+					}
+
+					.Bgc-red_h:hover {
+						background-color: red;
+					}
+
+					.Bgc-blue_f:focus {
+						background-color: blue;
+					}
+				}
+			}
+		}
+
+		@include it('make utils group with passed util components') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.mk-utils-group(
+						'Colors',
+						(red, 'green_a StOnly'),
+						(
+							'at-rules': 'ArOnly xl',
+							'important': true,
+						),
+					);
+				}
+
+				@include expect(false) {
+					@media (min-width: mlu.bp(xl)) {
+						.xl_C-red\! {
+							color: red !important;
+						}
+					}
+
+					.C-green_a:active {
+						color: green;
+					}
+
+					.Bgc-red_h:hover {
+						background-color: red;
+					}
+
+					.Bgc-green_a:active {
+						background-color: green;
+					}
+				}
+			}
+		}
+	}
+}
