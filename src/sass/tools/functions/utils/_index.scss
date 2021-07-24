@@ -84,25 +84,25 @@ $-states-abbrs: list.join(
 				mlu.$tSAnd
 			), 1);
 
-			//stylelint-disable
 			@if not $at-rules and (
 				string.index($part, mlu.$tAAr) or list.index($-ar-keywords, $part)
 			) {
 				$at-rules: $component-trimmed;
 				$comp-indexes: map.set($comp-indexes, 'ar', $i);
-			} @else if (string.index($component, ' ') or $value) and
-				list.index($-states-abbrs, $part) or
-				list.index(
-					(mlu.$tSCn mlu.$tSRaw mlu.$tSAnd mlu.$tSTu),
+			} @else if (
+				not $value and not string.index($component, ' ') and
+				not list.index(
+					(mlu.$tSCn mlu.$tSAnd mlu.$tSTu),
 					string.slice($component-item, 1, 1)
+				)
 			) {
+				$value: $component-trimmed;
+				$comp-indexes: map.set($comp-indexes, 'value', $i);
+			} @else {
 				$states: list.append($states, $component-trimmed);
 				$comp-indexes: map.set(
 					$comp-indexes, 'state' + list.length($states), $i
 				);
-			} @else {
-				$value: $component-trimmed;
-				$comp-indexes: map.set($comp-indexes, 'value', $i);
 			}
 
 			$i: $i + 1;

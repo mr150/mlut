@@ -89,11 +89,20 @@
 			);
 
 			@include assert-equal(
-				mlu.new-parse-util('!/p_!'),
+				mlu.new-parse-util('!=p _!'),
 				(
-					'pre-states': '!/p',
+					'pre-states': '!=p',
 					'important': true,
 					'value': '',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				mlu.new-parse-util('=[href]> _=54px'),
+				(
+					'pre-states': '=[href]>',
+					'value': '=54px',
 				),
 				$inspect: true,
 			);
@@ -113,9 +122,9 @@
 			);
 
 			@include assert-equal(
-				mlu.new-parse-util('^ctx /a> _2su'),
+				mlu.new-parse-util('^ctx =a>_2su'),
 				(
-					'pre-states': '^ctx /a>',
+					'pre-states': '^ctx =a>',
 					'value': '2su',
 				),
 				$inspect: true,
@@ -204,6 +213,15 @@
 				),
 				$inspect: true,
 			);
+
+			@include assert-equal(
+				mlu.new-parse-util('=54px_=[tabindex]'),
+				(
+					'post-states': '=[tabindex]',
+					'value': '=54px',
+				),
+				$inspect: true,
+			);
 		}
 
 		@include it('value with at-rule and pre state') {
@@ -272,11 +290,11 @@
 
 		@include it('value with post and pre states') {
 			@include assert-equal(
-				mlu.new-parse-util('/a>_cc_f:bf'),
+				mlu.new-parse-util('=a> _=cc_=>*:f:bf'),
 				(
-					'pre-states': '/a>',
-					'post-states': 'f:bf',
-					'value': 'cc',
+					'pre-states': '=a>',
+					'post-states': '=>*:f:bf',
+					'value': '=cc',
 				),
 				$inspect: true,
 			);
@@ -294,10 +312,10 @@
 
 		@include it('value with all components') {
 			@include assert-equal(
-				mlu.new-parse-util('xs:sm_:f:/>_0_h::^sub'),
+				mlu.new-parse-util('xs:sm_:f:>_0_h::^sub'),
 				(
 					'at-rules': 'xs:sm',
-					'pre-states': ':f:/>',
+					'pre-states': ':f:>',
 					'post-states': 'h::^sub',
 					'value': '0',
 				),
@@ -305,10 +323,10 @@
 			);
 
 			@include assert-equal(
-				mlu.new-parse-util('xs:sm_:f:/>__noJs:h'),
+				mlu.new-parse-util('xs:sm_:f:>__noJs:h'),
 				(
 					'at-rules': 'xs:sm',
-					'pre-states': ':f:/>',
+					'pre-states': ':f:>',
 					'post-states': 'noJs:h',
 					'value': '',
 				),

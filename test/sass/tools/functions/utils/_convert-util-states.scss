@@ -45,7 +45,7 @@ mlu.$utils-config: map.set(
 			);
 
 			@include assert-equal(
-				mlu.convert-util-states('/>*'),
+				mlu.convert-util-states('=>*'),
 				('&>*'),
 			);
 
@@ -77,12 +77,12 @@ mlu.$utils-config: map.set(
 			);
 
 			@include assert-equal(
-				mlu.convert-util-states(':^:&::^2:/+a.link:h', 'D'),
+				mlu.convert-util-states(':^:&::^2:=+a.link:h', 'D'),
 				('& .-Ctx.D .-Ctx2+a.link:hover'),
 			);
 
 			@include assert-equal(
-				mlu.convert-util-states('^ct0:/>*:h:!&--sec0', 'Bgc', true),
+				mlu.convert-util-states('^ct0:=>*:h:!&--sec0', 'Bgc', true),
 				('.-Ctx-ct0>*:hover:not(.Bgc--sec0) '),
 			);
 		}
@@ -94,7 +94,7 @@ mlu.$utils-config: map.set(
 			);
 
 			@include assert-equal(
-				mlu.convert-util-states('h:a:bf,noJs:-testou:a,:^:!-testou:!/h2'),
+				mlu.convert-util-states('h:a:bf,noJs:-testou:a,:^:!-testou:!=h2'),
 				('&:hover:active::before, &.pa.ro.voz:active, & .-Ctx:not(.pa.ro.voz):not(h2)'),
 			);
 		}

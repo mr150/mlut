@@ -48,7 +48,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state('::^one:fw:/+*', null) {
+						@include mlu.new-mk-state('::^one:fw:=+*', null) {
 							display: flex;
 						}
 					}
@@ -59,7 +59,7 @@ mlu.$utils-config: map.set(
 						display: flex;
 					}
 
-					.D-f_\:\:\^one\:fw\:\/\+\* .-Ctx-one:focus-within+* {
+					.D-f_\:\:\^one\:fw\:\=\+\* .-Ctx-one:focus-within+* {
 						display: flex;
 					}
 				}
@@ -145,15 +145,15 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(null, '/a:^:h,&:^1:+', false, &, $this) {
+						@include mlu.new-mk-state(null, '=a:^:h,&:^1:+', false, &, $this) {
 							display: flex;
 						}
 					}
 				}
 
 				@include expect(false) {
-					a.-Ctx:hover .\/a\:\^\:h\,\&\:\^1\:\+_D-f,
-					.D.-Ctx1+ .\/a\:\^\:h\,\&\:\^1\:\+_D-f {
+					a.-Ctx:hover .\=a\:\^\:h\,\&\:\^1\:\+_D-f,
+					.D.-Ctx1+ .\=a\:\^\:h\,\&\:\^1\:\+_D-f {
 						display: flex;
 					}
 				}
@@ -162,18 +162,18 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(null, '/h2. /ul:h', false) {
+						@include mlu.new-mk-state(null, '=h2. =ul:h', false) {
 							display: flex;
 						}
 					}
 				}
 
 				@include expect(false) {
-					h2.\/h2\._D-f {
+					h2.\=h2\._D-f {
 						display: flex;
 					}
 
-					ul:hover .\/ul\:h_D-f {
+					ul:hover .\=ul\:h_D-f {
 						display: flex;
 					}
 				}
@@ -357,7 +357,7 @@ mlu.$utils-config: map.set(
 					.D-f {
 						@include mlu.new-mk-state(
 							mlu.$states-cmb + 'af,bf a:af',
-							mlu.$states-cmb + ':h /a:a:>,/a.act:>',
+							mlu.$states-cmb + ':h =a:a:>,=a.act:>',
 							false,
 						) {
 							display: flex;
@@ -375,15 +375,15 @@ mlu.$utils-config: map.set(
 						display: flex;
 					}
 
-					a:active> .\/a\:a\:\>\,\/a\.act\:\>_D-f_af\,bf::after,
-					a:active> .\/a\:a\:\>\,\/a\.act\:\>_D-f_af\,bf::before,
-					a.act> .\/a\:a\:\>\,\/a\.act\:\>_D-f_af\,bf::after,
-					a.act> .\/a\:a\:\>\,\/a\.act\:\>_D-f_af\,bf::before {
+					a:active> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,bf::after,
+					a:active> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,bf::before,
+					a.act> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,bf::after,
+					a.act> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,bf::before {
 						display: flex;
 					}
 
-					a:active> .\/a\:a\:\>\,\/a\.act\:\>_D-f_a\:af:active::after,
-					a.act> .\/a\:a\:\>\,\/a\.act\:\>_D-f_a\:af:active::after {
+					a:active> .\=a\:a\:\>\,\=a\.act\:\>_D-f_a\:af:active::after,
+					a.act> .\=a\:a\:\>\,\=a\.act\:\>_D-f_a\:af:active::after {
 						display: flex;
 					}
 				}
