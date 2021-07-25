@@ -437,10 +437,22 @@ $-states-abbrs: list.join(
 		@return mlu.$tUNv + $value;
 	}
 
-	@return if(
-		meta.type-of($value) == 'string' and string.slice($value, 1, 1) == mlu.$tURv,
+	$str-value: if(
+		meta.type-of($value) == 'string',
 		$value,
-		mlu.$tUSv + $value
+		$value + ''
+	);
+
+	$first-char: string.slice($str-value, 1, 1);
+
+	@if $first-char == '#' {
+		@return mlu.$tUHv + $str-value;
+	}
+
+	@return if(
+		$first-char == mlu.$tURv,
+		$str-value,
+		mlu.$tUSv + $str-value
 	);
 }
 

@@ -152,6 +152,7 @@ $utils-config: (
 			'str-value': '-',
 			'raw-value': '=',
 			'num-value': '',
+			'hash-value': '',
 			'space': ':',
 			'custom-property': '-',
 			'variable': '$',
@@ -212,6 +213,7 @@ $util-type-keyword: list.set-nth($util-type-default, 1, 'keyword');
 $tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
 $tURv: map.get($utils-config, 'tokens', 'util', 'raw-value');
+$tUHv: map.get($utils-config, 'tokens', 'util', 'hash-value');
 $tUVar: map.get($utils-config, 'tokens', 'util', 'variable');
 $tUCp: map.get($utils-config, 'tokens', 'util', 'custom-property');
 $tUIm: map.get($utils-config, 'tokens', 'util', 'important');

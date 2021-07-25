@@ -928,5 +928,26 @@ mlu.$utils-data: map.deep-merge(
 				}
 			}
 		}
+
+		@include it('make util with color in value') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'C', (
+						#f06, '#f0d_f StOnly'
+					));
+				}
+
+				@include expect(false) {
+					.C\#f06 {
+						color: #f06
+					}
+
+					.C\#f0d_f:focus {
+						color: #f0d
+					}
+				}
+			}
+		}
 	}
 }
