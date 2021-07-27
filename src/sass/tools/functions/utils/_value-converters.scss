@@ -205,6 +205,12 @@
 	@return mlu.str2n($value) or $value;
 }
 
+@function convert-util-value-alpha($value, $data: ()) {
+	@return convert-util-value-number(
+		$value, ('units-key': 'alpha')
+	);
+}
+
 @function convert-util-value-css-kw($value, $data: ()) {
 	@return if(
 		map.has-key(mlu.$utils-data, 'general', 'keywords', 'css', $value),

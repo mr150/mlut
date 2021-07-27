@@ -77,6 +77,8 @@ mlu.$utils-config: map.set(
 				(2su, 'P'): mlu.sur(2) mlu.su(2),
 				(200x, 'W'): 200ex,
 				('16/9', 'Ar'): string.unquote('16/9'),
+				(70p, 'Op'): 0.7,
+				('0.8', 'Op'): 0.8,
 			),
 			'converts global CSS keyword': (
 				('a', 'W'): auto,

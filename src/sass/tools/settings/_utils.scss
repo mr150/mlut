@@ -145,6 +145,9 @@ $utils-config: (
 			'c': 1dpcm,
 			'x': 1dppx,
 		),
+		'alpha': (
+			'p': 0.01,
+		),
 	),
 
 	'tokens': (
@@ -209,6 +212,7 @@ $utils-config: map.deep-merge($utils-config, $utils);
 $util-type-default: map.get($utils-config, 'default-value-type');
 $util-type-unitless: list.set-nth($util-type-default, 1, 'unitless');
 $util-type-keyword: list.set-nth($util-type-default, 1, 'keyword');
+$util-type-alpha: list.set-nth($util-type-default, 1, 'alpha');
 
 $tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
@@ -319,7 +323,7 @@ $utils-data: (
 			'Cur': cursor,
 			'Op': (
 				'properties': opacity,
-				'value-type': $util-type-unitless,
+				'value-type': $util-type-alpha,
 			),
 			'Bd': border,
 			'Bdc': border-color,
