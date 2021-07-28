@@ -934,17 +934,23 @@ mlu.$utils-data: map.deep-merge(
 				@include output(false) {
 					@include mlu.new-mk-util(
 						'C', (
-						#f06, '#f0d_f StOnly'
+						#f06,
+						'#f0d_f StOnly',
+						'#60c*-txtAlpha',
 					));
 				}
 
 				@include expect(false) {
 					.C\#f06 {
-						color: #f06
+						color: #f06;
 					}
 
 					.C\#f0d_f:focus {
-						color: #f0d
+						color: #f0d;
+					}
+
+					.C\#60c\*-txtAlpha {
+						color: rgba(102, 0, 204, var(--mlu-txtAlpha, 1));
 					}
 				}
 			}

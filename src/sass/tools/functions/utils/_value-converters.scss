@@ -270,3 +270,41 @@ $-tUCp-length: string.length(mlu.$tUCp);
 		)
 	});
 }
+
+@function convert-util-value-color($value, $data: ()) {
+	@if map.has-key(
+		mlu.$utils-data, 'general', 'keywords', 'colors', $value
+	) {
+		@return map.get(
+			mlu.$utils-data, 'general', 'keywords', 'colors', $value
+		);
+	}
+
+	@if meta.type-of($value) == 'string' {
+		$mod-color-list: mlu.str-split($value, mlu.$tUVm);
+
+		@if list.length($mod-color-list) > 1 {
+			$name: map.get($data, 'name');
+			$section: map.get($data, 'section');
+
+			$part-color: list.nth($mod-color-list, 1);
+			$converted-part: apply-value-converter(
+				$part-color, $name, $section
+			);
+			$color: mlu.str-hex2color($converted-part);
+
+			@if $color or string.slice($part-color, 1, $-tUCp-length) == mlu.$tUCp {
+				$part-alpha: list.nth($mod-color-list, 2);
+				$alpha: apply-value-converter($part-alpha, 'Op', 'utils');
+
+				@if string.slice($part-alpha, 1, $-tUCp-length) == mlu.$tUCp {
+					$alpha: string.insert($alpha, ', 1', -2);
+				}
+
+				@return rgba($color or $converted-part, $alpha);
+			}
+		}
+	}
+
+	@return $value;
+}

@@ -42,12 +42,22 @@ mlu.$utils-data: map.deep-merge(
 		'variables': (
 			'testVar': 1989px,
 			'trsduDef': 0.3s,
+			'opDef': 0.64,
+			'cPrm0': #60c,
 		),
 		'keywords': (
 			'timing-functions': (
 				'e': ease,
 				'ei': ease-in,
 				'eo': ease-out,
+			),
+		),
+	),
+	'general': (
+		'keywords': (
+			'colors': (
+				'prm0': #c06,
+				'sec0': #0c6,
 			),
 		),
 	),
@@ -101,11 +111,22 @@ mlu.$utils-config: map.set(
 				('c', 'Ai'): center,
 				('ei', 'Animtf'): ease-in,
 			),
+			'converts colors': (
+				('t', 'C'): transparent,
+				('$cPrm0*20p', 'C'): rgba(102, 0, 204, 0.2),
+				('#60c*20p', 'C'): rgba(102, 0, 204, 0.2),
+				('prm0*$opDef', 'C'): rgba(204, 0, 102, 0.64),
+				('prm0*-co', 'C'): rgba(204, 0, 102, var(--mlu-co, 1)),
+				('#c06*20', 'C'): rgba(204, 0, 102, 20),
+				('prm10*-co', 'C'): string.unquote('prm10*-co'),
+				('-color*20p', 'C'): rgba(var(--mlu-color), 0.2),
+			),
 			'converts values list': (
 				('1r:2:5p', 'Bdrs'): 1rem 2px 5%,
 				('1r:=10x', 'M'): 1rem 10x,
 				('3su:16:a', 'M'): mlu.su(3) 16px auto,
 				('c:-trsdu:ei', 'Trs'): color var(--mlu-trsdu) ease-in,
+				('cc:prm0*5p', 'C'): currentColor rgba(204, 0, 102, 0.05),
 			),
 			'converts values multi list': (
 				('1r:2/5p', 'Bdrs'): list.slash(1rem 2px, 5%),

@@ -156,6 +156,7 @@ $utils-config: (
 			'raw-value': '=',
 			'num-value': '',
 			'hash-value': '',
+			'value-modifier': '*',
 			'space': ':',
 			'custom-property': '-',
 			'variable': '$',
@@ -211,13 +212,15 @@ $utils-config: map.deep-merge($utils-config, $utils);
 
 $util-type-default: map.get($utils-config, 'default-value-type');
 $util-type-unitless: list.set-nth($util-type-default, 1, 'unitless');
-$util-type-keyword: list.set-nth($util-type-default, 1, 'keyword');
 $util-type-alpha: list.set-nth($util-type-default, 1, 'alpha');
+$util-type-keyword: list.set-nth($util-type-default, 1, 'keyword');
+$util-type-color: list.set-nth($util-type-default, 1, 'color');
 
 $tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
 $tURv: map.get($utils-config, 'tokens', 'util', 'raw-value');
 $tUHv: map.get($utils-config, 'tokens', 'util', 'hash-value');
+$tUVm: map.get($utils-config, 'tokens', 'util', 'value-modifier');
 $tUVar: map.get($utils-config, 'tokens', 'util', 'variable');
 $tUCp: map.get($utils-config, 'tokens', 'util', 'custom-property');
 $tUIm: map.get($utils-config, 'tokens', 'util', 'important');
@@ -287,7 +290,10 @@ $utils-data: (
 				'directions': true,
 			),
 			'Ov': overflow,
-			'C': color,
+			'C': (
+				'properties': color,
+				'value-type': $util-type-color,
+			),
 			'F': font,
 			'Fw': (
 				'properties': font-weight,
@@ -355,6 +361,10 @@ $utils-data: (
 				'i': inherit,
 				'u': unset,
 				'n': none,
+			),
+			'colors': (
+				't': transparent,
+				'cc': currentColor,
 			),
 		),
 	),
