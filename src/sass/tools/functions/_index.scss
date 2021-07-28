@@ -7,7 +7,7 @@ Styleguide: sass-tools.functions
 */
 
 @forward 'general' hide
-	str-split, str-trim, remove-nth, str-replace, str-replace-all, str-starts, ls-join, ls-find;
+	str-split, str-trim, remove-nth, str-replace, str-replace-all, str-starts, ls-join, ls-find, str-hex2color;
 @forward 'math';
 @forward 'getters';
 @forward 'utils-getters';

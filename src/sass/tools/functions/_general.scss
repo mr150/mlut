@@ -332,3 +332,68 @@ Styleguide: sass-tools.functions.general
 
 	@return string.slice($str, 1, string.length($substr)) == $substr;
 }
+
+@function str-hex2color($str) {
+	$value-type: meta.type-of($str);
+
+	@if $value-type == 'color' {
+		@return $str;
+	}
+
+	@if $value-type != 'string' or string.slice($str, 1, 1) != '#' {
+		@return null;
+	}
+
+	$str-length: string.length($str);
+
+	@if $str-length != 4 and $str-length != 7 {
+		@return error('Invalid color format: `#{$str}`. Allowed 3 or 6 hexadecimal digits');
+	}
+
+	$r: '';
+	$g: '';
+	$b: '';
+	$str: string.to-lower-case($str);
+
+	$max-length: if(
+		$str-length == 4, 1, 2
+	);
+
+	@for $i from 2 through $str-length {
+		$digit: string.slice($str, $i, $i);
+
+		@if not list.index(mlu.$hex-digits, $digit) {
+			@return error('Invalid character: `#{$digit}`. Allowed only hexadecimal digits');
+		}
+
+		@if string.length($r) < $max-length {
+			$r: $r + $digit;
+		} @else if string.length($g) < $max-length {
+			$g: $g + $digit;
+		} @else {
+			$b: $b + $digit;
+		}
+	}
+
+	@if $str-length == 4 {
+		$r: $r + $r;
+		$g: $g + $g;
+		$b: $b + $b;
+	}
+
+	@return rgb(-hex2dec($r), -hex2dec($g), -hex2dec($b));
+}
+
+@function -hex2dec($n) {
+	$str-number: string.to-lower-case($n);
+	$result: 0;
+	$base: list.length(mlu.$hex-digits);
+	$length: string.length($str-number);
+
+	@for $i from 1 through $length {
+		$digit: list.index(mlu.$hex-digits, string.slice($str-number, $i, $i)) - 1;
+		$result: $result + $digit * math.pow($base, $length - $i);
+	}
+
+	@return $result;
+}

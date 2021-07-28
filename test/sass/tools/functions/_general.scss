@@ -253,4 +253,35 @@ $test-list: (0, 1, 2, 3);
 			}
 		}
 	}
+
+	@include describe('str-hex2color') {
+		$-tests: (
+			'converts hex string to color': (
+				(red): red,
+				('#c06'): #cc0066,
+				('#6600cc'): #6600cc,
+				('#FAB'): #ffaabb,
+			),
+			'returns `null` if conversion is not possible': (
+				(22): null,
+				('red'): null,
+			),
+			'invalid color format': (
+				('#h06'): 'ERROR: Invalid character: `h`. Allowed only hexadecimal digits',
+				('#660cc'): 'ERROR: Invalid color format: `#660cc`. Allowed 3 or 6 hexadecimal digits',
+			),
+		);
+
+		@each $test, $data in $-tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						mlu.str-hex2color($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
 }
