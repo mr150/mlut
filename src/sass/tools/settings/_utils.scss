@@ -228,7 +228,6 @@ $tUCm: map.get($utils-config, 'tokens', 'util', 'component');
 $tUSp: map.get($utils-config, 'tokens', 'util', 'space');
 $tULs1: map.get($utils-config, 'tokens', 'util', 'list-separator1');
 $tULs2: map.get($utils-config, 'tokens', 'util', 'list-separator2');
-$tGVcp: map.get($utils-config, 'tokens', 'util', 'value-converts-pipeline');
 $tSOr: map.get($utils-config, 'tokens', 'states', 'or');
 $tSAnd: map.get($utils-config, 'tokens', 'states', 'and');
 $tSNot: map.get($utils-config, 'tokens', 'states', 'not');
@@ -237,6 +236,7 @@ $tSTu: map.get($utils-config, 'tokens', 'states', 'this-util');
 $tSCn: map.get($utils-config, 'tokens', 'states', 'context');
 $tSRaw: map.get($utils-config, 'tokens', 'states', 'raw');
 $tSTucv: $tSTu + $tUSv;
+$tGVcp: map.get($utils-config, 'tokens', 'general', 'value-converts-pipeline');
 
 $utils-config: map.set(
 	$utils-config,
