@@ -210,6 +210,37 @@ $test-list: (0, 1, 2, 3);
 		}
 	}
 
+	@include describe('str-hex2color') {
+		$tests: (
+			'converts hex string to color': (
+				(red): red,
+				('#c06'): #cc0066,
+				('#6600cc'): #6600cc,
+				('#FAB'): #ffaabb,
+			),
+			'returns `null` if conversion is not possible': (
+				(22): null,
+				('red'): null,
+			),
+			'invalid color format': (
+				('#h06'): 'ERROR: Invalid character: `h`. Allowed only hexadecimal digits',
+				('#660cc'): 'ERROR: Invalid color format: `#660cc`. Allowed 3 or 6 hexadecimal digits',
+			),
+		);
+
+		@each $test, $data in $tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						mlu.str-hex2color($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
+
 	@include describe('ls-implode') {
 		$-tests: (
 		('xl' ':h' 'D', ' _ ',):  'xl _ :h _ D',
@@ -254,31 +285,29 @@ $test-list: (0, 1, 2, 3);
 		}
 	}
 
-	@include describe('str-hex2color') {
-		$-tests: (
-			'converts hex string to color': (
-				(red): red,
-				('#c06'): #cc0066,
-				('#6600cc'): #6600cc,
-				('#FAB'): #ffaabb,
+	@include describe('is-css-var') {
+		$tests: (
+			'checks if value is a CSS variable': (
+				(var(--bgColor)): true,
+				('--bgColor'): false,
 			),
-			'returns `null` if conversion is not possible': (
-				(22): null,
-				('red'): null,
-			),
-			'invalid color format': (
-				('#h06'): 'ERROR: Invalid character: `h`. Allowed only hexadecimal digits',
-				('#660cc'): 'ERROR: Invalid color format: `#660cc`. Allowed 3 or 6 hexadecimal digits',
+			'checks CSS variable in a color': (
+				(rgba(var(--mlu-bgColor), 0.6), true): true,
+				(hsla(var(--mlu-bgColor), 0.6), true): true,
+				(rgb(var(--mlu-bgColor)), true): true,
+				(hsl(var(--mlu-bgColor)), true): true,
+				(rgb(var(--mlu-bgColor))): false,
+				(rgba(24, 0, 102, var(--mlu-bgAlpha)), true): false,
+
 			),
 		);
 
-		@each $test, $data in $-tests {
+		@each $test, $data in $tests {
 			@include it($test) {
 				@each $args, $expect in $data {
 					@include assert-equal(
-						mlu.str-hex2color($args...),
+						mlu.is-css-var($args...),
 						$expect,
-						$inspect: true,
 					);
 				}
 			}

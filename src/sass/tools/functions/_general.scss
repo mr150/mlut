@@ -212,6 +212,23 @@ Styleguide: sass-tools.functions.general
 	@return $list;
 }
 
+@function is-css-var($value, $in-color: false) {
+	@return (
+		meta.type-of($value) == 'string' and
+		(
+			str-starts($value, 'var(') or
+			(
+				$in-color and (
+					str-starts($value, 'rgba(var(') or
+					str-starts($value, 'rgb(var(') or
+					str-starts($value, 'hsla(var(') or
+					str-starts($value, 'hsl(var(')
+				)
+			)
+		)
+	);
+}
+
 // Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.
 
 @function ls-implode($list, $separator: '') {
