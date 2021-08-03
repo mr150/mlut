@@ -2,11 +2,11 @@
 @use 'sass-true' as *;
 @use 'tools' as mlu;
 
-@include describe('tools/functions/utils/') {
-	@include describe('parse-util-value-range') {
+@include describe('tools/functions/utils/range-parsers') {
+	@include describe('number-range') {
 		@include it('parse simple range') {
 			@include assert-equal(
-				mlu.parse-util-value-range([2, 4], 'Bdw'),
+				mlu.parse-util-number-range([2, 4], 'Bdw'),
 				(
 					'values': (2: 2px, 3: 3px, 4: 4px),
 				),
@@ -14,7 +14,7 @@
 			);
 
 			@include assert-equal(
-				mlu.parse-util-value-range([2su, 4], 'Fz'),
+				mlu.parse-util-number-range([2su, 4], 'Fz'),
 				(
 					'values': (
 						2su: mlu.sur(2),
@@ -26,7 +26,7 @@
 			);
 
 			@include assert-equal(
-				mlu.parse-util-value-range([-2, 1], 'Z'),
+				mlu.parse-util-number-range([-2, 1], 'Z'),
 				(
 					'values': (
 					-2: -2,
@@ -39,7 +39,7 @@
 			);
 
 			@include assert-equal(
-				mlu.parse-util-value-range([0.5, 3], 'Z'),
+				mlu.parse-util-number-range([0.5, 3], 'Z'),
 				(
 					'values': (
 					0.5: 0.5,
@@ -51,7 +51,7 @@
 			);
 
 			@include assert-equal(
-				mlu.parse-util-value-range([-2, -4], 'Bdw'),
+				mlu.parse-util-number-range([-2, -4], 'Bdw'),
 				(
 					'values': ()
 				),
@@ -59,19 +59,19 @@
 			);
 
 			@include assert-equal(
-				mlu.parse-util-value-range('a', 'W'),
+				mlu.parse-util-number-range('a', 'W'),
 				'ERROR: Invalid $start value in range: `a`'
 			);
 
 			@include assert-equal(
-				mlu.parse-util-value-range('1no1', 'W'),
+				mlu.parse-util-number-range('1no1', 'W'),
 				'ERROR: Unknown unit in $start value in range: `1no1`'
 			);
 		}
 
 		@include it('parse range with step') {
 			@include assert-equal(
-				mlu.parse-util-value-range([2su, 6, 2], 'W'),
+				mlu.parse-util-number-range([2su, 6, 2], 'W'),
 				(
 					'values': (
 					2su: mlu.su(2),
@@ -83,7 +83,7 @@
 			);
 
 			@include assert-equal(
-				mlu.parse-util-value-range([0.5, 1.5, 0.5], 'Z'),
+				mlu.parse-util-number-range([0.5, 1.5, 0.5], 'Z'),
 				(
 					'values': (
 					0.5: 0.5,
@@ -97,7 +97,7 @@
 
 		@include it('parse range with features') {
 			@include assert-equal(
-				mlu.parse-util-value-range(['xs:sm_:f:>_1r_h::^sub', 7, 3], 'W'),
+				mlu.parse-util-number-range(['xs:sm_:f:>_1r_h::^sub', 7, 3], 'W'),
 				(
 					'features': (
 					'at-rules': 'xs:sm',
