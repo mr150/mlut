@@ -8,8 +8,7 @@
 
 @use 'forward-tools' as mlu;
 @use 'value-converters' as converters;
-@use 'range-parsers' as rn-parsers;
-@use 'parse-util' as mpu;
+@use 'range-parsers';
 @forward 'value-converters';
 @forward 'parse-util';
 @forward 'range-parsers' as parse-util-*;
@@ -366,10 +365,6 @@ Styleguide: sass-tools.functions.utils
 	);
 }
 
-@function parse-util-value-range($range, $util) {
-	@return rn-parsers.number-range($range, $util);
-}
-
 $util-value-converters: ();
 
 $-fn-name-prefix: 'convert-util-value-';
@@ -387,4 +382,22 @@ mlu.$utils-config: map.set(
 	mlu.$utils-config,
 	'value-converters',
 	map.merge($util-value-converters, map.get(mlu.$utils-config, 'value-converters'))
+);
+
+$-util-range-parsers: ();
+
+@each $key, $value in meta.module-functions(range-parsers) {
+	$suffix-pos: string.index($key, '-range');
+
+	@if $suffix-pos {
+		$-util-range-parsers: map.set(
+			$-util-range-parsers, string.slice($key, 1, $suffix-pos - 1), $value
+		);
+	}
+}
+
+mlu.$utils-config: map.set(
+	mlu.$utils-config,
+	'range-parsers',
+	map.merge($-util-range-parsers, map.get(mlu.$utils-config, 'range-parsers'))
 );

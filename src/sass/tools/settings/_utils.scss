@@ -132,6 +132,8 @@ $utils-config: (
 
 	'value-converters': (),
 
+	'range-parsers': (),
+
 	'units': (
 		'default': (
 			'': 1px,
@@ -292,6 +294,7 @@ $utils-data: (
 			'Ov': overflow,
 			'C': (
 				'properties': color,
+				'range-parser': 'color',
 				'value-type': $util-type-color,
 			),
 			'F': font,

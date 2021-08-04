@@ -955,5 +955,42 @@ mlu.$utils-data: map.deep-merge(
 				}
 			}
 		}
+
+		@include it('make util from color range') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'C', (
+						[('prm0', '-txtColor'), '2_h StOnly', ('alpha': 0.2, 'green': 30)],
+					));
+				}
+
+				@include expect(false) {
+					.C-prm0_h:hover {
+						color: #c06;
+					}
+
+					.C-prm0\*80p_h:hover {
+						color: rgba(204, 0, 102, 0.8);
+					}
+
+					.C-prm50_h:hover {
+						color: #cc1e66;
+					}
+
+					.C-prm50\*80p_h:hover {
+						color: rgba(204, 30, 102, 0.8);
+					}
+
+					.C--txtColor_h:hover {
+						color: var(--mlu-txtColor);
+					}
+
+					.C--txtColor\*80p_h:hover {
+						color: rgba(var(--mlu-txtColor), 0.8);
+					}
+				}
+			}
+		}
 	}
 }

@@ -18,6 +18,14 @@
 	$class-name: map.get($main-options, 'class-name');
 	$props: map.get($main-options, 'properties');
 	$custom-selector: map.get($main-options, 'selector');
+	$range-parser: map.get(
+		mlu.$utils-config,
+		'range-parsers',
+		(
+			map.get($main-options, 'range-parser')
+			or 'number'
+		)
+	);
 
 	@if not map.has-key(mlu.$utils-data, 'utils', 'registry', $util-name) {
 		mlu.$utils-data: map.set(
@@ -41,7 +49,7 @@
 			@include new-mk-util(
 				$util-name,
 				$options: $options,
-				mlu.parse-util-value-range($range-list, $util-name)...
+				meta.call($range-parser, $range-list, $util-name)...
 			);
 		} @else {
 			$util-val-data: mlu.new-parse-util($key);
@@ -179,6 +187,9 @@
 
 @function -util-main-options($name, $options) {
 	$prop: null;
+	$needed-options: (
+		'repeat-prop-values', 'preset-properties', 'selector', 'range-parser',
+	);
 
 	$result: (
 		'class-name': if(
@@ -186,16 +197,15 @@
 			map.get(mlu.$utils-data, 'utils', 'registry', $name, 'class-name'),
 			$name
 		),
-		'repeat-prop-values': map.get(
-			mlu.$utils-data, 'utils', 'registry', $name, 'repeat-prop-values'
-		),
-		'preset-properties': map.get(
-			mlu.$utils-data, 'utils', 'registry', $name, 'preset-properties'
-		),
-		'selector': map.get(
-			mlu.$utils-data, 'utils', 'registry', $name, 'selector'
-		),
 	);
+
+	@each $item in $needed-options {
+		$result: map.set(
+			$result,
+			$item,
+			map.get(mlu.$utils-data, 'utils', 'registry', $name, $item),
+		);
+	}
 
 	@if meta.type-of($options) == 'map' {
 		$prop: map.get($options, 'properties');
