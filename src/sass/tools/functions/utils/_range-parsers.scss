@@ -285,7 +285,7 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 				rgba(
 					$color,
 					string.insert(
-						converters.convert-util-value-cust-prop($step-value), ', 1', -2
+						converters.convert-uv-cust-prop($step-value), ', 1', -2
 					)
 				)
 			);

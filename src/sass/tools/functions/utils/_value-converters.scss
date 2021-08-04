@@ -24,11 +24,11 @@
 //
 // Available converters:
 // ```scss
-//@debug mlu.convert-util-value-number(10); // 10px
-//@debug mlu.convert-util-value-unitless(10); // 10
-//@debug mlu.convert-util-value-resolution(2x); // 2dppx
-//@debug mlu.convert-util-value-css-kw('a'); // auto
-//@debug mlu.convert-util-value-abbr('bgc'); // background-color
+//@debug mlu.convert-uv-number(10); // 10px
+//@debug mlu.convert-uv-unitless(10); // 10
+//@debug mlu.convert-uv-resolution(2x); // 2dppx
+//@debug mlu.convert-uv-css-kw('a'); // auto
+//@debug mlu.convert-uv-abbr('bgc'); // background-color
 // ```
 //
 // $value - value for converting
@@ -98,7 +98,6 @@
 		map.get(mlu.$utils-config, 'default-value-type'),
 	);
 
-	//$is-pipeline: list.nth($value-type, 1) == mlu.$tGVcp;
 	$is-pipeline: false;
 
 	@each $item in $value-type {
@@ -126,7 +125,7 @@
 	@return $util-val;
 }
 
-@function convert-util-value-number($value, $data: ()) {
+@function convert-uv-number($value, $data: ()) {
 	$val-number: mlu.str2n($value, true);
 	$section: map.get($data, 'section');
 	$name: map.get($data, 'name');
@@ -168,7 +167,7 @@
 	@return $value;
 }
 
-@function convert-util-value-keyword($value, $data: ()) {
+@function convert-uv-keyword($value, $data: ()) {
 	$name: map.get($data, 'name');
 	$section: map.get($data, 'section');
 
@@ -195,23 +194,23 @@
 	);
 }
 
-@function convert-util-value-resolution($value, $data: ()) {
-	@return convert-util-value-number(
+@function convert-uv-resolution($value, $data: ()) {
+	@return convert-uv-number(
 		$value, ('units-key': 'resolution')
 	);
 }
 
-@function convert-util-value-unitless($value, $data: ()) {
+@function convert-uv-unitless($value, $data: ()) {
 	@return mlu.str2n($value) or $value;
 }
 
-@function convert-util-value-alpha($value, $data: ()) {
-	@return convert-util-value-number(
+@function convert-uv-alpha($value, $data: ()) {
+	@return convert-uv-number(
 		$value, ('units-key': 'alpha')
 	);
 }
 
-@function convert-util-value-css-kw($value, $data: ()) {
+@function convert-uv-css-kw($value, $data: ()) {
 	@return if(
 		map.has-key(mlu.$utils-data, 'general', 'keywords', 'css', $value),
 		map.get(mlu.$utils-data, 'general', 'keywords', 'css', $value),
@@ -219,7 +218,7 @@
 	);
 }
 
-@function convert-util-value-abbr($value, $data: ()) {
+@function convert-uv-abbr($value, $data: ()) {
 	@return (
 		mlu.util-prop(mlu.str-ucfirst($value), map.get($data, 'section')) or
 		// maybe in the future, the keys of utils in the registry will be unified
@@ -230,7 +229,7 @@
 
 $-tUVar-length: string.length(mlu.$tUVar);
 
-@function convert-util-value-var($value, $data: ()) {
+@function convert-uv-var($value, $data: ()) {
 	@if (
 		meta.type-of($value) != 'string' or
 		string.slice($value, 1, $-tUVar-length) != mlu.$tUVar
@@ -256,7 +255,7 @@ $-tUVar-length: string.length(mlu.$tUVar);
 
 $-tUCp-length: string.length(mlu.$tUCp);
 
-@function convert-util-value-cust-prop($value, $data: ()) {
+@function convert-uv-cust-prop($value, $data: ()) {
 	@if (
 		meta.type-of($value) != 'string' or
 		string.slice($value, 1, $-tUCp-length) != mlu.$tUCp
@@ -271,7 +270,7 @@ $-tUCp-length: string.length(mlu.$tUCp);
 	});
 }
 
-@function convert-util-value-color($value, $data: ()) {
+@function convert-uv-color($value, $data: ()) {
 	@if map.has-key(
 		mlu.$utils-data, 'general', 'keywords', 'colors', $value
 	) {

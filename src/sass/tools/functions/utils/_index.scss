@@ -365,15 +365,15 @@ Styleguide: sass-tools.functions.utils
 	);
 }
 
-$util-value-converters: ();
+$-util-value-converters: ();
 
-$-fn-name-prefix: 'convert-util-value-';
+$-fn-name-prefix: 'convert-uv-';
 $-fn-prefix-length: string.length($-fn-name-prefix);
 
 @each $key, $value in meta.module-functions(converters) {
 	@if string.index($key, $-fn-name-prefix) {
-		$util-value-converters: map.set(
-			$util-value-converters, string.slice($key, $-fn-prefix-length + 1), $value
+		$-util-value-converters: map.set(
+			$-util-value-converters, string.slice($key, $-fn-prefix-length + 1), $value
 		);
 	}
 }
@@ -381,7 +381,7 @@ $-fn-prefix-length: string.length($-fn-name-prefix);
 mlu.$utils-config: map.set(
 	mlu.$utils-config,
 	'value-converters',
-	map.merge($util-value-converters, map.get(mlu.$utils-config, 'value-converters'))
+	map.merge($-util-value-converters, map.get(mlu.$utils-config, 'value-converters'))
 );
 
 $-util-range-parsers: ();
