@@ -98,6 +98,12 @@ mlu.$utils-config: map.set(
 				('$testVar', 'W'): map.get(mlu.$utils-data, 'utils', 'variables', 'testVar'),
 				('$undefVar', 'W'): string.unquote('ERROR: Undefined variable: `$undefVar`'),
 			),
+			'converts custom property with fallback': (
+				('-myCard?200', 'W'): var(--mlu-myCard, 200px),
+				('-myCard?a', 'W'): var(--mlu-myCard, auto),
+				('-cardFw?500', 'Fw'): var(--mlu-cardFw, 500),
+				('-myCard?-defWd?150', 'W'): var(--mlu-myCard, var(--mlu-defWd, 150px)),
+			),
 			'applys several converters as pipeline': (
 				('-css-var', 'Red'): var(--mlu-css-var-suf),
 				(22, 'Red'): 22px,

@@ -263,6 +263,23 @@ $-tUCp-length: string.length(mlu.$tUCp);
 		@return $value;
 	}
 
+	$fallback-pos: string.index($value, mlu.$tUFv);
+
+	@if $fallback-pos {
+		@return var(
+			#{
+				'--' + mlu.$util-val-css-var-prefix + string.slice(
+					$value, $-tUCp-length + 1, $fallback-pos - 1
+				)
+			},
+			#{
+				apply-value-converter(
+					string.slice($value, $fallback-pos + 1), $data...
+				)
+			}
+		);
+	}
+
 	@return var(#{
 		'--' + mlu.$util-val-css-var-prefix + string.slice(
 			$value, $-tUCp-length + 1

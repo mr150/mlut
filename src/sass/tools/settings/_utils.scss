@@ -158,6 +158,7 @@ $utils-config: (
 			'raw-value': '=',
 			'num-value': '',
 			'hash-value': '',
+			'fallback-value': '?',
 			'value-modifier': '*',
 			'space': ':',
 			'custom-property': '-',
@@ -222,6 +223,7 @@ $tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
 $tURv: map.get($utils-config, 'tokens', 'util', 'raw-value');
 $tUHv: map.get($utils-config, 'tokens', 'util', 'hash-value');
+$tUFv: map.get($utils-config, 'tokens', 'util', 'fallback-value');
 $tUVm: map.get($utils-config, 'tokens', 'util', 'value-modifier');
 $tUVar: map.get($utils-config, 'tokens', 'util', 'variable');
 $tUCp: map.get($utils-config, 'tokens', 'util', 'custom-property');

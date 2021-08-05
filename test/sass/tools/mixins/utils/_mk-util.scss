@@ -937,6 +937,7 @@ mlu.$utils-data: map.deep-merge(
 						#f06,
 						'#f0d_f StOnly',
 						'#60c*-txtAlpha',
+						'-txtColor?#333',
 					));
 				}
 
@@ -951,6 +952,10 @@ mlu.$utils-data: map.deep-merge(
 
 					.C\#60c\*-txtAlpha {
 						color: rgba(102, 0, 204, var(--mlu-txtAlpha, 1));
+					}
+
+					.C--txtColor\?\#333 {
+						color: var(--mlu-txtColor, #333);
 					}
 				}
 			}
