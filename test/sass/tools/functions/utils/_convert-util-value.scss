@@ -58,6 +58,7 @@ mlu.$utils-data: map.deep-merge(
 			'colors': (
 				'prm0': #c06,
 				'sec0': #0c6,
+				'varFb': (204, 0, 102),
 			),
 		),
 	),
@@ -123,6 +124,7 @@ mlu.$utils-config: map.set(
 				('#60c*20p', 'C'): rgba(102, 0, 204, 0.2),
 				('prm0*$opDef', 'C'): rgba(204, 0, 102, 0.64),
 				('prm0*-co', 'C'): rgba(204, 0, 102, var(--mlu-co, 1)),
+				('-co?varFb*-al?70p', 'C'): rgba(var(--mlu-co, 204, 0, 102), var(--mlu-al, 0.7)),
 				('#c06*20', 'C'): rgba(204, 0, 102, 20),
 				('prm10*-co', 'C'): string.unquote('prm10*-co'),
 				('-color*20p', 'C'): rgba(var(--mlu-color), 0.2),

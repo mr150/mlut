@@ -300,20 +300,17 @@ $-tUCp-length: string.length(mlu.$tUCp);
 		$mod-color-list: mlu.str-split($value, mlu.$tUVm);
 
 		@if list.length($mod-color-list) > 1 {
-			$name: map.get($data, 'name');
-			$section: map.get($data, 'section');
-
 			$part-color: list.nth($mod-color-list, 1);
 			$converted-part: apply-value-converter(
-				$part-color, $name, $section
+				$part-color, $data...
 			);
 			$color: mlu.str-hex2color($converted-part);
 
-			@if $color or string.slice($part-color, 1, $-tUCp-length) == mlu.$tUCp {
+			@if $color or mlu.is-css-var($converted-part) {
 				$part-alpha: list.nth($mod-color-list, 2);
 				$alpha: apply-value-converter($part-alpha, 'Op', 'utils');
 
-				@if string.slice($part-alpha, 1, $-tUCp-length) == mlu.$tUCp {
+				@if mlu.is-css-var($alpha) and not string.index($part-alpha, mlu.$tUFv) {
 					$alpha: string.insert($alpha, ', 1', -2);
 				}
 
