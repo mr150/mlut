@@ -40,14 +40,13 @@ Styleguide: sass-tools.functions.general
 		@return null;
 	}
 
-	$digits: '0123456789';
 	$negative: string.slice($str, 1, 1) == '-';
 	$result: 0;
 	$decimal: false;
 
 	@for $i from if($negative, 2, 1) through string.length($str) {
 		$char: string.slice($str, $i, $i);
-		$digit: string.index($digits, $char);
+		$digit: string.index(mlu.$dec-digits, $char);
 
 		@if $digit and not $decimal {
 			$result: $result * 10 + ($digit - 1);
@@ -94,7 +93,7 @@ Styleguide: sass-tools.functions.general
 	}
 
 	@for $i from 1 through string.length($str) {
-		@if string.index('0123456789', string.slice($str, $i, $i)) {
+		@if string.index(mlu.$dec-digits, string.slice($str, $i, $i)) {
 			@return $i;
 		}
 	}
@@ -135,13 +134,12 @@ Styleguide: sass-tools.functions.general
 
 @function str-escape($value) {
 	$str: $value + '';
-	$spec-chars: (' ' '!' '#' '$' '%' '&' '(' ')' '*' '+' ',' '.' '/' ':' ';' '<' '=' '>' '?' '@' '[' ']' '^' '`' '{' '|' '}' '~');
 	$escaped: '';
 
 	@for $i from 1 through string.length($str) {
 		$char: string.slice($str, $i, $i);
 
-		@if list.index($spec-chars, $char) {
+		@if list.index(mlu.$spec-chars, $char) {
 			$char: '\\' + $char;
 		}
 
