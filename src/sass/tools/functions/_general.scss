@@ -212,16 +212,13 @@ Styleguide: sass-tools.functions.general
 
 @function is-css-var($value, $in-color: false) {
 	@return (
-		meta.type-of($value) == 'string' and
+		str-starts($value, 'var(') or
 		(
-			str-starts($value, 'var(') or
-			(
-				$in-color and (
-					str-starts($value, 'rgba(var(') or
-					str-starts($value, 'rgb(var(') or
-					str-starts($value, 'hsla(var(') or
-					str-starts($value, 'hsl(var(')
-				)
+			$in-color and (
+				str-starts($value, 'rgba(var(') or
+				str-starts($value, 'rgb(var(') or
+				str-starts($value, 'hsla(var(') or
+				str-starts($value, 'hsl(var(')
 			)
 		)
 	);
@@ -341,8 +338,8 @@ Styleguide: sass-tools.functions.general
 }
 
 @function str-starts($str, $substr) {
-	@if meta.type-of($str) != 'string' {
-		@return error('Wrong type of argument $str: `#{meta.type-of($str)}`. Expected `string`');
+	@if meta.type-of($str) != 'string' or meta.type-of($substr) != 'string' {
+		@return false;
 	}
 
 	@return string.slice($str, 1, string.length($substr)) == $substr;

@@ -166,6 +166,16 @@ $test-list: (0, 1, 2, 3);
 				mlu.str-starts('xs', 'BpAll'),
 				false,
 			);
+
+			@include assert-equal(
+				mlu.str-starts(22, '2'),
+				false,
+			);
+
+			@include assert-equal(
+				mlu.str-starts('22', 2),
+				false,
+			);
 		}
 	}
 

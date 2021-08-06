@@ -242,11 +242,7 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 ) {
 	$values: ();
 	$step: if(
-		(
-			meta.type-of($step-value) == 'string' and
-			mlu.str-starts($step-value, mlu.$tUCp)
-		),
-		null, 0
+		mlu.str-starts($step-value, mlu.$tUCp), null, 0
 	);
 	$is-percent-step: false;
 

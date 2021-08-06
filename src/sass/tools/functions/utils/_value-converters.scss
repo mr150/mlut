@@ -87,10 +87,7 @@
 }
 
 @function apply-value-converter($util-value, $name, $section, $list-length: 1) {
-	@if (
-		meta.type-of($util-value) == 'string' and
-		mlu.str-starts($util-value, mlu.$tURv)
-	) {
+	@if mlu.str-starts($util-value, mlu.$tURv) {
 		@return string.unquote(string.slice($util-value, 2));
 	}
 
