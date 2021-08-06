@@ -58,7 +58,7 @@ Styleguide: sass-tools.functions.at_rules
 	$abbr-value: null;
 	$feat-prefix: '';
 
-	@each $item in map.get(mlu.$at-rules-cfg, 'abbr-operators') {
+	@each $item in map.get(mlu.$at-rules-cfg, 'abbr-separators') {
 		@if not $separator and string.index($abbr, $item) {
 			$separator: $item;
 		}
@@ -69,9 +69,9 @@ Styleguide: sass-tools.functions.at_rules
 		$abbr-feature: list.nth($abbr-parts, 1);
 		$abbr-value: list.nth($abbr-parts, 2);
 
-		@if string.index($separator, '<') {
+		@if string.index($separator, mlu.$tALs) {
 			$feat-prefix: 'max-';
-		} @else if string.index($separator, '>') {
+		} @else if string.index($separator, mlu.$tAGt) {
 			$feat-prefix: 'min-';
 		}
 
@@ -108,7 +108,7 @@ Styleguide: sass-tools.functions.at_rules
 			$feat-value: mgen.su($feat-value);
 		}
 
-		@if $separator == '<' or $separator == '>' {
+		@if $separator == mlu.$tALs or $separator == mlu.$tAGt {
 			$value-diff: math.div($feat-value, mgen.str2n($feat-value + '_'));
 
 			@if $value-unit == 'rem' or $value-unit == 'em' {
@@ -118,7 +118,7 @@ Styleguide: sass-tools.functions.at_rules
 				$value-diff: $value-diff * 0.01;
 			}
 
-			@if $separator == '<' {
+			@if $separator == mlu.$tALs {
 				$value-diff: $value-diff * -1;
 			}
 

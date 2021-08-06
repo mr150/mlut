@@ -51,12 +51,7 @@ $at-rules-data: (
 ) !default;
 
 $at-rules-cfg: (
-	'abbr-operators': (
-		mlu.$tUSv,
-		'<=',
-		'>=',
-		'>',
-		'<',
+	'abbr-separators': (
 	),
 	'tokens': (
 		'str-value': mlu.$tUSv,
@@ -67,6 +62,10 @@ $at-rules-cfg: (
 		'not': mlu.$tSNot,
 		'ar': '@',
 		'this-util': mlu.$tSTu,
+		'greater-equal': '>=',
+		'less-equal': '<=',
+		'greater': '>',
+		'less': '<',
 	),
 	'breakpoints': (
 		$bp-sm: 520px,
@@ -190,3 +189,22 @@ $tANot: map.get($at-rules-cfg, 'tokens', 'not');
 $tACs: map.get($at-rules-cfg, 'tokens', 'custom');
 $tAAr: map.get($at-rules-cfg, 'tokens', 'ar');
 $tATu: map.get($at-rules-cfg, 'tokens', 'this-util');
+$tAGte: map.get($at-rules-cfg, 'tokens', 'greater-equal');
+$tALse: map.get($at-rules-cfg, 'tokens', 'less-equal');
+$tAGt: map.get($at-rules-cfg, 'tokens', 'greater');
+$tALs: map.get($at-rules-cfg, 'tokens', 'less');
+
+$at-rules-cfg: map.set(
+	$at-rules-cfg,
+	'abbr-separators',
+	list.join(
+		(
+			mlu.$tUSv,
+			$tAGte,
+			$tALse,
+			$tAGt,
+			$tALs,
+		),
+		map.get($at-rules-cfg, 'abbr-separators')
+	)
+);
