@@ -103,6 +103,7 @@ mlu.$utils-config: map.set(
 				('-myCard?200', 'W'): var(--mlu-myCard, 200px),
 				('-myCard?a', 'W'): var(--mlu-myCard, auto),
 				('-cardFw?500', 'Fw'): var(--mlu-cardFw, 500),
+				('-myVar?=200', 'W'): var(--mlu-myVar, 200),
 				('-myCard?-defWd?150', 'W'): var(--mlu-myCard, var(--mlu-defWd, 150px)),
 			),
 			'applys several converters as pipeline': (

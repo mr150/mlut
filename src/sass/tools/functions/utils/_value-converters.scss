@@ -56,15 +56,10 @@
 				$converted-items: ();
 
 				@each $value in $items {
-					$converted: '';
-
-					@if string.slice($value, 1, 1) == mlu.$tURv {
-						$converted: string.unquote(string.slice($value, 2));
-					} @else {
-						$converted: apply-value-converter($value, $name, $section, $length);
-					}
-
-					$converted-items: list.append($converted-items, $converted);
+					$converted-items: list.append(
+						$converted-items,
+						apply-value-converter($value, $name, $section, $length)
+					);
 				}
 
 				$result: list.append($result, $converted-items, $separator);
@@ -91,7 +86,14 @@
 	);
 }
 
-@function apply-value-converter($util-val, $name, $section, $list-length: 1) {
+@function apply-value-converter($util-value, $name, $section, $list-length: 1) {
+	@if (
+		meta.type-of($util-value) == 'string' and
+		mlu.str-starts($util-value, mlu.$tURv)
+	) {
+		@return string.unquote(string.slice($util-value, 2));
+	}
+
 	$value-type: if(
 		map.has-key(mlu.$utils-data, $section, 'registry', $name, 'value-type'),
 		map.get(mlu.$utils-data, $section, 'registry', $name, 'value-type'),
@@ -102,11 +104,11 @@
 
 	@each $item in $value-type {
 		@if map.has-key(mlu.$utils-config, 'value-converters', $item) {
-			$prev-value: $util-val;
+			$prev-value: $util-value;
 
-			$util-val: meta.call(
+			$util-value: meta.call(
 				map.get(mlu.$utils-config, 'value-converters', $item),
-				$util-val,
+				$util-value,
 				(
 					'name': $name,
 					'section': $section,
@@ -114,15 +116,15 @@
 				)
 			);
 
-			@if $util-val != $prev-value and not $is-pipeline {
-				@return $util-val;
+			@if $util-value != $prev-value and not $is-pipeline {
+				@return $util-value;
 			}
 		} @else if $item == mlu.$tGVcp {
 			$is-pipeline: true;
 		}
 	}
 
-	@return $util-val;
+	@return $util-value;
 }
 
 @function convert-uv-number($value, $data: ()) {
