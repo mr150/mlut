@@ -53,6 +53,45 @@ $test-list: (0, 1, 2, 3);
 				't' 'e' 's' 't' 'o' 'u',
 			);
 		}
+
+		@include it('split string into list specified number of times') {
+			@include assert-equal(
+				mlu.str-split('Bgc--bgColor', '-', 1),
+				'Bgc' '-bgColor',
+			);
+
+			@include assert-equal(
+				mlu.str-split('Bgc--bgColor', '-', 0),
+				'Bgc--bgColor',
+				$inspect: true
+			);
+
+			@include assert-equal(
+				mlu.str-split('M-a', '-', -5),
+				'M-a',
+				$inspect: true
+			);
+
+			@include assert-equal(
+				mlu.str-split('af h,f a fw +:^', ' ', 2),
+				'af' 'h,f' 'a fw +:^',
+			);
+
+			@include assert-equal(
+				mlu.str-split('Bgc--bgColor', $repeats: 3),
+				'B' 'g' 'c' '--bgColor',
+			);
+
+			@include assert-equal(
+				mlu.str-split('testou', $repeats: 12),
+				't' 'e' 's' 't' 'o' 'u',
+			);
+
+			@include assert-equal(
+				mlu.str-split('Red22', $repeats: -1),
+				'Red22',
+			);
+		}
 	}
 
 	@include describe('str-trim') {

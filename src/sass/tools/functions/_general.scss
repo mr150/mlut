@@ -275,25 +275,35 @@ Styleguide: sass-tools.functions.general
 	@return $result;
 }
 
-@function str-split($str, $separator: '') {
+@function str-split($str, $separator: '', $repeats: mlu.$number-max) {
 	$result: ();
 	$sep-length: string.length($separator);
+	$str-length: string.length($str);
 
 	@if $sep-length == 0 {
-		@for $i from 1 through string.length($str) {
+		@if $repeats < 1 {
+			@return $str;
+		}
+
+		@for $i from 1 through math.min($str-length, $repeats) {
 			$result: list.append($result, string.slice($str, $i, $i));
 		}
 
-		@return $result;
+		@return if(
+			$repeats < $str-length,
+			list.append($result, string.slice($str, $repeats + 1)),
+			$result
+		);
 	}
 
 	$sep-pos: string.index($str, $separator);
+	$i: 0;
 
-	@while $sep-pos != null {
+	@while $sep-pos != null and $i < $repeats {
 		$result: list.append($result, string.slice($str, 1, $sep-pos - 1));
 		$str: string.slice($str, $sep-pos + $sep-length);
-
 		$sep-pos: string.index($str, $separator);
+		$i: $i + 1;
 	}
 
 	@return list.append($result, $str);
