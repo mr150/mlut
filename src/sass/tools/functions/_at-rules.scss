@@ -53,48 +53,28 @@ Styleguide: sass-tools.functions.at_rules
 		@return '(#{$feature})';
 	}
 
-	$separator: null;
-	$abbr-feature: null;
-	$abbr-value: null;
+	$abbr-data: mut.parse-abbr($abbr);
+	$abbr-feature: map.get($abbr-data, 'name');
+	$abbr-value: map.get($abbr-data, 'value');
+	$separator: map.get($abbr-data, 'separator');
 	$feat-prefix: '';
 
-	@each $item in map.get(mlu.$at-rules-cfg, 'abbr-separators') {
-		@if not $separator and string.index($abbr, $item) {
-			$separator: $item;
-		}
-	}
-
 	@if $separator {
-		$abbr-parts: mgen.str-split($abbr, $separator);
-		$abbr-feature: list.nth($abbr-parts, 1);
-		$abbr-value: list.nth($abbr-parts, 2);
-
 		@if string.index($separator, mlu.$tALs) {
 			$feat-prefix: 'max-';
 		} @else if string.index($separator, mlu.$tAGt) {
 			$feat-prefix: 'min-';
 		}
-
-		@if mlu.$tUNv == '' and $separator == '-' and mgen.str2n($abbr-value) {
-			$abbr-value: '-' + $abbr-value;
-		}
-	} @else if mlu.$tUNv == '' {
-
-		$number-index: mgen.str-digit-index($abbr);
-
-		@if $number-index {
-			$abbr-feature: string.slice($abbr, 1, $number-index - 1);
-			$abbr-value: string.slice($abbr, $number-index);
-		}
 	}
 
-	@if not $abbr-feature {
+	$feature: mget.util-prop($abbr-feature, $section, false, true);
+
+	@if not $feature {
 		@return mgen.error(
 			'Invalid feature abbreviation: `#{$abbr}`. `#{$abbr}` is not defined in `#{$section}` section of $utils-data map'
 		);
 	}
 
-	$feature: mget.util-prop($abbr-feature, $section, false, true);
 	$feat-value: map.get(mlu.$utils-data, $section, 'map', $abbr-feature, $abbr-value);
 
 	@if not $feat-value {
