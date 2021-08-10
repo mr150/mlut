@@ -217,8 +217,8 @@ mlu.$at-rules-cfg: map.set(mlu.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 		}
 
 		@include it('make at-rules with custom tokens') {
-			mlu.$tASv: '=';
-			mlu.$tANv: '=';
+			mlu.$tUSv: '=';
+			mlu.$tUNv: '=';
 			mlu.$tAOr: 'OR';
 			mlu.$tAAnd: '&';
 			mlu.$tACs: '#';

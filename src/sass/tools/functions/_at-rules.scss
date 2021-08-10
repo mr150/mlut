@@ -75,10 +75,10 @@ Styleguide: sass-tools.functions.at_rules
 			$feat-prefix: 'min-';
 		}
 
-		@if mlu.$tANv == '' and $separator == '-' and mgen.str2n($abbr-value) {
+		@if mlu.$tUNv == '' and $separator == '-' and mgen.str2n($abbr-value) {
 			$abbr-value: '-' + $abbr-value;
 		}
-	} @else if mlu.$tANv == '' {
+	} @else if mlu.$tUNv == '' {
 
 		$number-index: mgen.str-digit-index($abbr);
 
@@ -255,9 +255,9 @@ Styleguide: sass-tools.functions.at_rules
 				@return mgen.error('`#{mlu.$tATu}` cannot be used because $this-util is not passed');
 			}
 
-			$value: mlu.$tASv + 'initial';
+			$value: mlu.$tUSv + 'initial';
 
-			@if $item == mlu.$tATu + mlu.$tASv {
+			@if $item == mlu.$tATu + mlu.$tUSv {
 				$value: map.get($this-util, 'value');
 			} @else if $item != mlu.$tATu {
 				$value: string.slice($item, 2);

@@ -54,8 +54,6 @@ $at-rules-cfg: (
 	'abbr-separators': (
 	),
 	'tokens': (
-		'str-value': mlu.$tUSv,
-		'num-value': mlu.$tUNv,
 		'or': mlu.$tSOr,
 		'and': mlu.$tSAnd,
 		'custom': mlu.$tSCs,
@@ -181,8 +179,6 @@ $at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-conf);
 $breakpoints: map.get($at-rules-cfg, 'breakpoints');
 mlu.$utils-data: map.set(mlu.$utils-data, 'general', 'variables', $breakpoints);
 
-$tASv: map.get($at-rules-cfg, 'tokens', 'str-value');
-$tANv: map.get($at-rules-cfg, 'tokens', 'num-value');
 $tAOr: map.get($at-rules-cfg, 'tokens', 'or');
 $tAAnd: map.get($at-rules-cfg, 'tokens', 'and');
 $tANot: map.get($at-rules-cfg, 'tokens', 'not');
