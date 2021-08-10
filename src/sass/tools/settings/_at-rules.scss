@@ -208,3 +208,14 @@ $at-rules-cfg: map.set(
 		map.get($at-rules-cfg, 'abbr-separators')
 	)
 );
+
+$abbr-separators: ();
+
+@each $item in list.join(
+	map.get($at-rules-cfg, 'abbr-separators'),
+	map.get(mlu.$utils-config, 'abbr-separators'),
+) {
+	@if $item != '' {
+		$abbr-separators: list.append($abbr-separators, $item);
+	}
+}

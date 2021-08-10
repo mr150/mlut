@@ -1,0 +1,109 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:meta';
+@use 'sass-true' as *;
+@use 'tools' as mlu;
+
+@include describe('tools/functions/utils') {
+	@include describe('parse-abbr') {
+		$tests: (
+			'default value': (
+				('Ov'): (
+					'value': '',
+					'name': 'Ov',
+				),
+				(''): (
+					'value': '',
+					'name': '',
+				),
+			),
+			'number value': (
+				('Fz2r'): (
+					'value': '2r',
+					'name': 'Fz',
+				),
+				('Z-99'): (
+					'value': '-99',
+					'name': 'Z',
+				),
+			),
+			'number range syntax': (
+				('W<100'): (
+					'separator': '<',
+					'value': '100',
+					'name': 'W',
+				),
+				('H<=20r'): (
+					'separator': '<=',
+					'value': '20r',
+					'name': 'H',
+				),
+				('H>$sm'): (
+					'separator': '>',
+					'value': '$sm',
+					'name': 'H',
+				),
+			),
+			'string value separator': (
+				('M-a'): (
+					'separator': '-',
+					'value': 'a',
+					'name': 'M',
+				),
+				('Bgc--bgColor'): (
+					'separator': '-',
+					'value': '-bgColor',
+					'name': 'Bgc',
+				),
+				('-Mut--bgColor'): (
+					'separator': '-',
+					'value': '-bgColor',
+					'name': '-Mut',
+				),
+				('-Mut--bgColor:-var'): (
+					'separator': '-',
+					'value': '-bgColor:-var',
+					'name': '-Mut',
+				),
+			),
+			'raw value': (
+				('M=54'): (
+					'value': '=54',
+					'name': 'M',
+				),
+				('-Mut=3:12:=4'): (
+					'value': '=3:12:=4',
+					'name': '-Mut',
+				),
+				('-Mut-prm0:=10'): (
+					'separator': '-',
+					'value': 'prm0:=10',
+					'name': '-Mut',
+				),
+			),
+			'hex color value': (
+				('Bgc#c06'): (
+					'value': '#c06',
+					'name': 'Bgc',
+				),
+				('-Mut#c06:prm0'): (
+					'value': '#c06:prm0',
+					'name': '-Mut',
+				),
+			),
+		);
+
+		@each $test, $data in $tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						mlu.parse-abbr($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
+}

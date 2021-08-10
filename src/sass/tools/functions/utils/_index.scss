@@ -365,6 +365,64 @@ Styleguide: sass-tools.functions.utils
 	);
 }
 
+@function -str-contains-item($item, $i, $str) {
+	@return string.index($str, $item);
+}
+
+@function parse-abbr($abbr) {
+	$abbr-name: $abbr;
+	$abbr-value: '';
+	$abbr-prefix: '';
+	$hash-value-sep: mlu.$tUHv;
+	$all-separators: mlu.$abbr-separators;
+	$result: ();
+
+	@if string.slice($abbr, 1, 1) == '-' {
+		$abbr: string.slice($abbr, 2);
+		$abbr-prefix: '-';
+	}
+
+	@if mlu.$tUHv == '' {
+		$hash-value-sep: '#';
+		$all-separators: list.append($all-separators, '#');
+	}
+
+	$separator: mlu.ls-find(
+		$all-separators, meta.get-function('-str-contains-item'), $abbr
+	);
+
+	@if $separator {
+		$abbr-parts: mlu.str-split($abbr, $separator, 1);
+		$abbr-name: list.nth($abbr-parts, 1);
+		$abbr-value: list.nth($abbr-parts, 2);
+
+		@if mlu.$tUNv == '' and $separator == '-' and mlu.str2n($abbr-value) {
+			$abbr-value: '-' + $abbr-value;
+		} @else if $separator == $hash-value-sep or $separator == mlu.$tURv {
+			$abbr-value: $separator + $abbr-value;
+		} @else {
+			$result: map.set($result, 'separator', $separator);
+		}
+	} @else {
+		@if mlu.$tUNv == '' {
+			$number-index: mlu.str-digit-index($abbr);
+
+			@if $number-index {
+				$abbr-name: string.slice($abbr, 1, $number-index - 1);
+				$abbr-value: string.slice($abbr, $number-index);
+			}
+		}
+	}
+
+	@return map.merge(
+		$result,
+		(
+			'value': $abbr-value,
+			'name': $abbr-prefix + $abbr-name,
+		)
+	);
+}
+
 $-util-value-converters: ();
 
 $-fn-name-prefix: 'convert-uv-';
