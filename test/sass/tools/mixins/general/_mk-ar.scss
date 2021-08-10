@@ -217,8 +217,8 @@ mlu.$at-rules-cfg: map.set(mlu.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 		}
 
 		@include it('make at-rules with custom tokens') {
-			mlu.$tUSv: '=';
-			mlu.$tUNv: '=';
+			mlu.$tUSv: '~';
+			mlu.$tUNv: '~';
 			mlu.$tAOr: 'OR';
 			mlu.$tAAnd: '&';
 			mlu.$tACs: '#';
@@ -226,15 +226,11 @@ mlu.$at-rules-cfg: map.set(mlu.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 			mlu.$tATu: '$';
 			mlu.$tANot: '^';
 
-			mlu.$at-rules-cfg: map.set(
-				mlu.$at-rules-cfg,
-				'abbr-separators',
-				list.set-nth(map.get(mlu.$at-rules-cfg, 'abbr-separators'), 1, '=')
-			);
+			mlu.$abbr-separators: list.append(mlu.$abbr-separators, '~');
 
 			@include assert() {
 				@include output() {
-					@include mlu.mk-ar('%s&ar=4/3OR^$=%&prn&dm=s&#xlOR#testou', ('name': 'D', 'value': '=ig')) using ($ar) {
+					@include mlu.mk-ar('%s&ar~4/3OR^$~%&prn&dm~s&#xlOR#testou', ('name': 'D', 'value': '~ig')) using ($ar) {
 						width: 50%;
 					}
 				}
@@ -250,7 +246,7 @@ mlu.$at-rules-cfg: map.set(mlu.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 			@include assert() {
 				@include output() {
-					@include mlu.mk-ar('xs&smORmd&lgORxl%s&pos=sk') using ($ar) {
+					@include mlu.mk-ar('xs&smORmd&lgORxl%s&pos~sk') using ($ar) {
 						width: 50%;
 					}
 				}
@@ -263,6 +259,15 @@ mlu.$at-rules-cfg: map.set(mlu.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 					}
 				}
 			}
+
+			mlu.$tUSv: map.get(mlu.$utils-config, 'tokens', 'util', 'str-value');
+			mlu.$tUNv: map.get(mlu.$utils-config, 'tokens', 'util', 'num-value');
+			mlu.$tAOr: map.get(mlu.$at-rules-cfg, 'tokens', 'or');
+			mlu.$tAAnd: map.get(mlu.$at-rules-cfg, 'tokens', 'and');
+			mlu.$tANot: map.get(mlu.$at-rules-cfg, 'tokens', 'not');
+			mlu.$tACs: map.get(mlu.$at-rules-cfg, 'tokens', 'custom');
+			mlu.$tAAr: map.get(mlu.$at-rules-cfg, 'tokens', 'ar');
+			mlu.$tATu: map.get(mlu.$at-rules-cfg, 'tokens', 'this-util');
 		}
 
 	}

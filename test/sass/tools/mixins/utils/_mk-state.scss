@@ -494,9 +494,10 @@ mlu.$utils-config: map.set(
 			}
 
 		}
+
 		@include it('make states with custom tokens') {
-			mlu.$tUSv: '=';
-			mlu.$tUNv: '=';
+			mlu.$tUSv: '~';
+			mlu.$tUNv: '~';
 			mlu.$tUCm: '__';
 			mlu.$tSOr: '|';
 			mlu.$tSAnd: '&';
@@ -511,7 +512,7 @@ mlu.$utils-config: map.set(
 				@include output(false) {
 					.xs\:md__D-f {
 						@include mlu.new-mk-state(
-							'$= $=ib&#testou&af',
+							'$~ $~ib&#testou&af',
 							'%one&*a|%&?>*',
 							false,
 							&,
@@ -523,20 +524,31 @@ mlu.$utils-config: map.set(
 				}
 
 				@include expect(false) {
-					.-Ctx\=one:not(:active) .xs\:md__\%one\&\*a\|\%\&\?\>\*__D-f,
+					.-Ctx\~one:not(:active) .xs\:md__\%one\&\*a\|\%\&\?\>\*__D-f,
 					.-Ctx>* .xs\:md__\%one\&\*a\|\%\&\?\>\*__D-f {
 						display: flex;
 					}
 
-					.xs\:md__D-f__\$\=.xs\:md__D-f__\$\= {
+					.xs\:md__D-f__\$\~.xs\:md__D-f__\$\~ {
 							display: flex;
 					}
 
-					.xs\:md__D-f__\$\=ib\&\#testou\&af.D\=ib.pa.ro.voz::after {
+					.xs\:md__D-f__\$\~ib\&\#testou\&af.D\~ib.pa.ro.voz::after {
 						display: flex;
 					}
 				}
 			}
+
+			mlu.$tUSv: map.get(mlu.$utils-config, 'tokens', 'util', 'str-value');
+			mlu.$tUNv: map.get(mlu.$utils-config, 'tokens', 'util', 'num-value');
+			mlu.$tSOr: map.get(mlu.$utils-config, 'tokens', 'states', 'or');
+			mlu.$tSAnd: map.get(mlu.$utils-config, 'tokens', 'states', 'and');
+			mlu.$tSNot: map.get(mlu.$utils-config, 'tokens', 'states', 'not');
+			mlu.$tSCs: map.get(mlu.$utils-config, 'tokens', 'states', 'custom');
+			mlu.$tSTu: map.get(mlu.$utils-config, 'tokens', 'states', 'this-util');
+			mlu.$tSCn: map.get(mlu.$utils-config, 'tokens', 'states', 'context');
+			mlu.$tSRaw: map.get(mlu.$utils-config, 'tokens', 'states', 'raw');
+			mlu.$tSTucv: mlu.$tSTu + mlu.$tUSv;
 		}
 	}
 }
