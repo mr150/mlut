@@ -1,0 +1,126 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
+@use 'sass:selector';
+
+@use 'forward-tools' as mlu;
+
+@function util-apply-selector($selector, $util-sel-list) {
+	@if not $selector {
+		@return $util-sel-list;
+	}
+
+	$result: if(
+		string.index(meta.inspect($selector), mlu.$tSTu),
+		-apply-custom($selector, $util-sel-list),
+		-apply-external($selector, $util-sel-list)
+	);
+
+	@return if(
+		list.length($result) > 1,
+		$result,
+		list.nth($result, 1)
+	);
+}
+
+@function -str-item-index($item, $i, $str) {
+	@return string.index($item, $str);
+}
+
+@function -apply-external($external-sel-list, $util-sel-list) {
+	$result: ();
+
+	@each $external-sel in $external-sel-list {
+		@each $util-selector in $util-sel-list {
+			$util-sel-str: if(
+				meta.type-of($util-selector) == 'list',
+				meta.inspect($util-selector),
+				$util-selector
+			);
+
+			$util-simple-sel: -util-simple-selector($util-sel-str);
+			$result: list.append(
+				$result,
+				if(
+					$util-simple-sel == $util-sel-str,
+					$external-sel,
+					mlu.str-replace-all($util-sel-str, $util-simple-sel, $external-sel)
+				),
+				comma
+			);
+		}
+	}
+
+	@return $result;
+}
+
+@function -apply-custom($custom-sel, $util-sel-list) {
+	$result: ();
+
+	@each $util-selector in $util-sel-list {
+		$selector: $custom-sel;
+		$complex-sel-list: mlu.str-split($selector, ' ');
+
+		$compound-sel: if(
+			list.length($complex-sel-list) > 1,
+			mlu.ls-find($complex-sel-list, meta.get-function('-str-item-index'), mlu.$tSTu),
+			$selector
+		);
+
+		$compound-sel-prefix: list.nth(mlu.str-split($compound-sel, mlu.$tSTu), 1);
+		$new-util-compd-sel: null;
+
+		$util-sel-str: if(
+			meta.type-of($util-selector) == 'list',
+			meta.inspect($util-selector),
+			$util-selector
+		);
+
+		@if $compound-sel-prefix != '' {
+			$util-simple-sel: -util-simple-selector($util-sel-str);
+			$new-util-compd-sel: $compound-sel-prefix + string.slice($util-simple-sel, 2);
+
+			$util-sel-str: mlu.str-replace(
+				$util-sel-str, $util-simple-sel, $new-util-compd-sel
+			);
+
+			$selector: mlu.str-replace(
+				$selector, $compound-sel-prefix + mlu.$tSTu, $util-sel-str
+			);
+		} @else {
+			$selector: mlu.str-replace($selector, mlu.$tSTu, $util-sel-str);
+		}
+
+		@if string.index($selector, mlu.$tSTu) {
+			$selector: mlu.str-replace-all(
+				$selector,
+				mlu.$tSTu,
+				$new-util-compd-sel or -util-simple-selector($util-sel-str)
+			);
+		}
+
+		$result: list.append($result, $selector, comma);
+	}
+
+	@return $result;
+}
+
+@function -util-simple-selector($util-selector) {
+	// A bad solution, because a simple selector can be obtained in `mk-state` mixin, but now it seems too difficult to do it. Maybe this will be refactored in future
+	$complex-sel: list.nth(selector.parse($util-selector), 1);
+
+	$compound-sel: if(
+		list.length($complex-sel) > 1,
+		mlu.ls-find($complex-sel, meta.get-function('-str-item-index'), mlu.$tUCm),
+		list.nth($complex-sel, 1)
+	);
+
+	$simple-sel-list: selector.simple-selectors($compound-sel);
+
+	@return if(
+		list.length($simple-sel-list) > 1,
+		mlu.ls-find($simple-sel-list, meta.get-function('-str-item-index'), mlu.$tUCm),
+		$compound-sel
+	);
+}
