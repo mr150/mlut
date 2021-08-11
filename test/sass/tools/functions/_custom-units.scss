@@ -6,7 +6,7 @@
 		@include it('converts su to px') {
 			@include assert-equal(
 				mlu.su(3),
-				mlu.$su * 3,
+				12px,
 			);
 
 			@include assert-equal(
@@ -18,7 +18,7 @@
 		@include it('converts su to rem') {
 			@include assert-equal(
 				mlu.sur(3),
-				mlu.$su-rem * 3,
+				0.75rem,
 			);
 		}
 
