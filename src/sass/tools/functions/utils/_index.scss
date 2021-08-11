@@ -253,60 +253,83 @@ Styleguide: sass-tools.functions.utils
 	@return string.slice($result, 1, -(1 + string.length($or) + string.length($prefix)));
 }
 
-@function -str-contains($item, $i, $str) {
+@function -str-item-index($item, $i, $str) {
 	@return string.index($item, $str);
 }
 
 @function util-apply-selector($custom-sel, $util-sel-list) {
-	@if not $custom-sel or not string.index($custom-sel, mlu.$tSTu) {
+	@if not $custom-sel {
 		@return $util-sel-list;
 	}
 
 	$result: ();
 
-	@each $util-selector in $util-sel-list {
-		$selector: $custom-sel;
-		$complex-sel-list: mlu.str-split($selector, ' ');
+	@if not string.index(meta.inspect($custom-sel), mlu.$tSTu) {
+		@each $foreign-sel in $custom-sel {
+			@each $util-selector in $util-sel-list {
+				$util-sel-str: if(
+					meta.type-of($util-selector) == 'list',
+					meta.inspect($util-selector),
+					$util-selector
+				);
 
-		$compound-sel: if(
-			list.length($complex-sel-list) > 1,
-			mlu.ls-find($complex-sel-list, meta.get-function('-str-contains'), mlu.$tSTu),
-			$selector
-		);
-
-		$compound-sel-prefix: list.nth(mlu.str-split($compound-sel, mlu.$tSTu), 1);
-		$new-util-compd-sel: null;
-
-		$util-sel-str: if(
-			meta.type-of($util-selector) == 'list',
-			meta.inspect($util-selector),
-			$util-selector
-		);
-
-		@if $compound-sel-prefix != '' {
-			$util-simple-sel: -util-simple-selector($util-sel-str);
-			$new-util-compd-sel: $compound-sel-prefix + string.slice($util-simple-sel, 2);
-
-			$util-sel-str: mlu.str-replace(
-				$util-sel-str, $util-simple-sel, $new-util-compd-sel
-			);
-
-			$selector: mlu.str-replace(
-				$selector, $compound-sel-prefix + mlu.$tSTu, $util-sel-str
-			);
-		} @else {
-			$selector: mlu.str-replace($selector, mlu.$tSTu, $util-sel-str);
+				$util-simple-sel: -util-simple-selector($util-sel-str);
+				$result: list.append(
+					$result,
+					if(
+						$util-simple-sel == $util-sel-str,
+						$foreign-sel,
+						mlu.str-replace-all($util-sel-str, $util-simple-sel, $foreign-sel)
+					),
+					comma
+				);
+			}
 		}
+	} @else {
+		@each $util-selector in $util-sel-list {
+			$selector: $custom-sel;
+			$complex-sel-list: mlu.str-split($selector, ' ');
 
-		@if string.index($selector, mlu.$tSTu) {
-			$selector: mlu.str-replace-all(
-				$selector,
-				mlu.$tSTu,
-				$new-util-compd-sel or -util-simple-selector($util-sel-str)
+			$compound-sel: if(
+				list.length($complex-sel-list) > 1,
+				mlu.ls-find($complex-sel-list, meta.get-function('-str-item-index'), mlu.$tSTu),
+				$selector
 			);
-		}
 
-		$result: list.append($result, $selector, comma);
+			$compound-sel-prefix: list.nth(mlu.str-split($compound-sel, mlu.$tSTu), 1);
+			$new-util-compd-sel: null;
+
+			$util-sel-str: if(
+				meta.type-of($util-selector) == 'list',
+				meta.inspect($util-selector),
+				$util-selector
+			);
+
+			@if $compound-sel-prefix != '' {
+				$util-simple-sel: -util-simple-selector($util-sel-str);
+				$new-util-compd-sel: $compound-sel-prefix + string.slice($util-simple-sel, 2);
+
+				$util-sel-str: mlu.str-replace(
+					$util-sel-str, $util-simple-sel, $new-util-compd-sel
+				);
+
+				$selector: mlu.str-replace(
+					$selector, $compound-sel-prefix + mlu.$tSTu, $util-sel-str
+				);
+			} @else {
+				$selector: mlu.str-replace($selector, mlu.$tSTu, $util-sel-str);
+			}
+
+			@if string.index($selector, mlu.$tSTu) {
+				$selector: mlu.str-replace-all(
+					$selector,
+					mlu.$tSTu,
+					$new-util-compd-sel or -util-simple-selector($util-sel-str)
+				);
+			}
+
+			$result: list.append($result, $selector, comma);
+		}
 	}
 
 	@return if(
@@ -318,13 +341,11 @@ Styleguide: sass-tools.functions.utils
 
 @function -util-simple-selector($util-selector) {
 	// A bad solution, because a simple selector can be obtained in `mk-state` mixin, but now it seems too difficult to do it. Maybe this will be refactored in future
-	$complex-sel: list.nth(
-		selector.parse($util-selector), 1
-	);
+	$complex-sel: list.nth(selector.parse($util-selector), 1);
 
 	$compound-sel: if(
 		list.length($complex-sel) > 1,
-		mlu.ls-find($complex-sel, meta.get-function('-str-contains'), mlu.$tUCm),
+		mlu.ls-find($complex-sel, meta.get-function('-str-item-index'), mlu.$tUCm),
 		list.nth($complex-sel, 1)
 	);
 
@@ -332,7 +353,7 @@ Styleguide: sass-tools.functions.utils
 
 	@return if(
 		list.length($simple-sel-list) > 1,
-		mlu.ls-find($simple-sel-list, meta.get-function('-str-contains'), mlu.$tUCm),
+		mlu.ls-find($simple-sel-list, meta.get-function('-str-item-index'), mlu.$tUCm),
 		$compound-sel
 	);
 }

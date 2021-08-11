@@ -49,6 +49,31 @@
 				('#app .pre-&.lover #wrap', $selector-list):
 					('#app .pre-Red22_h\\,f:hover.lover #wrap', '#app .pre-Red22_h\\,f:focus.lover #wrap'),
 			),
+			'external selector with post states': (
+				('.block', '.-Ct-red0'): '.block',
+				('.block', '.-Ct-red0_h:hover'): '.block:hover',
+				('.block .elem', '.-Ct-red0_af::after'): '.block .elem::after',
+				(('.card', '.block'), '.-Ct-red0_h:hover'):
+					('.card:hover', '.block:hover'),
+				('.block', '.-Ct-red0_\\/\\>\\* >*'): '.block >*',
+				('.block', $selector-list):
+					('.block:hover', '.block:focus'),
+				(('.card', '.block'), $selector-list):
+					('.card:hover', '.card:focus', '.block:hover', '.block:focus'),
+			),
+			'external selector with this-util post state': (
+				('.block', '.-Ct-red0_\\&-.-Ct-red0_\\&-'): '.block.block',
+				('.block', '.-Ct-red0_\\&-sec1.-Ct-sec1'): '.block.-Ct-sec1',
+			),
+			'external selector with pre states': (
+				('.block', '.-Ctx .\\^_-Mut5gg'): '.-Ctx .block',
+				('.block .elem', '.-Ctx .\\^_-Mut5gg'): '.-Ctx .block .elem',
+				('.block', 'a.\\=a\\._-Mut5gg'): 'a.block',
+			),
+			'external selector with pre and post states': (
+				('.block', '.-Ctx1 .#{$escaped-sel} .-Ctx:hover'):
+					'.-Ctx1 .block .-Ctx:hover',
+			),
 		);
 
 		@each $test, $data in $-tests {
