@@ -541,6 +541,7 @@ mlu.$utils-config: map.set(
 
 			mlu.$tUSv: map.get(mlu.$utils-config, 'tokens', 'util', 'str-value');
 			mlu.$tUNv: map.get(mlu.$utils-config, 'tokens', 'util', 'num-value');
+			mlu.$tUCm: map.get(mlu.$utils-config, 'tokens', 'util', 'component');
 			mlu.$tSOr: map.get(mlu.$utils-config, 'tokens', 'states', 'or');
 			mlu.$tSAnd: map.get(mlu.$utils-config, 'tokens', 'states', 'and');
 			mlu.$tSNot: map.get(mlu.$utils-config, 'tokens', 'states', 'not');
