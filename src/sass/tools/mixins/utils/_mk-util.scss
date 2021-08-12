@@ -122,8 +122,10 @@
 					$util-selector: '.' + mlu.str-escape($ar + mlu.$tUCm) + $selector;
 
 					@if not $ar-st-only {
-						#{mlu.util-apply-selector($custom-selector, $util-selector)} {
-							@include -generate-props($args...);
+						@at-root {
+							#{mlu.util-apply-selector($custom-selector, $util-selector)} {
+								@include -generate-props($args...);
+							}
 						}
 					}
 

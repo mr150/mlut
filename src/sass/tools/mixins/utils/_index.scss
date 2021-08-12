@@ -384,3 +384,41 @@ Styleguide: sass-tools.mixins.utils
 		);
 	}
 }
+
+@mixin apply-util($utils, $components: ()) {
+	@each $item in $utils {
+		$util-data: mlu.new-parse-util($item);
+		$abbr-data: mlu.parse-abbr(map.get($util-data, 'value'));
+		$util-data: map.merge($util-data, $components);
+		$keyword: mlu.$kStOnly;
+		$pre-states: map.get($util-data, 'pre-states');
+		$post-states: map.get($util-data, 'post-states');
+
+		@if map.get($util-data, 'at-rules') {
+			$keyword: mlu.$kArStOnly;
+			// It's a bit dangerous to use non-standard fields in map, but it is unlikely that a way to check keywords in the `mk-util` will change
+			$util-data: map.set($util-data, 'applyArKw', mlu.$kArOnly);
+		}
+
+		@if $pre-states or $post-states {
+			@if $pre-states and $post-states {
+				$util-data: map.merge(
+					$util-data,
+					(
+						'pre-states': '#{mlu.$states-cmb} ' + $pre-states,
+						'post-states':'#{mlu.$states-cmb} ' + $post-states,
+					)
+				);
+			}
+
+			$util-data: map.set($util-data, 'applyStKw', $keyword);
+		}
+
+		@include mmu.new-mk-util(
+			map.get($abbr-data, 'name'),
+			map.get($abbr-data, 'value'),
+			map.remove($util-data, 'value'),
+			('selector': &)
+		);
+	}
+}

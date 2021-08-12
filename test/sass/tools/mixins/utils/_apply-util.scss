@@ -1,0 +1,144 @@
+@use 'sass-true' as *;
+@use 'tools' as mlu;
+
+@include describe('tools/mixins/utils') {
+	@include describe('apply-util') {
+		@include it('apply utils to rule') {
+			@include assert() {
+				@include output(false) {
+					.card {
+						display: block;
+
+						@include mlu.apply-util(
+							P2su Fz1r
+						);
+					}
+				}
+
+				@include expect(false) {
+					.card {
+						display: block;
+					}
+
+					.card {
+						padding: 0.5rem 8px;
+					}
+
+					.card {
+						font-size: 1rem;
+					}
+				}
+			}
+		}
+
+		@include it('apply utils with states and at-rules') {
+			@include assert() {
+				@include output(false) {
+					.card {
+						@include mlu.apply-util(
+							'Fz1r_h'
+							'^one_Bgc--bgColor?#c06_h'
+						);
+					}
+				}
+
+				@include expect(false) {
+					.card:hover {
+						font-size: 1rem;
+					}
+
+					.-Ctx-one .card:hover {
+						background-color: var(--mlu-bgColor, #c06);
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.card {
+						@include mlu.apply-util(
+							'xl_P2su'
+							'xl_C#fff!_h,f'
+							'@:prn_^new_Op80p_h'
+						);
+					}
+				}
+
+				@include expect(false) {
+					@media (min-width: mlu.bp(xl)) {
+						.card {
+							padding: 0.5rem 8px;
+						}
+					}
+
+					@media (min-width: mlu.bp(xl)) {
+						.card:hover,
+						.card:focus {
+							color: #fff !important;
+						}
+					}
+
+					@media print {
+						.-Ctx-new .card:hover {
+							opacity: 0.8;
+						}
+					}
+				}
+			}
+		}
+
+		@include it('use utils components from arguments') {
+			@include assert() {
+				@include output(false) {
+					.card {
+						@include mlu.apply-util(
+							'xl_P2su'
+							'Lh2_af'
+							Fz1r,
+							('important': true, 'post-states': null)
+						);
+					}
+				}
+
+				@include expect(false) {
+					@media (min-width: mlu.bp(xl)) {
+						.card {
+							padding: 0.5rem 8px !important;
+						}
+					}
+
+					.card {
+						line-height: 2 !important;
+					}
+
+					.card {
+						font-size: 1rem !important;
+					}
+				}
+			}
+		}
+
+		@include it('apply utils without parent selector') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.apply-util(
+						'xl_P2su'
+						'Lh2!_af'
+					);
+				}
+
+				@include expect(false) {
+					@media (min-width: mlu.bp(xl)) {
+						.xl_P2su {
+							padding: 0.5rem 8px;
+						}
+					}
+
+					.Lh2\!_af::after {
+						line-height: 2 !important;
+					}
+				}
+			}
+		}
+	}
+}
