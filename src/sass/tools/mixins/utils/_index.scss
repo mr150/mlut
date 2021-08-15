@@ -378,10 +378,17 @@ Styleguide: sass-tools.mixins.utils
 		$group-data: $components;
 	}
 
+	$i: 1;
+
 	@each $util in map.get(mlu.$utils-data, 'groups', 'registry', $group-name) {
 		@include mmu.new-mk-util(
-			$util, $values, if(string.index($util, mlu.$tUCm), (), $group-data)
+			$util,
+			$values,
+			if(string.index($util, mlu.$tUCm), (), $group-data),
+			('groupItemIndex': $i)
 		);
+
+		$i: $i + 1;
 	}
 }
 

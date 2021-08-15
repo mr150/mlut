@@ -338,7 +338,11 @@ $utils-data: (
 			'Td': text-decoration,
 			'Tsh': text-shadow,
 			'Va': vertical-align,
-			'Bgc': background-color,
+			'Bgc': (
+				'properties': background-color,
+				'range-parser': 'color',
+				'value-type': $util-type-color,
+			),
 			'Bgr': background-repeat,
 			'Bgp': background-position,
 			'Bgsz': background-size,

@@ -178,6 +178,14 @@
 		);
 	}
 
+	@if map.has-key(
+		mlu.$utils-data, $section, 'registry', $name, 'custom-keywords', $value
+	) {
+		@return map.get(
+			mlu.$utils-data, $section, 'registry', $name, 'custom-keywords', $value
+		);
+	}
+
 	$link: map.get(
 		mlu.$utils-data, $section, 'registry', $name, 'keywords'
 	);

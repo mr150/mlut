@@ -40,6 +40,7 @@
 	}
 
 	$is-values-map: meta.type-of($values) == 'map';
+	$new-keywords: ();
 	$i: 1;
 
 	@each $key, $value in $values {
@@ -48,7 +49,7 @@
 		@if list.is-bracketed($range-list) {
 			@include new-mk-util(
 				$util-name,
-				$options: $options,
+				$options: map.set($main-options, 'noSaveKw', true),
 				meta.call($range-parser, $range-list, $util-name)...
 			);
 		} @else {
@@ -69,6 +70,8 @@
 				$css-values: mlu.convert-util-value($util-parsed-val, $util-name);
 			} @else if $css-values == false {
 				$css-values: $util-parsed-val;
+			} @else if not map.has-key($main-options, 'noSaveKw') {
+				$new-keywords: map.set($new-keywords, $util-parsed-val + '', $value);
 			}
 
 			$separated-value: if(
@@ -146,6 +149,50 @@
 		}
 
 		$i: $i + 1;
+	}
+
+	@if list.length($new-keywords) > 0 {
+		@include -save-new-keywords(
+			$new-keywords, $util-name, $props, map.get($main-options, 'groupItemIndex')
+		);
+	}
+}
+
+@mixin -save-new-keywords($new-keywords, $util-name, $props, $group-item-index) {
+	$util-type: (
+		map.get(mlu.$utils-data, 'utils', 'registry', $util-name, 'value-type') or
+		map.get(mlu.$utils-config, 'default-value-type')
+	);
+
+	@if list.nth($util-type, 1) != 'color' {
+		$util-keywords: map.get(
+			mlu.$utils-data, 'utils', 'registry', $util-name, 'keywords'
+		);
+
+		@if not list.index($util-type, 'keyword') {
+			$util-type: list.join('keyword', $util-type);
+		}
+
+		$util-map: (
+			'properties': $props,
+			'value-type': $util-type,
+		);
+
+		@if meta.type-of($util-keywords) == 'map' or not $util-keywords {
+			$util-map: map.set($util-map, 'keywords', $new-keywords);
+		} @else {
+			$util-map: map.set($util-map, 'custom-keywords', $new-keywords);
+		}
+
+		mlu.$utils-data: map.deep-merge(
+			mlu.$utils-data,
+			('utils': ('registry': ($util-name: $util-map)))
+		);
+	} @else if not $group-item-index or $group-item-index < 2 {
+		mlu.$utils-data: map.deep-merge(
+			mlu.$utils-data,
+			('general': ('keywords': ('colors': $new-keywords)))
+		);
 	}
 }
 

@@ -19,6 +19,9 @@ mlu.$utils-data: map.deep-merge(
 				'class-name': '',
 				'properties': position,
 			),
+			'Maw': (
+				'keywords': 'maw-kws',
+			),
 			'-Posed': (
 				'preset-properties': (
 					'position': absolute,
@@ -993,6 +996,85 @@ mlu.$utils-data: map.deep-merge(
 
 					.C--txtColor\*80p_h:hover {
 						color: rgba(var(--mlu-txtColor), 0.8);
+					}
+				}
+			}
+		}
+
+		@include it('use the value generated above from the map as keywords') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'D', (
+						'ib_af', '', '150_h StOnly'
+					));
+				}
+
+				@include expect(false) {
+					.D-ib {
+						display: inline-block;
+					}
+
+					.D-ib_af::after {
+						display: inline-block;
+					}
+
+					.D {
+						display: block;
+					}
+
+					.D150_h:hover {
+						display: 150q;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'Maw', 'sm0'
+					);
+				}
+
+				@include expect(false) {
+					.Maw-sm0 {
+						max-width: 560px;
+					}
+				}
+			}
+		}
+
+		@include it('saving colors when creating them from a map') {
+			@include assert() {
+				@include output(false) {
+					@include mlu.new-mk-util(
+						'C', (
+						'main0': #c06,
+						'minor0': #150,
+					));
+
+					@include mlu.new-mk-util(
+						'Bgc', (
+						'main0_h StOnly',
+						'minor0',
+					));
+				}
+
+				@include expect(false) {
+					.C-main0 {
+						color: #c06;
+					}
+
+					.C-minor0 {
+						color: #150;
+					}
+
+					.Bgc-main0_h:hover {
+						background-color: #c06;
+					}
+
+					.Bgc-minor0 {
+						background-color: #150;
 					}
 				}
 			}
