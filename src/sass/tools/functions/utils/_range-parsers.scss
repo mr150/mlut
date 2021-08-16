@@ -225,6 +225,8 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 		$values: map.merge($values, $color-values);
 	}
 
+	// bad solution because the parser has a side effect
+	// TODO: move saving new shades from here
 	@if list.length($new-shades) > 0 {
 		mlu.$utils-data: map.deep-merge(
 			mlu.$utils-data,

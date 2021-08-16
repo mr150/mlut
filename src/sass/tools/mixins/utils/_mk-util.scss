@@ -13,8 +13,14 @@
 @mixin new-mk-util($raw-name, $values, $features: (), $options: ()) {
 	$util-data: mlu.new-parse-util($raw-name);
 	$util-name: map.get($util-data, 'value');
+	$is-range: map.has-key($options, 'isRange');
 
-	$main-options: -util-main-options($util-name, $options);
+	$main-options: if(
+		$is-range,
+		$options,
+		-util-main-options($util-name, $options),
+	);
+
 	$class-name: map.get($main-options, 'class-name');
 	$props: map.get($main-options, 'properties');
 	$custom-selector: map.get($main-options, 'selector');
@@ -49,7 +55,7 @@
 		@if list.is-bracketed($range-list) {
 			@include new-mk-util(
 				$util-name,
-				$options: map.set($main-options, 'noSaveKw', true),
+				$options: map.set($main-options, 'isRange', true),
 				meta.call($range-parser, $range-list, $util-name)...
 			);
 		} @else {
@@ -70,7 +76,7 @@
 				$css-values: mlu.convert-util-value($util-parsed-val, $util-name);
 			} @else if $css-values == false {
 				$css-values: $util-parsed-val;
-			} @else if not map.has-key($main-options, 'noSaveKw') {
+			} @else if not $is-range {
 				$new-keywords: map.set($new-keywords, $util-parsed-val + '', $value);
 			}
 
