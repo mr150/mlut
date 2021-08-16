@@ -10,7 +10,7 @@
 @use '../grid' as mgs;
 @use 'mk-state' as mst;
 
-@mixin new-mk-util($raw-name, $values, $features: (), $options: null) {
+@mixin new-mk-util($raw-name, $values, $features: (), $options: ()) {
 	$util-data: mlu.new-parse-util($raw-name);
 	$util-name: map.get($util-data, 'value');
 
@@ -239,7 +239,6 @@
 	$needed-options: (
 		'repeat-prop-values', 'preset-properties', 'selector', 'range-parser',
 	);
-
 	$result: (
 		'class-name': if(
 			map.has-key(mlu.$utils-data, 'utils', 'registry', $name, 'class-name'),
@@ -256,12 +255,8 @@
 		);
 	}
 
-	@if meta.type-of($options) == 'map' {
-		$prop: map.get($options, 'properties');
-		$result: map.merge($result, $options);
-	} @else if $options {
-		$prop: $options;
-	}
+	$prop: map.get($options, 'properties');
+	$result: map.merge($result, $options);
 
 	@return map.set(
 		$result, 'properties', $prop or mlu.util-prop($name, 'utils', true)

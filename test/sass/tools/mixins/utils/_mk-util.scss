@@ -359,56 +359,6 @@ mlu.$utils-data: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include mlu.new-mk-util(
-						'Ovcm', (5su, 'xl_a'),
-						(
-							'at-rules': 'lg @s',
-							'post-states': 'h,f',
-						),
-						overflow-clip-margin,
-					);
-				}
-
-				@include expect(false) {
-					.Ovcm5su {
-						overflow-clip-margin: mlu.su(5);
-					}
-
-					.Ovcm5su_h\,f:hover,
-					.Ovcm5su_h\,f:focus {
-						overflow-clip-margin: mlu.su(5);
-					}
-
-					@media (min-width: mlu.bp(lg)) {
-						.lg_Ovcm5su {
-							overflow-clip-margin: mlu.su(5);
-						}
-					}
-
-					@supports (overflow-clip-margin: 20px) {
-						.\@s_Ovcm5su {
-							overflow-clip-margin: mlu.su(5);
-						}
-					}
-
-					.Ovcm-a {
-						overflow-clip-margin: auto;
-					}
-
-					@media (min-width: mlu.bp(xl)) {
-						.xl_Ovcm-a {
-							overflow-clip-margin: auto;
-						}
-					}
-				}
-			}
-
-			mlu.$utils-data: map.deep-remove(
-				mlu.$utils-data, 'utils', 'registry', 'Ovcm'
-			);
-
-			@include assert() {
-				@include output(false) {
-					@include mlu.new-mk-util(
 						'Ovcm', (5, 'i_f'),
 						(
 							'post-states': 'h',
