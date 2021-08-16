@@ -45,19 +45,25 @@ Styleguide: sass-tools.functions.at_rules
 	}
 
 	$result: '';
-	$feature: mget.util-prop($abbr, $section, false, true);
-
-	@if map.has-key(mlu.$utils-data, $section, 'map', $abbr, '') {
-		@return "(#{$feature}: #{map.get(mlu.$utils-data, $section, 'map', $abbr, '')})";
-	} @else if $feature {
-		@return '(#{$feature})';
-	}
-
 	$abbr-data: mut.parse-abbr($abbr);
 	$abbr-feature: map.get($abbr-data, 'name');
 	$abbr-value: map.get($abbr-data, 'value');
 	$separator: map.get($abbr-data, 'separator');
 	$feat-prefix: '';
+	$feature: mget.util-prop($abbr-feature, $section, false, true);
+
+	@if not $feature {
+		@return mgen.error(
+			'Invalid feature abbreviation: `#{$abbr}`. `#{$abbr}` is not defined in `#{$section}` section of $utils-data map'
+		);
+	}
+
+	@if (
+		$abbr-value == '' and
+		not map.has-key(mlu.$utils-data, $section, 'registry', $abbr-feature, 'keywords')
+	) {
+		@return '(#{$feature})';
+	}
 
 	@if $separator {
 		@if string.index($separator, mlu.$tALs) {
@@ -67,19 +73,7 @@ Styleguide: sass-tools.functions.at_rules
 		}
 	}
 
-	$feature: mget.util-prop($abbr-feature, $section, false, true);
-
-	@if not $feature {
-		@return mgen.error(
-			'Invalid feature abbreviation: `#{$abbr}`. `#{$abbr}` is not defined in `#{$section}` section of $utils-data map'
-		);
-	}
-
-	$feat-value: map.get(mlu.$utils-data, $section, 'map', $abbr-feature, $abbr-value);
-
-	@if not $feat-value {
-		$feat-value: mut.convert-util-value($abbr-value, $abbr-feature, $section);
-	}
+	$feat-value: mut.convert-util-value($abbr-value, $abbr-feature, $section);
 
 	@if meta.type-of($feat-value) == 'number' {
 		$value-unit: math.unit($feat-value);
@@ -94,7 +88,7 @@ Styleguide: sass-tools.functions.at_rules
 			@if $value-unit == 'rem' or $value-unit == 'em' {
 				$value-diff: $value-diff * 0.06; // 1px = 0.062rem
 			} @else if $value-unit != 'px' and $value-unit != '' {
-				// calculations for other units can be added in the future
+				// TODO: add calculations for other units
 				$value-diff: $value-diff * 0.01;
 			}
 

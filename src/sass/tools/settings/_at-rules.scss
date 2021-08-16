@@ -101,13 +101,58 @@ mlu.$utils-data: map.set(
 			(
 				'hv': hover,
 				'ahv': any-hover,
-				'pn': pointer,
-				'apn': any-pointer,
-				'cg': color-gamut,
+				'pn': (
+					'properties': pointer,
+					'value-type': mlu.$util-type-keyword,
+					'keywords': (
+						'c': coarse,
+						'f': fine,
+					),
+				),
+				'apn': (
+					'properties': any-pointer,
+					'value-type': mlu.$util-type-keyword,
+					'keywords': (
+						'c': coarse,
+						'f': fine,
+					)
+				),
+				'cg': (
+					'properties': color-gamut,
+					'value-type': mlu.$util-type-keyword,
+					'keywords': (
+						'p': p3,
+						's': 'srgb',
+						'r': rec2020,
+					),
+				),
+				'dm': (
+					'properties': display-mode,
+					'value-type': mlu.$util-type-keyword,
+					'keywords': (
+						'': fullscreen,
+						's': standalone,
+						'mu': minimal-ui,
+						'b': browser,
+					),
+				),
 				'fc': forced-colors,
-				'dm': display-mode,
-				'ori': orientation,
-				'prfcs': prefers-color-scheme,
+				'ori': (
+					'properties': orientation,
+					'value-type': mlu.$util-type-keyword,
+					'keywords': (
+						'': landscape,
+						'p': portrait,
+					),
+				),
+				'prfcs': (
+					'properties': prefers-color-scheme,
+					'value-type': mlu.$util-type-keyword,
+					'keywords': (
+						'': dark,
+						'l': light,
+					),
+				),
 				'prfrm': prefers-reduced-motion,
 				'mn': (
 					'properties': monochrome,
@@ -123,40 +168,13 @@ mlu.$utils-data: map.set(
 				),
 				'rsl': (
 					'properties': resolution,
-					'value-type': list.set-nth(mlu.$util-type-default, 1, 'resolution'),
+					'value-type': list.join(
+						'keyword', list.set-nth(mlu.$util-type-default, 1, 'resolution')
+					),
+					'keywords': (
+						'i': infinite,
+					),
 				),
-			),
-		),
-		'map': (
-			'pn': (
-				'c': coarse,
-				'f': fine,
-			),
-			'apn': (
-				'c': coarse,
-				'f': fine,
-			),
-			'cg': (
-				'p': p3,
-				's': 'srgb',
-				'r': rec2020,
-			),
-			'dm': (
-				'': fullscreen,
-				's': standalone,
-				'mu': minimal-ui,
-				'b': browser,
-			),
-			'ori': (
-				'': landscape,
-				'p': portrait,
-			),
-			'prfcs': (
-				'': dark,
-				'l': light,
-			),
-			'rsl': (
-				'i': infinite,
 			),
 		),
 	),

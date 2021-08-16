@@ -1,4 +1,7 @@
 @use 'sass:map';
+
+$util-type-keyword: ('keyword', 'css-kw', 'var', 'cust-prop',);
+
 @use 'tools/settings' as mlu with (
 	$flag-test-env: true,
 	$utils: (
@@ -11,15 +14,25 @@
 					left
 				),
 			),
+			'D': (
+				'properties': display,
+				'value-type': $util-type-keyword,
+				'keywords': (
+				'ig': inline-grid,
+				'f': flex,
+				),
+			),
+			'Jc': (
+				'properties': justify-content,
+				'keywords': ('se': space-evenly),
+				'value-type': $util-type-keyword,
+			),
+			'Pos': (
+				'properties': position,
+				'keywords': ('sk': sticky),
+				'value-type': $util-type-keyword,
+			),
 		),
-		'map': (
-		'D': (
-			'ig': inline-grid,
-			'f': flex,
-		),
-		'Jc': ('se': space-evenly),
-		'Pos': ('sk': sticky),
-	),
 	),
 );
 
