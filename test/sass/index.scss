@@ -1,8 +1,11 @@
 @use 'sass:map';
+@use 'sass-true' as * with (
+	$terminal-output: false,
+);
 
 $util-type-keyword: ('keyword', 'css-kw', 'var', 'cust-prop',);
 
-@use 'tools/settings' as mlu with (
+@use 'tools/settings' with (
 	$flag-test-env: true,
 	$utils: (
 		'registry': (

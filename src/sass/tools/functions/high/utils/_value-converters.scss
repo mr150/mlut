@@ -1,0 +1,228 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
+
+@use '../forward-tools' as ml;
+
+// Value converters
+//
+// Available converters:
+// ```scss
+//@debug ml.convert-uv-number(10); // 10px
+//@debug ml.convert-uv-unitless(10); // 10
+//@debug ml.convert-uv-resolution(2x); // 2dppx
+//@debug ml.convert-uv-css-kw('a'); // auto
+//@debug ml.convert-uv-abbr('bgc'); // background-color
+// ```
+//
+// $value - value for converting
+// $data = () - map with data required for converting
+//
+// Styleguide: sass-tools.functions.high.utils.value_converters
+
+@function convert-uv-number($value, $data: ()) {
+	$val-number: ml.str2n($value, true);
+	$section: map.get($data, 'section');
+	$name: map.get($data, 'name');
+
+	@if meta.type-of($val-number) == 'number' {
+		$unit-number: 0;
+		$unit: math.unit($val-number);
+
+		$unit-number: map.get(
+			ml.$utils-config, 'units', map.get($data, 'units-key') or 'default', $unit
+		);
+
+		@if $unit-number {
+			@return ml.str2n($value + '_') * $unit-number;
+		}
+
+		@if $unit == 'su' or $unit == 'gg' {
+			$unit-converter: meta.get-function($unit, false, ml);
+
+			@if map.get(
+				ml.$utils-data, $section, 'registry', $name, 'directions'
+			) and map.get($data, 'list-length') == 1 {
+				@return (
+					meta.call($unit-converter, $val-number, 'rem')
+					meta.call($unit-converter, $val-number)
+				);
+			}
+
+			@return meta.call(
+				$unit-converter,
+				$val-number,
+				map.get(ml.$utils-data, $section, 'registry', $name, 'default-unit')
+			);
+		}
+
+		@return $val-number;
+	}
+
+	@return $value;
+}
+
+@function convert-uv-keyword($value, $data: ()) {
+	$name: map.get($data, 'name');
+	$section: map.get($data, 'section');
+
+	@if map.has-key(
+		ml.$utils-data, $section, 'registry', $name, 'keywords', $value
+	) {
+		@return map.get(
+			ml.$utils-data, $section, 'registry', $name, 'keywords', $value
+		);
+	}
+
+	@if map.has-key(
+		ml.$utils-data, $section, 'registry', $name, 'custom-keywords', $value
+	) {
+		@return map.get(
+			ml.$utils-data, $section, 'registry', $name, 'custom-keywords', $value
+		);
+	}
+
+	$link: map.get(
+		ml.$utils-data, $section, 'registry', $name, 'keywords'
+	);
+
+	@if map.has-key(ml.$utils-data, $section, 'keywords', $link, $value) {
+		@return map.get(ml.$utils-data, $section, 'keywords', $link, $value);
+	}
+
+	@return if(
+		map.has-key(ml.$utils-data, 'general', 'keywords', $link, $value),
+		map.get(ml.$utils-data, 'general', 'keywords', $link, $value),
+		$value
+	);
+}
+
+@function convert-uv-resolution($value, $data: ()) {
+	@return convert-uv-number(
+		$value, ('units-key': 'resolution')
+	);
+}
+
+@function convert-uv-unitless($value, $data: ()) {
+	@return ml.str2n($value) or $value;
+}
+
+@function convert-uv-alpha($value, $data: ()) {
+	@return convert-uv-number(
+		$value, ('units-key': 'alpha')
+	);
+}
+
+@function convert-uv-css-kw($value, $data: ()) {
+	@return if(
+		map.has-key(ml.$utils-data, 'general', 'keywords', 'css', $value),
+		map.get(ml.$utils-data, 'general', 'keywords', 'css', $value),
+		$value
+	);
+}
+
+@function convert-uv-abbr($value, $data: ()) {
+	@return (
+		ml.util-prop(ml.str-ucfirst($value), map.get($data, 'section')) or
+		// maybe in the future, the keys of utils in the registry will be unified
+		ml.util-prop($value, map.get($data, 'section')) or
+		$value
+	);
+}
+
+$-tUVar-length: string.length(ml.$tUVar);
+
+@function convert-uv-var($value, $data: ()) {
+	@if (
+		meta.type-of($value) != 'string' or
+		string.slice($value, 1, $-tUVar-length) != ml.$tUVar
+	) {
+		@return $value;
+	}
+
+	$var-name: string.slice($value, $-tUVar-length + 1);
+	$section: map.get($data, 'section');
+
+	$result: if(
+		map.has-key(ml.$utils-data, $section, 'variables', $var-name),
+		map.get(ml.$utils-data, $section, 'variables', $var-name),
+		map.get(ml.$utils-data, 'general', 'variables', $var-name)
+	);
+
+	@if not $result {
+		@return ml.error('Undefined variable: `#{$value}`');
+	}
+
+	@return $result;
+}
+
+$-tUCp-length: string.length(ml.$tUCp);
+
+@function convert-uv-cust-prop($value, $data: ()) {
+	@if (
+		meta.type-of($value) != 'string' or
+		string.slice($value, 1, $-tUCp-length) != ml.$tUCp
+	) {
+		@return $value;
+	}
+
+	$fallback-pos: string.index($value, ml.$tUFv);
+
+	@if $fallback-pos {
+		@return var(
+			#{
+				'--' + ml.$util-val-css-var-prefix + string.slice(
+					$value, $-tUCp-length + 1, $fallback-pos - 1
+				)
+			},
+			#{
+				ml.apply-value-converter(
+					string.slice($value, $fallback-pos + 1), $data...
+				)
+			}
+		);
+	}
+
+	@return var(#{
+		'--' + ml.$util-val-css-var-prefix + string.slice(
+			$value, $-tUCp-length + 1
+		)
+	});
+}
+
+@function convert-uv-color($value, $data: ()) {
+	@if map.has-key(
+		ml.$utils-data, 'general', 'keywords', 'colors', $value
+	) {
+		@return map.get(
+			ml.$utils-data, 'general', 'keywords', 'colors', $value
+		);
+	}
+
+	@if meta.type-of($value) == 'string' {
+		$mod-color-list: ml.str-split($value, ml.$tUVm);
+
+		@if list.length($mod-color-list) > 1 {
+			$part-color: list.nth($mod-color-list, 1);
+			$converted-part: ml.apply-value-converter(
+				$part-color, $data...
+			);
+			$color: ml.str-hex2color($converted-part);
+
+			@if $color or ml.is-css-var($converted-part) {
+				$part-alpha: list.nth($mod-color-list, 2);
+				$alpha: ml.apply-value-converter($part-alpha, 'Op', 'utils');
+
+				@if ml.is-css-var($alpha) and not string.index($part-alpha, ml.$tUFv) {
+					$alpha: string.insert($alpha, ', 1', -2);
+				}
+
+				@return rgba($color or $converted-part, $alpha);
+			}
+		}
+	}
+
+	@return $value;
+}

@@ -6,11 +6,6 @@ Useful functions. All MLUT functions have 'mlu' prefix. You can find all functio
 Styleguide: sass-tools.functions
 */
 
-@forward 'general' hide
-	str-split, str-trim, remove-nth, str-replace, str-replace-all, str-starts, ls-join, ls-find, str-hex2color;
-@forward 'math';
-@forward 'getters';
-@forward 'utils-getters';
-@forward 'utils';
-@forward 'at-rules';
-@forward 'custom-units';
+@forward 'base';
+@forward 'common';
+@forward 'high';

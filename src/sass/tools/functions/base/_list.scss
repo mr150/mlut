@@ -1,0 +1,56 @@
+@use 'sass:meta';
+@use 'sass:string';
+@use 'sass:list';
+
+@use 'error' as *;
+
+// Private functions only for internal usage. I hope that in the future they will be built into Sass. And when it will happens I don't want that their removing broke backward compatibility.
+
+@function ls-implode($list, $separator: '') {
+	$result: '';
+
+	@each $item in $list {
+		$result: $result + $item + $separator;
+	}
+
+	@return string.slice($result, 1, -1 - string.length($separator));
+}
+
+@function ls-find($list, $callback, $args...) {
+	@if meta.type-of($callback) != 'function' {
+		@return error(
+			'Wrong type of argument $callback: `#{meta.type-of($callback)}`. Expected `function`'
+		);
+	}
+
+	$i: 1;
+
+	@each $item in $list {
+		@if meta.call($callback, $item, $i, $args...) {
+			@return $item;
+		}
+
+		$i: $i + 1;
+	}
+
+	@return null;
+}
+
+@function remove-nth($list, $index) {
+	@if meta.type-of($index) != 'number' {
+		@return error('Wrong type of argument $index: `#{meta.type-of($index)}`. Expected `number`');
+	}
+
+	$result: ();
+	$i: 1;
+
+	@each $item in $list {
+		@if $i != $index {
+			$result: list.append($result, $item);
+		}
+
+		$i: $i + 1;
+	}
+
+	@return $result;
+}

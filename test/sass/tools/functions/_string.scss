@@ -1,0 +1,262 @@
+@use 'sass:meta';
+@use 'sass:string';
+@use 'sass-true' as *;
+@use 'tools/functions/base/string' as ml;
+
+@include describe('tools/functions/base/string') {
+	@include describe('str-split') {
+		@include it('split string into list with separator') {
+			@include assert-equal(
+				ml.str-split('text__with__double__underscores', '__'),
+				'text' 'with' 'double' 'underscores',
+			);
+
+			@include assert-equal(
+				ml.str-split(' one two  3', ' '),
+				'' 'one' 'two' '' '3',
+			);
+		}
+
+		@include it('split string into list without separator') {
+			@include assert-equal(
+				ml.str-split('testou'),
+				't' 'e' 's' 't' 'o' 'u',
+			);
+		}
+
+		@include it('split string into list specified number of times') {
+			@include assert-equal(
+				ml.str-split('Bgc--bgColor', '-', 1),
+				'Bgc' '-bgColor',
+			);
+
+			@include assert-equal(
+				ml.str-split('Bgc--bgColor', '-', 0),
+				'Bgc--bgColor',
+				$inspect: true
+			);
+
+			@include assert-equal(
+				ml.str-split('M-a', '-', -5),
+				'M-a',
+				$inspect: true
+			);
+
+			@include assert-equal(
+				ml.str-split('af h,f a fw +:^', ' ', 2),
+				'af' 'h,f' 'a fw +:^',
+			);
+
+			@include assert-equal(
+				ml.str-split('Bgc--bgColor', $repeats: 3),
+				'B' 'g' 'c' '--bgColor',
+			);
+
+			@include assert-equal(
+				ml.str-split('testou', $repeats: 12),
+				't' 'e' 's' 't' 'o' 'u',
+			);
+
+			@include assert-equal(
+				ml.str-split('Red22', $repeats: -1),
+				'Red22',
+			);
+		}
+	}
+
+	@include describe('str-trim') {
+		@include it('trim trailing and leading whitespaces') {
+			@include assert-equal(
+				ml.str-trim('  testou   '),
+				'testou',
+			);
+
+			@include assert-equal(
+				ml.str-trim('   '),
+				'',
+			);
+		}
+	}
+
+	@include describe('str-digit-index') {
+		@include it('find the first index of digit in string') {
+			@include assert-equal(
+				ml.str-digit-index('Mb55'),
+				3,
+			);
+		}
+
+		@include it('wrong type of argument') {
+			@include assert-equal(
+				ml.str-digit-index((55)),
+				'ERROR: Wrong type of argument $str: `number`. Expected `string`',
+			);
+		}
+
+		@include it('digits not found') {
+			@include assert-equal(
+				ml.str-digit-index('Mt-a'),
+				null,
+			);
+		}
+	}
+
+	@include describe('str-ucfirst') {
+		@include it('converts the first letter to uppercase') {
+			@include assert-equal(
+				ml.str-ucfirst('fxg1'),
+				'Fxg1',
+			);
+		}
+
+		@include it('wrong type of argument') {
+			@include assert-equal(
+				ml.str-ucfirst(1),
+				'ERROR: Wrong type of argument $str: `number`. Expected `string`',
+			);
+		}
+	}
+
+	@include describe('str-replace') {
+		@include it('replaces substring by another substring') {
+			@include assert-equal(
+				ml.str-replace('@:prn BpAll@s BpAll', 'BpAll', 'lg'),
+				'@:prn lg@s BpAll',
+			);
+
+			@include assert-equal(
+				ml.str-replace('BpAll@s BpAll', 'All'),
+				'Bp@s BpAll',
+			);
+		}
+	}
+
+	@include describe('str-replace-all') {
+		@include it('replaces all the entries of substring by another substring') {
+			@include assert-equal(
+				ml.str-replace-all('BpAll sm@:prn sm@s', 'sm', 'smx'),
+				'BpAll smx@:prn smx@s',
+			);
+
+			@include assert-equal(
+				ml.str-replace-all('sm@:prn sm@s', 'sm'),
+				'@:prn @s',
+			);
+		}
+	}
+
+	@include describe('str-escape') {
+		@include it('escape special characters in value') {
+			@include assert-equal(
+				ml.str-escape(':^:&::^2:/+a.link:h'),
+				'\\:\\^\\:\\&\\:\\:\\^2\\:\\/\\+a\\.link\\:h',
+			);
+
+			@include assert-equal(
+				ml.str-escape(1.5),
+				'1\\.5',
+			);
+		}
+	}
+
+	@include describe('str-starts') {
+		@include it('checks whether the string starts with the substring') {
+			@include assert-equal(
+				ml.str-starts('@:prn', '@:'),
+				true,
+			);
+
+			@include assert-equal(
+				ml.str-starts('BpAll@:scr', '@:'),
+				false,
+			);
+
+			@include assert-equal(
+				ml.str-starts('xs', 'BpAll'),
+				false,
+			);
+
+			@include assert-equal(
+				ml.str-starts(22, '2'),
+				false,
+			);
+
+			@include assert-equal(
+				ml.str-starts('22', 2),
+				false,
+			);
+		}
+	}
+
+	@include describe('str2n') {
+		@include it('converts string to number with unit') {
+			@include assert-equal(
+				ml.str2n('3px'),
+				3px,
+			);
+
+			@include assert-equal(
+				ml.str2n('3Hz'),
+				3hz,
+			);
+
+			@include assert-equal(
+				ml.str2n('25p'),
+				25p,
+			);
+
+			@include assert-equal(
+				ml.str2n('25%'),
+				25%,
+			);
+
+			@include assert-equal(
+				ml.str2n('-25rem'),
+				-25rem,
+			);
+
+			@include assert-equal(
+				ml.str2n('3px0'),
+				3,
+			);
+		}
+
+		@include it('returns `null` if not string was passed') {
+			@include assert-equal(
+				ml.str2n(#f00),
+				null,
+			);
+		}
+	}
+
+	@include describe('str-hex2color') {
+		$tests: (
+			'converts hex string to color': (
+				(red): red,
+				('#c06'): #cc0066,
+				('#6600cc'): #6600cc,
+				('#FAB'): #ffaabb,
+			),
+			'returns `null` if conversion is not possible': (
+				(22): null,
+				('red'): null,
+			),
+			'invalid color format': (
+				('#h06'): 'ERROR: Invalid character: `h`. Allowed only hexadecimal digits',
+				('#660cc'): 'ERROR: Invalid color format: `#660cc`. Allowed 3 or 6 hexadecimal digits',
+			),
+		);
+
+		@each $test, $data in $tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						ml.str-hex2color($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
+}

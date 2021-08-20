@@ -1,0 +1,153 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:string';
+
+@use 'forward-tools' as ml;
+
+@forward 'mk-ar';
+@forward 'mk-state';
+
+/*
+At-Rules
+
+At-Rules mixins.
+
+Styleguide: sass-tools.mixins.ar
+*/
+
+// bpm
+//
+// Bpm is breakpoint manager.
+// ```scss
+// @include bpm('md') {
+//		.inp--common {
+//			padding-left: 48px;
+//		}
+// }
+//
+// @include bpm($to: 'lg') {
+//		.btn--common {
+//			margin-left: 48px;
+//		}
+// }
+//
+// @include bpm('sm', 'lg') {
+//		.btn--common {
+//			margin-top: 48px;
+//		}
+// }
+// ```
+// Compile into:
+// ```css
+// @media (min-width: 760px) {
+//		.inp--common {
+//			padding-left: 48px;
+//		}
+// }
+//
+// @media (max-width: 959px) {
+//		.btn--common {
+//			margin-left: 48px;
+//		}
+// }
+//
+// @media (min-width: 520px) and (max-width: 959px) {
+//		.btn--common {
+//			margin-top: 48px;
+//		}
+// }
+// ```
+//
+// $from = false - breakpoint. Can be keyword (string) or number. Generate to 'min-width' mediaquery, and `$to` to 'max-width' - 1.
+// $to = false - breakpoint. Can be keyword (string) or number. Generate to 'max-width' - 1 mediaquery. Together with `$from` generate to 'min-width and max-width - 1'.
+// $opt = false - string with additional media-features to check.
+// For example:
+// `(orientation: landscape)`,
+// `screen and (aspect-ratio: 11/5)`,
+// `print`.
+// $prop = 'width' - property in mediaquery. Property generate like `#{$type}-#{$prop}`,
+// where `$type` can be 'min' or 'max'.
+// `$type` depends on availability `$from` and `$to`
+// @content - CSS relus that will be placed into mediaquery.
+//
+// Styleguide: sass-tools.mixins.ar.bpm
+
+@mixin bpm($from: false, $to: false, $opt: false, $prop: 'width') {
+	$type: 'min';
+	$bp-val: ();
+
+	@if $from and $to {
+		$type: 'range';
+	} @else if $to {
+		$type: 'max';
+	} @else if not $from {
+		@error 'Breakpoint value must be not null.';
+	}
+
+	@each $item in ($from, $to) {
+		@if meta.type-of($item) == 'string' {
+			$bp-val: list.append($bp-val,
+			if($item == $to,
+			ml.bp($item) - 1,
+			ml.bp($item)));
+		} @else if meta.type-of($item) == 'number' and not math.is-unitless($item) {
+			$item-to: $item;
+
+			@if math.unit($item) == 'em' {
+				$item-to: ml.px2em((($item / 1em) * ml.$browser-font-size) - 1, ml.$browser-font-size);
+			} @else if math.unit($item) == 'rem' {
+				$item-to: ml.px2rem((($item / 1rem) * ml.$browser-font-size) - 1, ml.$browser-font-size);
+			} @else if math.unit($item) == 'px' {
+				$item-to: $item - 1;
+			}
+
+			$bp-val: list.append($bp-val,
+			if($item == $to, $item-to, $item));
+		} @else if meta.type-of($item) != 'bool' or (meta.type-of($item) == 'bool' and $item) {
+			@error 'Invalid breakpoint type: `#{meta.type-of($item)}` or value: `#{$item}`';
+		}
+	}
+
+	$opt: if($opt, $opt + ' ', '');
+	$media-str: '';
+
+	@if $type == 'range' {
+		$media-str: $opt + '(min-' + $prop + ':' + list.nth($bp-val, 1) + ') and (max-' + $prop + ':' + list.nth($bp-val, 2) + ')';
+	} @else {
+		$bp-val: list.nth($bp-val, 1);
+		$media-str: $opt + '(' + $type + '-' + $prop + ':' + $bp-val + ')';
+	}
+
+	@media #{$media-str} {
+		@content;
+	}
+}
+
+// cCl
+//
+// Generate clearfix for float layout.
+// ```scss
+//.block {
+//		@include cCl;
+//}
+// ```
+// CSS
+// ```css
+//.block:after {
+//		display: table;
+//		clear: both;
+//		content: '';
+//}
+// ```
+//
+// Styleguide: sass-tools.mixins.utils.-cl
+
+@mixin cCl {
+	&:after {
+		display: table;
+		clear: both;
+		content: '';
+	}
+}

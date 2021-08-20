@@ -1,0 +1,318 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
+@use 'sass:selector';
+@use 'sass:color';
+
+@use '../forward-tools' as ml;
+@use 'value-converters' as converters;
+@use 'range-parsers';
+
+@forward 'value-converters';
+@forward 'parse-util';
+@forward 'util-apply-selector';
+@forward 'range-parsers' as parse-util-*;
+
+/*
+Utilities
+
+Functions for working with utilities.
+
+Styleguide: sass-tools.functions.high.utils
+*/
+
+// parse-util
+//
+// Parse utility value or name. Return map with passed value components:
+// - `value` - pure value or name
+// - `mq` - breakpoint or any mediaquery
+// ```scss
+//parse-util('1su_md') => ('value': '1su', 'mq': 'md')
+// ```
+//
+// $util-val - utility value or name. Type string.
+//
+// Styleguide: sass-tools.functions.high.utils.parse_util
+
+@function parse-util($util-val) {
+	$divider-pos: if(meta.type-of($util-val) == 'string', string.index($util-val, '_'), false);
+	$mq: null;
+
+	@if $divider-pos {
+		$mq: string.slice($util-val, $divider-pos + 1);
+		$util-val: string.slice($util-val, 1, $divider-pos - 1);
+	}
+
+	@return (
+		'value': if(
+			ml.str2n($util-val) or ml.util-prop($util-val),
+			$util-val,
+			'-' + $util-val
+		),
+		'mq': $mq,
+	);
+}
+
+// parse-util-directions
+//
+// Parse a map or list with directed utility values. If utility name is not passed, then the directions in the values will become the names of the utilities: t - T, x - -X etc. Returns a map with parsed data.
+// ```scss
+//$M-map: (
+//   'b-2gg': -2gg,
+//   'y--bar_lg': calc(5vw - 1.5rem),
+//   'b1su': 1su,
+//   'xy-auto_all': auto,
+//);
+//
+//@debug ml.parse-util-directions($M-map, 'M');
+///* (
+//  'utils-map': (
+//    'Mb': ('-2gg': -2gg, '1su': 1su),
+//    'My': ('-bar_lg': calc(5vw - 1.5rem)),
+//    'M': ('auto_all': auto)
+//  )
+//  'props': ('margin-bottom', 'margin', 'margin'),
+//  'directions': ('b', 'y', 'xy'),
+//) */
+// ```
+// or with list
+// ```scss
+//@debug ml.parse-util-directions(('y23', 'r2r', 'x5gg', 'r32su'), 'P');
+///* (
+//  'utils-map': (
+//    'Py': '23',
+//    'Pr': ('2r', '32su'),
+//    'Px': '5gg'
+//  )
+//  'props': ('padding', 'padding-right', 'padding'),
+//  'directions': ('y', 'r', 'x'),
+//) */
+// ```
+//
+// $values - `map` or `list` with values.
+// $name = null - directed utility name.
+//
+// Styleguide: sass-tools.functions.high.utils.parse_util_dir
+
+@function parse-util-directions($values, $name: null) {
+	$utils-map: ();
+	$util-directions: ();
+	$directed-props: ();
+
+	$append-item-val: if(
+		meta.type-of($values) == 'map',
+		meta.get-function('merge', false, map),
+		meta.get-function('append', false, list)
+	);
+
+	@each $key, $value in $values {
+		@if meta.type-of($key) != 'string' {
+			@error 'Invalid key format `#{$key}` for `#{$name}` in map of values';
+		}
+
+		$dir: string.slice($key, 1, 1);
+		$dir-val: map.get(ml.$main-directions, $dir);
+		$util-prop: ml.util-prop($name);
+		$util-name: '';
+
+		$utils-map-item-val: -cut-map-item-val($key, $value, 2);
+
+		@if $dir-val {
+			@if $name {
+				$util-name: $name + $dir;
+				$util-prop: $util-prop + '-' + $dir-val;
+			} @else {
+				$util-name: string.to-upper-case($dir);
+				$util-prop: $dir-val;
+			}
+		} @else if $dir == 'x' and string.slice($key, 2, 2) == 'y' {
+			$utils-map-item-val: -cut-map-item-val($key, $value, 3);
+
+			@if $name {
+				$util-name: $name;
+				$dir: 'xy';
+			} @else {
+				$util-name: '-Xy';
+				$dir: 'all';
+			}
+		} @else if $dir == 'x' or $dir == 'y' {
+			@if $name {
+				$util-name: $name + $dir;
+			} @else {
+				$util-name: '-' + string.to-upper-case($dir);
+			}
+		} @else {
+			@error 'Invalid direction `#{$dir}` for `#{$name}` in map of values';
+		}
+
+		@if not map.has-key($utils-map, $util-name) {
+			$utils-map: map.merge($utils-map, ($util-name: $utils-map-item-val));
+			$util-directions: list.append($util-directions, $dir);
+			$directed-props: list.append($directed-props, $util-prop);
+		} @else {
+			//This will be refactored when Sass nested map functions will be released
+			$utils-map: map.merge(
+				$utils-map,
+				($util-name: meta.call($append-item-val, map.get($utils-map, $util-name), $utils-map-item-val))
+			);
+		}
+	}
+
+	@return (
+		'utils-map': $utils-map,
+		'props': $directed-props,
+		'directions': $util-directions,
+	);
+}
+
+// Private function that cuts utility value from string with direction
+
+@function -cut-map-item-val($raw-val, $css-val, $val-pos) {
+	$util-val: if(
+		not ml.str2n(string.slice($raw-val, $val-pos)),
+		string.slice($raw-val, $val-pos + 1),
+		string.slice($raw-val, $val-pos)
+	);
+
+	@if $css-val {
+		@return ($util-val: $css-val);
+	}
+
+	@return $util-val;
+}
+
+@function convert-util-states($states, $this-util: null, $pre: false) {
+	$prefix: '&';
+	$suffix: '';
+
+	@if $pre {
+		$prefix: '';
+
+		@if string.slice($states, -1) == '.' {
+			$states: string.slice($states, 1, -2);
+		} @else {
+			$suffix: ' ';
+		}
+	}
+
+	$result: $prefix;
+	$or: ', ';
+
+	@each $state in ml.str-split($states, ml.$tSOr) {
+		@each $item in ml.str-split($state, ml.$tSAnd) {
+			$converted: '';
+			$not: string.slice($item, 1, 1) == ml.$tSNot;
+
+			@if $not {
+				$item: string.slice($item, 2);
+			}
+
+			@if map.has-key(ml.$utils-states, $item) {
+				$converted: map.get(ml.$utils-states, $item);
+			} @else if ml.str-starts($item, ml.$tSCs) {
+				$item-name: string.slice($item, 2);
+
+				@if map.has-key(ml.$utils-config, 'states', 'custom', $item-name) {
+					$converted: map.get(ml.$utils-config, 'states', 'custom', $item-name);
+				} @else {
+					@return ml.error('Undefined custom state: `#{$item}`');
+				}
+			} @else if ml.str-starts($item, ml.$tSCn) {
+				$ctx-value: string.slice($item, 2);
+				$converted: '.' + ml.str-escape(
+					ml.$cCtx + util-separated-value($ctx-value)
+				);
+			} @else if ml.str-starts($item, ml.$tSRaw) {
+				$converted: string.slice($item, 2);
+			} @else if ml.str-starts($item, ml.$tSTu) {
+				@if not $this-util {
+					@return ml.error('`#{ml.$tSTu}` cannot be used because $this-util is not passed');
+				}
+
+				@if $item == ml.$tSTucv {
+					$converted: ml.str-escape(ml.$tSTucv);
+				} @else {
+					$converted: ml.check-class($this-util + ml.str-escape(string.slice($item, 2)));
+				}
+			} @else if $item == '' {
+				$converted: ' ';
+			} @else {
+				@return ml.error('Invalid state: `#{$item}`');
+			}
+
+			@if $not {
+				$converted: ':not(#{$converted})';
+			}
+
+			$result: $result + $converted;
+		}
+
+		$result:  $result + $suffix + $or + $prefix;
+	}
+
+	@return string.slice($result, 1, -(1 + string.length($or) + string.length($prefix)));
+}
+
+@function util-separated-value($value) {
+	@if $value == '' {
+		@return '';
+	}
+
+	@if ml.str2n($value) {
+		@return ml.$tUNv + $value;
+	}
+
+	$str-value: if(
+		meta.type-of($value) == 'string',
+		$value,
+		$value + ''
+	);
+
+	$first-char: string.slice($str-value, 1, 1);
+
+	@if $first-char == '#' {
+		@return ml.$tUHv + $str-value;
+	}
+
+	@return if(
+		$first-char == ml.$tURv,
+		$str-value,
+		ml.$tUSv + $str-value
+	);
+}
+
+$-util-value-converters: ();
+
+$-fn-prefix-length: string.length('convert-uv-');
+
+@each $key, $value in meta.module-functions(converters) {
+	$-util-value-converters: map.set(
+		$-util-value-converters, string.slice($key, $-fn-prefix-length + 1), $value
+	);
+}
+
+ml.$utils-config: map.set(
+	ml.$utils-config,
+	'value-converters',
+	map.merge($-util-value-converters, map.get(ml.$utils-config, 'value-converters'))
+);
+
+$-util-range-parsers: ();
+
+@each $key, $value in meta.module-functions(range-parsers) {
+	$suffix-pos: string.index($key, '-range');
+
+	@if $suffix-pos {
+		$-util-range-parsers: map.set(
+			$-util-range-parsers, string.slice($key, 1, $suffix-pos - 1), $value
+		);
+	}
+}
+
+ml.$utils-config: map.set(
+	ml.$utils-config,
+	'range-parsers',
+	map.merge($-util-range-parsers, map.get(ml.$utils-config, 'range-parsers'))
+);

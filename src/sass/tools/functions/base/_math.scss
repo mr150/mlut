@@ -1,0 +1,153 @@
+@use 'sass:math';
+@use 'sass:meta';
+
+@use '../../settings' as ml;
+
+/*
+Math
+
+Functions for calculations.
+
+Styleguide: sass-tools.functions.base.math
+*/
+
+// ml-decimal-round
+//
+// Decimal rounding.
+// ```scss
+//ml-decimal-round(33.33333%, 2) => 33.33%
+//```
+//
+// $number - decimal to be rounded. Type: number.
+// $pos - the number of decimal places.
+// $type = 'round' - service parameter for functions-wrappers.
+//
+// Styleguide: sass-tools.functions.base.math.decimal_round
+
+@function decimal-round($number, $pos, $type: 'round') {
+	$n: 1;
+
+	@if meta.type-of($number) != 'number' {
+		@error 'Wrong type of argument $number: `#{meta.type-of($number)}`. Expected number';
+	}
+
+	@if meta.type-of($pos) != 'number' {
+		@error 'Wrong type of argument $pos: `#{meta.type-of($pos)}`. Expected `number`';
+	}
+
+	@for $i from 0 to $pos {
+		$n: $n * 10;
+	}
+
+	@if $type == 'round' {
+		@return math.div(math.round($number * $n), $n);
+	} @else if $type == 'ceil' {
+		@return math.div(math.ceil($number * $n), $n);
+	} @else if $type == 'floor' {
+		@return math.div(math.floor($number * $n), $n);
+	} @else {
+		@error 'Invalid round type: `#{$type}`';
+	}
+}
+
+// ml-decimal-ceil
+//
+// Wrapper on [ml-decimal-round](#kssref-sass-tools-functions-decimal_round) for ceil round.
+// ```scss
+//ml-decimal-ceil(33.33333%, 2) => 33.34%
+//```
+//
+// $number - decimal to be rounded. Type: number.
+// $pos - the number of decimal places.
+//
+// Styleguide: sass-tools.functions.base.math.decimal_ceil
+
+@function decimal-ceil($number, $pos) {
+	@return decimal-round($number, $pos, 'ceil');
+}
+
+
+// ml-decimal-floor
+//
+// Wrapper on [ml-decimal-round](#kssref-sass-tools-functions-decimal_round) for floor round.
+// ```scss
+//ml-decimal-floor(33.33333%, 2) => 33.33%
+//```
+//
+// $number - decimal to be rounded. Type: number.
+// $pos - the number of decimal places.
+//
+// Styleguide: sass-tools.functions.base.math.decimal_floor
+
+@function decimal-floor($number, $pos) {
+	@return decimal-round($number, $pos, 'floor');
+}
+
+// ml-px2em
+//
+// Convert pixels to `ems`.
+// Final value in ems rounded because accuracy more than two decimal places does not make sense.
+// ```scss
+//ml-px2em(24px, 18px) => 1.33em
+//ml-px2em(24px) => 1.5em
+// ```
+//
+// $number - number in `px` that will be converted.
+// $divider = $ml-base-font-size - parent font size in `px`.
+// $unit = 'em' - service parameter for functions-wrappers.
+//
+// Styleguide: sass-tools.functions.base.math.px2em
+
+@function px2em($number, $divider: ml.$base-font-size, $unit: 'em') {
+	@if math.is-unitless($number) {
+		@warn 'Assuming #{$number} to be in pixels in ml-px2em. Convert it to px';
+		@return px2em($number * 1px, $divider, $unit);
+	} @else if math.unit($number) == $unit {
+		@return $number;
+	}
+
+	@if $unit == 'rem' {
+		@return decimal-round(math.div($number, $divider), 2) * 1rem;
+	}
+
+	@if $unit == 'no' {
+		@return decimal-round(math.div($number, $divider), 2);
+	}
+
+	@return decimal-round(math.div($number, $divider), 2) * 1em;
+}
+
+
+// ml-px2rem
+//
+// Wrapper on [ml-px2em](#kssref-sass-tools-functions-px2em) for converting to `rems`. Works similarly.
+// ```scss
+//ml-px2rem(24px) => 1.5rem
+// ```
+//
+// $number - number in `px` that will be converted.
+// $divider = $ml-browser-font-size - browser default font size in `px`.
+//
+// Styleguide: sass-tools.functions.base.math.px2rem
+
+@function px2rem($number, $divider: ml.$browser-font-size) {
+	@return px2em($number, $divider, 'rem');
+}
+
+
+// ml-px2lh
+//
+// Wrapper on [ml-px2em](#kssref-sass-tools-functions-px2em) for converting to `line-height` units. Works similarly.
+// ```scss
+//ml-px2lh(24px, 14px) => 1.71
+//ml-px2lh(24px) => 1.5
+// ```
+//
+// $number - number in `px` that will be converted.
+// $divider = $ml-base-font-size - parent font size in `px`.
+//
+// Styleguide: sass-tools.functions.base.math.px2lh
+
+@function px2lh($number, $divider: ml.$base-font-size) {
+	@return px2em($number, $divider, 'no');
+}

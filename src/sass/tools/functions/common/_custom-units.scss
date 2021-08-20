@@ -1,0 +1,182 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
+@use 'sass:list';
+
+@use 'forward-tools' as ml;
+
+/*
+Custom units
+
+Functions for working with custom units.
+
+Styleguide: sass-tools.functions.common.custom_units
+*/
+
+// space unit converters
+//
+// Converts space units to CSS value. Available converters:
+// - `su()` - `su` to `px`
+// - `sur()` - `su` to `rem`
+// ```scss
+//@debug ml.su(3); // 12px
+//@debug ml.sur(3su); // 0.75rem
+// ```
+//
+// $n - unitless number or number with `su` unit
+// $unit = 'px' - `su` will be converted to that units. Service argument in `su()` for create converters for any units
+//
+// Styleguide: sass-tools.functions.common.custom_units.su
+
+@function su($n, $unit: 'px') {
+	@if meta.type-of($n) != 'number' {
+		@return ml.error(
+			'Wrong type of argument $n: `#{meta.type-of($n)}`. Expected `number`'
+		);
+	}
+
+	$init-value: map.get(ml.$general-data, 'custom-unit-values', 'su', $unit or 'px');
+
+	@if not $init-value {
+		@return ml.error('No initial value for converting to `#{$unit}` unit');
+	}
+
+	@if math.unit($n) == 'su' {
+		$n: math.div($n, 1su);
+	}
+
+	@return $init-value * $n;
+}
+
+@function sur($n) {
+	@return su($n, 'rem');
+}
+
+@function gg($n, $unit: null) {
+	@if meta.type-of($n) != 'number' {
+		@return ml.error(
+			'Wrong type of argument $n: `#{meta.type-of($n)}`. Expected `number`'
+		);
+	}
+
+	@if math.unit($n) == 'gg' {
+		$n: math.div($n, 1gg);
+	}
+
+	$var-name: if(
+		$unit,
+		'gg-' + $unit,
+		'gg'
+	);
+
+	@if not map.has-key(ml.$general-data, 'css-vars', $var-name) {
+		@return ml.error('No CSS variable for converting to `#{$unit}` unit');
+	}
+
+	@return string.unquote(
+		'calc(var(#{map.get(ml.$general-data, "css-vars", $var-name)}) * #{$n})'
+	);
+}
+
+@function ggr($n) {
+	@return gg($n, 'rem');
+}
+
+ml.$general-data: map.set(
+	ml.$general-data, 'custom-unit-values', 'gg', meta.get-function('gg', false)
+);
+
+$-gtr-fallback-rem: ml.px2rem(ml.$grid-default-gtr);
+
+@function gg-fallback($util, $util-value, $css-value, $important) {
+	$value-part-init: 'calc(var(#{ml.css-var("gg")}';
+
+	@if not string.index(meta.inspect($css-value), $value-part-init) {
+		@return null;
+	}
+
+	$def-unit: map.get(ml.$utils-data, 'utils', 'registry', $util, 'default-unit');
+
+	$value-part: $value-part-init + '#{$def-unit and "-" + $def-unit}) * ';
+	$fallback-list: ();
+	$multi-sep: list.separator($css-value);
+
+	$value-parts: (
+		(
+			$value-part,
+			string.length($value-part),
+			if(
+				$def-unit == 'rem',
+				$-gtr-fallback-rem,
+				ml.$grid-default-gtr
+			)
+		),
+	);
+
+	@if map.get(ml.$utils-data, 'utils', 'registry', $util, 'directions') {
+		$value-part: $value-part-init + '-rem) * ';
+		$value-parts: list.append(
+			$value-parts,
+			(
+				$value-part,
+				string.length($value-part),
+				$-gtr-fallback-rem,
+			)
+		);
+	}
+
+	@each $list in $css-value {
+		$converted-list: ();
+
+		@each $item in $list {
+			@if meta.type-of($item) == 'string' {
+				@each $part, $length, $fallback in $value-parts {
+					@if ml.str-starts($item, $part) {
+						$converted-list: list.append(
+							$converted-list,
+							ml.str2n(string.slice($item, $length + 1)) * $fallback
+						);
+					}
+				}
+			} @else {
+				$converted-list: list.append($converted-list, $item);
+			}
+		}
+
+		$fallback-list: list.append($fallback-list, $converted-list, $multi-sep);
+	}
+
+	@return $fallback-list $important;
+}
+
+@if ml.$flag-css-vars == 1 {
+	$-utils-registry: ();
+
+	@each $item in map.get(ml.$utils-config, 'gg-fallback-list') {
+		$props-map: ();
+		$props-list: ml.util-prop($item);
+
+		@each $item in $props-list {
+			$props-map: map.set(
+				$props-map, $item, meta.get-function('gg-fallback', false)
+			);
+		}
+
+		$-utils-registry: map.set(
+			$-utils-registry,
+			$item,
+			(
+				'preset-properties': $props-map,
+				'properties': $props-list
+			)
+		);
+	}
+
+	ml.$utils-data: map.deep-merge(
+		ml.$utils-data,
+		(
+			'utils': ('registry': $-utils-registry)
+		)
+	);
+}

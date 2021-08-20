@@ -1,0 +1,167 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
+
+@use 'forward-tools' as ml;
+
+// convert-util-value
+//
+// Determines the type of utility and, depending on type, calls the converter from the `$util-value-converters` map. If the utility type is not recognized, the [default converter](#kssref-sass-tools-functions-utils-value_converters-def) is called. If the `$utils-value-converters` does not contain a converter for this type, the utility value is returned without conversion. Else the result of the converter work is returned.
+// ```scss
+//@debug ml.convert-util-value('2r', 'Fz'); // 2rem
+//@debug ml.convert-util-value(100, 'Fw'); // 100
+// ```
+//
+// $util-val - utility value
+// $name - utility name
+// $section = 'utils' - section in the registry in which utility was defined
+//
+// Styleguide: sass-tools.functions.common.utils.convert_util_value
+
+@function convert-util-value($util-val, $name, $section: 'utils') {
+	@if meta.type-of($util-val) == 'string' {
+		$space: ' ';
+
+		$multi-list-sep: if(
+			map.has-key(ml.$utils-data, $section, 'registry', $name, 'multi-list-separator'),
+			map.get(ml.$utils-data, $section, 'registry', $name, 'multi-list-separator'),
+			ml.$tULs1
+		);
+
+		@if string.index($util-val, $multi-list-sep) or string.index($util-val, ml.$tUSp) {
+			$result: ();
+			$separator: map.get(ml.$utils-config, 'tokens-values', $multi-list-sep);
+
+			@each $list in ml.str-split($util-val, $multi-list-sep) {
+				$items: ml.str-split($list, ml.$tUSp);
+				$length: list.length($items);
+				$converted-items: ();
+
+				@each $value in $items {
+					$converted-items: list.append(
+						$converted-items,
+						apply-value-converter($value, $name, $section, $length)
+					);
+				}
+
+				$result: list.append($result, $converted-items, $separator);
+			}
+
+			@return if(
+				list.length($result) == 1,
+				list.nth($result, 1),
+				$result
+			);
+		}
+
+		@if string.slice($util-val, 1, 1) == ml.$tURv {
+			@return string.unquote(string.slice($util-val, 2));
+		}
+	}
+
+	$converted: apply-value-converter($util-val, $name, $section);
+
+	@return if(
+		meta.type-of($converted) == 'string',
+		string.unquote($converted),
+		$converted
+	);
+}
+
+@function apply-value-converter($util-value, $name, $section, $list-length: 1) {
+	@if ml.str-starts($util-value, ml.$tURv) {
+		@return string.unquote(string.slice($util-value, 2));
+	}
+
+	$value-type: if(
+		map.has-key(ml.$utils-data, $section, 'registry', $name, 'value-type'),
+		map.get(ml.$utils-data, $section, 'registry', $name, 'value-type'),
+		map.get(ml.$utils-config, 'default-value-type'),
+	);
+
+	$is-pipeline: false;
+
+	@each $item in $value-type {
+		@if map.has-key(ml.$utils-config, 'value-converters', $item) {
+			$prev-value: $util-value;
+
+			$util-value: meta.call(
+				map.get(ml.$utils-config, 'value-converters', $item),
+				$util-value,
+				(
+					'name': $name,
+					'section': $section,
+					'list-length': $list-length,
+				)
+			);
+
+			@if $util-value != $prev-value and not $is-pipeline {
+				@return $util-value;
+			}
+		} @else if $item == ml.$tGVcp {
+			$is-pipeline: true;
+		}
+	}
+
+	@return $util-value;
+}
+
+@function -str-contains-item($item, $i, $str) {
+	@return string.index($str, $item);
+}
+
+@function parse-abbr($abbr) {
+	$abbr-name: $abbr;
+	$abbr-value: '';
+	$abbr-prefix: '';
+	$hash-value-sep: ml.$tUHv;
+	$all-separators: ml.$abbr-separators;
+	$result: ();
+
+	@if string.slice($abbr, 1, 1) == '-' {
+		$abbr: string.slice($abbr, 2);
+		$abbr-prefix: '-';
+	}
+
+	@if ml.$tUHv == '' {
+		$hash-value-sep: '#';
+		$all-separators: list.append($all-separators, '#');
+	}
+
+	$separator: ml.ls-find(
+		$all-separators, meta.get-function('-str-contains-item'), $abbr
+	);
+
+	@if $separator {
+		$abbr-parts: ml.str-split($abbr, $separator, 1);
+		$abbr-name: list.nth($abbr-parts, 1);
+		$abbr-value: list.nth($abbr-parts, 2);
+
+		@if ml.$tUNv == '' and $separator == '-' and ml.str2n($abbr-value) {
+			$abbr-value: '-' + $abbr-value;
+		} @else if $separator == $hash-value-sep or $separator == ml.$tURv {
+			$abbr-value: $separator + $abbr-value;
+		} @else {
+			$result: map.set($result, 'separator', $separator);
+		}
+	} @else {
+		@if ml.$tUNv == '' {
+			$number-index: ml.str-digit-index($abbr);
+
+			@if $number-index {
+				$abbr-name: string.slice($abbr, 1, $number-index - 1);
+				$abbr-value: string.slice($abbr, $number-index);
+			}
+		}
+	}
+
+	@return map.merge(
+		$result,
+		(
+			'value': $abbr-value,
+			'name': $abbr-prefix + $abbr-name,
+		)
+	);
+}

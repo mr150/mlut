@@ -1,0 +1,173 @@
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:selector';
+@use 'sass:string';
+
+@use 'forward-tools' as ml;
+
+// mk-state
+//
+// Generates values for utilities in various [states](section-concepts.html#kssref-concepts-utility-states). Names and values of states are set in the [settings](#kssref-sass-tools-settings-utils-states). Usually this mixin is not used separately because it is called inside [mk-util](#kssref-sass-tools-mixins-mk_util).
+//
+// ```scss
+//@include mk-state('.Bgc-mn0', ('h')) {
+//		background-color: #60f;
+//}
+// ```
+// CSS
+// ```css
+//.Bgc-mn0 {
+//		background-color: #60f;
+//}
+//
+//.h_Bgc-mn0:hover {
+//		background-color: #60f;
+//}
+// ```
+//
+// $post
+// $pre = null
+// $no-state = 1 - number flag. If equal to 1, then a value without state will be generated as in the example above.
+// $selector = & - selector of CSS rule. Can be `string` or `&`.
+// $this-util = null
+// $custom-sel = null
+//
+// Styleguide: sass-tools.mixins.utils.mk_state
+
+@mixin new-mk-state(
+	$post,
+	$pre: null,
+	$no-state: true,
+	$selector: &,
+	$this-util: null,
+	$custom-sel: null,
+) {
+	@if not $selector {
+		@error '$selector argument must not be null.';
+	}
+
+	$selector: ml.check-class($selector);
+	$final-selector-list: ();
+	$pre-comb-list: $selector;
+
+	@at-root {
+		@if $no-state {
+			#{ml.util-apply-selector($custom-sel, $selector)} {
+				@content;
+			}
+		}
+
+		@if $pre {
+			$pre-comb-list: ();
+			$pre-states: ml.str-split($pre, ml.$states-cmb);
+			$separate-states: list.nth($pre-states, 1);
+
+			@if $separate-states != '' {
+				$final-selector-list: -convert-states($separate-states, $selector, $this-util);
+			}
+
+			@if list.length($pre-states) > 1 {
+				$pre-comb-list: -convert-states(list.nth($pre-states, 2), $selector, $this-util);
+			}
+		}
+
+		@if $post {
+			$post-states: ml.str-split($post, ml.$states-cmb);
+			$separate-states: list.nth($post-states, 1);
+
+			@if $separate-states != '' {
+				$final-selector-list: list.join(
+					$final-selector-list,
+					-convert-states($separate-states, $selector, $this-util, 'post')
+				);
+			}
+
+			@if list.length($post-states) > 1 {
+				@each $pre-item in $pre-comb-list {
+					$final-selector-list: list.join(
+						$final-selector-list,
+						-convert-states(list.nth($post-states, 2), $pre-item, $this-util, 'post')
+					);
+				}
+			}
+		}
+
+		@each $item in $final-selector-list {
+			#{ml.util-apply-selector($custom-sel, $item)} {
+				@content;
+			}
+		}
+	}
+}
+
+@function -pre-state-selector($list, $selector, $this: null) {
+	$result: ();
+	$selector: ml.check-class($selector, 1);
+
+	@each $item in $list {
+		$selector-list: '';
+
+		@each $part in ml.str-split(
+			ml.convert-util-states($item, $this, true), ','
+		) {
+			$escaped-token: ml.str-escape(ml.$tUCm);
+			$state-prefix: ml.str-escape($item) + $escaped-token;
+			$ar-separator: string.index($selector, $escaped-token + $this);
+
+			$cur-selector: if(
+				$ar-separator,
+				string.insert(
+					$selector, $state-prefix, $ar-separator + string.length($escaped-token)
+				),
+				$state-prefix + $selector
+			);
+
+			$selector-list: $selector-list + '#{$part}.#{$cur-selector},';
+		}
+
+		$result: list.append($result, string.slice($selector-list, 1, -2));
+	}
+
+	@return $result;
+}
+
+@function -post-state-selector($list, $selector, $this: null) {
+	$result: ();
+
+	@each $item in $list {
+		$util-selector: selector.append($selector, ml.str-escape(ml.$tUCm + $item));
+		$state-selector: ml.str-replace-all(
+			ml.convert-util-states($item, $this), ml.str-escape(ml.$tSTucv), $util-selector
+		);
+
+		$result: list.append(
+			$result,
+			selector.nest(
+				$util-selector,
+				$state-selector
+			)
+		);
+	}
+
+	@return $result;
+}
+
+@function -convert-states($item, $selector, $this: null, $type: 'pre') {
+	$result: ml.str-split(ml.str-trim($item), ' ');
+
+	@each $key, $value in map.get(ml.$utils-config, 'states', 'keywords') {
+		@if meta.type-of($value) == 'string' {
+			$value: map.keys(map.get(ml.$utils-config, 'states', $value));
+		}
+
+		$result: ml.replace-keyword($result, $key, $value);
+	}
+
+	@return meta.call(
+		meta.get-function('-#{$type}-state-selector'),
+		$result,
+		$selector,
+		$this
+	);
+}

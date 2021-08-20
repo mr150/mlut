@@ -1,0 +1,79 @@
+@use 'sass:meta';
+@use 'sass:string';
+@use 'sass-true' as *;
+@use 'tools/functions/base/' as ml;
+
+$test-list: (0, 1, 2, 3);
+
+@function -greter-than($item, $i, $n) {
+	@return ml.str2n($item) > $n;
+}
+
+@include describe('tools/functions/base/list') {
+	@include describe('remove-nth') {
+		@include it('removes element from the list by index') {
+			@include assert-equal(
+				ml.remove-nth($test-list, 3),
+				0 1 3,
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.remove-nth($test-list, 8),
+				0 1 2 3,
+				$inspect: true,
+			);
+		}
+
+		@include it('wrong type of index argument') {
+			@include assert-equal(
+				ml.remove-nth($test-list, '3'),
+				'ERROR: Wrong type of argument $index: `string`. Expected `number`',
+			);
+		}
+	}
+
+	@include describe('ls-implode') {
+		$-tests: (
+		('xl' ':h' 'D', ' _ ',):  'xl _ :h _ D',
+		('e' 'ver' 'more',): 'evermore',
+		((),): '',
+		(4,): '4',
+	);
+
+		@include it('concatenates the elements of the list into a string with separator') {
+			@each $args, $expect in $-tests {
+				@include assert-equal(
+					ml.ls-implode($args...),
+					$expect,
+				);
+			}
+		}
+	}
+
+	@include describe('ls-find') {
+		$list: (4, '5', 6, '777');
+
+		$-tests: (
+			'simple selector after utility': (
+				($list, meta.get-function('-greter-than'), 6): '777',
+				($list, meta.get-function('-greter-than'), 1000): null,
+			),
+			'wrong type of argument': (
+				($list, 'nope'): 'ERROR: Wrong type of argument $callback: `string`. Expected `function`',
+			),
+		);
+
+		@each $test, $data in $-tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						ml.ls-find($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
+}

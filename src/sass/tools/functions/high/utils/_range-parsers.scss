@@ -1,0 +1,349 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
+@use 'sass:color';
+
+@use '../forward-tools' as ml;
+@use 'value-converters' as converters;
+@use 'parse-util' as mpu;
+
+@function number-range($range, $util) {
+	$value-data: mpu.new-parse-util(list.nth($range, 1));
+	$start: map.get($value-data, 'value');
+	$start-number: ml.str2n($start, true);
+
+	@if meta.type-of($start-number) != 'number' {
+		@if ml.str2n($start) {
+			@return ml.error('Unknown unit in $start value in range: `#{$start}`');
+		}
+
+		@return ml.error('Invalid $start value in range: `#{$start}`');
+	}
+
+	$result: if(
+		list.length($value-data) > 1,
+		('features': map.remove($value-data, 'value')),
+		()
+	);
+
+	$unit-name: math.unit($start-number);
+	$unit: map.get(ml.$units-all, $unit-name);
+	$converted-start: ml.convert-util-value($start-number, $util);
+	$css-unit-name: map.get(ml.$utils-data, 'utils', 'registry', $util, 'default-unit');
+	$css-unit: null;
+
+	@if meta.type-of($converted-start) == 'number' {
+		$css-unit-name: math.unit($converted-start);
+		$css-unit: map.get(ml.$units-all, $css-unit-name);
+	}
+
+	@if map.has-key(ml.$general-data, 'custom-unit-values', $unit-name) {
+		$css-unit: map.get(
+			ml.$general-data, 'custom-unit-values', $unit-name, $css-unit-name
+		) or map.get(ml.$general-data, 'custom-unit-values', $unit-name);
+	}
+
+	$step: if((list.length($range) > 2), list.nth($range, 3), 1);
+	$values: ();
+	$is-css-unit-fn: meta.type-of($css-unit) == 'function';
+	$i: math.div($start-number, $unit);
+
+	@while $i <= list.nth($range, 2) {
+		$values: map.set(
+			$values,
+			$i * $unit,
+			if(
+				$is-css-unit-fn,
+				meta.call($css-unit, $i, $css-unit-name),
+				$i * $css-unit
+			)
+		);
+		$i: $i + $step;
+	}
+
+	$result: map.set($result, 'values', $values);
+
+	@return $result;
+}
+
+$-color-adjust-fn: meta.get-function('adjust', false, color);
+$-color-scale-fn: meta.get-function('scale', false, color);
+
+@function -shade-name($item, $i, $step) {
+	@return $step <= $item;
+}
+
+@function color-range($range, $util) {
+	$range-args-count: list.length($range);
+
+	@if $range-args-count < 3 {
+		@return ml.error('invalid range syntax: `#{$range}`. Expected 3 or 4 arguments');
+	}
+
+	$numbers-list: list.nth($range, 2);
+	$shades-num-data: mpu.new-parse-util(list.nth($numbers-list, 1));
+	$shades-number: ml.str2n(map.get($shades-num-data, 'value'));
+
+	$alpha-number: if(
+		list.length($numbers-list) > 1,
+		list.nth($numbers-list, 2),
+		$shades-number
+	);
+
+	$step-map: list.nth($range, 3);
+	$step-fn: $-color-adjust-fn;
+	$is-alpha: map.has-key($step-map, 'alpha');
+	$only-alpha: list.length($step-map) == 1 and $is-alpha;
+	$util-data: (
+		'name': $util,
+		'section': 'utils',
+	);
+
+	$result: if(
+		list.length($shades-num-data) > 1,
+		('features': map.remove($shades-num-data, 'value')),
+		()
+	);
+
+	@if $range-args-count >= 4 {
+		$fn-link: list.nth($range, 4);
+
+		$step-fn: if(
+			meta.type-of($fn-link) == 'function',
+			$fn-link,
+			meta.get-function($fn-link, false, color)
+		);
+	}
+
+	$shades-map: if(
+		$only-alpha,
+		list.nth($range, 1),
+		-generate-color-shades(
+			list.nth($range, 1),
+			$shades-number,
+			map.remove($step-map, 'alpha'),
+			$step-fn,
+			$util-data
+		)
+	);
+
+	$shades-list: if(
+		meta.type-of($shades-map) == 'map',
+		map.keys($shades-map),
+		$shades-map
+	);
+
+	$values: if(
+		$is-alpha,
+		-generate-color-alpha(
+			$shades-list, $alpha-number, map.get($step-map, 'alpha'), $step-fn, $util-data
+		),
+		$shades-map
+	);
+
+	@return map.set($result, 'values', $values);
+}
+
+@function -generate-color-shades(
+	$colors, $count, $step-map, $step-fn, $util-data
+) {
+	$values: ();
+	$new-shades: ();
+	$shade-step: 50;
+	$max-step: 0;
+
+	@if map.has-key($step-map, 'rgb') {
+		$max-step: map.get($step-map, 'rgb');
+		$step-map: map.merge(
+			map.remove($step-map, 'rgb'),
+			(
+				'red': $max-step,
+				'green': $max-step,
+				'blue': $max-step,
+			)
+		);
+	} @else {
+		//stylelint-disable
+		$max-step: math.max(map.values($step-map)...);
+		//stylelint-enable
+	}
+
+	@if $step-fn == $-color-adjust-fn {
+		$shade-step: ml.ls-find(
+			(5, 10, 50), meta.get-function('-shade-name'), $max-step
+		) or 100;
+	} @else if $step-fn == $-color-scale-fn {
+		$shade-step: if($max-step <= 20%, 50, 100);
+	}
+
+	@each $item in $colors {
+		$color: ml.apply-value-converter(
+			$item, $util-data...
+		);
+		$is-css-var: ml.is-css-var($color, true);
+
+		@if meta.type-of($color) != 'color' and not $is-css-var {
+			@return ml.error(
+				'invalid value in range: `#{$color}`. Expected color or CSS variable'
+			);
+		}
+
+		$str-color: $item + '';
+		$first-char: string.slice($str-color, 1, 1);
+		$color-values: (
+			$item: $color
+		);
+
+		@if not $is-css-var and not (
+			$first-char == '#' or
+			$first-char == ml.$tUVar or
+			string.index($str-color, ml.$tUVm)
+		) {
+			$cur-shade: 0;
+			$i: 1;
+
+			@if string.slice($str-color, -1) == '0' {
+				$str-color: string.slice($str-color, 1, -2);
+			}
+
+			@while $i < $count {
+				$color: meta.call($step-fn, $color, $step-map...);
+				$cur-shade: $cur-shade + $shade-step;
+				$key: $str-color + $cur-shade;
+
+				@if not map.has-key(ml.$utils-data, 'general', 'keywords', 'colors', $key) {
+					$new-shades: map.set($new-shades, $key, $color);
+				}
+
+				$color-values: map.set($color-values, $key, $color);
+				$i: $i + 1;
+			}
+		}
+
+		$values: map.merge($values, $color-values);
+	}
+
+	// bad solution because the parser has a side effect
+	// TODO: move saving new shades from here
+	@if list.length($new-shades) > 0 {
+		ml.$utils-data: map.deep-merge(
+			ml.$utils-data,
+			('general': (
+				'keywords': ('colors': $new-shades)
+			))
+		);
+	}
+
+	@return $values;
+}
+
+@function -generate-color-alpha(
+	$colors, $count, $step-value, $step-fn, $util-data
+) {
+	$values: ();
+	$step: if(
+		ml.str-starts($step-value, ml.$tUCp), null, 0
+	);
+	$is-percent-step: false;
+
+	@if $step {
+		$is-percent-step: math.unit($step-value) == '%';
+
+		$step: if(
+			$is-percent-step,
+			math.div($step-value, 1%) * 1p,
+			$step-value * 100p
+		);
+
+		$step-value: -$step-value;
+	}
+
+	@each $item in $colors {
+		$color: ml.apply-value-converter(
+			$item, $util-data...
+		);
+		$is-css-var: ml.is-css-var($color, true);
+
+		@if meta.type-of($color) != 'color' and not $is-css-var {
+			@return ml.error(
+				'invalid value in range: `#{$color}`. Expected color or CSS variable'
+			);
+		}
+
+		$color-values: (
+			$item: $color
+		);
+
+		@if not $step {
+			$color-values: map.set(
+				$color-values,
+				($item + ml.$tUVm + $step-value),
+				rgba(
+					$color,
+					string.insert(
+						converters.convert-uv-cust-prop($step-value), ', 1', -2
+					)
+				)
+			);
+		} @else {
+			@if meta.type-of($item) == 'string' {
+				$token-pos: string.index($item, ml.$tUVm);
+
+				@if $token-pos {
+					$item: string.slice($item, 1, $token-pos - 1);
+				}
+			}
+
+			$cur-alpha: 100p;
+			$cur-alpha-val: 1;
+			$prev-alpha-val: 1;
+			$i: 1;
+
+			@if $is-css-var {
+				$space-pos: string.index($color, '), ');
+
+				@if $is-percent-step {
+					$step-value: math.div($step-value, 100%);
+				}
+
+				@if $space-pos {
+					$cur-alpha-val: ml.str2n(string.slice($color, $space-pos + 3));
+					$cur-alpha: $cur-alpha-val * 100p;
+					$prev-alpha-val: $cur-alpha-val;
+				} @else {
+					$color: rgba($color, 1);
+				}
+			} @else {
+				$cur-alpha: color.alpha($color) * 100p;
+			}
+
+			@while $i < $count {
+				@if $is-css-var {
+					$cur-alpha: $cur-alpha - $step;
+					$cur-alpha-val: $cur-alpha-val + $step-value;
+					$color: ml.str-replace($color, $prev-alpha-val + '', $cur-alpha-val);
+					$prev-alpha-val: $cur-alpha-val;
+				} @else {
+					$color: meta.call($step-fn, $color, $alpha: $step-value);
+
+					$cur-alpha: if(
+						$is-percent-step,
+						color.alpha($color) * 100p,
+						$cur-alpha - $step
+					);
+				}
+
+				$color-values: map.set(
+					$color-values, ($item + ml.$tUVm + $cur-alpha), $color
+				);
+				$i: $i + 1;
+			}
+		}
+
+		$values: map.merge($values, $color-values);
+	}
+
+	@return $values;
+}

@@ -1,0 +1,234 @@
+// At-rules
+//
+// Settings for media queries and other CSS at-rules.
+//
+// $at-rules - main map with settings.
+//
+// Styleguide: sass-tools.settings.at_rules
+
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+@use 'utils' as ml;
+
+// Breakpoints
+//
+// Breakpoint names and values.
+//
+// $ml-bp-xs = 0 - `xs`
+// $ml-bp-sm = 520px - `sm`
+// $ml-bp-md = 760px - `md`
+// $ml-bp-lg = 960px - `lg`
+// $ml-bp-xl = 1168px - `xl`
+//
+// Styleguide: sass-tools.settings.at_rules.breakpoints
+
+$bp-xs: 'xs' !default;
+$bp-sm: 'sm' !default;
+$bp-md: 'md' !default;
+$bp-lg: 'lg' !default;
+$bp-xl: 'xl' !default;
+$bp-all: 'BpAll' !default;
+$kArOnly: 'ArOnly' !default;
+$kArSt: 'ArSt' !default;
+$kArStOnly: 'ArStOnly' !default;
+
+$at-rules-data: (
+	'media': (
+		'alias': '',
+		'types': (
+			'prn': print,
+			'scr': screen,
+		),
+		'custom': (
+		),
+	),
+	'supports': (
+		'alias': 's',
+		'custom': (
+		),
+	),
+) !default;
+
+$at-rules-cfg: (
+	'abbr-separators': (
+	),
+	'tokens': (
+		'or': ml.$tSOr,
+		'and': ml.$tSAnd,
+		'custom': ml.$tSCs,
+		'not': ml.$tSNot,
+		'ar': '@',
+		'this-util': ml.$tSTu,
+		'greater-equal': '>=',
+		'less-equal': '<=',
+		'greater': '>',
+		'less': '<',
+	),
+	'breakpoints': (
+		$bp-sm: 520px,
+		$bp-md: 760px,
+		$bp-lg: 960px,
+		$bp-xl: 1168px,
+	),
+	'all-breakpoints': (
+		$bp-xs: 0,
+	),
+	'keywords': (
+		$bp-all: 'breakpoints',
+		$kArOnly: null,
+		$kArStOnly: null,
+		$kArSt: null,
+	),
+) !default;
+
+$-general-registry: ();
+
+@each $key, $value in map.get(ml.$utils-data, 'general', 'registry') {
+	$-general-registry: map.set(
+		$-general-registry,
+		string.to-lower-case($key),
+		$value
+	);
+}
+
+ml.$utils-data: map.set(
+	ml.$utils-data,
+	'media',
+	(
+		'registry': map.deep-merge(
+			$-general-registry,
+			(
+				'hv': hover,
+				'ahv': any-hover,
+				'pn': (
+					'properties': pointer,
+					'value-type': ml.$util-type-keyword,
+					'keywords': (
+						'c': coarse,
+						'f': fine,
+					),
+				),
+				'apn': (
+					'properties': any-pointer,
+					'value-type': ml.$util-type-keyword,
+					'keywords': (
+						'c': coarse,
+						'f': fine,
+					)
+				),
+				'cg': (
+					'properties': color-gamut,
+					'value-type': ml.$util-type-keyword,
+					'keywords': (
+						'p': p3,
+						's': 'srgb',
+						'r': rec2020,
+					),
+				),
+				'dm': (
+					'properties': display-mode,
+					'value-type': ml.$util-type-keyword,
+					'keywords': (
+						'': fullscreen,
+						's': standalone,
+						'mu': minimal-ui,
+						'b': browser,
+					),
+				),
+				'fc': forced-colors,
+				'ori': (
+					'properties': orientation,
+					'value-type': ml.$util-type-keyword,
+					'keywords': (
+						'': landscape,
+						'p': portrait,
+					),
+				),
+				'prfcs': (
+					'properties': prefers-color-scheme,
+					'value-type': ml.$util-type-keyword,
+					'keywords': (
+						'': dark,
+						'l': light,
+					),
+				),
+				'prfrm': prefers-reduced-motion,
+				'mn': (
+					'properties': monochrome,
+					'value-type': ml.$util-type-unitless,
+				),
+				'gd': (
+					'properties': grid,
+					'value-type': ml.$util-type-unitless,
+				),
+				'c': (
+					'properties': color,
+					'value-type': ml.$util-type-unitless,
+				),
+				'rsl': (
+					'properties': resolution,
+					'value-type': list.join(
+						'keyword', list.set-nth(ml.$util-type-default, 1, 'resolution')
+					),
+					'keywords': (
+						'i': infinite,
+					),
+				),
+			),
+		),
+	),
+);
+
+$at-rules-cfg: map.merge(
+	$at-rules-cfg,
+	'all-breakpoints',
+	map.get($at-rules-cfg, 'breakpoints')
+);
+
+$at-rules: () !default;
+$at-rules-conf: () !default;
+
+ml.$utils-data: ml.merge-utils-data(ml.$utils-data, $at-rules, 'media');
+
+$at-rules-data: map.deep-merge($at-rules-data, $at-rules);
+$at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-conf);
+
+$breakpoints: map.get($at-rules-cfg, 'breakpoints');
+ml.$utils-data: map.set(ml.$utils-data, 'general', 'variables', $breakpoints);
+
+$tAOr: map.get($at-rules-cfg, 'tokens', 'or');
+$tAAnd: map.get($at-rules-cfg, 'tokens', 'and');
+$tANot: map.get($at-rules-cfg, 'tokens', 'not');
+$tACs: map.get($at-rules-cfg, 'tokens', 'custom');
+$tAAr: map.get($at-rules-cfg, 'tokens', 'ar');
+$tATu: map.get($at-rules-cfg, 'tokens', 'this-util');
+$tAGte: map.get($at-rules-cfg, 'tokens', 'greater-equal');
+$tALse: map.get($at-rules-cfg, 'tokens', 'less-equal');
+$tAGt: map.get($at-rules-cfg, 'tokens', 'greater');
+$tALs: map.get($at-rules-cfg, 'tokens', 'less');
+
+$at-rules-cfg: map.set(
+	$at-rules-cfg,
+	'abbr-separators',
+	list.join(
+		(
+			$tAGte,
+			$tALse,
+			$tAGt,
+			$tALs,
+		),
+		map.get($at-rules-cfg, 'abbr-separators')
+	)
+);
+
+$abbr-separators: ();
+
+@each $item in list.join(
+	map.get($at-rules-cfg, 'abbr-separators'),
+	map.get(ml.$utils-config, 'abbr-separators'),
+) {
+	@if $item != '' {
+		$abbr-separators: list.append($abbr-separators, $item);
+	}
+}

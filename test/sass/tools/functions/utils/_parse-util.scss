@@ -1,6 +1,4 @@
-@use 'sass-true' as * with (
-	$terminal-output: false,
-);
+@use 'sass-true' as *;
 @use 'tools' as mlu;
 
 @include describe('tools/functions/utils/') {

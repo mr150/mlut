@@ -1,0 +1,214 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+
+@use '../../settings' as ml;
+
+/*
+Getters
+
+Functions-getters from settings maps and more.
+
+Styleguide: sass-tools.functions.base.getters
+*/
+
+// ml-bp
+//
+// Get breakpoint value from [$ml-breakpoints](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints) map.
+// ```scss
+//ml-bp('md') => 760px
+//```
+//
+// $name - breakpoint name. Type: string.
+// $error-handler = 1 - bool flag for enable strict error handling. If it is enabled, then when an invalid breakpoint name is passed, the compiler will generate an error.
+//
+// Styleguide: sass-tools.functions.base.getters.bp
+
+@function bp($name, $error-handler: 1) {
+	@if map.has-key(ml.$breakpoints, $name) or $error-handler == 0 {
+		@return map.get(ml.$breakpoints, $name);
+	}
+
+	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-breakpoints';
+}
+
+// ml-bp-next
+//
+// Get next breakpoint value.
+// ```scss
+//ml-bp-next('md') => 960px
+//```
+//
+// $bp = 0 - breakpoint name.
+// If pass last breakpoint, function return 0. With default value, function return first breakpoint. Type: string.
+// $data-type = 'value' - service parameter for functions-wrappers. Type: string.
+//
+// Styleguide: sass-tools.functions.base.getters.bp_next
+
+@function bp-next($bp: 0, $data-type: 'value') {
+	@if $bp == 0 or map.has-key(ml.$breakpoints, $bp) {
+		$bp-keys: map.keys(ml.$breakpoints);
+		$bp-index: if($bp != 0, list.index($bp-keys, $bp), 0);
+
+		@if $data-type == 'name' {
+			@return if($bp-index < list.length($bp-keys), list.nth(map.keys(ml.$breakpoints), $bp-index + 1), 0);
+		} @else {
+			@return if($bp-index < list.length($bp-keys), list.nth(map.values(ml.$breakpoints), $bp-index + 1), 0);
+		}
+	}
+
+	@error 'Invalid breakpoint name: `#{$bp}`. `#{$bp}` is not defined in $ml-breakpoints';
+}
+
+// ml-bp-next-name
+//
+// Wrapper on [ml-bp-next](#kssref-sass-tools-functions-bp_next) for get breakpoint's name. Works similarly.
+// ```scss
+//ml-bp-next-name('md') => 'lg'
+//```
+//
+// $bp = 0 - breakpoint name. Type: string.
+//
+// Styleguide: sass-tools.functions.base.getters.bp_next_name
+
+@function bp-next-name($bp: 0) {
+	@return bp-next($bp, 'name');
+}
+
+// ml-bp-prev
+//
+// Get previous breakpoint value.
+// ```scss
+//ml-bp-prev('md') => 520px
+//```
+//
+// $bp = 0 - breakpoint name.
+// If pass firts breakpoint, function return 0. With default value, function return last breakpoint. Type: string.
+// $data-type = 'value' - service parameter for functions-wrappers. Type: string.
+//
+// Styleguide: sass-tools.functions.base.getters.bp_prev
+
+@function bp-prev($bp: 0, $data-type: 'value') {
+	@if $bp == 0 or map.has-key(ml.$breakpoints, $bp) {
+		$bp-keys: map.keys(ml.$breakpoints);
+		$bp-index: if($bp != 0, list.index($bp-keys, $bp), list.length($bp-keys) + 1);
+
+		@if $data-type == 'name' {
+			@return if($bp-index > 1, list.nth(map.keys(ml.$breakpoints), $bp-index - 1), 0);
+		} @else {
+			@return if($bp-index > 1, list.nth(map.values(ml.$breakpoints), $bp-index - 1), 0);
+		}
+	}
+
+	@error 'Invalid breakpoint name: `#{$bp}`. `#{$bp}` is not defined in $ml-breakpoints';
+}
+
+// ml-bp-prev-name
+//
+// Wrapper on [ml-bp-prev](#kssref-sass-tools-functions-bp_prev) for get breakpoint's name. Works similarly.
+// ```scss
+//ml-bp-prev-name('md') => 'sm'
+//```
+//
+// $bp = 0 - breakpoint name. Type: string.
+//
+// Styleguide: sass-tools.functions.base.getters.bp_prev_name
+
+@function bp-prev-name($bp: 0) {
+	@return bp-prev($bp, 'name');
+}
+
+// ml-grid-gtr
+//
+// Get grid gutter on breakpoint from [$ml-grid-gutters](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters) map.
+// ```scss
+//ml-grid-gtr('md') => 12px
+//```
+//
+// $name - breakpoint name. Type: string.
+// $error-handler = 1 - works similarly like [here](#kssref-sass-tools-functions-bp).
+//
+// Styleguide: sass-tools.functions.base.getters.grid_gtr
+
+@function grid-gtr($name, $error-handler: 1) {
+	@if map.has-key(ml.$grid-gutters, $name) or $error-handler == 0 {
+		@return map.get(ml.$grid-gutters, $name);
+	}
+
+	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-grid-gutters';
+}
+
+// ml-grid-cols-count
+//
+// Get columns count on breakpoint from [$ml-grid-cols](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints) map.
+// ```scss
+//ml-grid-cols-count('sm') => 4
+//```
+//
+// $name - breakpoint name. Type: string.
+// $error-handler = 1 - works similarly like [here](#kssref-sass-tools-functions-bp).
+//
+// Styleguide: sass-tools.functions.base.getters.grid_cols_count
+
+@function grid-cols-count($name, $error-handler: 1) {
+	@if map.has-key(ml.$grid-cols, $name) or $error-handler == 0 {
+		@return map.get(ml.$grid-cols, $name);
+	}
+
+	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-grid-cols';
+}
+
+// ml-css-var
+//
+// Get name of CSS custom property from [$ml-css-vars](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names) map.
+// ```scss
+//ml-css-var('gg') => '--ml-gg'
+//```
+//
+// $name - custom property name. Type: string.
+// $error-handler = 1 - works similarly like [here](#kssref-sass-tools-functions-bp).
+//
+// Styleguide: sass-tools.functions.base.getters.css_var
+
+@function css-var($name, $error-handler: 1) {
+	@if map.has-key(ml.$general-data, 'css-vars', $name) or $error-handler == 0 {
+		@return map.get(ml.$general-data, 'css-vars', $name);
+	}
+
+	@error 'Invalid custom property name. `#{$name}` is not defined in $ml-css-vars';
+}
+
+// util-prop
+//
+// Get the CSS property, which corresponds to the utility from [$ml-utils-map](section-sass-tools.html#kssref-sass-tools-settings-utils).
+// ```scss
+//ml-util-prop('D') => 'display'
+//```
+//
+// $name - utility name. Type: string.
+// $section = 'utils' - section in the registry in which utility was defined
+// $name-as-prop = false - return the utility name as a property if it was not found
+// $single = false - return one property of the utility, even if there are several
+//
+// Styleguide: sass-tools.functions.base.getters.util_prop
+
+@function util-prop(
+	$name, $section: 'utils', $name-as-prop: false, $single: false
+) {
+	$options: map.get(ml.$utils-data, $section, 'registry', $name);
+	$prop: null;
+
+	@if meta.type-of($options) == 'map' {
+		$prop-list: map.get($options, 'properties');
+
+		@if $single {
+			$prop: list.nth($prop-list, 1);
+		} @else {
+			$prop: $prop-list;
+		}
+	} @else {
+		$prop: $options;
+	}
+
+	@return $prop or ($name-as-prop and $name);
+}

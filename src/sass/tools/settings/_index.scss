@@ -457,9 +457,6 @@ Grid settings, compilation flags, constants and more. All core settings are in t
 Styleguide: sass-tools.settings
 */
 
-@forward 'flags';
-@forward 'general';
-@forward 'utils';
-@forward 'grid';
-@forward 'blocks';
-@forward 'at-rules';
+@forward 'base';
+@forward 'common';
+@forward 'high';

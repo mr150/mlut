@@ -1,8 +1,3 @@
-@forward 'general' hide
-	str-split, str-trim, remove-nth, str-replace, str-replace-all, str-starts, ls-join, ls-find, str-hex2color as mlu-*;
-@forward 'getters' as mlu-*;
-@forward 'math' as mlu-*;
-@forward 'utils-getters' as mlu-*;
-@forward 'utils' as mlu-*;
-@forward 'at-rules' as mlu-*;
-@forward 'custom-units' as mlu-*;
+@forward 'base' as mlu-*;
+@forward 'common' as mlu-*;
+@forward 'high' as mlu-*;

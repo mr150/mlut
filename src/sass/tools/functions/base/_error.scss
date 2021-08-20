@@ -1,0 +1,18 @@
+// error
+//
+// Shows the error text in the test environment or throws an exception in the production.
+//
+// $message - error message
+// $catch = $flag-test-env - bool flag. Catch the error if `true` else throws an exception
+//
+// Styleguide: sass-tools.functions.base.error
+
+@use '../../settings/base/flags' as ml;
+
+@function error($message, $catch: ml.$flag-test-env) {
+	@if $catch {
+		@return 'ERROR: #{$message}';
+	}
+
+	@error '#{$message}';
+}
