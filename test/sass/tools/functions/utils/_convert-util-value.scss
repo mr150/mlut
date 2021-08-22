@@ -76,7 +76,7 @@ ml.$utils-config: map.set(
 	meta.get-function('cp-suffix')
 );
 
-@include describe('tools/functions/utils/') {
+@include describe('tools/functions/common/utils/') {
 	@include describe('convert-util-value') {
 		$-tests: (
 			'converts number': (

@@ -8,7 +8,7 @@ ml.$utils-config: map.set(
 	ml.$utils-config, 'states', 'keywords', 'st1', ('iv' 'vl')
 );
 
-@include describe('tools/mixins/utils') {
+@include describe('tools/mixins/base/utils') {
 	@include describe('mk-state') {
 		@include it('make only post states') {
 			@include assert() {

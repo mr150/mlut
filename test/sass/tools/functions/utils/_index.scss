@@ -1,3 +1,7 @@
+@use 'sass:map';
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
 @forward 'parse-util';
 @forward 'parse-abbr';
 @forward 'parse-util-number-range';
@@ -6,3 +10,29 @@
 @forward 'util-apply-selector';
 @forward 'parse-util-color-range';
 @forward 'general';
+
+@include describe('tools/functions/high/utils') {
+	@include describe('util-separated-value') {
+		@include it('returns the util value with separator') {
+			@include assert-equal(
+				ml.util-separated-value(3),
+				'3'
+			);
+
+			@include assert-equal(
+				ml.util-separated-value('3'),
+				'3'
+			);
+
+			@include assert-equal(
+				ml.util-separated-value(''),
+				''
+			);
+
+			@include assert-equal(
+				ml.util-separated-value('a'),
+				'-a'
+			);
+		}
+	}
+}

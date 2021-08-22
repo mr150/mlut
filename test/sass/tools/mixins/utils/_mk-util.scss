@@ -43,7 +43,7 @@ ml.$utils-data: map.deep-merge(
 );
 
 
-@include describe('tools/mixins/utils') {
+@include describe('tools/mixins/high/utils') {
 	@include describe('mk-util') {
 		@include it('make util from map of values') {
 			@include assert() {

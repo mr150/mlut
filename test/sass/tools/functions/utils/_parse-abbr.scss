@@ -5,7 +5,7 @@
 @use 'sass-true' as *;
 @use 'tools' as ml;
 
-@include describe('tools/functions/utils') {
+@include describe('tools/functions/common/utils') {
 	@include describe('parse-abbr') {
 		$tests: (
 			'default value': (

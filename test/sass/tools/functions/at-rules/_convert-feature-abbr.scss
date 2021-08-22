@@ -23,7 +23,7 @@ ml.$utils-data: map.deep-merge(
 	)
 );
 
-@include describe('tools/functions/at-rules/') {
+@include describe('tools/functions/high/at-rules/') {
 	@include describe('convert-feature-abbr') {
 		@include it('converts abbr without separator') {
 			@include assert-equal(

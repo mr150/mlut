@@ -43,7 +43,7 @@ $rgba-scale: ('rgb': 15%, 'alpha': 10%);
 	@return color.adjust($color, $args-map...);
 }
 
-@include describe('tools/functions/utils/range-parsers') {
+@include describe('tools/functions/high/utils/range-parsers') {
 	@include describe('color-range') {
 		$tests: (
 			'colors and alpha': (

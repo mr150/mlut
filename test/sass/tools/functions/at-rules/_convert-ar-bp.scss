@@ -1,7 +1,7 @@
 @use 'sass-true' as *;
 @use 'tools/functions' as ml;
 
-@include describe('tools/functions/at-rules/') {
+@include describe('tools/functions/high/at-rules') {
 	@include describe('convert-ar-bp') {
 		@include it('converts single breakpoint') {
 			@include assert-equal(

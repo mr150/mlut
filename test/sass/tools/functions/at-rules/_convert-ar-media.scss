@@ -6,7 +6,7 @@ ml.$at-rules-data: map.set(
 	ml.$at-rules-data, 'media', 'custom', 'testou', '(orientation: landscape) and (min-height: 20rem)'
 );
 
-@include describe('tools/functions/at-rules/') {
+@include describe('tools/functions/high/at-rules/') {
 	@include describe('convert-ar-media') {
 		@include it('converts media types') {
 			@include assert-equal(

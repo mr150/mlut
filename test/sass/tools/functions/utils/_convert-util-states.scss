@@ -6,7 +6,7 @@ ml.$utils-config: map.set(
 	ml.$utils-config, 'states', 'custom', 'testou', '.pa.ro.voz'
 );
 
-@include describe('tools/functions/utils/') {
+@include describe('tools/functions/high/utils/') {
 	@include describe('convert-util-states') {
 		@include it('converts simple state') {
 			@include assert-equal(
