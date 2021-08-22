@@ -1,37 +1,37 @@
 @use 'sass-true' as *;
-@use 'tools' as mlu;
+@use 'tools' as ml;
 
 @include describe('tools/functions/custom_units') {
 	@include describe('space unit converters') {
 		@include it('converts su to px') {
 			@include assert-equal(
-				mlu.su(3),
+				ml.su(3),
 				12px,
 			);
 
 			@include assert-equal(
-				mlu.su(4su),
-				mlu.$su * 4,
+				ml.su(4su),
+				ml.$su * 4,
 			);
 		}
 
 		@include it('converts su to rem') {
 			@include assert-equal(
-				mlu.sur(3),
+				ml.sur(3),
 				0.75rem,
 			);
 		}
 
 		@include it('wrong type of argument') {
 			@include assert-equal(
-				mlu.su('1'),
+				ml.su('1'),
 				'ERROR: Wrong type of argument $n: `string`. Expected `number`',
 			);
 		}
 
 		@include it('unable convert to unit') {
 			@include assert-equal(
-				mlu.su(2, 'cm'),
+				ml.su(2, 'cm'),
 				'ERROR: No initial value for converting to `cm` unit',
 			);
 		}
@@ -51,7 +51,7 @@
 			@include it($test) {
 				@each $args, $expect in $data {
 					@include assert-equal(
-						mlu.gg($args...),
+						ml.gg($args...),
 						$expect,
 						$inspect: true,
 					);

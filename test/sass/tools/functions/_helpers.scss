@@ -11,12 +11,12 @@
 				('--bgColor'): false,
 			),
 			'checks CSS variable in a color': (
-				(rgba(var(--mlu-bgColor), 0.6), true): true,
-				(hsla(var(--mlu-bgColor), 0.6), true): true,
-				(rgb(var(--mlu-bgColor)), true): true,
-				(hsl(var(--mlu-bgColor)), true): true,
-				(rgb(var(--mlu-bgColor))): false,
-				(rgba(24, 0, 102, var(--mlu-bgAlpha)), true): false,
+				(rgba(var(--ml-bgColor), 0.6), true): true,
+				(hsla(var(--ml-bgColor), 0.6), true): true,
+				(rgb(var(--ml-bgColor)), true): true,
+				(hsl(var(--ml-bgColor)), true): true,
+				(rgb(var(--ml-bgColor))): false,
+				(rgba(24, 0, 102, var(--ml-bgAlpha)), true): false,
 
 			),
 		);

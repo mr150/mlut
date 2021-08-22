@@ -1,9 +1,9 @@
 @use 'sass:map';
 @use 'sass-true' as *;
-@use 'tools' as mlu;
+@use 'tools' as ml;
 
-mlu.$utils-data: map.deep-merge(
-	mlu.$utils-data,
+ml.$utils-data: map.deep-merge(
+	ml.$utils-data,
 	('utils':
 	(
 		'registry': (
@@ -27,101 +27,101 @@ mlu.$utils-data: map.deep-merge(
 	@include describe('convert-feature-abbr') {
 		@include it('converts abbr without separator') {
 			@include assert-equal(
-				mlu.convert-feature-abbr('Ov'),
+				ml.convert-feature-abbr('Ov'),
 				'(overflow)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('ori', 'media'),
+				ml.convert-feature-abbr('ori', 'media'),
 				'(orientation: landscape)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr(''),
+				ml.convert-feature-abbr(''),
 				'ERROR: Passed empty string',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('ic'),
+				ml.convert-feature-abbr('ic'),
 				'ERROR: Invalid feature abbreviation: `ic`. `ic` is not defined in `utils` section of $utils-data map',
 			);
 		}
 
 		@include it('converts abbr with value from map') {
 			@include assert-equal(
-				mlu.convert-feature-abbr('Pos-sk'),
+				ml.convert-feature-abbr('Pos-sk'),
 				'(position: sticky)',
 			);
 		}
 
 		@include it('converts abbr with converted value') {
 			@include assert-equal(
-				mlu.convert-feature-abbr('M-a'),
+				ml.convert-feature-abbr('M-a'),
 				'(margin: auto)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('Fz2r'),
+				ml.convert-feature-abbr('Fz2r'),
 				'(font-size: 2rem)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('Lh1'),
+				ml.convert-feature-abbr('Lh1'),
 				'(line-height: 1)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('Z-99'),
+				ml.convert-feature-abbr('Z-99'),
 				'(z-index: -99)',
 			);
 		}
 
 		@include it('converts abbr with range syntax') {
 			@include assert-equal(
-				mlu.convert-feature-abbr('W<100'),
+				ml.convert-feature-abbr('W<100'),
 				'(max-width: 99px)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('H>20r'),
+				ml.convert-feature-abbr('H>20r'),
 				'(min-height: 20.06rem)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('h>$hXl', 'media'),
+				ml.convert-feature-abbr('h>$hXl', 'media'),
 				'(min-height: 801px)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('h<$sm', 'media'),
+				ml.convert-feature-abbr('h<$sm', 'media'),
 				'(max-height: 519px)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('rsl>1x', 'media'),
+				ml.convert-feature-abbr('rsl>1x', 'media'),
 				'(min-resolution: 1.01dppx)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('mn<50', 'media'),
+				ml.convert-feature-abbr('mn<50', 'media'),
 				'(max-monochrome: 49)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('W>=60e'),
+				ml.convert-feature-abbr('W>=60e'),
 				'(min-width: 60em)',
 			);
 
 			@include assert-equal(
-				mlu.convert-feature-abbr('H<=100su'),
+				ml.convert-feature-abbr('H<=100su'),
 				'(max-height: 400px)',
 			);
 		}
 
 		@include it('converts abbr of util with several properties') {
 			@include assert-equal(
-				mlu.convert-feature-abbr('Prop1gg'),
-				'(--prop: #{mlu.gg(1)})',
+				ml.convert-feature-abbr('Prop1gg'),
+				'(--prop: #{ml.gg(1)})',
 			);
 		}
 	}

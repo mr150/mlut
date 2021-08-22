@@ -1,5 +1,5 @@
 @use 'sass-true' as *;
-@use 'tools' as mlu;
+@use 'tools' as ml;
 
 @include describe('tools/mixins/utils') {
 	@include describe('apply-util') {
@@ -9,7 +9,7 @@
 					.card {
 						display: block;
 
-						@include mlu.apply-util(
+						@include ml.apply-util(
 							P2su Fz1r
 						);
 					}
@@ -35,7 +35,7 @@
 			@include assert() {
 				@include output(false) {
 					.card {
-						@include mlu.apply-util(
+						@include ml.apply-util(
 							'Fz1r_h'
 							'^one_Bgc--bgColor?#c06_h'
 						);
@@ -48,7 +48,7 @@
 					}
 
 					.-Ctx-one .card:hover {
-						background-color: var(--mlu-bgColor, #c06);
+						background-color: var(--ml-bgColor, #c06);
 					}
 				}
 			}
@@ -56,7 +56,7 @@
 			@include assert() {
 				@include output(false) {
 					.card {
-						@include mlu.apply-util(
+						@include ml.apply-util(
 							'xl_P2su'
 							'xl_C#fff!_h,f'
 							'@:prn_^new_Op80p_h'
@@ -65,13 +65,13 @@
 				}
 
 				@include expect(false) {
-					@media (min-width: mlu.bp(xl)) {
+					@media (min-width: ml.bp(xl)) {
 						.card {
 							padding: 0.5rem 8px;
 						}
 					}
 
-					@media (min-width: mlu.bp(xl)) {
+					@media (min-width: ml.bp(xl)) {
 						.card:hover,
 						.card:focus {
 							color: #fff !important;
@@ -91,7 +91,7 @@
 			@include assert() {
 				@include output(false) {
 					.card {
-						@include mlu.apply-util(
+						@include ml.apply-util(
 							'xl_P2su'
 							'Lh2_af'
 							Fz1r,
@@ -101,7 +101,7 @@
 				}
 
 				@include expect(false) {
-					@media (min-width: mlu.bp(xl)) {
+					@media (min-width: ml.bp(xl)) {
 						.card {
 							padding: 0.5rem 8px !important;
 						}
@@ -121,14 +121,14 @@
 		@include it('apply utils without parent selector') {
 			@include assert() {
 				@include output(false) {
-					@include mlu.apply-util(
+					@include ml.apply-util(
 						'xl_P2su'
 						'Lh2!_af'
 					);
 				}
 
 				@include expect(false) {
-					@media (min-width: mlu.bp(xl)) {
+					@media (min-width: ml.bp(xl)) {
 						.xl_P2su {
 							padding: 0.5rem 8px;
 						}

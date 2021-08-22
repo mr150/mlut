@@ -1,11 +1,11 @@
 @use 'sass-true' as *;
-@use 'tools' as mlu;
+@use 'tools' as ml;
 @use 'sass:map';
 
 $this: 'D';
 
-mlu.$utils-config: map.set(
-	mlu.$utils-config, 'states', 'keywords', 'st1', ('iv' 'vl')
+ml.$utils-config: map.set(
+	ml.$utils-config, 'states', 'keywords', 'st1', ('iv' 'vl')
 );
 
 @include describe('tools/mixins/utils') {
@@ -14,7 +14,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state('h:af,!a:af', null, false) {
+						@include ml.new-mk-state('h:af,!a:af', null, false) {
 							display: flex;
 						}
 					}
@@ -31,7 +31,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state('&-,&-:f', null, null, &, $this) {
+						@include ml.new-mk-state('&-,&-:f', null, null, &, $this) {
 							display: flex;
 						}
 					}
@@ -48,7 +48,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state('::^one:fw:=+*', null) {
+						@include ml.new-mk-state('::^one:fw:=+*', null) {
 							display: flex;
 						}
 					}
@@ -68,7 +68,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state('h,f ' + mlu.$states-ps, null, false) {
+						@include ml.new-mk-state('h,f ' + ml.$states-ps, null, false) {
 							display: flex;
 						}
 					}
@@ -80,7 +80,7 @@ mlu.$utils-config: map.set(
 						display: flex;
 					}
 
-					@each $key, $value in map.get(mlu.$utils-config, 'states', 'pseudo') {
+					@each $key, $value in map.get(ml.$utils-config, 'states', 'pseudo') {
 						.D-f_#{$key + $value} {
 							display: flex;
 						}
@@ -91,14 +91,14 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(':^:' + mlu.$states-ps, null, null) {
+						@include ml.new-mk-state(':^:' + ml.$states-ps, null, null) {
 							display: flex;
 						}
 					}
 				}
 
 				@include expect(false) {
-					@each $key, $value in map.get(mlu.$utils-config, 'states', 'pseudo') {
+					@each $key, $value in map.get(ml.$utils-config, 'states', 'pseudo') {
 						.D-f_\:\^\:#{$key} .-Ctx#{$value} {
 							display: flex;
 						}
@@ -109,15 +109,15 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state('h:' + 'st1', null, null) {
+						@include ml.new-mk-state('h:' + 'st1', null, null) {
 							display: flex;
 						}
 					}
 				}
 
 				@include expect(false) {
-					@each $item in map.get(mlu.$utils-config, 'states', 'keywords', 'st1') {
-						.D-f_h\:#{$item + ':hover' + map.get(mlu.$utils-states, $item)} {
+					@each $item in map.get(ml.$utils-config, 'states', 'keywords', 'st1') {
+						.D-f_h\:#{$item + ':hover' + map.get(ml.$utils-states, $item)} {
 							display: flex;
 						}
 					}
@@ -129,7 +129,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(null, '^:h', false) {
+						@include ml.new-mk-state(null, '^:h', false) {
 							display: flex;
 						}
 					}
@@ -145,7 +145,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(null, '=a:^:h,&:^1:+', false, &, $this) {
+						@include ml.new-mk-state(null, '=a:^:h,&:^1:+', false, &, $this) {
 							display: flex;
 						}
 					}
@@ -162,7 +162,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(null, '=h2. =ul:h', false) {
+						@include ml.new-mk-state(null, '=h2. =ul:h', false) {
 							display: flex;
 						}
 					}
@@ -182,14 +182,14 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(null, '^ct1:' + mlu.$states-ps, false) {
+						@include ml.new-mk-state(null, '^ct1:' + ml.$states-ps, false) {
 							display: flex;
 						}
 					}
 				}
 
 				@include expect(false) {
-					@each $key, $value in map.get(mlu.$utils-config, 'states', 'pseudo') {
+					@each $key, $value in map.get(ml.$utils-config, 'states', 'pseudo') {
 						.-Ctx-ct1#{$value} .\^ct1\:#{$key}_D-f {
 							display: flex;
 						}
@@ -202,7 +202,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state('&-ib:af', '^one:h', false, &, $this) {
+						@include ml.new-mk-state('&-ib:af', '^one:h', false, &, $this) {
 							display: flex;
 						}
 					}
@@ -222,9 +222,9 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(
-							mlu.$states-cmb + ' af',
-							mlu.$states-cmb + ' ^one:h',
+						@include ml.new-mk-state(
+							ml.$states-cmb + ' af',
+							ml.$states-cmb + ' ^one:h',
 							false,
 						) {
 							display: flex;
@@ -242,9 +242,9 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(
-							'&:af #{mlu.$states-cmb} af',
-							'^one:h #{mlu.$states-cmb} ^:f',
+						@include ml.new-mk-state(
+							'&:af #{ml.$states-cmb} af',
+							'^one:h #{ml.$states-cmb} ^:f',
 							false,
 							&,
 							$this
@@ -272,8 +272,8 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(
-							'&:af #{mlu.$states-cmb} af',
+						@include ml.new-mk-state(
+							'&:af #{ml.$states-cmb} af',
 							'^one:h ^:f',
 							false,
 							&,
@@ -302,9 +302,9 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(
+						@include ml.new-mk-state(
 							'&:af af',
-							'^one:h #{mlu.$states-cmb} ^:f',
+							'^one:h #{ml.$states-cmb} ^:f',
 							false,
 							&,
 							$this
@@ -332,9 +332,9 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(
-							mlu.$states-cmb + ' fw:af,a:af',
-							mlu.$states-cmb + ' ^1:f,^2:>',
+						@include ml.new-mk-state(
+							ml.$states-cmb + ' fw:af,a:af',
+							ml.$states-cmb + ' ^1:f,^2:>',
 							false,
 						) {
 							display: flex;
@@ -355,9 +355,9 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(
-							mlu.$states-cmb + 'af,bf a:af',
-							mlu.$states-cmb + ':h =a:a:>,=a.act:>',
+						@include ml.new-mk-state(
+							ml.$states-cmb + 'af,bf a:af',
+							ml.$states-cmb + ':h =a:a:>,=a.act:>',
 							false,
 						) {
 							display: flex;
@@ -394,7 +394,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(null, '^:f', true) {
+						@include ml.new-mk-state(null, '^:f', true) {
 							display: flex;
 						}
 					}
@@ -414,7 +414,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-							@include mlu.new-mk-state('f:af') {
+							@include ml.new-mk-state('f:af') {
 								display: flex;
 						}
 					}
@@ -434,7 +434,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state(null) {
+						@include ml.new-mk-state(null) {
 							display: flex;
 						}
 					}
@@ -450,7 +450,7 @@ mlu.$utils-config: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include mlu.new-mk-state('h:af', '^act') {
+						@include ml.new-mk-state('h:af', '^act') {
 							display: flex;
 						}
 					}
@@ -473,7 +473,7 @@ mlu.$utils-config: map.set(
 
 			@include assert() {
 				@include output(false) {
-					@include mlu.new-mk-state('af', '&:h', true, '.D-ib', $this) {
+					@include ml.new-mk-state('af', '&:h', true, '.D-ib', $this) {
 						display: inline-block;
 					}
 				}
@@ -496,22 +496,22 @@ mlu.$utils-config: map.set(
 		}
 
 		@include it('make states with custom tokens') {
-			mlu.$tUSv: '~';
-			mlu.$tUNv: '~';
-			mlu.$tUCm: '__';
-			mlu.$tSOr: '|';
-			mlu.$tSAnd: '&';
-			mlu.$tSCs: '#';
-			mlu.$tSCn: '%';
-			mlu.$tSRaw: '?';
-			mlu.$tSTu: '$';
-			mlu.$tSNot: '*';
-			mlu.$tSTucv: mlu.$tSTu + mlu.$tUSv;
+			ml.$tUSv: '~';
+			ml.$tUNv: '~';
+			ml.$tUCm: '__';
+			ml.$tSOr: '|';
+			ml.$tSAnd: '&';
+			ml.$tSCs: '#';
+			ml.$tSCn: '%';
+			ml.$tSRaw: '?';
+			ml.$tSTu: '$';
+			ml.$tSNot: '*';
+			ml.$tSTucv: ml.$tSTu + ml.$tUSv;
 
 			@include assert() {
 				@include output(false) {
 					.xs\:md__D-f {
-						@include mlu.new-mk-state(
+						@include ml.new-mk-state(
 							'$~ $~ib&#testou&af',
 							'%one&*a|%&?>*',
 							false,
@@ -539,17 +539,17 @@ mlu.$utils-config: map.set(
 				}
 			}
 
-			mlu.$tUSv: map.get(mlu.$utils-config, 'tokens', 'util', 'str-value');
-			mlu.$tUNv: map.get(mlu.$utils-config, 'tokens', 'util', 'num-value');
-			mlu.$tUCm: map.get(mlu.$utils-config, 'tokens', 'util', 'component');
-			mlu.$tSOr: map.get(mlu.$utils-config, 'tokens', 'states', 'or');
-			mlu.$tSAnd: map.get(mlu.$utils-config, 'tokens', 'states', 'and');
-			mlu.$tSNot: map.get(mlu.$utils-config, 'tokens', 'states', 'not');
-			mlu.$tSCs: map.get(mlu.$utils-config, 'tokens', 'states', 'custom');
-			mlu.$tSTu: map.get(mlu.$utils-config, 'tokens', 'states', 'this-util');
-			mlu.$tSCn: map.get(mlu.$utils-config, 'tokens', 'states', 'context');
-			mlu.$tSRaw: map.get(mlu.$utils-config, 'tokens', 'states', 'raw');
-			mlu.$tSTucv: mlu.$tSTu + mlu.$tUSv;
+			ml.$tUSv: map.get(ml.$utils-config, 'tokens', 'util', 'str-value');
+			ml.$tUNv: map.get(ml.$utils-config, 'tokens', 'util', 'num-value');
+			ml.$tUCm: map.get(ml.$utils-config, 'tokens', 'util', 'component');
+			ml.$tSOr: map.get(ml.$utils-config, 'tokens', 'states', 'or');
+			ml.$tSAnd: map.get(ml.$utils-config, 'tokens', 'states', 'and');
+			ml.$tSNot: map.get(ml.$utils-config, 'tokens', 'states', 'not');
+			ml.$tSCs: map.get(ml.$utils-config, 'tokens', 'states', 'custom');
+			ml.$tSTu: map.get(ml.$utils-config, 'tokens', 'states', 'this-util');
+			ml.$tSCn: map.get(ml.$utils-config, 'tokens', 'states', 'context');
+			ml.$tSRaw: map.get(ml.$utils-config, 'tokens', 'states', 'raw');
+			ml.$tSTucv: ml.$tSTu + ml.$tUSv;
 		}
 	}
 }

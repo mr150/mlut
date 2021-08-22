@@ -4,7 +4,7 @@
 @use 'sass:meta';
 @use 'sass:color';
 @use 'sass-true' as *;
-@use 'tools' as mlu;
+@use 'tools' as ml;
 
 $initial-colors: (
 	'prm0': #c06,
@@ -12,8 +12,8 @@ $initial-colors: (
 	'ter': #06c,
 );
 
-mlu.$utils-data: map.deep-merge(
-	mlu.$utils-data,
+ml.$utils-data: map.deep-merge(
+	ml.$utils-data,
 	('utils':
 	(
 		'variables': (
@@ -162,39 +162,39 @@ $rgba-scale: ('rgb': 15%, 'alpha': 10%);
 			'css variables as colors': (
 				(['-bgColor', 3, $alpha-step], 'C'): (
 					'values': (
-						'-bgColor': var(--mlu-bgColor),
-						'-bgColor*90p': rgba(var(--mlu-bgColor), 0.9),
-						'-bgColor*80p': rgba(var(--mlu-bgColor), 0.8),
+						'-bgColor': var(--ml-bgColor),
+						'-bgColor*90p': rgba(var(--ml-bgColor), 0.9),
+						'-bgColor*80p': rgba(var(--ml-bgColor), 0.8),
 				)),
 				(['-bgColor*60p', 3, ('alpha': -15%)], 'C'): (
 					'values': (
-						'-bgColor*60p': rgba(var(--mlu-bgColor), 0.6),
-						'-bgColor*75p': rgba(var(--mlu-bgColor), 0.75),
-						'-bgColor*90p': rgba(var(--mlu-bgColor), 0.90),
+						'-bgColor*60p': rgba(var(--ml-bgColor), 0.6),
+						'-bgColor*75p': rgba(var(--ml-bgColor), 0.75),
+						'-bgColor*90p': rgba(var(--ml-bgColor), 0.90),
 				)),
 				([('-bgColor', 'prm0', '-bdColor'), 2, $green-alpha-step], 'C'): (
 					'values': (
-						'-bgColor': var(--mlu-bgColor),
-						'-bgColor*90p': rgba(var(--mlu-bgColor), 0.9),
+						'-bgColor': var(--ml-bgColor),
+						'-bgColor*90p': rgba(var(--ml-bgColor), 0.9),
 						'prm0': #c06,
 						'prm0*90p': rgba(204, 0, 102, 0.9),
 						'prm50': #cc1e66,
 						'prm50*90p': rgba(204, 30, 102, 0.9),
-						'-bdColor': var(--mlu-bdColor),
-						'-bdColor*90p': rgba(var(--mlu-bdColor), 0.9),
+						'-bdColor': var(--ml-bdColor),
+						'-bdColor*90p': rgba(var(--ml-bdColor), 0.9),
 				)),
 			),
 			'css variables as alpha': (
 				([('-bgColor', 'prm0', '$cPrm0'), 2, $green-alpha-var], 'C'): (
 					'values': (
-						'-bgColor': var(--mlu-bgColor),
-						'-bgColor*-bgAlpha': rgba(var(--mlu-bgColor), var(--mlu-bgAlpha, 1)),
+						'-bgColor': var(--ml-bgColor),
+						'-bgColor*-bgAlpha': rgba(var(--ml-bgColor), var(--ml-bgAlpha, 1)),
 						'prm0': #c06,
-						'prm0*-bgAlpha': rgba(204, 0, 102, var(--mlu-bgAlpha, 1)),
+						'prm0*-bgAlpha': rgba(204, 0, 102, var(--ml-bgAlpha, 1)),
 						'prm50': #cc1e66,
-						'prm50*-bgAlpha': rgba(204, 30, 102, var(--mlu-bgAlpha, 1)),
+						'prm50*-bgAlpha': rgba(204, 30, 102, var(--ml-bgAlpha, 1)),
 						'$cPrm0': #60c,
-						'$cPrm0*-bgAlpha': rgba(102, 0, 204, var(--mlu-bgAlpha, 1)),
+						'$cPrm0*-bgAlpha': rgba(102, 0, 204, var(--ml-bgAlpha, 1)),
 				)),
 			),
 			'invalid value in range': (
@@ -214,13 +214,13 @@ $rgba-scale: ('rgb': 15%, 'alpha': 10%);
 
 		@each $test, $data in $tests {
 			@include it($test) {
-				mlu.$utils-data: map.set(
-					mlu.$utils-data, 'general', 'keywords', 'colors', $initial-colors
+				ml.$utils-data: map.set(
+					ml.$utils-data, 'general', 'keywords', 'colors', $initial-colors
 				);
 
 				@each $args, $expect in $data {
 					@include assert-equal(
-						mlu.parse-util-color-range($args...),
+						ml.parse-util-color-range($args...),
 						$expect,
 						$inspect: true,
 					);

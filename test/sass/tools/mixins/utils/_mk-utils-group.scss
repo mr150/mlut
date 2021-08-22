@@ -1,10 +1,10 @@
 @use 'sass-true' as *;
-@use 'tools' as mlu;
+@use 'tools' as ml;
 @use 'sass:map';
 @use 'sass:list';
 
-mlu.$utils-data: map.deep-merge(
-	mlu.$utils-data,
+ml.$utils-data: map.deep-merge(
+	ml.$utils-data,
 	('groups':
 	(
 		'registry': (
@@ -25,7 +25,7 @@ mlu.$utils-data: map.deep-merge(
 		@include it('make utils group') {
 			@include assert() {
 				@include output(false) {
-					@include mlu.mk-utils-group(
+					@include ml.mk-utils-group(
 						'Spaces', (
 						'xs0': 100px,
 						150: null
@@ -53,14 +53,14 @@ mlu.$utils-data: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include mlu.mk-utils-group(
+					@include ml.mk-utils-group(
 						'ArOnly xl_Spaces', (
 							100, '150_af StOnly',
 					));
 				}
 
 				@include expect(false) {
-					@media (min-width: mlu.bp(xl)) {
+					@media (min-width: ml.bp(xl)) {
 						.xl_M100 {
 							margin: 100px;
 						}
@@ -70,7 +70,7 @@ mlu.$utils-data: map.deep-merge(
 						margin: 150px;
 					}
 
-					@media (min-width: mlu.bp(xl)) {
+					@media (min-width: ml.bp(xl)) {
 						.xl_P100 {
 							padding: 100px;
 						}
@@ -86,14 +86,14 @@ mlu.$utils-data: map.deep-merge(
 		@include it('make group of utils that have component') {
 			@include assert() {
 				@include output(false) {
-					@include mlu.mk-utils-group(
+					@include ml.mk-utils-group(
 						'ArOnly xl_Colors', (
 						red, 'blue_f StOnly',
 					));
 				}
 
 				@include expect(false) {
-					@media (min-width: mlu.bp(xl)) {
+					@media (min-width: ml.bp(xl)) {
 						.xl_C-red {
 							color: red;
 						}
@@ -117,7 +117,7 @@ mlu.$utils-data: map.deep-merge(
 		@include it('make utils group with passed util components') {
 			@include assert() {
 				@include output(false) {
-					@include mlu.mk-utils-group(
+					@include ml.mk-utils-group(
 						'Colors',
 						(red, 'green_a StOnly'),
 						(
@@ -128,7 +128,7 @@ mlu.$utils-data: map.deep-merge(
 				}
 
 				@include expect(false) {
-					@media (min-width: mlu.bp(xl)) {
+					@media (min-width: ml.bp(xl)) {
 						.xl_C-red\! {
 							color: red !important;
 						}

@@ -2,11 +2,11 @@
 @use 'sass:list';
 @use 'sass:string';
 @use 'sass-true' as *;
-@use 'tools' as mlu;
+@use 'tools' as ml;
 
 @include describe('tools/functions/utils/') {
 	@include describe('util-apply-selector') {
-		$escaped-sel: mlu.str-escape('^1_Red22_:^:h');
+		$escaped-sel: ml.str-escape('^1_Red22_:^:h');
 		$selector-list: ('.Red22_h\\,f:hover','.Red22_h\\,f:focus');
 
 		$-tests: (
@@ -80,7 +80,7 @@
 			@include it($test) {
 				@each $args, $expect in $data {
 					@include assert-equal(
-						mlu.util-apply-selector($args...),
+						ml.util-apply-selector($args...),
 						$expect,
 						$inspect: true,
 					);

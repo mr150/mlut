@@ -3,10 +3,10 @@
 @use 'sass:string';
 @use 'sass:meta';
 @use 'sass-true' as *;
-@use 'tools' as mlu;
+@use 'tools' as ml;
 
-mlu.$utils-data: map.deep-merge(
-	mlu.$utils-data,
+ml.$utils-data: map.deep-merge(
+	ml.$utils-data,
 	('utils':
 	(
 		'registry': (
@@ -17,11 +17,11 @@ mlu.$utils-data: map.deep-merge(
 			),
 			'Red': (
 				'properties': --reputation,
-				'value-type': ('number', mlu.$tGVcp, 'cust-prop', 'cp-suffix'),
+				'value-type': ('number', ml.$tGVcp, 'cust-prop', 'cp-suffix'),
 			),
 			'-Tst': (
 				'properties': --testou,
-				'value-type': ('cust-prop', mlu.$tGVcp, 'cp-suffix'),
+				'value-type': ('cust-prop', ml.$tGVcp, 'cp-suffix'),
 			),
 			'Ai': (
 				'keywords': (
@@ -29,11 +29,11 @@ mlu.$utils-data: map.deep-merge(
 					'b': baseline,
 					'c': center,
 				),
-				'value-type': mlu.$util-type-keyword,
+				'value-type': ml.$util-type-keyword,
 			),
 			'Animtf': (
 				'keywords': 'timing-functions',
-				'value-type': mlu.$util-type-keyword,
+				'value-type': ml.$util-type-keyword,
 			),
 			'Trs': (
 				'keywords': 'timing-functions',
@@ -69,8 +69,8 @@ mlu.$utils-data: map.deep-merge(
 	@return string.insert($value + '', '-suf', -2);
 }
 
-mlu.$utils-config: map.set(
-	mlu.$utils-config,
+ml.$utils-config: map.set(
+	ml.$utils-config,
 	'value-converters',
 	'cp-suffix',
 	meta.get-function('cp-suffix')
@@ -84,8 +84,8 @@ mlu.$utils-config: map.set(
 				('=200', 'W'): 200,
 				('20vw', 'W'): 20vw,
 				(300, 'Fw'): 300,
-				(2su, 'Fz'): mlu.sur(2),
-				(2su, 'P'): mlu.sur(2) mlu.su(2),
+				(2su, 'Fz'): ml.sur(2),
+				(2su, 'P'): ml.sur(2) ml.su(2),
 				(200x, 'W'): 200ex,
 				('16/9', 'Ar'): string.unquote('16/9'),
 				(70p, 'Op'): 0.7,
@@ -96,20 +96,20 @@ mlu.$utils-config: map.set(
 				('=a', 'W'): a,
 			),
 			'converts variables': (
-				('$testVar', 'W'): map.get(mlu.$utils-data, 'utils', 'variables', 'testVar'),
+				('$testVar', 'W'): map.get(ml.$utils-data, 'utils', 'variables', 'testVar'),
 				('$undefVar', 'W'): string.unquote('ERROR: Undefined variable: `$undefVar`'),
 			),
 			'converts custom property with fallback': (
-				('-myCard?200', 'W'): var(--mlu-myCard, 200px),
-				('-myCard?a', 'W'): var(--mlu-myCard, auto),
-				('-cardFw?500', 'Fw'): var(--mlu-cardFw, 500),
-				('-myVar?=200', 'W'): var(--mlu-myVar, 200),
-				('-myCard?-defWd?150', 'W'): var(--mlu-myCard, var(--mlu-defWd, 150px)),
+				('-myCard?200', 'W'): var(--ml-myCard, 200px),
+				('-myCard?a', 'W'): var(--ml-myCard, auto),
+				('-cardFw?500', 'Fw'): var(--ml-cardFw, 500),
+				('-myVar?=200', 'W'): var(--ml-myVar, 200),
+				('-myCard?-defWd?150', 'W'): var(--ml-myCard, var(--ml-defWd, 150px)),
 			),
 			'applys several converters as pipeline': (
-				('-css-var', 'Red'): var(--mlu-css-var-suf),
+				('-css-var', 'Red'): var(--ml-css-var-suf),
 				(22, 'Red'): 22px,
-				('-css-var', '-Tst'): var(--mlu-css-var),
+				('-css-var', '-Tst'): var(--ml-css-var),
 			),
 			'converts property abbreviation': (
 				('bgc', 'Trs'): background-color,
@@ -124,17 +124,17 @@ mlu.$utils-config: map.set(
 				('$cPrm0*20p', 'C'): rgba(102, 0, 204, 0.2),
 				('#60c*20p', 'C'): rgba(102, 0, 204, 0.2),
 				('prm0*$opDef', 'C'): rgba(204, 0, 102, 0.64),
-				('prm0*-co', 'C'): rgba(204, 0, 102, var(--mlu-co, 1)),
-				('-co?varFb*-al?70p', 'C'): rgba(var(--mlu-co, 204, 0, 102), var(--mlu-al, 0.7)),
+				('prm0*-co', 'C'): rgba(204, 0, 102, var(--ml-co, 1)),
+				('-co?varFb*-al?70p', 'C'): rgba(var(--ml-co, 204, 0, 102), var(--ml-al, 0.7)),
 				('#c06*20', 'C'): rgba(204, 0, 102, 20),
 				('prm10*-co', 'C'): string.unquote('prm10*-co'),
-				('-color*20p', 'C'): rgba(var(--mlu-color), 0.2),
+				('-color*20p', 'C'): rgba(var(--ml-color), 0.2),
 			),
 			'converts values list': (
 				('1r:2:5p', 'Bdrs'): 1rem 2px 5%,
 				('1r:=10x', 'M'): 1rem 10x,
-				('3su:16:a', 'M'): mlu.su(3) 16px auto,
-				('c:-trsdu:ei', 'Trs'): color var(--mlu-trsdu) ease-in,
+				('3su:16:a', 'M'): ml.su(3) 16px auto,
+				('c:-trsdu:ei', 'Trs'): color var(--ml-trsdu) ease-in,
 				('cc:prm0*5p', 'C'): currentColor rgba(204, 0, 102, 0.05),
 			),
 			'converts values multi list': (
@@ -148,7 +148,7 @@ mlu.$utils-config: map.set(
 			@include it($test) {
 				@each $args, $expect in $data {
 					@include assert-equal(
-						mlu.convert-util-value($args...),
+						ml.convert-util-value($args...),
 						$expect,
 						$inspect: true,
 					);
