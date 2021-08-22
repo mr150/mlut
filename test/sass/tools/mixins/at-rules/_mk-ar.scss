@@ -5,7 +5,7 @@
 
 ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
-@include describe('tools/mixins/general') {
+@include describe('tools/mixins/base/') {
 	@include describe('mk-ar') {
 		@include it('make only media queries from breakpoints') {
 			@include assert() {
