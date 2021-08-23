@@ -15,10 +15,12 @@ ml.$utils-data: map.deep-merge(
 			),
 	),
 	),
-		'media': (
-			'variables': (
-				'hXl': 800px,
+		'general': (
+			'keywords': (
+				'global': (
+					'$hXl': 800px,
 				),
+			),
 		),
 	)
 );

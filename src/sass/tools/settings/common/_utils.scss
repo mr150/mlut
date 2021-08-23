@@ -128,7 +128,7 @@ $utils-config: (
 		'-X', '-Y', '-Xy', 'Maw', 'Miw', 'Mah', 'Mih', 'Fz', 'M', 'P', 'Lh', 'Lts', 'Tsh', 'Va', 'Bdw', 'Bd', 'Bdrs',
 	),
 
-	'default-value-type': ('number', 'css-kw', 'var', 'cust-prop',),
+	'default-value-type': ('number', 'global-kw', 'cust-prop',),
 
 	'abbr-separators': (),
 
@@ -164,7 +164,7 @@ $utils-config: (
 			'value-modifier': '*',
 			'space': ':',
 			'custom-property': '-',
-			'variable': '$',
+			'global-keyword': '$',
 			'important': '!',
 			'list-separator1': ',',
 			'list-separator2': '/',
@@ -227,7 +227,7 @@ $tURv: map.get($utils-config, 'tokens', 'util', 'raw-value');
 $tUHv: map.get($utils-config, 'tokens', 'util', 'hash-value');
 $tUFv: map.get($utils-config, 'tokens', 'util', 'fallback-value');
 $tUVm: map.get($utils-config, 'tokens', 'util', 'value-modifier');
-$tUVar: map.get($utils-config, 'tokens', 'util', 'variable');
+$tUGkw: map.get($utils-config, 'tokens', 'util', 'global-keyword');
 $tUCp: map.get($utils-config, 'tokens', 'util', 'custom-property');
 $tUIm: map.get($utils-config, 'tokens', 'util', 'important');
 $tUCm: map.get($utils-config, 'tokens', 'util', 'component');

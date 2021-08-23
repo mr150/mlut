@@ -195,7 +195,20 @@ $at-rules-data: map.deep-merge($at-rules-data, $at-rules);
 $at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-conf);
 
 $breakpoints: map.get($at-rules-cfg, 'breakpoints');
-ml.$utils-data: map.set(ml.$utils-data, 'general', 'variables', $breakpoints);
+$-custom-global-kw: map.get(ml.$utils-data, 'general', 'keywords', 'global');
+$-bp-kw-map: ();
+
+@each $key, $value in $breakpoints {
+	$-bp-kw-map: map.set($-bp-kw-map, ml.$tUGkw + $key, $value);
+}
+
+@if $-custom-global-kw {
+	$-bp-kw-map: map.merge($-bp-kw-map, $-custom-global-kw);
+}
+
+ml.$utils-data: map.set(
+	ml.$utils-data, 'general', 'keywords', 'global', $-bp-kw-map
+);
 
 $tAOr: map.get($at-rules-cfg, 'tokens', 'or');
 $tAAnd: map.get($at-rules-cfg, 'tokens', 'and');

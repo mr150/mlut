@@ -14,14 +14,12 @@ $initial-colors: (
 
 ml.$utils-data: map.deep-merge(
 	ml.$utils-data,
-	('utils':
 	(
-		'variables': (
-			'cPrm0': #60c,
-		),
-	),
 	'general': (
 		'keywords': (
+			'global': (
+				'$cPrm0': #60c,
+			),
 			'colors': $initial-colors
 		),
 	),
@@ -82,6 +80,8 @@ $rgba-scale: ('rgb': 15%, 'alpha': 10%);
 						'prm50': #cc1e66,
 						'prm100': #cc3c66,
 						 '$cPrm0': #60c,
+						 '$cPrm50': #661ecc,
+						 '$cPrm100': #663ccc,
 				)),
 				(['sec0', 3, $rgb-step5], 'C'): (
 					'values': (
@@ -185,7 +185,7 @@ $rgba-scale: ('rgb': 15%, 'alpha': 10%);
 				)),
 			),
 			'css variables as alpha': (
-				([('-bgColor', 'prm0', '$cPrm0'), 2, $green-alpha-var], 'C'): (
+				([('-bgColor', 'prm0', #60c), 2, $green-alpha-var], 'C'): (
 					'values': (
 						'-bgColor': var(--ml-bgColor),
 						'-bgColor*-bgAlpha': rgba(var(--ml-bgColor), var(--ml-bgAlpha, 1)),
@@ -193,8 +193,8 @@ $rgba-scale: ('rgb': 15%, 'alpha': 10%);
 						'prm0*-bgAlpha': rgba(204, 0, 102, var(--ml-bgAlpha, 1)),
 						'prm50': #cc1e66,
 						'prm50*-bgAlpha': rgba(204, 30, 102, var(--ml-bgAlpha, 1)),
-						'$cPrm0': #60c,
-						'$cPrm0*-bgAlpha': rgba(102, 0, 204, var(--ml-bgAlpha, 1)),
+						#60c: #60c,
+						'#60c*-bgAlpha': rgba(102, 0, 204, var(--ml-bgAlpha, 1)),
 				)),
 			),
 			'invalid value in range': (

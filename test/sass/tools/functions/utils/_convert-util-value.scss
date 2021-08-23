@@ -39,12 +39,6 @@ ml.$utils-data: map.deep-merge(
 				'keywords': 'timing-functions',
 			),
 		),
-		'variables': (
-			'testVar': 1989px,
-			'trsduDef': 0.3s,
-			'opDef': 0.64,
-			'cPrm0': #60c,
-		),
 		'keywords': (
 			'timing-functions': (
 				'e': ease,
@@ -59,6 +53,11 @@ ml.$utils-data: map.deep-merge(
 				'prm0': #c06,
 				'sec0': #0c6,
 				'varFb': (204, 0, 102),
+			),
+			'global': (
+				'$cPrm0': #60c,
+				'$opDef': 0.64,
+				'$trsduDef': 0.3s,
 			),
 		),
 	),
@@ -91,13 +90,10 @@ ml.$utils-config: map.set(
 				(70p, 'Op'): 0.7,
 				('0.8', 'Op'): 0.8,
 			),
-			'converts global CSS keyword': (
+			'converts global keyword': (
 				('a', 'W'): auto,
+				('$sm', 'W'): ml.bp(sm),
 				('=a', 'W'): a,
-			),
-			'converts variables': (
-				('$testVar', 'W'): map.get(ml.$utils-data, 'utils', 'variables', 'testVar'),
-				('$undefVar', 'W'): string.unquote('ERROR: Undefined variable: `$undefVar`'),
 			),
 			'converts custom property with fallback': (
 				('-myCard?200', 'W'): var(--ml-myCard, 200px),

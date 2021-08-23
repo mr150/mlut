@@ -863,16 +863,16 @@ ml.$utils-data: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.new-mk-util(
-						'Maw', ('$testVar_af', '-card-sm'));
+						'Maw', ('$lg_af', '-card-sm'));
 				}
 
 				@include expect(false) {
-					.Maw-\$testVar {
-						max-width: map.get(ml.$utils-data, 'utils', 'variables', 'testVar');
+					.Maw-\$lg {
+						max-width: map.get(ml.$utils-data, 'general', 'keywords', 'global', '$lg');
 					}
 
-					.Maw-\$testVar_af::after {
-						max-width: map.get(ml.$utils-data, 'utils', 'variables', 'testVar');
+					.Maw-\$lg_af::after {
+						max-width: map.get(ml.$utils-data, 'general', 'keywords', 'global', '$lg');
 					}
 
 					.Maw--card-sm {

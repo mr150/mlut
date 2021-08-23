@@ -13,7 +13,7 @@
 //@debug ml.convert-uv-number(10); // 10px
 //@debug ml.convert-uv-unitless(10); // 10
 //@debug ml.convert-uv-resolution(2x); // 2dppx
-//@debug ml.convert-uv-css-kw('a'); // auto
+//@debug ml.convert-uv-global-kw('a'); // auto
 //@debug ml.convert-uv-abbr('bgc'); // background-color
 // ```
 //
@@ -115,10 +115,18 @@
 	);
 }
 
-@function convert-uv-css-kw($value, $data: ()) {
+@function convert-uv-global-kw($value, $data: ()) {
+	@if map.has-key(
+		ml.$utils-data, 'general', 'keywords', 'css', $value
+	) {
+		@return map.get(
+			ml.$utils-data, 'general', 'keywords', 'css', $value
+		);
+	}
+
 	@return if(
-		map.has-key(ml.$utils-data, 'general', 'keywords', 'css', $value),
-		map.get(ml.$utils-data, 'general', 'keywords', 'css', $value),
+		map.has-key(ml.$utils-data, 'general', 'keywords', 'global', $value),
+		map.get(ml.$utils-data, 'general', 'keywords', 'global', $value),
 		$value
 	);
 }
@@ -130,32 +138,6 @@
 		ml.util-prop($value, map.get($data, 'section')) or
 		$value
 	);
-}
-
-$-tUVar-length: string.length(ml.$tUVar);
-
-@function convert-uv-var($value, $data: ()) {
-	@if (
-		meta.type-of($value) != 'string' or
-		string.slice($value, 1, $-tUVar-length) != ml.$tUVar
-	) {
-		@return $value;
-	}
-
-	$var-name: string.slice($value, $-tUVar-length + 1);
-	$section: map.get($data, 'section');
-
-	$result: if(
-		map.has-key(ml.$utils-data, $section, 'variables', $var-name),
-		map.get(ml.$utils-data, $section, 'variables', $var-name),
-		map.get(ml.$utils-data, 'general', 'variables', $var-name)
-	);
-
-	@if not $result {
-		@return ml.error('Undefined variable: `#{$value}`');
-	}
-
-	@return $result;
 }
 
 $-tUCp-length: string.length(ml.$tUCp);

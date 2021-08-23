@@ -191,14 +191,12 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 		}
 
 		$str-color: $item + '';
-		$first-char: string.slice($str-color, 1, 1);
 		$color-values: (
 			$item: $color
 		);
 
 		@if not $is-css-var and not (
-			$first-char == '#' or
-			$first-char == ml.$tUVar or
+			string.slice($str-color, 1, 1) == '#' or
 			string.index($str-color, ml.$tUVm)
 		) {
 			$cur-shade: 0;
