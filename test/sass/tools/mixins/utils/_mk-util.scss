@@ -507,8 +507,8 @@ ml.$utils-data: map.deep-merge(
 						'-Xy', (
 						0: null,
 						1gg: null,
-						'sm0:xs0_h': (1rem, 20px),
-						'1r:10:2r': null,
+						'sm0;xs0_h': (1rem, 20px),
+						'1r;10;2r': null,
 						'md0': (2rem, 20px, 1rem, 12px),
 					));
 				}
@@ -524,7 +524,7 @@ ml.$utils-data: map.deep-merge(
 						@each $key, $value in ml.$main-directions { #{$value}: ml.gg(1); }
 					}
 
-					.Stretched-sm0\:xs0 {
+					.Stretched-sm0\;xs0 {
 						top: 1rem;
 						right: 20px;
 						bottom: 1rem;
@@ -538,7 +538,7 @@ ml.$utils-data: map.deep-merge(
 						}
 					}
 
-					.Stretched1r\:10\:2r {
+					.Stretched1r\;10\;2r {
 						top: 1rem;
 						right: 10px;
 						bottom: 2rem;
@@ -562,7 +562,7 @@ ml.$utils-data: map.deep-merge(
 						0: null,
 						'sm0': (1rem, 2),
 						'lg1': (null, 5),
-						'lg_a:-1': null,
+						'lg_a;-1': null,
 					));
 				}
 
@@ -583,14 +583,14 @@ ml.$utils-data: map.deep-merge(
 						z-index: 5;
 					}
 
-					.-Posed-a\:-1 {
+					.-Posed-a\;-1 {
 						position: absolute;
 						top: auto;
 						z-index: -1;
 					}
 
 					@media (min-width: ml.bp(lg)) {
-						.lg_-Posed-a\:-1 {
+						.lg_-Posed-a\;-1 {
 							position: absolute;
 							top: auto;
 							z-index: -1;
@@ -631,22 +631,22 @@ ml.$utils-data: map.deep-merge(
 				@include output(false) {
 					@include ml.new-mk-util(
 						'Bdrs', (
-						'^:+_5:10': null,
-						'50p:50p:12:12': null,
+						'^:+_5;10': null,
+						'50p;50p;12;12': null,
 						'xs0': 0 8px 50%,
 					));
 				}
 
 				@include expect(false) {
-					.Bdrs5\:10 {
+					.Bdrs5\;10 {
 						border-radius: 5px 10px;
 					}
 
-					.-Ctx+.\^\:\+_Bdrs5\:10 {
+					.-Ctx+.\^\:\+_Bdrs5\;10 {
 						border-radius: 5px 10px;
 					}
 
-					.Bdrs50p\:50p\:12\:12 {
+					.Bdrs50p\;50p\;12\;12 {
 						border-radius: 50% 50% 12px 12px;
 					}
 
@@ -660,17 +660,17 @@ ml.$utils-data: map.deep-merge(
 				@include output(false) {
 					@include ml.new-mk-util(
 						'Bdrs', (
-						'=50:1r_h StOnly',
-						'12:=20'
+						'=50;1r_h StOnly',
+						'12;=20'
 					));
 				}
 
 				@include expect(false) {
-					.Bdrs\=50\:1r_h:hover {
+					.Bdrs\=50\;1r_h:hover {
 						border-radius: 50 1rem;
 					}
 
-					.Bdrs12\:\=20 {
+					.Bdrs12\;\=20 {
 						border-radius: 12px 20;
 					}
 				}
@@ -680,18 +680,18 @@ ml.$utils-data: map.deep-merge(
 				@include output(false) {
 					@include ml.new-mk-util(
 						'Bdrs', (
-						'13:1gg_a StOnly',
-						'1gg:25/1.5gg',
+						'13;1gg_a StOnly',
+						'1gg;25/1.5gg',
 					));
 				}
 
 				@include expect(false) {
-					.Bdrs13\:1gg_a:active {
+					.Bdrs13\;1gg_a:active {
 						border-radius: 13px ml.$grid-default-gtr;
 						border-radius: 13px ml.gg(1);
 					}
 
-					.Bdrs1gg\:25\/1\.5gg {
+					.Bdrs1gg\;25\/1\.5gg {
 						border-radius: list.slash((ml.$grid-default-gtr * 1) 25px, ml.$grid-default-gtr * 1.5);
 						border-radius: list.slash(ml.gg(1) 25px, ml.gg(1.5));
 					}
@@ -723,7 +723,7 @@ ml.$utils-data: map.deep-merge(
 						'M', (
 						'!': auto,
 						 '25!_af StOnly': null,
-						 '2r:12!': null,
+						 '2r;12!': null,
 					));
 				}
 
@@ -736,7 +736,7 @@ ml.$utils-data: map.deep-merge(
 						margin: 25px !important;
 					}
 
-					.M2r\:12\! {
+					.M2r\;12\! {
 						margin: 2rem 12px !important;
 					}
 				}
@@ -746,12 +746,12 @@ ml.$utils-data: map.deep-merge(
 				@include output(false) {
 					@include ml.new-mk-util(
 						'-Xy', (
-						'2r:12!',
+						'2r;12!',
 					));
 				}
 
 				@include expect(false) {
-					.Stretched2r\:12\! {
+					.Stretched2r\;12\! {
 						top: 2rem !important;
 						right: 12px !important;
 						bottom: 2rem !important;
@@ -807,7 +807,7 @@ ml.$utils-data: map.deep-merge(
 					);
 
 					@include ml.new-mk-util(
-						'-Posed', ('10%:3')
+						'-Posed', ('10%;3')
 					);
 				}
 
@@ -816,7 +816,7 @@ ml.$utils-data: map.deep-merge(
 						border-width: 5px !important;
 					}
 
-					.-Posed10\%\:3 {
+					.-Posed10\%\;3 {
 						position: absolute !important;
 						top: 10% !important;
 						z-index: 3 !important;
