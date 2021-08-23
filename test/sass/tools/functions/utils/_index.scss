@@ -9,7 +9,6 @@
 @forward 'convert-util-states';
 @forward 'util-apply-selector';
 @forward 'parse-util-color-range';
-@forward 'general';
 
 @include describe('tools/functions/high/utils') {
 	@include describe('util-separated-value') {
