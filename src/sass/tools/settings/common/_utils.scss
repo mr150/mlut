@@ -112,6 +112,8 @@ $util-val-css-var-prefix: ml.$css-var-prefix !default;
 // Styleguide: sass-tools.settings.utils.states
 
 $utils: () !default;
+$uv-type-default: ('number', 'global-kw', 'cust-prop',) !default;
+$uv-type-keyword: list.set-nth($uv-type-default, 1, 'keyword');
 
 //stylelint-disable
 $utils-config: (
@@ -128,7 +130,17 @@ $utils-config: (
 		'-X', '-Y', '-Xy', 'Maw', 'Miw', 'Mah', 'Mih', 'Fz', 'M', 'P', 'Lh', 'Lts', 'Tsh', 'Va', 'Bdw', 'Bd', 'Bdrs',
 	),
 
-	'default-value-type': ('number', 'global-kw', 'cust-prop',),
+	'value-types': (
+		'default': $uv-type-default,
+		'unitless': list.set-nth($uv-type-default, 1, 'unitless'),
+		'alpha': list.set-nth($uv-type-default, 1, 'alpha'),
+		'keyword': $uv-type-keyword,
+		'color': list.set-nth($uv-type-default, 1, 'color'),
+		'abbr-kw': list.join(('abbr', 'number'), $uv-type-keyword),
+		'resolution': list.join(
+			'keyword', list.set-nth($uv-type-default, 1, 'resolution')
+		),
+	),
 
 	'abbr-separators': (),
 
@@ -215,12 +227,6 @@ $utils-config: (
 
 $utils-config: map.deep-merge($utils-config, $utils);
 
-$util-type-default: map.get($utils-config, 'default-value-type');
-$util-type-unitless: list.set-nth($util-type-default, 1, 'unitless');
-$util-type-alpha: list.set-nth($util-type-default, 1, 'alpha');
-$util-type-keyword: list.set-nth($util-type-default, 1, 'keyword');
-$util-type-color: list.set-nth($util-type-default, 1, 'color');
-
 $tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
 $tURv: map.get($utils-config, 'tokens', 'util', 'raw-value');
@@ -278,18 +284,18 @@ $utils-data: (
 			'-Xy': null,
 			'Z': (
 				'properties': z-index,
-				'value-type': $util-type-unitless,
+				'value-type': 'unitless',
 			),
 			'D': display,
 			'Fxd': flex-direction,
 			'Fxw': flex-wrap,
 			'Fxg': (
 				'properties': flex-grow,
-				'value-type': $util-type-unitless,
+				'value-type': 'unitless',
 			),
 			'Fxsh': (
 				'properties': flex-shrink,
-				'value-type': $util-type-unitless,
+				'value-type': 'unitless',
 			),
 			'Ac': align-content,
 			'As': align-self,
@@ -313,12 +319,12 @@ $utils-data: (
 			'C': (
 				'properties': color,
 				'range-parser': 'color',
-				'value-type': $util-type-color,
+				'value-type': 'color',
 			),
 			'F': font,
 			'Fw': (
 				'properties': font-weight,
-				'value-type': $util-type-unitless,
+				'value-type': 'unitless',
 			),
 			'Fz': (
 				'properties': font-size,
@@ -328,7 +334,7 @@ $utils-data: (
 			'Fs': font-style,
 			'Lh': (
 				'properties': line-height,
-				'value-type': $util-type-unitless,
+				'value-type': 'unitless',
 			),
 			'Dir': direction,
 			'Lts': letter-spacing,
@@ -341,7 +347,7 @@ $utils-data: (
 			'Bgc': (
 				'properties': background-color,
 				'range-parser': 'color',
-				'value-type': $util-type-color,
+				'value-type': 'color',
 			),
 			'Bgr': background-repeat,
 			'Bgp': background-position,
@@ -354,7 +360,7 @@ $utils-data: (
 			'Cur': cursor,
 			'Op': (
 				'properties': opacity,
-				'value-type': $util-type-alpha,
+				'value-type': 'alpha',
 			),
 			'Bd': border,
 			'Bdc': border-color,
@@ -366,7 +372,7 @@ $utils-data: (
 			),
 			'Trs': (
 				'properties': transition,
-				'value-type': list.join(('abbr', 'number'), $util-type-keyword),
+				'value-type': 'abbr-kw',
 			),
 			'Anim': animation,
 			'Rsz': resize,

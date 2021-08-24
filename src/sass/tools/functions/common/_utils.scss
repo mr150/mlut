@@ -75,15 +75,13 @@
 		@return string.unquote(string.slice($util-value, 2));
 	}
 
-	$value-type: if(
-		map.has-key(ml.$utils-data, $section, 'registry', $name, 'value-type'),
-		map.get(ml.$utils-data, $section, 'registry', $name, 'value-type'),
-		map.get(ml.$utils-config, 'default-value-type'),
+	$value-type: (
+		map.get(ml.$utils-data, $section, 'registry', $name, 'value-type') or
+		'default'
 	);
-
 	$is-pipeline: false;
 
-	@each $item in $value-type {
+	@each $item in map.get(ml.$utils-config, 'value-types', $value-type) {
 		@if map.has-key(ml.$utils-config, 'value-converters', $item) {
 			$prev-value: $util-value;
 

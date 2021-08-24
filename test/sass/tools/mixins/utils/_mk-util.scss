@@ -30,7 +30,7 @@ ml.$utils-data: map.deep-merge(
 					top,
 					z-index,
 				),
-				'value-type': ml.$util-type-unitless,
+				'value-type': 'unitless',
 				'repeat-prop-values': false,
 			),
 			'Gx': (
@@ -365,7 +365,7 @@ ml.$utils-data: map.deep-merge(
 						),
 						(
 							'properties': overflow-clip-margin,
-							'value-type': ml.$util-type-unitless,
+							'value-type': 'unitless',
 						)
 					);
 				}

@@ -5,6 +5,15 @@
 @use 'sass-true' as *;
 @use 'tools' as ml;
 
+ml.$utils-config: map.deep-merge(
+	ml.$utils-config,
+	('value-types': (
+		'red-ppl': ('number', ml.$tGVcp, 'cust-prop', 'cp-suffix'),
+		'tst-ppl': ('cust-prop', ml.$tGVcp, 'cp-suffix'),
+	)
+	)
+);
+
 ml.$utils-data: map.deep-merge(
 	ml.$utils-data,
 	('utils':
@@ -12,16 +21,16 @@ ml.$utils-data: map.deep-merge(
 		'registry': (
 			'Gc': (
 				'properties': grid-column,
-				'value-type': ('unitless', 'css-kw'),
+				'value-type': 'unitless',
 				'multi-list-separator': '/',
 			),
 			'Red': (
 				'properties': --reputation,
-				'value-type': ('number', ml.$tGVcp, 'cust-prop', 'cp-suffix'),
+				'value-type': 'red-ppl',
 			),
 			'-Tst': (
 				'properties': --testou,
-				'value-type': ('cust-prop', ml.$tGVcp, 'cp-suffix'),
+				'value-type': 'tst-ppl',
 			),
 			'Ai': (
 				'keywords': (
@@ -29,11 +38,11 @@ ml.$utils-data: map.deep-merge(
 					'b': baseline,
 					'c': center,
 				),
-				'value-type': ml.$util-type-keyword,
+				'value-type': 'keyword',
 			),
 			'Animtf': (
 				'keywords': 'timing-functions',
-				'value-type': ml.$util-type-keyword,
+				'value-type': 'keyword',
 			),
 			'Trs': (
 				'keywords': 'timing-functions',

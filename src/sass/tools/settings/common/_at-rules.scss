@@ -103,7 +103,7 @@ ml.$utils-data: map.set(
 				'ahv': any-hover,
 				'pn': (
 					'properties': pointer,
-					'value-type': ml.$util-type-keyword,
+					'value-type': 'keyword',
 					'keywords': (
 						'c': coarse,
 						'f': fine,
@@ -111,7 +111,7 @@ ml.$utils-data: map.set(
 				),
 				'apn': (
 					'properties': any-pointer,
-					'value-type': ml.$util-type-keyword,
+					'value-type': 'keyword',
 					'keywords': (
 						'c': coarse,
 						'f': fine,
@@ -119,7 +119,7 @@ ml.$utils-data: map.set(
 				),
 				'cg': (
 					'properties': color-gamut,
-					'value-type': ml.$util-type-keyword,
+					'value-type': 'keyword',
 					'keywords': (
 						'p': p3,
 						's': 'srgb',
@@ -128,7 +128,7 @@ ml.$utils-data: map.set(
 				),
 				'dm': (
 					'properties': display-mode,
-					'value-type': ml.$util-type-keyword,
+					'value-type': 'keyword',
 					'keywords': (
 						'': fullscreen,
 						's': standalone,
@@ -139,7 +139,7 @@ ml.$utils-data: map.set(
 				'fc': forced-colors,
 				'ori': (
 					'properties': orientation,
-					'value-type': ml.$util-type-keyword,
+					'value-type': 'keyword',
 					'keywords': (
 						'': landscape,
 						'p': portrait,
@@ -147,7 +147,7 @@ ml.$utils-data: map.set(
 				),
 				'prfcs': (
 					'properties': prefers-color-scheme,
-					'value-type': ml.$util-type-keyword,
+					'value-type': 'keyword',
 					'keywords': (
 						'': dark,
 						'l': light,
@@ -156,21 +156,19 @@ ml.$utils-data: map.set(
 				'prfrm': prefers-reduced-motion,
 				'mn': (
 					'properties': monochrome,
-					'value-type': ml.$util-type-unitless,
+					'value-type': 'unitless',
 				),
 				'gd': (
 					'properties': grid,
-					'value-type': ml.$util-type-unitless,
+					'value-type': 'unitless',
 				),
 				'c': (
 					'properties': color,
-					'value-type': ml.$util-type-unitless,
+					'value-type': 'unitless',
 				),
 				'rsl': (
 					'properties': resolution,
-					'value-type': list.join(
-						'keyword', list.set-nth(ml.$util-type-default, 1, 'resolution')
-					),
+					'value-type': 'resolution',
 					'keywords': (
 						'i': infinite,
 					),
