@@ -432,5 +432,8 @@ $utils: map.remove($utils, 'map');
 
 $utils-states: map.merge(
 	map.get($utils-config, 'states', 'pseudo'),
-	map.get($utils-config, 'states', 'special'),
+	map.merge(
+		map.get($utils-config, 'states', 'special'),
+		map.get($utils-config, 'states', 'custom'),
+	)
 );

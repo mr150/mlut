@@ -211,14 +211,6 @@ Styleguide: sass-tools.functions.high.utils
 
 			@if map.has-key(ml.$utils-states, $item) {
 				$converted: map.get(ml.$utils-states, $item);
-			} @else if ml.str-starts($item, ml.$tSCs) {
-				$item-name: string.slice($item, 2);
-
-				@if map.has-key(ml.$utils-config, 'states', 'custom', $item-name) {
-					$converted: map.get(ml.$utils-config, 'states', 'custom', $item-name);
-				} @else {
-					@return ml.error('Undefined custom state: `#{$item}`');
-				}
 			} @else if ml.str-starts($item, ml.$tSCn) {
 				$ctx-value: string.slice($item, 2);
 				$converted: '.' + ml.str-escape(

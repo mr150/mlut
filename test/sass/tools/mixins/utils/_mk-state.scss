@@ -8,6 +8,10 @@ ml.$utils-config: map.set(
 	ml.$utils-config, 'states', 'keywords', 'st1', ('iv' 'vl')
 );
 
+ml.$utils-states: map.set(
+	ml.$utils-states, '-myState', '.pa.ro.voz'
+);
+
 @include describe('tools/mixins/base/utils') {
 	@include describe('mk-state') {
 		@include it('make only post states') {
@@ -512,7 +516,7 @@ ml.$utils-config: map.set(
 				@include output(false) {
 					.xs\:md__D-f {
 						@include ml.new-mk-state(
-							'$~ $~ib&#testou&af',
+							'$~ $~ib&-myState&af',
 							'%one&*a|%&?>*',
 							false,
 							&,
@@ -533,7 +537,7 @@ ml.$utils-config: map.set(
 							display: flex;
 					}
 
-					.xs\:md__D-f__\$\~ib\&\#testou\&af.D\~ib.pa.ro.voz::after {
+					.xs\:md__D-f__\$\~ib\&\-myState\&af.D\~ib.pa.ro.voz::after {
 						display: flex;
 					}
 				}
