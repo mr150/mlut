@@ -224,13 +224,10 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 	}
 
 	// bad solution because the parser has a side effect
-	// TODO: move saving new shades from here
+	// TODO: move saving new shades from parser
 	@if list.length($new-shades) > 0 {
-		ml.$utils-data: map.deep-merge(
-			ml.$utils-data,
-			('general': (
-				'keywords': ('colors': $new-shades)
-			))
+		ml.$utils-data: map.merge(
+			ml.$utils-data, 'general', 'keywords', 'colors', $new-shades
 		);
 	}
 
