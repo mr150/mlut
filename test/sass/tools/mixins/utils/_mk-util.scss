@@ -1029,5 +1029,49 @@ ml.$utils-data: map.deep-merge(
 				}
 			}
 		}
+
+		@include it('make utils with global class prefix') {
+			ml.$class-prefix: 'ml-';
+
+			@include assert() {
+				@include output(false) {
+					@include ml.new-mk-util(
+						'D', (
+						'', 'StOnly ^:h_ib'
+					));
+				}
+
+				@include expect(false) {
+					.ml-D {
+						display: block;
+					}
+
+					.-Ctx:hover .\^\:h_ml-D-ib {
+						display: inline-block;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.new-mk-util(
+						'Gx', (
+						'12', 'StOnly ^_12'
+					));
+				}
+
+				@include expect(false) {
+					.my-ml-Gx12 >*+* {
+						margin-left: 12px;
+					}
+
+					.-Ctx .my-\^_ml-Gx12 >*+* {
+						margin-left: 12px;
+					}
+				}
+			}
+
+			ml.$class-prefix: '';
+		}
 	}
 }
