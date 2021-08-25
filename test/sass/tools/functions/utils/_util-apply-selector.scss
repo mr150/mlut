@@ -36,6 +36,7 @@
 				('.pre-&', '.Mut5gg'): '.pre-Mut5gg',
 				('.pre-&', '.-Ctx1 .#{$escaped-sel} .-Ctx:hover'):
 					'.-Ctx1 .pre-#{$escaped-sel} .-Ctx:hover',
+				// this is expected behavior
 				('.pre-&&', '.-Ctx .\\^_-Mut5gg'): '.-Ctx .pre-\\^_-Mut5gg.pre-\\^_-Mut5gg',
 				('.pre-&', $selector-list):
 					('.pre-Red22_h\\,f:hover', '.pre-Red22_h\\,f:focus'),
