@@ -605,14 +605,16 @@ ml.$utils-data: map.deep-merge(
 				@include output(false) {
 					@include ml.new-mk-util(
 						'-AltPos', (
-						'relative': null,
+						'ArOnly @s_sticky': null,
 						':h_abs': absolute,
 					));
 				}
 
 				@include expect(false) {
-					.relative {
-						position: relative;
+					@supports (position: sticky) {
+						.\@s_sticky {
+							position: sticky;
+						}
 					}
 
 					.abs {

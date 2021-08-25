@@ -160,11 +160,15 @@
 				$new-keywords: map.set($new-keywords, $util-parsed-val + '', $value);
 			}
 
-			$separated-value: if(
-				$class-name == '',
-				$util-parsed-val,
-				ml.util-separated-value($util-parsed-val),
+			$separated-value: ml.util-separated-value($util-parsed-val);
+			$this-util: (
+				'name': $util-name,
+				'value': $separated-value
 			);
+
+			@if $class-name == '' {
+				$separated-value: $util-parsed-val;
+			}
 
 			@if $is-important {
 				$separated-value: $separated-value + ml.$tUIm;
@@ -173,15 +177,10 @@
 			$selector: ml.str-escape(
 				ml.$class-prefix + $class-name + $separated-value
 			);
-			$this-util: (
-				'name': $class-name,
-				'value': $separated-value
-			);
 
 			$val-feat-str: ml.ls-implode(
 				map.values(map.remove($util-val-data, 'value')), ' '
 			);
-
 			$st-only: string.index($val-feat-str, ml.$kStOnly);
 			$ar-st-only: string.index($val-feat-str, ml.$kArStOnly);
 			$ar-st: string.index($val-feat-str, ml.$kArSt);
