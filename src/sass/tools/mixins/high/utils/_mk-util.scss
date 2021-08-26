@@ -301,7 +301,7 @@
 	$i: if($repeat-values == null, 0, 1);
 	$values-count: list.length($values);
 	$important: (
-		ml.$flag-important or $is-important
+		(ml.$utils-up-specif == true) or $is-important
 	) and string.unquote('!important');
 
 	$css-values: if(
@@ -314,10 +314,8 @@
 		@each $key, $value in $preset-props {
 			@if meta.type-of($value) == 'function' {
 				#{$key}: meta.call($value, $util, $util-value, $values, $important);
-			} @else if ml.$flag-important {
-				#{$key}: $value $important;
 			} @else {
-				#{$key}: $value;
+				#{$key}: $value $important;
 			}
 		}
 	}

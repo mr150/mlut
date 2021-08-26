@@ -11,7 +11,6 @@
 // `2` \- turn on. With this value, most fallbacks will be disabled for browsers that don't support custom properties. Be careful. <br>
 // $mlu-flag-flex-pe = false - turn on utilities with progressive enhancement for flexbox.
 // $flag-test-env = false - indicating the test environment
-// $flag-important = false - adds `!important` to values of all CSS properties of all utilities
 //
 // Styleguide: sass-tools.settings.flags
 
@@ -20,4 +19,3 @@ $flag-col-offset: true !default;
 $flag-css-vars: 1 !default;
 $flag-flex-pe: false !default;
 $flag-test-env: false !default;
-$flag-important: false !default;

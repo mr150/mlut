@@ -126,6 +126,8 @@ $utils-config: (
 		'-Xy',
 	),
 
+	'up-specificity': false,
+
 	'gg-fallback-list': (
 		'-X', '-Y', '-Xy', 'Maw', 'Miw', 'Mah', 'Mih', 'Fz', 'M', 'P', 'Lh', 'Lts', 'Tsh', 'Va', 'Bdw', 'Bd', 'Bdrs',
 	),
@@ -226,6 +228,8 @@ $utils-config: (
 ) !default;
 
 $utils-config: map.deep-merge($utils-config, $utils);
+
+$utils-up-specif: map.get($utils-config, 'up-specificity');
 
 $tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');

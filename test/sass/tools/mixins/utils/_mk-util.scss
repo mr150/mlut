@@ -801,7 +801,7 @@ ml.$utils-data: map.deep-merge(
 			}
 
 			@include assert() {
-				ml.$flag-important: true;
+				ml.$utils-up-specif: true;
 
 				@include output(false) {
 					@include ml.new-mk-util(
@@ -825,7 +825,7 @@ ml.$utils-data: map.deep-merge(
 					}
 				}
 
-				ml.$flag-important: false;
+				ml.$utils-up-specif: false;
 			}
 		}
 
