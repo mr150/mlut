@@ -8,7 +8,11 @@
 
 @function util-apply-selector($selector, $util-sel-list) {
 	@if not $selector {
-		@return $util-sel-list;
+		@return if(
+			meta.type-of(ml.$utils-up-specif) == 'string',
+			selector.nest(ml.$utils-up-specif, $util-sel-list),
+			$util-sel-list
+		);
 	}
 
 	$result: if(
@@ -16,6 +20,10 @@
 		-apply-custom($selector, $util-sel-list),
 		-apply-external($selector, $util-sel-list)
 	);
+
+	@if meta.type-of(ml.$utils-up-specif) == 'string' {
+		$result: selector.nest(ml.$utils-up-specif, $result);
+	}
 
 	@return if(
 		list.length($result) > 1,

@@ -829,6 +829,35 @@ ml.$utils-data: map.deep-merge(
 			}
 		}
 
+		@include it('increased specificity with selector') {
+			@include assert() {
+				ml.$utils-up-specif: '#super .app';
+
+				@include output(false) {
+					@include ml.new-mk-util(
+						'Bdw', (5)
+					);
+
+					@include ml.new-mk-util(
+						'Gx', ('StOnly StCmb ^_20_ StCmb h,f',)
+					);
+				}
+
+				@include expect(false) {
+					#super .app .Bdw5 {
+						border-width: 5px;
+					}
+
+					#super .app .-Ctx .my-\^_Gx20_h\,f:hover >*+*,
+					#super .app .-Ctx .my-\^_Gx20_h\,f:focus >*+* {
+						margin-left: 20px;
+					}
+				}
+
+				ml.$utils-up-specif: false;
+			}
+		}
+
 		@include it('make util with custom selector') {
 			@include assert() {
 				@include output(false) {
