@@ -24,7 +24,7 @@
 
 	$result: if(
 		list.length($value-data) > 1,
-		('features': map.remove($value-data, 'value')),
+		('components': map.remove($value-data, 'value')),
 		()
 	);
 
@@ -103,7 +103,7 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 
 	$result: if(
 		list.length($shades-num-data) > 1,
-		('features': map.remove($shades-num-data, 'value')),
+		('components': map.remove($shades-num-data, 'value')),
 		()
 	);
 

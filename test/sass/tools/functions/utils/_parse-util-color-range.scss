@@ -58,7 +58,7 @@ $rgba-scale: ('rgb': 15%, 'alpha': 10%);
 						'$cPrm0*70p': rgba(102, 0, 204, 0.7),
 				)),
 				([(#60c, 'prm0'), 'BpAll_3_f,a', $alpha-step], 'C'): (
-					'features': (
+					'components': (
 						'at-rules': 'BpAll',
 						'post-states': 'f,a',
 					),
@@ -126,7 +126,7 @@ $rgba-scale: ('rgb': 15%, 'alpha': 10%);
 			),
 			'different count of shades and opacities': (
 				(['prm0', ('BpAll_3_h f', 2), $green-alpha-step], 'C'): (
-					'features': (
+					'components': (
 						'at-rules': 'BpAll',
 						'post-states': 'h f',
 					),

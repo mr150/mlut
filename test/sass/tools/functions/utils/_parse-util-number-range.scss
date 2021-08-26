@@ -95,11 +95,11 @@
 			);
 		}
 
-		@include it('parse range with features') {
+		@include it('parse range with util components') {
 			@include assert-equal(
 				ml.parse-util-number-range(['xs:sm_:f:>_1r_h::^sub', 7, 3], 'W'),
 				(
-					'features': (
+					'components': (
 					'at-rules': 'xs:sm',
 					'pre-states': ':f:>',
 					'post-states': 'h::^sub',
