@@ -195,7 +195,7 @@ $utils-config: (
 			'context': '^',
 			'raw': '=',
 		),
-		'general': (
+		'common': (
 			'value-converts-pipeline': 'Pl',
 		),
 	),
@@ -256,7 +256,7 @@ $tSTu: map.get($utils-config, 'tokens', 'states', 'this-util');
 $tSCn: map.get($utils-config, 'tokens', 'states', 'context');
 $tSRaw: map.get($utils-config, 'tokens', 'states', 'raw');
 $tSTucv: $tSTu + $tUSv;
-$tGVcp: map.get($utils-config, 'tokens', 'general', 'value-converts-pipeline');
+$tCVcp: map.get($utils-config, 'tokens', 'common', 'value-converts-pipeline');
 
 $utils-config: map.set(
 	$utils-config,
@@ -395,7 +395,7 @@ $utils-data: (
 		'map': (),
 	),
 
-	'general': (
+	'common': (
 		'registry': (
 			'H': height,
 			'W': width,
@@ -446,7 +446,7 @@ $utils-data: map.merge(
 	$utils-data,
 	'utils',
 	'registry',
-	map.get($utils-data, 'general', 'registry')
+	map.get($utils-data, 'common', 'registry')
 );
 
 $utils-data: merge-utils-data($utils-data, $utils, 'utils');

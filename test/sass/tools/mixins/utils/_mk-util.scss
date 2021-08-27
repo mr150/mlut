@@ -899,11 +899,11 @@ ml.$utils-data: map.deep-merge(
 
 				@include expect(false) {
 					.Maw-\$lg {
-						max-width: map.get(ml.$utils-data, 'general', 'keywords', 'global', '$lg');
+						max-width: map.get(ml.$utils-data, 'common', 'keywords', 'global', '$lg');
 					}
 
 					.Maw-\$lg_af::after {
-						max-width: map.get(ml.$utils-data, 'general', 'keywords', 'global', '$lg');
+						max-width: map.get(ml.$utils-data, 'common', 'keywords', 'global', '$lg');
 					}
 
 					.Maw--card-sm {
@@ -1107,7 +1107,7 @@ ml.$utils-data: map.deep-merge(
 
 		@include it('make util using keywords aliases') {
 			ml.$utils-data: map.set(
-				ml.$utils-data, 'general', 'keywords', 'colors', (
+				ml.$utils-data, 'common', 'keywords', 'colors', (
 					't': transparent,
 					'cc': currentColor,
 				)

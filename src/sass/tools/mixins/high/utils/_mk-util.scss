@@ -296,7 +296,7 @@
 		);
 	} @else if not $group-item-index or $group-item-index < 2 {
 		ml.$utils-data: map.merge(
-			ml.$utils-data, 'general', 'keywords', 'colors', $new-keywords
+			ml.$utils-data, 'common', 'keywords', 'colors', $new-keywords
 		);
 	}
 }

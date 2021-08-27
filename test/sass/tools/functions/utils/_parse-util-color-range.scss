@@ -15,7 +15,7 @@ $initial-colors: (
 ml.$utils-data: map.deep-merge(
 	ml.$utils-data,
 	(
-	'general': (
+	'common': (
 		'keywords': (
 			'global': (
 				'$cPrm0': #60c,
@@ -215,7 +215,7 @@ $rgba-scale: ('rgb': 15%, 'alpha': 10%);
 		@each $test, $data in $tests {
 			@include it($test) {
 				ml.$utils-data: map.set(
-					ml.$utils-data, 'general', 'keywords', 'colors', $initial-colors
+					ml.$utils-data, 'common', 'keywords', 'colors', $initial-colors
 				);
 
 				@each $args, $expect in $data {

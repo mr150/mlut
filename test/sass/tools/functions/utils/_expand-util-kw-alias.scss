@@ -34,9 +34,9 @@ ml.$utils-data: map.deep-merge(
 	),
 );
 
-$-global-kw: map.get(ml.$utils-data, 'general', 'keywords', 'global');
+$-global-kw: map.get(ml.$utils-data, 'common', 'keywords', 'global');
 ml.$utils-data: map.set(
-	ml.$utils-data, 'general', 'keywords', 'global', ('$opDef': 0.88, '$trsduDef': 0.3s,)
+	ml.$utils-data, 'common', 'keywords', 'global', ('$opDef': 0.88, '$trsduDef': 0.3s,)
 );
 
 @include describe('tools/functions/common/utils/') {
@@ -119,7 +119,7 @@ ml.$utils-data: map.set(
 						'eo': ease-out,
 					)
 				),
-				('KW.general.css.random-item', 'Trs'): (
+				('KW.common.css.random-item', 'Trs'): (
 					'values': (
 						'i': inherit,
 						'ini': initial,
@@ -146,5 +146,5 @@ ml.$utils-data: map.set(
 }
 
 ml.$utils-data: map.set(
-	ml.$utils-data, 'general', 'keywords', 'global', $-global-kw
+	ml.$utils-data, 'common', 'keywords', 'global', $-global-kw
 );

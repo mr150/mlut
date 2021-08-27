@@ -82,11 +82,11 @@ $at-rules-cfg: (
 	),
 ) !default;
 
-$-general-registry: ();
+$-common-registry: ();
 
-@each $key, $value in map.get(ml.$utils-data, 'general', 'registry') {
-	$-general-registry: map.set(
-		$-general-registry,
+@each $key, $value in map.get(ml.$utils-data, 'common', 'registry') {
+	$-common-registry: map.set(
+		$-common-registry,
 		string.to-lower-case($key),
 		$value
 	);
@@ -97,7 +97,7 @@ ml.$utils-data: map.set(
 	'media',
 	(
 		'registry': map.deep-merge(
-			$-general-registry,
+			$-common-registry,
 			(
 				'hv': hover,
 				'ahv': any-hover,
@@ -193,7 +193,7 @@ $at-rules-data: map.deep-merge($at-rules-data, $at-rules);
 $at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-conf);
 
 $breakpoints: map.get($at-rules-cfg, 'breakpoints');
-$-custom-global-kw: map.get(ml.$utils-data, 'general', 'keywords', 'global');
+$-custom-global-kw: map.get(ml.$utils-data, 'common', 'keywords', 'global');
 $-bp-kw-map: ();
 
 @each $key, $value in $breakpoints {
@@ -205,7 +205,7 @@ $-bp-kw-map: ();
 }
 
 ml.$utils-data: map.set(
-	ml.$utils-data, 'general', 'keywords', 'global', $-bp-kw-map
+	ml.$utils-data, 'common', 'keywords', 'global', $-bp-kw-map
 );
 
 $tAOr: map.get($at-rules-cfg, 'tokens', 'or');

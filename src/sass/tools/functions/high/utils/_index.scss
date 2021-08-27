@@ -296,24 +296,24 @@ Styleguide: sass-tools.functions.high.utils
 			$keywords,
 			(
 				map.get(ml.$utils-data, 'utils', 'keywords', $keywords) or
-				map.get(ml.$utils-data, 'general', 'keywords', 'css')
+				map.get(ml.$utils-data, 'common', 'keywords', 'css')
 			)
 		);
 	} @else if $length == 2 {
 		$group: list.nth($alias-list, 2);
 
-		@if map.has-key(ml.$utils-data, 'general', 'keywords', $group) {
-			$values: map.get(ml.$utils-data, 'general', 'keywords', $group);
+		@if map.has-key(ml.$utils-data, 'common', 'keywords', $group) {
+			$values: map.get(ml.$utils-data, 'common', 'keywords', $group);
 		} @else if $group == 'General' {
 			$values: map.merge(
-				map.get(ml.$utils-data, 'general', 'keywords', 'css'),
-				map.get(ml.$utils-data, 'general', 'keywords', 'global'),
+				map.get(ml.$utils-data, 'common', 'keywords', 'css'),
+				map.get(ml.$utils-data, 'common', 'keywords', 'global'),
 			);
 		} @else if $group == 'All' {
 			$values: map.merge(
 				map.merge(
-					map.get(ml.$utils-data, 'general', 'keywords', 'css'),
-					map.get(ml.$utils-data, 'general', 'keywords', 'global'),
+					map.get(ml.$utils-data, 'common', 'keywords', 'css'),
+					map.get(ml.$utils-data, 'common', 'keywords', 'global'),
 				),
 				map.get(ml.$utils-data, 'utils', 'registry', $util, 'keywords') or ()
 			);

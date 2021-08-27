@@ -8,8 +8,8 @@
 ml.$utils-config: map.deep-merge(
 	ml.$utils-config,
 	('value-types': (
-		'red-ppl': ('number', ml.$tGVcp, 'cust-prop', 'cp-suffix'),
-		'tst-ppl': ('cust-prop', ml.$tGVcp, 'cp-suffix'),
+		'red-ppl': ('number', ml.$tCVcp, 'cust-prop', 'cp-suffix'),
+		'tst-ppl': ('cust-prop', ml.$tCVcp, 'cp-suffix'),
 	)
 	)
 );
@@ -56,7 +56,7 @@ ml.$utils-data: map.deep-merge(
 			),
 		),
 	),
-	'general': (
+	'common': (
 		'keywords': (
 			'colors': (
 				'prm0': #c06,

@@ -211,7 +211,7 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 				$cur-shade: $cur-shade + $shade-step;
 				$key: $str-color + $cur-shade;
 
-				@if not map.has-key(ml.$utils-data, 'general', 'keywords', 'colors', $key) {
+				@if not map.has-key(ml.$utils-data, 'common', 'keywords', 'colors', $key) {
 					$new-shades: map.set($new-shades, $key, $color);
 				}
 
@@ -227,7 +227,7 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 	// TODO: move saving new shades from parser
 	@if list.length($new-shades) > 0 {
 		ml.$utils-data: map.merge(
-			ml.$utils-data, 'general', 'keywords', 'colors', $new-shades
+			ml.$utils-data, 'common', 'keywords', 'colors', $new-shades
 		);
 	}
 
