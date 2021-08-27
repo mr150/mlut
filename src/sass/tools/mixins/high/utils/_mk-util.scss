@@ -184,8 +184,8 @@
 				ml.$class-prefix + $class-name + $separated-value
 			);
 
-			$val-feat-str: ml.ls-implode(
-				map.values(map.remove($util-val-data, 'value')), ' '
+			$val-feat-str: meta.inspect(
+				map.values(map.remove($util-val-data, 'value'))
 			);
 			$st-only: string.index($val-feat-str, ml.$kStOnly);
 			$ar-st-only: string.index($val-feat-str, ml.$kArStOnly);
