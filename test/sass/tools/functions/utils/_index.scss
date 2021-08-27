@@ -9,6 +9,7 @@
 @forward 'convert-util-states';
 @forward 'util-apply-selector';
 @forward 'parse-util-color-range';
+@forward 'expand-util-kw-alias';
 
 @include describe('tools/functions/high/utils') {
 	@include describe('util-separated-value') {

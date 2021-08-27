@@ -179,6 +179,7 @@ $utils-config: (
 			'space': ';',
 			'custom-property': '-',
 			'global-keyword': '$',
+			'keyword-chain': '.',
 			'important': '!',
 			'list-separator1': ',',
 			'list-separator2': '/',
@@ -242,6 +243,7 @@ $tUCp: map.get($utils-config, 'tokens', 'util', 'custom-property');
 $tUIm: map.get($utils-config, 'tokens', 'util', 'important');
 $tUCm: map.get($utils-config, 'tokens', 'util', 'component');
 $tUSp: map.get($utils-config, 'tokens', 'util', 'space');
+$tUKwc: map.get($utils-config, 'tokens', 'util', 'keyword-chain');
 $tULs1: map.get($utils-config, 'tokens', 'util', 'list-separator1');
 $tULs2: map.get($utils-config, 'tokens', 'util', 'list-separator2');
 $tSOr: map.get($utils-config, 'tokens', 'states', 'or');
@@ -275,6 +277,13 @@ $utils-config: map.set(
 		),
 		map.get($utils-config, 'abbr-separators')
 	)
+);
+
+$-css-wide-kw: (
+	'i': inherit,
+	'ini': initial,
+	'rv': revert,
+	'us': unset,
 );
 
 $utils-data: (
@@ -391,11 +400,13 @@ $utils-data: (
 			'Ar': aspect-ratio,
 		),
 		'keywords': (
-			'css': (
-				'a': auto,
-				'i': inherit,
-				'u': unset,
-				'n': none,
+			'css': $-css-wide-kw,
+			'css-oft': map.merge(
+				$-css-wide-kw,
+				(
+					'a': auto,
+					'n': none,
+				)
 			),
 			'colors': (
 				't': transparent,

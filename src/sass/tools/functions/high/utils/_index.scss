@@ -9,6 +9,7 @@
 @use '../forward-tools' as ml;
 @use 'value-converters' as converters;
 @use 'range-parsers';
+@use 'parse-util' as pu;
 
 @forward 'value-converters';
 @forward 'parse-util';
@@ -273,6 +274,64 @@ Styleguide: sass-tools.functions.high.utils
 		$str-value,
 		ml.$tUSv + $str-value
 	);
+}
+
+@function expand-util-kw-alias($raw-alias, $util) {
+	$alias-data: pu.new-parse-util($raw-alias);
+	$alias-list: ml.str-split(map.get($alias-data, 'value'), ml.$tUKwc);
+	$length: list.length($alias-list);
+	$values: ();
+
+	$result: if(
+		list.length($alias-data) > 1,
+		('components': map.remove($alias-data, 'value')),
+		()
+	);
+
+	@if $length == 1 {
+		$keywords: map.get(ml.$utils-data, 'utils', 'registry', $util, 'keywords');
+
+		$values: if(
+			meta.type-of($keywords) == 'map',
+			$keywords,
+			(
+				map.get(ml.$utils-data, 'utils', 'keywords', $keywords) or
+				map.get(ml.$utils-data, 'general', 'keywords', 'css')
+			)
+		);
+	} @else if $length == 2 {
+		$group: list.nth($alias-list, 2);
+
+		@if map.has-key(ml.$utils-data, 'general', 'keywords', $group) {
+			$values: map.get(ml.$utils-data, 'general', 'keywords', $group);
+		} @else if $group == 'General' {
+			$values: map.merge(
+				map.get(ml.$utils-data, 'general', 'keywords', 'css'),
+				map.get(ml.$utils-data, 'general', 'keywords', 'global'),
+			);
+		} @else if $group == 'All' {
+			$values: map.merge(
+				map.merge(
+					map.get(ml.$utils-data, 'general', 'keywords', 'css'),
+					map.get(ml.$utils-data, 'general', 'keywords', 'global'),
+				),
+				map.get(ml.$utils-data, 'utils', 'registry', $util, 'keywords') or ()
+			);
+		} @else {
+			@return ml.error('Invalid keyword group alias: `#{$group}`');
+		}
+	} @else {
+		$section: list.nth($alias-list, 2);
+		$group: list.nth($alias-list, 3);
+
+		@if not map.has-key(ml.$utils-data, $section, 'keywords', $group) {
+			@return ml.error('Not found keywords on this path: `#{$section}.#{$group}`');
+		}
+
+		$values: map.get(ml.$utils-data, $section, 'keywords', $group);
+	}
+
+	@return map.set($result, 'values', $values);
 }
 
 $-util-value-converters: ();

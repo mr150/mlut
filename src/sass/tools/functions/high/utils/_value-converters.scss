@@ -117,17 +117,15 @@
 
 @function convert-uv-global-kw($value, $data: ()) {
 	@if map.has-key(
-		ml.$utils-data, 'general', 'keywords', 'css', $value
+		ml.$utils-data, 'general', 'keywords', 'css-oft', $value
 	) {
 		@return map.get(
-			ml.$utils-data, 'general', 'keywords', 'css', $value
+			ml.$utils-data, 'general', 'keywords', 'css-oft', $value
 		);
 	}
 
-	@return if(
-		map.has-key(ml.$utils-data, 'general', 'keywords', 'global', $value),
-		map.get(ml.$utils-data, 'general', 'keywords', 'global', $value),
-		$value
+	@return (
+		map.get(ml.$utils-data, 'general', 'keywords', 'global', $value) or $value
 	);
 }
 

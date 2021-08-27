@@ -1,0 +1,150 @@
+@use 'sass:map';
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
+ml.$utils-data: map.deep-merge(
+	ml.$utils-data,
+	('utils':
+	(
+		'registry': (
+			'Ai': (
+				'keywords': (
+					'e': end,
+					'b': baseline,
+					'c': center,
+				),
+				'value-type': 'keyword',
+			),
+			'Animtf': (
+				'keywords': 'timing-functions',
+				'value-type': 'keyword',
+			),
+			'Trs': (
+				'keywords': 'timing-functions',
+			),
+		),
+		'keywords': (
+			'timing-functions': (
+				'e': ease,
+				'ei': ease-in,
+				'eo': ease-out,
+			),
+		),
+	),
+	),
+);
+
+$-global-kw: map.get(ml.$utils-data, 'general', 'keywords', 'global');
+ml.$utils-data: map.set(
+	ml.$utils-data, 'general', 'keywords', 'global', ('$opDef': 0.88, '$trsduDef': 0.3s,)
+);
+
+@include describe('tools/functions/common/utils/') {
+	@include describe('expand-util-kw-alias') {
+		$-tests: (
+			'util own keywords': (
+				('KW', 'Ai'): (
+					'values': (
+						'e': end,
+						'b': baseline,
+						'c': center,
+				)),
+				('KW', 'Trs'): (
+					'values': (
+						'e': ease,
+						'ei': ease-in,
+						'eo': ease-out,
+				)),
+				('BpAll_KW_f,a', 'Ai'): (
+					'components': (
+						'at-rules': 'BpAll',
+						'post-states': 'f,a',
+					),
+					'values': (
+						'e': end,
+						'b': baseline,
+						'c': center,
+					)
+				),
+			),
+			'get CSS-wide keywords if util has not their own': (
+				('KW', 'P'): (
+					'values': (
+						'i': inherit,
+						'ini': initial,
+						'rv': revert,
+						'us': unset,
+					)
+				),
+			),
+			'keywords from `common` section': (
+				('KW.global', 'P'): (
+					'values': (
+						'$opDef': 0.88,
+						'$trsduDef': 0.3s,
+					)
+				),
+			),
+			'keywords by predefined group alias': (
+				('KW.General', 'P'): (
+					'values': (
+						'i': inherit,
+						'ini': initial,
+						'rv': revert,
+						'us': unset,
+						'$opDef': 0.88,
+						'$trsduDef': 0.3s,
+					)
+				),
+				('KW.All', 'Ai'): (
+					'values': (
+						'i': inherit,
+						'ini': initial,
+						'rv': revert,
+						'us': unset,
+						'$opDef': 0.88,
+						'$trsduDef': 0.3s,
+						'e': end,
+						'b': baseline,
+						'c': center,
+					)
+				),
+				('KW.undefineD', 'Ai'): 'ERROR: Invalid keyword group alias: `undefineD`',
+			),
+			'path alias to keywords': (
+				('KW.utils.timing-functions', 'Trs'): (
+					'values': (
+						'e': ease,
+						'ei': ease-in,
+						'eo': ease-out,
+					)
+				),
+				('KW.general.css.random-item', 'Trs'): (
+					'values': (
+						'i': inherit,
+						'ini': initial,
+						'rv': revert,
+						'us': unset,
+					)
+				),
+				('KW.speak.now', 'Ai'): 'ERROR: Not found keywords on this path: `speak.now`',
+			),
+		);
+
+		@each $test, $data in $-tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						ml.expand-util-kw-alias($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
+}
+
+ml.$utils-data: map.set(
+	ml.$utils-data, 'general', 'keywords', 'global', $-global-kw
+);
