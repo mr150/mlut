@@ -1104,5 +1104,46 @@ ml.$utils-data: map.deep-merge(
 
 			ml.$class-prefix: '';
 		}
+
+		@include it('make util using keywords aliases') {
+			ml.$utils-data: map.set(
+				ml.$utils-data, 'general', 'keywords', 'colors', (
+					't': transparent,
+					'cc': currentColor,
+				)
+			);
+
+			@include assert() {
+				@include output(false) {
+					@include ml.new-mk-util(
+						'Bgc', (
+						'KW.colors_h', #ccc
+					));
+				}
+
+				@include expect(false) {
+					.Bgc-t {
+						background-color: transparent;
+					}
+
+					.Bgc-t_h:hover {
+						background-color: transparent;
+					}
+
+					.Bgc-cc {
+						background-color: currentColor;
+					}
+
+					.Bgc-cc_h:hover {
+						background-color: currentColor;
+					}
+
+					.Bgc\#ccc {
+						background-color: #ccc;
+					}
+				}
+			}
+
+		}
 	}
 }

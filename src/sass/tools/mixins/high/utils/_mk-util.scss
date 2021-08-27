@@ -138,6 +138,12 @@
 				$options: map.set($main-options, 'isRange', true),
 				meta.call($range-parser, $range-list, $util-name)...
 			);
+		} @else if meta.type-of($key) == 'string' and string.index($key, ml.$tUKwa) {
+			@include new-mk-util(
+				$util-name,
+				$options: map.set($main-options, 'isRange', true),
+				ml.expand-util-kw-alias($key, $util-name)...
+			);
 		} @else {
 			$util-val-data: ml.new-parse-util($key);
 

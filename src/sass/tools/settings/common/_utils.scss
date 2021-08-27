@@ -180,6 +180,7 @@ $utils-config: (
 			'custom-property': '-',
 			'global-keyword': '$',
 			'keyword-chain': '.',
+			'keywords-alias': 'KW',
 			'important': '!',
 			'list-separator1': ',',
 			'list-separator2': '/',
@@ -244,6 +245,7 @@ $tUIm: map.get($utils-config, 'tokens', 'util', 'important');
 $tUCm: map.get($utils-config, 'tokens', 'util', 'component');
 $tUSp: map.get($utils-config, 'tokens', 'util', 'space');
 $tUKwc: map.get($utils-config, 'tokens', 'util', 'keyword-chain');
+$tUKwa: map.get($utils-config, 'tokens', 'util', 'keywords-alias');
 $tULs1: map.get($utils-config, 'tokens', 'util', 'list-separator1');
 $tULs2: map.get($utils-config, 'tokens', 'util', 'list-separator2');
 $tSOr: map.get($utils-config, 'tokens', 'states', 'or');
