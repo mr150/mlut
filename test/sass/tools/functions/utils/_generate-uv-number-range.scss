@@ -2,11 +2,11 @@
 @use 'sass-true' as *;
 @use 'tools' as ml;
 
-@include describe('tools/functions/high/utils/range-parsers') {
+@include describe('tools/functions/high/utils/range-generators') {
 	@include describe('number-range') {
-		@include it('parse simple range') {
+		@include it('generate simple range') {
 			@include assert-equal(
-				ml.parse-util-number-range([2, 4], 'Bdw'),
+				ml.generate-uv-number-range([2, 4], 'Bdw'),
 				(
 					'values': (2: 2px, 3: 3px, 4: 4px),
 				),
@@ -14,7 +14,7 @@
 			);
 
 			@include assert-equal(
-				ml.parse-util-number-range([2su, 4], 'Fz'),
+				ml.generate-uv-number-range([2su, 4], 'Fz'),
 				(
 					'values': (
 						2su: ml.sur(2),
@@ -26,32 +26,32 @@
 			);
 
 			@include assert-equal(
-				ml.parse-util-number-range([-2, 1], 'Z'),
+				ml.generate-uv-number-range([-2, 1], 'Z'),
 				(
 					'values': (
-					-2: -2,
-					-1: -1,
-					0: 0,
-					1: 1,
-				)
+						-2: -2,
+						-1: -1,
+						0: 0,
+						1: 1,
+					)
 				),
 				$inspect: true,
 			);
 
 			@include assert-equal(
-				ml.parse-util-number-range([0.5, 3], 'Z'),
+				ml.generate-uv-number-range([0.5, 3], 'Z'),
 				(
 					'values': (
-					0.5: 0.5,
-					1.5: 1.5,
-					2.5: 2.5,
-				)
+						0.5: 0.5,
+						1.5: 1.5,
+						2.5: 2.5,
+					)
 				),
 				$inspect: true,
 			);
 
 			@include assert-equal(
-				ml.parse-util-number-range([-2, -4], 'Bdw'),
+				ml.generate-uv-number-range([-2, -4], 'Bdw'),
 				(
 					'values': ()
 				),
@@ -59,45 +59,45 @@
 			);
 
 			@include assert-equal(
-				ml.parse-util-number-range('a', 'W'),
+				ml.generate-uv-number-range('a', 'W'),
 				'ERROR: Invalid $start value in range: `a`'
 			);
 
 			@include assert-equal(
-				ml.parse-util-number-range('1no1', 'W'),
+				ml.generate-uv-number-range('1no1', 'W'),
 				'ERROR: Unknown unit in $start value in range: `1no1`'
 			);
 		}
 
-		@include it('parse range with step') {
+		@include it('generate range with step') {
 			@include assert-equal(
-				ml.parse-util-number-range([2su, 6, 2], 'W'),
+				ml.generate-uv-number-range([2su, 6, 2], 'W'),
 				(
 					'values': (
-					2su: ml.su(2),
-					4su: ml.su(4),
-					6su: ml.su(6),
-				)
+						2su: ml.su(2),
+						4su: ml.su(4),
+						6su: ml.su(6),
+					)
 				),
 				$inspect: true,
 			);
 
 			@include assert-equal(
-				ml.parse-util-number-range([0.5, 1.5, 0.5], 'Z'),
+				ml.generate-uv-number-range([0.5, 1.5, 0.5], 'Z'),
 				(
 					'values': (
-					0.5: 0.5,
-					1: 1,
-					1.5: 1.5,
-				)
+						0.5: 0.5,
+						1: 1,
+						1.5: 1.5,
+					)
 				),
 				$inspect: true,
 			);
 		}
 
-		@include it('parse range with util components') {
+		@include it('generate range with util components') {
 			@include assert-equal(
-				ml.parse-util-number-range(['xs:sm_:f:>_1r_h::^sub', 7, 3], 'W'),
+				ml.generate-uv-number-range(['xs:sm_:f:>_1r_h::^sub', 7, 3], 'W'),
 				(
 					'components': (
 					'at-rules': 'xs:sm',

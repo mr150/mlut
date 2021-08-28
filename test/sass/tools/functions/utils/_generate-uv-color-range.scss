@@ -41,7 +41,7 @@ $rgba-scale: ('rgb': 15%, 'alpha': 10%);
 	@return color.adjust($color, $args-map...);
 }
 
-@include describe('tools/functions/high/utils/range-parsers') {
+@include describe('tools/functions/high/utils/range-generators') {
 	@include describe('color-range') {
 		$tests: (
 			'colors and alpha': (
@@ -220,7 +220,7 @@ $rgba-scale: ('rgb': 15%, 'alpha': 10%);
 
 				@each $args, $expect in $data {
 					@include assert-equal(
-						ml.parse-util-color-range($args...),
+						ml.generate-uv-color-range($args...),
 						$expect,
 						$inspect: true,
 					);

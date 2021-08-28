@@ -223,8 +223,8 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 		$values: map.merge($values, $color-values);
 	}
 
-	// bad solution because the parser has a side effect
-	// TODO: move saving new shades from parser
+	// questionable solution because the generator has a hidden side effect
+	// TODO: move saving new shades from here
 	@if list.length($new-shades) > 0 {
 		ml.$utils-data: map.merge(
 			ml.$utils-data, 'common', 'keywords', 'colors', $new-shades

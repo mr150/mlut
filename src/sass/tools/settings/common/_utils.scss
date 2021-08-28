@@ -148,7 +148,7 @@ $utils-config: (
 
 	'value-converters': (),
 
-	'range-parsers': (),
+	'range-generators': (),
 
 	'units': (
 		'default': (
@@ -333,7 +333,7 @@ $utils-data: (
 			'Ov': overflow,
 			'C': (
 				'properties': color,
-				'range-parser': 'color',
+				'range-generator': 'color',
 				'value-type': 'color',
 			),
 			'F': font,
@@ -361,7 +361,7 @@ $utils-data: (
 			'Va': vertical-align,
 			'Bgc': (
 				'properties': background-color,
-				'range-parser': 'color',
+				'range-generator': 'color',
 				'value-type': 'color',
 			),
 			'Bgr': background-repeat,

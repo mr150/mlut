@@ -8,13 +8,13 @@
 
 @use '../forward-tools' as ml;
 @use 'value-converters' as converters;
-@use 'range-parsers';
+@use 'range-generators';
 @use 'parse-util' as pu;
 
 @forward 'value-converters';
 @forward 'parse-util';
 @forward 'util-apply-selector';
-@forward 'range-parsers' as parse-util-*;
+@forward 'range-generators' as generate-uv-*;
 
 /*
 Utilities
@@ -347,23 +347,23 @@ $-fn-prefix-length: string.length('convert-uv-');
 ml.$utils-config: map.set(
 	ml.$utils-config,
 	'value-converters',
-	map.merge($-util-value-converters, map.get(ml.$utils-config, 'value-converters'))
+	map.merge(
+		$-util-value-converters, map.get(ml.$utils-config, 'value-converters')
+	)
 );
 
-$-util-range-parsers: ();
+$-util-range-generators: ();
 
-@each $key, $value in meta.module-functions(range-parsers) {
-	$suffix-pos: string.index($key, '-range');
-
-	@if $suffix-pos {
-		$-util-range-parsers: map.set(
-			$-util-range-parsers, string.slice($key, 1, $suffix-pos - 1), $value
-		);
-	}
+@each $key, $value in meta.module-functions(range-generators) {
+	$-util-range-generators: map.set(
+		$-util-range-generators, ml.str-replace($key, '-range'), $value
+	);
 }
 
 ml.$utils-config: map.set(
 	ml.$utils-config,
-	'range-parsers',
-	map.merge($-util-range-parsers, map.get(ml.$utils-config, 'range-parsers'))
+	'range-generators',
+	map.merge(
+		$-util-range-generators, map.get(ml.$utils-config, 'range-generators')
+	)
 );

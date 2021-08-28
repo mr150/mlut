@@ -104,11 +104,11 @@
 	$class-name: map.get($main-options, 'class-name');
 	$props: map.get($main-options, 'properties');
 	$custom-selector: map.get($main-options, 'selector');
-	$range-parser: map.get(
+	$range-generator: map.get(
 		ml.$utils-config,
-		'range-parsers',
+		'range-generators',
 		(
-			map.get($main-options, 'range-parser')
+			map.get($main-options, 'range-generator')
 			or 'number'
 		)
 	);
@@ -136,7 +136,7 @@
 			@include new-mk-util(
 				$util-name,
 				$options: map.set($main-options, 'isRange', true),
-				meta.call($range-parser, $range-list, $util-name)...
+				meta.call($range-generator, $range-list, $util-name)...
 			);
 		} @else if meta.type-of($key) == 'string' and string.index($key, ml.$tUKwa) {
 			@include new-mk-util(
@@ -340,7 +340,7 @@
 @function -util-main-options($name, $options) {
 	$prop: null;
 	$needed-options: (
-		'repeat-prop-values', 'preset-properties', 'selector', 'range-parser',
+		'repeat-prop-values', 'preset-properties', 'selector', 'range-generator',
 	);
 	$result: (
 		'class-name': if(

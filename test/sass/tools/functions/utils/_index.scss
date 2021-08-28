@@ -4,11 +4,11 @@
 
 @forward 'parse-util';
 @forward 'parse-abbr';
-@forward 'parse-util-number-range';
+@forward 'generate-uv-number-range';
 @forward 'convert-util-value';
 @forward 'convert-util-states';
 @forward 'util-apply-selector';
-@forward 'parse-util-color-range';
+@forward 'generate-uv-color-range';
 @forward 'expand-util-kw-alias';
 
 @include describe('tools/functions/high/utils') {
