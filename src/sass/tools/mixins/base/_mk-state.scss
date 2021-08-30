@@ -156,9 +156,9 @@
 @function -convert-states($item, $selector, $this: null, $type: 'pre') {
 	$result: ml.str-split(ml.str-trim($item), ' ');
 
-	@each $key, $value in map.get(ml.$utils-config, 'states', 'keywords') {
+	@each $key, $value in map.get(ml.$utils-cfg, 'states', 'keywords') {
 		@if meta.type-of($value) == 'string' {
-			$value: map.keys(map.get(ml.$utils-config, 'states', $value));
+			$value: map.keys(map.get(ml.$utils-cfg, 'states', $value));
 		}
 
 		$result: ml.replace-keyword($result, $key, $value);

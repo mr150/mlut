@@ -289,33 +289,33 @@ Styleguide: sass-tools.functions.high.utils
 	);
 
 	@if $length == 1 {
-		$keywords: map.get(ml.$utils-data, 'utils', 'registry', $util, 'keywords');
+		$keywords: map.get(ml.$utils-db, 'utils', 'registry', $util, 'keywords');
 
 		$values: if(
 			meta.type-of($keywords) == 'map',
 			$keywords,
 			(
-				map.get(ml.$utils-data, 'utils', 'keywords', $keywords) or
-				map.get(ml.$utils-data, 'common', 'keywords', 'css')
+				map.get(ml.$utils-db, 'utils', 'keywords', $keywords) or
+				map.get(ml.$utils-db, 'common', 'keywords', 'css')
 			)
 		);
 	} @else if $length == 2 {
 		$group: list.nth($alias-list, 2);
 
-		@if map.has-key(ml.$utils-data, 'common', 'keywords', $group) {
-			$values: map.get(ml.$utils-data, 'common', 'keywords', $group);
+		@if map.has-key(ml.$utils-db, 'common', 'keywords', $group) {
+			$values: map.get(ml.$utils-db, 'common', 'keywords', $group);
 		} @else if $group == 'General' {
 			$values: map.merge(
-				map.get(ml.$utils-data, 'common', 'keywords', 'css'),
-				map.get(ml.$utils-data, 'common', 'keywords', 'global'),
+				map.get(ml.$utils-db, 'common', 'keywords', 'css'),
+				map.get(ml.$utils-db, 'common', 'keywords', 'global'),
 			);
 		} @else if $group == 'All' {
 			$values: map.merge(
 				map.merge(
-					map.get(ml.$utils-data, 'common', 'keywords', 'css'),
-					map.get(ml.$utils-data, 'common', 'keywords', 'global'),
+					map.get(ml.$utils-db, 'common', 'keywords', 'css'),
+					map.get(ml.$utils-db, 'common', 'keywords', 'global'),
 				),
-				map.get(ml.$utils-data, 'utils', 'registry', $util, 'keywords') or ()
+				map.get(ml.$utils-db, 'utils', 'registry', $util, 'keywords') or ()
 			);
 		} @else {
 			@return ml.error('Invalid keyword group alias: `#{$group}`');
@@ -324,11 +324,11 @@ Styleguide: sass-tools.functions.high.utils
 		$section: list.nth($alias-list, 2);
 		$group: list.nth($alias-list, 3);
 
-		@if not map.has-key(ml.$utils-data, $section, 'keywords', $group) {
+		@if not map.has-key(ml.$utils-db, $section, 'keywords', $group) {
 			@return ml.error('Not found keywords on this path: `#{$section}.#{$group}`');
 		}
 
-		$values: map.get(ml.$utils-data, $section, 'keywords', $group);
+		$values: map.get(ml.$utils-db, $section, 'keywords', $group);
 	}
 
 	@return map.set($result, 'values', $values);
@@ -344,11 +344,11 @@ $-fn-prefix-length: string.length('convert-uv-');
 	);
 }
 
-ml.$utils-config: map.set(
-	ml.$utils-config,
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg,
 	'value-converters',
 	map.merge(
-		$-util-value-converters, map.get(ml.$utils-config, 'value-converters')
+		$-util-value-converters, map.get(ml.$utils-cfg, 'value-converters')
 	)
 );
 
@@ -360,10 +360,10 @@ $-util-range-generators: ();
 	);
 }
 
-ml.$utils-config: map.set(
-	ml.$utils-config,
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg,
 	'range-generators',
 	map.merge(
-		$-util-range-generators, map.get(ml.$utils-config, 'range-generators')
+		$-util-range-generators, map.get(ml.$utils-cfg, 'range-generators')
 	)
 );

@@ -12,7 +12,7 @@
 $-su-rem: ml.px2rem(ml.$su);
 $-gtr-sm-rem: ml.px2rem(ml.$gtr-sm);
 
-$-utils-directed: map.get(ml.$utils-config, 'directed');
+$-utils-directed: map.get(ml.$utils-cfg, 'directed');
 
 /*
 Utilities
@@ -87,7 +87,7 @@ Styleguide: sass-tools.mixins.utils
 			}
 		}
 
-		@each $key, $value in ml.$breakpoints {
+		@each $key, $value in ml.$bp-map {
 			@include ml.bpm($key) {
 				#{$selector}_#{$key} {
 					@content;
@@ -145,8 +145,8 @@ Styleguide: sass-tools.mixins.utils
 
 	@if list.index($-utils-directed, $util-name) {
 		$util-name: if($prop, $util-name, null);
-		$utils-data: ml.parse-util-directions($values, $util-name);
-		$utils-map: map.get($utils-data, 'utils-map');
+		$utils-db: ml.parse-util-directions($values, $util-name);
+		$utils-map: map.get($utils-db, 'utils-map');
 
 		@each $key, $value in $utils-map {
 			$util-index: list.index($utils-map, ($key $value));
@@ -156,8 +156,8 @@ Styleguide: sass-tools.mixins.utils
 				$value,
 				$bp,
 				$states,
-				list.nth(map.get($utils-data, 'props'), $util-index),
-				list.nth(map.get($utils-data, 'directions'), $util-index)
+				list.nth(map.get($utils-db, 'props'), $util-index),
+				list.nth(map.get($utils-db, 'directions'), $util-index)
 			);
 		}
 	} @else {
@@ -256,7 +256,7 @@ Styleguide: sass-tools.mixins.utils
 	$group-data: ml.new-parse-util($raw-name);
 	$group-name: map.get($group-data, 'value');
 
-	@if not map.has-key(ml.$utils-data, 'groups', 'registry', $group-name) {
+	@if not map.has-key(ml.$utils-db, 'groups', 'registry', $group-name) {
 		@error 'Group `#{$group-name}` not defined in registry';
 	}
 
@@ -266,7 +266,7 @@ Styleguide: sass-tools.mixins.utils
 
 	$i: 1;
 
-	@each $util in map.get(ml.$utils-data, 'groups', 'registry', $group-name) {
+	@each $util in map.get(ml.$utils-db, 'groups', 'registry', $group-name) {
 		@include mu.new-mk-util(
 			$util,
 			$values,

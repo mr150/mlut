@@ -96,7 +96,7 @@ $-gtr-fallback-rem: ml.px2rem(ml.$grid-default-gtr);
 		@return null;
 	}
 
-	$def-unit: map.get(ml.$utils-data, 'utils', 'registry', $util, 'default-unit');
+	$def-unit: map.get(ml.$utils-db, 'utils', 'registry', $util, 'default-unit');
 
 	$value-part: $value-part-init + '#{$def-unit and "-" + $def-unit}) * ';
 	$fallback-list: ();
@@ -114,7 +114,7 @@ $-gtr-fallback-rem: ml.px2rem(ml.$grid-default-gtr);
 		),
 	);
 
-	@if map.get(ml.$utils-data, 'utils', 'registry', $util, 'directions') {
+	@if map.get(ml.$utils-db, 'utils', 'registry', $util, 'directions') {
 		$value-part: $value-part-init + '-rem) * ';
 		$value-parts: list.append(
 			$value-parts,
@@ -153,7 +153,7 @@ $-gtr-fallback-rem: ml.px2rem(ml.$grid-default-gtr);
 @if ml.$flag-css-vars == 1 {
 	$-utils-registry: ();
 
-	@each $item in map.get(ml.$utils-config, 'gg-fallback-list') {
+	@each $item in map.get(ml.$utils-cfg, 'gg-fallback-list') {
 		$props-map: ();
 		$props-list: ml.util-prop($item);
 
@@ -173,8 +173,8 @@ $-gtr-fallback-rem: ml.px2rem(ml.$grid-default-gtr);
 		);
 	}
 
-	ml.$utils-data: map.deep-merge(
-		ml.$utils-data,
+	ml.$utils-db: map.deep-merge(
+		ml.$utils-db,
 		(
 			'utils': ('registry': $-utils-registry)
 		)

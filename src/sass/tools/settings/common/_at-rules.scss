@@ -33,7 +33,7 @@ $kArOnly: 'ArOnly' !default;
 $kArSt: 'ArSt' !default;
 $kArStOnly: 'ArStOnly' !default;
 
-$at-rules-data: (
+$at-rules-db: (
 	'media': (
 		'alias': '',
 		'types': (
@@ -84,7 +84,7 @@ $at-rules-cfg: (
 
 $-common-registry: ();
 
-@each $key, $value in map.get(ml.$utils-data, 'common', 'registry') {
+@each $key, $value in map.get(ml.$utils-db, 'common', 'registry') {
 	$-common-registry: map.set(
 		$-common-registry,
 		string.to-lower-case($key),
@@ -92,8 +92,8 @@ $-common-registry: ();
 	);
 }
 
-ml.$utils-data: map.set(
-	ml.$utils-data,
+ml.$utils-db: map.set(
+	ml.$utils-db,
 	'media',
 	(
 		'registry': map.deep-merge(
@@ -178,25 +178,28 @@ ml.$utils-data: map.set(
 	),
 );
 
+$at-rules: () !default;
+$at-rules-data: () !default;
+$at-rules-config: () !default;
+$breakpoints: () !default;
+
+ml.$utils-db: ml.merge-utils-db(ml.$utils-db, $at-rules, 'media');
+
+$at-rules-db: map.deep-merge($at-rules-db, $at-rules);
+$at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules);
+$at-rules-cfg: map.merge($at-rules-cfg, 'breakpoints', $breakpoints);
+
 $at-rules-cfg: map.merge(
 	$at-rules-cfg,
 	'all-breakpoints',
 	map.get($at-rules-cfg, 'breakpoints')
 );
 
-$at-rules: () !default;
-$at-rules-conf: () !default;
-
-ml.$utils-data: ml.merge-utils-data(ml.$utils-data, $at-rules, 'media');
-
-$at-rules-data: map.deep-merge($at-rules-data, $at-rules);
-$at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-conf);
-
-$breakpoints: map.get($at-rules-cfg, 'breakpoints');
-$-custom-global-kw: map.get(ml.$utils-data, 'common', 'keywords', 'global');
+$bp-map: map.get($at-rules-cfg, 'breakpoints');
+$-custom-global-kw: map.get(ml.$utils-db, 'common', 'keywords', 'global');
 $-bp-kw-map: ();
 
-@each $key, $value in $breakpoints {
+@each $key, $value in $bp-map {
 	$-bp-kw-map: map.set($-bp-kw-map, ml.$tUGkw + $key, $value);
 }
 
@@ -204,8 +207,8 @@ $-bp-kw-map: ();
 	$-bp-kw-map: map.merge($-bp-kw-map, $-custom-global-kw);
 }
 
-ml.$utils-data: map.set(
-	ml.$utils-data, 'common', 'keywords', 'global', $-bp-kw-map
+ml.$utils-db: map.set(
+	ml.$utils-db, 'common', 'keywords', 'global', $-bp-kw-map
 );
 
 $tAOr: map.get($at-rules-cfg, 'tokens', 'or');
@@ -237,7 +240,7 @@ $abbr-separators: ();
 
 @each $item in list.join(
 	map.get($at-rules-cfg, 'abbr-separators'),
-	map.get(ml.$utils-config, 'abbr-separators'),
+	map.get(ml.$utils-cfg, 'abbr-separators'),
 ) {
 	@if $item != '' {
 		$abbr-separators: list.append($abbr-separators, $item);

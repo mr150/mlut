@@ -51,13 +51,13 @@ Styleguide: sass-tools.functions.high.at_rules
 
 	@if not $feature {
 		@return ml.error(
-			'Invalid feature abbreviation: `#{$abbr}`. `#{$abbr}` is not defined in `#{$section}` section of $utils-data map'
+			'Invalid feature abbreviation: `#{$abbr}`. `#{$abbr}` is not defined in `#{$section}` section of $utils-db map'
 		);
 	}
 
 	@if (
 		$abbr-value == '' and
-		not map.has-key(ml.$utils-data, $section, 'registry', $abbr-feature, 'keywords')
+		not map.has-key(ml.$utils-db, $section, 'registry', $abbr-feature, 'keywords')
 	) {
 		@return '(#{$feature})';
 	}
@@ -104,7 +104,7 @@ Styleguide: sass-tools.functions.high.at_rules
 //
 // Converts abbreviations to at-rules. The name of the converter begins with `convert-ar-` and ends with the name of the at-rule, which it corresponds. The exception is the breakpoint converter. All converters take the same arguments, see below.
 //
-// Converter is bind to the at-rule that contains in the `$at-rules-data` map. It is recorded on the 'converter' key in the map of the relevant rule.
+// Converter is bind to the at-rule that contains in the `$at-rules-db` map. It is recorded on the 'converter' key in the map of the relevant rule.
 //
 // Available converters:
 // ```scss
@@ -140,8 +140,8 @@ Styleguide: sass-tools.functions.high.at_rules
 		$bp-range: false;
 
 		@each $item in $queary-list {
-			@if map.has-key(ml.$at-rules-data, 'media', 'types', $item) {
-				$result: $result + map.get(ml.$at-rules-data, 'media', 'types', $item);
+			@if map.has-key(ml.$at-rules-db, 'media', 'types', $item) {
+				$result: $result + map.get(ml.$at-rules-db, 'media', 'types', $item);
 			} @else if string.slice($item, 1, 1) == ml.$tACs {
 				$item-name: string.slice($item, 2);
 
@@ -165,8 +165,8 @@ Styleguide: sass-tools.functions.high.at_rules
 					}
 
 					$result: $result + convert-bp-list($bp-list);
-				} @else if map.has-key(ml.$at-rules-data, 'media', 'custom', $item-name) {
-					$result: $result + map.get(ml.$at-rules-data, 'media', 'custom', $item-name);
+				} @else if map.has-key(ml.$at-rules-db, 'media', 'custom', $item-name) {
+					$result: $result + map.get(ml.$at-rules-db, 'media', 'custom', $item-name);
 				} @else if $bp-range {
 					$result: string.slice($result, 1, -(1 + string.length($and)));
 				} @else {
@@ -216,8 +216,8 @@ Styleguide: sass-tools.functions.high.at_rules
 		@if ml.str-starts($item, ml.$tACs) {
 			$item-name: string.slice($item, 2);
 
-			@if map.has-key(ml.$at-rules-data, 'supports', 'custom', $item-name) {
-				$converted: map.get(ml.$at-rules-data, 'supports', 'custom', $item-name);
+			@if map.has-key(ml.$at-rules-db, 'supports', 'custom', $item-name) {
+				$converted: map.get(ml.$at-rules-db, 'supports', 'custom', $item-name);
 			} @else {
 				@return ml.error('Undefined custom supports condition: `#{$item}`');
 			}
@@ -249,10 +249,10 @@ Styleguide: sass-tools.functions.high.at_rules
 	@return string.slice($result, 1, -(1 + string.length($operator)));
 }
 
-@each $key, $value in ml.$at-rules-data {
+@each $key, $value in ml.$at-rules-db {
 	@if meta.function-exists('convert-ar-#{$key}') {
-		ml.$at-rules-data: map.set(
-			ml.$at-rules-data, $key, 'converter', meta.get-function('convert-ar-#{$key}')
+		ml.$at-rules-db: map.set(
+			ml.$at-rules-db, $key, 'converter', meta.get-function('convert-ar-#{$key}')
 		);
 	}
 }

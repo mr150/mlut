@@ -5,8 +5,8 @@
 @use 'sass-true' as *;
 @use 'tools' as ml;
 
-ml.$utils-config: map.deep-merge(
-	ml.$utils-config,
+ml.$utils-cfg: map.deep-merge(
+	ml.$utils-cfg,
 	('value-types': (
 		'red-ppl': ('number', ml.$tCVcp, 'cust-prop', 'cp-suffix'),
 		'tst-ppl': ('cust-prop', ml.$tCVcp, 'cp-suffix'),
@@ -14,8 +14,8 @@ ml.$utils-config: map.deep-merge(
 	)
 );
 
-ml.$utils-data: map.deep-merge(
-	ml.$utils-data,
+ml.$utils-db: map.deep-merge(
+	ml.$utils-db,
 	('utils':
 	(
 		'registry': (
@@ -77,8 +77,8 @@ ml.$utils-data: map.deep-merge(
 	@return string.insert($value + '', '-suf', -2);
 }
 
-ml.$utils-config: map.set(
-	ml.$utils-config,
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg,
 	'value-converters',
 	'cp-suffix',
 	meta.get-function('cp-suffix')

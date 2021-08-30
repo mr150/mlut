@@ -111,12 +111,14 @@ $util-val-css-var-prefix: ml.$css-var-prefix !default;
 //
 // Styleguide: sass-tools.settings.utils.states
 
-$utils: () !default;
 $uv-type-default: ('number', 'global-kw', 'cust-prop',) !default;
 $uv-type-keyword: list.set-nth($uv-type-default, 1, 'keyword');
+$utils: () !default;
+$utils-config: () !default;
+$utils-data: () !default;
 
 //stylelint-disable
-$utils-config: (
+$utils-cfg: (
 	'directed': (
 		'M',
 		'P',
@@ -229,37 +231,36 @@ $utils-config: (
 	),
 ) !default;
 
-$utils-config: map.deep-merge($utils-config, $utils);
+$utils-up-specif: map.get($utils-cfg, 'up-specificity');
+$utils-cfg: map.deep-merge($utils-cfg, $utils-config);
 
-$utils-up-specif: map.get($utils-config, 'up-specificity');
-
-$tUSv: map.get($utils-config, 'tokens', 'util', 'str-value');
-$tUNv: map.get($utils-config, 'tokens', 'util', 'num-value');
-$tURv: map.get($utils-config, 'tokens', 'util', 'raw-value');
-$tUHv: map.get($utils-config, 'tokens', 'util', 'hash-value');
-$tUFv: map.get($utils-config, 'tokens', 'util', 'fallback-value');
-$tUVm: map.get($utils-config, 'tokens', 'util', 'value-modifier');
-$tUGkw: map.get($utils-config, 'tokens', 'util', 'global-keyword');
-$tUCp: map.get($utils-config, 'tokens', 'util', 'custom-property');
-$tUIm: map.get($utils-config, 'tokens', 'util', 'important');
-$tUCm: map.get($utils-config, 'tokens', 'util', 'component');
-$tUSp: map.get($utils-config, 'tokens', 'util', 'space');
-$tUKwc: map.get($utils-config, 'tokens', 'util', 'keyword-chain');
-$tUKwa: map.get($utils-config, 'tokens', 'util', 'keywords-alias');
-$tULs1: map.get($utils-config, 'tokens', 'util', 'list-separator1');
-$tULs2: map.get($utils-config, 'tokens', 'util', 'list-separator2');
-$tSOr: map.get($utils-config, 'tokens', 'states', 'or');
-$tSAnd: map.get($utils-config, 'tokens', 'states', 'and');
-$tSNot: map.get($utils-config, 'tokens', 'states', 'not');
-$tSCs: map.get($utils-config, 'tokens', 'states', 'custom');
-$tSTu: map.get($utils-config, 'tokens', 'states', 'this-util');
-$tSCn: map.get($utils-config, 'tokens', 'states', 'context');
-$tSRaw: map.get($utils-config, 'tokens', 'states', 'raw');
+$tUSv: map.get($utils-cfg, 'tokens', 'util', 'str-value');
+$tUNv: map.get($utils-cfg, 'tokens', 'util', 'num-value');
+$tURv: map.get($utils-cfg, 'tokens', 'util', 'raw-value');
+$tUHv: map.get($utils-cfg, 'tokens', 'util', 'hash-value');
+$tUFv: map.get($utils-cfg, 'tokens', 'util', 'fallback-value');
+$tUVm: map.get($utils-cfg, 'tokens', 'util', 'value-modifier');
+$tUGkw: map.get($utils-cfg, 'tokens', 'util', 'global-keyword');
+$tUCp: map.get($utils-cfg, 'tokens', 'util', 'custom-property');
+$tUIm: map.get($utils-cfg, 'tokens', 'util', 'important');
+$tUCm: map.get($utils-cfg, 'tokens', 'util', 'component');
+$tUSp: map.get($utils-cfg, 'tokens', 'util', 'space');
+$tUKwc: map.get($utils-cfg, 'tokens', 'util', 'keyword-chain');
+$tUKwa: map.get($utils-cfg, 'tokens', 'util', 'keywords-alias');
+$tULs1: map.get($utils-cfg, 'tokens', 'util', 'list-separator1');
+$tULs2: map.get($utils-cfg, 'tokens', 'util', 'list-separator2');
+$tSOr: map.get($utils-cfg, 'tokens', 'states', 'or');
+$tSAnd: map.get($utils-cfg, 'tokens', 'states', 'and');
+$tSNot: map.get($utils-cfg, 'tokens', 'states', 'not');
+$tSCs: map.get($utils-cfg, 'tokens', 'states', 'custom');
+$tSTu: map.get($utils-cfg, 'tokens', 'states', 'this-util');
+$tSCn: map.get($utils-cfg, 'tokens', 'states', 'context');
+$tSRaw: map.get($utils-cfg, 'tokens', 'states', 'raw');
 $tSTucv: $tSTu + $tUSv;
-$tCVcp: map.get($utils-config, 'tokens', 'common', 'value-converts-pipeline');
+$tCVcp: map.get($utils-cfg, 'tokens', 'common', 'value-converts-pipeline');
 
-$utils-config: map.set(
-	$utils-config,
+$utils-cfg: map.set(
+	$utils-cfg,
 	'tokens-values',
 	(
 		$tULs1: comma,
@@ -267,8 +268,8 @@ $utils-config: map.set(
 	)
 );
 
-$utils-config: map.set(
-	$utils-config,
+$utils-cfg: map.set(
+	$utils-cfg,
 	'abbr-separators',
 	list.join(
 		(
@@ -277,7 +278,7 @@ $utils-config: map.set(
 			$tURv,
 			$tUHv,
 		),
-		map.get($utils-config, 'abbr-separators')
+		map.get($utils-cfg, 'abbr-separators')
 	)
 );
 
@@ -288,7 +289,7 @@ $-css-wide-kw: (
 	'us': unset,
 );
 
-$utils-data: (
+$utils-db: (
 	'utils': (
 		'registry': (
 			'-Gsc': ml.$var-grid-cols,
@@ -418,7 +419,7 @@ $utils-data: (
 	),
 ) !default;
 
-@function merge-utils-data($target, $data, $section) {
+@function merge-utils-db($target, $data, $section) {
 	$registry: if(
 		map.has-key($data, 'registry'),
 		map.get($data, 'registry'),
@@ -442,21 +443,22 @@ $utils-data: (
 	);
 }
 
-$utils-data: map.merge(
-	$utils-data,
+$utils-db: map.deep-merge($utils-db, $utils-db);
+$utils-db: map.merge(
+	$utils-db,
 	'utils',
 	'registry',
-	map.get($utils-data, 'common', 'registry')
+	map.get($utils-db, 'common', 'registry')
 );
 
-$utils-data: merge-utils-data($utils-data, $utils, 'utils');
+$utils-db: merge-utils-db($utils-db, $utils, 'utils');
 $utils: map.remove($utils, 'registry');
 $utils: map.remove($utils, 'map');
 
 $utils-states: map.merge(
-	map.get($utils-config, 'states', 'pseudo'),
+	map.get($utils-cfg, 'states', 'pseudo'),
 	map.merge(
-		map.get($utils-config, 'states', 'special'),
-		map.get($utils-config, 'states', 'custom'),
+		map.get($utils-cfg, 'states', 'special'),
+		map.get($utils-cfg, 'states', 'custom'),
 	)
 );

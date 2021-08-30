@@ -25,8 +25,8 @@ Styleguide: sass-tools.functions.base.getters
 // Styleguide: sass-tools.functions.base.getters.bp
 
 @function bp($name, $error-handler: 1) {
-	@if map.has-key(ml.$breakpoints, $name) or $error-handler == 0 {
-		@return map.get(ml.$breakpoints, $name);
+	@if map.has-key(ml.$bp-map, $name) or $error-handler == 0 {
+		@return map.get(ml.$bp-map, $name);
 	}
 
 	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-breakpoints';
@@ -46,14 +46,14 @@ Styleguide: sass-tools.functions.base.getters
 // Styleguide: sass-tools.functions.base.getters.bp_next
 
 @function bp-next($bp: 0, $data-type: 'value') {
-	@if $bp == 0 or map.has-key(ml.$breakpoints, $bp) {
-		$bp-keys: map.keys(ml.$breakpoints);
+	@if $bp == 0 or map.has-key(ml.$bp-map, $bp) {
+		$bp-keys: map.keys(ml.$bp-map);
 		$bp-index: if($bp != 0, list.index($bp-keys, $bp), 0);
 
 		@if $data-type == 'name' {
-			@return if($bp-index < list.length($bp-keys), list.nth(map.keys(ml.$breakpoints), $bp-index + 1), 0);
+			@return if($bp-index < list.length($bp-keys), list.nth(map.keys(ml.$bp-map), $bp-index + 1), 0);
 		} @else {
-			@return if($bp-index < list.length($bp-keys), list.nth(map.values(ml.$breakpoints), $bp-index + 1), 0);
+			@return if($bp-index < list.length($bp-keys), list.nth(map.values(ml.$bp-map), $bp-index + 1), 0);
 		}
 	}
 
@@ -89,14 +89,14 @@ Styleguide: sass-tools.functions.base.getters
 // Styleguide: sass-tools.functions.base.getters.bp_prev
 
 @function bp-prev($bp: 0, $data-type: 'value') {
-	@if $bp == 0 or map.has-key(ml.$breakpoints, $bp) {
-		$bp-keys: map.keys(ml.$breakpoints);
+	@if $bp == 0 or map.has-key(ml.$bp-map, $bp) {
+		$bp-keys: map.keys(ml.$bp-map);
 		$bp-index: if($bp != 0, list.index($bp-keys, $bp), list.length($bp-keys) + 1);
 
 		@if $data-type == 'name' {
-			@return if($bp-index > 1, list.nth(map.keys(ml.$breakpoints), $bp-index - 1), 0);
+			@return if($bp-index > 1, list.nth(map.keys(ml.$bp-map), $bp-index - 1), 0);
 		} @else {
-			@return if($bp-index > 1, list.nth(map.values(ml.$breakpoints), $bp-index - 1), 0);
+			@return if($bp-index > 1, list.nth(map.values(ml.$bp-map), $bp-index - 1), 0);
 		}
 	}
 
@@ -195,7 +195,7 @@ Styleguide: sass-tools.functions.base.getters
 @function util-prop(
 	$name, $section: 'utils', $name-as-prop: false, $single: false
 ) {
-	$options: map.get(ml.$utils-data, $section, 'registry', $name);
+	$options: map.get(ml.$utils-db, $section, 'registry', $name);
 	$prop: null;
 
 	@if meta.type-of($options) == 'map' {

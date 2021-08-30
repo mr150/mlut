@@ -4,8 +4,8 @@
 
 $this: 'D';
 
-ml.$utils-config: map.set(
-	ml.$utils-config, 'states', 'keywords', 'st1', ('iv' 'vl')
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg, 'states', 'keywords', 'st1', ('iv' 'vl')
 );
 
 ml.$utils-states: map.set(
@@ -84,7 +84,7 @@ ml.$utils-states: map.set(
 						display: flex;
 					}
 
-					@each $key, $value in map.get(ml.$utils-config, 'states', 'pseudo') {
+					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo') {
 						.D-f_#{$key + $value} {
 							display: flex;
 						}
@@ -102,7 +102,7 @@ ml.$utils-states: map.set(
 				}
 
 				@include expect(false) {
-					@each $key, $value in map.get(ml.$utils-config, 'states', 'pseudo') {
+					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo') {
 						.D-f_\:\^\:#{$key} .-Ctx#{$value} {
 							display: flex;
 						}
@@ -120,7 +120,7 @@ ml.$utils-states: map.set(
 				}
 
 				@include expect(false) {
-					@each $item in map.get(ml.$utils-config, 'states', 'keywords', 'st1') {
+					@each $item in map.get(ml.$utils-cfg, 'states', 'keywords', 'st1') {
 						.D-f_h\:#{$item + ':hover' + map.get(ml.$utils-states, $item)} {
 							display: flex;
 						}
@@ -193,7 +193,7 @@ ml.$utils-states: map.set(
 				}
 
 				@include expect(false) {
-					@each $key, $value in map.get(ml.$utils-config, 'states', 'pseudo') {
+					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo') {
 						.-Ctx-ct1#{$value} .\^ct1\:#{$key}_D-f {
 							display: flex;
 						}
@@ -543,16 +543,16 @@ ml.$utils-states: map.set(
 				}
 			}
 
-			ml.$tUSv: map.get(ml.$utils-config, 'tokens', 'util', 'str-value');
-			ml.$tUNv: map.get(ml.$utils-config, 'tokens', 'util', 'num-value');
-			ml.$tUCm: map.get(ml.$utils-config, 'tokens', 'util', 'component');
-			ml.$tSOr: map.get(ml.$utils-config, 'tokens', 'states', 'or');
-			ml.$tSAnd: map.get(ml.$utils-config, 'tokens', 'states', 'and');
-			ml.$tSNot: map.get(ml.$utils-config, 'tokens', 'states', 'not');
-			ml.$tSCs: map.get(ml.$utils-config, 'tokens', 'states', 'custom');
-			ml.$tSTu: map.get(ml.$utils-config, 'tokens', 'states', 'this-util');
-			ml.$tSCn: map.get(ml.$utils-config, 'tokens', 'states', 'context');
-			ml.$tSRaw: map.get(ml.$utils-config, 'tokens', 'states', 'raw');
+			ml.$tUSv: map.get(ml.$utils-cfg, 'tokens', 'util', 'str-value');
+			ml.$tUNv: map.get(ml.$utils-cfg, 'tokens', 'util', 'num-value');
+			ml.$tUCm: map.get(ml.$utils-cfg, 'tokens', 'util', 'component');
+			ml.$tSOr: map.get(ml.$utils-cfg, 'tokens', 'states', 'or');
+			ml.$tSAnd: map.get(ml.$utils-cfg, 'tokens', 'states', 'and');
+			ml.$tSNot: map.get(ml.$utils-cfg, 'tokens', 'states', 'not');
+			ml.$tSCs: map.get(ml.$utils-cfg, 'tokens', 'states', 'custom');
+			ml.$tSTu: map.get(ml.$utils-cfg, 'tokens', 'states', 'this-util');
+			ml.$tSCn: map.get(ml.$utils-cfg, 'tokens', 'states', 'context');
+			ml.$tSRaw: map.get(ml.$utils-cfg, 'tokens', 'states', 'raw');
 			ml.$tSTucv: ml.$tSTu + ml.$tUSv;
 		}
 	}

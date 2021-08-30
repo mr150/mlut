@@ -2,8 +2,8 @@
 @use 'sass-true' as *;
 @use 'tools' as ml;
 
-ml.$utils-data: map.deep-merge(
-	ml.$utils-data,
+ml.$utils-db: map.deep-merge(
+	ml.$utils-db,
 	('utils':
 	(
 		'registry': (
@@ -45,7 +45,7 @@ ml.$utils-data: map.deep-merge(
 
 			@include assert-equal(
 				ml.convert-feature-abbr('ic'),
-				'ERROR: Invalid feature abbreviation: `ic`. `ic` is not defined in `utils` section of $utils-data map',
+				'ERROR: Invalid feature abbreviation: `ic`. `ic` is not defined in `utils` section of $utils-db map',
 			);
 		}
 

@@ -3,12 +3,12 @@
 @use 'sass:map';
 @use 'sass:list';
 
-ml.$utils-config: map.set(
-	ml.$utils-config, 'states', 'keywords', 'st1', ('iv' 'vl')
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg, 'states', 'keywords', 'st1', ('iv' 'vl')
 );
 
-ml.$utils-data: map.deep-merge(
-	ml.$utils-data,
+ml.$utils-db: map.deep-merge(
+	ml.$utils-db,
 	('utils':
 	(
 		'registry': (
@@ -899,11 +899,11 @@ ml.$utils-data: map.deep-merge(
 
 				@include expect(false) {
 					.Maw-\$lg {
-						max-width: map.get(ml.$utils-data, 'common', 'keywords', 'global', '$lg');
+						max-width: map.get(ml.$utils-db, 'common', 'keywords', 'global', '$lg');
 					}
 
 					.Maw-\$lg_af::after {
-						max-width: map.get(ml.$utils-data, 'common', 'keywords', 'global', '$lg');
+						max-width: map.get(ml.$utils-db, 'common', 'keywords', 'global', '$lg');
 					}
 
 					.Maw--card-sm {
@@ -1106,8 +1106,8 @@ ml.$utils-data: map.deep-merge(
 		}
 
 		@include it('make util using keywords aliases') {
-			ml.$utils-data: map.set(
-				ml.$utils-data, 'common', 'keywords', 'colors', (
+			ml.$utils-db: map.set(
+				ml.$utils-db, 'common', 'keywords', 'colors', (
 					't': transparent,
 					'cc': currentColor,
 				)

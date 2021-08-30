@@ -32,7 +32,7 @@
 		$unit: math.unit($val-number);
 
 		$unit-number: map.get(
-			ml.$utils-config, 'units', map.get($data, 'units-key') or 'default', $unit
+			ml.$utils-cfg, 'units', map.get($data, 'units-key') or 'default', $unit
 		);
 
 		@if $unit-number {
@@ -43,7 +43,7 @@
 			$unit-converter: meta.get-function($unit, false, ml);
 
 			@if map.get(
-				ml.$utils-data, $section, 'registry', $name, 'directions'
+				ml.$utils-db, $section, 'registry', $name, 'directions'
 			) and map.get($data, 'list-length') == 1 {
 				@return (
 					meta.call($unit-converter, $val-number, 'rem')
@@ -54,7 +54,7 @@
 			@return meta.call(
 				$unit-converter,
 				$val-number,
-				map.get(ml.$utils-data, $section, 'registry', $name, 'default-unit')
+				map.get(ml.$utils-db, $section, 'registry', $name, 'default-unit')
 			);
 		}
 
@@ -69,32 +69,32 @@
 	$section: map.get($data, 'section');
 
 	@if map.has-key(
-		ml.$utils-data, $section, 'registry', $name, 'keywords', $value
+		ml.$utils-db, $section, 'registry', $name, 'keywords', $value
 	) {
 		@return map.get(
-			ml.$utils-data, $section, 'registry', $name, 'keywords', $value
+			ml.$utils-db, $section, 'registry', $name, 'keywords', $value
 		);
 	}
 
 	@if map.has-key(
-		ml.$utils-data, $section, 'registry', $name, 'custom-keywords', $value
+		ml.$utils-db, $section, 'registry', $name, 'custom-keywords', $value
 	) {
 		@return map.get(
-			ml.$utils-data, $section, 'registry', $name, 'custom-keywords', $value
+			ml.$utils-db, $section, 'registry', $name, 'custom-keywords', $value
 		);
 	}
 
 	$link: map.get(
-		ml.$utils-data, $section, 'registry', $name, 'keywords'
+		ml.$utils-db, $section, 'registry', $name, 'keywords'
 	);
 
-	@if map.has-key(ml.$utils-data, $section, 'keywords', $link, $value) {
-		@return map.get(ml.$utils-data, $section, 'keywords', $link, $value);
+	@if map.has-key(ml.$utils-db, $section, 'keywords', $link, $value) {
+		@return map.get(ml.$utils-db, $section, 'keywords', $link, $value);
 	}
 
 	@return if(
-		map.has-key(ml.$utils-data, 'common', 'keywords', $link, $value),
-		map.get(ml.$utils-data, 'common', 'keywords', $link, $value),
+		map.has-key(ml.$utils-db, 'common', 'keywords', $link, $value),
+		map.get(ml.$utils-db, 'common', 'keywords', $link, $value),
 		$value
 	);
 }
@@ -117,15 +117,15 @@
 
 @function convert-uv-global-kw($value, $data: ()) {
 	@if map.has-key(
-		ml.$utils-data, 'common', 'keywords', 'css-oft', $value
+		ml.$utils-db, 'common', 'keywords', 'css-oft', $value
 	) {
 		@return map.get(
-			ml.$utils-data, 'common', 'keywords', 'css-oft', $value
+			ml.$utils-db, 'common', 'keywords', 'css-oft', $value
 		);
 	}
 
 	@return (
-		map.get(ml.$utils-data, 'common', 'keywords', 'global', $value) or $value
+		map.get(ml.$utils-db, 'common', 'keywords', 'global', $value) or $value
 	);
 }
 
@@ -174,10 +174,10 @@ $-tUCp-length: string.length(ml.$tUCp);
 
 @function convert-uv-color($value, $data: ()) {
 	@if map.has-key(
-		ml.$utils-data, 'common', 'keywords', 'colors', $value
+		ml.$utils-db, 'common', 'keywords', 'colors', $value
 	) {
 		@return map.get(
-			ml.$utils-data, 'common', 'keywords', 'colors', $value
+			ml.$utils-db, 'common', 'keywords', 'colors', $value
 		);
 	}
 

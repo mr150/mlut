@@ -2,8 +2,8 @@
 @use 'sass-true' as *;
 @use 'tools' as ml;
 
-ml.$utils-data: map.deep-merge(
-	ml.$utils-data,
+ml.$utils-db: map.deep-merge(
+	ml.$utils-db,
 	('utils':
 	(
 		'registry': (
@@ -34,9 +34,9 @@ ml.$utils-data: map.deep-merge(
 	),
 );
 
-$-global-kw: map.get(ml.$utils-data, 'common', 'keywords', 'global');
-ml.$utils-data: map.set(
-	ml.$utils-data, 'common', 'keywords', 'global', ('$opDef': 0.88, '$trsduDef': 0.3s,)
+$-global-kw: map.get(ml.$utils-db, 'common', 'keywords', 'global');
+ml.$utils-db: map.set(
+	ml.$utils-db, 'common', 'keywords', 'global', ('$opDef': 0.88, '$trsduDef': 0.3s,)
 );
 
 @include describe('tools/functions/common/utils/') {
@@ -145,6 +145,6 @@ ml.$utils-data: map.set(
 	}
 }
 
-ml.$utils-data: map.set(
-	ml.$utils-data, 'common', 'keywords', 'global', $-global-kw
+ml.$utils-db: map.set(
+	ml.$utils-db, 'common', 'keywords', 'global', $-global-kw
 );

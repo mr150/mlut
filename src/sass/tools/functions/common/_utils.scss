@@ -25,14 +25,14 @@
 		$space: ' ';
 
 		$multi-list-sep: if(
-			map.has-key(ml.$utils-data, $section, 'registry', $name, 'multi-list-separator'),
-			map.get(ml.$utils-data, $section, 'registry', $name, 'multi-list-separator'),
+			map.has-key(ml.$utils-db, $section, 'registry', $name, 'multi-list-separator'),
+			map.get(ml.$utils-db, $section, 'registry', $name, 'multi-list-separator'),
 			ml.$tULs1
 		);
 
 		@if string.index($util-val, $multi-list-sep) or string.index($util-val, ml.$tUSp) {
 			$result: ();
-			$separator: map.get(ml.$utils-config, 'tokens-values', $multi-list-sep);
+			$separator: map.get(ml.$utils-cfg, 'tokens-values', $multi-list-sep);
 
 			@each $list in ml.str-split($util-val, $multi-list-sep) {
 				$items: ml.str-split($list, ml.$tUSp);
@@ -76,17 +76,17 @@
 	}
 
 	$value-type: (
-		map.get(ml.$utils-data, $section, 'registry', $name, 'value-type') or
+		map.get(ml.$utils-db, $section, 'registry', $name, 'value-type') or
 		'default'
 	);
 	$is-pipeline: false;
 
-	@each $item in map.get(ml.$utils-config, 'value-types', $value-type) {
-		@if map.has-key(ml.$utils-config, 'value-converters', $item) {
+	@each $item in map.get(ml.$utils-cfg, 'value-types', $value-type) {
+		@if map.has-key(ml.$utils-cfg, 'value-converters', $item) {
 			$prev-value: $util-value;
 
 			$util-value: meta.call(
-				map.get(ml.$utils-config, 'value-converters', $item),
+				map.get(ml.$utils-cfg, 'value-converters', $item),
 				$util-value,
 				(
 					'name': $name,

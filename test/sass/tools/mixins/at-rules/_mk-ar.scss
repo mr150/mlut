@@ -114,7 +114,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 				}
 
 				@include expect() {
-					@each $bp, $value in ml.$breakpoints {
+					@each $bp, $value in ml.$bp-map {
 						@media (min-width: $value) {
 							@supports (display: inline-grid) {
 								width: 50%;
@@ -181,7 +181,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 						width: 50%;
 					}
 
-					@each $bp, $value in ml.$breakpoints {
+					@each $bp, $value in ml.$bp-map {
 						@media (min-width: $value) {
 							width: 50%;
 						}
@@ -260,8 +260,8 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 				}
 			}
 
-			ml.$tUSv: map.get(ml.$utils-config, 'tokens', 'util', 'str-value');
-			ml.$tUNv: map.get(ml.$utils-config, 'tokens', 'util', 'num-value');
+			ml.$tUSv: map.get(ml.$utils-cfg, 'tokens', 'util', 'str-value');
+			ml.$tUNv: map.get(ml.$utils-cfg, 'tokens', 'util', 'num-value');
 			ml.$tAOr: map.get(ml.$at-rules-cfg, 'tokens', 'or');
 			ml.$tAAnd: map.get(ml.$at-rules-cfg, 'tokens', 'and');
 			ml.$tANot: map.get(ml.$at-rules-cfg, 'tokens', 'not');
