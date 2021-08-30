@@ -54,7 +54,7 @@ $gtr-md: $gtr-sm !default;
 $gtr-lg: $grid-default-gtr !default;
 $gtr-xl: $gtr-lg !default;
 
-$grid-data: (
+$grid-cfg: (
 	'gutters': (
 		ml.$bp-sm: $gtr-sm,
 		ml.$bp-md: $gtr-md,
@@ -69,9 +69,9 @@ $grid-data: (
 	),
 ) !default;
 
-$grid-map: () !default;
+$grid-config: () !default;
 
-$grid-data: map.deep-merge($grid-data, $grid-map);
+$grid-cfg: map.deep-merge($grid-cfg, $grid-config);
 
-$grid-gutters: map.get($grid-data, 'gutters');
-$grid-cols: map.get($grid-data, 'cols');
+$grid-gutters: map.get($grid-cfg, 'gutters');
+$grid-cols: map.get($grid-cfg, 'cols');

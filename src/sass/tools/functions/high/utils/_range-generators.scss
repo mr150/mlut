@@ -39,10 +39,10 @@
 		$css-unit: map.get(ml.$units-all, $css-unit-name);
 	}
 
-	@if map.has-key(ml.$general-data, 'custom-unit-values', $unit-name) {
+	@if map.has-key(ml.$general-cfg, 'custom-unit-values', $unit-name) {
 		$css-unit: map.get(
-			ml.$general-data, 'custom-unit-values', $unit-name, $css-unit-name
-		) or map.get(ml.$general-data, 'custom-unit-values', $unit-name);
+			ml.$general-cfg, 'custom-unit-values', $unit-name, $css-unit-name
+		) or map.get(ml.$general-cfg, 'custom-unit-values', $unit-name);
 	}
 
 	$step: if((list.length($range) > 2), list.nth($range, 3), 1);

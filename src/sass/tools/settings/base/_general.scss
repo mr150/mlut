@@ -53,7 +53,7 @@ $spec-chars: (
 
 $number-max: 2e9 !default;
 
-$general-data: (
+$general-cfg: (
 	'main-directions': (
 		't': top,
 		'r': right,
@@ -116,30 +116,30 @@ $general-data: (
 	),
 ) !default;
 
-$general: () !default;
+$general-config: () !default;
 
-$general-data: map.deep-merge($general-data, $general);
+$general-cfg: map.deep-merge($general-cfg, $general-config);
 
-$su: map.get($general-data, 'custom-unit-values', 'su', 'px');
-$su-rem: map.get($general-data, 'custom-unit-values', 'su', 'rem');
+$su: map.get($general-cfg, 'custom-unit-values', 'su', 'px');
+$su-rem: map.get($general-cfg, 'custom-unit-values', 'su', 'rem');
 
-$main-directions: map.get($general-data, 'main-directions');
+$main-directions: map.get($general-cfg, 'main-directions');
 
 $units-all: map.merge(
-	map.get($general-data, 'units', 'css'),
-	map.get($general-data, 'units', 'custom'),
+	map.get($general-cfg, 'units', 'css'),
+	map.get($general-cfg, 'units', 'custom'),
 );
 
 $-prefixed-vars: ();
 
-@each $key, $value in map.get($general-data, 'css-vars') {
+@each $key, $value in map.get($general-cfg, 'css-vars') {
 	$-prefixed-vars: map.set(
 		$-prefixed-vars, $key, '--#{$css-var-prefix}#{$value}'
 	);
 }
 
-$general-data: map.set($general-data, 'css-vars', $-prefixed-vars);
+$general-cfg: map.set($general-cfg, 'css-vars', $-prefixed-vars);
 
-$var-gg: map.get($general-data, 'css-vars', 'gg');
-$var-gg-rem: map.get($general-data, 'css-vars', 'gg-rem');
-$var-grid-cols: map.get($general-data, 'css-vars', 'grid-cols');
+$var-gg: map.get($general-cfg, 'css-vars', 'gg');
+$var-gg-rem: map.get($general-cfg, 'css-vars', 'gg-rem');
+$var-grid-cols: map.get($general-cfg, 'css-vars', 'grid-cols');
