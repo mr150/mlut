@@ -117,8 +117,10 @@ $general-cfg: (
 ) !default;
 
 $general-config: () !default;
+$general-config-ext: () !default;
 
 $general-cfg: map.deep-merge($general-cfg, $general-config);
+$general-cfg: map.deep-merge($general-cfg, $general-config-ext);
 
 $su: map.get($general-cfg, 'custom-unit-values', 'su', 'px');
 $su-rem: map.get($general-cfg, 'custom-unit-values', 'su', 'rem');

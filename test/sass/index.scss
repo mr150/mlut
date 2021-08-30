@@ -29,14 +29,21 @@
 					'keywords': ('se': space-evenly),
 					'value-type': 'keyword',
 				),
+				'Pos': null,
+			),
+		),
+	),
+	$utils-data-ext: (
+		'utils': (
+			'registry': (
 				'Pos': (
 					'properties': position,
 					'keywords': ('sk': sticky),
 					'value-type': 'keyword',
 				),
-			),
+			)
 		),
-	),
+	)
 );
 
 @use 'tools/functions';

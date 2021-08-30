@@ -179,12 +179,18 @@ ml.$utils-db: map.set(
 );
 
 $at-rules-data: () !default;
+$at-rules-data-ext: () !default;
 $at-rules-config: () !default;
+$at-rules-config-ext: () !default;
 $breakpoints: () !default;
+$breakpoints-ext: () !default;
 
 $at-rules-db: map.deep-merge($at-rules-db, $at-rules-data);
+$at-rules-db: map.deep-merge($at-rules-db, $at-rules-data-ext);
 $at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-config);
+$at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-config-ext);
 $at-rules-cfg: map.merge($at-rules-cfg, 'breakpoints', $breakpoints);
+$at-rules-cfg: map.merge($at-rules-cfg, 'breakpoints', $breakpoints-ext);
 
 $at-rules-cfg: map.merge(
 	$at-rules-cfg,

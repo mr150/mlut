@@ -70,8 +70,10 @@ $grid-cfg: (
 ) !default;
 
 $grid-config: () !default;
+$grid-config-ext: () !default;
 
 $grid-cfg: map.deep-merge($grid-cfg, $grid-config);
+$grid-cfg: map.deep-merge($grid-cfg, $grid-config-ext);
 
 $grid-gutters: map.get($grid-cfg, 'gutters');
 $grid-cols: map.get($grid-cfg, 'cols');

@@ -114,7 +114,9 @@ $util-val-css-var-prefix: ml.$css-var-prefix !default;
 $uv-type-default: ('number', 'global-kw', 'cust-prop',) !default;
 $uv-type-keyword: list.set-nth($uv-type-default, 1, 'keyword');
 $utils-config: () !default;
+$utils-config-ext: () !default;
 $utils-data: () !default;
+$utils-data-ext: () !default;
 
 //stylelint-disable
 $utils-cfg: (
@@ -231,6 +233,7 @@ $utils-cfg: (
 ) !default;
 
 $utils-cfg: map.deep-merge($utils-cfg, $utils-config);
+$utils-cfg: map.deep-merge($utils-cfg, $utils-config-ext);
 $utils-up-specif: map.get($utils-cfg, 'up-specificity');
 
 $tUSv: map.get($utils-cfg, 'tokens', 'util', 'str-value');
@@ -419,6 +422,7 @@ $utils-db: (
 ) !default;
 
 $utils-db: map.deep-merge($utils-db, $utils-data);
+$utils-db: map.deep-merge($utils-db, $utils-data-ext);
 $utils-db: map.merge(
 	$utils-db,
 	'utils',
