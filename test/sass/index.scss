@@ -5,33 +5,35 @@
 
 @use 'tools/settings' with (
 	$flag-test-env: true,
-	$utils: (
-		'registry': (
-			'-Xy': (
-				'properties': (
-					top,
-					right,
-					bottom,
-					left
+	$utils-data: (
+		'utils': (
+			'registry': (
+				'-Xy': (
+					'properties': (
+						top,
+						right,
+						bottom,
+						left
+					),
 				),
-			),
-			'D': (
-				'properties': display,
-				'value-type': 'keyword',
-				'keywords': (
-				'ig': inline-grid,
-				'f': flex,
+				'D': (
+					'properties': display,
+					'value-type': 'keyword',
+					'keywords': (
+					'ig': inline-grid,
+					'f': flex,
+					),
 				),
-			),
-			'Jc': (
-				'properties': justify-content,
-				'keywords': ('se': space-evenly),
-				'value-type': 'keyword',
-			),
-			'Pos': (
-				'properties': position,
-				'keywords': ('sk': sticky),
-				'value-type': 'keyword',
+				'Jc': (
+					'properties': justify-content,
+					'keywords': ('se': space-evenly),
+					'value-type': 'keyword',
+				),
+				'Pos': (
+					'properties': position,
+					'keywords': ('sk': sticky),
+					'value-type': 'keyword',
+				),
 			),
 		),
 	),

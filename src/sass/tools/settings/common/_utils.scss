@@ -113,7 +113,6 @@ $util-val-css-var-prefix: ml.$css-var-prefix !default;
 
 $uv-type-default: ('number', 'global-kw', 'cust-prop',) !default;
 $uv-type-keyword: list.set-nth($uv-type-default, 1, 'keyword');
-$utils: () !default;
 $utils-config: () !default;
 $utils-data: () !default;
 
@@ -231,8 +230,8 @@ $utils-cfg: (
 	),
 ) !default;
 
-$utils-up-specif: map.get($utils-cfg, 'up-specificity');
 $utils-cfg: map.deep-merge($utils-cfg, $utils-config);
+$utils-up-specif: map.get($utils-cfg, 'up-specificity');
 
 $tUSv: map.get($utils-cfg, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-cfg, 'tokens', 'util', 'num-value');
@@ -419,41 +418,13 @@ $utils-db: (
 	),
 ) !default;
 
-@function merge-utils-db($target, $data, $section) {
-	$registry: if(
-		map.has-key($data, 'registry'),
-		map.get($data, 'registry'),
-		()
-	);
-
-	$map: if(
-		map.has-key($data, 'map'),
-		map.get($data, 'map'),
-		()
-	);
-
-	@return map.deep-merge(
-		$target,
-		($section:
-		 (
-			 'registry': $registry,
-			 'map': $map,
-		 ),
-		)
-	);
-}
-
-$utils-db: map.deep-merge($utils-db, $utils-db);
+$utils-db: map.deep-merge($utils-db, $utils-data);
 $utils-db: map.merge(
 	$utils-db,
 	'utils',
 	'registry',
 	map.get($utils-db, 'common', 'registry')
 );
-
-$utils-db: merge-utils-db($utils-db, $utils, 'utils');
-$utils: map.remove($utils, 'registry');
-$utils: map.remove($utils, 'map');
 
 $utils-states: map.merge(
 	map.get($utils-cfg, 'states', 'pseudo'),

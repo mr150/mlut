@@ -178,15 +178,12 @@ ml.$utils-db: map.set(
 	),
 );
 
-$at-rules: () !default;
 $at-rules-data: () !default;
 $at-rules-config: () !default;
 $breakpoints: () !default;
 
-ml.$utils-db: ml.merge-utils-db(ml.$utils-db, $at-rules, 'media');
-
-$at-rules-db: map.deep-merge($at-rules-db, $at-rules);
-$at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules);
+$at-rules-db: map.deep-merge($at-rules-db, $at-rules-data);
+$at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-config);
 $at-rules-cfg: map.merge($at-rules-cfg, 'breakpoints', $breakpoints);
 
 $at-rules-cfg: map.merge(
