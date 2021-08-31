@@ -1,288 +1,13 @@
 @use 'sass:map';
 @use 'sass:list';
+@use 'sass:string';
 
-@use '../base/general' as ml;
-
-// Utilities
-//
-// Settings affecting the values and generation of the core utilities.
-//
-// $ml-Maw--fx0 = 288px - fixed width for cards. This is value for [Maw-fx0](section-core-utils.html#kssref-core-utils-bxz-maw) utility.
-// $ml-My-range = 4 - count of [Mt](section-core-utils.html#kssref-core-utils-margin) and [Mb](section-core-utils.html#kssref-core-utils-margin-mb) utilities.
-// $ml-P-range = 4 - count of [P](section-core-utils.html#kssref-core-utils-padding) utilities.
-// $ml--Gg-range = 5 - number of [-Gg](section-core-utils.html#kssref-core-utils-custom-gg) utility values in `su`.
-// $ml-Z-range = 4 - [z-index](section-core-utils.html#kssref-core-utils-pos-z) range. Counted from zero.
-// $ml-Z-max = 9999 - `z-index` max value.
-// $ml-Ord-range = 4 - [order](section-core-utils.html#kssref-core-utils-flex) range. Counted from -1.
-// $ml-Ff--ss0 - sans serif font stack contains default fonts on different OS.
-// $ml-Ff--m0 - monospace font stack contains default fonts on different OS.
-// $ml-Trsdu--def = 0.3s - default [transition](section-core-utils.html#kssref-core-utils-anim) duration.
-// $ml-utils-states-psd-cls - map with abbreviations of pseudo-classes for utilities.
-// $ml-utils-states-psd-elm - map with pseudo-elements abbreviations for utilities.
-// $ml-utils-states - map with abbreviations of utility state names. Maps of pseudo-classes and pseudo-elements merge into it.
-//
-// Styleguide: sass-tools.settings.utils
-
-$cGsg-range: 5 !default;
-
-$Z-max: 9999 !default;
-$Z-range: 4 !default;
-
-$Maw--fx0: 288px !default;
-
-$My-range: 4 !default;
-
-$P-range: 4 !default;
-
-$Ord-range: 4 !default;
-
-// stylelint-disable
-$Ff--ss0: (
-	-apple-system,
-	BlinkMacSystemFont,
-	'Segoe UI',
-	Roboto,
-	Oxygen,
-	Cantarell,
-	Ubuntu,
-	'Fira Sans',
-	'Droid Sans',
-	'Helvetica Neue',
-	Arial,
-	sans-serif
-) !default;
-
-$Ff--m0: (
-	SFMono-Regular,
-	Menlo,
-	Monaco,
-	Consolas,
-	'Liberation Mono',
-	'Courier New',
-	monospace
-) !default;
-// stylelint-enable
-
-$Trsdu--def: 0.3s !default;
-
-$cCtx: '-Ctx' !default;
-
-$states-ps: 'StPs' !default;
-$states-cmb: 'StCmb' !default;
-$kStOnly: 'StOnly' !default;
+@use '../base' as ml;
 
 $util-val-css-var-prefix: ml.$css-var-prefix !default;
 
-// Conversion to CSS
-//
-// Settings of conversion utilitie values to CSS values. All variables below are maps.
-//
-// $util-value-types - value types and lists of utilities that belong to this type.
-// $util-unit-aliases - utility unit aliases and corresponding CSS units.
-// $util-custom-units - [custom unit](section-concepts.html#kssref-concepts-su) names and their number values.
-// $util-css-keywords - keyword aliases and corresponding CSS global keywords.
-//
-// Styleguide: sass-tools.settings.utils.conversion
-
-// Maps with utilities states
-//
-// ```scss
-//$ml-utils-states-psd-cls: (
-//		'h': hover,
-//		'f': focus,
-//		'fw': focus-within,
-//		'h-f': (hover, focus),
-//		'a': active,
-//		'vl': valid,
-//		'iv': invalid,
-//);
-//
-//$ml-utils-states-psd-elm: (
-//		'bf': before,
-//		'af': after,
-//		'fln': first-line,
-//		'flt': first-letter,
-//);
-//
-//$ml-utils-states: (
-//		'noJs': null,
-//);
-// ```
-//
-// Styleguide: sass-tools.settings.utils.states
-
-$uv-type-default: ('number', 'global-kw', 'cust-prop',) !default;
-$uv-type-keyword: list.set-nth($uv-type-default, 1, 'keyword');
-$utils-config: () !default;
-$utils-config-ext: () !default;
 $utils-data: () !default;
 $utils-data-ext: () !default;
-
-//stylelint-disable
-$utils-cfg: (
-	'directed': (
-		'M',
-		'P',
-		'Bd',
-		'-X',
-		'-Y',
-		'-Xy',
-	),
-
-	'up-specificity': false,
-
-	'gg-fallback-list': (
-		'-X', '-Y', '-Xy', 'Maw', 'Miw', 'Mah', 'Mih', 'Fz', 'M', 'P', 'Lh', 'Lts', 'Tsh', 'Va', 'Bdw', 'Bd', 'Bdrs',
-	),
-
-	'value-types': (
-		'default': $uv-type-default,
-		'unitless': list.set-nth($uv-type-default, 1, 'unitless'),
-		'alpha': list.set-nth($uv-type-default, 1, 'alpha'),
-		'keyword': $uv-type-keyword,
-		'color': list.set-nth($uv-type-default, 1, 'color'),
-		'abbr-kw': list.join(('abbr', 'number'), $uv-type-keyword),
-		'resolution': list.join(
-			'keyword', list.set-nth($uv-type-default, 1, 'resolution')
-		),
-	),
-
-	'abbr-separators': (),
-
-	'value-converters': (),
-
-	'range-generators': (),
-
-	'units': (
-		'default': (
-			'': 1px,
-			'e': 1em,
-			'p': 1%,
-			'x': 1ex,
-			'r': 1rem,
-		),
-		'resolution': (
-			'i': 1dpi,
-			'c': 1dpcm,
-			'x': 1dppx,
-		),
-		'alpha': (
-			'p': 0.01,
-		),
-	),
-
-	'tokens': (
-		'util': (
-			'str-value': '-',
-			'raw-value': '=',
-			'num-value': '',
-			'hash-value': '',
-			'fallback-value': '?',
-			'value-modifier': '*',
-			'space': ';',
-			'custom-property': '-',
-			'global-keyword': '$',
-			'keyword-chain': '.',
-			'keywords-alias': 'KW',
-			'important': '!',
-			'list-separator1': ',',
-			'list-separator2': '/',
-			'component': '_',
-		),
-		'states': (
-			'or': ',',
-			'and': ':',
-			'not': '!',
-			'custom': '-',
-			'this-util': '&',
-			'context': '^',
-			'raw': '=',
-		),
-		'common': (
-			'value-converts-pipeline': 'Pl',
-		),
-	),
-
-	'states': (
-		'pseudo': (
-			'h': ':hover',
-			'f': ':focus',
-			'fw': ':focus-within',
-			'a': ':active',
-			'vl': ':valid',
-			'iv': ':invalid',
-			'bf': '::before',
-			'af': '::after',
-			'fln': '::first-line',
-			'flt': '::first-letter',
-		),
-		'custom': (
-		),
-		'keywords': (
-			$states-ps: 'pseudo',
-			$states-cmb: null,
-			$kStOnly: null,
-		),
-		'special': (
-			'noJs': null,
-			'+': '+',
-			'~': '~',
-			'>': '>',
-		),
-	),
-) !default;
-
-$utils-cfg: map.deep-merge($utils-cfg, $utils-config);
-$utils-cfg: map.deep-merge($utils-cfg, $utils-config-ext);
-$utils-up-specif: map.get($utils-cfg, 'up-specificity');
-
-$tUSv: map.get($utils-cfg, 'tokens', 'util', 'str-value');
-$tUNv: map.get($utils-cfg, 'tokens', 'util', 'num-value');
-$tURv: map.get($utils-cfg, 'tokens', 'util', 'raw-value');
-$tUHv: map.get($utils-cfg, 'tokens', 'util', 'hash-value');
-$tUFv: map.get($utils-cfg, 'tokens', 'util', 'fallback-value');
-$tUVm: map.get($utils-cfg, 'tokens', 'util', 'value-modifier');
-$tUGkw: map.get($utils-cfg, 'tokens', 'util', 'global-keyword');
-$tUCp: map.get($utils-cfg, 'tokens', 'util', 'custom-property');
-$tUIm: map.get($utils-cfg, 'tokens', 'util', 'important');
-$tUCm: map.get($utils-cfg, 'tokens', 'util', 'component');
-$tUSp: map.get($utils-cfg, 'tokens', 'util', 'space');
-$tUKwc: map.get($utils-cfg, 'tokens', 'util', 'keyword-chain');
-$tUKwa: map.get($utils-cfg, 'tokens', 'util', 'keywords-alias');
-$tULs1: map.get($utils-cfg, 'tokens', 'util', 'list-separator1');
-$tULs2: map.get($utils-cfg, 'tokens', 'util', 'list-separator2');
-$tSOr: map.get($utils-cfg, 'tokens', 'states', 'or');
-$tSAnd: map.get($utils-cfg, 'tokens', 'states', 'and');
-$tSNot: map.get($utils-cfg, 'tokens', 'states', 'not');
-$tSCs: map.get($utils-cfg, 'tokens', 'states', 'custom');
-$tSTu: map.get($utils-cfg, 'tokens', 'states', 'this-util');
-$tSCn: map.get($utils-cfg, 'tokens', 'states', 'context');
-$tSRaw: map.get($utils-cfg, 'tokens', 'states', 'raw');
-$tSTucv: $tSTu + $tUSv;
-$tCVcp: map.get($utils-cfg, 'tokens', 'common', 'value-converts-pipeline');
-
-$utils-cfg: map.set(
-	$utils-cfg,
-	'tokens-values',
-	(
-		$tULs1: comma,
-		$tULs2: slash,
-	)
-);
-
-$utils-cfg: map.set(
-	$utils-cfg,
-	'abbr-separators',
-	list.join(
-		(
-			$tUSv,
-			$tUNv,
-			$tURv,
-			$tUHv,
-		),
-		map.get($utils-cfg, 'abbr-separators')
-	)
-);
 
 $-css-wide-kw: (
 	'i': inherit,
@@ -291,6 +16,7 @@ $-css-wide-kw: (
 	'us': unset,
 );
 
+//stylelint-disable
 $utils-db: (
 	'utils': (
 		'registry': (
@@ -386,7 +112,7 @@ $utils-db: (
 			'Bdw': border-width,
 			'Bdrs': (
 				'properties': border-radius,
-				'multi-list-separator': $tULs2,
+				'multi-list-separator': ml.$tULs2,
 			),
 			'Trs': (
 				'properties': transition,
@@ -421,6 +147,102 @@ $utils-db: (
 	),
 ) !default;
 
+$-common-registry: ();
+
+@each $key, $value in map.get($utils-db, 'common', 'registry') {
+	$-common-registry: map.set(
+		$-common-registry,
+		string.to-lower-case($key),
+		$value
+	);
+}
+
+$utils-db: map.set(
+	$utils-db,
+	'media',
+	(
+		'registry': map.deep-merge(
+			$-common-registry,
+			(
+				'hv': hover,
+				'ahv': any-hover,
+				'pn': (
+					'properties': pointer,
+					'value-type': 'keyword',
+					'keywords': (
+						'c': coarse,
+						'f': fine,
+					),
+				),
+				'apn': (
+					'properties': any-pointer,
+					'value-type': 'keyword',
+					'keywords': (
+						'c': coarse,
+						'f': fine,
+					)
+				),
+				'cg': (
+					'properties': color-gamut,
+					'value-type': 'keyword',
+					'keywords': (
+						'p': p3,
+						's': 'srgb',
+						'r': rec2020,
+					),
+				),
+				'dm': (
+					'properties': display-mode,
+					'value-type': 'keyword',
+					'keywords': (
+						'': fullscreen,
+						's': standalone,
+						'mu': minimal-ui,
+						'b': browser,
+					),
+				),
+				'fc': forced-colors,
+				'ori': (
+					'properties': orientation,
+					'value-type': 'keyword',
+					'keywords': (
+						'': landscape,
+						'p': portrait,
+					),
+				),
+				'prfcs': (
+					'properties': prefers-color-scheme,
+					'value-type': 'keyword',
+					'keywords': (
+						'': dark,
+						'l': light,
+					),
+				),
+				'prfrm': prefers-reduced-motion,
+				'mn': (
+					'properties': monochrome,
+					'value-type': 'unitless',
+				),
+				'gd': (
+					'properties': grid,
+					'value-type': 'unitless',
+				),
+				'c': (
+					'properties': color,
+					'value-type': 'unitless',
+				),
+				'rsl': (
+					'properties': resolution,
+					'value-type': 'resolution',
+					'keywords': (
+						'i': infinite,
+					),
+				),
+			),
+		),
+	),
+);
+
 $utils-db: map.deep-merge($utils-db, $utils-data);
 $utils-db: map.deep-merge($utils-db, $utils-data-ext);
 $utils-db: map.merge(
@@ -428,12 +250,4 @@ $utils-db: map.merge(
 	'utils',
 	'registry',
 	map.get($utils-db, 'common', 'registry')
-);
-
-$utils-states: map.merge(
-	map.get($utils-cfg, 'states', 'pseudo'),
-	map.merge(
-		map.get($utils-cfg, 'states', 'special'),
-		map.get($utils-cfg, 'states', 'custom'),
-	)
 );

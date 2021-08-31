@@ -9,7 +9,8 @@
 @use 'sass:map';
 @use 'sass:list';
 @use 'sass:string';
-@use 'utils' as ml;
+@use '../base' as ml;
+@use 'utils' as ud;
 
 // Breakpoints
 //
@@ -82,102 +83,6 @@ $at-rules-cfg: (
 	),
 ) !default;
 
-$-common-registry: ();
-
-@each $key, $value in map.get(ml.$utils-db, 'common', 'registry') {
-	$-common-registry: map.set(
-		$-common-registry,
-		string.to-lower-case($key),
-		$value
-	);
-}
-
-ml.$utils-db: map.set(
-	ml.$utils-db,
-	'media',
-	(
-		'registry': map.deep-merge(
-			$-common-registry,
-			(
-				'hv': hover,
-				'ahv': any-hover,
-				'pn': (
-					'properties': pointer,
-					'value-type': 'keyword',
-					'keywords': (
-						'c': coarse,
-						'f': fine,
-					),
-				),
-				'apn': (
-					'properties': any-pointer,
-					'value-type': 'keyword',
-					'keywords': (
-						'c': coarse,
-						'f': fine,
-					)
-				),
-				'cg': (
-					'properties': color-gamut,
-					'value-type': 'keyword',
-					'keywords': (
-						'p': p3,
-						's': 'srgb',
-						'r': rec2020,
-					),
-				),
-				'dm': (
-					'properties': display-mode,
-					'value-type': 'keyword',
-					'keywords': (
-						'': fullscreen,
-						's': standalone,
-						'mu': minimal-ui,
-						'b': browser,
-					),
-				),
-				'fc': forced-colors,
-				'ori': (
-					'properties': orientation,
-					'value-type': 'keyword',
-					'keywords': (
-						'': landscape,
-						'p': portrait,
-					),
-				),
-				'prfcs': (
-					'properties': prefers-color-scheme,
-					'value-type': 'keyword',
-					'keywords': (
-						'': dark,
-						'l': light,
-					),
-				),
-				'prfrm': prefers-reduced-motion,
-				'mn': (
-					'properties': monochrome,
-					'value-type': 'unitless',
-				),
-				'gd': (
-					'properties': grid,
-					'value-type': 'unitless',
-				),
-				'c': (
-					'properties': color,
-					'value-type': 'unitless',
-				),
-				'rsl': (
-					'properties': resolution,
-					'value-type': 'resolution',
-					'keywords': (
-						'i': infinite,
-					),
-				),
-			),
-		),
-	),
-);
-
 $at-rules-data: () !default;
 $at-rules-data-ext: () !default;
 $at-rules-config: () !default;
@@ -199,7 +104,7 @@ $at-rules-cfg: map.merge(
 );
 
 $bp-map: map.get($at-rules-cfg, 'breakpoints');
-$-custom-global-kw: map.get(ml.$utils-db, 'common', 'keywords', 'global');
+$-custom-global-kw: map.get(ud.$utils-db, 'common', 'keywords', 'global');
 $-bp-kw-map: ();
 
 @each $key, $value in $bp-map {
@@ -210,8 +115,8 @@ $-bp-kw-map: ();
 	$-bp-kw-map: map.merge($-bp-kw-map, $-custom-global-kw);
 }
 
-ml.$utils-db: map.set(
-	ml.$utils-db, 'common', 'keywords', 'global', $-bp-kw-map
+ud.$utils-db: map.set(
+	ud.$utils-db, 'common', 'keywords', 'global', $-bp-kw-map
 );
 
 $tAOr: map.get($at-rules-cfg, 'tokens', 'or');
