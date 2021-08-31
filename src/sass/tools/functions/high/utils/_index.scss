@@ -334,6 +334,19 @@ Styleguide: sass-tools.functions.high.utils
 	@return map.set($result, 'values', $values);
 }
 
+@function uv($util) {
+	@if $util == '' {
+		@return ml.error('Empty string passed');
+	}
+
+	$util-data: ml.parse-abbr($util);
+
+	@return ml.convert-util-value(
+		map.get($util-data, 'value'),
+		map.get($util-data, 'name'),
+	);
+}
+
 $-util-value-converters: ();
 
 $-fn-prefix-length: string.length('convert-uv-');
