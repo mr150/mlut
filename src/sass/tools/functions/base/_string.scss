@@ -47,7 +47,7 @@ Styleguide: sass-tools.functions.base.string
 
 	@for $i from if($negative, 2, 1) through string.length($str) {
 		$char: string.slice($str, $i, $i);
-		$digit: string.index(ml.$dec-digits, $char);
+		$digit: list.index(ml.$dec-digits, $char);
 
 		@if $digit and not $decimal {
 			$result: $result * 10 + ($digit - 1);
@@ -94,7 +94,7 @@ Styleguide: sass-tools.functions.base.string
 	}
 
 	@for $i from 1 through string.length($str) {
-		@if string.index(ml.$dec-digits, string.slice($str, $i, $i)) {
+		@if list.index(ml.$dec-digits, string.slice($str, $i, $i)) {
 			@return $i;
 		}
 	}

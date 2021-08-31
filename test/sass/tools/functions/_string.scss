@@ -221,9 +221,24 @@
 			);
 		}
 
-		@include it('returns `null` if not string was passed') {
+		@include it('returns `null` if converting is not possible') {
+			@include assert-equal(
+				ml.str2n('str'),
+				null,
+			);
+
+			@include assert-equal(
+				ml.str2n(''),
+				null,
+			);
+
 			@include assert-equal(
 				ml.str2n(#f00),
+				null,
+			);
+
+			@include assert-equal(
+				ml.str2n(true),
 				null,
 			);
 		}
