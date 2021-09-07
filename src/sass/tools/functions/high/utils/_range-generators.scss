@@ -10,6 +10,12 @@
 @use 'parse-util' as mpu;
 
 @function number-range($range, $util) {
+	$range-args-count: list.length($range);
+
+	@if $range-args-count < 2 {
+		@return ml.error('Invalid range syntax: `#{$range}`. Expected 2 or 3 arguments');
+	}
+
 	$value-data: mpu.new-parse-util(list.nth($range, 1));
 	$start: map.get($value-data, 'value');
 	$start-number: ml.str2n($start, true);
@@ -57,7 +63,7 @@
 		);
 	}
 
-	$step: if((list.length($range) > 2), list.nth($range, 3), 1);
+	$step: if(($range-args-count > 2), list.nth($range, 3), 1);
 	$values: ();
 	$is-css-unit-fn: meta.type-of(
 		list.nth(list.nth($css-unit-map, 1), 2)

@@ -57,14 +57,21 @@
 				),
 				$inspect: true,
 			);
+		}
+
+		@include it('invalid values or syntax') {
+			@include assert-equal(
+				ml.generate-uv-number-range([8], 'W'),
+				'ERROR: Invalid range syntax: `[8]`. Expected 2 or 3 arguments'
+			);
 
 			@include assert-equal(
-				ml.generate-uv-number-range('a', 'W'),
+				ml.generate-uv-number-range(['a', 5], 'W'),
 				'ERROR: Invalid $start value in range: `a`'
 			);
 
 			@include assert-equal(
-				ml.generate-uv-number-range('1no1', 'W'),
+				ml.generate-uv-number-range(['1no1', 5], 'W'),
 				'ERROR: Unknown unit in $start value in range: `1no1`'
 			);
 		}
