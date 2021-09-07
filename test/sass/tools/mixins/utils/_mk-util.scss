@@ -332,7 +332,9 @@ ml.$utils-db: map.deep-merge(
 					}
 				}
 			}
+		}
 
+		@include it('make util from range of custom units') {
 			@include assert() {
 				@include output(false) {
 					@include ml.new-mk-util(
@@ -350,6 +352,46 @@ ml.$utils-db: map.deep-merge(
 					.Bdw2gg {
 						border-width: 32px;
 						border-width: ml.gg(2);
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.new-mk-util(
+						'M', (
+						[1gg, 2],
+					));
+				}
+
+				@include expect(false) {
+					.M1gg {
+						margin: 1rem 16px;
+						margin: ml.ggr(1) ml.gg(1);
+					}
+
+					.M2gg {
+						margin: 2rem 32px;
+						margin: ml.ggr(2) ml.gg(2);
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.new-mk-util(
+						'M', (
+						[1su, 2],
+					));
+				}
+
+				@include expect(false) {
+					.M1su {
+						margin: ml.sur(1) ml.su(1);
+					}
+
+					.M2su {
+						margin: ml.sur(2) ml.su(2);
 					}
 				}
 			}

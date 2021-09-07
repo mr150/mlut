@@ -13,6 +13,7 @@
 	$value-data: mpu.new-parse-util(list.nth($range, 1));
 	$start: map.get($value-data, 'value');
 	$start-number: ml.str2n($start, true);
+	$end: list.nth($range, 2);
 
 	@if meta.type-of($start-number) != 'number' {
 		@if ml.str2n($start) {
@@ -31,35 +32,53 @@
 	$unit-name: math.unit($start-number);
 	$unit: map.get(ml.$units-all, $unit-name);
 	$converted-start: ml.convert-util-value($start-number, $util);
-	$css-unit-name: map.get(ml.$utils-db, 'utils', 'registry', $util, 'default-unit');
-	$css-unit: null;
+	$css-unit-map: ();
 
-	@if meta.type-of($converted-start) == 'number' {
-		$css-unit-name: math.unit($converted-start);
-		$css-unit: map.get(ml.$units-all, $css-unit-name);
-	}
+	@if list.length($converted-start) == 1 {
+		$css-unit-name: map.get(ml.$utils-db, 'utils', 'registry', $util, 'default-unit');
+		$css-unit: null;
 
-	@if map.has-key(ml.$general-cfg, 'custom-unit-values', $unit-name) {
-		$css-unit: map.get(
-			ml.$general-cfg, 'custom-unit-values', $unit-name, $css-unit-name
-		) or map.get(ml.$general-cfg, 'custom-unit-values', $unit-name);
+		@if meta.type-of($converted-start) == 'number' {
+			$css-unit-name: math.unit($converted-start);
+			$css-unit: map.get(ml.$units-all, $css-unit-name);
+		}
+
+		@if map.has-key(ml.$general-cfg, 'custom-unit-values', $unit-name) {
+			$css-unit: map.get(
+				ml.$general-cfg, 'custom-unit-values', $unit-name, $css-unit-name
+			) or map.get(ml.$general-cfg, 'custom-unit-values', $unit-name);
+		}
+
+		$css-unit-map: map.set($css-unit-map, $css-unit-name, $css-unit);
+	} @else {
+		$css-unit-map: (
+			'rem': meta.get-function($unit-name, false, ml),
+			null: meta.get-function($unit-name, false, ml),
+		);
 	}
 
 	$step: if((list.length($range) > 2), list.nth($range, 3), 1);
 	$values: ();
-	$is-css-unit-fn: meta.type-of($css-unit) == 'function';
+	$is-css-unit-fn: meta.type-of(
+		list.nth(list.nth($css-unit-map, 1), 2)
+	) == 'function';
 	$i: math.div($start-number, $unit);
 
-	@while $i <= list.nth($range, 2) {
-		$values: map.set(
-			$values,
-			$i * $unit,
-			if(
-				$is-css-unit-fn,
-				meta.call($css-unit, $i, $css-unit-name),
-				$i * $css-unit
-			)
-		);
+	@while $i <= $end {
+		$css-value: ();
+
+		@each $css-unit-name, $css-unit in $css-unit-map {
+			$css-value: list.append(
+				$css-value,
+				if(
+					$is-css-unit-fn,
+					meta.call($css-unit, $i, $css-unit-name),
+					$i * $css-unit
+				)
+			);
+		}
+
+		$values: map.set($values, $i * $unit, $css-value);
 		$i: $i + $step;
 	}
 
