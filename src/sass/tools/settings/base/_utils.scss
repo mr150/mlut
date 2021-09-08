@@ -106,8 +106,8 @@ $states-cmb: 'StCmb' !default;
 $kStOnly: 'StOnly' !default;
 $cCtx: '-Ctx' !default;
 
-$uv-type-default: ('number', 'global-kw', 'cust-prop',) !default;
-$uv-type-keyword: list.set-nth($uv-type-default, 1, 'keyword');
+$uv-type-base: ('global-kw', 'cust-prop',) !default;
+$uv-type-default: list.join(('keyword', 'number'), $uv-type-base);
 $utils-config: () !default;
 $utils-config-ext: () !default;
 
@@ -130,14 +130,11 @@ $utils-cfg: (
 
 	'value-types': (
 		'default': $uv-type-default,
-		'unitless': list.set-nth($uv-type-default, 1, 'unitless'),
-		'alpha': list.set-nth($uv-type-default, 1, 'alpha'),
-		'keyword': $uv-type-keyword,
-		'color': list.set-nth($uv-type-default, 1, 'color'),
-		'abbr-kw': list.join(('abbr', 'number'), $uv-type-keyword),
-		'resolution': list.join(
-			'keyword', list.set-nth($uv-type-default, 1, 'resolution')
-		),
+		'unitless': list.join('unitless', $uv-type-base),
+		'alpha': list.join('alpha', $uv-type-base),
+		'color': list.join('color', $uv-type-base),
+		'abbr-kw': list.join('abbr', $uv-type-default),
+		'resolution': list.set-nth($uv-type-default, 2, 'resolution'),
 	),
 
 	'abbr-separators': (),

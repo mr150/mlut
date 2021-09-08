@@ -168,7 +168,6 @@ $utils-db: map.set(
 				'ahv': any-hover,
 				'pn': (
 					'properties': pointer,
-					'value-type': 'keyword',
 					'keywords': (
 						'c': coarse,
 						'f': fine,
@@ -176,7 +175,6 @@ $utils-db: map.set(
 				),
 				'apn': (
 					'properties': any-pointer,
-					'value-type': 'keyword',
 					'keywords': (
 						'c': coarse,
 						'f': fine,
@@ -184,7 +182,6 @@ $utils-db: map.set(
 				),
 				'cg': (
 					'properties': color-gamut,
-					'value-type': 'keyword',
 					'keywords': (
 						'p': p3,
 						's': 'srgb',
@@ -193,7 +190,6 @@ $utils-db: map.set(
 				),
 				'dm': (
 					'properties': display-mode,
-					'value-type': 'keyword',
 					'keywords': (
 						'': fullscreen,
 						's': standalone,
@@ -204,7 +200,6 @@ $utils-db: map.set(
 				'fc': forced-colors,
 				'ori': (
 					'properties': orientation,
-					'value-type': 'keyword',
 					'keywords': (
 						'': landscape,
 						'p': portrait,
@@ -212,7 +207,6 @@ $utils-db: map.set(
 				),
 				'prfcs': (
 					'properties': prefers-color-scheme,
-					'value-type': 'keyword',
 					'keywords': (
 						'': dark,
 						'l': light,

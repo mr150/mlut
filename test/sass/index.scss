@@ -18,7 +18,6 @@
 				),
 				'D': (
 					'properties': display,
-					'value-type': 'keyword',
 					'keywords': (
 					'ig': inline-grid,
 					'f': flex,
@@ -27,7 +26,6 @@
 				'Jc': (
 					'properties': justify-content,
 					'keywords': ('se': space-evenly),
-					'value-type': 'keyword',
 				),
 				'Pos': null,
 			),
@@ -39,7 +37,6 @@
 				'Pos': (
 					'properties': position,
 					'keywords': ('sk': sticky),
-					'value-type': 'keyword',
 				),
 			)
 		),

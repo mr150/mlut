@@ -13,11 +13,9 @@ ml.$utils-db: map.deep-merge(
 					'b': baseline,
 					'c': center,
 				),
-				'value-type': 'keyword',
 			),
 			'Animtf': (
 				'keywords': 'timing-functions',
-				'value-type': 'keyword',
 			),
 			'Trs': (
 				'keywords': 'timing-functions',
