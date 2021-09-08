@@ -121,6 +121,7 @@ ml.$utils-cfg: map.set(
 			'converts utility keyword': (
 				('c', 'Ai'): center,
 				('ei', 'Animtf'): ease-in,
+				('', 'Bd'): 1px solid,
 			),
 			'converts colors': (
 				('t', 'C'): transparent,
@@ -139,6 +140,7 @@ ml.$utils-cfg: map.set(
 				('3su;16;a', 'M'): ml.su(3) 16px auto,
 				('c;-trsdu;ei', 'Trs'): color var(--ml-trsdu) ease-in,
 				('cc;prm0*5p', 'C'): currentColor rgba(204, 0, 102, 0.05),
+				('3;sec0;d', 'Bd'): 3px #0c6 dotted,
 			),
 			'converts values multi list': (
 				('1r;2/5p', 'Bdrs'): list.slash(1rem 2px, 5%),

@@ -291,14 +291,19 @@ Styleguide: sass-tools.functions.high.utils
 	@if $length == 1 {
 		$keywords: map.get(ml.$utils-db, 'utils', 'registry', $util, 'keywords');
 
-		$values: if(
-			meta.type-of($keywords) == 'map',
-			$keywords,
-			(
-				map.get(ml.$utils-db, 'utils', 'keywords', $keywords) or
-				map.get(ml.$utils-db, 'common', 'keywords', 'css')
-			)
-		);
+		@if meta.type-of($keywords) == 'map' {
+			$values: $keywords;
+		} @else {
+			@each $link in $keywords {
+				@if map.has-key(ml.$utils-db, 'utils', 'keywords', $link) {
+					$values: map.merge($values, map.get(ml.$utils-db, 'utils', 'keywords', $link));
+				}
+			}
+
+			@if $values == () {
+				$values: map.get(ml.$utils-db, 'common', 'keywords', 'css');
+			}
+		}
 	} @else if $length == 2 {
 		$group: list.nth($alias-list, 2);
 

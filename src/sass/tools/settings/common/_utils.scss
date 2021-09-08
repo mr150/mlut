@@ -106,7 +106,11 @@ $utils-db: (
 				'properties': opacity,
 				'value-type': 'alpha',
 			),
-			'Bd': border,
+			'Bd': (
+				'properties': border,
+				'value-type': 'border',
+				'keywords': ('border', 'line-style', 'colors'),
+			),
 			'Bdc': border-color,
 			'Bds': border-style,
 			'Bdw': border-width,
@@ -122,6 +126,23 @@ $utils-db: (
 			'Rsz': resize,
 		),
 		'map': (),
+		'keywords': (
+			'border': (
+				'': 1px solid,
+			),
+			'line-style': (
+				'': none,
+				'd': dotted,
+				'ds': dashed,
+				'db': double,
+				'g': groove,
+				'h': hidden,
+				'i': inset,
+				'o': outset,
+				'r': ridge,
+				's': solid,
+			),
+		),
 	),
 
 	'common': (

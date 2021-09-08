@@ -135,6 +135,9 @@ $utils-cfg: (
 		'color': list.join('color', $uv-type-base),
 		'abbr-kw': list.join('abbr', $uv-type-default),
 		'resolution': list.set-nth($uv-type-default, 2, 'resolution'),
+		'border': list.join(
+			('keyword', 'color', 'number'), $uv-type-base
+		),
 	),
 
 	'abbr-separators': (),

@@ -68,6 +68,10 @@
 	$name: map.get($data, 'name');
 	$section: map.get($data, 'section');
 
+	@if not map.has-key(ml.$utils-db, $section, 'registry', $name, 'keywords') {
+		@return $value;
+	}
+
 	@if map.has-key(
 		ml.$utils-db, $section, 'registry', $name, 'keywords', $value
 	) {
@@ -84,17 +88,18 @@
 		);
 	}
 
-	$link: map.get(
+	$links: map.get(
 		ml.$utils-db, $section, 'registry', $name, 'keywords'
 	);
 
-	@if map.has-key(ml.$utils-db, $section, 'keywords', $link, $value) {
-		@return map.get(ml.$utils-db, $section, 'keywords', $link, $value);
+	@each $item in $links {
+		@if map.has-key(ml.$utils-db, $section, 'keywords', $item, $value) {
+			@return map.get(ml.$utils-db, $section, 'keywords', $item, $value);
+		}
 	}
 
-	@return if(
-		map.has-key(ml.$utils-db, 'common', 'keywords', $link, $value),
-		map.get(ml.$utils-db, 'common', 'keywords', $link, $value),
+	@return (
+		map.get(ml.$utils-db, 'common', 'keywords', $links, $value) or
 		$value
 	);
 }
