@@ -5,6 +5,7 @@
 @use '../base' as ml;
 
 $uv-css-var-prefix: ml.$css-var-prefix !default;
+$-cv-pref: '--' + ml.$css-var-prefix;
 
 $utils-data: () !default;
 $utils-data-ext: () !default;
@@ -15,24 +16,105 @@ $-css-wide-kw: (
 	'rv': revert,
 	'us': unset,
 );
+$-bd-kw-links: ('border', 'line-style', 'line-width');
 
 //stylelint-disable
 $utils-db: (
 	'utils': (
 		'registry': (
 			'-Gsc': ml.$var-grid-cols,
+			'-Gscd': $-cv-pref + 'gc-diff',
 			'-Gsg': ml.$var-gg,
-			'Pos': position,
-			'-X': null,
-			'-Y': null,
-			'-Xy': null,
+			'-Gscr': (
+				'properties': (
+					$-cv-pref + 'gc-rule',
+					$-cv-pref + 'mgc-rule',
+				),
+			),
+			'Pos': (
+				'properties': position,
+				'keywords': (
+					'': relative,
+					'a': absolute,
+					'f': fixed,
+					'r': relative,
+					's': static,
+					'st': sticky,
+				),
+			),
+
+			'T': (
+				'properties': top,
+				'default-unit': 'rem',
+			),
+			'R': right,
+			'B': (
+				'properties': bottom,
+				'default-unit': 'rem',
+			),
+			'L': left,
+			'-X': (
+				'properties': (
+					right, left,
+				),
+			),
+			'-Y': (
+				'properties': (
+					top, bottom,
+				),
+				'default-unit': 'rem',
+			),
+			'-Xy': (
+				'properties': (
+					top, right, bottom, left
+				),
+			),
+
 			'Z': (
 				'properties': z-index,
 				'value-type': 'unitless',
 			),
-			'D': display,
-			'Fxd': flex-direction,
-			'Fxw': flex-wrap,
+			'D': (
+				'properties': display,
+				'keywords': (
+					'': block,
+					'b': block,
+					'i': inline,
+					'ib': inline-block,
+					'f': flex,
+					'if': inline-flex,
+					'g': grid,
+					'ig': inline-grid,
+					'li': list-item,
+					'ri': run-in,
+					'tb': table,
+					'itb': inline-table,
+					'tbr': table-row,
+					'tbc': table-cell,
+					'tbcl': table-column,
+					'tbclg': table-column-group,
+					'tbhg': table-header-group,
+					'tbfg': table-footer-group,
+					'tbrg': table-row-group,
+				),
+			),
+			'Fxd': (
+				'properties': flex-direction,
+				'keywords': (
+					'c': column,
+					'cr': column-reverse,
+					'r': row,
+					'rr': row-reverse,
+				),
+			),
+			'Fxw': (
+				'properties': flex-wrap,
+				'keywords': (
+					'nw': nowrap,
+					'w': wrap,
+					'wr': wrap-reverse,
+				),
+			),
 			'Fxg': (
 				'properties': flex-grow,
 				'value-type': 'unitless',
@@ -41,25 +123,127 @@ $utils-db: (
 				'properties': flex-shrink,
 				'value-type': 'unitless',
 			),
-			'Ac': align-content,
-			'As': align-self,
-			'Ai': align-items,
-			'Jc': justify-content,
-			'Ord': order,
+			'Fx': flex,
+			'Ac': (
+				'properties': align-content,
+				'keywords': 'box-alignment',
+			),
+			'As': (
+				'properties': align-self,
+				'keywords': 'box-alignment',
+			),
+			'Ai': (
+				'properties': align-items,
+				'keywords': 'box-alignment',
+			),
+			'Jc': (
+				'properties': justify-content,
+				'keywords': 'box-alignment',
+			),
+			'Ord': (
+				'properties': order,
+				'value-type': 'unitless',
+			),
 			'Gd': grid,
-			'Fl': float,
-			'Bxz': box-sizing,
-			'Maw': max-width,
-			'Mih': min-height,
+			'Fl': (
+				'properties': float,
+				'keywords': (
+					'': left,
+					'l': left,
+					'r': right,
+				),
+			),
+			'Cl': (
+				'properties': clear,
+				'keywords': (
+					'': both,
+					'b': both,
+					'l': left,
+					'r': right,
+				),
+			),
+			'Bxz': (
+				'properties': box-sizing,
+				'keywords': (
+					'': border-box,
+					'bb': border-box,
+					'cb': content-box,
+				),
+			),
+			'Maw': (
+				'properties': max-width,
+				'keywords': 'sizing',
+			),
+			'Mih': (
+				'properties': min-height,
+				'keywords': 'sizing',
+			),
+
 			'M': (
 				'properties': margin,
 				'directions': true,
 			),
+			'Mt': (
+				'properties': margin-top,
+				'default-unit': 'rem',
+			),
+			'Mr': margin-right,
+			'Mb': (
+				'properties': margin-bottom,
+				'default-unit': 'rem',
+			),
+			'Ml': margin-left,
+			'-Mx': (
+				'properties': (
+					margin-right, margin-left
+				),
+			),
+			'-My': (
+				'properties': (
+					margin-top, margin-bottom
+				),
+				'default-unit': 'rem',
+			),
+
 			'P': (
 				'properties': padding,
 				'directions': true,
 			),
-			'Ov': overflow,
+			'Pt': (
+				'properties': padding-top,
+				'default-unit': 'rem',
+			),
+			'Pr': padding-right,
+			'Pb': (
+				'properties': padding-bottom,
+				'default-unit': 'rem',
+			),
+			'Pl': padding-left,
+			'-Px': (
+				'properties': (
+					padding-right, padding-left
+				),
+			),
+			'-Py': (
+				'properties': (
+					padding-top, padding-bottom
+				),
+				'default-unit': 'rem',
+			),
+
+			'Ov': (
+				'properties': overflow,
+				'keywords': 'overflow',
+			),
+			'Ovx': (
+				'properties': overflow-x,
+				'keywords': 'overflow',
+			),
+			'Ovy': (
+				'properties': overflow-y,
+				'keywords': 'overflow',
+			),
+
 			'C': (
 				'properties': color,
 				'range-generator': 'color',
@@ -68,52 +252,224 @@ $utils-db: (
 			'F': font,
 			'Fw': (
 				'properties': font-weight,
-				'value-type': 'unitless',
+				'value-type': 'kw-unitless',
+				'keywords': (
+					'b': bold,
+					'br': bolder,
+					'l': lighter,
+					'n': normal,
+				),
 			),
 			'Fz': (
 				'properties': font-size,
 				'default-unit': 'rem',
 			),
-			'Ff': font-family,
-			'Fs': font-style,
+			'Ff': (
+				'properties': font-family,
+				'keywords': (
+					'ss0': ml.$Ff--ss0,
+					's0': (ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif),
+					'm0': (ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace),
+				),
+			),
+			'Fs': (
+				'properties': font-style,
+				'keywords': (
+					'': italic,
+					'i': italic,
+					'n': normal,
+					'o': oblique,
+				),
+			),
 			'Lh': (
 				'properties': line-height,
-				'value-type': 'unitless',
+				'keywords': (
+					'n': normal,
+				),
 			),
 			'Dir': direction,
 			'Lts': letter-spacing,
-			'Whs': white-space,
-			'Ta': text-align,
-			'Tt': text-transform,
-			'Td': text-decoration,
+			'Whs': (
+				'properties': white-space,
+				'keywords': (
+					'': nowrap,
+					'n': normal,
+					'nw': nowrap,
+					'p': pre,
+					'pw': pre-wrap,
+					'pl': pre-line,
+				),
+			),
+			'Ta': (
+				'properties': text-align,
+				'keywords': (
+					'': center,
+					'c': center,
+					'e': end,
+					'j': justify,
+					'l': left,
+					'mp': match-parent,
+					'r': right,
+					's': start,
+				),
+			),
+			'Tt': (
+				'properties': text-transform,
+				'keywords': (
+					'': uppercase,
+					'c': capitalize,
+					'fw': full-width,
+					'l': lowercase,
+					'n': none,
+					'u': uppercase,
+				),
+			),
+			'Td': (
+				'properties': text-decoration,
+				'keywords': ('text-decoration', 'line-style'),
+			),
 			'Tsh': text-shadow,
-			'Va': vertical-align,
+			'Va': (
+				'properties': vertical-align,
+				'keywords': (
+					'': top,
+					'b': bottom,
+					'bl': baseline,
+					'm': middle,
+					'sb': sub,
+					'sp': super,
+					't': top,
+					'tb': text-bottom,
+					'tt': text-top,
+				),
+			),
+			'-Tov': (
+				'properties': (
+					overflow, text-overflow, white-space,
+				),
+				'keywords': (
+					'': (hidden, ellipsis, nowrap),
+				),
+			),
 			'Bgc': (
 				'properties': background-color,
 				'range-generator': 'color',
 				'value-type': 'color',
 			),
-			'Bgr': background-repeat,
-			'Bgp': background-position,
-			'Bgsz': background-size,
-			'Bga': background-attachment,
-			'Ol': outline,
+			'Bgr': (
+				'properties': background-repeat,
+				'keywords': (
+					'nr': no-repeat,
+					'rx': repeat-x,
+					'ry': repeat-y,
+					'r': repeat,
+					's': space,
+					'ro': round,
+				)
+			),
+			'Bgp': (
+				'properties': background-position,
+				'keywords': 'position'
+			),
+			'Bgsz': (
+				'properties': background-size,
+				'keywords': (
+					'ct': contain,
+					'cv': cover,
+				),
+			),
+			'Bga': (
+				'properties': background-attachment,
+				'keywords': (
+					'f': fixed,
+					'l': local,
+					's': scroll,
+				),
+			),
+			'Ol': (
+				'properties': outline,
+				'value-type': 'border',
+				'keywords': ('line-style', 'line-width'),
+			),
 			'Bxsh': box-shadow,
 			'Trf': transform,
-			'V': visibility,
+			'V': (
+				'properties': visibility,
+				'keywords': (
+					'': hidden,
+					'c': collapse,
+					'h': hidden,
+					'v': visible,
+				),
+			),
 			'Cur': cursor,
 			'Op': (
 				'properties': opacity,
 				'value-type': 'alpha',
 			),
+
 			'Bd': (
 				'properties': border,
 				'value-type': 'border',
-				'keywords': ('border', 'line-style', 'colors'),
+				'keywords': $-bd-kw-links,
 			),
-			'Bdc': border-color,
-			'Bds': border-style,
-			'Bdw': border-width,
+			'Bdt': (
+				'properties': border-top,
+				'value-type': 'border',
+				'keywords': $-bd-kw-links,
+			),
+			'Bdr': (
+				'properties': border-right,
+				'value-type': 'border',
+				'keywords': $-bd-kw-links,
+			),
+			'Bdb': (
+				'properties': border-bottom,
+				'value-type': 'border',
+				'keywords': $-bd-kw-links,
+			),
+			'Bdl': (
+				'properties': border-left,
+				'value-type': 'border',
+				'keywords': $-bd-kw-links,
+			),
+			'-Bdx': (
+				'properties': (
+					border-right, border-left,
+				),
+				'value-type': 'border',
+				'keywords': $-bd-kw-links,
+			),
+			'-Bdy': (
+				'properties': (
+					border-top, border-bottom,
+				),
+				'value-type': 'border',
+				'keywords': $-bd-kw-links,
+			),
+
+			'Bdc': (
+				'properties': border-color,
+				'value-type': 'color',
+				'directions': true,
+			),
+			'Bds': (
+				'properties': border-style,
+				'keywords': 'line-style',
+			),
+
+			'Bdw': (
+				'properties': border-width,
+				'keywords': 'line-width',
+			),
+			'Bdcl': (
+				'properties': border-collapse,
+				'keywords': (
+					'': collapse,
+					'c': collapse,
+					's': separate,
+				),
+			),
 			'Bdrs': (
 				'properties': border-radius,
 				'multi-list-separator': ml.$tULs2,
@@ -123,12 +479,36 @@ $utils-db: (
 				'value-type': 'abbr-kw',
 			),
 			'Anim': animation,
-			'Rsz': resize,
+			'Rsz': (
+				'properties': resize,
+				'keywords': (
+					'': none,
+					'n': none,
+					'b': both,
+					'h': horizontal,
+					'v': vertical,
+				),
+			),
+			'-All': (
+				'properties': (
+					margin, padding, font, list-style, border,
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'sr': (0, 0, inherit, none, 0),
+				),
+			),
+			'All': (
+				'properties': all,
+				'keywords': 'css',
+			),
 		),
-		'map': (),
 		'keywords': (
 			'border': (
 				'': 1px solid,
+			),
+			'position': map.set(
+				ml.$main-directions, 'c', 'center'
 			),
 			'line-style': (
 				'': none,
@@ -142,13 +522,56 @@ $utils-db: (
 				'r': ridge,
 				's': solid,
 			),
+			'text-decoration': (
+				'ff': from-font,
+				'lt': line-through,
+				'n': none,
+				'o': overline,
+				'u': underline,
+				'w': wavy,
+			),
+			'line-width': (
+				'm': medium,
+				't': thin,
+				'thc': thick,
+			),
+			'overflow': (
+				'': hidden,
+				'a': auto,
+				'h': hidden,
+				's': scroll,
+				'v': visible
+			),
+			'sizing': (
+				'n': none,
+				'fc': fit-content,
+				'mac': max-content,
+				'mic': min-content,
+			),
+			'box-alignment': (
+				'b': baseline,
+				'c': center,
+				'n': normal,
+				'fs': flex-start,
+				'fe': flex-end,
+				's': stretch,
+				'sb': space-between,
+				'sa': space-around,
+				'se': space-evenly,
+			),
 		),
 	),
 
 	'common': (
 		'registry': (
-			'H': height,
-			'W': width,
+			'H': (
+				'properties': height,
+				'keywords': 'sizing',
+			),
+			'W': (
+				'properties': width,
+				'keywords': 'sizing',
+			),
 			'Ar': aspect-ratio,
 		),
 		'keywords': (

@@ -93,7 +93,7 @@
 					.card {
 						@include ml.apply-util(
 							'xl_P2su'
-							'Lh2_af'
+							'Lh=2_af'
 							Fz1r,
 							('important': true, 'post-states': null)
 						);
@@ -123,7 +123,7 @@
 				@include output(false) {
 					@include ml.apply-util(
 						'xl_P2su'
-						'Lh2!_af'
+						'Lh2r!_af'
 					);
 				}
 
@@ -134,8 +134,8 @@
 						}
 					}
 
-					.Lh2\!_af::after {
-						line-height: 2 !important;
+					.Lh2r\!_af::after {
+						line-height: 2rem !important;
 					}
 				}
 			}

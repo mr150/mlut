@@ -29,8 +29,8 @@ ml.$utils-db: map.deep-merge(
 	@include describe('convert-feature-abbr') {
 		@include it('converts abbr without separator') {
 			@include assert-equal(
-				ml.convert-feature-abbr('Ov'),
-				'(overflow)',
+				ml.convert-feature-abbr('P'),
+				'(padding)',
 			);
 
 			@include assert-equal(
@@ -68,8 +68,8 @@ ml.$utils-db: map.deep-merge(
 			);
 
 			@include assert-equal(
-				ml.convert-feature-abbr('Lh1'),
-				'(line-height: 1)',
+				ml.convert-feature-abbr('Fxg1'),
+				'(flex-grow: 1)',
 			);
 
 			@include assert-equal(

@@ -131,6 +131,7 @@ $utils-cfg: (
 	'value-types': (
 		'default': $uv-type-default,
 		'unitless': list.join('unitless', $uv-type-base),
+		'kw-unitless': list.set-nth($uv-type-default, 2, 'unitless'),
 		'alpha': list.join('alpha', $uv-type-base),
 		'color': list.join('color', $uv-type-base),
 		'abbr-kw': list.join('abbr', $uv-type-default),
