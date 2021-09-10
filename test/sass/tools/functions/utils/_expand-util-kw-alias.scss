@@ -74,7 +74,7 @@ ml.$utils-db: map.set(
 			'get CSS-wide keywords if util has not their own': (
 				('KW', 'P'): (
 					'values': (
-						'i': inherit,
+						'ih': inherit,
 						'ini': initial,
 						'rv': revert,
 						'us': unset,
@@ -92,7 +92,7 @@ ml.$utils-db: map.set(
 			'keywords by predefined group alias': (
 				('KW.General', 'P'): (
 					'values': (
-						'i': inherit,
+						'ih': inherit,
 						'ini': initial,
 						'rv': revert,
 						'us': unset,
@@ -102,7 +102,7 @@ ml.$utils-db: map.set(
 				),
 				('KW.All', 'Ai'): (
 					'values': (
-						'i': inherit,
+						'ih': inherit,
 						'ini': initial,
 						'rv': revert,
 						'us': unset,
@@ -125,7 +125,7 @@ ml.$utils-db: map.set(
 				),
 				('KW.common.css.random-item', 'Trs'): (
 					'values': (
-						'i': inherit,
+						'ih': inherit,
 						'ini': initial,
 						'rv': revert,
 						'us': unset,

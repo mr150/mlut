@@ -401,7 +401,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.new-mk-util(
-						'Ovcm', (5, 'i_f'),
+						'Ovcm', (5, 'ih_f'),
 						(
 							'post-states': 'h',
 						),
@@ -421,11 +421,11 @@ ml.$utils-db: map.deep-merge(
 						overflow-clip-margin: 5;
 					}
 
-					.Ovcm-i {
+					.Ovcm-ih {
 						overflow-clip-margin: inherit;
 					}
 
-					.Ovcm-i_f:focus {
+					.Ovcm-ih_f:focus {
 						overflow-clip-margin: inherit;
 					}
 				}
