@@ -5,10 +5,12 @@
 @use '../base' as ml;
 
 $uv-css-var-prefix: ml.$css-var-prefix !default;
-$-cv-pref: '--' + ml.$css-var-prefix;
+$cv-pref: '--' + ml.$css-var-prefix;
 
 $utils-data: () !default;
 $utils-data-ext: () !default;
+$utils-map: ();
+$utils-groups-map: ();
 
 $-css-wide-kw: (
 	'ih': inherit,
@@ -22,13 +24,22 @@ $-bd-kw-links: ('border', 'line-style', 'line-width');
 $utils-db: (
 	'utils': (
 		'registry': (
-			'-Gsc': ml.$var-grid-cols,
-			'-Gscd': $-cv-pref + 'gc-diff',
-			'-Gsg': ml.$var-gg,
+			'-Gsc': (
+				'properties': ml.$var-grid-cols,
+				'value-type': 'unitless',
+			),
+			'-Gscd': $cv-pref + 'gc-diff',
+			'-Gsg': (
+				'properties': (
+					ml.$var-gg-rem,
+					ml.$var-gg,
+				),
+				'directions': true,
+			),
 			'-Gscr': (
 				'properties': (
-					$-cv-pref + 'gc-rule',
-					$-cv-pref + 'mgc-rule',
+					$cv-pref + 'gc-rule',
+					$cv-pref + 'mgc-rule',
 				),
 			),
 			'Pos': (
@@ -110,7 +121,7 @@ $utils-db: (
 			'Fxw': (
 				'properties': flex-wrap,
 				'keywords': (
-					'nw': nowrap,
+					'n': nowrap,
 					'w': wrap,
 					'wr': wrap-reverse,
 				),
@@ -453,8 +464,39 @@ $utils-db: (
 				'value-type': 'color',
 				'directions': true,
 			),
+
 			'Bds': (
 				'properties': border-style,
+				'keywords': 'line-style',
+			),
+			'Bdts': (
+				'properties': border-top-style,
+				'keywords': 'line-style',
+			),
+			'Bdrst': (
+				'properties': border-right-style,
+				'keywords': 'line-style',
+			),
+			'Bdbs': (
+				'properties': border-bottom-style,
+				'keywords': 'line-style',
+			),
+			'Bdls': (
+				'properties': border-left-style,
+				'keywords': 'line-style',
+			),
+			'-Bdxs': (
+				'properties': (
+					border-right-style,
+					border-left-style,
+				),
+				'keywords': 'line-style',
+			),
+			'-Bdys': (
+				'properties': (
+					border-top-style,
+					border-bottom-style,
+				),
 				'keywords': 'line-style',
 			),
 
@@ -462,6 +504,37 @@ $utils-db: (
 				'properties': border-width,
 				'keywords': 'line-width',
 			),
+			'Bdtw': (
+				'properties': border-top-width,
+				'keywords': 'line-width',
+			),
+			'Bdrw': (
+				'properties': border-right-width,
+				'keywords': 'line-width',
+			),
+			'Bdbw': (
+				'properties': border-bottom-width,
+				'keywords': 'line-width',
+			),
+			'Bdlw': (
+				'properties': border-left-width,
+				'keywords': 'line-width',
+			),
+			'-Bdxw': (
+				'properties': (
+					border-right-width,
+					border-left-width,
+				),
+				'keywords': 'line-width',
+			),
+			'-Bdyw': (
+				'properties': (
+					border-top-width,
+					border-bottom-width,
+				),
+				'keywords': 'line-width',
+			),
+
 			'Bdcl': (
 				'properties': border-collapse,
 				'keywords': (
@@ -477,13 +550,15 @@ $utils-db: (
 			'Trs': (
 				'properties': transition,
 				'value-type': 'abbr-kw',
+				'keywords': (
+					'mAll': all ml.$Trsdu-def,
+				),
 			),
 			'Anim': animation,
 			'Rsz': (
 				'properties': resize,
 				'keywords': (
 					'': none,
-					'n': none,
 					'b': both,
 					'h': horizontal,
 					'v': vertical,
@@ -505,10 +580,10 @@ $utils-db: (
 		),
 		'keywords': (
 			'border': (
-				'': 1px solid,
+				'': (1px solid,),
 			),
 			'position': map.set(
-				ml.$main-directions, 'c', 'center'
+				ml.$main-directions, 'c', center
 			),
 			'line-style': (
 				'': none,
@@ -525,7 +600,6 @@ $utils-db: (
 			'text-decoration': (
 				'ff': from-font,
 				'lt': line-through,
-				'n': none,
 				'o': overline,
 				'u': underline,
 				'w': wavy,
@@ -558,6 +632,32 @@ $utils-db: (
 				'sb': space-between,
 				'sa': space-around,
 				'se': space-evenly,
+			),
+		),
+	),
+
+	'groups': (
+		'registry': (
+			'Borders': (
+				'Bd', 'Bdt', 'Bdr', 'Bdb', 'Bdl', '-Bdx', '-Bdy',
+			),
+			'BdWidth': (
+				'Bdw', 'Bdtw', 'Bdrw', 'Bdbw', 'Bdlw', '-Bdxw', '-Bdyw',
+			),
+			'BdStyle': (
+				'Bds', 'Bdts', 'Bdrst', 'Bdbs', 'Bdls', '-Bdxs', '-Bdys',
+			),
+			'Overflows': (
+				'Ov', 'Ovx', 'Ovy',
+			),
+			'Margins': (
+				'M', 'Mt', 'Mr', 'Mb', 'Ml', '-Mx', '-My',
+			),
+			'Paddings': (
+				'P', 'Pt', 'Pr', 'Pb', 'Pl', '-Px', '-Py',
+			),
+			'Offsets': (
+				'T', 'R', 'B', 'L', '-X', '-Y', '-Xy',
 			),
 		),
 	),
