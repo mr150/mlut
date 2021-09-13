@@ -121,7 +121,7 @@ ml.$utils-cfg: map.set(
 			'converts utility keyword': (
 				('c', 'Ai'): center,
 				('ei', 'Animtf'): ease-in,
-				('', 'Bd'): 1px solid,
+				('', 'Bd'): (1px solid,),
 			),
 			'converts colors': (
 				('t', 'C'): transparent,

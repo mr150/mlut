@@ -1,6 +1,5 @@
 @use 'sass:map';
-
-@use '../../tools' as mlu;
+@use '../../tools/settings' as ml;
 
 /*
 Grid system
@@ -66,49 +65,17 @@ Markup: ../../../docs/examples/core-utils/grid-system/gscr.hbs
 Styleguide: core-utils.grid_system.gscr
 */
 
-@for $i from 1 through mlu.$cGsg-range {
-	@include mlu.bp-all('.-Gsg#{$i}su') {
-		#{mlu.$var-gg}: $i * mlu.$su;
-		#{mlu.$var-gg-rem}: mlu.px2rem($i * mlu.$su);
-	}
-}
-
-.-Gsc {
-	$sm-cols: mlu.grid-cols-count(mlu.$bp-sm);
-	$Gc-map: (
-		mlu.$bp-sm: $sm-cols,
-		'_bp': mlu.$grid-default-cols,
-		'10_bp': 10,
-	);
-
-	@each $key, $value in mlu.$grid-cols {
-		@if $key != mlu.$bp-sm and $sm-cols != mlu.$grid-default-gtr {
-			$Gc-map: map.merge($Gc-map, (mlu.$bp-sm + '_' + $key: $sm-cols));
-		}
-	}
-
-	@at-root {
-		.chl_-Gsc-#{mlu.$bp-sm} > * {
-			#{mlu.$var-grid-cols}: $sm-cols;
-		}
-
-		.chl_-Gsc10 > * {
-			#{mlu.$var-grid-cols}: 10;
-		}
-
-		@include mlu.mk-util('-Gsc', $Gc-map);
-	}
-}
-
-.-Gscd0 {
-	--gc-diff: 0px;
-}
-
-.-Gscd1gg {
-	--gc-diff: var(#{mlu.$var-gg});
-}
-
-.-Gscr {
-	--gc-rule: calc((var(--gc) - 0.0001) / var(#{mlu.$var-grid-cols}) * 100% - var(--gc-diff, var(#{mlu.$var-gg})) * 2);
-	--mgc-rule: calc((var(--mgc) - 0.0001) / var(#{mlu.$var-grid-cols}) * 100% + var(--gc-diff, var(#{mlu.$var-gg})));
-}
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	(
+		ml.$bp-all + '_-Gsg': ([1su, 8],),
+		ml.$bp-all + '_-Gsc': (['2_=>*', 11],),
+		ml.$bp-all + '_-Gscd': (1gg, 0),
+		ml.$bp-all + '_-Gscr': (
+			'': (
+				calc(var(#{ml.$cv-pref}gc) / var(#{ml.$var-grid-cols}) * 100% - var(#{ml.$cv-pref}gc-diff, var(#{ml.$var-gg})) * 2),
+				calc(var(#{ml.$cv-pref}mgc) / var(#{ml.$var-grid-cols}) * 100% + var(#{ml.$cv-pref}gc-diff, var(#{ml.$var-gg}))),
+			),
+		),
+	)
+);

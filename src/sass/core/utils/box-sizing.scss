@@ -1,4 +1,6 @@
-@use '../../tools' as mlu;
+@use 'sass:list';
+@use 'sass:map';
+@use '../../tools' as ml;
 
 /*
 Box sizing
@@ -6,10 +8,12 @@ Box sizing
 Utilities for DOM nodes size management.
 
 * `H100p`
+* `H100vh`
 * `H0`
 * `Mih100vh`
 * `Mih100p`
 * `Bxz`
+* `Bxz-cb`
 * `Fl` \- turn on wrapping text on the right.
 * `Fl-r` \- turn on wrapping text on the left.
 
@@ -17,11 +21,45 @@ Styleguide: core-utils.bxz
 */
 
 /*
+D
+
+Display. Sets the display type.
+
+* `D-tb`
+* `D-tbc`
+* `D-tbr`
+* `D-itb`
+* `D-g` \- grid. *Responsive*.
+
+D - block. The DOM node stretches on the full width of the container and creates line breaks before and after. *Responsive*.
+D-ib - inline-block. The width of the DOM node depends on the width of the content. Inline-blocks line up in one line like a letters and wrap if they don’t fit. *Responsive*.
+D-f - flex. Turns an DOM node into a flex container. Can be used to progressive enhancement the [row](section-core-blocks.html#kssref-core-blocks-row) layouts. Child DOM nodes will be stretched to the full height of the container. By default, child DOM nodes are not wrap to the new line and are compressed in width until they go beyond the line. *Responsive*.
+D-if - inline-flex. Combines inline-block and flex container. *Responsive*.
+D-n - none. Hides the DOM node as if it is not on the page. *Responsive*.
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/d.hbs
+
+Styleguide: core-utils.bxz.d
+*/
+
+/*
+-D
+
+Custom display.
+
+-D-f - `D-f` with line breaks.
+-D-if - `D-if` with `Fxw-w`.
+
+Styleguide: core-utils.bxz.-d
+*/
+
+/*
 Maw
 
 Max-width.
 
-fx0 - fixed width for cards. You can change it in utilities [settings](section-sass-tools.html#kssref-sass-tools-settings-utils).
+* $sm, $md, $lg, $xl \- global keywords with breakpoints values
+
 100p - 100%
 n - none
 
@@ -53,46 +91,44 @@ Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
 Styleguide: core-utils.bxz.ov
 */
 
-@include mlu.mk-util('Maw', (
-	'-fx0': mlu.$Maw--fx0,
-	'100p': 100%,
-	'n': none,
-));
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	(
+		ml.$bp-all + '_D': (
+			'', 'i', 'ib', 'if', 'g', 'ig', 'n',
+		),
+		'D': (
+			ml.$bp-all + ' @s_f', 'tb', 'tbc', 'tbr', 'itb',
+		),
+		ml.$bp-all + '_Maw': list.join((100p, 'n'), ml.$global-kw-bp),
+		'W': (100p, ml.$bp-all + '_a', ml.$bp-all + '_ih',),
+		'H': (100p, 100vh, 0),
+		'Mih': (100p, 100vh),
+		'Bxz': ('', 'cb'),
+		'Fl': ('', 'r'),
+		'Cl': ('', 'r', 'l'),
+	)
+);
 
-@include mlu.mk-util('H', (
-	'100p': 100%,
-	0: 0,
-));
+ml.$utils-groups-map: map.merge(
+	ml.$utils-groups-map,
+	(
+		'Overflows': ('', 'a', 's', 'v'),
+	)
+);
 
-@include mlu.mk-util('Mih', (
-	'100p': 100%,
-	100vh: 100vh,
-));
-
-.Bxz {
-	box-sizing: border-box;
+.-D-f {
+	display: flex;
+	flex-wrap: wrap;
 }
 
-@include mlu.mk-util('Fl', (
-	'': left,
-	'r': right,
-));
+.-D-if {
+	display: inline-flex;
+	flex-wrap: wrap;
+}
 
 .-Cl {
-	@include mlu.cCl;
-}
-
-@include mlu.mk-util('Ov', (
-	'': hidden,
-	'a': auto,
-));
-
-.Ovx-a {
-	overflow-x: auto;
-}
-
-.Ovy-a {
-	overflow-y: auto;
+	@include ml.cCl;
 }
 
 /*
@@ -113,34 +149,28 @@ Markup: ../../../docs/examples/core-utils/box-sizing/w.html
 Styleguide: core-utils.bxz.w
 */
 
-@for $i from 1 through mlu.$grid-cols-xs {
+@for $i from 1 through ml.$grid-cols-xs {
 	.W#{$i}c {
-		@include mlu.W($i * 1c, $cols: mlu.$grid-cols-xs);
+		@include ml.W($i * 1c, $cols: ml.$grid-cols-xs);
 	}
 }
 
 // Generate grid utilities W and Ml on breakpoints
-@each $key, $value in mlu.$grid-cols {
+@each $key, $value in ml.$grid-cols {
 	@for $i from 1 through $value {
-		.W#{$i}c_#{$key} {
-			@include mlu.W($i * 1c, $key, $value);
+		.#{$key}_W#{$i}c {
+			@include ml.W($i * 1c, $key, $value);
 		}
 
-		// Offsets start generate from mlu.$bp-md and if offset flag turn on.
-		// '$i < mlu.grid-cols-count($gtr-key) - 1' because
+		// Offsets start generate from ml.$bp-md and if offset flag turn on.
+		// '$i < ml.grid-cols-count($gtr-key) - 1' because
 		// offset like 'Ml11c' makes no sense
-		@if mlu.$flag-col-offset and
-			mlu.bp($key) > mlu.bp(mlu.$bp-sm) and
+		@if ml.$flag-col-offset and
+			ml.bp($key) > ml.bp(ml.$bp-sm) and
 			$i < $value - 1 {
-			.Ml#{$i}c_#{$key} {
-				@include mlu.Ml($i * 1c, $key, $value);
+			.#{$key}_Ml#{$i}c {
+				@include ml.Ml($i * 1c, $key, $value);
 			}
 		}
 	}
 }
-
-@include mlu.mk-util('W', (
-	'100p': 100%,
-	'a_all': auto,
-	'i_all': inherit,
-));

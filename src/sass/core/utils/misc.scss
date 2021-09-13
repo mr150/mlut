@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '../../tools/settings' as ml;
+
 /*
 Misc
 
@@ -23,14 +26,10 @@ Markup: ../../../docs/examples/core-utils/visual-formatting/-all.html
 Styleguide: core-utils.misc.-all
 */
 
-.Rsz-n {
-	resize: none;
-}
-
-.-All-sr {
-	margin: 0;
-	padding: 0;
-	font: inherit;
-	list-style: none;
-	border: 0;
-}
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	(
+		'Rsz': (ml.$tUKwa),
+		'-All': ('sr'),
+	)
+);

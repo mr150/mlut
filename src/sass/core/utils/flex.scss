@@ -1,6 +1,5 @@
 @use 'sass:map';
-
-@use '../../tools' as mlu;
+@use '../../tools/settings' as ml;
 
 /*
 Flex
@@ -100,181 +99,22 @@ Markup: ../../../docs/examples/core-utils/flex/ac.hbs
 Styleguide: core-utils.flex.ac
 */
 
-/*
--As
-
-Custom align self. Set `vertical-align` for common DOM nodes and `align-self` for flex-element.
-
-Can be used to vertically align an element in row-layouts. Partially works without flex-container. Has the same values as `As`.
-
-Styleguide: core-utils.flex.-as
-*/
-
-/*
--Jc
-
-Custom justify content. Combines [Ta](#kssref-core-utils-text-ta) and [Jc](#kssref-core-utils-flex-jc) utilities. Can be used to horizontal alignment with progressive enhancement for row-layouts.
-
-All values are available and correspond to `Jc` if [flex-pe](section-sass-tools.html#kssref-sass-tools-settings-flags) flag turned on. By default available one value.
-
--Jc-c - center.
-
-Styleguide: core-utils.flex.-jc
-*/
-
-/*
--Ai
-
-Custom align items. Set `vertical-align` for child DOM nodes and `align-items` for flex-container.
-
-Can be used to vertically align an elements in row-layouts. Partially works without flex-container. Has the same values as `Ai`.
-
-Styleguide: core-utils.flex.-ai
-*/
-
-@include mlu.mk-util('Fxd', (
-	'rr_all': row-reverse,
-	'r_bp': row,
-	'c': column,
-	'cr': column-reverse,
-));
-
-.Fxg1 {
-	flex-grow: 1;
-}
-
-.Fxsh0 {
-	flex-shrink: 0;
-}
-
-.Fx-i {
-	flex: inherit;
-}
-
-@include mlu.mk-util('Fxw', (
-	'wr': wrap-reverse,
-	'w_all': wrap,
-	'n_bp': nowrap,
-));
-
-@include mlu.mk-util('Ac', (
-	'fs': flex-start,
-	'fe': flex-end,
-	'c': center,
-	'sa': space-around,
-	'sb': space-between,
-));
-
-$As-map: (
-	's': stretch,
-);
-
-@if mlu.$flag-flex-pe {
-	.-As-b {
-		align-self: baseline;
-		vertical-align: baseline;
-	}
-
-	.-As-fs {
-		align-self: flex-start;
-		vertical-align: top;
-	}
-
-	.-As-c {
-		align-self: center;
-		vertical-align: middle;
-	}
-
-	.-As-fe {
-		align-self: flex-end;
-		vertical-align: bottom;
-	}
-} @else {
-	$As-map: map.merge($As-map,
+ml.$utils-map: map.merge(
+	ml.$utils-map,
 	(
-		'fs': flex-start,
-		'fe': flex-end,
-		'c': center,
-		'b': baseline,
-	));
-}
-
-@include mlu.mk-util('As', $As-map);
-
-@include mlu.mk-util('Jc', (
-	'fs_bp': flex-start,
-	'fe_all': flex-end,
-	'c_all': center,
-	'sa_all': space-around,
-	'sb_all': space-between,
-));
-
-@if mlu.$flag-flex-pe {
-	@include mlu.bp-all('.-Jc-fs', 0) {
-		justify-content: flex-start;
-		text-align: left;
-	}
-
-	@include mlu.bp-all('.-Jc-c') {
-		justify-content: center;
-		text-align: center;
-	}
-
-	@include mlu.bp-all('.-Jc-fe') {
-		justify-content: flex-end;
-		text-align: right;
-	}
-} @else if mlu.$flag-css-vars != 2 {
-	.-Jc-c {
-		justify-content: center;
-		text-align: center;
-	}
-}
-
-@if mlu.$flag-flex-pe {
-	.-Ai-fs {
-		align-items: flex-start;
-
-		> * {
-			vertical-align: top;
-		}
-	}
-
-	.-Ai-c {
-		align-items: center;
-
-		> * {
-			vertical-align: middle;
-		}
-	}
-
-	.-Ai-fe {
-		align-items: flex-end;
-
-		> * {
-			vertical-align: bottom;
-		}
-	}
-
-	.-Ai-b {
-		align-items: baseline;
-
-		> * {
-			vertical-align: baseline;
-		}
-	}
-} @else {
-	@include mlu.mk-util('Ai', (
-		's_bp': stretch,
-		'fs_all': flex-start,
-		'fe_all': flex-end,
-		'b_all': baseline,
-		'c_all': center,
-	));
-}
-
-@for $i from -1 to (mlu.$Ord-range - 1) {
-	.Ord#{$i} {
-		order: $i;
-	}
-}
+		ml.$bp-all + '_Fxd': ('rr', '#{ml.$bp-all} #{ml.$kArOnly}_r', 'c', 'cr'),
+		'Fxg': (1),
+		'Fxsh': (0),
+		'Fx': ('ih'),
+		ml.$bp-all + '_Fxw': ('wr', 'w', 'n'),
+		'Ac': ('fs', 'fe', 'c', 'sa', 'sb', 'se'),
+		ml.$bp-all + '_As': (
+			'fs', 'fe', 'c', 'b', 'a', '#{ml.$bp-all} #{ml.$kArOnly}_s'
+		),
+		ml.$bp-all + '_Jc': (
+			'#{ml.$bp-all} #{ml.$kArOnly}_fs', 'fe', 'c', 'sa', 'sb', 'se'
+		),
+		ml.$bp-all + '_Ai': ('fs', 'fe', 'c', 'b', '#{ml.$bp-all} #{ml.$kArOnly}_s'),
+		ml.$bp-all + '_Ord': ([-1, 5],),
+	)
+);

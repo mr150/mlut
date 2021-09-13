@@ -1,4 +1,57 @@
-@use '../../tools' as mlu;
+@use 'sass:map';
+@use '../../tools' as ml;
+
+/*
+Background
+
+Group of utilities for managing the background image of DOM node.
+
+* `Bga-f`
+* `Bga-l`
+
+Styleguide: core-utils.bg
+*/
+
+/*
+Bgp
+
+Position of background.
+
+t - top
+r - right
+b - bottom
+c - center
+r;t - right top
+r;b - right bottom
+l;b - left bottom
+
+Styleguide: core-utils.bg.bgp
+*/
+
+/*
+Bgr
+
+Repeat of background.
+
+nr - no repeat
+rx - repeat on X axis
+ry - repeat on Y
+
+Styleguide: core-utils.bg.bgr
+*/
+
+/*
+Bgsz
+
+Background size.
+
+* `Bgsz100p`
+
+cv - cover. Stretches the background image so that it covers the entire space of the container.
+ct - contain. Stretches the background image to the maximum possible size so it does not go beyond the background of the container. The image does not change the proportions.
+
+Styleguide: core-utils.bg.bgsz
+*/
 
 /*
 Visual formatting
@@ -22,23 +75,20 @@ Markup: ../../../docs/examples/core-utils/visual-formatting/-v.hbs
 Styleguide: core-utils.visual.-v
 */
 
-.Ol0 {
-	outline: 0px;
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	(
+		'Bgr': ('nr', 'rx', 'ry'),
+		ml.$bp-all + '_Bgsz': (100p, ml.$tUKwa),
+		'Bga': ml.$tUKwa,
+		'Bgp': (ml.$tUKwa, 'r;t', 'r;b', 'l;b'),
+		'Ol': (0),
+		ml.$bp-all + '_Op': (0, 1),
+		ml.$bp-all + '_V': ('', 'c', 'v'),
+	)
+);
 
-	&::-moz-focus-inner {
-		border: 0;
-	}
-}
-
-.Op0 {
-	opacity: 0;
-}
-
-.V {
-	visibility: hidden;
-}
-
-@include mlu.bp-all('.-V-vh') {
+@include ml.bp-all('.-V-vh') {
 	position: absolute;
 	width: 1px;
 	height: 1px;

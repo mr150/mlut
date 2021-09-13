@@ -111,6 +111,8 @@ $-bp-kw-map: ();
 	$-bp-kw-map: map.set($-bp-kw-map, ml.$tUGkw + $key, $value);
 }
 
+$global-kw-bp: map.keys($-bp-kw-map);
+
 @if $-custom-global-kw {
 	$-bp-kw-map: map.merge($-bp-kw-map, $-custom-global-kw);
 }

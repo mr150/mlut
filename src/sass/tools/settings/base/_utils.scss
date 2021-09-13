@@ -5,34 +5,14 @@
 //
 // Settings affecting the values and generation of the core utilities.
 //
-// $ml-Maw--fx0 = 288px - fixed width for cards. This is value for [Maw-fx0](section-core-utils.html#kssref-core-utils-bxz-maw) utility.
-// $ml-My-range = 4 - count of [Mt](section-core-utils.html#kssref-core-utils-margin) and [Mb](section-core-utils.html#kssref-core-utils-margin-mb) utilities.
-// $ml-P-range = 4 - count of [P](section-core-utils.html#kssref-core-utils-padding) utilities.
-// $ml--Gg-range = 5 - number of [-Gg](section-core-utils.html#kssref-core-utils-custom-gg) utility values in `su`.
-// $ml-Z-range = 4 - [z-index](section-core-utils.html#kssref-core-utils-pos-z) range. Counted from zero.
-// $ml-Z-max = 9999 - `z-index` max value.
-// $ml-Ord-range = 4 - [order](section-core-utils.html#kssref-core-utils-flex) range. Counted from -1.
 // $ml-Ff--ss0 - sans serif font stack contains default fonts on different OS.
 // $ml-Ff--m0 - monospace font stack contains default fonts on different OS.
-// $ml-Trsdu--def = 0.3s - default [transition](section-core-utils.html#kssref-core-utils-anim) duration.
+// $ml-Trsdu-def = 0.3s - default [transition](section-core-utils.html#kssref-core-utils-anim) duration.
 // $ml-utils-states-psd-cls - map with abbreviations of pseudo-classes for utilities.
 // $ml-utils-states-psd-elm - map with pseudo-elements abbreviations for utilities.
 // $ml-utils-states - map with abbreviations of utility state names. Maps of pseudo-classes and pseudo-elements merge into it.
 //
 // Styleguide: sass-tools.settings.utils
-
-$cGsg-range: 5 !default;
-
-$Z-max: 9999 !default;
-$Z-range: 4 !default;
-
-$Maw--fx0: 288px !default;
-
-$My-range: 4 !default;
-
-$P-range: 4 !default;
-
-$Ord-range: 4 !default;
 
 // stylelint-disable
 $Ff--ss0: (
@@ -61,7 +41,7 @@ $Ff--m0: (
 ) !default;
 // stylelint-enable
 
-$Trsdu--def: 0.3s !default;
+$Trsdu-def: 0.3s !default;
 
 // Conversion to CSS
 //
@@ -125,7 +105,14 @@ $utils-cfg: (
 	'up-specificity': false,
 
 	'gg-fallback-list': (
-		'-X', '-Y', '-Xy', 'Maw', 'Miw', 'Mah', 'Mih', 'Fz', 'M', 'P', 'Lh', 'Lts', 'Tsh', 'Va', 'Bdw', 'Bd', 'Bdrs',
+		'T', 'R', 'B', 'L', '-X', '-Y', '-Xy',
+		'P', 'Pt', 'Pr', 'Pb', 'Pl', '-Px', '-Py',
+		'M', 'Mt', 'Mr', 'Mb', 'Ml', '-Mx', '-My',
+		'Bdw', 'Bdtw', 'Bdrw', 'Bdbw', 'Bdlw', '-Bdxw', '-Bdyw',
+		'Bd', 'Bdt', 'Bdr', 'Bdb', 'Bdl', '-Bdx', '-Bdy',
+		'Maw', 'Miw', 'Mah', 'Mih', 'G',
+		'Fz', 'Lh', 'Lts', 'Tsh', 'Va', 'Td', 'F',
+		'Bxsh', 'Ol', 'Bdrs', 'Bgsz', 'Bgp',
 	),
 
 	'value-types': (

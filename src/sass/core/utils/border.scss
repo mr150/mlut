@@ -1,6 +1,5 @@
 @use 'sass:map';
-
-@use '../../tools' as mlu;
+@use '../../tools/settings' as ml;
 
 /*
 Border
@@ -25,7 +24,7 @@ Bdw
 
 Border width.
 
-0 - remove border
+0 - remove border. *Responsive*.
 2 - <div class="Bd Bdw2 P2su Mb1gg">2px</div>
 1su - <div class="Bd Bdw1su P2su">1 space unit</div>
 
@@ -38,44 +37,25 @@ Bds
 Border style. Changes the style of the border on **all** sides at once.
 
 dt - <div class="Bd Bdw1su Bds-dt P2su Mb1gg">dotted</div>
-ds - <div class="Bd Bdw1su Bds-ds P2su">dashed</div>
+ds - <div class="Bd Bdw1su Bds-ds P2su Mb1gg">dashed</div>
+s - <div class="Bd Bdw1su xl_Bds-s P2su">solid</div>
 
 Styleguide: core-utils.bd.bds
 */
 
-$Bdxy-map: (
-	'xy': 1px solid,
+ml.$utils-groups-map: map.merge(
+	ml.$utils-groups-map,
+	(
+		'Borders': ml.$bp-all + '_',
+		ml.$bp-all + '_BdWidth': (0, 2, 1su),
+		'BdStyle': ('d', 'ds', '#{ml.$bp-all} #{ml.$kArOnly}_s'),
+	)
 );
 
-@each $key, $value in mlu.$main-directions {
-	$Bdxy-map: map.merge($Bdxy-map, ($key: 1px solid));
-}
-
-$Bdxy-map: map.merge($Bdxy-map,
-(
-	'y': 1px solid,
-	'x': 1px solid,
-));
-
-@include mlu.mk-util('Bd', $Bdxy-map);
-
-@include mlu.mk-util('Bds', (
-	'dt': dotted,
-	'ds': dashed,
-));
-
-$Bdw-map: (
-	0: 0,
-	2: 2px,
-	1su: 1su,
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	(
+		'Bdcl': (''),
+		'Bdrs': (50p),
+	)
 );
-
-@include mlu.mk-util('Bdw', $Bdw-map);
-
-.Bdcl-c {
-	border-collapse: collapse;
-}
-
-.Bdrs50p {
-	border-radius: 50%;
-}

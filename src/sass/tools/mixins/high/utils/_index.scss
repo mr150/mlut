@@ -87,9 +87,11 @@ Styleguide: sass-tools.mixins.utils
 			}
 		}
 
+		$selector: ml.check-class($selector, 1);
+
 		@each $key, $value in ml.$bp-map {
 			@include ml.bpm($key) {
-				#{$selector}_#{$key} {
+				.#{$key}_#{$selector} {
 					@content;
 				}
 			}
