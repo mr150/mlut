@@ -131,18 +131,23 @@
 
 	@each $key, $value in $values {
 		$range-list: if($is-values-map, $key, list.nth($values, $i));
+		$range-data: null;
 
 		@if list.is-bracketed($range-list) {
-			@include new-mk-util(
-				$util-name,
-				$options: map.set($main-options, 'isRange', true),
-				meta.call($range-generator, $range-list, $util-name)...
-			);
+			$range-data: meta.call($range-generator, $range-list, $util-name);
 		} @else if meta.type-of($key) == 'string' and string.index($key, ml.$tUKwa) {
+			$range-data: ml.expand-util-kw-alias($key, $util-name);
+		}
+
+		@if $range-data {
+			@if not map.has-key($range-data, 'components') {
+				$range-data: map.set($range-data, 'components', $util-data);
+			}
+
 			@include new-mk-util(
 				$util-name,
 				$options: map.set($main-options, 'isRange', true),
-				ml.expand-util-kw-alias($key, $util-name)...
+				$range-data...
 			);
 		} @else {
 			$util-val-data: ml.new-parse-util($key);

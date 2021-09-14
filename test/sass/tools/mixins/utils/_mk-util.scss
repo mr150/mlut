@@ -332,6 +332,42 @@ ml.$utils-db: map.deep-merge(
 					}
 				}
 			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.new-mk-util(
+						'sm ArOnly_Mt', (
+						[10, 20, 10],
+						['@:prn ArOnly_40', 45, 5],
+					));
+				}
+
+				@include expect(false) {
+					@media (min-width: ml.bp(sm)) {
+						.sm_Mt10 {
+							margin-top: 10px;
+						}
+					}
+
+					@media (min-width: ml.bp(sm)) {
+						.sm_Mt20 {
+							margin-top: 20px;
+						}
+					}
+
+					@media print {
+						.\@\:prn_Mt40 {
+							margin-top: 40px;
+						}
+					}
+
+					@media print {
+						.\@\:prn_Mt45 {
+							margin-top: 45px;
+						}
+					}
+				}
+			}
 		}
 
 		@include it('make util from range of custom units') {
@@ -1182,6 +1218,33 @@ ml.$utils-db: map.deep-merge(
 
 					.Bgc\#ccc {
 						background-color: #ccc;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.new-mk-util(
+						'Bgsz_f StOnly', (
+						'KW.colors', 'KW_af StOnly'
+					));
+				}
+
+				@include expect(false) {
+					.Bgsz-t_f:focus {
+						background-size: transparent;
+					}
+
+					.Bgsz-cc_f:focus {
+						background-size: currentColor;
+					}
+
+					.Bgsz-ct_af::after {
+						background-size: contain;
+					}
+
+					.Bgsz-cv_af::after {
+						background-size: cover;
 					}
 				}
 			}
