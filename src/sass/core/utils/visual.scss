@@ -105,18 +105,6 @@ Visual formatting
 Styleguide: core-utils.visual
 */
 
-/*
--V
-
-Custom visibility.
-
--V-vh - visually hides the DOM node but leaves it accessible to the screen readers and robots. For comparison `D-n` hides the DOM node from all. *Responsive*.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/-v.hbs
-
-Styleguide: core-utils.visual.-v
-*/
-
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	(
@@ -143,15 +131,3 @@ ml.$utils-groups-map: map.merge(
 		'BdStyle': ('d', 'ds', '#{ml.$bp-all} #{ml.$kArOnly}_s'),
 	)
 );
-
-@include ml.bp-all('.-V-vh') {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0px;
-	overflow: hidden;
-	white-space: nowrap;
-	border: 0px;
-	clip: rect(0 0 0 0);
-}

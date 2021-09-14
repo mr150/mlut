@@ -47,8 +47,9 @@ Styleguide: core-utils.bxz.d
 
 Custom display.
 
--D-f - `D-f` with line breaks.
--D-if - `D-if` with `Fxw-w`.
+-D-mf - multiline flex
+-D-mif - multiline inline-flex
+-D-vh - visually hidden. Hides the DOM node but leaves it accessible to the screen readers and robots.
 
 Styleguide: core-utils.bxz.-d
 */
@@ -101,6 +102,7 @@ ml.$utils-map: map.merge(
 		'D': (
 			ml.$bp-all + ' @s_f', 'tb', 'tbc', 'tbr', 'itb',
 		),
+		ml.$bp-all + '_-D': ml.$tUKwa,
 		// sizes
 		ml.$bp-all + '_Maw': list.join((100p, 'n'), ml.$global-kw-bp),
 		'W': (100p, ml.$bp-all + '_a', ml.$bp-all + '_ih',),
@@ -119,16 +121,6 @@ ml.$utils-groups-map: map.merge(
 		'Overflows': ('', 'a', 's', 'v'),
 	)
 );
-
-.-D-f {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.-D-if {
-	display: inline-flex;
-	flex-wrap: wrap;
-}
 
 .-Cl {
 	@include ml.cCl;

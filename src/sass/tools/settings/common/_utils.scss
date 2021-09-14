@@ -109,6 +109,20 @@ $utils-db: (
 					'tbrg': table-row-group,
 				),
 			),
+			'-D': (
+				'properties': (
+					display, flex-wrap, position, width, height,
+					margin, padding, overflow, white-space, border, clip,
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'mf': (flex, wrap),
+					'mif': (inline-flex, wrap),
+					'vh': (
+						null, null, absolute, 1px, 1px, -1px, 0, hidden, nowrap, 0, rect(0 0 0 0)
+					),
+				),
+			),
 			'Fxd': (
 				'properties': flex-direction,
 				'keywords': (
