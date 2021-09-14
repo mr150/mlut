@@ -1,15 +1,11 @@
 @use '../../tools/' as ml;
 @use 'grid-system';
-@use 'position';
-@use 'flex';
-@use 'box-sizing';
-@use 'margin';
-@use 'padding';
+@use 'other';
+@use 'box-alignment';
+@use 'box-model';
+@use 'spacing';
 @use 'text';
-@use 'border';
-@use 'animation';
-@use 'misc';
-@use 'visual-formatting';
+@use 'visual';
 
 @each $group, $values in ml.$utils-groups-map {
 	@include ml.mk-utils-group($group, $values);

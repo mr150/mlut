@@ -38,6 +38,39 @@ X and Y coordinate axes. Change `top` or `bottom` and `right` or `left`.
 Styleguide: core-utils.pos.xy
 */
 
+/*
+Animation
+
+* `Trs-mAll` \- transition duration sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
+
+Styleguide: core-utils.anim
+*/
+
+/*
+Misc
+
+* `Rsz-n`
+
+Styleguide: core-utils.misc
+*/
+
+/*
+-All
+
+Custom `all`.
+
+* `sr` \- soft reset, reset some default browser styles:
+	* `margin`
+	* `padding`
+	* `border`
+	* `font`
+	* `list-style`
+
+Markup: ../../../docs/examples/core-utils/visual-formatting/-all.html
+
+Styleguide: core-utils.misc.-all
+*/
+
 ml.$utils-groups-map: map.merge(
 	ml.$utils-groups-map,
 	(
@@ -50,5 +83,10 @@ ml.$utils-map: map.merge(
 	(
 		ml.$bp-all + '_Pos': ('', 'a', 'f', 's', 'st'),
 		'Z': ('a', [-1, 5]),
+		// animation
+		'Trs': ('mAll'),
+		// misc
+		'Rsz': (ml.$tUKwa),
+		'-All': ('sr'),
 	)
 );

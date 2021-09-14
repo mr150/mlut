@@ -94,16 +94,19 @@ Styleguide: core-utils.bxz.ov
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	(
+		// display
 		ml.$bp-all + '_D': (
 			'', 'i', 'ib', 'if', 'g', 'ig', 'n',
 		),
 		'D': (
 			ml.$bp-all + ' @s_f', 'tb', 'tbc', 'tbr', 'itb',
 		),
+		// sizes
 		ml.$bp-all + '_Maw': list.join((100p, 'n'), ml.$global-kw-bp),
 		'W': (100p, ml.$bp-all + '_a', ml.$bp-all + '_ih',),
 		'H': (100p, 100vh, 0),
 		'Mih': (100p, 100vh),
+		// other
 		'Bxz': ('', 'cb'),
 		'Fl': ('', 'r'),
 		'Cl': ('', 'r', 'l'),

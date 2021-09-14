@@ -63,12 +63,35 @@ Markup: ../../../docs/examples/core-utils/margin/mx.html
 Styleguide: core-utils.margin.mx
 */
 
+/*
+Padding
+
+* `P0` \- clear all paddings.
+* `P1su..P4su` \- creates padding all around.
+* `P1gg`
+* `Pt1gg..Pt2gg` \- works similarly [Mt1gg](#kssref-core-utils-margin)
+* `Pb1gg..Pb2gg`
+
+Styleguide: core-utils.padding
+*/
+
+/*
+Px
+
+Padding on X axis. Sets left and right padding.
+
+* `Px1gg`
+
+Styleguide: core-utils.padding.px
+*/
+
 $-M-list: ([ml.$bp-all + '_-6su', -1], [ml.$bp-all + '_-2gg', -1], [ml.$bp-all + '_1gg', 4]);
 
 ml.$utils-groups-map: map.merge(
 	ml.$utils-groups-map,
 	(
 		ml.$bp-all + '_Margins': (0, 'a', 'ih', [1su, 6]),
+		ml.$bp-all + '_Paddings': (0, 'ih', [1su, 7], [1gg, 6]),
 	)
 );
 
