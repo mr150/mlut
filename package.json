@@ -36,7 +36,7 @@
 		"build": "export NODE_ENV=production && ./node_modules/gulp/bin/gulp.js build"
 	},
 	"devDependencies": {
-		"browser-sync": "^2.27.4",
+		"browser-sync": "^2.27.5",
 		"del": "^6.0.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
@@ -54,10 +54,10 @@
 		"gulp-tabify": "0.0.2",
 		"gulp-uglify": "^3.0.2",
 		"kss": "^3.0.1",
-		"mocha": "^9.0.0",
+		"mocha": "^9.1.1",
 		"mocha-clean": "^1.0.0",
-		"sass": "^1.35.1",
-		"sass-migrator": "^1.5.0",
+		"sass": "^1.41.0",
+		"sass-migrator": "^1.5.2",
 		"sass-true": "^6.0.1",
 		"stylelint": "^13.13.1",
 		"stylelint-order": "^4.0.0",
