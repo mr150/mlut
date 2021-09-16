@@ -184,16 +184,16 @@ gulp.task('kss', shell.task([
 	'cp ' + path.test.css + 'test.css ' + dirs.docs + 'styleguide/kss-assets'
 ]));
 
-gulp.task('default', gulp.parallel('server', 'style', 'pug', 'scripts', function(){
-	gulp.watch(path.watch.styles, gulp.parallel(
-		gulp.series('style', 'sass-test'),
-		'kss'
-	));
-
+gulp.task('default', gulp.parallel('server', 'kss', 'style', 'pug', 'scripts', function(){
+	gulp.watch(path.watch.styles, gulp.series('kss', 'style'));
 	gulp.watch(path.watch.pug, gulp.series('pug'));
 	gulp.watch(path.watch.html, gulp.series('html'));
 	gulp.watch(path.watch.js, gulp.series('scripts', 'kss'));
 	gulp.watch(path.watch.docs, gulp.series('kss'));
+}));
+
+gulp.task('watch-test', gulp.parallel('sass-test', 'kss', function(){
+	gulp.watch(path.watch.styles, gulp.series('kss', 'sass-test'));
 }));
 
 gulp.task('ftp', function(){
