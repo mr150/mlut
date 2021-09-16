@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:list';
 @use '../../tools/settings' as ml;
 
 /*
@@ -27,7 +28,7 @@ Margin left. You can set left margin in the [grid units](section-concepts.html#k
 * `Ml0` \- *Responsive*.
 * `Ml-2gg..Ml2gg` \- the range includes 2 negative margins and 2 positive.
 * `Ml1gg` \- it is needed to return the default column gutter. *Responsive*.
-* `Ml1c..Ml10c` \- available margin in `c` on all breakpoints, starting with `md`.
+* `Ml1gc..Ml10gc` \- available margin in `gc` on all breakpoints.
 
 Markup: ../../../docs/examples/core-utils/margin/ml.html
 
@@ -101,7 +102,7 @@ ml.$utils-map: map.merge(
 		'M': $-M-list,
 		'Mt': $-M-list,
 		'Mb': $-M-list,
-		'Ml': $-M-list,
+		'Ml': list.append($-M-list, [ml.$bp-all + '_1gc', 10]),
 		'-Mx': $-M-list,
 		'-My': $-M-list,
 	)
