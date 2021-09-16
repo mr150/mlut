@@ -37,6 +37,9 @@ ml.$utils-db: map.deep-merge(
 				'properties': margin-left,
 				'selector': '.my-& >*+*',
 			),
+			'Tt': (
+				'components': 'Tt_af',
+			),
 	),
 	)
 	)
@@ -1248,7 +1251,40 @@ ml.$utils-db: map.deep-merge(
 					}
 				}
 			}
+		}
 
+		@include it('make util with bound components') {
+			@include assert() {
+				@include output(false) {
+					@include ml.new-mk-util(
+						'Tt', (
+						'', 'c_h StOnly',
+					));
+
+					@include ml.new-mk-util(
+						'Tt_f StOnly', (
+						'n',
+					));
+				}
+
+				@include expect(false) {
+					.Tt {
+						text-transform: uppercase;
+					}
+
+					.Tt_af::after {
+						text-transform: uppercase;
+					}
+
+					.Tt-c_h:hover {
+						text-transform: capitalize;
+					}
+
+					.Tt-n_f:focus {
+						text-transform: none;
+					}
+				}
+			}
 		}
 	}
 }

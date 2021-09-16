@@ -104,6 +104,7 @@
 	$class-name: map.get($main-options, 'class-name');
 	$props: map.get($main-options, 'properties');
 	$custom-selector: map.get($main-options, 'selector');
+	$bound-components: map.get($main-options, 'components');
 	$range-generator: map.get(
 		ml.$utils-cfg,
 		'range-generators',
@@ -123,6 +124,8 @@
 
 	@if list.length($components) > 0 {
 		$util-data: $components;
+	} @else if list.length($util-data) == 1 and $bound-components {
+		$util-data: ml.new-parse-util($bound-components);
 	}
 
 	$is-values-map: meta.type-of($values) == 'map';
@@ -350,7 +353,8 @@
 @function -util-main-options($name, $options) {
 	$prop: null;
 	$needed-options: (
-		'repeat-prop-values', 'preset-properties', 'selector', 'range-generator',
+		'repeat-prop-values', 'preset-properties',
+		'selector', 'range-generator', 'components'
 	);
 	$result: (
 		'class-name': if(
