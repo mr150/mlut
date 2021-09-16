@@ -13,10 +13,10 @@ ml.$utils-db: map.deep-merge(
 	(
 		'registry': (
 			'-Xy': (
-				'class-name': 'Stretched',
+				'components': 'Stretched',
 		),
 			'-AltPos': (
-				'class-name': '',
+				'components': '',
 				'properties': position,
 			),
 			'Maw': (
@@ -1260,11 +1260,6 @@ ml.$utils-db: map.deep-merge(
 						'Tt', (
 						'', 'c_h StOnly',
 					));
-
-					@include ml.new-mk-util(
-						'Tt_f StOnly', (
-						'n',
-					));
 				}
 
 				@include expect(false) {
@@ -1276,10 +1271,55 @@ ml.$utils-db: map.deep-merge(
 						text-transform: uppercase;
 					}
 
-					.Tt-c_h:hover {
+					.Tt-c {
 						text-transform: capitalize;
 					}
 
+					.Tt-c_af::after {
+						text-transform: capitalize;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.new-mk-util(
+						'Tt_f StOnly', (
+						'n',
+					));
+
+					@include ml.new-mk-util(
+						'Tt', 'l', ('post-states': 'fw StOnly')
+					);
+				}
+
+				@include expect(false) {
+					.Tt-n {
+						text-transform: none;
+					}
+
+					.Tt-n_af::after {
+						text-transform: none;
+					}
+
+					.Tt-l {
+						text-transform: lowercase;
+					}
+
+					.Tt-l_af::after {
+						text-transform: lowercase;
+					}
+				}
+			}
+
+			@include assert('generate other states for util with bound components') {
+				@include output(false) {
+					@include ml.new-mk-util(
+						'Tt_f StOnly', 'n', (), ('components': null)
+					);
+				}
+
+				@include expect(false) {
 					.Tt-n_f:focus {
 						text-transform: none;
 					}

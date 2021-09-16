@@ -101,10 +101,11 @@
 		-util-main-options($util-name, $options),
 	);
 
-	$class-name: map.get($main-options, 'class-name');
 	$props: map.get($main-options, 'properties');
 	$custom-selector: map.get($main-options, 'selector');
-	$bound-components: map.get($main-options, 'components');
+	$bound-comp-str: map.get($main-options, 'components');
+	$bound-components: $bound-comp-str and ml.new-parse-util($bound-comp-str);
+	$is-bound-comp: list.length($bound-components) > 1;
 	$range-generator: map.get(
 		ml.$utils-cfg,
 		'range-generators',
@@ -114,18 +115,22 @@
 		)
 	);
 
+	$class-name: if(
+		$bound-components,
+		map.get($bound-components, 'value'),
+		$util-name
+	);
+
 	@if not map.has-key(ml.$utils-db, 'utils', 'registry', $util-name) {
 		ml.$utils-db: map.set(
 			ml.$utils-db, 'utils', 'registry', $util-name, if($options, $options, $props)
 		);
 	}
 
-	$util-map: ();
-
-	@if list.length($components) > 0 {
+	@if $is-bound-comp {
+		$util-data: $bound-components;
+	} @else if list.length($components) > 0 {
 		$util-data: $components;
-	} @else if list.length($util-data) == 1 and $bound-components {
-		$util-data: ml.new-parse-util($bound-components);
 	}
 
 	$is-values-map: meta.type-of($values) == 'map';
@@ -154,12 +159,12 @@
 			);
 		} @else {
 			$util-val-data: ml.new-parse-util($key);
+			$util-parsed-val: map.get($util-val-data, 'value');
 
-			@if list.length($util-val-data) < 2 {
-				$util-val-data: map.merge($util-data, $util-val-data);
+			@if $is-bound-comp or list.length($util-val-data) < 2 {
+				$util-val-data: $util-data;
 			}
 
-			$util-parsed-val: map.get($util-val-data, 'value');
 			$at-rules: map.get($util-val-data, 'at-rules');
 			$post-states: map.get($util-val-data, 'post-states');
 			$pre-states: map.get($util-val-data, 'pre-states');
@@ -352,16 +357,10 @@
 
 @function -util-main-options($name, $options) {
 	$prop: null;
+	$result: ();
 	$needed-options: (
 		'repeat-prop-values', 'preset-properties',
 		'selector', 'range-generator', 'components'
-	);
-	$result: (
-		'class-name': if(
-			map.has-key(ml.$utils-db, 'utils', 'registry', $name, 'class-name'),
-			map.get(ml.$utils-db, 'utils', 'registry', $name, 'class-name'),
-			$name
-		),
 	);
 
 	@each $item in $needed-options {
