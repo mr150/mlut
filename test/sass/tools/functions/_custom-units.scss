@@ -31,7 +31,7 @@
 
 		@include it('unable convert to unit') {
 			@include assert-equal(
-				ml.su(2, 'cm'),
+				ml.su(2, ('unit': 'cm')),
 				'ERROR: No initial value for converting to `cm` unit',
 			);
 		}
@@ -40,7 +40,7 @@
 	@include describe('grid gutter unit converters') {
 		$-tests: (
 		'unable convert to unit': (
-		(3, 'cm'): 'ERROR: No CSS variable for converting to `cm` unit',
+		(3, ('unit': 'cm')): 'ERROR: No CSS variable for converting to `cm` unit',
 	),
 		'wrong type of argument': (
 			'5': 'ERROR: Wrong type of argument $n: `string`. Expected `number`'

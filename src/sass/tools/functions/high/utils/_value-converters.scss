@@ -39,14 +39,19 @@
 			@return ml.str2n($value + '_') * $unit-number;
 		}
 
-		@if $unit == 'su' or $unit == 'gg' {
+		@if (
+			map.has-key(ml.$general-cfg, 'custom-unit-values', $unit) and
+			meta.function-exists($unit, ml)
+		) {
 			$unit-converter: meta.get-function($unit, false, ml);
 
-			@if map.get(
-				ml.$utils-db, $section, 'registry', $name, 'directions'
-			) and map.get($data, 'list-length') == 1 {
+			@if (
+				($unit == 'su' or $unit == 'gg') and
+				map.get(ml.$utils-db, $section, 'registry', $name, 'directions') and
+				map.get($data, 'list-length') == 1
+			) {
 				@return (
-					meta.call($unit-converter, $val-number, 'rem')
+					meta.call($unit-converter, $val-number, ('unit': 'rem'))
 					meta.call($unit-converter, $val-number)
 				);
 			}
@@ -54,7 +59,10 @@
 			@return meta.call(
 				$unit-converter,
 				$val-number,
-				map.get(ml.$utils-db, $section, 'registry', $name, 'default-unit')
+				(
+					'util': $name,
+					'unit': map.get(ml.$utils-db, $section, 'registry', $name, 'default-unit'),
+				)
 			);
 		}
 

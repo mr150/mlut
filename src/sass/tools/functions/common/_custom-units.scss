@@ -29,13 +29,14 @@ Styleguide: sass-tools.functions.common.custom_units
 //
 // Styleguide: sass-tools.functions.common.custom_units.su
 
-@function su($n, $unit: 'px') {
+@function su($n, $data: ()) {
 	@if meta.type-of($n) != 'number' {
 		@return ml.error(
 			'Wrong type of argument $n: `#{meta.type-of($n)}`. Expected `number`'
 		);
 	}
 
+	$unit: map.get($data, 'unit');
 	$init-value: map.get(ml.$general-cfg, 'custom-unit-values', 'su', $unit or 'px');
 
 	@if not $init-value {
@@ -50,10 +51,10 @@ Styleguide: sass-tools.functions.common.custom_units
 }
 
 @function sur($n) {
-	@return su($n, 'rem');
+	@return su($n, ('unit': 'rem'));
 }
 
-@function gg($n, $unit: null) {
+@function gg($n, $data: ()) {
 	@if meta.type-of($n) != 'number' {
 		@return ml.error(
 			'Wrong type of argument $n: `#{meta.type-of($n)}`. Expected `number`'
@@ -64,6 +65,7 @@ Styleguide: sass-tools.functions.common.custom_units
 		$n: math.div($n, 1gg);
 	}
 
+	$unit: map.get($data, 'unit');
 	$var-name: if(
 		$unit,
 		'gg-' + $unit,
@@ -80,7 +82,7 @@ Styleguide: sass-tools.functions.common.custom_units
 }
 
 @function ggr($n) {
-	@return gg($n, 'rem');
+	@return gg($n, ('unit': 'rem'));
 }
 
 ml.$general-cfg: map.set(

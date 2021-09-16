@@ -78,7 +78,9 @@
 				$css-value,
 				if(
 					$is-css-unit-fn,
-					meta.call($css-unit, $i, $css-unit-name),
+					meta.call(
+						$css-unit, $i, ('unit': $css-unit-name, 'util': $util)
+					),
 					$i * $css-unit
 				)
 			);
