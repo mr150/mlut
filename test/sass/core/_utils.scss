@@ -1,0 +1,85 @@
+@use 'sass-true' as *;
+@use 'tools' as ml;
+@use 'sass:map';
+@use 'sass:list';
+
+@include describe('core/utils/box-model') {
+	@include it('make W values in `gc` unit') {
+		@include assert() {
+			@include output(false) {
+				@include ml.new-mk-util(
+					'W', (
+					6gc, '9gc_h StOnly',
+				));
+			}
+
+			@include expect(false) {
+				.W6gc {
+					--ml-gc: 6;
+					width: calc(50% - 32px);
+					width: var(--ml-gc-rule, 50%);
+				}
+
+				.W9gc_h:hover {
+					--ml-gc: 9;
+					width: calc(75% - 32px);
+					width: var(--ml-gc-rule, 75%);
+				}
+			}
+		}
+
+		@include assert() {
+			@include output(false) {
+				@include ml.new-mk-util(
+					'W', (
+					[9gc, 10],
+				));
+			}
+
+			@include expect(false) {
+				.W9gc {
+					--ml-gc: 9;
+					width: calc(75% - 32px);
+					width: var(--ml-gc-rule, 75%);
+				}
+
+				.W10gc {
+					--ml-gc: 10;
+					width: calc(83.3333333333% - 32px);
+					width: var(--ml-gc-rule, 83.3333333333%);
+				}
+			}
+		}
+	}
+
+	@include it('make Ml values in `gc` unit') {
+		@include assert() {
+			@include output(false) {
+				@include ml.new-mk-util(
+					'Ml', (
+					6gc, [9gc, 10],
+				));
+			}
+
+			@include expect(false) {
+				.Ml6gc {
+					--ml-mgc: 6;
+					margin-left: calc(50% + 16px);
+					margin-left: var(--ml-mgc-rule, 50%);
+				}
+
+				.Ml9gc {
+					--ml-mgc: 9;
+					margin-left: calc(75% + 16px);
+					margin-left: var(--ml-mgc-rule, 75%);
+				}
+
+				.Ml10gc {
+					--ml-mgc: 10;
+					margin-left: calc(83.3333333333% + 16px);
+					margin-left: var(--ml-mgc-rule, 83.3333333333%);
+				}
+			}
+		}
+	}
+}

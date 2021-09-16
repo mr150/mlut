@@ -182,3 +182,63 @@ $-gtr-fallback-rem: ml.px2rem(ml.$grid-default-gtr);
 		)
 	);
 }
+
+@function gc($n, $data: ()) {
+	@if math.unit($n) == 'gc' {
+		$n: math.div($n, 1gc);
+	}
+
+	@return var(
+		#{ml.$cv-pref + if(map.get($data, 'util') == 'Ml', 'mgc', 'gc') + '-rule'},
+		#{math.div($n, ml.$grid-columns) * 100%}
+	);
+}
+
+ml.$general-cfg: map.set(
+	ml.$general-cfg, 'custom-unit-values', 'gc', meta.get-function('gc', false)
+);
+
+@function -gc-prop($util, $value, $css-value, $important) {
+	$n: ml.str2n($value);
+
+	@return if(
+		meta.type-of($n) == 'number' and math.unit($n) == 'gc',
+		math.div($n, 1gc),
+		null
+	);
+}
+
+@function -gc-fallback($util, $value, $css-value, $important) {
+	$n: ml.str2n($value);
+
+	@if meta.type-of($n) == 'number' and math.unit($n) == 'gc' {
+		$cols: math.div($n, 1gc);
+
+		@return calc(
+			(math.div($cols, ml.$grid-columns) * 100%) -
+			ml.$grid-default-gtr * if($util == 'Ml', -1, 2)
+		);
+	}
+
+	@return null;
+}
+
+ml.$utils-db: map.deep-merge(
+	ml.$utils-db,
+	('utils': (
+		'registry': (
+			'W': (
+				'preset-properties': (
+					ml.$cv-pref + 'gc': meta.get-function('-gc-prop'),
+					'width': meta.get-function('-gc-fallback'),
+				)
+			),
+			'Ml': (
+				'preset-properties': (
+					ml.$cv-pref + 'mgc': meta.get-function('-gc-prop'),
+					'margin-left': meta.get-function('-gc-fallback'),
+				)
+			)
+		)
+	))
+);

@@ -324,7 +324,12 @@
 	@if $preset-props {
 		@each $key, $value in $preset-props {
 			@if meta.type-of($value) == 'function' {
-				#{$key}: meta.call($value, $util, $util-value, $values, $important);
+				$final-value: meta.call($value, $util, $util-value, $values, $important);
+
+				// temporary fix, because Sass does not allow `null` value for hiding custom properties
+				@if $final-value {
+					#{$key}: $final-value;
+				}
 			} @else {
 				#{$key}: $value $important;
 			}
