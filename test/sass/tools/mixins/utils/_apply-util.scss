@@ -1,5 +1,19 @@
+@use 'sass:map';
 @use 'sass-true' as *;
 @use 'tools' as ml;
+
+ml.$utils-db: map.deep-merge(
+	ml.$utils-db,
+	('utils':
+	(
+		'registry': (
+			'Tt': (
+				'components': 'Tt_af',
+			),
+		),
+	)
+	)
+);
 
 @include describe('tools/mixins/high/utils') {
 	@include describe('apply-util') {
@@ -136,6 +150,29 @@
 
 					.Lh2r\!_af::after {
 						line-height: 2rem !important;
+					}
+				}
+			}
+		}
+
+		@include it('apply util with bound components') {
+			@include assert() {
+				@include output(false) {
+					.testou {
+						@include ml.apply-util(
+							'Tt-c'
+							'Tt_h'
+						);
+					}
+				}
+
+				@include expect(false) {
+					.testou {
+						text-transform: capitalize;
+					}
+
+					.testou:hover {
+						text-transform: uppercase;
 					}
 				}
 			}

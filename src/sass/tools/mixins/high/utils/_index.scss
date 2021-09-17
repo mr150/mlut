@@ -332,7 +332,7 @@ Styleguide: sass-tools.mixins.utils
 			map.get($abbr-data, 'name'),
 			map.get($abbr-data, 'value'),
 			map.remove($util-data, 'value'),
-			('selector': &)
+			('selector': &, 'components': null)
 		);
 	}
 }
