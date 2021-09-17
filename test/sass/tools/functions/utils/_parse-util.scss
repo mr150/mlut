@@ -18,6 +18,11 @@
 				ml.new-parse-util(''),
 				('value': ''),
 			);
+
+			@include assert-equal(
+				ml.new-parse-util(null),
+				'ERROR: Not specified value or name in string ``',
+			);
 		}
 
 		@include it('value with only at-rule') {
