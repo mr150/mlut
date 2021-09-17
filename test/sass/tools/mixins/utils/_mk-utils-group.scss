@@ -3,35 +3,38 @@
 @use 'sass:map';
 @use 'sass:list';
 
+ml.$utils-groups: map.deep-merge(
+	ml.$utils-groups,
+	(
+		'tSpaces': (
+			'M', 'P',
+		),
+		'tSizes': (
+			'members': ('W_a StOnly', 'H',),
+			'components': 'G_af',
+		),
+		'TtGroup': (
+			'members': 'Tt',
+			'components': 'G_fw',
+		),
+		'tColors': (
+			'C', 'Bgc_h StOnly',
+		),
+	),
+);
+
 ml.$utils-db: map.deep-merge(
 	ml.$utils-db,
+	('utils':
 	(
-		'groups':(
-			'registry': (
-				'tSpaces': (
-					'M', 'P',
-				),
-				'tSizes': (
-					'members': ('W_a StOnly', 'H',),
-					'components': 'G_af',
-				),
-				'TtGroup': (
-					'members': 'Tt',
-					'components': 'G_fw',
-				),
-				'tColors': (
-					'C', 'Bgc_h StOnly',
-				),
-			),
-		),
-		'utils': (
+		'registry': (
 			'Tt': (
 				'components': 'Tt_af',
 			),
-		)
+		),
+	)
 	)
 );
-
 
 @include describe('tools/mixins/high/utils') {
 	@include describe('mk-utils-group') {

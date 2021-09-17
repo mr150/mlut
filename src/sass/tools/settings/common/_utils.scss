@@ -650,32 +650,6 @@ $utils-db: (
 		),
 	),
 
-	'groups': (
-		'registry': (
-			'Borders': (
-				'Bd', 'Bdt', 'Bdr', 'Bdb', 'Bdl', '-Bdx', '-Bdy',
-			),
-			'BdWidth': (
-				'Bdw', 'Bdtw', 'Bdrw', 'Bdbw', 'Bdlw', '-Bdxw', '-Bdyw',
-			),
-			'BdStyle': (
-				'Bds', 'Bdts', 'Bdrst', 'Bdbs', 'Bdls', '-Bdxs', '-Bdys',
-			),
-			'Overflows': (
-				'Ov', 'Ovx', 'Ovy',
-			),
-			'Margins': (
-				'M', 'Mt', 'Mr', 'Mb', 'Ml', '-Mx', '-My',
-			),
-			'Paddings': (
-				'P', 'Pt', 'Pr', 'Pb', 'Pl', '-Px', '-Py',
-			),
-			'Offsets': (
-				'T', 'R', 'B', 'L', '-X', '-Y', '-Xy',
-			),
-		),
-	),
-
 	'common': (
 		'registry': (
 			'H': (
@@ -704,6 +678,45 @@ $utils-db: (
 		),
 	),
 ) !default;
+
+$utils-groups: (
+	'Borders': (
+		'members': (
+			'Bd', 'Bdt', 'Bdr', 'Bdb', 'Bdl', '-Bdx', '-Bdy',
+		),
+	),
+	'BdWidth': (
+		'members': (
+			'Bdw', 'Bdtw', 'Bdrw', 'Bdbw', 'Bdlw', '-Bdxw', '-Bdyw',
+		),
+	),
+	'BdStyle': (
+		'members': (
+			'Bds', 'Bdts', 'Bdrst', 'Bdbs', 'Bdls', '-Bdxs', '-Bdys',
+		),
+	),
+	'Overflows': (
+		'members': (
+			'Ov', 'Ovx', 'Ovy',
+		),
+	),
+	'Margins': (
+		'members': (
+			'M', 'Mt', 'Mr', 'Mb', 'Ml', '-Mx', '-My',
+		),
+	),
+	'Paddings': (
+		'members': (
+			'P', 'Pt', 'Pr', 'Pb', 'Pl', '-Px', '-Py',
+		),
+	),
+	'Offsets': (
+		'members': (
+			'T', 'R', 'B', 'L', '-X', '-Y', '-Xy',
+		),
+	),
+) !default;
+
 
 $-common-registry: ();
 
