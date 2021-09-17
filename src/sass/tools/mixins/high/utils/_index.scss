@@ -254,7 +254,9 @@ Styleguide: sass-tools.mixins.utils
 	}
 }
 
-@mixin mk-utils-group($raw-name, $values, $components: ()) {
+@mixin mk-utils-group(
+	$raw-name, $values, $components: (), $bound-components: true
+) {
 	$group-data: ml.new-parse-util($raw-name);
 	$group-name: map.get($group-data, 'value');
 
@@ -262,18 +264,35 @@ Styleguide: sass-tools.mixins.utils
 		@error 'Group `#{$group-name}` not defined in registry';
 	}
 
-	@if list.length($components) > 0 {
+	$bound-comp-map: (
+		$bound-components and
+		map.has-key(ml.$utils-db, 'groups', 'registry', $group-name, 'components') and
+		ml.new-parse-util(
+			map.get(ml.$utils-db, 'groups', 'registry', $group-name, 'components')
+		)
+	);
+	$is-bound-comp: list.length($bound-comp-map) > 1;
+
+	@if $is-bound-comp {
+		$group-data: $bound-comp-map;
+	} @else if list.length($components) > 0 {
 		$group-data: $components;
 	}
 
 	$i: 1;
+	$members: (
+		map.get(ml.$utils-db, 'groups', 'registry', $group-name, 'members') or
+		map.get(ml.$utils-db, 'groups', 'registry', $group-name)
+	);
 
-	@each $util in map.get(ml.$utils-db, 'groups', 'registry', $group-name) {
+	@each $util in $members {
 		@include mu.new-mk-util(
 			$util,
 			$values,
-			if(string.index($util, ml.$tUCm), (), $group-data),
-			('groupItemIndex': $i)
+			if(
+				not $is-bound-comp and string.index($util, ml.$tUCm), (), $group-data
+			),
+			('groupItemIndex': $i, 'groupBoundComp': $is-bound-comp)
 		);
 
 		$i: $i + 1;

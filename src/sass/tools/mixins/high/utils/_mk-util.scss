@@ -134,6 +134,7 @@
 	}
 
 	$is-values-map: meta.type-of($values) == 'map';
+	$is-bound-comp: $is-bound-comp or map.get($main-options, 'groupBoundComp');
 	$new-keywords: ();
 	$i: 1;
 

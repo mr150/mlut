@@ -5,17 +5,30 @@
 
 ml.$utils-db: map.deep-merge(
 	ml.$utils-db,
-	('groups':
 	(
-		'registry': (
-			'Spaces': (
-				'M', 'P',
-			),
-			'Colors': (
-				'C', 'Bgc_h StOnly',
+		'groups':(
+			'registry': (
+				'tSpaces': (
+					'M', 'P',
+				),
+				'tSizes': (
+					'members': ('W_a StOnly', 'H',),
+					'components': 'G_af',
+				),
+				'TtGroup': (
+					'members': 'Tt',
+					'components': 'G_fw',
+				),
+				'tColors': (
+					'C', 'Bgc_h StOnly',
+				),
 			),
 		),
-	)
+		'utils': (
+			'Tt': (
+				'components': 'Tt_af',
+			),
+		)
 	)
 );
 
@@ -26,7 +39,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-utils-group(
-						'Spaces', (
+						'tSpaces', (
 						'xs0': 100px,
 						150: null
 					));
@@ -54,7 +67,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-utils-group(
-						'ArOnly xl_Spaces', (
+						'ArOnly xl_tSpaces', (
 							100, '150_af StOnly',
 					));
 				}
@@ -87,7 +100,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-utils-group(
-						'ArOnly xl_Colors', (
+						'ArOnly xl_tColors', (
 						red, 'blue_f StOnly',
 					));
 				}
@@ -118,7 +131,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-utils-group(
-						'Colors',
+						'tColors',
 						(red, 'green_a StOnly'),
 						(
 							'at-rules': 'ArOnly xl',
@@ -144,6 +157,139 @@ ml.$utils-db: map.deep-merge(
 
 					.Bgc-green_a:active {
 						background-color: green;
+					}
+				}
+			}
+		}
+
+		@include it('make group with bound components') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-utils-group(
+						'tSizes', (
+						150
+					));
+				}
+
+				@include expect(false) {
+					.W150 {
+						width: 150px;
+					}
+
+					.W150_af::after {
+						width: 150px;
+					}
+
+					.H150 {
+						height: 150px;
+					}
+
+					.H150_af::after {
+						height: 150px;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-utils-group(
+						'tSizes', (
+						'20r_h'
+					));
+				}
+
+				@include expect(false) {
+					.W20r {
+						width: 20rem;
+					}
+
+					.W20r_af::after {
+						width: 20rem;
+					}
+
+					.H20r {
+						height: 20rem;
+					}
+
+					.H20r_af::after {
+						height: 20rem;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-utils-group(
+						'tSizes_f', (
+						30r
+					));
+				}
+
+				@include expect(false) {
+					.W30r {
+						width: 30rem;
+					}
+
+					.W30r_af::after {
+						width: 30rem;
+					}
+
+					.H30r {
+						height: 30rem;
+					}
+
+					.H30r_af::after {
+						height: 30rem;
+					}
+				}
+			}
+		}
+
+		@include it('cases of ignore bound components of group') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-utils-group(
+						'TtGroup', '',
+					);
+
+					@include ml.mk-utils-group(
+						'TtGroup_=>*', 'c',
+					);
+				}
+
+				@include expect(false) {
+					.Tt {
+						text-transform: uppercase;
+					}
+
+					.Tt_af::after {
+						text-transform: uppercase;
+					}
+
+					.Tt-c {
+						text-transform: capitalize;
+					}
+
+					.Tt-c_af::after {
+						text-transform: capitalize;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-utils-group(
+						'tSizes_fw StOnly', 20r, (), false
+					);
+				}
+
+				@include expect(false) {
+					.W20r_a:active {
+						width: 20rem;
+					}
+
+					.H20r_fw:focus-within {
+						height: 20rem;
 					}
 				}
 			}
