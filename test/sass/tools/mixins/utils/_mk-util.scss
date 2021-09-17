@@ -206,7 +206,7 @@ ml.$utils-db: map.deep-merge(
 					@include ml.new-mk-util(
 						'Maw', (
 						':f_100_+:h',
-						'xl @:-sm:ori_32p_vl',
+						'xl @m:-sm:ori_32p_vl',
 					));
 				}
 
@@ -238,7 +238,7 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					@media (min-width: ml.bp(sm)) and (orientation: landscape) {
-						.\@\:-sm\:ori_Maw32p {
+						.\@m\:-sm\:ori_Maw32p {
 							max-width: 32%;
 						}
 					}
@@ -341,7 +341,7 @@ ml.$utils-db: map.deep-merge(
 					@include ml.new-mk-util(
 						'sm ArOnly_Mt', (
 						[10, 20, 10],
-						['@:prn ArOnly_40', 45, 5],
+						['@m:prn ArOnly_40', 45, 5],
 					));
 				}
 
@@ -359,13 +359,13 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					@media print {
-						.\@\:prn_Mt40 {
+						.\@m\:prn_Mt40 {
 							margin-top: 40px;
 						}
 					}
 
 					@media print {
-						.\@\:prn_Mt45 {
+						.\@m\:prn_Mt45 {
 							margin-top: 45px;
 						}
 					}
@@ -477,9 +477,9 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.new-mk-util(
 						'Maw', (
-						'@:prn_100_+:h ' + ml.$kStOnly,
-						ml.$kArOnly + ' @:prn_32p_+:h',
-						'#{ml.$kArOnly} @:prn_50p_vl #{ml.$kStOnly}',
+						'@m:prn_100_+:h ' + ml.$kStOnly,
+						ml.$kArOnly + ' @m:prn_32p_+:h',
+						'#{ml.$kArOnly} @m:prn_50p_vl #{ml.$kStOnly}',
 					));
 				}
 
@@ -489,19 +489,19 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					@media print {
-						.\@\:prn_Maw100 {
+						.\@m\:prn_Maw100 {
 							max-width: 100px;
 						}
 					}
 
 					@media print {
-						.\@\:prn_Maw32p {
+						.\@m\:prn_Maw32p {
 							max-width: 32%;
 						}
 					}
 
 					@media print {
-						.\@\:prn_Maw50p {
+						.\@m\:prn_Maw50p {
 							max-width: 50%;
 						}
 					}
@@ -512,8 +512,8 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.new-mk-util(
 						'Maw', (
-						ml.$kArSt + ' @:prn_200_+:h',
-						'#{ml.$kArSt} #{ml.$kArOnly} @:prn_a_vl',
+						ml.$kArSt + ' @m:prn_200_+:h',
+						'#{ml.$kArSt} #{ml.$kArOnly} @m:prn_a_vl',
 					));
 				}
 
@@ -527,21 +527,21 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					@media print {
-						.\@\:prn_Maw200 {
+						.\@m\:prn_Maw200 {
 							max-width: 200px;
 						}
 
-						.\@\:prn_Maw200_\+\:h+:hover {
+						.\@m\:prn_Maw200_\+\:h+:hover {
 							max-width: 200px;
 						}
 					}
 
 					@media print {
-						.\@\:prn_Maw-a {
+						.\@m\:prn_Maw-a {
 							max-width: auto;
 						}
 
-						.\@\:prn_Maw-a_vl:valid {
+						.\@m\:prn_Maw-a_vl:valid {
 							max-width: auto;
 						}
 					}
@@ -552,8 +552,8 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.new-mk-util(
 						'Maw', (
-						'#{ml.$kArSt} @:prn_300_+:h #{ml.$kStOnly}',
-						ml.$kArStOnly + ' @:prn_n_vl',
+						'#{ml.$kArSt} @m:prn_300_+:h #{ml.$kStOnly}',
+						ml.$kArStOnly + ' @m:prn_n_vl',
 					));
 				}
 
@@ -563,17 +563,17 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					@media print {
-						.\@\:prn_Maw300 {
+						.\@m\:prn_Maw300 {
 							max-width: 300px;
 						}
 
-						.\@\:prn_Maw300_\+\:h+:hover {
+						.\@m\:prn_Maw300_\+\:h+:hover {
 							max-width: 300px;
 						}
 					}
 
 					@media print {
-						.\@\:prn_Maw-n_vl:valid {
+						.\@m\:prn_Maw-n_vl:valid {
 							max-width: none;
 						}
 					}
