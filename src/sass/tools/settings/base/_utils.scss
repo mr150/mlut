@@ -166,6 +166,7 @@ $utils-cfg: (
 			'keyword-chain': '.',
 			'keywords-alias': 'KW',
 			'important': '!',
+			'no-list-separator': '  ',
 			'list-separator1': ',',
 			'list-separator2': '/',
 			'component': '_',
@@ -230,6 +231,7 @@ $tUCm: map.get($utils-cfg, 'tokens', 'util', 'component');
 $tUSp: map.get($utils-cfg, 'tokens', 'util', 'space');
 $tUKwc: map.get($utils-cfg, 'tokens', 'util', 'keyword-chain');
 $tUKwa: map.get($utils-cfg, 'tokens', 'util', 'keywords-alias');
+$tUNls: map.get($utils-cfg, 'tokens', 'util', 'no-list-separator');
 $tULs1: map.get($utils-cfg, 'tokens', 'util', 'list-separator1');
 $tULs2: map.get($utils-cfg, 'tokens', 'util', 'list-separator2');
 $tSOr: map.get($utils-cfg, 'tokens', 'states', 'or');
@@ -246,6 +248,7 @@ $utils-cfg: map.set(
 	$utils-cfg,
 	'tokens-values',
 	(
+		$tUNls: space,
 		$tULs1: comma,
 		$tULs2: slash,
 	)

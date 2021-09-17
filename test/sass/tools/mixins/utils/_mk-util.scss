@@ -2,6 +2,7 @@
 @use 'tools' as ml;
 @use 'sass:map';
 @use 'sass:list';
+@use 'sass:string';
 
 ml.$utils-cfg: map.set(
 	ml.$utils-cfg, 'states', 'keywords', 'st1', ('iv' 'vl')
@@ -259,7 +260,6 @@ ml.$utils-db: map.deep-merge(
 					}
 				}
 			}
-
 		}
 
 		@include it('make util from list of ranges') {
@@ -1322,6 +1322,24 @@ ml.$utils-db: map.deep-merge(
 				@include expect(false) {
 					.Tt-n_f:focus {
 						text-transform: none;
+					}
+				}
+			}
+		}
+
+		@include it('util with native CSS function as a value') {
+			@include assert() {
+				@include output(false) {
+					@include ml.new-mk-util(
+						'W', '=max(15vw,150px)',
+					);
+				}
+
+				@include expect(false) {
+					.W\=max\(15vw\,150px\) {
+						// used unquoted string because the compiler
+						// add a space after comma in arguments
+						width: string.unquote('max(15vw,150px)');
 					}
 				}
 			}

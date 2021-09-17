@@ -22,12 +22,10 @@
 
 @function convert-util-value($util-val, $name, $section: 'utils') {
 	@if meta.type-of($util-val) == 'string' {
-		$space: ' ';
-
 		$multi-list-sep: if(
 			map.has-key(ml.$utils-db, $section, 'registry', $name, 'multi-list-separator'),
 			map.get(ml.$utils-db, $section, 'registry', $name, 'multi-list-separator'),
-			ml.$tULs1
+			ml.$tUNls
 		);
 
 		@if string.index($util-val, $multi-list-sep) or string.index($util-val, ml.$tUSp) {

@@ -564,6 +564,7 @@ $utils-db: (
 			'Trs': (
 				'properties': transition,
 				'value-type': 'abbr-kw',
+				'multi-list-separator': ml.$tULs1,
 				'keywords': (
 					'mAll': all ml.$Trsdu-def,
 				),
