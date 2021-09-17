@@ -62,6 +62,11 @@ ml.$utils-states: map.set(
 			);
 
 			@include assert-equal(
+				ml.convert-util-states('~:*'),
+				('&~*'),
+			);
+
+			@include assert-equal(
 				ml.convert-util-states('+:h'),
 				('&+:hover'),
 			);
