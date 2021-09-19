@@ -10,6 +10,19 @@ $-ar-keywords: list.join(
 	map.keys(map.get(ml.$at-rules-cfg, 'keywords')),
 );
 
+// parse-util
+//
+// Parse utility value or name. Return map with passed value components:
+// - `value` - pure value or name
+// - `mq` - breakpoint or any mediaquery
+// ```scss
+//parse-util('1su_md') => ('value': '1su', 'mq': 'md')
+// ```
+//
+// $raw-value - utility value or name. Type string.
+//
+// Styleguide: sass-tools.functions.high.utils.parse_util
+
 @function new-parse-util($raw-value) {
 	$raw-value-parts: ml.str-split($raw-value + '', ml.$tUCm);
 	$result: ();
