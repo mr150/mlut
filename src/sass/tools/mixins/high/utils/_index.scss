@@ -20,7 +20,7 @@ Styleguide: sass-tools.mixins.utils
 @mixin mk-utils-group(
 	$raw-name, $values, $components: (), $bound-components: true
 ) {
-	$group-data: ml.new-parse-util($raw-name);
+	$group-data: ml.parse-util($raw-name);
 	$name: map.get($group-data, 'value');
 
 	@if not map.has-key(ml.$utils-groups, $name) {
@@ -30,7 +30,7 @@ Styleguide: sass-tools.mixins.utils
 	$bound-comp-map: (
 		$bound-components and
 		map.has-key(ml.$utils-groups, $name, 'components') and
-		ml.new-parse-util(
+		ml.parse-util(
 			map.get(ml.$utils-groups, $name, 'components')
 		)
 	);
@@ -49,7 +49,7 @@ Styleguide: sass-tools.mixins.utils
 	);
 
 	@each $util in $members {
-		@include mu.new-mk-util(
+		@include mu.mk-util(
 			$util,
 			$values,
 			if(
@@ -64,7 +64,7 @@ Styleguide: sass-tools.mixins.utils
 
 @mixin apply-util($utils, $components: ()) {
 	@each $item in $utils {
-		$util-data: ml.new-parse-util($item);
+		$util-data: ml.parse-util($item);
 		$abbr-data: ml.parse-abbr(map.get($util-data, 'value'));
 		$util-data: map.merge($util-data, $components);
 		$keyword: ml.$kStOnly;
@@ -91,7 +91,7 @@ Styleguide: sass-tools.mixins.utils
 			$util-data: map.set($util-data, 'applyStKw', $keyword);
 		}
 
-		@include mu.new-mk-util(
+		@include mu.mk-util(
 			map.get($abbr-data, 'name'),
 			map.get($abbr-data, 'value'),
 			map.remove($util-data, 'value'),

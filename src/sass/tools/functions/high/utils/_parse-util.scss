@@ -23,7 +23,7 @@ $-ar-keywords: list.join(
 //
 // Styleguide: sass-tools.functions.high.utils.parse_util
 
-@function new-parse-util($raw-value) {
+@function parse-util($raw-value) {
 	$raw-value-parts: ml.str-split($raw-value + '', ml.$tUCm);
 	$result: ();
 	$at-rules: null;

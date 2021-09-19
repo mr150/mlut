@@ -18,7 +18,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state('h:af,!a:af', null, false) {
+						@include ml.mk-state('h:af,!a:af', null, false) {
 							display: flex;
 						}
 					}
@@ -35,7 +35,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state('&-,&-:f', null, null, &, $this) {
+						@include ml.mk-state('&-,&-:f', null, null, &, $this) {
 							display: flex;
 						}
 					}
@@ -52,7 +52,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state('::^one:fw:=+*', null) {
+						@include ml.mk-state('::^one:fw:=+*', null) {
 							display: flex;
 						}
 					}
@@ -72,7 +72,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state('h,f ' + ml.$states-ps, null, false) {
+						@include ml.mk-state('h,f ' + ml.$states-ps, null, false) {
 							display: flex;
 						}
 					}
@@ -95,7 +95,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(':^:' + ml.$states-ps, null, null) {
+						@include ml.mk-state(':^:' + ml.$states-ps, null, null) {
 							display: flex;
 						}
 					}
@@ -113,7 +113,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state('h:' + 'st1', null, null) {
+						@include ml.mk-state('h:' + 'st1', null, null) {
 							display: flex;
 						}
 					}
@@ -133,7 +133,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(null, '^:h', false) {
+						@include ml.mk-state(null, '^:h', false) {
 							display: flex;
 						}
 					}
@@ -149,7 +149,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(null, '=a:^:h,&:^1:+', false, &, $this) {
+						@include ml.mk-state(null, '=a:^:h,&:^1:+', false, &, $this) {
 							display: flex;
 						}
 					}
@@ -166,7 +166,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(null, '=h2. =ul:h', false) {
+						@include ml.mk-state(null, '=h2. =ul:h', false) {
 							display: flex;
 						}
 					}
@@ -186,7 +186,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(null, '^ct1:' + ml.$states-ps, false) {
+						@include ml.mk-state(null, '^ct1:' + ml.$states-ps, false) {
 							display: flex;
 						}
 					}
@@ -206,7 +206,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state('&-ib:af', '^one:h', false, &, $this) {
+						@include ml.mk-state('&-ib:af', '^one:h', false, &, $this) {
 							display: flex;
 						}
 					}
@@ -226,7 +226,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(
+						@include ml.mk-state(
 							ml.$states-cmb + ' af',
 							ml.$states-cmb + ' ^one:h',
 							false,
@@ -246,7 +246,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(
+						@include ml.mk-state(
 							'&:af #{ml.$states-cmb} af',
 							'^one:h #{ml.$states-cmb} ^:f',
 							false,
@@ -276,7 +276,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(
+						@include ml.mk-state(
 							'&:af #{ml.$states-cmb} af',
 							'^one:h ^:f',
 							false,
@@ -306,7 +306,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(
+						@include ml.mk-state(
 							'&:af af',
 							'^one:h #{ml.$states-cmb} ^:f',
 							false,
@@ -336,7 +336,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(
+						@include ml.mk-state(
 							ml.$states-cmb + ' fw:af,a:af',
 							ml.$states-cmb + ' ^1:f,^2:>',
 							false,
@@ -359,7 +359,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(
+						@include ml.mk-state(
 							ml.$states-cmb + 'af,bf a:af',
 							ml.$states-cmb + ':h =a:a:>,=a.act:>',
 							false,
@@ -398,7 +398,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(null, '^:f', true) {
+						@include ml.mk-state(null, '^:f', true) {
 							display: flex;
 						}
 					}
@@ -418,7 +418,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-							@include ml.new-mk-state('f:af') {
+							@include ml.mk-state('f:af') {
 								display: flex;
 						}
 					}
@@ -438,7 +438,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state(null) {
+						@include ml.mk-state(null) {
 							display: flex;
 						}
 					}
@@ -454,7 +454,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.new-mk-state('h:af', '^act') {
+						@include ml.mk-state('h:af', '^act') {
 							display: flex;
 						}
 					}
@@ -477,7 +477,7 @@ ml.$utils-states: map.set(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-state('af', '&:h', true, '.D-ib', $this) {
+					@include ml.mk-state('af', '&:h', true, '.D-ib', $this) {
 						display: inline-block;
 					}
 				}
@@ -515,7 +515,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.xs\:md__D-f {
-						@include ml.new-mk-state(
+						@include ml.mk-state(
 							'$~ $~ib&-myState&af',
 							'%one&*a|%&?>*',
 							false,

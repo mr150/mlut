@@ -5,29 +5,29 @@
 	@include describe('parse-util') {
 		@include it('simple value') {
 			@include assert-equal(
-				ml.new-parse-util(1gg),
+				ml.parse-util(1gg),
 				('value': 1gg),
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('xl'),
+				ml.parse-util('xl'),
 				('value': 'xl'),
 			);
 
 			@include assert-equal(
-				ml.new-parse-util(''),
+				ml.parse-util(''),
 				('value': ''),
 			);
 
 			@include assert-equal(
-				ml.new-parse-util(null),
+				ml.parse-util(null),
 				'ERROR: Not specified value or name in string ``',
 			);
 		}
 
 		@include it('value with only at-rule') {
 			@include assert-equal(
-				ml.new-parse-util('xl_1gg'),
+				ml.parse-util('xl_1gg'),
 				(
 					'at-rules': 'xl',
 					'value': '1gg',
@@ -36,7 +36,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('md_'),
+				ml.parse-util('md_'),
 				(
 					'at-rules': 'md',
 					'value': '',
@@ -45,7 +45,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('xs:sm,lg_1gg'),
+				ml.parse-util('xs:sm,lg_1gg'),
 				(
 					'at-rules': 'xs:sm,lg',
 					'value': '1gg',
@@ -54,7 +54,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('@:md:ori-l,print:-myMq_1gg'),
+				ml.parse-util('@:md:ori-l,print:-myMq_1gg'),
 				(
 					'at-rules': '@:md:ori-l,print:-myMq',
 					'value': '1gg',
@@ -63,7 +63,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('md xl_Spaces'),
+				ml.parse-util('md xl_Spaces'),
 				(
 					'at-rules': 'md xl',
 					'value': 'Spaces',
@@ -72,7 +72,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('lg_lg'),
+				ml.parse-util('lg_lg'),
 				(
 					'at-rules': 'lg',
 					'value': 'lg',
@@ -83,7 +83,7 @@
 
 		@include it('value with only pre-states') {
 			@include assert-equal(
-				ml.new-parse-util('^ctx_D'),
+				ml.parse-util('^ctx_D'),
 				(
 					'pre-states': '^ctx',
 					'value': 'D',
@@ -92,7 +92,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('!=p _!'),
+				ml.parse-util('!=p _!'),
 				(
 					'pre-states': '!=p',
 					'important': true,
@@ -102,7 +102,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('=[href]> _=54px'),
+				ml.parse-util('=[href]> _=54px'),
 				(
 					'pre-states': '=[href]>',
 					'value': '=54px',
@@ -111,7 +111,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('#{ml.$states-ps} _#{ml.$states-ps}'),
+				ml.parse-util('#{ml.$states-ps} _#{ml.$states-ps}'),
 				(
 					'pre-states': '#{ml.$states-ps}',
 					'value': '#{ml.$states-ps}',
@@ -120,12 +120,12 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('^_^'),
+				ml.parse-util('^_^'),
 				'ERROR: Not specified value or name in string `^_^`',
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('^ctx =a>_2su'),
+				ml.parse-util('^ctx =a>_2su'),
 				(
 					'pre-states': '^ctx =a>',
 					'value': '2su',
@@ -134,7 +134,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util(':h:a_h:a'),
+				ml.parse-util(':h:a_h:a'),
 				(
 					'pre-states': ':h:a',
 					'value': 'h:a',
@@ -145,7 +145,7 @@
 
 		@include it('value with only post-states') {
 			@include assert-equal(
-				ml.new-parse-util('a_h'),
+				ml.parse-util('a_h'),
 				(
 					'post-states': 'h',
 					'value': 'a',
@@ -154,7 +154,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('inh_ :fw:^'),
+				ml.parse-util('inh_ :fw:^'),
 				(
 					'post-states': ':fw:^',
 					'value': 'inh',
@@ -163,7 +163,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('!_!f'),
+				ml.parse-util('!_!f'),
 				(
 					'post-states': '!f',
 					'important': true,
@@ -173,7 +173,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('a_h f'),
+				ml.parse-util('a_h f'),
 				(
 					'post-states': 'h f',
 					'value': 'a',
@@ -182,7 +182,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('md_af,bf '),
+				ml.parse-util('md_af,bf '),
 				(
 					'post-states': 'af,bf',
 					'value': 'md',
@@ -191,7 +191,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('_vl'),
+				ml.parse-util('_vl'),
 				(
 					'post-states': 'vl',
 					'value': '',
@@ -200,7 +200,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('sm:lg_ h'),
+				ml.parse-util('sm:lg_ h'),
 				(
 					'post-states': 'h',
 					'value': 'sm:lg',
@@ -209,7 +209,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('1gg_&-'),
+				ml.parse-util('1gg_&-'),
 				(
 					'post-states': '&-',
 					'value': '1gg',
@@ -218,7 +218,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('=54px_=[tabindex]'),
+				ml.parse-util('=54px_=[tabindex]'),
 				(
 					'post-states': '=[tabindex]',
 					'value': '=54px',
@@ -229,7 +229,7 @@
 
 		@include it('value with at-rule and pre state') {
 			@include assert-equal(
-				ml.new-parse-util('xl_^:h_50p'),
+				ml.parse-util('xl_^:h_50p'),
 				(
 					'at-rules': 'xl',
 					'pre-states': '^:h',
@@ -239,7 +239,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('md_^1:f_md'),
+				ml.parse-util('md_^1:f_md'),
 				(
 					'at-rules': 'md',
 					'pre-states': '^1:f',
@@ -251,7 +251,7 @@
 
 		@include it('value with at-rule and post state') {
 			@include assert-equal(
-				ml.new-parse-util('BpAll_n_f,a'),
+				ml.parse-util('BpAll_n_f,a'),
 				(
 					'at-rules': 'BpAll',
 					'post-states': 'f,a',
@@ -261,7 +261,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util(ml.$kArStOnly + ' @:prn_f_vl'),
+				ml.parse-util(ml.$kArStOnly + ' @:prn_f_vl'),
 				(
 					'at-rules': ml.$kArStOnly + ' @:prn',
 					'post-states': 'vl',
@@ -271,7 +271,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('sm@s:&-_f_f'),
+				ml.parse-util('sm@s:&-_f_f'),
 				(
 					'at-rules': 'sm@s:&-',
 					'post-states': 'f',
@@ -281,7 +281,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('xl_xl_h:af'),
+				ml.parse-util('xl_xl_h:af'),
 				(
 					'at-rules': 'xl',
 					'post-states': 'h:af',
@@ -293,7 +293,7 @@
 
 		@include it('value with post and pre states') {
 			@include assert-equal(
-				ml.new-parse-util('=a> _=cc_=>*:f:bf'),
+				ml.parse-util('=a> _=cc_=>*:f:bf'),
 				(
 					'pre-states': '=a>',
 					'post-states': '=>*:f:bf',
@@ -303,7 +303,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('#{ml.$states-cmb} ^:f_f_#{ml.$states-cmb} af'),
+				ml.parse-util('#{ml.$states-cmb} ^:f_f_#{ml.$states-cmb} af'),
 				(
 					'pre-states': '#{ml.$states-cmb} ^:f',
 					'post-states': '#{ml.$states-cmb} af',
@@ -315,7 +315,7 @@
 
 		@include it('value with all components') {
 			@include assert-equal(
-				ml.new-parse-util('xs:sm_:f:>_0_h::^sub'),
+				ml.parse-util('xs:sm_:f:>_0_h::^sub'),
 				(
 					'at-rules': 'xs:sm',
 					'pre-states': ':f:>',
@@ -326,7 +326,7 @@
 			);
 
 			@include assert-equal(
-				ml.new-parse-util('xs:sm_:f:>__noJs:h'),
+				ml.parse-util('xs:sm_:f:>__noJs:h'),
 				(
 					'at-rules': 'xs:sm',
 					'pre-states': ':f:>',

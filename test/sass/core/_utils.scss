@@ -7,7 +7,7 @@
 	@include it('make W values in `gc` unit') {
 		@include assert() {
 			@include output(false) {
-				@include ml.new-mk-util(
+				@include ml.mk-util(
 					'W', (
 					6gc, '9gc_h StOnly',
 				));
@@ -30,7 +30,7 @@
 
 		@include assert() {
 			@include output(false) {
-				@include ml.new-mk-util(
+				@include ml.mk-util(
 					'W', (
 					[9gc, 10],
 				));
@@ -55,7 +55,7 @@
 	@include it('make Ml values in `gc` unit') {
 		@include assert() {
 			@include output(false) {
-				@include ml.new-mk-util(
+				@include ml.mk-util(
 					'Ml', (
 					6gc, [9gc, 10],
 				));

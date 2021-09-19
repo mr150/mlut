@@ -90,8 +90,8 @@
 //
 // Styleguide: sass-tools.mixins.utils.mk_util
 
-@mixin new-mk-util($raw-name, $values, $components: (), $options: ()) {
-	$util-data: ml.new-parse-util($raw-name);
+@mixin mk-util($raw-name, $values, $components: (), $options: ()) {
+	$util-data: ml.parse-util($raw-name);
 	$util-name: map.get($util-data, 'value');
 	$is-range: map.has-key($options, 'isRange');
 
@@ -104,7 +104,7 @@
 	$props: map.get($main-options, 'properties');
 	$custom-selector: map.get($main-options, 'selector');
 	$bound-comp-str: map.get($main-options, 'components');
-	$bound-components: $bound-comp-str and ml.new-parse-util($bound-comp-str);
+	$bound-components: $bound-comp-str and ml.parse-util($bound-comp-str);
 	$is-bound-comp: list.length($bound-components) > 1;
 	$range-generator: map.get(
 		ml.$utils-cfg,
@@ -153,13 +153,13 @@
 				$range-data: map.set($range-data, 'components', $util-data);
 			}
 
-			@include new-mk-util(
+			@include mk-util(
 				$util-name,
 				$options: map.set($main-options, 'isRange', true),
 				$range-data...
 			);
 		} @else {
-			$util-val-data: ml.new-parse-util($key);
+			$util-val-data: ml.parse-util($key);
 			$util-parsed-val: map.get($util-val-data, 'value');
 
 			@if $is-bound-comp or list.length($util-val-data) < 2 {
@@ -215,7 +215,7 @@
 			);
 
 			@if not string.index($val-feat-str, ml.$kArOnly) and not $ar-st-only {
-				@include ml.new-mk-state(
+				@include ml.mk-state(
 					$post-states,
 					$pre-states,
 					not $st-only,
@@ -240,7 +240,7 @@
 					}
 
 					@if $ar-st or $ar-st-only {
-						@include ml.new-mk-state(
+						@include ml.mk-state(
 							$post-states,
 							$pre-states,
 							false,

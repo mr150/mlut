@@ -117,7 +117,7 @@ Styleguide: sass-tools.functions.high.utils
 }
 
 @function expand-util-kw-alias($raw-alias, $util) {
-	$alias-data: pu.new-parse-util($raw-alias);
+	$alias-data: pu.parse-util($raw-alias);
 	$alias-list: ml.str-split(map.get($alias-data, 'value'), ml.$tUKwc);
 	$length: list.length($alias-list);
 	$values: ();

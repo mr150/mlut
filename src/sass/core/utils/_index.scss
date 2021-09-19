@@ -12,5 +12,5 @@
 }
 
 @each $util, $values in ml.$utils-map {
-	@include ml.new-mk-util($util, $values);
+	@include ml.mk-util($util, $values);
 }

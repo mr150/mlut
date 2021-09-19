@@ -16,7 +16,7 @@
 		@return ml.error('Invalid range syntax: `#{$range}`. Expected 2 or 3 arguments');
 	}
 
-	$value-data: mpu.new-parse-util(list.nth($range, 1));
+	$value-data: mpu.parse-util(list.nth($range, 1));
 	$start: map.get($value-data, 'value');
 	$start-number: ml.str2n($start, true);
 	$end: list.nth($range, 2);
@@ -110,7 +110,7 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 	}
 
 	$numbers-list: list.nth($range, 2);
-	$shades-num-data: mpu.new-parse-util(list.nth($numbers-list, 1));
+	$shades-num-data: mpu.parse-util(list.nth($numbers-list, 1));
 	$shades-number: ml.str2n(map.get($shades-num-data, 'value'));
 
 	$alpha-number: if(

@@ -52,7 +52,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util from map of values') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'D', (
 						'ib': inline-block,
 						'': block,
@@ -77,7 +77,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'xl_D_+:h', (
 						'sm@s:&-_^:h_f_af f': flex,
 						'_h,f': block,
@@ -137,7 +137,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Maw', (
 						500: false,
 						'n': null,
@@ -171,7 +171,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util from list of values') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Maw', (
 						10, 4vw, 'a', 2su, 5gg
 					));
@@ -203,7 +203,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Maw', (
 						':f_100_+:h',
 						'xl @m:-sm:ori_32p_vl',
@@ -247,7 +247,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'M', (
 						2gg,
 					));
@@ -267,7 +267,7 @@ ml.$utils-db: map.deep-merge(
 				$step: 2;
 
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bdw', (
 						[2, 4],
 						5,
@@ -304,7 +304,7 @@ ml.$utils-db: map.deep-merge(
 				$step: 0.7;
 
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bdw', (
 						['lg_#{$start}r_h', $end, $step],
 					));
@@ -338,7 +338,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'sm ArOnly_Mt', (
 						[10, 20, 10],
 						['@m:prn ArOnly_40', 45, 5],
@@ -376,7 +376,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util from range of custom units') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bdw', (
 						[1gg, 2],
 					));
@@ -397,7 +397,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'M', (
 						[1gg, 2],
 					));
@@ -418,7 +418,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'M', (
 						[1su, 2],
 					));
@@ -439,7 +439,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util from mixin arguments') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Ovcm', (5, 'ih_f'),
 						(
 							'post-states': 'h',
@@ -475,7 +475,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util at-rules and states taking into account keywords') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Maw', (
 						'@m:prn_100_+:h ' + ml.$kStOnly,
 						ml.$kArOnly + ' @m:prn_32p_+:h',
@@ -510,7 +510,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Maw', (
 						ml.$kArSt + ' @m:prn_200_+:h',
 						'#{ml.$kArSt} #{ml.$kArOnly} @m:prn_a_vl',
@@ -550,7 +550,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Maw', (
 						'#{ml.$kArSt} @m:prn_300_+:h #{ml.$kStOnly}',
 						ml.$kArStOnly + ' @m:prn_n_vl',
@@ -584,7 +584,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make utils with multiple properties') {
 			@include assert('properties list and custom util class name') {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'-Xy', (
 						0: null,
 						1gg: null,
@@ -638,7 +638,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert('properties map with one static item and no repeating values') {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'-Posed', (
 						0: null,
 						'sm0': (1rem, 2),
@@ -684,7 +684,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util with empty class name') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'-AltPos', (
 						'ArOnly @s_sticky': null,
 						':h_abs': absolute,
@@ -712,7 +712,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util with multiple values for one property') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bdrs', (
 						'^:+_5;10': null,
 						'50p;50p;12;12': null,
@@ -741,7 +741,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bdrs', (
 						'=50;1r_h StOnly',
 						'12;=20'
@@ -761,7 +761,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bdrs', (
 						'13;1gg_a StOnly',
 						'1gg;25/1.5gg',
@@ -785,7 +785,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util with name as a property') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'width', (
 						5.3su,
 					));
@@ -802,7 +802,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util with CSS !important') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'M', (
 						'!': auto,
 						 '25!_af StOnly': null,
@@ -827,7 +827,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'-Xy', (
 						'2r;12!',
 					));
@@ -845,7 +845,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bdw', (
 						['1r!', 2],
 					));
@@ -864,7 +864,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Fz!', (3su, 3gg)
 					);
 				}
@@ -885,11 +885,11 @@ ml.$utils-db: map.deep-merge(
 				ml.$utils-up-specif: true;
 
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bdw', (5)
 					);
 
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'-Posed', ('10%;3')
 					);
 				}
@@ -915,11 +915,11 @@ ml.$utils-db: map.deep-merge(
 				ml.$utils-up-specif: '#super .app';
 
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bdw', (5)
 					);
 
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Gx', ('StOnly StCmb ^_20_ StCmb h,f',)
 					);
 				}
@@ -942,7 +942,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util with custom selector') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Gx', ('^ StCmb ^_20_h h,f StCmb :^0',));
 				}
 
@@ -974,7 +974,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util with MLUT and CSS variables in value') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Maw', ('$lg_af', '-card-sm'));
 				}
 
@@ -997,7 +997,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util with color in value') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'C', (
 						#f06,
 						'#f0d_f StOnly',
@@ -1029,7 +1029,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util from color range') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'C', (
 						[('prm0', '-txtColor'), '2_h StOnly', ('alpha': 0.2, 'green': 30)],
 					));
@@ -1066,7 +1066,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('use the value generated above from the map as keywords') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'D', (
 						'ib_af', '', '150_h StOnly'
 					));
@@ -1093,7 +1093,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Maw', 'sm0'
 					);
 				}
@@ -1109,13 +1109,13 @@ ml.$utils-db: map.deep-merge(
 		@include it('saving colors when creating them from a map') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'C', (
 						'main0': #c06,
 						'minor0': #150,
 					));
 
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bgc', (
 						'main0_h StOnly',
 						'minor0',
@@ -1147,7 +1147,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'D', (
 						'', 'StOnly ^:h_ib'
 					));
@@ -1166,7 +1166,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Gx', (
 						'12', 'StOnly ^_12'
 					));
@@ -1196,7 +1196,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bgc', (
 						'KW.colors_h', #ccc
 					));
@@ -1227,7 +1227,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Bgsz_f StOnly', (
 						'KW.colors', 'KW_af StOnly'
 					));
@@ -1256,7 +1256,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('make util with bound components') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Tt', (
 						'', 'c_h StOnly',
 					));
@@ -1283,12 +1283,12 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Tt_f StOnly', (
 						'n',
 					));
 
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Tt', 'l', ('post-states': 'fw StOnly')
 					);
 				}
@@ -1314,7 +1314,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert('generate other states for util with bound components') {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'Tt_f StOnly', 'n', (), ('components': null)
 					);
 				}
@@ -1330,7 +1330,7 @@ ml.$utils-db: map.deep-merge(
 		@include it('util with native CSS function as a value') {
 			@include assert() {
 				@include output(false) {
-					@include ml.new-mk-util(
+					@include ml.mk-util(
 						'W', '=max(15vw,150px)',
 					);
 				}
