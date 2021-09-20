@@ -123,6 +123,7 @@ $utils-db: (
 					),
 				),
 			),
+
 			'Fxd': (
 				'properties': flex-direction,
 				'keywords': (
@@ -165,10 +166,19 @@ $utils-db: (
 				'properties': justify-content,
 				'keywords': 'box-alignment',
 			),
+			'Ji': (
+				'properties': justify-items,
+				'keywords': 'box-alignment',
+			),
+			'Js': (
+				'properties': justify-self,
+				'keywords': 'box-alignment',
+			),
 			'Ord': (
 				'properties': order,
 				'value-type': 'unitless',
 			),
+
 			'Gd': grid,
 			'Fl': (
 				'properties': float,
@@ -195,6 +205,10 @@ $utils-db: (
 					'cb': content-box,
 				),
 			),
+			'Miw': (
+				'properties': min-width,
+				'keywords': 'sizing',
+			),
 			'Maw': (
 				'properties': max-width,
 				'keywords': 'sizing',
@@ -202,6 +216,16 @@ $utils-db: (
 			'Mih': (
 				'properties': min-height,
 				'keywords': 'sizing',
+			),
+			'Mah': (
+				'properties': max-height,
+				'keywords': 'sizing',
+			),
+			'Tbl': (
+				'properties': table-layout,
+				'keywords': (
+					'f': fixed,
+				),
 			),
 
 			'M': (
@@ -376,6 +400,7 @@ $utils-db: (
 					'': (hidden, ellipsis, nowrap),
 				),
 			),
+
 			'Bgc': (
 				'properties': background-color,
 				'range-generator': 'color',
@@ -411,10 +436,26 @@ $utils-db: (
 					's': scroll,
 				),
 			),
+			'Bgcp': (
+				'properties': background-clip,
+				'keywords': 'box-ext',
+			),
+			'Bgo': (
+				'properties': background-origin,
+				'keywords': 'box-ext',
+			),
+			'Bgi': (
+				'properties': background-image,
+			),
+
 			'Ol': (
 				'properties': outline,
 				'value-type': 'border',
 				'keywords': ('line-style', 'line-width'),
+			),
+			'Olc': (
+				'properties': outline-color,
+				'value-type': 'color',
 			),
 			'Bxsh': box-shadow,
 			'Trf': transform,
@@ -477,6 +518,34 @@ $utils-db: (
 				'properties': border-color,
 				'value-type': 'color',
 				'directions': true,
+			),
+			'Bdtc': (
+				'properties': border-top-color,
+				'value-type': 'color',
+			),
+			'Bdrc': (
+				'properties': border-right-color,
+				'value-type': 'color',
+			),
+			'Bdbc': (
+				'properties': border-bottom-color,
+				'value-type': 'color',
+			),
+			'Bdlc': (
+				'properties': border-left-color,
+				'value-type': 'color',
+			),
+			'-Bdxc': (
+				'properties': (
+					border-right-color, border-left-color
+				),
+				'value-type': 'color',
+			),
+			'-Bdyc': (
+				'properties': (
+					border-top-color, border-bottom-color
+				),
+				'value-type': 'color',
 			),
 
 			'Bds': (
@@ -648,6 +717,12 @@ $utils-db: (
 				'sa': space-around,
 				'se': space-evenly,
 			),
+			'box-ext': (
+				'bb': border-box,
+				'cb': content-box,
+				'pb': padding-box,
+				't': text,
+			),
 		),
 	),
 
@@ -696,6 +771,11 @@ $utils-groups: (
 			'Bds', 'Bdts', 'Bdrst', 'Bdbs', 'Bdls', '-Bdxs', '-Bdys',
 		),
 	),
+	'BdSidesColor': (
+		'members': (
+			Bdtc, Bdrc, Bdbc, Bdlc, '-Bdxc', '-Bdyc',
+		),
+	),
 	'Overflows': (
 		'members': (
 			'Ov', 'Ovx', 'Ovy',
@@ -711,9 +791,27 @@ $utils-groups: (
 			'P', 'Pt', 'Pr', 'Pb', 'Pl', '-Px', '-Py',
 		),
 	),
+	'Spaces': (
+		'members': (
+			'M', 'Mt', 'Mr', 'Mb', 'Ml', '-Mx', '-My',
+			'P', 'Pt', 'Pr', 'Pb', 'Pl', '-Px', '-Py',
+			'T', 'R', 'B', 'L', '-X', '-Y', '-Xy',
+			'W', 'H', 'Mah',
+		),
+	),
 	'Offsets': (
 		'members': (
 			'T', 'R', 'B', 'L', '-X', '-Y', '-Xy',
+		),
+	),
+	'Colors': (
+		'members': (
+			C, Bgc, Bdc,
+		),
+	),
+	'ColorsExt': (
+		'members': (
+			C, Bgc, Bdc, Olc,
 		),
 	),
 ) !default;
