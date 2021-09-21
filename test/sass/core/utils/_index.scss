@@ -1,1 +1,57 @@
+@use 'sass-true' as *;
+@use 'tools' as ml;
+@use 'sass:map';
+@use 'sass:list';
+
 @forward 'box-model';
+
+@use 'core/utils' with (
+	$utils: (
+		'^_D': ('', 'n', 'f'),
+
+		'/override': (
+			'M': (1su, 2r)
+		),
+
+		'/allow': (
+			'M', 'Fl', 'Bgsz'
+		),
+
+		/*
+		//`ban` test commented because it and `allow` is mutually exclusive
+		// and module can be configure only once
+		'/ban': list.join(
+			map.keys(map.get(ml.$utils-db, 'utils', 'registry')),
+			('Offsets', 'Paddings', 'Margins', 'BdWidth')
+		),
+		*/
+	),
+);
+
+@include describe('core/utils') {
+	@include it('override and allow core utils') {
+		@include assert-equal(
+			ml.$utils-map,
+			(
+				'M': (1su, 2r),
+				'Fl': ('', 'r'),
+				ml.$bp-all + '_Bgsz': (100p, ml.$tUKwa),
+			),
+			$inspect: true,
+		);
+	}
+
+	/*
+	@include it('ban core utils') {
+		@include assert-equal(
+			ml.$utils-map,
+			(
+				'Overflows': ('', 'a', 's', 'v'),
+				'Borders': ml.$bp-all + '_',
+				'BdStyle': ('d', 'ds', '#{ml.$bp-all} #{ml.$kArOnly}_s'),
+			),
+			$inspect: true,
+		);
+	}
+ */
+}

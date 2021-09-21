@@ -1,3 +1,9 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:string';
+
+@use '../../tools/functions/base' as bf;
 @use '../../tools/' as ml;
 @use 'grid-system';
 @use 'other';
@@ -7,10 +13,67 @@
 @use 'text';
 @use 'visual';
 
-@each $group, $values in ml.$utils-groups-map {
-	@include ml.mk-utils-group($group, $values);
+$utils: () !default;
+$filter-mod: null;
+
+ml.$utils-map: map.merge(ml.$utils-map, ml.$utils-groups-map);
+$-utils-list: map.keys(ml.$utils-map);
+$-all-groups: map.keys(ml.$utils-groups);
+$-override-map: map.get($utils, '/override');
+$-filter-keys: ();
+
+@if map.has-key($utils, '/allow') {
+	$filter-mod: '/allow';
+} @else if map.has-key($utils, '/ban') {
+	$filter-mod: '/ban';
 }
 
-@each $util, $values in ml.$utils-map {
-	@include ml.mk-util($util, $values);
+@if $filter-mod {
+	$utils-filtered: ();
+
+	// not used `ls-find`, because the utils can be repeated in the map
+	// and we need to go through almost all elements
+	// TODO: optimize the search to remove extra check
+	@each $util in map.get($utils, $filter-mod) {
+		@each $item in $-utils-list {
+			@if (
+				string.index($item, $util) and (
+					$item == $util or
+					list.index(bf.str-split($item, ml.$tUCm), $util)
+				)
+			) {
+				$-filter-keys: list.append($-filter-keys, $item);
+			}
+		}
+	}
+
+	@if $filter-mod == '/allow' {
+		@each $item in $-filter-keys {
+			$utils-filtered: map.set(
+				$utils-filtered, $item, map.get(ml.$utils-map, $item)
+			);
+		}
+
+		ml.$utils-map: $utils-filtered;
+	} @else {
+		ml.$utils-map: map.remove(ml.$utils-map, $-filter-keys...);
+	}
+}
+
+@if $-override-map != null {
+	ml.$utils-map: map.merge(ml.$utils-map, $-override-map);
+} @else if map.has-key($utils, '/override') {
+	ml.$utils-map: ();
+}
+
+@each $util, $values in list.join(
+	ml.$utils-map, map.remove($utils, '/override', '/allow', '/ban')
+) {
+	@if bf.ls-find(
+		$-all-groups, meta.get-function('str-contains-item', false, bf), $util
+	) {
+		@include ml.mk-utils-group($util, $values);
+	} @else {
+		@include ml.mk-util($util, $values);
+	}
 }
