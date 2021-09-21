@@ -232,6 +232,10 @@ Styleguide: sass-tools.functions.base.string
 	@return string.slice($str, 1, string.length($substr)) == $substr;
 }
 
+@function str-contains-item($item, $i, $str) {
+	@return string.index($str, $item);
+}
+
 @function str-hex2color($str) {
 	$value-type: meta.type-of($str);
 

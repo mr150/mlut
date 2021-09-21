@@ -104,10 +104,6 @@
 	@return $util-value;
 }
 
-@function -str-contains-item($item, $i, $str) {
-	@return string.index($str, $item);
-}
-
 @function parse-abbr($abbr) {
 	$abbr-name: $abbr;
 	$abbr-value: '';
@@ -127,7 +123,7 @@
 	}
 
 	$separator: ml.ls-find(
-		$all-separators, meta.get-function('-str-contains-item'), $abbr
+		$all-separators, meta.get-function('str-contains-item', false, ml), $abbr
 	);
 
 	@if $separator {
