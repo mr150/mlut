@@ -71,17 +71,11 @@ Markup: ../../../docs/examples/core-utils/visual-formatting/-all.html
 Styleguide: core-utils.misc.-all
 */
 
-ml.$utils-groups-map: map.merge(
-	ml.$utils-groups-map,
-	(
-		ml.$bp-all + '_Offsets': (0, 'a', 100p, 50p),
-	)
-);
-
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	(
 		ml.$bp-all + '_Pos': ('', 'a', 'f', 's', 'st'),
+		ml.$bp-all + '_Offsets': (0, 'a', 100p, 50p),
 		'Z': ('a', [-1, 5]),
 		// animation
 		'Trs': ('mAll'),

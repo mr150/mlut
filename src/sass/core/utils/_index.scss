@@ -16,7 +16,6 @@
 $utils: () !default;
 $filter-mod: null;
 
-ml.$utils-map: map.merge(ml.$utils-map, ml.$utils-groups-map);
 $-utils-list: map.keys(ml.$utils-map);
 $-all-groups: map.keys(ml.$utils-groups);
 $-override-map: map.get($utils, '/override');

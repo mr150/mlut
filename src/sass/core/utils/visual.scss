@@ -114,20 +114,14 @@ ml.$utils-map: map.merge(
 		'Bga': ml.$tUKwa,
 		'Bgp': (ml.$tUKwa, 'r;t', 'r;b', 'l;b'),
 		// border
+		'Borders': ml.$bp-all + '_',
+		ml.$bp-all + '_BdWidth': (0, 2, 1su),
+		'BdStyle': ('d', 'ds', '#{ml.$bp-all} #{ml.$kArOnly}_s'),
 		'Bdcl': (''),
 		'Bdrs': (50p),
 		// other
 		'Ol': (0),
 		ml.$bp-all + '_Op': (0, 1),
 		ml.$bp-all + '_V': ('', 'c', 'v'),
-	)
-);
-
-ml.$utils-groups-map: map.merge(
-	ml.$utils-groups-map,
-	(
-		'Borders': ml.$bp-all + '_',
-		ml.$bp-all + '_BdWidth': (0, 2, 1su),
-		'BdStyle': ('d', 'ds', '#{ml.$bp-all} #{ml.$kArOnly}_s'),
 	)
 );

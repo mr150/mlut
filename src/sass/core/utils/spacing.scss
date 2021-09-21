@@ -88,17 +88,11 @@ Styleguide: core-utils.padding.px
 
 $-M-list: ([ml.$bp-all + '_-6su', -1], [ml.$bp-all + '_-2gg', -1], [ml.$bp-all + '_1gg', 4]);
 
-ml.$utils-groups-map: map.merge(
-	ml.$utils-groups-map,
-	(
-		ml.$bp-all + '_Margins': (0, 'a', 'ih', [1su, 6]),
-		ml.$bp-all + '_Paddings': (0, 'ih', [1su, 7], [1gg, 6]),
-	)
-);
-
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	(
+		ml.$bp-all + '_Margins': (0, 'a', 'ih', [1su, 6]),
+		ml.$bp-all + '_Paddings': (0, 'ih', [1su, 7], [1gg, 6]),
 		'M': $-M-list,
 		'Mt': $-M-list,
 		'Mb': $-M-list,

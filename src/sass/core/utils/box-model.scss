@@ -112,12 +112,6 @@ ml.$utils-map: map.merge(
 		'Bxz': ('', 'cb'),
 		'Fl': ('', 'r'),
 		'Cl': ('', 'r', 'l'),
-	)
-);
-
-ml.$utils-groups-map: map.merge(
-	ml.$utils-groups-map,
-	(
 		'Overflows': ('', 'a', 's', 'v'),
 	)
 );
