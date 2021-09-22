@@ -9,6 +9,7 @@
 @use 'sass:map';
 @use 'sass:list';
 @use 'sass:string';
+@use 'sass:math';
 @use '../base' as ml;
 @use 'utils' as ud;
 
@@ -104,6 +105,18 @@ $at-rules-cfg: map.merge(
 );
 
 $bp-map: map.get($at-rules-cfg, 'breakpoints');
+$-bp-values: map.values($bp-map);
+$bp-keys: map.keys($bp-map);
+$bp-map: ();
+
+@for $i from 1 through list.length($-bp-values) {
+	$min-bp: math.min($-bp-values...);
+	$min-index: list.index($-bp-values, $min-bp);
+	$-bp-values: list.set-nth($-bp-values, $min-index, ml.$number-max);
+	$bp-map: map.set($bp-map, list.nth($bp-keys, $min-index), $min-bp);
+}
+
+$at-rules-cfg: map.set($at-rules-cfg, 'breakpoints', $bp-map);
 $-custom-global-kw: map.get(ud.$utils-db, 'common', 'keywords', 'global');
 $-bp-kw-map: ();
 

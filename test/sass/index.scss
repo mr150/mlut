@@ -3,8 +3,11 @@
 	$terminal-output: false,
 );
 
-@use 'tools/settings' with (
+@use 'tools/settings/base/flags' with (
 	$flag-test-env: true,
+);
+
+@use 'tools/settings/common/utils' as cu with (
 	$utils-data: (
 		'utils': (
 			'registry': (
@@ -24,6 +27,7 @@
 	)
 );
 
+@use 'tools/settings/at-rules';
 @use 'tools/functions';
 @use 'tools/mixins';
 @use 'core/utils';
