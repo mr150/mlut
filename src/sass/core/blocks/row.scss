@@ -241,8 +241,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 .row__col {
 	--gc-diff: var(#{mlu.$var-gg});
 
-	@include mlu.W(12gc);
-
+	@include mlu.apply-util(W12gc);
 	@include mlu.mk-gtr();
 	@include mlu.mk-gtr(mlu.px2rem(mlu.$gtr-sm), $direct: 'b', $coef: 2);
 

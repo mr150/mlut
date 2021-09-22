@@ -94,8 +94,7 @@ $css-vars: ml.$flag-css-vars, $calc: ml.$flag-calc-fallback, $type: 'col') {
 	@if $type == 'col' {
 		--gc-diff: var(#{ml.$var-gg});
 
-		@include ml.W(12gc, $gutters: $grid-gutters, $css-vars: $css-vars, $calc: $calc);
-
+		@include ml.apply-util(W12gc);
 		@include ml.mk-gtr(ml.$gtr-sm, $gutters: $grid-gutters, $calc: $calc, $css-vars: $css-vars);
 		@include ml.mk-gtr(ml.$gtr-sm, $gutters: $grid-gutters, $calc: $calc, $direct: 'b', $coef: 2, $css-vars: $css-vars);
 
