@@ -73,9 +73,6 @@ $at-rules-cfg: (
 		$bp-lg: 960px,
 		$bp-xl: 1168px,
 	),
-	'all-breakpoints': (
-		$bp-xs: 0,
-	),
 	'keywords': (
 		$bp-all: 'breakpoints',
 		$kArOnly: null,
@@ -98,12 +95,6 @@ $at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-config-ext);
 $at-rules-cfg: map.merge($at-rules-cfg, 'breakpoints', $breakpoints);
 $at-rules-cfg: map.merge($at-rules-cfg, 'breakpoints', $breakpoints-ext);
 
-$at-rules-cfg: map.merge(
-	$at-rules-cfg,
-	'all-breakpoints',
-	map.get($at-rules-cfg, 'breakpoints')
-);
-
 $bp-map: map.get($at-rules-cfg, 'breakpoints');
 $-bp-values: map.values($bp-map);
 $bp-keys: map.keys($bp-map);
@@ -117,6 +108,11 @@ $bp-map: ();
 }
 
 $at-rules-cfg: map.set($at-rules-cfg, 'breakpoints', $bp-map);
+$all-bp-map: map.merge(
+	($bp-xs: 0),
+	$bp-map,
+);
+
 $-custom-global-kw: map.get(ud.$utils-db, 'common', 'keywords', 'global');
 $-bp-kw-map: ();
 

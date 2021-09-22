@@ -6,7 +6,7 @@
 @use '../forward-tools' as ml;
 
 $-ar-keywords: list.join(
-	map.keys(map.get(ml.$at-rules-cfg, 'all-breakpoints')),
+	map.keys(ml.$all-bp-map),
 	map.keys(map.get(ml.$at-rules-cfg, 'keywords')),
 );
 
