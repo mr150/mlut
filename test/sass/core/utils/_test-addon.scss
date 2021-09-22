@@ -1,0 +1,10 @@
+@use 'sass:map';
+@use 'tools' as ml;
+
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	(
+		'reputation': (100, 150),
+		'Tsh_h,f a': ('-defTsh', 'rv'),
+	)
+);
