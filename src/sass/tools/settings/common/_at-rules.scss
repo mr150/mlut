@@ -108,11 +108,6 @@ $bp-map: ();
 }
 
 $at-rules-cfg: map.set($at-rules-cfg, 'breakpoints', $bp-map);
-$all-bp-map: map.merge(
-	($bp-xs: 0),
-	$bp-map,
-);
-
 $-custom-global-kw: map.get(ud.$utils-db, 'common', 'keywords', 'global');
 $-bp-kw-map: ();
 

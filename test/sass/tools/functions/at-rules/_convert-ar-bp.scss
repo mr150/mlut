@@ -11,7 +11,7 @@
 
 			@include assert-equal(
 				ml.convert-ar-bp('NO'),
-				'ERROR: Invalid breakpoint name: `NO`. Allowed only breakpoints and "no breakpoint" keyword',
+				'ERROR: Invalid breakpoint name: `NO`',
 			);
 		}
 

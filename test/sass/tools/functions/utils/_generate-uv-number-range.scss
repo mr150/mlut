@@ -104,10 +104,10 @@
 
 		@include it('generate range with util components') {
 			@include assert-equal(
-				ml.generate-uv-number-range(['xs:sm_:f:>_1r_h::^sub', 7, 3], 'W'),
+				ml.generate-uv-number-range(['<sm_:f:>_1r_h::^sub', 7, 3], 'W'),
 				(
 					'components': (
-					'at-rules': 'xs:sm',
+					'at-rules': '<sm',
 					'pre-states': ':f:>',
 					'post-states': 'h::^sub',
 				),

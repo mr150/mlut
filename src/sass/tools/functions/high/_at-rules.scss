@@ -25,11 +25,11 @@ $-tACs-length: string.length(ml.$tACs);
 		$from: string.slice($from, $-tALs-length + 1);
 	}
 
-	$from-value: map.get(ml.$all-bp-map, $from);
+	$from-value: map.get(ml.$bp-map, $from);
 
 	@if not $from-value {
 		@return ml.error(
-			'Invalid breakpoint name: `#{$from}`. Allowed only breakpoints and "no breakpoint" keyword',
+			'Invalid breakpoint name: `#{$from}`',
 		);
 	}
 
@@ -117,7 +117,7 @@ $-tACs-length: string.length(ml.$tACs);
 //
 // Available converters:
 // ```scss
-//@debug ml.convert-ar-bp('xs:sm,xl'); // '(max-width: 519px), (min-width: 1168px)'
+//@debug ml.convert-ar-bp('<sm,xl'); // '(max-width: 519px), (min-width: 1168px)'
 //@debug ml.convert-ar-media('scr:fc'); // 'screen and (forced-colors)'
 //@debug ml.convert-ar-supports('!&', 'D-ig'); // '(not (display: inline-grid))'
 // ```
