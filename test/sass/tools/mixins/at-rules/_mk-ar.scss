@@ -10,7 +10,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 		@include it('make only media queries from breakpoints') {
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar('xs:sm,md:lg,xl') using ($ar) {
+					@include ml.mk-ar('<sm,md:lg,xl') using ($ar) {
 						width: 50%;
 					}
 				}
@@ -246,7 +246,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar('xs&smORmd&lgORxl%s&pos~sk') using ($ar) {
+					@include ml.mk-ar('<smORmd&lgORxl%s&pos~sk') using ($ar) {
 						width: 50%;
 					}
 				}

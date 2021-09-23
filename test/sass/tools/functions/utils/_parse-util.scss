@@ -45,9 +45,9 @@
 			);
 
 			@include assert-equal(
-				ml.parse-util('xs:sm,lg_1gg'),
+				ml.parse-util('<sm,lg_1gg'),
 				(
-					'at-rules': 'xs:sm,lg',
+					'at-rules': '<sm,lg',
 					'value': '1gg',
 				),
 				$inspect: true,
@@ -315,9 +315,9 @@
 
 		@include it('value with all components') {
 			@include assert-equal(
-				ml.parse-util('xs:sm_:f:>_0_h::^sub'),
+				ml.parse-util('<sm_:f:>_0_h::^sub'),
 				(
-					'at-rules': 'xs:sm',
+					'at-rules': '<sm',
 					'pre-states': ':f:>',
 					'post-states': 'h::^sub',
 					'value': '0',
@@ -326,9 +326,9 @@
 			);
 
 			@include assert-equal(
-				ml.parse-util('xs:sm_:f:>__noJs:h'),
+				ml.parse-util('<sm_:f:>__noJs:h'),
 				(
-					'at-rules': 'xs:sm',
+					'at-rules': '<sm',
 					'pre-states': ':f:>',
 					'post-states': 'noJs:h',
 					'value': '',

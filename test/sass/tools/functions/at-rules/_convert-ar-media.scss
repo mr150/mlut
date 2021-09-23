@@ -20,11 +20,6 @@ ml.$at-rules-db: map.set(
 				ml.convert-ar-media('-md'),
 				'(min-width: #{ml.bp(md)})',
 			);
-
-			@include assert-equal(
-				ml.convert-ar-media('-xs:-sm'),
-				'(max-width: #{ml.bp(sm) - 1px})',
-			);
 		}
 
 		@include it('converts custom mq') {
@@ -63,7 +58,7 @@ ml.$at-rules-db: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-ar-media('prn:-lg:-xl:dm,pn-c:w>=90r,c<256:-xs:-sm'),
+				ml.convert-ar-media('prn:-lg:-xl:dm,pn-c:w>=90r,c<256:w<$sm'),
 				'print and (min-width: #{ml.bp(lg)}) and (max-width: #{ml.bp(xl) - 1px}) and (display-mode: fullscreen), (pointer: coarse) and (min-width: 90rem), (max-color: 255) and (max-width: #{ml.bp(sm) - 1px})',
 			);
 		}

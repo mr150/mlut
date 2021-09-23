@@ -14,8 +14,16 @@ Styleguide: sass-tools.functions.high.at_rules
 
 @use 'forward-tools' as ml;
 
+$-tALs-length: string.length(ml.$tALs);
+
 @function convert-bp-list($bp-list) {
 	$from: list.nth($bp-list, 1);
+	$is-max: ml.str-starts($from, ml.$tALs);
+
+	@if $is-max {
+		$from: string.slice($from, $-tALs-length + 1);
+	}
+
 	$from-value: map.get(ml.$all-bp-map, $from);
 
 	@if not $from-value {
@@ -24,13 +32,13 @@ Styleguide: sass-tools.functions.high.at_rules
 		);
 	}
 
-	$to: if(list.length($bp-list) >= 2, list.nth($bp-list, 2), null);
 	$media-str: '(min-width: #{$from-value})';
 
-	@if $to and $from-value == 0 {
-		$media-str: '(max-width: #{ml.bp($to) - 1px})';
-	} @else if $to {
-		$media-str: $media-str + ' and (max-width: #{ml.bp($to) - 1px})';
+	@if $is-max {
+		$media-str: '(max-width: #{$from-value - 1px})';
+	} @else if list.length($bp-list) >= 2 {
+		$media-str:
+			$media-str + ' and (max-width: #{ml.bp(list.nth($bp-list, 2)) - 1px})';
 	}
 
 	@return $media-str;

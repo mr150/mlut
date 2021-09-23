@@ -17,7 +17,7 @@
 
 		@include it('converts max-width breakpoint') {
 			@include assert-equal(
-				ml.convert-ar-bp('xs:sm'),
+				ml.convert-ar-bp('<sm'),
 				'(max-width: #{ml.bp(sm) - 1px})',
 			);
 		}
@@ -31,7 +31,7 @@
 
 		@include it('converts comma-separated max-width breakpoint and single breakpoint') {
 			@include assert-equal(
-				ml.convert-ar-bp('xs:md,xl'),
+				ml.convert-ar-bp('<md,xl'),
 				'(max-width: #{ml.bp(md) - 1px}), (min-width: #{ml.bp(xl)})',
 			);
 		}
@@ -48,7 +48,7 @@
 			);
 
 			@include assert-equal(
-				ml.convert-ar-bp('xs:sm,md:lg,xl'),
+				ml.convert-ar-bp('<sm,md:lg,xl'),
 				'(max-width: #{ml.bp(sm) - 1px}), (min-width: #{ml.bp(md)}) and (max-width: #{ml.bp(lg) - 1px}), (min-width: #{ml.bp(xl)})',
 			);
 		}

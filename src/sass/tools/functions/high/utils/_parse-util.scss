@@ -47,7 +47,9 @@ $-ar-keywords: list.join(
 			), 1);
 
 			@if not $at-rules and (
-				string.index($part, ml.$tAAr) or list.index($-ar-keywords, $part)
+				string.index($part, ml.$tAAr) or
+				list.index($-ar-keywords, $part) or
+				ml.str-starts($part, ml.$tALs)
 			) {
 				$at-rules: $component-trimmed;
 				$comp-indexes: map.set($comp-indexes, 'ar', $i);
