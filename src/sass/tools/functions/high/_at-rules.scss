@@ -15,6 +15,7 @@ Styleguide: sass-tools.functions.high.at_rules
 @use 'forward-tools' as ml;
 
 $-tALs-length: string.length(ml.$tALs);
+$-tACs-length: string.length(ml.$tACs);
 
 @function convert-bp-list($bp-list) {
 	$from: list.nth($bp-list, 1);
@@ -145,38 +146,15 @@ $-tALs-length: string.length(ml.$tALs);
 
 	@each $queary in $queries {
 		$queary-list: ml.str-split($queary, ml.$tAAnd);
-		$bp-range: false;
 
 		@each $item in $queary-list {
 			@if map.has-key(ml.$at-rules-db, 'media', 'types', $item) {
 				$result: $result + map.get(ml.$at-rules-db, 'media', 'types', $item);
-			} @else if string.slice($item, 1, 1) == ml.$tACs {
-				$item-name: string.slice($item, 2);
+			} @else if ml.str-starts($item, ml.$tACs) {
+				$item-name: string.slice($item, $-tACs-length + 1);
 
-				@if map.has-key(ml.$all-bp-map, $item-name) and not $bp-range {
-					$bp-list: ($item-name);
-					$next-item-name: null;
-					$item-index: list.index($queary-list, $item);
-
-					@if $item-index < list.length($queary-list) {
-						$next-item: list.nth($queary-list, $item-index + 1);
-						$next-item-name: if(
-							string.slice($next-item, 1, 1) == ml.$tACs,
-							string.slice($next-item, 2),
-							null,
-						);
-					}
-
-					@if map.has-key(ml.$all-bp-map, $next-item-name) {
-						$bp-list: list.append($bp-list, $next-item-name);
-						$bp-range: true;
-					}
-
-					$result: $result + convert-bp-list($bp-list);
-				} @else if map.has-key(ml.$at-rules-db, 'media', 'custom', $item-name) {
+				@if map.has-key(ml.$at-rules-db, 'media', 'custom', $item-name) {
 					$result: $result + map.get(ml.$at-rules-db, 'media', 'custom', $item-name);
-				} @else if $bp-range {
-					$result: string.slice($result, 1, -(1 + string.length($and)));
 				} @else {
 					@return ml.error('Undefined custom media query: `#{$item}`');
 				}

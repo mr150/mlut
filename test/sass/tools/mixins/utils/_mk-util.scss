@@ -206,7 +206,7 @@ ml.$utils-db: map.deep-merge(
 					@include ml.mk-util(
 						'Maw', (
 						':f_100_+:h',
-						'xl @m:-sm:ori_32p_vl',
+						'xl @m:w>=$sm:ori_32p_vl',
 					));
 				}
 
@@ -238,7 +238,7 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					@media (min-width: ml.bp(sm)) and (orientation: landscape) {
-						.\@m\:-sm\:ori_Maw32p {
+						.\@m\:w\>\=\$sm\:ori_Maw32p {
 							max-width: 32%;
 						}
 					}
