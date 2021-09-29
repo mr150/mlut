@@ -207,16 +207,16 @@ $-tACs-length: string.length(ml.$tACs);
 			} @else {
 				@return ml.error('Undefined custom supports condition: `#{$item}`');
 			}
-		} @else if ml.str-starts($item, ml.$tATu) {
+		} @else if ml.str-starts($item, ml.$tSTu) {
 			@if not $this-util {
-				@return ml.error('`#{ml.$tATu}` cannot be used because $this-util is not passed');
+				@return ml.error('`#{ml.$tSTu}` cannot be used because $this-util is not passed');
 			}
 
 			$value: ml.$tUSv + 'initial';
 
-			@if $item == ml.$tATu + ml.$tUSv {
+			@if $item == ml.$tSTu + ml.$tUSv {
 				$value: map.get($this-util, 'value');
-			} @else if $item != ml.$tATu {
+			} @else if $item != ml.$tSTu {
 				$value: string.slice($item, 2);
 			}
 

@@ -223,14 +223,14 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 			ml.$tAAnd: '&';
 			ml.$tACs: '#';
 			ml.$tAAr: '%';
-			ml.$tATu: '$';
+			ml.$tSTu: '?';
 			ml.$tANot: '^';
 
 			ml.$abbr-separators: list.append(ml.$abbr-separators, '~');
 
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar('%s&ar~4/3OR^$~%m&prn&dm~s&w>=$xlOR#testou', ('name': 'D', 'value': '~ig')) using ($ar) {
+					@include ml.mk-ar('%s&ar~4/3OR^?~%m&prn&dm~s&w>=$xlOR#testou', ('name': 'D', 'value': '~ig')) using ($ar) {
 						width: 50%;
 					}
 				}
@@ -267,7 +267,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 			ml.$tANot: map.get(ml.$at-rules-cfg, 'tokens', 'not');
 			ml.$tACs: map.get(ml.$at-rules-cfg, 'tokens', 'custom');
 			ml.$tAAr: map.get(ml.$at-rules-cfg, 'tokens', 'ar');
-			ml.$tATu: map.get(ml.$at-rules-cfg, 'tokens', 'this-util');
+			ml.$tSTu: map.get(ml.$utils-cfg, 'tokens', 'this-util');
 		}
 
 	}

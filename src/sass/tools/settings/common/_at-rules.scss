@@ -61,7 +61,6 @@ $at-rules-cfg: (
 		'custom': ml.$tSCs,
 		'not': ml.$tSNot,
 		'ar': '@',
-		'this-util': ml.$tSTu,
 		'greater-equal': '>=',
 		'less-equal': '<=',
 		'greater': '>',
@@ -130,7 +129,6 @@ $tAAnd: map.get($at-rules-cfg, 'tokens', 'and');
 $tANot: map.get($at-rules-cfg, 'tokens', 'not');
 $tACs: map.get($at-rules-cfg, 'tokens', 'custom');
 $tAAr: map.get($at-rules-cfg, 'tokens', 'ar');
-$tATu: map.get($at-rules-cfg, 'tokens', 'this-util');
 $tAGte: map.get($at-rules-cfg, 'tokens', 'greater-equal');
 $tALse: map.get($at-rules-cfg, 'tokens', 'less-equal');
 $tAGt: map.get($at-rules-cfg, 'tokens', 'greater');
