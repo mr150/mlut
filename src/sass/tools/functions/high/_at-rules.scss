@@ -89,14 +89,7 @@ $-tACs-length: string.length(ml.$tACs);
 		}
 
 		@if $separator == ml.$tALs or $separator == ml.$tAGt {
-			$value-diff: math.div($feat-value, ml.str2n($feat-value + '_'));
-
-			@if $value-unit == 'rem' or $value-unit == 'em' {
-				$value-diff: $value-diff * 0.06; // 1px = 0.062rem
-			} @else if $value-unit != 'px' and $value-unit != '' {
-				// TODO: add calculations for other units
-				$value-diff: $value-diff * 0.01;
-			}
+			$value-diff: bp-value-diff($feat-value, $value-unit);
 
 			@if $separator == ml.$tALs {
 				$value-diff: $value-diff * -1;
@@ -107,6 +100,20 @@ $-tACs-length: string.length(ml.$tACs);
 	}
 
 	@return '(#{$feat-prefix + $feature}: #{$feat-value})';
+}
+
+@function bp-value-diff($value, $computed-unit: null) {
+	$unit: $computed-unit or math.unit($value);
+	$diff: map.get(ml.$general-cfg, 'units', 'css', $unit) or 1;
+
+	@if $unit == 'rem' or $unit == 'em' {
+		$diff: $diff * 0.06; // 1px = 0.062rem
+	} @else if $unit != 'px' and $unit != '' {
+		// TODO: add calculations for other units
+		$diff: $diff * 0.01;
+	}
+
+	@return $diff;
 }
 
 // Converters
