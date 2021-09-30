@@ -125,6 +125,33 @@ Styleguide: sass-tools.mixins.ar
 	}
 }
 
+@mixin bp($bp) {
+	$bp-type: meta.type-of($bp);
+	$mq-str: '';
+
+	@if $bp-type == 'string' {
+		$mq-str: ml.convert-ar-bp($bp);
+	} @else if $bp-type == 'number' {
+		$mq-str: '(min-width: #{$bp})';
+	} @else if $bp-type == 'list' {
+		$from: list.nth($bp, 1);
+		$to: list.nth($bp, 2);
+		$to: $to - ml.bp-value-diff($to);
+
+		$mq-str: if(
+			$from == 0,
+			'(max-width: #{$to})',
+			'(min-width: #{$from}) and (max-width: #{$to})'
+		);
+	} @else {
+		@error 'Wrong type of argument $bp: `#{$bp-type}`. Expected `string`, `number` or numbers `list`';
+	}
+
+	@media #{$mq-str} {
+		@content;
+	}
+}
+
 // cCl
 //
 // Generate clearfix for float layout.
