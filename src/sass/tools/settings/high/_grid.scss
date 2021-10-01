@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:list';
 @use 'forward-tools' as ml;
 
 // Grid system
@@ -11,10 +12,6 @@
 // $ml-grid-gutters - map with grid gutters on breakpoints.
 //
 // Styleguide: sass-tools.settings.grid
-
-$grid-columns: 12 !default;
-$grid-default-gtr: (ml.$su * 4) !default;
-$grid-gutter-fallback: 1.5% !default;
 
 /*
 Columns and gutters
@@ -43,24 +40,25 @@ Styleguide: sass-tools.settings.grid.cols
 //
 // Styleguide: sass-tools.settings.grid.gtr
 
+$grid-columns: 12 !default;
+$grid-default-gtr: (ml.$su * 4) !default;
+$grid-gutter-fallback: 1.5% !default;
+
 $gtr-sm: (ml.$su * 3) !default;
 $gtr-md: $gtr-sm !default;
 $gtr-lg: $grid-default-gtr !default;
 $gtr-xl: $gtr-lg !default;
 
-$grid-cfg: (
-	'gutters': (
-		ml.$bp-sm: $gtr-sm,
-		ml.$bp-md: $gtr-md,
-		ml.$bp-lg: $gtr-lg,
-		ml.$bp-xl: $gtr-xl,
-	),
-) !default;
+$grid-gutters: () !default;
+$grid-gutters-ext: () !default;
 
-$grid-config: () !default;
-$grid-config-ext: () !default;
+@if $grid-gutters == () {
+	@each $bp, $gtr in list.zip(
+		ml.$bp-keys, ($gtr-sm, $gtr-sm, $grid-default-gtr, $grid-default-gtr)
+	) {
+		$grid-gutters: map.set($grid-gutters, $bp, $gtr);
+	}
+}
 
-$grid-cfg: map.deep-merge($grid-cfg, $grid-config);
-$grid-cfg: map.deep-merge($grid-cfg, $grid-config-ext);
-
-$grid-gutters: map.get($grid-cfg, 'gutters');
+$grid-gutters: map.merge($grid-gutters, $grid-gutters-ext);
+$gtr-sm: list.nth(list.nth($grid-gutters, 1), 2);
