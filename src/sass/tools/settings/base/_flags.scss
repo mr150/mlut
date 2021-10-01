@@ -2,8 +2,6 @@
 //
 // Flags for core compilation.
 //
-// $mlu-flag-calc-fallback = false - turn on CSS `calc()` fallback for grid utils on `md+` breakpoints. Type: `bool`.
-// $mlu-flag-col-offset = true - turn on generation grid columns offset [utils](section-core-utils.html#kssref-core-utils-margin-ml). Type: `bool`.
 // $mlu-flag-css-vars = 1 - turn on usage of [CSS variables](section-core-styles.html#kssref-core-styles-css_vars).
 // Allowable values: <br>
 // `false` \- turn off <br>
@@ -14,8 +12,6 @@
 //
 // Styleguide: sass-tools.settings.flags
 
-$flag-calc-fallback: false !default;
-$flag-col-offset: true !default;
 $flag-css-vars: 1 !default;
 $flag-flex-pe: false !default;
 $flag-test-env: false !default;

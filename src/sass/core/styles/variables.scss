@@ -26,10 +26,10 @@ Styleguide: core-styles.css_vars
 
 @if ml.$flag-css-vars {
 	:root {
-		$prev-value: ml.$gtr-sm;
+		$prev-value: ml.$gtr-first;
 
-		#{ml.$var-gg}: ml.$gtr-sm;
-		#{ml.$var-gg-rem}: ml.px2rem(ml.$gtr-sm);
+		#{ml.$var-gg}: ml.$gtr-first;
+		#{ml.$var-gg-rem}: ml.px2rem(ml.$gtr-first);
 		#{ml.$var-grid-cols}: ml.$grid-columns;
 
 		@each $key, $value in ml.$grid-gutters {

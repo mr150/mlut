@@ -7,58 +7,40 @@
 // Settings that affect the work of grid system.
 //
 // $ml-grid-default-gtr = 16px - default gutter on large width screen. Used as fallback for [--ml-gg](section-core-styles.html#kssref-core-styles-css_vars).
-// $ml-grid-gutter-fallback = 1.5% - Fallback for grid gutter's width if CSS `calc()` not supported
 // $ml-grid-columns - columls count.
 // $ml-grid-gutters - map with grid gutters on breakpoints.
 //
 // Styleguide: sass-tools.settings.grid
 
 /*
-Columns and gutters
+Gutters
 
-Columns count and gutters value on breakpoints.
+Gutters value on breakpoints.
 
-Breakpoint | Columns | Gutter
-:---:  | :---: | :---:
-xs | 4 | 12px
-sm | 4 | 12px
-md | 12 | 12px
-lg | 12 | 16px
-xl | 12 | 16px
+Breakpoint | Gutter
+:---:  | :---:
+<sm | 12px
+sm | 12px
+md | 12px
+lg | 16px
+xl | 16px
 
-Styleguide: sass-tools.settings.grid.cols
+Styleguide: sass-tools.settings.grid.gtr
 */
-
-// Gutters
-//
-// Gutters variables and their values ​​in the source
-//
-// - `$ml-gtr-sm = ` `$ml-su * 3`
-// - `$ml-gtr-md = ` `$ml-gtr-sm`
-// - `$ml-gtr-lg = ` `$ml-grid-default-gtr`
-// - `$ml-gtr-xl = ` `$ml-gtr-lg`
-//
-// Styleguide: sass-tools.settings.grid.gtr
 
 $grid-columns: 12 !default;
 $grid-default-gtr: (ml.$su * 4) !default;
-$grid-gutter-fallback: 1.5% !default;
-
-$gtr-sm: (ml.$su * 3) !default;
-$gtr-md: $gtr-sm !default;
-$gtr-lg: $grid-default-gtr !default;
-$gtr-xl: $gtr-lg !default;
-
 $grid-gutters: () !default;
 $grid-gutters-ext: () !default;
+$gtr-first: (ml.$su * 3);
 
 @if $grid-gutters == () {
 	@each $bp, $gtr in list.zip(
-		ml.$bp-keys, ($gtr-sm, $gtr-sm, $grid-default-gtr, $grid-default-gtr)
+		ml.$bp-keys, ($gtr-first, $gtr-first, $grid-default-gtr, $grid-default-gtr)
 	) {
 		$grid-gutters: map.set($grid-gutters, $bp, $gtr);
 	}
 }
 
 $grid-gutters: map.merge($grid-gutters, $grid-gutters-ext);
-$gtr-sm: list.nth(list.nth($grid-gutters, 1), 2);
+$gtr-first: list.nth(list.nth($grid-gutters, 1), 2);

@@ -25,11 +25,6 @@
 //
 // Styleguide: sass-tools.settings.at_rules.breakpoints
 
-$bp-xs: 'xs' !default;
-$bp-sm: 'sm' !default;
-$bp-md: 'md' !default;
-$bp-lg: 'lg' !default;
-$bp-xl: 'xl' !default;
 $bp-all: 'BpAll' !default;
 $kArOnly: 'ArOnly' !default;
 $kArSt: 'ArSt' !default;
@@ -67,10 +62,10 @@ $at-rules-cfg: (
 		'less': '<',
 	),
 	'breakpoints': (
-		$bp-sm: 520px,
-		$bp-md: 760px,
-		$bp-lg: 960px,
-		$bp-xl: 1168px,
+		'sm': 520px,
+		'md': 760px,
+		'lg': 960px,
+		'xl': 1168px,
 	),
 	'keywords': (
 		$bp-all: 'breakpoints',
