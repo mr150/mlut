@@ -9,6 +9,7 @@ $-ar-keywords: list.join(
 	map.keys(ml.$bp-map),
 	map.keys(map.get(ml.$at-rules-cfg, 'keywords')),
 );
+$-states-tokens: (ml.$tSCn, ml.$tSAnd, ml.$tSTu);
 
 // parse-util
 //
@@ -55,10 +56,7 @@ $-ar-keywords: list.join(
 				$comp-indexes: map.set($comp-indexes, 'ar', $i);
 			} @else if (
 				not $value and not string.index($component, ' ') and
-				not list.index(
-					(ml.$tSCn ml.$tSAnd ml.$tSTu),
-					string.slice($component-item, 1, 1)
-				)
+				not list.index($-states-tokens, string.slice($component-item, 1, 1))
 			) {
 				$value: $component-trimmed;
 				$comp-indexes: map.set($comp-indexes, 'value', $i);
