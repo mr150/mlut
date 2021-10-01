@@ -199,7 +199,17 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 */
 
 .row {
-	@include mlu.row;
+	position: relative;
+	display: block;
+	margin: 0px;
+	padding: 0px;
+
+	@if mlu.$flag-css-vars != 2 {
+		font-size: 0px;
+	}
+
+	list-style: none;
+	counter-reset: ml-row-item;
 }
 
 .row__col,
@@ -241,9 +251,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 .row__col {
 	--gc-diff: var(#{mlu.$var-gg});
 
-	@include mlu.apply-util(W12gc);
-	@include mlu.mk-gtr();
-	@include mlu.mk-gtr(mlu.px2rem(mlu.$gtr-sm), $direct: 'b', $coef: 2);
+	@include mlu.apply-util(W12gc '-Mx1gg' Mb2gg);
 
 	&.row {
 		margin-bottom: 0px;

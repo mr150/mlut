@@ -1,4 +1,4 @@
-@use '../../tools' as mlu;
+@use '../../tools' as ml;
 
 /*
 Wrapper
@@ -22,7 +22,8 @@ Styleguide: core-blocks.wrapper
 
 .wrapper {
 	display: block;
-	max-width: mlu.$wrapper-max-width;
+	max-width: ml.$wrapper-max-width;
 	margin: 0 auto;
-	@include mlu.mk-gtr($type: 'padding');
+
+	@include ml.apply-util('-Px1gg');
 }
