@@ -251,7 +251,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 .row__col {
 	--gc-diff: var(#{mlu.$var-gg});
 
-	@include mlu.apply-util(W12gc '-Mx1gg' Mb2gg);
+	@include mlu.apply('W12gc -Mx1gg Mb2gg');
 
 	&.row {
 		margin-bottom: 0px;

@@ -62,8 +62,13 @@ Styleguide: sass-tools.mixins.utils
 	}
 }
 
-@mixin apply-util($utils, $components: ()) {
-	@each $item in $utils {
+@mixin apply($utils, $components: (), $ready-list: false) {
+	$utils-list: if(
+		$ready-list, $utils, ml.str-split($utils, ' ')
+	);
+
+	// TODO: optimize the applying several values of one utility
+	@each $item in $utils-list {
 		$util-data: ml.parse-util($item);
 		$abbr-data: ml.parse-abbr(map.get($util-data, 'value'));
 		$util-data: map.merge($util-data, $components);

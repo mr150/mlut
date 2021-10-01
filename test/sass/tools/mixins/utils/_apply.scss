@@ -16,15 +16,15 @@ ml.$utils-db: map.deep-merge(
 );
 
 @include describe('tools/mixins/high/utils') {
-	@include describe('apply-util') {
+	@include describe('apply') {
 		@include it('apply utils to rule') {
 			@include assert() {
 				@include output(false) {
 					.card {
 						display: block;
 
-						@include ml.apply-util(
-							P2su Fz1r
+						@include ml.apply(
+							'P2su Fz1r'
 						);
 					}
 				}
@@ -49,9 +49,8 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					.card {
-						@include ml.apply-util(
-							'Fz1r_h'
-							'^one_Bgc--bgColor?#c06_h'
+						@include ml.apply(
+							'Fz1r_h ^one_Bgc--bgColor?#c06_h'
 						);
 					}
 				}
@@ -70,10 +69,12 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					.card {
-						@include ml.apply-util(
+						@include ml.apply(
 							'xl_P2su'
 							'xl_C#fff!_h,f'
-							'@m:prn_^new_Op80p_h'
+							'@m:prn_^new_Op80p_h',
+							(),
+							true
 						);
 					}
 				}
@@ -105,11 +106,12 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					.card {
-						@include ml.apply-util(
+						@include ml.apply(
 							'xl_P2su'
 							'Lh=2_af'
 							Fz1r,
-							('important': true, 'post-states': null)
+							('important': true, 'post-states': null),
+							true
 						);
 					}
 				}
@@ -135,9 +137,8 @@ ml.$utils-db: map.deep-merge(
 		@include it('apply utils without parent selector') {
 			@include assert() {
 				@include output(false) {
-					@include ml.apply-util(
-						'xl_P2su'
-						'Lh2r!_af'
+					@include ml.apply(
+						'xl_P2su Lh2r!_af'
 					);
 				}
 
@@ -159,9 +160,8 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					.testou {
-						@include ml.apply-util(
-							'Tt-c'
-							'Tt_h'
+						@include ml.apply(
+							'Tt-c Tt_h'
 						);
 					}
 				}

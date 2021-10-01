@@ -25,5 +25,5 @@ Styleguide: core-blocks.wrapper
 	max-width: ml.$wrapper-max-width;
 	margin: 0 auto;
 
-	@include ml.apply-util('-Px1gg');
+	@include ml.apply('-Px1gg');
 }
