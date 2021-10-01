@@ -19,7 +19,7 @@ You can find global CSS variables in `sass/core/variables.scss`.
 Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
 Fallback is [ml.$grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).
 --ml.gg-rem = 0.75rem - grid gutter in `rem`.
---ml.grid-cols = 4 - number of columns in the [grid system](section-concepts.html#kssref-concepts-grid). Sets by [ml.$grid-cols-xs](section-sass-tools.html#kssref-sass-tools-settings-grid) and changes on breakpoints according to the [settings](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints).
+--ml.grid-cols = 12 - number of columns in the [grid system](section-concepts.html#kssref-concepts-grid). Sets by [ml.$grid-columns](section-sass-tools.html#kssref-sass-tools-settings-grid).
 
 Styleguide: core-styles.css_vars
 */
@@ -30,25 +30,13 @@ Styleguide: core-styles.css_vars
 
 		#{ml.$var-gg}: ml.$gtr-sm;
 		#{ml.$var-gg-rem}: ml.px2rem(ml.$gtr-sm);
-		#{ml.$var-grid-cols}: ml.$grid-cols-xs;
+		#{ml.$var-grid-cols}: ml.$grid-columns;
 
 		@each $key, $value in ml.$grid-gutters {
 			@if $value != $prev-value {
 				@include ml.bp($key) {
 					#{ml.$var-gg}: $value;
 					#{ml.$var-gg-rem}: ml.px2rem($value);
-				}
-			}
-
-			$prev-value: $value;
-		}
-
-		$prev-value: ml.$grid-cols-xs;
-
-		@each $key, $value in ml.$grid-cols {
-			@if $value != $prev-value {
-				@include ml.bp($key) {
-					#{ml.$var-grid-cols}: $value;
 				}
 			}
 

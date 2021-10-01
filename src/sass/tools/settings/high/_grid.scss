@@ -5,22 +5,15 @@
 //
 // Settings that affect the work of grid system.
 //
-// $ml-grid-default-cols = 12 - default columns count on large width screen (>960px).
 // $ml-grid-default-gtr = 16px - default gutter on large width screen. Used as fallback for [--ml-gg](section-core-styles.html#kssref-core-styles-css_vars).
 // $ml-grid-gutter-fallback = 1.5% - Fallback for grid gutter's width if CSS `calc()` not supported
-// $ml-grid-cols - columls count on breakpoints.
-// $ml-grid-cols-xs - columls count on `$ml-bp-xs` (without breakpoints).
+// $ml-grid-columns - columls count.
 // $ml-grid-gutters - map with grid gutters on breakpoints.
 //
 // Styleguide: sass-tools.settings.grid
 
-$grid-default-cols: 12 !default;
 $grid-columns: 12 !default;
-
-$grid-cols-xs: 4 !default;
-
 $grid-default-gtr: (ml.$su * 4) !default;
-
 $grid-gutter-fallback: 1.5% !default;
 
 /*
@@ -62,12 +55,6 @@ $grid-cfg: (
 		ml.$bp-lg: $gtr-lg,
 		ml.$bp-xl: $gtr-xl,
 	),
-	'cols': (
-		ml.$bp-sm: 4,
-		ml.$bp-md: 12,
-		ml.$bp-lg: $grid-default-cols,
-		ml.$bp-xl: $grid-default-cols,
-	),
 ) !default;
 
 $grid-config: () !default;
@@ -77,4 +64,3 @@ $grid-cfg: map.deep-merge($grid-cfg, $grid-config);
 $grid-cfg: map.deep-merge($grid-cfg, $grid-config-ext);
 
 $grid-gutters: map.get($grid-cfg, 'gutters');
-$grid-cols: map.get($grid-cfg, 'cols');

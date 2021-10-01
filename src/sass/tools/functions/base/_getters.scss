@@ -138,26 +138,6 @@ Styleguide: sass-tools.functions.base.getters
 	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-grid-gutters';
 }
 
-// ml-grid-cols-count
-//
-// Get columns count on breakpoint from [$ml-grid-cols](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints) map.
-// ```scss
-//ml-grid-cols-count('sm') => 4
-//```
-//
-// $name - breakpoint name. Type: string.
-// $error-handler = 1 - works similarly like [here](#kssref-sass-tools-functions-bp).
-//
-// Styleguide: sass-tools.functions.base.getters.grid_cols_count
-
-@function grid-cols-count($name, $error-handler: 1) {
-	@if map.has-key(ml.$grid-cols, $name) or $error-handler == 0 {
-		@return map.get(ml.$grid-cols, $name);
-	}
-
-	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-grid-cols';
-}
-
 // ml-css-var
 //
 // Get name of CSS custom property from [$ml-css-vars](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names) map.
