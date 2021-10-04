@@ -81,7 +81,8 @@ $Trsdu-def: 0.3s !default;
 //
 // Styleguide: sass-tools.settings.utils.states
 
-$states-ps: 'StPs' !default;
+$kStPC: 'StPC' !default;
+$kStPE: 'StPE' !default;
 $states-cmb: 'StCmb' !default;
 $kStOnly: 'StOnly' !default;
 $cCtx: '-Ctx' !default;
@@ -186,7 +187,7 @@ $utils-cfg: (
 	),
 
 	'states': (
-		'pseudo': (
+		'pseudo-cls': (
 			'a': ':active',
 			'c': ':checked',
 			'd': ':disabled',
@@ -200,7 +201,7 @@ $utils-cfg: (
 			'frc': ':first-child',
 			'frot': ':first-of-type',
 			'h': ':hover',
-			'iv': ':invalid',
+			'i': ':invalid',
 			'id': ':indeterminate',
 			'inr': ':in-range',
 			'lc': ':last-child',
@@ -218,10 +219,12 @@ $utils-cfg: (
 			't': ':target',
 			'v': ':visited',
 			'vl': ':valid',
+		),
+		'pseudo-elm': (
 			'af': '::after',
-			'bf': '::before',
-			'fln': '::first-line',
-			'flt': '::first-letter',
+			'b': '::before',
+			'frl': '::first-line',
+			'frlt': '::first-letter',
 			'm': '::marker',
 			'ph': '::placeholder',
 			's': '::selection',
@@ -229,7 +232,8 @@ $utils-cfg: (
 		'custom': (
 		),
 		'keywords': (
-			$states-ps: 'pseudo',
+			$kStPC: 'pseudo-cls',
+			$kStPE: 'pseudo-elm',
 			$states-cmb: null,
 			$kStOnly: null,
 		),
@@ -298,7 +302,10 @@ $utils-cfg: map.set(
 );
 
 $utils-states: map.merge(
-	map.get($utils-cfg, 'states', 'pseudo'),
+	map.merge(
+		map.get($utils-cfg, 'states', 'pseudo-cls'),
+		map.get($utils-cfg, 'states', 'pseudo-elm'),
+	),
 	map.merge(
 		map.get($utils-cfg, 'states', 'special'),
 		map.get($utils-cfg, 'states', 'custom'),

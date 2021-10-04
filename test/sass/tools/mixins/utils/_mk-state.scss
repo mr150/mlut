@@ -5,7 +5,7 @@
 $this: 'D';
 
 ml.$utils-cfg: map.set(
-	ml.$utils-cfg, 'states', 'keywords', 'st1', ('iv' 'vl')
+	ml.$utils-cfg, 'states', 'keywords', 'st1', ('i' 'vl')
 );
 
 ml.$utils-states: map.set(
@@ -72,7 +72,7 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.mk-state('h,f ' + ml.$states-ps, null, false) {
+						@include ml.mk-state('h,f ' + ml.$kStPC, null, false) {
 							display: flex;
 						}
 					}
@@ -84,7 +84,7 @@ ml.$utils-states: map.set(
 						display: flex;
 					}
 
-					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo') {
+					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo-cls') {
 						.D-f_#{$key + $value} {
 							display: flex;
 						}
@@ -95,14 +95,14 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.mk-state(':^:' + ml.$states-ps, null, null) {
+						@include ml.mk-state(':^:' + ml.$kStPC, null, null) {
 							display: flex;
 						}
 					}
 				}
 
 				@include expect(false) {
-					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo') {
+					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo-cls') {
 						.D-f_\:\^\:#{$key} .-Ctx#{$value} {
 							display: flex;
 						}
@@ -186,14 +186,14 @@ ml.$utils-states: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.mk-state(null, '^ct1:' + ml.$states-ps, false) {
+						@include ml.mk-state(null, '^ct1:' + ml.$kStPC, false) {
 							display: flex;
 						}
 					}
 				}
 
 				@include expect(false) {
-					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo') {
+					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo-cls') {
 						.-Ctx-ct1#{$value} .\^ct1\:#{$key}_D-f {
 							display: flex;
 						}
@@ -360,7 +360,7 @@ ml.$utils-states: map.set(
 				@include output(false) {
 					.D-f {
 						@include ml.mk-state(
-							ml.$states-cmb + 'af,bf a:af',
+							ml.$states-cmb + 'af,b a:af',
 							ml.$states-cmb + ':h =a:a:>,=a.act:>',
 							false,
 						) {
@@ -370,8 +370,8 @@ ml.$utils-states: map.set(
 				}
 
 				@include expect(false) {
-					:hover .\:h_D-f_af\,bf::after,
-					:hover .\:h_D-f_af\,bf::before {
+					:hover .\:h_D-f_af\,b::after,
+					:hover .\:h_D-f_af\,b::before {
 						display: flex;
 					}
 
@@ -379,10 +379,10 @@ ml.$utils-states: map.set(
 						display: flex;
 					}
 
-					a:active> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,bf::after,
-					a:active> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,bf::before,
-					a.act> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,bf::after,
-					a.act> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,bf::before {
+					a:active> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,b::after,
+					a:active> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,b::before,
+					a.act> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,b::after,
+					a.act> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,b::before {
 						display: flex;
 					}
 

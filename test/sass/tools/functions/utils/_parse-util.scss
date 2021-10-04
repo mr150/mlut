@@ -111,10 +111,10 @@
 			);
 
 			@include assert-equal(
-				ml.parse-util('#{ml.$states-ps} _#{ml.$states-ps}'),
+				ml.parse-util('#{ml.$kStPC} _#{ml.$kStPC}'),
 				(
-					'pre-states': '#{ml.$states-ps}',
-					'value': '#{ml.$states-ps}',
+					'pre-states': '#{ml.$kStPC}',
+					'value': '#{ml.$kStPC}',
 				),
 				$inspect: true,
 			);

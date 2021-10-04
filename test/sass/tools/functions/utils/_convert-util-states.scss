@@ -52,7 +52,7 @@ ml.$utils-states: map.set(
 
 		@include it('converts complex state') {
 			@include assert-equal(
-				ml.convert-util-states('h:bf'),
+				ml.convert-util-states('h:b'),
 				('&:hover::before'),
 			);
 
@@ -94,7 +94,7 @@ ml.$utils-states: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-util-states('h:a:bf,noJs:-testou:a,:^:!-testou:!=h2'),
+				ml.convert-util-states('h:a:b,noJs:-testou:a,:^:!-testou:!=h2'),
 				('&:hover:active::before, &.pa.ro.voz:active, & .-Ctx:not(.pa.ro.voz):not(h2)'),
 			);
 		}
