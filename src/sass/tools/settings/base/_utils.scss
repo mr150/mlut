@@ -274,6 +274,9 @@ $kStPE: map.get($utils-cfg, 'tokens', 'generation', 'states-pseudo-elements');
 $kStCb: map.get($utils-cfg, 'tokens', 'generation', 'states-combine');
 $kStOl: map.get($utils-cfg, 'tokens', 'generation', 'states-only');
 $kSsVCP: 'Pl' !default;
+$kCfOv: '/override' !default;
+$kCfBan: '/ban' !default;
+$kCfAl: '/allow' !default;
 
 $utils-cfg: map.set(
 	$utils-cfg,

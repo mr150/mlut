@@ -11,13 +11,13 @@ $filter-mod: null;
 
 $-utils-list: map.keys(ml.$utils-map);
 $-all-groups: map.keys(ml.$utils-groups);
-$-override-map: map.get($utils, '/override');
+$-override-map: map.get($utils, ml.$kCfOv);
 $-filter-keys: ();
 
-@if map.has-key($utils, '/allow') {
-	$filter-mod: '/allow';
-} @else if map.has-key($utils, '/ban') {
-	$filter-mod: '/ban';
+@if map.has-key($utils, ml.$kCfAl) {
+	$filter-mod: ml.$kCfAl;
+} @else if map.has-key($utils, ml.$kCfBan) {
+	$filter-mod: ml.$kCfBan;
 }
 
 @if $filter-mod {
@@ -39,7 +39,7 @@ $-filter-keys: ();
 		}
 	}
 
-	@if $filter-mod == '/allow' {
+	@if $filter-mod ==  ml.$kCfAl {
 		@each $item in $-filter-keys {
 			$utils-filtered: map.set(
 				$utils-filtered, $item, map.get(ml.$utils-map, $item)
@@ -54,12 +54,12 @@ $-filter-keys: ();
 
 @if $-override-map != null {
 	ml.$utils-map: map.merge(ml.$utils-map, $-override-map);
-} @else if map.has-key($utils, '/override') {
+} @else if map.has-key($utils, ml.$kCfOv) {
 	ml.$utils-map: ();
 }
 
 @each $util, $values in list.join(
-	ml.$utils-map, map.remove($utils, '/override', '/allow', '/ban')
+	ml.$utils-map, map.remove($utils, ml.$kCfOv, ml.$kCfAl, ml.$kCfBan)
 ) {
 	@if bf.ls-find(
 		$-all-groups, meta.get-function('str-contains-item', false, bf), $util

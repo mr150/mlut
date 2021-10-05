@@ -9,18 +9,18 @@
 	$utils: (
 		'^_D': ('', 'n', 'f'),
 
-		'/override': (
+		ml.$kCfOv: (
 			'M': (1su, 2r)
 		),
 
-		'/allow': (
+		ml.$kCfAl: (
 			'M', 'Fl', 'Tsh', 'Bgsz'
 		),
 
 		/*
 		//`ban` test commented because it and `allow` is mutually exclusive
 		// and module can be configure only once
-		'/ban': list.join(
+		ml.$kCfBan: list.join(
 			map.keys(map.get(ml.$utils-db, 'utils', 'registry')),
 			('Offsets', 'Paddings', 'Margins', 'BdWidth')
 		),
