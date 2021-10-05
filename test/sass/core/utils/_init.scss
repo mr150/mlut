@@ -36,7 +36,7 @@
 				'M': (1su, 2r),
 				'Fl': ('', 'r'),
 				'Tsh_h,f a': ('-defTsh', 'rv'),
-				ml.$bp-all + '_Bgsz': (100p, ml.$tUKwa),
+				ml.$kBpAll + '_Bgsz': (100p, ml.$kUvKA),
 			),
 			$inspect: true,
 		);
@@ -48,8 +48,8 @@
 			ml.$utils-map,
 			(
 				'Overflows': ('', 'a', 's', 'v'),
-				'Borders': ml.$bp-all + '_',
-				'BdStyle': ('d', 'ds', '#{ml.$bp-all} #{ml.$kArOnly}_s'),
+				'Borders': ml.$kBpAll + '_',
+				'BdStyle': ('d', 'ds', '#{ml.$kBpAll} #{ml.$kArOl}_s'),
 				'reputation': (100, 150),
 			),
 			$inspect: true,

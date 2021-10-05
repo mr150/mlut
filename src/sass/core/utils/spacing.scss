@@ -86,17 +86,17 @@ Padding on X axis. Sets left and right padding.
 Styleguide: core-utils.padding.px
 */
 
-$-M-list: ([ml.$bp-all + '_-6su', -1], [ml.$bp-all + '_-2gg', -1], [ml.$bp-all + '_1gg', 4]);
+$-M-list: ([ml.$kBpAll + '_-6su', -1], [ml.$kBpAll + '_-2gg', -1], [ml.$kBpAll + '_1gg', 4]);
 
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	(
-		ml.$bp-all + '_Margins': (0, 'a', 'ih', [1su, 6]),
-		ml.$bp-all + '_Paddings': (0, 'ih', [1su, 7], [1gg, 6]),
+		ml.$kBpAll + '_Margins': (0, 'a', 'ih', [1su, 6]),
+		ml.$kBpAll + '_Paddings': (0, 'ih', [1su, 7], [1gg, 6]),
 		'M': $-M-list,
 		'Mt': $-M-list,
 		'Mb': $-M-list,
-		'Ml': list.append($-M-list, [ml.$bp-all + '_1gc', 10]),
+		'Ml': list.append($-M-list, [ml.$kBpAll + '_1gc', 10]),
 		'-Mx': $-M-list,
 		'-My': $-M-list,
 	)

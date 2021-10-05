@@ -96,16 +96,16 @@ ml.$utils-map: map.merge(
 	ml.$utils-map,
 	(
 		// display
-		ml.$bp-all + '_D': (
+		ml.$kBpAll + '_D': (
 			'', 'i', 'ib', 'if', 'g', 'ig', 'n',
 		),
 		'D': (
-			ml.$bp-all + ' @s_f', 'tb', 'tbc', 'tbr', 'itb',
+			ml.$kBpAll + ' @s_f', 'tb', 'tbc', 'tbr', 'itb',
 		),
-		ml.$bp-all + '_-D': ml.$tUKwa,
+		ml.$kBpAll + '_-D': ml.$kUvKA,
 		// sizes
-		ml.$bp-all + '_Maw': list.join((100p, 'n'), ml.$global-kw-bp),
-		ml.$bp-all + '_W': (100p, 'a', 'ih', [1gc, 12]),
+		ml.$kBpAll + '_Maw': list.join((100p, 'n'), ml.$global-kw-bp),
+		ml.$kBpAll + '_W': (100p, 'a', 'ih', [1gc, 12]),
 		'H': (100p, 100vh, 0),
 		'Mih': (100p, 100vh),
 		// other

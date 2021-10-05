@@ -10,7 +10,7 @@ ml.$utils-groups: map.deep-merge(
 			'M', 'P',
 		),
 		'tSizes': (
-			'members': ('W_a StOnly', 'H',),
+			'members': ('W_a StOl', 'H',),
 			'components': 'G_af',
 		),
 		'TtGroup': (
@@ -18,7 +18,7 @@ ml.$utils-groups: map.deep-merge(
 			'components': 'G_fw',
 		),
 		'tColors': (
-			'C', 'Bgc_h StOnly',
+			'C', 'Bgc_h StOl',
 		),
 	),
 );
@@ -70,8 +70,8 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-utils-group(
-						'ArOnly xl_tSpaces', (
-							100, '150_af StOnly',
+						'ArOl xl_tSpaces', (
+							100, '150_af StOl',
 					));
 				}
 
@@ -103,8 +103,8 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-utils-group(
-						'ArOnly xl_tColors', (
-						red, 'blue_f StOnly',
+						'ArOl xl_tColors', (
+						red, 'blue_f StOl',
 					));
 				}
 
@@ -135,9 +135,9 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-utils-group(
 						'tColors',
-						(red, 'green_a StOnly'),
+						(red, 'green_a StOl'),
 						(
-							'at-rules': 'ArOnly xl',
+							'at-rules': 'ArOl xl',
 							'important': true,
 						),
 					);
@@ -282,7 +282,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-utils-group(
-						'tSizes_fw StOnly', 20r, (), false
+						'tSizes_fw StOl', 20r, (), false
 					);
 				}
 

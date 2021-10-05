@@ -72,14 +72,14 @@ Styleguide: sass-tools.mixins.utils
 		$util-data: ml.parse-util($item);
 		$abbr-data: ml.parse-abbr(map.get($util-data, 'value'));
 		$util-data: map.merge($util-data, $components);
-		$keyword: ml.$kStOnly;
+		$keyword: ml.$kStOl;
 		$pre-states: map.get($util-data, 'pre-states');
 		$post-states: map.get($util-data, 'post-states');
 
 		@if map.get($util-data, 'at-rules') {
-			$keyword: ml.$kArStOnly;
+			$keyword: ml.$kArSO;
 			// It's a bit dangerous to use non-standard fields in map, but it is unlikely that a way to check keywords in the `mk-util` will change
-			$util-data: map.set($util-data, 'applyArKw', ml.$kArOnly);
+			$util-data: map.set($util-data, 'applyArKw', ml.$kArOl);
 		}
 
 		@if $pre-states or $post-states {
@@ -87,8 +87,8 @@ Styleguide: sass-tools.mixins.utils
 				$util-data: map.merge(
 					$util-data,
 					(
-						'pre-states': '#{ml.$states-cmb} ' + $pre-states,
-						'post-states':'#{ml.$states-cmb} ' + $post-states,
+						'pre-states': '#{ml.$kStCb} ' + $pre-states,
+						'post-states':'#{ml.$kStCb} ' + $post-states,
 					)
 				);
 			}

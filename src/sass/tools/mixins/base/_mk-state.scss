@@ -60,7 +60,7 @@
 
 		@if $pre {
 			$pre-comb-list: ();
-			$pre-states: ml.str-split($pre, ml.$states-cmb);
+			$pre-states: ml.str-split($pre, ml.$kStCb);
 			$separate-states: list.nth($pre-states, 1);
 
 			@if $separate-states != '' {
@@ -73,7 +73,7 @@
 		}
 
 		@if $post {
-			$post-states: ml.str-split($post, ml.$states-cmb);
+			$post-states: ml.str-split($post, ml.$kStCb);
 			$separate-states: list.nth($post-states, 1);
 
 			@if $separate-states != '' {
@@ -154,6 +154,7 @@
 }
 
 @function -convert-states($item, $selector, $this: null, $type: 'pre') {
+	// TODO: move this repeating code from here and from `mk-ar` to a separate function
 	$result: ml.str-split(ml.str-trim($item), ' ');
 
 	@each $key, $value in map.get(ml.$utils-cfg, 'states', 'keywords') {

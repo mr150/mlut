@@ -110,18 +110,18 @@ ml.$utils-map: map.merge(
 	(
 		// background
 		'Bgr': ('nr', 'rx', 'ry'),
-		ml.$bp-all + '_Bgsz': (100p, ml.$tUKwa),
-		'Bga': ml.$tUKwa,
-		'Bgp': (ml.$tUKwa, 'r;t', 'r;b', 'l;b'),
+		ml.$kBpAll + '_Bgsz': (100p, ml.$kUvKA),
+		'Bga': ml.$kUvKA,
+		'Bgp': (ml.$kUvKA, 'r;t', 'r;b', 'l;b'),
 		// border
-		'Borders': ml.$bp-all + '_',
-		ml.$bp-all + '_BdWidth': (0, 2, 1su),
-		'BdStyle': ('d', 'ds', '#{ml.$bp-all} #{ml.$kArOnly}_s'),
+		'Borders': ml.$kBpAll + '_',
+		ml.$kBpAll + '_BdWidth': (0, 2, 1su),
+		'BdStyle': ('d', 'ds', '#{ml.$kBpAll} #{ml.$kArOl}_s'),
 		'Bdcl': (''),
 		'Bdrs': (50p),
 		// other
 		'Ol': (0),
-		ml.$bp-all + '_Op': (0, 1),
-		ml.$bp-all + '_V': ('', 'c', 'v'),
+		ml.$kBpAll + '_Op': (0, 1),
+		ml.$kBpAll + '_V': ('', 'c', 'v'),
 	)
 );

@@ -144,7 +144,7 @@
 
 		@if list.is-bracketed($range-list) {
 			$range-data: meta.call($range-generator, $range-list, $util-name);
-		} @else if meta.type-of($key) == 'string' and string.index($key, ml.$tUKwa) {
+		} @else if meta.type-of($key) == 'string' and string.index($key, ml.$kUvKA) {
 			$range-data: ml.expand-util-kw-alias($key, $util-name);
 		}
 
@@ -201,8 +201,8 @@
 			$val-feat-str: meta.inspect(
 				map.values(map.remove($util-val-data, 'value'))
 			);
-			$st-only: string.index($val-feat-str, ml.$kStOnly);
-			$ar-st-only: string.index($val-feat-str, ml.$kArStOnly);
+			$st-only: string.index($val-feat-str, ml.$kStOl);
+			$ar-st-only: string.index($val-feat-str, ml.$kArSO);
 			$ar-st: string.index($val-feat-str, ml.$kArSt);
 			$args: (
 				$props,
@@ -214,7 +214,7 @@
 				$util-parsed-val,
 			);
 
-			@if not string.index($val-feat-str, ml.$kArOnly) and not $ar-st-only {
+			@if not string.index($val-feat-str, ml.$kArOl) and not $ar-st-only {
 				@include ml.mk-state(
 					$post-states,
 					$pre-states,

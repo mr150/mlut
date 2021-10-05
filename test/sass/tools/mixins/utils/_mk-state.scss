@@ -227,8 +227,8 @@ ml.$utils-states: map.set(
 				@include output(false) {
 					.D-f {
 						@include ml.mk-state(
-							ml.$states-cmb + ' af',
-							ml.$states-cmb + ' ^one:h',
+							ml.$kStCb + ' af',
+							ml.$kStCb + ' ^one:h',
 							false,
 						) {
 							display: flex;
@@ -247,8 +247,8 @@ ml.$utils-states: map.set(
 				@include output(false) {
 					.D-f {
 						@include ml.mk-state(
-							'&:af #{ml.$states-cmb} af',
-							'^one:h #{ml.$states-cmb} ^:f',
+							'&:af #{ml.$kStCb} af',
+							'^one:h #{ml.$kStCb} ^:f',
 							false,
 							&,
 							$this
@@ -277,7 +277,7 @@ ml.$utils-states: map.set(
 				@include output(false) {
 					.D-f {
 						@include ml.mk-state(
-							'&:af #{ml.$states-cmb} af',
+							'&:af #{ml.$kStCb} af',
 							'^one:h ^:f',
 							false,
 							&,
@@ -308,7 +308,7 @@ ml.$utils-states: map.set(
 					.D-f {
 						@include ml.mk-state(
 							'&:af af',
-							'^one:h #{ml.$states-cmb} ^:f',
+							'^one:h #{ml.$kStCb} ^:f',
 							false,
 							&,
 							$this
@@ -337,8 +337,8 @@ ml.$utils-states: map.set(
 				@include output(false) {
 					.D-f {
 						@include ml.mk-state(
-							ml.$states-cmb + ' fw:af,a:af',
-							ml.$states-cmb + ' ^1:f,^2:>',
+							ml.$kStCb + ' fw:af,a:af',
+							ml.$kStCb + ' ^1:f,^2:>',
 							false,
 						) {
 							display: flex;
@@ -360,8 +360,8 @@ ml.$utils-states: map.set(
 				@include output(false) {
 					.D-f {
 						@include ml.mk-state(
-							ml.$states-cmb + 'af,b a:af',
-							ml.$states-cmb + ':h =a:a:>,=a.act:>',
+							ml.$kStCb + 'af,b a:af',
+							ml.$kStCb + ':h =a:a:>,=a.act:>',
 							false,
 						) {
 							display: flex;

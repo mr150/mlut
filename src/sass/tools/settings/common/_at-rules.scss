@@ -25,11 +25,6 @@
 //
 // Styleguide: sass-tools.settings.at_rules.breakpoints
 
-$bp-all: 'BpAll' !default;
-$kArOnly: 'ArOnly' !default;
-$kArSt: 'ArSt' !default;
-$kArStOnly: 'ArStOnly' !default;
-
 $at-rules-db: (
 	'media': (
 		'alias': 'm',
@@ -48,30 +43,30 @@ $at-rules-db: (
 ) !default;
 
 $at-rules-cfg: (
-	'abbr-separators': (
-	),
 	'tokens': (
-		'or': ml.$tSOr,
-		'and': ml.$tSAnd,
-		'custom': ml.$tSCs,
-		'not': ml.$tSNot,
-		'ar': '@',
-		'greater-equal': '>=',
-		'less-equal': '<=',
-		'greater': '>',
-		'less': '<',
+		'syntax': (
+			'or': ml.$tSOr,
+			'and': ml.$tSAnd,
+			'custom': ml.$tSCs,
+			'not': ml.$tSNot,
+			'ar': '@',
+			'greater-equal': '>=',
+			'less-equal': '<=',
+			'greater': '>',
+			'less': '<',
+		),
+		'generation': (
+			'all-breakpoints': 'BpAll',
+			'at-rules-only': 'ArOl',
+			'at-rules-states': 'ArSt',
+			'at-rules-states-only': 'ArSO',
+		),
 	),
 	'breakpoints': (
 		'sm': 520px,
 		'md': 760px,
 		'lg': 960px,
 		'xl': 1168px,
-	),
-	'keywords': (
-		$bp-all: 'breakpoints',
-		$kArOnly: null,
-		$kArStOnly: null,
-		$kArSt: null,
 	),
 ) !default;
 
@@ -119,27 +114,42 @@ ud.$utils-db: map.set(
 	ud.$utils-db, 'common', 'keywords', 'global', $-bp-kw-map
 );
 
-$tAOr: map.get($at-rules-cfg, 'tokens', 'or');
-$tAAnd: map.get($at-rules-cfg, 'tokens', 'and');
-$tANot: map.get($at-rules-cfg, 'tokens', 'not');
-$tACs: map.get($at-rules-cfg, 'tokens', 'custom');
-$tAAr: map.get($at-rules-cfg, 'tokens', 'ar');
-$tAGte: map.get($at-rules-cfg, 'tokens', 'greater-equal');
-$tALse: map.get($at-rules-cfg, 'tokens', 'less-equal');
-$tAGt: map.get($at-rules-cfg, 'tokens', 'greater');
-$tALs: map.get($at-rules-cfg, 'tokens', 'less');
+$tAOr: map.get($at-rules-cfg, 'tokens', 'syntax', 'or');
+$tAAnd: map.get($at-rules-cfg, 'tokens', 'syntax', 'and');
+$tANot: map.get($at-rules-cfg, 'tokens', 'syntax', 'not');
+$tACs: map.get($at-rules-cfg, 'tokens', 'syntax', 'custom');
+$tAAr: map.get($at-rules-cfg, 'tokens', 'syntax', 'ar');
+$tAGte: map.get($at-rules-cfg, 'tokens', 'syntax', 'greater-equal');
+$tALse: map.get($at-rules-cfg, 'tokens', 'syntax', 'less-equal');
+$tAGt: map.get($at-rules-cfg, 'tokens', 'syntax', 'greater');
+$tALs: map.get($at-rules-cfg, 'tokens', 'syntax', 'less');
 
-$at-rules-cfg: map.set(
+$kBpAll: map.get($at-rules-cfg, 'tokens', 'generation', 'all-breakpoints');
+$kArOl: map.get($at-rules-cfg, 'tokens', 'generation', 'at-rules-only');
+$kArSt: map.get($at-rules-cfg, 'tokens', 'generation', 'at-rules-states');
+$kArSO: map.get($at-rules-cfg, 'tokens', 'generation', 'at-rules-states-only');
+
+$at-rules-cfg: map.merge(
 	$at-rules-cfg,
-	'abbr-separators',
-	list.join(
-		(
-			$tAGte,
-			$tALse,
-			$tAGt,
-			$tALs,
+	(
+		'keywords': map.merge(
+			(
+				$kBpAll: 'breakpoints',
+				$kArOl: null,
+				$kArSO: null,
+				$kArSt: null,
+			),
+			map.get($at-rules-cfg, 'keywords') or ()
 		),
-		map.get($at-rules-cfg, 'abbr-separators')
+		'abbr-separators': list.join(
+			(
+				$tAGte,
+				$tALse,
+				$tAGt,
+				$tALs,
+			),
+			map.get($at-rules-cfg, 'abbr-separators') or ()
+		)
 	)
 );
 

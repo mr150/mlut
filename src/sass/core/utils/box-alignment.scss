@@ -102,19 +102,19 @@ Styleguide: core-utils.flex.ac
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	(
-		ml.$bp-all + '_Fxd': ('rr', '#{ml.$bp-all} #{ml.$kArOnly}_r', 'c', 'cr'),
+		ml.$kBpAll + '_Fxd': ('rr', '#{ml.$kBpAll} #{ml.$kArOl}_r', 'c', 'cr'),
 		'Fxg': (1),
 		'Fxsh': (0),
 		'Fx': ('ih'),
-		ml.$bp-all + '_Fxw': ('wr', 'w', 'n'),
+		ml.$kBpAll + '_Fxw': ('wr', 'w', 'n'),
 		'Ac': ('fs', 'fe', 'c', 'sa', 'sb', 'se'),
-		ml.$bp-all + '_As': (
-			'fs', 'fe', 'c', 'b', 'a', '#{ml.$bp-all} #{ml.$kArOnly}_s'
+		ml.$kBpAll + '_As': (
+			'fs', 'fe', 'c', 'b', 'a', '#{ml.$kBpAll} #{ml.$kArOl}_s'
 		),
-		ml.$bp-all + '_Jc': (
-			'#{ml.$bp-all} #{ml.$kArOnly}_fs', 'fe', 'c', 'sa', 'sb', 'se'
+		ml.$kBpAll + '_Jc': (
+			'#{ml.$kBpAll} #{ml.$kArOl}_fs', 'fe', 'c', 'sa', 'sb', 'se'
 		),
-		ml.$bp-all + '_Ai': ('fs', 'fe', 'c', 'b', '#{ml.$bp-all} #{ml.$kArOnly}_s'),
-		ml.$bp-all + '_Ord': ([-1, 5],),
+		ml.$kBpAll + '_Ai': ('fs', 'fe', 'c', 'b', '#{ml.$kBpAll} #{ml.$kArOl}_s'),
+		ml.$kBpAll + '_Ord': ([-1, 5],),
 	)
 );

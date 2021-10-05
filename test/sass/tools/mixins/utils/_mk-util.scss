@@ -339,9 +339,9 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'sm ArOnly_Mt', (
+						'sm ArOl_Mt', (
 						[10, 20, 10],
-						['@m:prn ArOnly_40', 45, 5],
+						['@m:prn ArOl_40', 45, 5],
 					));
 				}
 
@@ -477,9 +477,9 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'Maw', (
-						'@m:prn_100_+:h ' + ml.$kStOnly,
-						ml.$kArOnly + ' @m:prn_32p_+:h',
-						'#{ml.$kArOnly} @m:prn_50p_vl #{ml.$kStOnly}',
+						'@m:prn_100_+:h ' + ml.$kStOl,
+						ml.$kArOl + ' @m:prn_32p_+:h',
+						'#{ml.$kArOl} @m:prn_50p_vl #{ml.$kStOl}',
 					));
 				}
 
@@ -513,7 +513,7 @@ ml.$utils-db: map.deep-merge(
 					@include ml.mk-util(
 						'Maw', (
 						ml.$kArSt + ' @m:prn_200_+:h',
-						'#{ml.$kArSt} #{ml.$kArOnly} @m:prn_a_vl',
+						'#{ml.$kArSt} #{ml.$kArOl} @m:prn_a_vl',
 					));
 				}
 
@@ -552,8 +552,8 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'Maw', (
-						'#{ml.$kArSt} @m:prn_300_+:h #{ml.$kStOnly}',
-						ml.$kArStOnly + ' @m:prn_n_vl',
+						'#{ml.$kArSt} @m:prn_300_+:h #{ml.$kStOl}',
+						ml.$kArSO + ' @m:prn_n_vl',
 					));
 				}
 
@@ -686,7 +686,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'-AltPos', (
-						'ArOnly @s_sticky': null,
+						'ArOl @s_sticky': null,
 						':h_abs': absolute,
 					));
 				}
@@ -743,7 +743,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'Bdrs', (
-						'=50;1r_h StOnly',
+						'=50;1r_h StOl',
 						'12;=20'
 					));
 				}
@@ -763,7 +763,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'Bdrs', (
-						'13;1gg_a StOnly',
+						'13;1gg_a StOl',
 						'1gg;25/1.5gg',
 					));
 				}
@@ -805,7 +805,7 @@ ml.$utils-db: map.deep-merge(
 					@include ml.mk-util(
 						'M', (
 						'!': auto,
-						 '25!_af StOnly': null,
+						 '25!_af StOl': null,
 						 '2r;12!': null,
 					));
 				}
@@ -920,7 +920,7 @@ ml.$utils-db: map.deep-merge(
 					);
 
 					@include ml.mk-util(
-						'Gx', ('StOnly StCmb ^_20_ StCmb h,f',)
+						'Gx', ('StOl StCb ^_20_ StCb h,f',)
 					);
 				}
 
@@ -943,7 +943,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Gx', ('^ StCmb ^_20_h h,f StCmb :^0',));
+						'Gx', ('^ StCb ^_20_h h,f StCb :^0',));
 				}
 
 				@include expect(false) {
@@ -1000,7 +1000,7 @@ ml.$utils-db: map.deep-merge(
 					@include ml.mk-util(
 						'C', (
 						#f06,
-						'#f0d_f StOnly',
+						'#f0d_f StOl',
 						'#60c*-txtAlpha',
 						'-txtColor?#333',
 					));
@@ -1031,7 +1031,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'C', (
-						[('prm0', '-txtColor'), '2_h StOnly', ('alpha': 0.2, 'green': 30)],
+						[('prm0', '-txtColor'), '2_h StOl', ('alpha': 0.2, 'green': 30)],
 					));
 				}
 
@@ -1068,7 +1068,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'D', (
-						'ib_af', '', '150_h StOnly'
+						'ib_af', '', '150_h StOl'
 					));
 				}
 
@@ -1117,7 +1117,7 @@ ml.$utils-db: map.deep-merge(
 
 					@include ml.mk-util(
 						'Bgc', (
-						'main0_h StOnly',
+						'main0_h StOl',
 						'minor0',
 					));
 				}
@@ -1149,7 +1149,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'D', (
-						'', 'StOnly ^:h_ib'
+						'', 'StOl ^:h_ib'
 					));
 				}
 
@@ -1168,7 +1168,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'Gx', (
-						'12', 'StOnly ^_12'
+						'12', 'StOl ^_12'
 					));
 				}
 
@@ -1228,8 +1228,8 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Bgsz_f StOnly', (
-						'KW.colors', 'KW_af StOnly'
+						'Bgsz_f StOl', (
+						'KW.colors', 'KW_af StOl'
 					));
 				}
 
@@ -1258,7 +1258,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'Tt', (
-						'', 'c_h StOnly',
+						'', 'c_h StOl',
 					));
 				}
 
@@ -1284,12 +1284,12 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Tt_f StOnly', (
+						'Tt_f StOl', (
 						'n',
 					));
 
 					@include ml.mk-util(
-						'Tt', 'l', ('post-states': 'fw StOnly')
+						'Tt', 'l', ('post-states': 'fw StOl')
 					);
 				}
 
@@ -1315,7 +1315,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert('generate other states for util with bound components') {
 				@include output(false) {
 					@include ml.mk-util(
-						'Tt_f StOnly', 'n', (), ('components': null)
+						'Tt_f StOl', 'n', (), ('components': null)
 					);
 				}
 

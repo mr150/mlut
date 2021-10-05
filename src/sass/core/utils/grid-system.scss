@@ -68,10 +68,10 @@ Styleguide: core-utils.grid_system.gscr
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	(
-		ml.$bp-all + '_-Gsg': ([1su, 8],),
-		ml.$bp-all + '_-Gsc': (['2_=>*', 11],),
-		ml.$bp-all + '_-Gscd': (1gg, 0),
-		ml.$bp-all + '_-Gscr': (
+		ml.$kBpAll + '_-Gsg': ([1su, 8],),
+		ml.$kBpAll + '_-Gsc': (['2_=>*', 11],),
+		ml.$kBpAll + '_-Gscd': (1gg, 0),
+		ml.$kBpAll + '_-Gscr': (
 			'': (
 				calc(var(#{ml.$cv-pref}gc) / var(#{ml.$var-grid-cols}) * 100% - var(#{ml.$cv-pref}gc-diff, var(#{ml.$var-gg})) * 2),
 				calc(var(#{ml.$cv-pref}mgc) / var(#{ml.$var-grid-cols}) * 100% + var(#{ml.$cv-pref}gc-diff, var(#{ml.$var-gg}))),

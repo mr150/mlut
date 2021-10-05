@@ -108,7 +108,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar(ml.$bp-all + '@s:d-ig') using ($ar) {
+					@include ml.mk-ar(ml.$kBpAll + '@s:d-ig') using ($ar) {
 						width: 50%;
 					}
 				}
@@ -171,7 +171,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar(ml.$bp-all + ' @s:d-ig') using ($ar) {
+					@include ml.mk-ar(ml.$kBpAll + ' @s:d-ig') using ($ar) {
 						width: 50%;
 					}
 				}
@@ -262,12 +262,12 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 			ml.$tUSv: map.get(ml.$utils-cfg, 'tokens', 'util', 'str-value');
 			ml.$tUNv: map.get(ml.$utils-cfg, 'tokens', 'util', 'num-value');
-			ml.$tAOr: map.get(ml.$at-rules-cfg, 'tokens', 'or');
-			ml.$tAAnd: map.get(ml.$at-rules-cfg, 'tokens', 'and');
-			ml.$tANot: map.get(ml.$at-rules-cfg, 'tokens', 'not');
-			ml.$tACs: map.get(ml.$at-rules-cfg, 'tokens', 'custom');
-			ml.$tAAr: map.get(ml.$at-rules-cfg, 'tokens', 'ar');
-			ml.$tSTu: map.get(ml.$utils-cfg, 'tokens', 'this-util');
+			ml.$tAOr: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'or');
+			ml.$tAAnd: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'and');
+			ml.$tANot: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'not');
+			ml.$tACs: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'custom');
+			ml.$tAAr: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'ar');
+			ml.$tSTu: map.get(ml.$utils-cfg, 'tokens', 'syntax', 'this-util');
 		}
 
 	}

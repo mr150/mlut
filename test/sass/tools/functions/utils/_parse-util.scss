@@ -261,9 +261,9 @@
 			);
 
 			@include assert-equal(
-				ml.parse-util(ml.$kArStOnly + ' @:prn_f_vl'),
+				ml.parse-util(ml.$kArSO + ' @:prn_f_vl'),
 				(
-					'at-rules': ml.$kArStOnly + ' @:prn',
+					'at-rules': ml.$kArSO + ' @:prn',
 					'post-states': 'vl',
 					'value': 'f',
 				),
@@ -303,10 +303,10 @@
 			);
 
 			@include assert-equal(
-				ml.parse-util('#{ml.$states-cmb} ^:f_f_#{ml.$states-cmb} af'),
+				ml.parse-util('#{ml.$kStCb} ^:f_f_#{ml.$kStCb} af'),
 				(
-					'pre-states': '#{ml.$states-cmb} ^:f',
-					'post-states': '#{ml.$states-cmb} af',
+					'pre-states': '#{ml.$kStCb} ^:f',
+					'post-states': '#{ml.$kStCb} af',
 					'value': 'f',
 				),
 				$inspect: true,

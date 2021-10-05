@@ -74,13 +74,13 @@ Styleguide: core-utils.misc.-all
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	(
-		ml.$bp-all + '_Pos': ('', 'a', 'f', 's', 'st'),
-		ml.$bp-all + '_Offsets': (0, 'a', 100p, 50p),
+		ml.$kBpAll + '_Pos': ('', 'a', 'f', 's', 'st'),
+		ml.$kBpAll + '_Offsets': (0, 'a', 100p, 50p),
 		'Z': ('a', [-1, 5]),
 		// animation
 		'Trs': ('mAll'),
 		// misc
-		'Rsz': (ml.$tUKwa),
+		'Rsz': (ml.$kUvKA),
 		'-All': ('sr'),
 	)
 );
