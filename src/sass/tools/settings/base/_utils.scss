@@ -182,9 +182,6 @@ $utils-cfg: (
 			'states-combine': 'StCb',
 			'uv-keywords-alias': 'KW',
 		),
-		'common': (
-			'value-converts-pipeline': 'Pl',
-		),
 	),
 
 	'states': (
@@ -270,13 +267,13 @@ $tSTu: map.get($utils-cfg, 'tokens', 'states', 'this-util');
 $tSCn: map.get($utils-cfg, 'tokens', 'states', 'context');
 $tSRaw: map.get($utils-cfg, 'tokens', 'states', 'raw');
 $tSTucv: $tSTu + $tUSv;
-$tCVcp: map.get($utils-cfg, 'tokens', 'common', 'value-converts-pipeline');
 
 $kUvKA: map.get($utils-cfg, 'tokens', 'generation', 'uv-keywords-alias');
 $kStPC: map.get($utils-cfg, 'tokens', 'generation', 'states-pseudo-classes');
 $kStPE: map.get($utils-cfg, 'tokens', 'generation', 'states-pseudo-elements');
 $kStCb: map.get($utils-cfg, 'tokens', 'generation', 'states-combine');
 $kStOl: map.get($utils-cfg, 'tokens', 'generation', 'states-only');
+$kSsVCP: 'Pl' !default;
 
 $utils-cfg: map.set(
 	$utils-cfg,

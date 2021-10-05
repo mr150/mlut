@@ -96,7 +96,7 @@
 			@if $util-value != $prev-value and not $is-pipeline {
 				@return $util-value;
 			}
-		} @else if $item == ml.$tCVcp {
+		} @else if $item == ml.$kSsVCP {
 			$is-pipeline: true;
 		}
 	}
