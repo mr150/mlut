@@ -96,6 +96,8 @@ ml.$utils-cfg: map.set(
 				('16/9', 'Ar'): string.unquote('16/9'),
 				(70p, 'Op'): 0.7,
 				('0.8', 'Op'): 0.8,
+				(1.5, 'W'): 1.5rem,
+				(-0.7, 'Ml'): -0.7rem,
 			),
 			'converts global keyword': (
 				('a', 'W'): auto,

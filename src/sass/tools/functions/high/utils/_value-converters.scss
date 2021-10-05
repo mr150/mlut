@@ -30,13 +30,22 @@
 	@if meta.type-of($val-number) == 'number' {
 		$unit-number: 0;
 		$unit: math.unit($val-number);
+		$units-key: map.get($data, 'units-key');
 
-		$unit-number: map.get(
-			ml.$utils-cfg, 'units', map.get($data, 'units-key') or 'default', $unit
-		);
+		@if (
+			$unit == '' and not $units-key and
+			($val-number - math.floor($val-number)) != 0
+		) {
+			// TODO: add setting for changing unit
+			$unit-number: 1rem;
+		} @else {
+			$unit-number: map.get(
+				ml.$utils-cfg, 'units', $units-key or 'default', $unit
+			);
+		}
 
 		@if $unit-number {
-			@return ml.str2n($value + '_') * $unit-number;
+			@return math.div($val-number, map.get(ml.$units-all, $unit)) * $unit-number;
 		}
 
 		@if (
