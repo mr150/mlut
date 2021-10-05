@@ -1344,5 +1344,29 @@ ml.$utils-db: map.deep-merge(
 				}
 			}
 		}
+
+		@include it('make util with custom property as a name') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'-BgAlpha', ('50p_h', 'n'),
+					);
+				}
+
+				@include expect(false) {
+					.-BgAlpha50p {
+						--BgAlpha: 50%;
+					}
+
+					.-BgAlpha50p_h:hover {
+						--BgAlpha: 50%;
+					}
+
+					.-BgAlpha-n {
+						--BgAlpha: none;
+					}
+				}
+			}
+		}
 	}
 }

@@ -1,4 +1,5 @@
 @use 'sass:list';
+@use 'sass:string';
 @use 'sass:map';
 @use 'sass:meta';
 
@@ -190,5 +191,11 @@ Styleguide: sass-tools.functions.base.getters
 		$prop: $options;
 	}
 
-	@return $prop or ($name-as-prop and $name);
+	@return $prop or (
+		$name-as-prop and if(
+			string.slice($name, 1, 1) == '-',
+			'-' + $name,
+			$name
+		)
+	);
 }
