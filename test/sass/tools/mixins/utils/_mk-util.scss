@@ -20,7 +20,7 @@ ml.$utils-db: map.deep-merge(
 				'components': '',
 				'properties': position,
 			),
-			'Maw': (
+			'Mxw': (
 				'keywords': 'maw-kws',
 			),
 			'-Posed': (
@@ -38,8 +38,8 @@ ml.$utils-db: map.deep-merge(
 				'properties': margin-left,
 				'selector': '.my-& >*+*',
 			),
-			'Tt': (
-				'components': 'Tt_af',
+			'Txt': (
+				'components': 'Txt_af',
 			),
 	),
 	)
@@ -138,7 +138,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Maw', (
+						'Mxw', (
 						500: false,
 						'n': null,
 						[5x, 7]: null,
@@ -147,21 +147,21 @@ ml.$utils-db: map.deep-merge(
 				}
 
 				@include expect(false) {
-					.Maw500 {
+					.Mxw500 {
 						max-width: 500;
 					}
 
-					.Maw-n {
+					.Mxw-n {
 						max-width: none;
 					}
 
 					@for $i from 5 through 7 {
-						.Maw#{$i}x {
+						.Mxw#{$i}x {
 							max-width: $i * 1ex;
 						}
 					}
 
-					.Maw-sm0 {
+					.Mxw-sm0 {
 						max-width: 560px;
 					}
 				}
@@ -172,29 +172,29 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Maw', (
+						'Mxw', (
 						10, 4vw, 'a', 2su, 5gg
 					));
 				}
 
 				@include expect(false) {
-					.Maw10 {
+					.Mxw10 {
 						max-width: 10px;
 					}
 
-					.Maw4vw {
+					.Mxw4vw {
 						max-width: 4vw;
 					}
 
-					.Maw-a {
+					.Mxw-a {
 						max-width: auto;
 					}
 
-					.Maw2su {
+					.Mxw2su {
 						max-width: ml.su(2);
 					}
 
-					.Maw5gg {
+					.Mxw5gg {
 						max-width: 80px;
 						max-width: calc(var(#{ml.$var-gg}) * 5);
 					}
@@ -204,41 +204,41 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Maw', (
+						'Mxw', (
 						':f_100_+:h',
-						'xl @m:w>=$sm:ori_32p_vl',
+						'xl @m:w>=$sm:o_32p_vl',
 					));
 				}
 
 				@include expect(false) {
-					.Maw100 {
+					.Mxw100 {
 						max-width: 100px;
 					}
 
-					:focus .\:f_Maw100 {
+					:focus .\:f_Mxw100 {
 						max-width: 100px;
 					}
 
-					.Maw100_\+\:h+:hover {
+					.Mxw100_\+\:h+:hover {
 						max-width: 100px;
 					}
 
-					.Maw32p {
+					.Mxw32p {
 						max-width: 32%;
 					}
 
-					.Maw32p_vl:valid {
+					.Mxw32p_vl:valid {
 						max-width: 32%;
 					}
 
 					@media (min-width: ml.bp(xl)) {
-						.xl_Maw32p {
+						.xl_Mxw32p {
 							max-width: 32%;
 						}
 					}
 
 					@media (min-width: ml.bp(sm)) and (orientation: landscape) {
-						.\@m\:w\>\=\$sm\:ori_Maw32p {
+						.\@m\:w\>\=\$sm\:o_Mxw32p {
 							max-width: 32%;
 						}
 					}
@@ -341,7 +341,7 @@ ml.$utils-db: map.deep-merge(
 					@include ml.mk-util(
 						'sm ArOl_Mt', (
 						[10, 20, 10],
-						['@m:prn ArOl_40', 45, 5],
+						['@m:pr ArOl_40', 45, 5],
 					));
 				}
 
@@ -359,13 +359,13 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					@media print {
-						.\@m\:prn_Mt40 {
+						.\@m\:pr_Mt40 {
 							margin-top: 40px;
 						}
 					}
 
 					@media print {
-						.\@m\:prn_Mt45 {
+						.\@m\:pr_Mt45 {
 							margin-top: 45px;
 						}
 					}
@@ -476,32 +476,32 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Maw', (
-						'@m:prn_100_+:h ' + ml.$kStOl,
-						ml.$kArOl + ' @m:prn_32p_+:h',
-						'#{ml.$kArOl} @m:prn_50p_vl #{ml.$kStOl}',
+						'Mxw', (
+						'@m:pr_100_+:h ' + ml.$kStOl,
+						ml.$kArOl + ' @m:pr_32p_+:h',
+						'#{ml.$kArOl} @m:pr_50p_vl #{ml.$kStOl}',
 					));
 				}
 
 				@include expect(false) {
-					.Maw100_\+\:h+:hover {
+					.Mxw100_\+\:h+:hover {
 						max-width: 100px;
 					}
 
 					@media print {
-						.\@m\:prn_Maw100 {
+						.\@m\:pr_Mxw100 {
 							max-width: 100px;
 						}
 					}
 
 					@media print {
-						.\@m\:prn_Maw32p {
+						.\@m\:pr_Mxw32p {
 							max-width: 32%;
 						}
 					}
 
 					@media print {
-						.\@m\:prn_Maw50p {
+						.\@m\:pr_Mxw50p {
 							max-width: 50%;
 						}
 					}
@@ -511,37 +511,37 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Maw', (
-						ml.$kArSt + ' @m:prn_200_+:h',
-						'#{ml.$kArSt} #{ml.$kArOl} @m:prn_a_vl',
+						'Mxw', (
+						ml.$kArSt + ' @m:pr_200_+:h',
+						'#{ml.$kArSt} #{ml.$kArOl} @m:pr_a_vl',
 					));
 				}
 
 				@include expect(false) {
-					.Maw200 {
+					.Mxw200 {
 						max-width: 200px;
 					}
 
-					.Maw200_\+\:h+:hover {
+					.Mxw200_\+\:h+:hover {
 						max-width: 200px;
 					}
 
 					@media print {
-						.\@m\:prn_Maw200 {
+						.\@m\:pr_Mxw200 {
 							max-width: 200px;
 						}
 
-						.\@m\:prn_Maw200_\+\:h+:hover {
+						.\@m\:pr_Mxw200_\+\:h+:hover {
 							max-width: 200px;
 						}
 					}
 
 					@media print {
-						.\@m\:prn_Maw-a {
+						.\@m\:pr_Mxw-a {
 							max-width: auto;
 						}
 
-						.\@m\:prn_Maw-a_vl:valid {
+						.\@m\:pr_Mxw-a_vl:valid {
 							max-width: auto;
 						}
 					}
@@ -551,29 +551,29 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Maw', (
-						'#{ml.$kArSt} @m:prn_300_+:h #{ml.$kStOl}',
-						ml.$kArSO + ' @m:prn_n_vl',
+						'Mxw', (
+						'#{ml.$kArSt} @m:pr_300_+:h #{ml.$kStOl}',
+						ml.$kArSO + ' @m:pr_n_vl',
 					));
 				}
 
 				@include expect(false) {
-					.Maw300_\+\:h+:hover {
+					.Mxw300_\+\:h+:hover {
 						max-width: 300px;
 					}
 
 					@media print {
-						.\@m\:prn_Maw300 {
+						.\@m\:pr_Mxw300 {
 							max-width: 300px;
 						}
 
-						.\@m\:prn_Maw300_\+\:h+:hover {
+						.\@m\:pr_Mxw300_\+\:h+:hover {
 							max-width: 300px;
 						}
 					}
 
 					@media print {
-						.\@m\:prn_Maw-n_vl:valid {
+						.\@m\:pr_Mxw-n_vl:valid {
 							max-width: none;
 						}
 					}
@@ -713,7 +713,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Bdrs', (
+						'Bdrd', (
 						'^:+_5;10': null,
 						'50p;50p;12;12': null,
 						'xs0': 0 8px 50%,
@@ -721,19 +721,19 @@ ml.$utils-db: map.deep-merge(
 				}
 
 				@include expect(false) {
-					.Bdrs5\;10 {
+					.Bdrd5\;10 {
 						border-radius: 5px 10px;
 					}
 
-					.-Ctx+.\^\:\+_Bdrs5\;10 {
+					.-Ctx+.\^\:\+_Bdrd5\;10 {
 						border-radius: 5px 10px;
 					}
 
-					.Bdrs50p\;50p\;12\;12 {
+					.Bdrd50p\;50p\;12\;12 {
 						border-radius: 50% 50% 12px 12px;
 					}
 
-					.Bdrs-xs0 {
+					.Bdrd-xs0 {
 						border-radius: 0 8px 50%;
 					}
 				}
@@ -742,18 +742,18 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Bdrs', (
+						'Bdrd', (
 						'=50;1r_h StOl',
 						'12;=20'
 					));
 				}
 
 				@include expect(false) {
-					.Bdrs\=50\;1r_h:hover {
+					.Bdrd\=50\;1r_h:hover {
 						border-radius: 50 1rem;
 					}
 
-					.Bdrs12\;\=20 {
+					.Bdrd12\;\=20 {
 						border-radius: 12px 20;
 					}
 				}
@@ -762,19 +762,19 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Bdrs', (
+						'Bdrd', (
 						'13;1gg_a StOl',
 						'1gg;25/1.5gg',
 					));
 				}
 
 				@include expect(false) {
-					.Bdrs13\;1gg_a:active {
+					.Bdrd13\;1gg_a:active {
 						border-radius: 13px ml.$grid-default-gtr;
 						border-radius: 13px ml.gg(1);
 					}
 
-					.Bdrs1gg\;25\/1\.5gg {
+					.Bdrd1gg\;25\/1\.5gg {
 						border-radius: list.slash((ml.$grid-default-gtr * 1) 25px, ml.$grid-default-gtr * 1.5);
 						border-radius: list.slash(ml.gg(1) 25px, ml.gg(1.5));
 					}
@@ -865,16 +865,16 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Fz!', (3su, 3gg)
+						'Fns!', (3su, 3gg)
 					);
 				}
 
 				@include expect(false) {
-					.Fz3su\! {
+					.Fns3su\! {
 						font-size: ml.sur(3) !important;
 					}
 
-					.Fz3gg\! {
+					.Fns3gg\! {
 						font-size: 3rem !important;
 						font-size: calc(var(#{ml.$var-gg-rem}) * 3) !important;
 					}
@@ -975,19 +975,19 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Maw', ('$lg_af', '-card-sm'));
+						'Mxw', ('$lg_af', '-card-sm'));
 				}
 
 				@include expect(false) {
-					.Maw-\$lg {
+					.Mxw-\$lg {
 						max-width: map.get(ml.$utils-db, 'common', 'keywords', 'global', '$lg');
 					}
 
-					.Maw-\$lg_af::after {
+					.Mxw-\$lg_af::after {
 						max-width: map.get(ml.$utils-db, 'common', 'keywords', 'global', '$lg');
 					}
 
-					.Maw--card-sm {
+					.Mxw--card-sm {
 						max-width: var(--ml-card-sm);
 					}
 				}
@@ -1094,12 +1094,12 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Maw', 'sm0'
+						'Mxw', 'sm0'
 					);
 				}
 
 				@include expect(false) {
-					.Maw-sm0 {
+					.Mxw-sm0 {
 						max-width: 560px;
 					}
 				}
@@ -1228,25 +1228,25 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Bgsz_f StOl', (
+						'Bgs_f StOl', (
 						'KW.colors', 'KW_af StOl'
 					));
 				}
 
 				@include expect(false) {
-					.Bgsz-t_f:focus {
+					.Bgs-t_f:focus {
 						background-size: transparent;
 					}
 
-					.Bgsz-cc_f:focus {
+					.Bgs-cc_f:focus {
 						background-size: currentColor;
 					}
 
-					.Bgsz-ct_af::after {
+					.Bgs-ct_af::after {
 						background-size: contain;
 					}
 
-					.Bgsz-cv_af::after {
+					.Bgs-cv_af::after {
 						background-size: cover;
 					}
 				}
@@ -1257,25 +1257,25 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Tt', (
+						'Txt', (
 						'', 'c_h StOl',
 					));
 				}
 
 				@include expect(false) {
-					.Tt {
+					.Txt {
 						text-transform: uppercase;
 					}
 
-					.Tt_af::after {
+					.Txt_af::after {
 						text-transform: uppercase;
 					}
 
-					.Tt-c {
+					.Txt-c {
 						text-transform: capitalize;
 					}
 
-					.Tt-c_af::after {
+					.Txt-c_af::after {
 						text-transform: capitalize;
 					}
 				}
@@ -1284,29 +1284,29 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Tt_f StOl', (
+						'Txt_f StOl', (
 						'n',
 					));
 
 					@include ml.mk-util(
-						'Tt', 'l', ('post-states': 'fw StOl')
+						'Txt', 'l', ('post-states': 'fw StOl')
 					);
 				}
 
 				@include expect(false) {
-					.Tt-n {
+					.Txt-n {
 						text-transform: none;
 					}
 
-					.Tt-n_af::after {
+					.Txt-n_af::after {
 						text-transform: none;
 					}
 
-					.Tt-l {
+					.Txt-l {
 						text-transform: lowercase;
 					}
 
-					.Tt-l_af::after {
+					.Txt-l_af::after {
 						text-transform: lowercase;
 					}
 				}
@@ -1315,12 +1315,12 @@ ml.$utils-db: map.deep-merge(
 			@include assert('generate other states for util with bound components') {
 				@include output(false) {
 					@include ml.mk-util(
-						'Tt_f StOl', 'n', (), ('components': null)
+						'Txt_f StOl', 'n', (), ('components': null)
 					);
 				}
 
 				@include expect(false) {
-					.Tt-n_f:focus {
+					.Txt-n_f:focus {
 						text-transform: none;
 					}
 				}

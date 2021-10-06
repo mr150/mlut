@@ -14,7 +14,7 @@
 		),
 
 		ml.$kCfAl: (
-			'M', 'Fl', 'Tsh', 'Bgsz'
+			'M', 'F', 'Txs', 'Bgs'
 		),
 
 		/*
@@ -34,9 +34,9 @@
 			ml.$utils-map,
 			(
 				'M': (1su, 2r),
-				'Fl': ('', 'r'),
-				'Tsh_h,f a': ('-defTsh', 'rv'),
-				ml.$kBpAll + '_Bgsz': (100p, ml.$kUvKA),
+				'F': ('', 'r'),
+				'Txs_h,f a': ('-defTxs', 'rv'),
+				ml.$kBpAll + '_Bgs': (100p, ml.$kUvKA),
 			),
 			$inspect: true,
 		);

@@ -14,7 +14,7 @@
 			);
 
 			@include assert-equal(
-				ml.generate-uv-number-range([2su, 4], 'Fz'),
+				ml.generate-uv-number-range([2su, 4], 'Fns'),
 				(
 					'values': (
 						2su: ml.sur(2),
@@ -26,7 +26,7 @@
 			);
 
 			@include assert-equal(
-				ml.generate-uv-number-range([-2, 1], 'Z'),
+				ml.generate-uv-number-range([-2, 1], 'Zi'),
 				(
 					'values': (
 						-2: -2,
@@ -39,7 +39,7 @@
 			);
 
 			@include assert-equal(
-				ml.generate-uv-number-range([0.5, 3], 'Z'),
+				ml.generate-uv-number-range([0.5, 3], 'Zi'),
 				(
 					'values': (
 						0.5: 0.5,
@@ -90,7 +90,7 @@
 			);
 
 			@include assert-equal(
-				ml.generate-uv-number-range([0.5, 1.5, 0.5], 'Z'),
+				ml.generate-uv-number-range([0.5, 1.5, 0.5], 'Zi'),
 				(
 					'values': (
 						0.5: 0.5,

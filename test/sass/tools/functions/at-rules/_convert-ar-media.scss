@@ -10,7 +10,7 @@ ml.$at-rules-db: map.set(
 	@include describe('convert-ar-media') {
 		@include it('converts media types') {
 			@include assert-equal(
-				ml.convert-ar-media('prn'),
+				ml.convert-ar-media('pr'),
 				'print',
 			);
 		}
@@ -29,7 +29,7 @@ ml.$at-rules-db: map.set(
 
 		@include it('converts media features') {
 			@include assert-equal(
-				ml.convert-ar-media('ahv'),
+				ml.convert-ar-media('anyh'),
 				'(any-hover)',
 			);
 
@@ -41,17 +41,17 @@ ml.$at-rules-db: map.set(
 
 		@include it('converts complex mq') {
 			@include assert-equal(
-				ml.convert-ar-media('scr:fc'),
+				ml.convert-ar-media('s:fc'),
 				'screen and (forced-colors)',
 			);
 
 			@include assert-equal(
-				ml.convert-ar-media('prn,hv'),
+				ml.convert-ar-media('pr,hv'),
 				'print, (hover)',
 			);
 
 			@include assert-equal(
-				ml.convert-ar-media('prn:h>$sm:dm,pn-c:w>=90r,c<256:w<$sm'),
+				ml.convert-ar-media('pr:h>$sm:dm,p-c:w>=90r,c<256:w<$sm'),
 				'print and (min-height: #{ml.bp(sm) + 1}) and (display-mode: fullscreen), (pointer: coarse) and (min-width: 90rem), (max-color: 255) and (max-width: #{ml.bp(sm) - 1px})',
 			);
 		}

@@ -41,7 +41,7 @@ $utils-db: (
 					$cv-pref + 'mgc-rule',
 				),
 			),
-			'Pos': (
+			'Ps': (
 				'properties': position,
 				'keywords': (
 					'': relative,
@@ -49,7 +49,7 @@ $utils-db: (
 					'f': fixed,
 					'r': relative,
 					's': static,
-					'st': sticky,
+					'sk': sticky,
 				),
 			),
 
@@ -80,7 +80,7 @@ $utils-db: (
 				),
 			),
 
-			'Z': (
+			'Zi': (
 				'properties': z-index,
 				'value-type': 'unitless',
 			),
@@ -97,15 +97,15 @@ $utils-db: (
 					'ig': inline-grid,
 					'li': list-item,
 					'ri': run-in,
-					'tb': table,
-					'itb': inline-table,
-					'tbr': table-row,
-					'tbc': table-cell,
-					'tbcl': table-column,
-					'tbclg': table-column-group,
-					'tbhg': table-header-group,
-					'tbfg': table-footer-group,
-					'tbrg': table-row-group,
+					't': table,
+					'it': inline-table,
+					'tr': table-row,
+					'tc': table-cell,
+					'tcl': table-column,
+					'tcg': table-column-group,
+					'thg': table-header-group,
+					'tfg': table-footer-group,
+					'trg': table-row-group,
 				),
 			),
 			'-D': (
@@ -123,7 +123,7 @@ $utils-db: (
 				),
 			),
 
-			'Fxd': (
+			'Fld': (
 				'properties': flex-direction,
 				'keywords': (
 					'c': column,
@@ -132,7 +132,7 @@ $utils-db: (
 					'rr': row-reverse,
 				),
 			),
-			'Fxw': (
+			'Flw': (
 				'properties': flex-wrap,
 				'keywords': (
 					'n': nowrap,
@@ -140,15 +140,15 @@ $utils-db: (
 					'wr': wrap-reverse,
 				),
 			),
-			'Fxg': (
+			'Flg': (
 				'properties': flex-grow,
 				'value-type': 'unitless',
 			),
-			'Fxsh': (
+			'Fls': (
 				'properties': flex-shrink,
 				'value-type': 'unitless',
 			),
-			'Fx': flex,
+			'Fl': flex,
 			'Ac': (
 				'properties': align-content,
 				'keywords': 'box-alignment',
@@ -173,13 +173,13 @@ $utils-db: (
 				'properties': justify-self,
 				'keywords': 'box-alignment',
 			),
-			'Ord': (
+			'Od': (
 				'properties': order,
 				'value-type': 'unitless',
 			),
 
 			'Gd': grid,
-			'Fl': (
+			'F': (
 				'properties': float,
 				'keywords': (
 					'': left,
@@ -196,7 +196,7 @@ $utils-db: (
 					'r': right,
 				),
 			),
-			'Bxz': (
+			'Bxs': (
 				'properties': box-sizing,
 				'keywords': (
 					'': border-box,
@@ -204,19 +204,19 @@ $utils-db: (
 					'cb': content-box,
 				),
 			),
-			'Miw': (
+			'Mnw': (
 				'properties': min-width,
 				'keywords': 'sizing',
 			),
-			'Maw': (
+			'Mxw': (
 				'properties': max-width,
 				'keywords': 'sizing',
 			),
-			'Mih': (
+			'Mnh': (
 				'properties': min-height,
 				'keywords': 'sizing',
 			),
-			'Mah': (
+			'Mxh': (
 				'properties': max-height,
 				'keywords': 'sizing',
 			),
@@ -297,30 +297,30 @@ $utils-db: (
 				'range-generator': 'color',
 				'value-type': 'color',
 			),
-			'F': font,
-			'Fw': (
+			'Fn': font,
+			'Fnw': (
 				'properties': font-weight,
 				'value-type': 'kw-unitless',
 				'keywords': (
 					'b': bold,
-					'br': bolder,
+					'bd': bolder,
 					'l': lighter,
 					'n': normal,
 				),
 			),
-			'Fz': (
+			'Fns': (
 				'properties': font-size,
 				'default-unit': 'rem',
 			),
-			'Ff': (
+			'Fnf': (
 				'properties': font-family,
 				'keywords': (
-					'ss0': ml.$Ff--ss0,
+					'ss0': ml.$Fnf--ss0,
 					's0': (ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif),
 					'm0': (ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace),
 				),
 			),
-			'Fs': (
+			'Fnst': (
 				'properties': font-style,
 				'keywords': (
 					'': italic,
@@ -329,7 +329,7 @@ $utils-db: (
 					'o': oblique,
 				),
 			),
-			'Lh': (
+			'Lnh': (
 				'properties': line-height,
 				'keywords': (
 					'n': normal,
@@ -341,14 +341,14 @@ $utils-db: (
 				'properties': white-space,
 				'keywords': (
 					'': nowrap,
-					'n': normal,
-					'nw': nowrap,
+					'n': nowrap,
+					'nm': normal,
 					'p': pre,
 					'pw': pre-wrap,
 					'pl': pre-line,
 				),
 			),
-			'Ta': (
+			'Txa': (
 				'properties': text-align,
 				'keywords': (
 					'': center,
@@ -361,7 +361,7 @@ $utils-db: (
 					's': start,
 				),
 			),
-			'Tt': (
+			'Txt': (
 				'properties': text-transform,
 				'keywords': (
 					'': uppercase,
@@ -372,11 +372,11 @@ $utils-db: (
 					'u': uppercase,
 				),
 			),
-			'Td': (
+			'Txd': (
 				'properties': text-decoration,
 				'keywords': ('text-decoration', 'line-style'),
 			),
-			'Tsh': text-shadow,
+			'Txs': text-shadow,
 			'Va': (
 				'properties': vertical-align,
 				'keywords': (
@@ -387,11 +387,11 @@ $utils-db: (
 					'sb': sub,
 					'sp': super,
 					't': top,
-					'tb': text-bottom,
-					'tt': text-top,
+					'txb': text-bottom,
+					'txt': text-top,
 				),
 			),
-			'-Tov': (
+			'-Txo': (
 				'properties': (
 					overflow, text-overflow, white-space,
 				),
@@ -413,14 +413,14 @@ $utils-db: (
 					'ry': repeat-y,
 					'r': repeat,
 					's': space,
-					'ro': round,
+					'rn': round,
 				)
 			),
 			'Bgp': (
 				'properties': background-position,
 				'keywords': 'position'
 			),
-			'Bgsz': (
+			'Bgs': (
 				'properties': background-size,
 				'keywords': (
 					'ct': contain,
@@ -435,7 +435,7 @@ $utils-db: (
 					's': scroll,
 				),
 			),
-			'Bgcp': (
+			'Bgcl': (
 				'properties': background-clip,
 				'keywords': 'box-ext',
 			),
@@ -456,9 +456,9 @@ $utils-db: (
 				'properties': outline-color,
 				'value-type': 'color',
 			),
-			'Bxsh': box-shadow,
-			'Trf': transform,
-			'V': (
+			'Bxsd': box-shadow,
+			'Tf': transform,
+			'Vs': (
 				'properties': visibility,
 				'keywords': (
 					'': hidden,
@@ -467,8 +467,8 @@ $utils-db: (
 					'v': visible,
 				),
 			),
-			'Cur': cursor,
-			'Op': (
+			'Cs': cursor,
+			'O': (
 				'properties': opacity,
 				'value-type': 'alpha',
 			),
@@ -555,7 +555,7 @@ $utils-db: (
 				'properties': border-top-style,
 				'keywords': 'line-style',
 			),
-			'Bdrst': (
+			'Bdrs': (
 				'properties': border-right-style,
 				'keywords': 'line-style',
 			),
@@ -625,11 +625,11 @@ $utils-db: (
 					's': separate,
 				),
 			),
-			'Bdrs': (
+			'Bdrd': (
 				'properties': border-radius,
 				'multi-list-separator': ml.$tULs2,
 			),
-			'Trs': (
+			'Ts': (
 				'properties': transition,
 				'value-type': 'abbr-kw',
 				'multi-list-separator': ml.$tULs1,
@@ -637,8 +637,8 @@ $utils-db: (
 					'mAll': all ml.$Trsdu-def,
 				),
 			),
-			'Anim': animation,
-			'Rsz': (
+			'An': animation,
+			'Rs': (
 				'properties': resize,
 				'keywords': (
 					'': none,
@@ -671,7 +671,7 @@ $utils-db: (
 			'line-style': (
 				'': none,
 				'd': dotted,
-				'ds': dashed,
+				'dh': dashed,
 				'db': double,
 				'g': groove,
 				'h': hidden,
@@ -689,8 +689,8 @@ $utils-db: (
 			),
 			'line-width': (
 				'm': medium,
-				't': thin,
-				'thc': thick,
+				't': thick,
+				'th': thin,
 			),
 			'overflow': (
 				'': hidden,
@@ -702,8 +702,8 @@ $utils-db: (
 			'sizing': (
 				'n': none,
 				'fc': fit-content,
-				'mac': max-content,
-				'mic': min-content,
+				'mc': max-content,
+				'mnc': min-content,
 			),
 			'box-alignment': (
 				'b': baseline,
@@ -735,7 +735,9 @@ $utils-db: (
 				'properties': width,
 				'keywords': 'sizing',
 			),
-			'Ar': aspect-ratio,
+			'Aspr': (
+				'properties': aspect-ratio,
+			),
 		),
 		'keywords': (
 			'css': $-css-wide-kw,
@@ -767,7 +769,7 @@ $utils-groups: (
 	),
 	'BdStyle': (
 		'members': (
-			'Bds', 'Bdts', 'Bdrst', 'Bdbs', 'Bdls', '-Bdxs', '-Bdys',
+			'Bds', 'Bdts', 'Bdrs', 'Bdbs', 'Bdls', '-Bdxs', '-Bdys',
 		),
 	),
 	'BdSidesColor': (
@@ -795,7 +797,7 @@ $utils-groups: (
 			'M', 'Mt', 'Mr', 'Mb', 'Ml', '-Mx', '-My',
 			'P', 'Pt', 'Pr', 'Pb', 'Pl', '-Px', '-Py',
 			'T', 'R', 'B', 'L', '-X', '-Y', '-Xy',
-			'W', 'H', 'Mah',
+			'W', 'H', 'Mxh',
 		),
 	),
 	'Offsets': (
@@ -834,15 +836,15 @@ $utils-db: map.set(
 			$-common-registry,
 			(
 				'hv': hover,
-				'ahv': any-hover,
-				'pn': (
+				'anyh': any-hover,
+				'p': (
 					'properties': pointer,
 					'keywords': (
 						'c': coarse,
 						'f': fine,
 					),
 				),
-				'apn': (
+				'anyp': (
 					'properties': any-pointer,
 					'keywords': (
 						'c': coarse,
@@ -861,32 +863,35 @@ $utils-db: map.set(
 					'properties': display-mode,
 					'keywords': (
 						'': fullscreen,
+						'f': fullscreen,
 						's': standalone,
 						'mu': minimal-ui,
 						'b': browser,
 					),
 				),
 				'fc': forced-colors,
-				'ori': (
+				'o': (
 					'properties': orientation,
 					'keywords': (
 						'': landscape,
+						'l': landscape,
 						'p': portrait,
 					),
 				),
-				'prfcs': (
+				'pfcs': (
 					'properties': prefers-color-scheme,
 					'keywords': (
 						'': dark,
+						'd': dark,
 						'l': light,
 					),
 				),
-				'prfrm': prefers-reduced-motion,
-				'mn': (
+				'pfrm': prefers-reduced-motion,
+				'm': (
 					'properties': monochrome,
 					'value-type': 'unitless',
 				),
-				'gd': (
+				'g': (
 					'properties': grid,
 					'value-type': 'unitless',
 				),
@@ -894,7 +899,7 @@ $utils-db: map.set(
 					'properties': color,
 					'value-type': 'unitless',
 				),
-				'rsl': (
+				'r': (
 					'properties': resolution,
 					'value-type': 'resolution',
 					'keywords': (

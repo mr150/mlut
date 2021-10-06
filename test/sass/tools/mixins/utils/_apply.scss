@@ -7,8 +7,8 @@ ml.$utils-db: map.deep-merge(
 	('utils':
 	(
 		'registry': (
-			'Tt': (
-				'components': 'Tt_af',
+			'Txt': (
+				'components': 'Txt_af',
 			),
 		),
 	)
@@ -24,7 +24,7 @@ ml.$utils-db: map.deep-merge(
 						display: block;
 
 						@include ml.apply(
-							'P2su Fz1r'
+							'P2su Fns1r'
 						);
 					}
 				}
@@ -50,7 +50,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					.card {
 						@include ml.apply(
-							'Fz1r_h ^one_Bgc--bgColor?#c06_h'
+							'Fns1r_h ^one_Bgc--bgColor?#c06_h'
 						);
 					}
 				}
@@ -72,7 +72,7 @@ ml.$utils-db: map.deep-merge(
 						@include ml.apply(
 							'xl_P2su'
 							'xl_C#fff!_h,f'
-							'@m:prn_^new_Op80p_h',
+							'@m:pr_^new_O80p_h',
 							(),
 							true
 						);
@@ -108,8 +108,8 @@ ml.$utils-db: map.deep-merge(
 					.card {
 						@include ml.apply(
 							'xl_P2su'
-							'Lh=2_af'
-							Fz1r,
+							'Lnh=2_af'
+							Fns1r,
 							('important': true, 'post-states': null),
 							true
 						);
@@ -138,7 +138,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.apply(
-						'xl_P2su Lh2r!_af'
+						'xl_P2su Lnh2r!_af'
 					);
 				}
 
@@ -149,7 +149,7 @@ ml.$utils-db: map.deep-merge(
 						}
 					}
 
-					.Lh2r\!_af::after {
+					.Lnh2r\!_af::after {
 						line-height: 2rem !important;
 					}
 				}
@@ -161,7 +161,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					.testou {
 						@include ml.apply(
-							'Tt-c Tt_h'
+							'Txt-c Txt_h'
 						);
 					}
 				}

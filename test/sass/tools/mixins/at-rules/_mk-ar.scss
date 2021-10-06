@@ -26,7 +26,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 		@include it('make only media queries from abbreviations') {
 			@include assert('complex') {
 				@include output() {
-					@include ml.mk-ar('@m:prn:h<$md:dm,pn-c:w>=90r') using ($ar) {
+					@include ml.mk-ar('@m:pr:h<$md:dm,p-c:w>=90r') using ($ar) {
 						width: 50%;
 					}
 				}
@@ -60,7 +60,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 			@include assert('complex') {
 				@include output() {
-					@include ml.mk-ar('@s:pos-sk,h100vh') using ($ar) {
+					@include ml.mk-ar('@s:ps-sc,h100vh') using ($ar) {
 						width: 50%;
 					}
 				}
@@ -76,7 +76,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 		@include it('make at-rules from abbreviations and breakpoints') {
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar('@s:ar4/3@m:dm') using ($ar) {
+					@include ml.mk-ar('@s:aspr4/3@m:dm') using ($ar) {
 						width: 50%;
 					}
 				}
@@ -92,7 +92,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar('sm@s:pos-sk') using ($ar) {
+					@include ml.mk-ar('sm@s:ps-sc') using ($ar) {
 						width: 50%;
 					}
 				}
@@ -149,7 +149,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 		@include it('make several at-rules from list') {
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar('lg @m:scr @s:d-ig') using ($ar) {
+					@include ml.mk-ar('lg @m:s @s:d-ig') using ($ar) {
 						width: 50%;
 					}
 				}
@@ -193,7 +193,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 		@include it('make util with at-rules') {
 			@include assert() {
 				@include output(false) {
-					@include ml.mk-ar('lg @m:scr') using ($ar) {
+					@include ml.mk-ar('lg @m:s') using ($ar) {
 						.#{ml.str-escape($ar)}_W50p {
 							width: 50%;
 						}
@@ -208,7 +208,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 					}
 
 					@media screen {
-						.\@m\:scr_W50p {
+						.\@m\:s_W50p {
 							width: 50%;
 						}
 					}
@@ -230,7 +230,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar('%s&ar~4/3OR^?~%m&prn&dm~s&w>=$xlOR#testou', ('name': 'D', 'value': '~ig')) using ($ar) {
+					@include ml.mk-ar('%s&aspr~4/3OR^?~%m&pr&dm~s&w>=$xlOR#testou', ('name': 'D', 'value': '~ig')) using ($ar) {
 						width: 50%;
 					}
 				}
@@ -246,7 +246,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar('<smORmd&lgORxl%s&pos~sk') using ($ar) {
+					@include ml.mk-ar('<smORmd&lgORxl%s&ps~sc') using ($ar) {
 						width: 50%;
 					}
 				}

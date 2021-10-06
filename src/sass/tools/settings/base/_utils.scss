@@ -5,8 +5,8 @@
 //
 // Settings affecting the values and generation of the core utilities.
 //
-// $ml-Ff--ss0 - sans serif font stack contains default fonts on different OS.
-// $ml-Ff--m0 - monospace font stack contains default fonts on different OS.
+// $ml-Fnf--ss0 - sans serif font stack contains default fonts on different OS.
+// $ml-Fnf--m0 - monospace font stack contains default fonts on different OS.
 // $ml-Trsdu-def = 0.3s - default [transition](section-core-utils.html#kssref-core-utils-anim) duration.
 // $ml-utils-states-psd-cls - map with abbreviations of pseudo-classes for utilities.
 // $ml-utils-states-psd-elm - map with pseudo-elements abbreviations for utilities.
@@ -15,7 +15,7 @@
 // Styleguide: sass-tools.settings.utils
 
 // stylelint-disable
-$Ff--ss0: (
+$Fnf--ss0: (
 	-apple-system,
 	BlinkMacSystemFont,
 	'Segoe UI',
@@ -30,7 +30,7 @@ $Ff--ss0: (
 	sans-serif
 ) !default;
 
-$Ff--m0: (
+$Fnf--m0: (
 	SFMono-Regular,
 	Menlo,
 	Monaco,
@@ -106,9 +106,9 @@ $utils-cfg: (
 		'M', 'Mt', 'Mr', 'Mb', 'Ml', '-Mx', '-My',
 		'Bdw', 'Bdtw', 'Bdrw', 'Bdbw', 'Bdlw', '-Bdxw', '-Bdyw',
 		'Bd', 'Bdt', 'Bdr', 'Bdb', 'Bdl', '-Bdx', '-Bdy',
-		'Maw', 'Miw', 'Mah', 'Mih', 'G',
-		'Fz', 'Lh', 'Lts', 'Tsh', 'Va', 'Td', 'F',
-		'Bxsh', 'Ol', 'Bdrs', 'Bgsz', 'Bgp',
+		'Mxw', 'Mnw', 'Mxh', 'Mnh', 'G',
+		'Fns', 'Lnh', 'Lts', 'Txs', 'Va', 'Txd', 'Fn',
+		'Bxsd', 'Ol', 'Bdrd', 'Bgs', 'Bgp',
 	),
 
 	'value-types': (

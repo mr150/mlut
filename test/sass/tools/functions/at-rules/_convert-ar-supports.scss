@@ -34,7 +34,7 @@ ml.$at-rules-db: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-ar-supports('ar1/1'),
+				ml.convert-ar-supports('aspr1/1'),
 				'(aspect-ratio: 1/1)',
 			);
 
@@ -49,7 +49,7 @@ ml.$at-rules-db: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-ar-supports('!&-sk', ('name': 'Pos', 'value': '')),
+				ml.convert-ar-supports('!&-sc', ('name': 'Ps', 'value': '')),
 				'(not (position: sticky))',
 			);
 
@@ -61,12 +61,12 @@ ml.$at-rules-db: map.set(
 
 		@include it('converts complex condition') {
 			@include assert-equal(
-				ml.convert-ar-supports('pos-sk,h100vh'),
+				ml.convert-ar-supports('ps-sc,h100vh'),
 				'(position: sticky) or (height: 100vh)',
 			);
 
 			@include assert-equal(
-				ml.convert-ar-supports('pos-sk,h1vh:m-a'),
+				ml.convert-ar-supports('ps-sc,h1vh:m-a'),
 				'ERROR: Different operators are not allowed in one abbreviations list',
 			);
 
@@ -81,7 +81,7 @@ ml.$at-rules-db: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-ar-supports('!-testou:ar4/3:!pos-sk'),
+				ml.convert-ar-supports('!-testou:aspr4/3:!ps-sc'),
 				'(not (clip-path: url(#c1)) and selector(:is(ul))) and (aspect-ratio: 4/3) and (not (position: sticky))',
 			);
 		}

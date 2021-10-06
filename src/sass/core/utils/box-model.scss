@@ -10,14 +10,14 @@ Utilities for DOM nodes size management.
 * `H100p`
 * `H100vh`
 * `H0`
-* `Mih100vh`
-* `Mih100p`
-* `Bxz`
-* `Bxz-cb`
-* `Fl` \- turn on wrapping text on the right.
-* `Fl-r` \- turn on wrapping text on the left.
+* `Mnh100vh`
+* `Mnh100p`
+* `Bxs`
+* `Bxs-cb`
+* `F` \- turn on wrapping text on the right.
+* `F-r` \- turn on wrapping text on the left.
 
-Styleguide: core-utils.bxz
+Styleguide: core-utils.bxs
 */
 
 /*
@@ -25,10 +25,10 @@ D
 
 Display. Sets the display type.
 
-* `D-tb`
-* `D-tbc`
-* `D-tbr`
-* `D-itb`
+* `D-t`
+* `D-tc`
+* `D-tr`
+* `D-it`
 * `D-g` \- grid. *Responsive*.
 
 D - block. The DOM node stretches on the full width of the container and creates line breaks before and after. *Responsive*.
@@ -39,7 +39,7 @@ D-n - none. Hides the DOM node as if it is not on the page. *Responsive*.
 
 Markup: ../../../docs/examples/core-utils/visual-formatting/d.hbs
 
-Styleguide: core-utils.bxz.d
+Styleguide: core-utils.bxs.d
 */
 
 /*
@@ -51,11 +51,11 @@ Custom display.
 -D-mif - multiline inline-flex
 -D-vh - visually hidden. Hides the DOM node but leaves it accessible to the screen readers and robots.
 
-Styleguide: core-utils.bxz.-d
+Styleguide: core-utils.bxs.-d
 */
 
 /*
-Maw
+Mxw
 
 Max-width.
 
@@ -64,7 +64,7 @@ Max-width.
 100p - 100%
 n - none
 
-Styleguide: core-utils.bxz.maw
+Styleguide: core-utils.bxs.mxw
 */
 
 /*
@@ -74,7 +74,7 @@ Custom clear. It is clearfix utility. Use it with a container whose child DOM no
 
 Markup: ../../../docs/examples/core-utils/visual-formatting/-cl.html
 
-Styleguide: core-utils.bxz.-cl
+Styleguide: core-utils.bxs.-cl
 */
 
 /*
@@ -89,7 +89,7 @@ Ov.Ovy-a - auto. Scrollbar on Y axis.
 
 Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
 
-Styleguide: core-utils.bxz.ov
+Styleguide: core-utils.bxs.ov
 */
 
 ml.$utils-map: map.merge(
@@ -100,17 +100,17 @@ ml.$utils-map: map.merge(
 			'', 'i', 'ib', 'if', 'g', 'ig', 'n',
 		),
 		'D': (
-			ml.$kBpAll + ' @s_f', 'tb', 'tbc', 'tbr', 'itb',
+			ml.$kBpAll + ' @s_f', 't', 'tc', 'tr', 'it',
 		),
 		ml.$kBpAll + '_-D': ml.$kUvKA,
 		// sizes
-		ml.$kBpAll + '_Maw': list.join((100p, 'n'), ml.$global-kw-bp),
+		ml.$kBpAll + '_Mxw': list.join((100p, 'n'), ml.$global-kw-bp),
 		ml.$kBpAll + '_W': (100p, 'a', 'ih', [1gc, 12]),
 		'H': (100p, 100vh, 0),
-		'Mih': (100p, 100vh),
+		'Mnh': (100p, 100vh),
 		// other
-		'Bxz': ('', 'cb'),
-		'Fl': ('', 'r'),
+		'Bxs': ('', 'cb'),
+		'F': ('', 'r'),
 		'Cl': ('', 'r', 'l'),
 		'Overflows': ('', 'a', 's', 'v'),
 	)
@@ -127,12 +127,12 @@ Width. You can set width in the variable columns(`c`).
 
 If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
 
-* `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-bxz-d). *Responsive*.
+* `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-bxs-d). *Responsive*.
 * `W-i` \- inherit value from parent DOM node. *Responsive*.
 * `W100p` \- for browsers which not support custom properties.
 * `W1gc..W12gc` \- available width in `gc` on all breakpoints.
 
 Markup: ../../../docs/examples/core-utils/box-sizing/w.html
 
-Styleguide: core-utils.bxz.w
+Styleguide: core-utils.bxs.w
 */

@@ -42,9 +42,9 @@
 		$tests: (
 			'get CSS value of util': (
 				('C-prm0'): #c06,
-				('Op-$opDef'): 0.64,
+				('O-$opDef'): 0.64,
 				('D-f'): flex,
-				('Ar4/3'): string.unquote('4/3'),
+				('Aspr4/3'): string.unquote('4/3'),
 				('M3gg;a;$sm'): ml.gg(3) auto ml.bp(sm),
 				(''): 'ERROR: Empty string passed',
 			),

@@ -41,7 +41,7 @@ Styleguide: core-utils.bg.bgr
 */
 
 /*
-Bgsz
+Bgs
 
 Background size.
 
@@ -50,7 +50,7 @@ Background size.
 cv - cover. Stretches the background image so that it covers the entire space of the container.
 ct - contain. Stretches the background image to the maximum possible size so it does not go beyond the background of the container. The image does not change the proportions.
 
-Styleguide: core-utils.bg.bgsz
+Styleguide: core-utils.bg.bgs
 */
 
 /*
@@ -99,8 +99,8 @@ Styleguide: core-utils.bd.bds
 Visual formatting
 
 * `Ol0`
-* `Op0`
-* `V`
+* `O0`
+* `Vs`
 
 Styleguide: core-utils.visual
 */
@@ -110,7 +110,7 @@ ml.$utils-map: map.merge(
 	(
 		// background
 		'Bgr': ('nr', 'rx', 'ry'),
-		ml.$kBpAll + '_Bgsz': (100p, ml.$kUvKA),
+		ml.$kBpAll + '_Bgs': (100p, ml.$kUvKA),
 		'Bga': ml.$kUvKA,
 		'Bgp': (ml.$kUvKA, 'r;t', 'r;b', 'l;b'),
 		// border
@@ -118,10 +118,10 @@ ml.$utils-map: map.merge(
 		ml.$kBpAll + '_BdWidth': (0, 2, 1su),
 		'BdStyle': ('d', 'ds', '#{ml.$kBpAll} #{ml.$kArOl}_s'),
 		'Bdcl': (''),
-		'Bdrs': (50p),
+		'Bdrd': (50p),
 		// other
 		'Ol': (0),
-		ml.$kBpAll + '_Op': (0, 1),
-		ml.$kBpAll + '_V': ('', 'c', 'v'),
+		ml.$kBpAll + '_O': (0, 1),
+		ml.$kBpAll + '_Vs': ('', 'c', 'v'),
 	)
 );

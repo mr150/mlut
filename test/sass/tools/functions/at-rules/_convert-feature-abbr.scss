@@ -34,7 +34,7 @@ ml.$utils-db: map.deep-merge(
 			);
 
 			@include assert-equal(
-				ml.convert-feature-abbr('ori', 'media'),
+				ml.convert-feature-abbr('o', 'media'),
 				'(orientation: landscape)',
 			);
 
@@ -51,7 +51,7 @@ ml.$utils-db: map.deep-merge(
 
 		@include it('converts abbr with value from map') {
 			@include assert-equal(
-				ml.convert-feature-abbr('Pos-sk'),
+				ml.convert-feature-abbr('Ps-sc'),
 				'(position: sticky)',
 			);
 		}
@@ -63,17 +63,17 @@ ml.$utils-db: map.deep-merge(
 			);
 
 			@include assert-equal(
-				ml.convert-feature-abbr('Fz2r'),
+				ml.convert-feature-abbr('Fns2r'),
 				'(font-size: 2rem)',
 			);
 
 			@include assert-equal(
-				ml.convert-feature-abbr('Fxg1'),
+				ml.convert-feature-abbr('Flg1'),
 				'(flex-grow: 1)',
 			);
 
 			@include assert-equal(
-				ml.convert-feature-abbr('Z-99'),
+				ml.convert-feature-abbr('Zi-99'),
 				'(z-index: -99)',
 			);
 		}
@@ -100,12 +100,12 @@ ml.$utils-db: map.deep-merge(
 			);
 
 			@include assert-equal(
-				ml.convert-feature-abbr('rsl>1x', 'media'),
+				ml.convert-feature-abbr('r>1x', 'media'),
 				'(min-resolution: 1.01dppx)',
 			);
 
 			@include assert-equal(
-				ml.convert-feature-abbr('mn<50', 'media'),
+				ml.convert-feature-abbr('m<50', 'media'),
 				'(max-monochrome: 49)',
 			);
 

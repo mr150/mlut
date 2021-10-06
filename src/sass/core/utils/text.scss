@@ -5,12 +5,12 @@
 Font
 
 * `F-ih`
-* `Ff-ss0` \- sans serif system fonts stack. Sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
-* `Fw100..Fw900`
-* `Fs` \- *italic*.
-* `Fs-n` \- normal font style.
-* `Fs-o`
-* `Fz-ih`
+* `Fnf-ss0` \- sans serif system fonts stack. Sets [here](section-sass-tools.html#kssref-sass-tools-settings-utils).
+* `Fnw100..Fnw900`
+* `Fnst` \- *italic*.
+* `Fnst-n` \- normal font style.
+* `Fnst-o`
+* `Fns-ih`
 
 Styleguide: core-utils.f
 */
@@ -21,16 +21,16 @@ Text
 Group of utilities that manage the display of text.
 
 * `C-i`
-* `Whs-nw`
+* `Whs-n`
 * `Whs-p`
-* `Lh-n` \- line-height normal.
-* `Lh1`
+* `Lnh-n` \- line-height normal.
+* `Lnh1`
 
 Styleguide: core-utils.text
 */
 
 /*
-Ta
+Txa
 
 Text alignment.
 
@@ -42,7 +42,7 @@ Styleguide: core-utils.text.ta
 */
 
 /*
-Tt
+Txt
 
 Text transform.
 
@@ -55,7 +55,7 @@ Styleguide: core-utils.text.tt
 */
 
 /*
-Td
+Txd
 
 Text decoration.
 
@@ -79,9 +79,9 @@ Styleguide: core-utils.text.dir
 */
 
 /*
--Tov
+-Txo
 
-Custom text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container. DOM node with `-Tov` should have a width limit.
+Custom text overflow. Removes line breaks in the text and displays ellipsis at the end of the line if the text does not fit in the container. DOM node with `-Txo` should have a width limit.
 
 Markup: ../../../docs/examples/core-utils/text/-tov.html
 
@@ -91,17 +91,17 @@ Styleguide: core-utils.text.-tov
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	(
-		'F': ('ih'),
-		'Ff': ('ss0'),
-		'Fw': ([100, 900, 100],),
-		'Fs': ('', 'n', 'o'),
-		'Fz': ('ih'),
-		ml.$kBpAll + '_Ta': ('', '#{ml.$kBpAll} #{ml.$kArOl}_l', 'r', 'j'),
-		'Td': ('', 'u', 'lt', 'o'),
-		'Tt': ('', 'n', 'l', 'c'),
-		'-Tov': (''),
+		'Fn': ('ih'),
+		'Fnf': ('ss0'),
+		'Fnw': ([100, 900, 100],),
+		'Fnst': ('', 'n', 'o'),
+		'Fns': ('ih'),
+		ml.$kBpAll + '_Txa': ('', '#{ml.$kBpAll} #{ml.$kArOl}_l', 'r', 'j'),
+		'Txd': ('', 'u', 'lt', 'o'),
+		'Txt': ('', 'n', 'l', 'c'),
+		'-Txo': (''),
 		'C': ('ih'),
-		'Lh': ('n', '=1'),
-		'Whs': ('', 'n', 'p', 'pw', 'pl'),
+		'Lnh': ('n', '=1'),
+		'Whs': ('', 'nm', 'p', 'pw', 'pl'),
 	)
 );

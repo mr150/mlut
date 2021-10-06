@@ -43,20 +43,20 @@
 // ```
 // or with list
 // ```scss
-//@include ml.mk-util('Maw', ('100_sm', 32p, 7su));
+//@include ml.mk-util('Mxw', ('100_sm', 32p, 7su));
 // ```
 // CSS
 // ```css
-//.Maw32p {
+//.Mxw32p {
 //		max-width: 32%;
 //}
 //
-//.Maw7su {
+//.Mxw7su {
 //		max-width: 28px;
 //}
 //
 //@media (min-width: 520px) {
-//		.Maw100_sm {
+//		.Mxw100_sm {
 //			max-width: 100px;
 //		}
 //}

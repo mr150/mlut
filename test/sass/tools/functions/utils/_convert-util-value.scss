@@ -39,10 +39,10 @@ ml.$utils-db: map.deep-merge(
 					'c': center,
 				),
 			),
-			'Animtf': (
+			'Antf': (
 				'keywords': 'timing-functions',
 			),
-			'Trs': (
+			'Ts': (
 				'keywords': 'timing-functions',
 			),
 		),
@@ -89,13 +89,13 @@ ml.$utils-cfg: map.set(
 				(200, 'W'): 200px,
 				('=200', 'W'): 200,
 				('20vw', 'W'): 20vw,
-				(300, 'Fw'): 300,
-				(2su, 'Fz'): ml.sur(2),
+				(300, 'Fnw'): 300,
+				(2su, 'Fns'): ml.sur(2),
 				(2su, 'P'): ml.sur(2) ml.su(2),
 				(200x, 'W'): 200ex,
-				('16/9', 'Ar'): string.unquote('16/9'),
-				(70p, 'Op'): 0.7,
-				('0.8', 'Op'): 0.8,
+				('16/9', 'Aspr'): string.unquote('16/9'),
+				(70p, 'O'): 0.7,
+				('0.8', 'O'): 0.8,
 				(1.5, 'W'): 1.5rem,
 				(-0.7, 'Ml'): -0.7rem,
 			),
@@ -107,7 +107,7 @@ ml.$utils-cfg: map.set(
 			'converts custom property with fallback': (
 				('-myCard?200', 'W'): var(--ml-myCard, 200px),
 				('-myCard?a', 'W'): var(--ml-myCard, auto),
-				('-cardFw?500', 'Fw'): var(--ml-cardFw, 500),
+				('-cardFnw?500', 'Fnw'): var(--ml-cardFnw, 500),
 				('-myVar?=200', 'W'): var(--ml-myVar, 200),
 				('-myCard?-defWd?150', 'W'): var(--ml-myCard, var(--ml-defWd, 150px)),
 			),
@@ -117,12 +117,12 @@ ml.$utils-cfg: map.set(
 				('-css-var', '-Tst'): var(--ml-css-var),
 			),
 			'converts property abbreviation': (
-				('bgc', 'Trs'): background-color,
-				('=bgc', 'Trs'): bgc,
+				('bgc', 'Ts'): background-color,
+				('=bgc', 'Ts'): bgc,
 			),
 			'converts utility keyword': (
 				('c', 'Ai'): center,
-				('ei', 'Animtf'): ease-in,
+				('ei', 'Antf'): ease-in,
 				('', 'Bd'): (1px solid,),
 			),
 			'converts colors': (
@@ -137,16 +137,16 @@ ml.$utils-cfg: map.set(
 				('-color*20p', 'C'): rgba(var(--ml-color), 0.2),
 			),
 			'converts values list': (
-				('1r;2;5p', 'Bdrs'): 1rem 2px 5%,
+				('1r;2;5p', 'Bdrd'): 1rem 2px 5%,
 				('1r;=10x', 'M'): 1rem 10x,
 				('3su;16;a', 'M'): ml.su(3) 16px auto,
-				('c;-trsdu;ei', 'Trs'): color var(--ml-trsdu) ease-in,
+				('c;-trsdu;ei', 'Ts'): color var(--ml-trsdu) ease-in,
 				('cc;prm0*5p', 'C'): currentColor rgba(204, 0, 102, 0.05),
 				('3;sec0;d', 'Bd'): 3px #0c6 dotted,
 			),
 			'converts values multi list': (
-				('1r;2/5p', 'Bdrs'): list.slash(1rem 2px, 5%),
-				('bdc;3s,c;$trsduDef', 'Trs'): (border-color 3s, color 0.3s),
+				('1r;2/5p', 'Bdrd'): list.slash(1rem 2px, 5%),
+				('bdc;3s,c;$trsduDef', 'Ts'): (border-color 3s, color 0.3s),
 				('3/5', 'Gc'): list.slash(3, 5),
 			),
 		);
