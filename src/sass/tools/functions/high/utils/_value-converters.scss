@@ -128,7 +128,7 @@
 }
 
 @function convert-uv-unitless($value, $data: ()) {
-	@return ml.str2n($value) or $value;
+	@return ml.str2n($value, true) or $value;
 }
 
 @function convert-uv-alpha($value, $data: ()) {
