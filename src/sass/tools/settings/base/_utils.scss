@@ -101,14 +101,14 @@ $utils-cfg: (
 	'up-specificity': false,
 
 	'gg-fallback-list': (
-		'T', 'R', 'B', 'L', '-X', '-Y', '-Xy',
-		'P', 'Pt', 'Pr', 'Pb', 'Pl', '-Px', '-Py',
-		'M', 'Mt', 'Mr', 'Mb', 'Ml', '-Mx', '-My',
-		'Bdw', 'Bdtw', 'Bdrw', 'Bdbw', 'Bdlw', '-Bdxw', '-Bdyw',
-		'Bd', 'Bdt', 'Bdr', 'Bdb', 'Bdl', '-Bdx', '-Bdy',
-		'Mxw', 'Mnw', 'Mxh', 'Mnh', 'G',
-		'Fns', 'Lnh', 'Lts', 'Txs', 'Va', 'Txd', 'Fn',
-		'Bxsd', 'Ol', 'Bdrd', 'Bgs', 'Bgp',
+		T, R, B, L, -X, -Y, -Xy,
+		P, Pt, Pr, Pb, Pl, -Px, -Py,
+		M, Mt, Mr, Mb, Ml, -Mx, -My,
+		Bdw, Bdtw, Bdrw, Bdbw, Bdlw, -Bdxw, -Bdyw,
+		Bd, Bdt, Bdr, Bdb, Bdl, -Bdx, -Bdy,
+		Mxw, Mnw, Mxh, Mnh, G,
+		Fns, Lnh, Lts, Txs, Va, Txd, Fn,
+		Bxsd, Ol, Bdrd, Bgs, Bgp,
 	),
 
 	'value-types': (

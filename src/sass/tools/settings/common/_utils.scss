@@ -760,50 +760,50 @@ $utils-db: (
 $utils-groups: (
 	'Borders': (
 		'members': (
-			'Bd', 'Bdt', 'Bdr', 'Bdb', 'Bdl', '-Bdx', '-Bdy',
+			Bd, Bdt, Bdr, Bdb, Bdl, -Bdx, -Bdy,
 		),
 	),
 	'BdWidth': (
 		'members': (
-			'Bdw', 'Bdtw', 'Bdrw', 'Bdbw', 'Bdlw', '-Bdxw', '-Bdyw',
+			Bdw, Bdtw, Bdrw, Bdbw, Bdlw, -Bdxw, -Bdyw,
 		),
 	),
 	'BdStyle': (
 		'members': (
-			'Bds', 'Bdts', 'Bdrs', 'Bdbs', 'Bdls', '-Bdxs', '-Bdys',
+			Bds, Bdts, Bdrs, Bdbs, Bdls, -Bdxs, -Bdys,
 		),
 	),
 	'BdSidesColor': (
 		'members': (
-			Bdtc, Bdrc, Bdbc, Bdlc, '-Bdxc', '-Bdyc',
+			Bdtc, Bdrc, Bdbc, Bdlc, -Bdxc, -Bdyc,
 		),
 	),
 	'Overflows': (
 		'members': (
-			'Ov', 'Ovx', 'Ovy',
+			Ov, Ovx, Ovy,
 		),
 	),
 	'Margins': (
 		'members': (
-			'M', 'Mt', 'Mr', 'Mb', 'Ml', '-Mx', '-My',
+			M, Mt, Mr, Mb, Ml, -Mx, -My,
 		),
 	),
 	'Paddings': (
 		'members': (
-			'P', 'Pt', 'Pr', 'Pb', 'Pl', '-Px', '-Py',
+			P, Pt, Pr, Pb, Pl, -Px, -Py,
 		),
 	),
 	'Spaces': (
 		'members': (
-			'M', 'Mt', 'Mr', 'Mb', 'Ml', '-Mx', '-My',
-			'P', 'Pt', 'Pr', 'Pb', 'Pl', '-Px', '-Py',
-			'T', 'R', 'B', 'L', '-X', '-Y', '-Xy',
-			'W', 'H', 'Mxh',
+			M, Mt, Mr, Mb, Ml, -Mx, -My,
+			P, Pt, Pr, Pb, Pl, -Px, -Py,
+			T, R, B, L, -X, -Y, -Xy,
+			W, H, Mxh,
 		),
 	),
 	'Offsets': (
 		'members': (
-			'T', 'R', 'B', 'L', '-X', '-Y', '-Xy',
+			T, R, B, L, -X, -Y, -Xy,
 		),
 	),
 	'Colors': (
