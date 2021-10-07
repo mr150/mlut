@@ -35,7 +35,7 @@ ml.$utils-db: map.deep-merge(
 
 $-global-kw: map.get(ml.$utils-db, 'common', 'keywords', 'global');
 ml.$utils-db: map.set(
-	ml.$utils-db, 'common', 'keywords', 'global', ('$opDef': 0.88, '$trsduDef': 0.3s,)
+	ml.$utils-db, 'common', 'keywords', 'global', ('gODef': 0.88, 'gTsdDef': 0.3s,)
 );
 
 @include describe('tools/functions/common/utils/') {
@@ -81,8 +81,8 @@ ml.$utils-db: map.set(
 			'keywords from `common` section': (
 				('KW.global', 'P'): (
 					'values': (
-						'$opDef': 0.88,
-						'$trsduDef': 0.3s,
+						'gODef': 0.88,
+						'gTsdDef': 0.3s,
 					)
 				),
 			),
@@ -93,8 +93,8 @@ ml.$utils-db: map.set(
 						'ini': initial,
 						'rv': revert,
 						'us': unset,
-						'$opDef': 0.88,
-						'$trsduDef': 0.3s,
+						'gODef': 0.88,
+						'gTsdDef': 0.3s,
 					)
 				),
 				('KW.All', 'Ai'): (
@@ -103,8 +103,8 @@ ml.$utils-db: map.set(
 						'ini': initial,
 						'rv': revert,
 						'us': unset,
-						'$opDef': 0.88,
-						'$trsduDef': 0.3s,
+						'gODef': 0.88,
+						'gTsdDef': 0.3s,
 						'e': end,
 						'b': baseline,
 						'c': center,

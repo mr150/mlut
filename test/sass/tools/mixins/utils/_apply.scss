@@ -50,7 +50,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					.card {
 						@include ml.apply(
-							'Fns1r_h ^one_Bgc--bgColor?#c06_h'
+							'Fns1r_h ^one_Bgc-$bgColor?#c06_h'
 						);
 					}
 				}
@@ -134,7 +134,7 @@ ml.$utils-db: map.deep-merge(
 			}
 		}
 
-		@include it('apply utils without parent selector') {
+		@include it('top-level apply') {
 			@include assert() {
 				@include output(false) {
 					@include ml.apply(

@@ -51,7 +51,7 @@ ml.$at-rules-db: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-ar-media('pr:h>$sm:dm,p-c:w>=90r,c<256:w<$sm'),
+				ml.convert-ar-media('pr:h>gSm:dm,p-c:w>=90r,c<256:w<gSm'),
 				'print and (min-height: #{ml.bp(sm) + 1}) and (display-mode: fullscreen), (pointer: coarse) and (min-width: 90rem), (max-color: 255) and (max-width: #{ml.bp(sm) - 1px})',
 			);
 		}

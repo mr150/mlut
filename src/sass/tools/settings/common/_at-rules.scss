@@ -101,7 +101,15 @@ $-custom-global-kw: map.get(ud.$utils-db, 'common', 'keywords', 'global');
 $-bp-kw-map: ();
 
 @each $key, $value in $bp-map {
-	$-bp-kw-map: map.set($-bp-kw-map, ml.$tUGkw + $key, $value);
+	$-bp-kw-map: map.set(
+		$-bp-kw-map,
+		(
+			ml.$tUGkw +
+			string.to-upper-case(string.slice($key, 1, 1)) +
+			string.slice($key, 2)
+		),
+		$value
+	);
 }
 
 $global-kw-bp: map.keys($-bp-kw-map);

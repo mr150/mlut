@@ -206,7 +206,7 @@ ml.$utils-db: map.deep-merge(
 					@include ml.mk-util(
 						'Mxw', (
 						':f_100_+:h',
-						'xl @m:w>=$sm:o_32p_vl',
+						'xl @m:w>=gSm:o_32p_vl',
 					));
 				}
 
@@ -238,7 +238,7 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					@media (min-width: ml.bp(sm)) and (orientation: landscape) {
-						.\@m\:w\>\=\$sm\:o_Mxw32p {
+						.\@m\:w\>\=gSm\:o_Mxw32p {
 							max-width: 32%;
 						}
 					}
@@ -971,23 +971,23 @@ ml.$utils-db: map.deep-merge(
 			}
 		}
 
-		@include it('make util with MLUT and CSS variables in value') {
+		@include it('make util with global keywords and CSS variables in value') {
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Mxw', ('$lg_af', '-card-sm'));
+						'Mxw', ('gLg_af', '$card-sm'));
 				}
 
 				@include expect(false) {
-					.Mxw-\$lg {
-						max-width: map.get(ml.$utils-db, 'common', 'keywords', 'global', '$lg');
+					.Mxw-gLg {
+						max-width: map.get(ml.$utils-db, 'common', 'keywords', 'global', 'gLg');
 					}
 
-					.Mxw-\$lg_af::after {
-						max-width: map.get(ml.$utils-db, 'common', 'keywords', 'global', '$lg');
+					.Mxw-gLg_af::after {
+						max-width: map.get(ml.$utils-db, 'common', 'keywords', 'global', 'gLg');
 					}
 
-					.Mxw--card-sm {
+					.Mxw-\$card-sm {
 						max-width: var(--ml-card-sm);
 					}
 				}
@@ -1001,8 +1001,8 @@ ml.$utils-db: map.deep-merge(
 						'C', (
 						#f06,
 						'#f0d_f StOl',
-						'#60c*-txtAlpha',
-						'-txtColor?#333',
+						'#60c*$txtAlpha',
+						'$txtColor?#333',
 					));
 				}
 
@@ -1015,11 +1015,11 @@ ml.$utils-db: map.deep-merge(
 						color: #f0d;
 					}
 
-					.C\#60c\*-txtAlpha {
+					.C\#60c\*\$txtAlpha {
 						color: rgba(102, 0, 204, var(--ml-txtAlpha, 1));
 					}
 
-					.C--txtColor\?\#333 {
+					.C-\$txtColor\?\#333 {
 						color: var(--ml-txtColor, #333);
 					}
 				}
@@ -1031,7 +1031,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'C', (
-						[('prm0', '-txtColor'), '2_h StOl', ('alpha': 0.2, 'green': 30)],
+						[('prm0', '$txtColor'), '2_h StOl', ('alpha': 0.2, 'green': 30)],
 					));
 				}
 
@@ -1052,11 +1052,11 @@ ml.$utils-db: map.deep-merge(
 						color: rgba(204, 30, 102, 0.8);
 					}
 
-					.C--txtColor_h:hover {
+					.C-\$txtColor_h:hover {
 						color: var(--ml-txtColor);
 					}
 
-					.C--txtColor\*80p_h:hover {
+					.C-\$txtColor\*80p_h:hover {
 						color: rgba(var(--ml-txtColor), 0.8);
 					}
 				}

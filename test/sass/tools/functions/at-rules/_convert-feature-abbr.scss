@@ -18,7 +18,7 @@ ml.$utils-db: map.deep-merge(
 		'common': (
 			'keywords': (
 				'global': (
-					'$hXl': 800px,
+					'gHXl': 800px,
 				),
 			),
 		),
@@ -90,12 +90,12 @@ ml.$utils-db: map.deep-merge(
 			);
 
 			@include assert-equal(
-				ml.convert-feature-abbr('h>$hXl', 'media'),
+				ml.convert-feature-abbr('h>gHXl', 'media'),
 				'(min-height: 801px)',
 			);
 
 			@include assert-equal(
-				ml.convert-feature-abbr('h<$sm', 'media'),
+				ml.convert-feature-abbr('h<gSm', 'media'),
 				'(max-height: 519px)',
 			);
 

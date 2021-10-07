@@ -39,9 +39,9 @@
 					'value': '20r',
 					'name': 'H',
 				),
-				('H>$sm'): (
+				('H>gSm'): (
 					'separator': '>',
-					'value': '$sm',
+					'value': 'gSm',
 					'name': 'H',
 				),
 			),
@@ -51,19 +51,19 @@
 					'value': 'a',
 					'name': 'M',
 				),
-				('Bgc--bgColor'): (
+				('Bgc-$bgColor'): (
 					'separator': '-',
-					'value': '-bgColor',
+					'value': '$bgColor',
 					'name': 'Bgc',
 				),
-				('-Mut--bgColor'): (
+				('-Mut-$bgColor'): (
 					'separator': '-',
-					'value': '-bgColor',
+					'value': '$bgColor',
 					'name': '-Mut',
 				),
-				('-Mut--bgColor:-var'): (
+				('-Mut-$bgColor:$var'): (
 					'separator': '-',
-					'value': '-bgColor:-var',
+					'value': '$bgColor:$var',
 					'name': '-Mut',
 				),
 			),
