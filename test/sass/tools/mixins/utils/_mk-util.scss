@@ -1355,15 +1355,15 @@ ml.$utils-db: map.deep-merge(
 
 				@include expect(false) {
 					.-BgAlpha50p {
-						--BgAlpha: 50%;
+						--ml-bgAlpha: 50%;
 					}
 
 					.-BgAlpha50p_h:hover {
-						--BgAlpha: 50%;
+						--ml-bgAlpha: 50%;
 					}
 
 					.-BgAlpha-n {
-						--BgAlpha: none;
+						--ml-bgAlpha: none;
 					}
 				}
 			}

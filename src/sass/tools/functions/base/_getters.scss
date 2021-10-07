@@ -194,7 +194,11 @@ Styleguide: sass-tools.functions.base.getters
 	@return $prop or (
 		$name-as-prop and if(
 			string.slice($name, 1, 1) == '-',
-			'-' + $name,
+			(
+				'--' + ml.$uv-css-var-prefix +
+				// TODO: replace with str-lcfirst function
+				string.to-lower-case(string.slice($name, 2, 2)) + string.slice($name, 3)
+			),
 			$name
 		)
 	);
