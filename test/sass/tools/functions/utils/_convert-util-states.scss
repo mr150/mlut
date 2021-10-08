@@ -2,8 +2,8 @@
 @use 'sass-true' as *;
 @use 'tools' as ml;
 
-ml.$utils-states: map.set(
-	ml.$utils-states, '-testou', '.pa.ro.voz'
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg, 'states', 'custom', 'testou', '.pa.ro.voz'
 );
 
 @include describe('tools/functions/high/utils/') {
@@ -32,6 +32,11 @@ ml.$utils-states: map.set(
 			@include assert-equal(
 				ml.convert-util-states('-testou'),
 				('&.pa.ro.voz'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('-NO'),
+				('ERROR: Undefined custom state: `-NO`'),
 			);
 
 			@include assert-equal(

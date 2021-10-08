@@ -8,8 +8,8 @@ ml.$utils-cfg: map.set(
 	ml.$utils-cfg, 'states', 'keywords', 'st1', ('i' 'vl')
 );
 
-ml.$utils-states: map.set(
-	ml.$utils-states, '-myState', '.pa.ro.voz'
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg, 'states', 'custom', 'myState', '.pa.ro.voz'
 );
 
 @include describe('tools/mixins/base/utils') {
@@ -516,7 +516,7 @@ ml.$utils-states: map.set(
 				@include output(false) {
 					.xs\:md__D-f {
 						@include ml.mk-state(
-							'$~ $~ib&-myState&af',
+							'$~ $~ib&#myState&af',
 							'%one&*a|%&?>*',
 							false,
 							&,
@@ -537,7 +537,7 @@ ml.$utils-states: map.set(
 							display: flex;
 					}
 
-					.xs\:md__D-f__\$\~ib\&\-myState\&af.D\~ib.pa.ro.voz::after {
+					.xs\:md__D-f__\$\~ib\&\#myState\&af.D\~ib.pa.ro.voz::after {
 						display: flex;
 					}
 				}
