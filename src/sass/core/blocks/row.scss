@@ -228,12 +228,6 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 		font-size: mlu.$base-font-size;
 		font-size: mlu.px2rem(mlu.$base-font-size);
 
-		@if mlu.$flag-flex-pe {
-			text-align: left;
-			white-space: normal;
-			direction: ltr;
-		}
-
 		&.row {
 			font-size: 0px;
 		}

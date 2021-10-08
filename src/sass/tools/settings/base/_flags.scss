@@ -7,11 +7,9 @@
 // `false` \- turn off <br>
 // `1` \- turn on with fallback <br>
 // `2` \- turn on. With this value, most fallbacks will be disabled for browsers that don't support custom properties. Be careful. <br>
-// $mlu-flag-flex-pe = false - turn on utilities with progressive enhancement for flexbox.
 // $flag-test-env = false - indicating the test environment
 //
 // Styleguide: sass-tools.settings.flags
 
 $flag-css-vars: 1 !default;
-$flag-flex-pe: false !default;
 $flag-test-env: false !default;
