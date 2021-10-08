@@ -34,6 +34,11 @@
 					'value': '100',
 					'name': 'W',
 				),
+				('W>-100'): (
+					'separator': '>',
+					'value': '-100',
+					'name': 'W',
+				),
 				('H<=20r'): (
 					'separator': '<=',
 					'value': '20r',
@@ -50,6 +55,11 @@
 					'separator': '-',
 					'value': 'a',
 					'name': 'M',
+				),
+				('Ml--gSm'): (
+					'separator': '-',
+					'value': '-gSm',
+					'name': 'Ml',
 				),
 				('Bgc-$bgColor'): (
 					'separator': '-',

@@ -5,6 +5,7 @@
 @use 'sass:string';
 
 @use 'forward-tools' as ml;
+@use 'helpers';
 
 // convert-util-value
 //
@@ -78,6 +79,14 @@
 		'default'
 	);
 	$is-pipeline: false;
+	$negative: (
+		meta.type-of($util-value) == 'string' and
+		string.slice($util-value, 1, 1) == '-'
+	);
+
+	@if $negative {
+		$util-value: string.slice($util-value, 2);
+	}
 
 	@each $item in map.get(ml.$utils-cfg, 'value-types', $value-type) {
 		@if map.has-key(ml.$utils-cfg, 'value-converters', $item) {
@@ -94,6 +103,14 @@
 			);
 
 			@if $util-value != $prev-value and not $is-pipeline {
+				@if $negative {
+					@if meta.type-of($util-value) == 'number' {
+						@return $util-value * -1;
+					} @else if helpers.is-css-var($util-value) {
+						@return calc($util-value * -1);
+					}
+				}
+
 				@return $util-value;
 			}
 		} @else if $item == ml.$kSsVCP {
@@ -101,7 +118,9 @@
 		}
 	}
 
-	@return $util-value;
+	@return if(
+		$negative, '-' + $util-value, $util-value
+	);
 }
 
 @function parse-abbr($abbr) {
