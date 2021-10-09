@@ -34,7 +34,7 @@ ml.$at-rules-db: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-ar-supports('aspr1/1'),
+				ml.convert-ar-supports('apcr1/1'),
 				'(aspect-ratio: 1/1)',
 			);
 
@@ -81,7 +81,7 @@ ml.$at-rules-db: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-ar-supports('!-testou:aspr4/3:!ps-sc'),
+				ml.convert-ar-supports('!-testou:apcr4/3:!ps-sc'),
 				'(not (clip-path: url(#c1)) and selector(:is(ul))) and (aspect-ratio: 4/3) and (not (position: sticky))',
 			);
 		}
