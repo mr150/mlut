@@ -28,17 +28,14 @@
 $at-rules-db: (
 	'media': (
 		'alias': 'm',
+		'default': true,
 		'types': (
 			'pr': print,
 			's': screen,
 		),
-		'custom': (
-		),
 	),
 	'supports': (
 		'alias': 's',
-		'custom': (
-		),
 	),
 ) !default;
 

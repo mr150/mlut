@@ -26,7 +26,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 		@include it('make only media queries from abbreviations') {
 			@include assert('complex') {
 				@include output() {
-					@include ml.mk-ar('@m:pr:h<gMd:dm,p-c:w>=90r') using ($ar) {
+					@include ml.mk-ar('@:pr:h<gMd:dm,p-c:w>=90r') using ($ar) {
 						width: 50%;
 					}
 				}
@@ -76,7 +76,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 		@include it('make at-rules from abbreviations and breakpoints') {
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar('@s:apcr4/3@m:dm') using ($ar) {
+					@include ml.mk-ar('@s:apcr4/3@:dm') using ($ar) {
 						width: 50%;
 					}
 				}
