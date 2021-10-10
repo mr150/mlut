@@ -177,5 +177,39 @@ ml.$utils-db: map.deep-merge(
 				}
 			}
 		}
+
+		@include it('make util with raw states by default') {
+			@include assert() {
+				@include output(false) {
+					@include ml.apply(
+						(
+							'.js:h:>* _D',
+							'D_[href]:f',
+							'D-f_.nojs',
+							'D_![tabindex]',
+						),
+						(), true
+					);
+				}
+
+				@include expect(false) {
+					.js:hover > * .\.js\:h\:\>\*_D {
+						display: block;
+					}
+
+					.D_\[href\]\:f[href]:focus {
+						display: block;
+					}
+
+					.D-f_\.nojs.nojs {
+						display: flex;
+					}
+
+					.D_\!\[tabindex\]:not([tabindex]) {
+						display: block;
+					}
+				}
+			}
+		}
 	}
 }

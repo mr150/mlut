@@ -80,7 +80,7 @@ Styleguide: sass-tools.functions.high.utils
 			} @else if $item == '' {
 				$converted: ' ';
 			} @else {
-				@return ml.error('Invalid state: `#{$item}`');
+				$converted: $item;
 			}
 
 			@if $not {
