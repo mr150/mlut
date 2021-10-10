@@ -204,7 +204,7 @@ $-tUCp-length: string.length(ml.$tUCp);
 	}
 
 	@if meta.type-of($value) == 'string' {
-		$mod-color-list: ml.str-split($value, ml.$tUVm);
+		$mod-color-list: ml.str-split($value, ml.$tUCla);
 
 		@if list.length($mod-color-list) > 1 {
 			$part-color: list.nth($mod-color-list, 1);

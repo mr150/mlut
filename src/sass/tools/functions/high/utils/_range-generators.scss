@@ -224,7 +224,7 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 
 		@if not $is-css-var and not (
 			string.slice($str-color, 1, 1) == '#' or
-			string.index($str-color, ml.$tUVm)
+			string.index($str-color, ml.$tUCla)
 		) {
 			$cur-shade: 0;
 			$i: 1;
@@ -301,7 +301,7 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 		@if not $step {
 			$color-values: map.set(
 				$color-values,
-				($item + ml.$tUVm + $step-value),
+				($item + ml.$tUCla + $step-value),
 				rgba(
 					$color,
 					string.insert(
@@ -311,7 +311,7 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 			);
 		} @else {
 			@if meta.type-of($item) == 'string' {
-				$token-pos: string.index($item, ml.$tUVm);
+				$token-pos: string.index($item, ml.$tUCla);
 
 				@if $token-pos {
 					$item: string.slice($item, 1, $token-pos - 1);
@@ -358,7 +358,7 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 				}
 
 				$color-values: map.set(
-					$color-values, ($item + ml.$tUVm + $cur-alpha), $color
+					$color-values, ($item + ml.$tUCla + $cur-alpha), $color
 				);
 				$i: $i + 1;
 			}

@@ -155,7 +155,7 @@ $utils-cfg: (
 			'num-value': '',
 			'hash-value': '',
 			'fallback-value': '?',
-			'value-modifier': '*',
+			'color-alpha': '*',
 			'space': ';',
 			'custom-property': '$',
 			'global-keyword': 'g',
@@ -244,7 +244,7 @@ $tUNv: map.get($utils-cfg, 'tokens', 'util', 'num-value');
 $tURv: map.get($utils-cfg, 'tokens', 'util', 'raw-value');
 $tUHv: map.get($utils-cfg, 'tokens', 'util', 'hash-value');
 $tUFv: map.get($utils-cfg, 'tokens', 'util', 'fallback-value');
-$tUVm: map.get($utils-cfg, 'tokens', 'util', 'value-modifier');
+$tUCla: map.get($utils-cfg, 'tokens', 'util', 'color-alpha');
 $tUGkw: map.get($utils-cfg, 'tokens', 'util', 'global-keyword');
 $tUCp: map.get($utils-cfg, 'tokens', 'util', 'custom-property');
 $tUIm: map.get($utils-cfg, 'tokens', 'util', 'important');
