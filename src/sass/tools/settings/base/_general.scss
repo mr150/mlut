@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'sass:math';
+@use 'sass:string';
 
 // General
 //
@@ -114,6 +115,7 @@ $general-cfg: (
 	'css-vars': (
 		'gg': 'gg',
 		'gg-rem': 'gg-rem',
+		'gc-diff': 'gc-diff',
 		'grid-cols': 'grid-cols',
 	),
 ) !default;
@@ -138,7 +140,7 @@ $-prefixed-vars: ();
 
 @each $key, $value in map.get($general-cfg, 'css-vars') {
 	$-prefixed-vars: map.set(
-		$-prefixed-vars, $key, '--#{$css-var-prefix}#{$value}'
+		$-prefixed-vars, $key, string.unquote('--#{$css-var-prefix}#{$value}')
 	);
 }
 
@@ -146,4 +148,5 @@ $general-cfg: map.set($general-cfg, 'css-vars', $-prefixed-vars);
 
 $var-gg: map.get($general-cfg, 'css-vars', 'gg');
 $var-gg-rem: map.get($general-cfg, 'css-vars', 'gg-rem');
+$var-gc-diff: map.get($general-cfg, 'css-vars', 'gc-diff');
 $var-grid-cols: map.get($general-cfg, 'css-vars', 'grid-cols');

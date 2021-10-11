@@ -40,6 +40,12 @@ $utils-db: (
 					$cv-pref + 'gc-rule',
 					$cv-pref + 'mgc-rule',
 				),
+				'keywords': (
+					'': (
+					calc(var(#{$cv-pref}gc) / var(ml.$var-grid-cols) * 100% - var(ml.$var-gc-diff, var(ml.$var-gg)) * 2),
+					calc(var(#{$cv-pref}mgc) / var(ml.$var-grid-cols) * 100% + var(ml.$var-gc-diff, var(ml.$var-gg))),
+				),
+				),
 			),
 			'Ps': (
 				'properties': position,
