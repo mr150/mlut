@@ -124,7 +124,6 @@
 }
 
 @function parse-abbr($abbr) {
-	$abbr-name: $abbr;
 	$abbr-value: '';
 	$abbr-prefix: '';
 	$hash-value-sep: ml.$tUHv;
@@ -141,6 +140,7 @@
 		$all-separators: list.append($all-separators, '#');
 	}
 
+	$abbr-name: $abbr;
 	$separator: ml.ls-find(
 		$all-separators, meta.get-function('str-contains-item', false, ml), $abbr
 	);
