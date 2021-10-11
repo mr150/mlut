@@ -33,6 +33,7 @@ $grid-default-gtr: (ml.$su * 4) !default;
 $grid-gutters: () !default;
 $grid-gutters-ext: () !default;
 $gtr-first: (ml.$su * 3);
+$grid-flex-fallback: false !default;
 
 @if $grid-gutters == () {
 	@each $bp, $gtr in list.zip(
