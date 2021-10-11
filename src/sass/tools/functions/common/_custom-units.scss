@@ -152,7 +152,7 @@ $-gtr-fallback-rem: ml.px2rem(ml.$grid-default-gtr);
 	@return $fallback-list $important;
 }
 
-@if ml.$flag-css-vars == 1 {
+@if ml.$css-vars-fallback {
 	$-utils-registry: ();
 
 	@each $item in map.get(ml.$utils-cfg, 'gg-fallback-list') {

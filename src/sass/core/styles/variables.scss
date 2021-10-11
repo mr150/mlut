@@ -7,10 +7,6 @@ Global CSS custom properties which used in MLT. Their names are stored in variab
 
 The values and meaning of many custom properties correspond to the [SASS settings](section-sass-tools.html#kssref-sass-tools-settings) of MLT core. But unlike them, custom properties can be changed dynamically without recompiling.
 
-Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by [ml.$flag-css-vars](section-sass-tools.html#kssref-sass-tools-settings-flags).
-
-Remember that custom properties do not work in all browsers. This means that part of the settings, such as dynamically changing the gutters and the number of columns in the grid system, also does not work everywhere.
-
 In some blocks and utilities, custom properties are also used. Look for info about them in the description of the corresponding block or utility.
 
 You can find global CSS variables in `sass/core/variables.scss`.
@@ -24,23 +20,21 @@ Fallback is [ml.$grid-default-gtr](section-sass-tools.html#kssref-sass-tools-set
 Styleguide: core-styles.css_vars
 */
 
-@if ml.$flag-css-vars {
-	:root {
-		$prev-value: ml.$gtr-first;
+:root {
+	$prev-value: ml.$gtr-first;
 
-		#{ml.$var-gg}: ml.$gtr-first;
-		#{ml.$var-gg-rem}: ml.px2rem(ml.$gtr-first);
-		#{ml.$var-grid-cols}: ml.$grid-columns;
+	#{ml.$var-gg}: ml.$gtr-first;
+	#{ml.$var-gg-rem}: ml.px2rem(ml.$gtr-first);
+	#{ml.$var-grid-cols}: ml.$grid-columns;
 
-		@each $key, $value in ml.$grid-gutters {
-			@if $value != $prev-value {
-				@include ml.bp($key) {
-					#{ml.$var-gg}: $value;
-					#{ml.$var-gg-rem}: ml.px2rem($value);
-				}
+	@each $key, $value in ml.$grid-gutters {
+		@if $value != $prev-value {
+			@include ml.bp($key) {
+				#{ml.$var-gg}: $value;
+				#{ml.$var-gg-rem}: ml.px2rem($value);
 			}
-
-			$prev-value: $value;
 		}
+
+		$prev-value: $value;
 	}
 }
