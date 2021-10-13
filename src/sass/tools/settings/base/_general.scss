@@ -116,6 +116,18 @@ $general-cfg: (
 			'gc': 1gc,
 		),
 	),
+	'base-styles': (
+		'border-box': true,
+		'sup-sub-no-v-align': true,
+		'embeds-v-align': true,
+		'embeds-aspect-ratio': true,
+		'forms-normalize': true,
+		'embeds-block': false,
+		'svg-fill-cur-color': false,
+		'default-reduce-motion': false,
+		'border-for-utils': false,
+		'reset': false,
+	),
 	'css-vars': (
 		'gg': 'gg',
 		'gg-rem': 'gg-rem',
@@ -154,3 +166,5 @@ $var-gg: map.get($general-cfg, 'css-vars', 'gg');
 $var-gg-rem: map.get($general-cfg, 'css-vars', 'gg-rem');
 $var-gc-diff: map.get($general-cfg, 'css-vars', 'gc-diff');
 $var-grid-cols: map.get($general-cfg, 'css-vars', 'grid-cols');
+
+$base-border-box: map.get($general-cfg, 'base-styles', 'border-box');

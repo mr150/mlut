@@ -211,7 +211,10 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 .row__item {
 	#{ml.$var-gc-diff}: 0px;
 	max-width: 100%;
-	box-sizing: border-box;
+
+	@if not ml.$base-border-box {
+		box-sizing: border-box;
+	}
 
 	@if ml.$grid-flex-fallback {
 		display: inline-block;
