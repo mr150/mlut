@@ -93,6 +93,8 @@ ml.$utils-map: map.merge(
 	(
 		ml.$kBpAll + '_Margins': (0, 'a', 'ih', [1su, 6]),
 		ml.$kBpAll + '_Paddings': (0, 'ih', [1su, 7], [1gg, 6]),
+		// for ratio-box
+		'Pt_b StOl': (100p, 75p),
 		'M': $-M-list,
 		'Mt': $-M-list,
 		'Mb': $-M-list,
