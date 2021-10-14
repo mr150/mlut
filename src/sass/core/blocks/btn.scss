@@ -1,9 +1,9 @@
-@use '../../tools' as mlu;
+@use '../../tools' as ml;
 
 /*
 Btn
 
-Block for creating buttons. It normalizes styles.
+Block for creating buttons. Prepares any element to styling as a button.
 
 Markup: ../../../docs/examples/core-blocks/btn/btn.html
 
@@ -12,15 +12,16 @@ Styleguide: core-blocks.btn
 
 .btn {
 	display: inline-block;
-	box-sizing: border-box;
 	margin: 0;
-	font-family: inherit;
-	font-size: mlu.px2rem(mlu.$base-font-size);
-	line-height: normal;
+	line-height: inherit;
 	text-align: center;
 	text-decoration: none;
-	vertical-align: top;
+	vertical-align: middle;
 	background: none;
 	border: 0;
 	cursor: pointer;
+
+	@if not ml.$base-border-box {
+		box-sizing: border-box;
+	}
 }
