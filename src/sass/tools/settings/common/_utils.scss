@@ -653,6 +653,19 @@ $utils-db: (
 					'v': vertical,
 				),
 			),
+			'Ct': (
+				'properties': content,
+				'keywords': (
+					'': "''",
+					'nm': normal,
+					'oq': open-quote,
+					'cq': close-quote,
+					'noq': no-open-quote,
+					'ncq': no-close-quote,
+					'ct': contents,
+					'mAtt': attr(data-#{ml.$css-var-prefix}ct),
+				),
+			),
 			'-All': (
 				'properties': (
 					margin, padding, font, list-style, border,

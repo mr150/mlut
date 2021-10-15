@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:list';
 @use '../../tools/settings' as ml;
 
 /*
@@ -71,6 +72,8 @@ Markup: ../../../docs/examples/core-utils/visual-formatting/-all.html
 Styleguide: core-utils.misc.-all
 */
 
+$-Ct-list: ('', 'n');
+
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	(
@@ -81,6 +84,8 @@ ml.$utils-map: map.merge(
 		'Ts': ('mAll'),
 		// misc
 		'Rs': (ml.$kUvKA),
+		'Ct_b af ' + ml.$kStOl: list.append($-Ct-list, 'mAtt'),
+		'#{ml.$kBpAll} #{ml.$kArSO}_Ct_b af': $-Ct-list,
 		'-All': ('sr'),
 	)
 );
