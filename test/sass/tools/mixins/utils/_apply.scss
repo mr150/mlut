@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:list';
 @use 'sass-true' as *;
 @use 'tools' as ml;
 
@@ -135,10 +136,15 @@ ml.$utils-db: map.deep-merge(
 		}
 
 		@include it('top-level apply') {
+			// double quotes are used in `Ct` value because the test runner always use
+			// such quotes in expected CSS
+			$-tmp-chars: ml.$spec-chars;
+			ml.$spec-chars: list.append(ml.$spec-chars, '"');
+
 			@include assert() {
 				@include output(false) {
 					@include ml.apply(
-						'xl_P2su Lnh2r!_af'
+						'xl_P2su Lnh2r!_af Ct-"lol"_b'
 					);
 				}
 
@@ -152,8 +158,14 @@ ml.$utils-db: map.deep-merge(
 					.Lnh2r\!_af::after {
 						line-height: 2rem !important;
 					}
+
+					.Ct-\"lol\"_b::before {
+						content: "lol";
+					}
 				}
 			}
+
+			ml.$spec-chars: $-tmp-chars;
 		}
 
 		@include it('apply util with bound components') {
