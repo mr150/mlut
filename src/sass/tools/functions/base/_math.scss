@@ -93,12 +93,12 @@ Styleguide: sass-tools.functions.base.math
 // ```
 //
 // $number - number in `px` that will be converted.
-// $divider = $ml-base-font-size - parent font size in `px`.
+// $divider = $ml-browser-font-size - parent font size in `px`.
 // $unit = 'em' - service parameter for functions-wrappers.
 //
 // Styleguide: sass-tools.functions.base.math.px2em
 
-@function px2em($number, $divider: ml.$base-font-size, $unit: 'em') {
+@function px2em($number, $divider: ml.$browser-font-size, $unit: 'em') {
 	@if math.is-unitless($number) {
 		@warn 'Assuming #{$number} to be in pixels in ml-px2em. Convert it to px';
 		@return px2em($number * 1px, $divider, $unit);
@@ -144,10 +144,10 @@ Styleguide: sass-tools.functions.base.math
 // ```
 //
 // $number - number in `px` that will be converted.
-// $divider = $ml-base-font-size - parent font size in `px`.
+// $divider = $ml-browser-font-size - parent font size in `px`.
 //
 // Styleguide: sass-tools.functions.base.math.px2lh
 
-@function px2lh($number, $divider: ml.$base-font-size) {
+@function px2lh($number, $divider: ml.$browser-font-size) {
 	@return px2em($number, $divider, 'no');
 }

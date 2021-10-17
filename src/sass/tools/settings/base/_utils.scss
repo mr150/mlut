@@ -89,15 +89,6 @@ $utils-config-ext: () !default;
 
 //stylelint-disable
 $utils-cfg: (
-	'directed': (
-		'M',
-		'P',
-		'Bd',
-		'-X',
-		'-Y',
-		'-Xy',
-	),
-
 	'up-specificity': false,
 
 	'gg-fallback-list': (

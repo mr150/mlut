@@ -9,7 +9,6 @@
 // $mlu-browser-font-size = 16px - font size for converting [px to rem](section-sass-tools.html#kssref-sass-tools-functions-px2rem). 16px used because is default font size in settings of most browsers.
 // $mlu-su-cf = 4 - value of [space unit](section-concepts.html#kssref-concepts-su). Use this factor to change su and for calculations.
 // $mlu-su = 4px - space unit in px. Depends on `$mlu-su-cf`. Use this variable to set the values in px.
-// $mlu-base-font-size = $mlu-browser-font-size - base font size on website. Is used for `rems` fallback in [row elements](section-core-blocks.html#kssref-core-blocks-row) and in [mlu-px2em](section-sass-tools.html#kssref-sass-tools-functions-px2em) default font size.
 // $mlu-main-directions - Map with directions for css properties and values generation. The keys are the first letters of the directions, and the values are directions. <br> Example: `('t': top)`.
 // $is-test-env = false - indicating the test environment
 // $css-vars-fallback = true - add fallback for values in `grid-gutters` units
@@ -38,7 +37,6 @@ $browser-font-size: 16px !default;
 
 $su-cf: 4 !default;
 
-$base-font-size: $browser-font-size !default;
 $is-test-env: false !default;
 
 $css-var-prefix: 'ml-' !default;
