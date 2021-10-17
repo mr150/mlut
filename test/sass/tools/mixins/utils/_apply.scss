@@ -223,5 +223,49 @@ ml.$utils-db: map.deep-merge(
 				}
 			}
 		}
+
+		@include it('make transform utils') {
+			@include assert() {
+				@include output(false) {
+					@include ml.apply(
+						'Tf Tf-n -Tr-50p -Skx40d'
+					);
+				}
+
+				@include expect(false) {
+					.Tf {
+						transform:
+							translateX(var(--ml-trx))
+							translateY(var(--ml-try))
+							scaleX(var(--ml-sx))
+							scaleY(var(--ml-sy))
+							rotate(var(--ml-rt))
+							skewX(var(--ml-skx))
+							skewY(var(--ml-sky));
+
+						--ml-trx: 0;
+						--ml-try: 0;
+						--ml-sx: 1;
+						--ml-sy: 1;
+						--ml-rt: 0;
+						--ml-skx: 0;
+						--ml-sky: 0;
+					}
+
+					.Tf-n {
+						transform: none;
+					}
+
+					.-Tr-50p {
+						--ml-trx: -50%;
+						--ml-try: -50%;
+					}
+
+					.-Skx40d {
+						--ml-skx: 40deg;
+					}
+				}
+			}
+		}
 	}
 }

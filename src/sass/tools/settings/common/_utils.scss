@@ -463,7 +463,81 @@ $utils-db: (
 				'value-type': 'color',
 			),
 			'Bxsd': box-shadow,
-			'Tf': transform,
+
+			'Tf': (
+				'properties': (
+					transform,
+					$cv-pref + 'trx',
+					$cv-pref + 'try',
+					$cv-pref + 'sx',
+					$cv-pref + 'sy',
+					$cv-pref + 'rt',
+					$cv-pref + 'skx',
+					$cv-pref + 'sky',
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'': (
+						(
+							translateX(var(#{$cv-pref}trx))
+							translateY(var(#{$cv-pref}try))
+							scaleX(var(#{$cv-pref}sx))
+							scaleY(var(#{$cv-pref}sy))
+							rotate(var(#{$cv-pref}rt))
+							skewX(var(#{$cv-pref}skx))
+							skewY(var(#{$cv-pref}sky))
+						),
+						0, 0, 1, 1, 0, 0, 0,
+					),
+					'mGpu': (
+						(
+							translate3d(var(#{$cv-pref}trx), var(#{$cv-pref}try), 0)
+							scaleX(var(#{$cv-pref}sx))
+							scaleY(var(#{$cv-pref}sy))
+							rotate(var(#{$cv-pref}rt))
+							skewX(var(#{$cv-pref}skx))
+							skewY(var(#{$cv-pref}sky))
+						),
+						0, 0, 1, 1, 0, 0, 0,
+					),
+				),
+			),
+			'-Tr': (
+				'properties': (
+					$cv-pref + 'trx',
+					$cv-pref + 'try',
+				),
+			),
+			'-S': (
+				'properties': (
+					$cv-pref + 'sx',
+					$cv-pref + 'sy',
+				),
+				'value-type': 'alpha',
+			),
+			'-Sx': (
+				'value-type': 'alpha',
+			),
+			'-Sy': (
+				'value-type': 'alpha',
+			),
+			'-Sk': (
+				'properties': (
+					$cv-pref + 'skx',
+					$cv-pref + 'sky',
+				),
+				'value-type': 'angle',
+			),
+			'-Skx': (
+				'value-type': 'angle',
+			),
+			'-Sky': (
+				'value-type': 'angle',
+			),
+			'-Rt': (
+				'value-type': 'angle',
+			),
+
 			'Vs': (
 				'properties': visibility,
 				'keywords': (
@@ -833,6 +907,11 @@ $utils-groups: (
 	'ColorsExt': (
 		'members': (
 			C, Bgc, Bdc, Olc,
+		),
+	),
+	'Translates': (
+		'members': (
+			-Tr, -Trx, -Try,
 		),
 	),
 ) !default;

@@ -119,6 +119,9 @@ ml.$utils-map: map.merge(
 		'BdStyle': ('d', 'ds', '#{ml.$kBpAll} #{ml.$kArOl}_s'),
 		'Bdcl': (''),
 		'Bdrd': (50p),
+		// transform
+		ml.$kBpAll + '_Tf': ('KW', 'n'),
+		ml.$kBpAll + '_Translates': -50p,
 		// other
 		'Ol': (0),
 		ml.$kBpAll + '_O': (0, 1),

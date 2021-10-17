@@ -137,6 +137,12 @@
 	);
 }
 
+@function convert-uv-angle($value, $data: ()) {
+	@return convert-uv-number(
+		$value, ('units-key': 'angle')
+	);
+}
+
 @function convert-uv-global-kw($value, $data: ()) {
 	@if map.has-key(
 		ml.$utils-db, 'common', 'keywords', 'css-oft', $value
