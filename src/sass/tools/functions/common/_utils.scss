@@ -22,6 +22,8 @@
 // Styleguide: sass-tools.functions.common.utils.convert_util_value
 
 @function convert-util-value($util-val, $name, $section: 'utils') {
+	$result: null;
+
 	@if meta.type-of($util-val) == 'string' {
 		$multi-list-sep: if(
 			map.has-key(ml.$utils-db, $section, 'registry', $name, 'multi-list-separator'),
@@ -30,7 +32,7 @@
 		);
 
 		@if string.index($util-val, $multi-list-sep) or string.index($util-val, ml.$tUSp) {
-			$result: ();
+			$converted: ();
 			$separator: map.get(ml.$utils-cfg, 'tokens-values', $multi-list-sep);
 
 			@each $list in ml.str-split($util-val, $multi-list-sep) {
@@ -45,27 +47,38 @@
 					);
 				}
 
-				$result: list.append($result, $converted-items, $separator);
+				$converted: list.append($converted, $converted-items, $separator);
 			}
 
-			@return if(
-				list.length($result) == 1,
-				list.nth($result, 1),
-				$result
+			$result: if(
+				list.length($converted) == 1,
+				list.nth($converted, 1),
+				$converted
 			);
-		}
-
-		@if string.slice($util-val, 1, 1) == ml.$tURv {
-			@return string.unquote(string.slice($util-val, 2));
+		} @else if string.slice($util-val, 1, 1) == ml.$tURv {
+			$result: string.unquote(string.slice($util-val, 2));
 		}
 	}
 
-	$converted: apply-value-converter($util-val, $name, $section);
+	@if not $result {
+		$converted: apply-value-converter($util-val, $name, $section);
+
+		$result: if(
+			meta.type-of($converted) == 'string',
+			string.unquote($converted),
+			$converted
+		);
+	}
 
 	@return if(
-		meta.type-of($converted) == 'string',
-		string.unquote($converted),
-		$converted
+		map.has-key(
+			ml.$utils-db, $section, 'registry', $name, 'last-transform-value'
+		),
+		meta.call(
+			map.get(ml.$utils-db, $section, 'registry', $name, 'last-transform-value'),
+			$result
+		),
+		$result
 	);
 }
 

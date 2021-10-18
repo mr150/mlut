@@ -14,6 +14,10 @@ ml.$utils-cfg: map.deep-merge(
 	)
 );
 
+@function bdrd-modify($value) {
+	@return list.append(($value,), 15px 30px, slash);
+}
+
 ml.$utils-db: map.deep-merge(
 	ml.$utils-db,
 	('utils':
@@ -44,6 +48,10 @@ ml.$utils-db: map.deep-merge(
 			),
 			'Ts': (
 				'keywords': 'timing-functions',
+			),
+			'-Bdrd': (
+				'properties': border-radius,
+				'last-transform-value': meta.get-function('bdrd-modify'),
 			),
 		),
 		'keywords': (
@@ -156,6 +164,10 @@ ml.$utils-cfg: map.set(
 				('1r;2/5p', 'Bdrd'): list.slash(1rem 2px, 5%),
 				('bdc;3s,c;gTsdDef', 'Ts'): (border-color 3s, color 0.3s),
 				('3/5', 'Gc'): list.slash(3, 5),
+			),
+			'last transform after conversion': (
+				('2e', '-Bdrd'): list.slash(2em, 15px 30px),
+				('10;1r', '-Bdrd'): list.slash(10px 1rem, 15px 30px),
 			),
 		);
 
