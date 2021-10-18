@@ -267,5 +267,21 @@ ml.$utils-db: map.deep-merge(
 				}
 			}
 		}
+
+		@include it('make gradient utils') {
+			@include assert() {
+				@include output(false) {
+					@include ml.apply(
+						'-Gdl-r,#fff;30p,#00f;80p,red'
+					);
+				}
+
+				@include expect(false) {
+					.-Gdl-r\,\#fff\;30p\,\#00f\;80p\,red {
+						background-image: linear-gradient(to right, #fff 30%, #00f 80%, red);
+					}
+				}
+			}
+		}
 	}
 }

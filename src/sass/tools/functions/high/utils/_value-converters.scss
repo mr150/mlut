@@ -229,6 +229,9 @@ $-tUCp-length: string.length(ml.$tUCp);
 
 				@return rgba($color or $converted-part, $alpha);
 			}
+		} @else {
+			// TODO: remove this when quotes in multiple string values will fixed
+			@return string.unquote($value);
 		}
 	}
 

@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:list';
 @use 'sass:string';
+@use 'sass:meta';
 
 @use '../base' as ml;
 
@@ -18,6 +19,27 @@ $-css-wide-kw: (
 	'us': unset,
 );
 $-bd-kw-links: ('border', 'line-style', 'line-width');
+
+@function -gdrl-val-prefix($values) {
+	@return -gdl-val-prefix($values, 'repeating-linear-gradient');
+}
+
+@function -gdl-val-prefix($values, $type: 'linear-gradient') {
+	$first-list: list.nth($values, 1);
+	$first-item: list.nth($first-list, 1);
+
+	@if (
+		meta.type-of($first-item) == 'string' and
+		string.index($first-item, 'var(') != 1
+	) {
+		$first-list: list.join(to, $first-list);
+	}
+
+	@return meta.call(
+		meta.get-function($type, true),
+		list.set-nth($values, 1, $first-list)
+	);
+}
 
 //stylelint-disable
 $utils-db: (
@@ -184,7 +206,7 @@ $utils-db: (
 				'value-type': 'unitless',
 			),
 
-			'Gd': grid,
+			'G': grid,
 			'F': (
 				'properties': float,
 				'keywords': (
@@ -451,6 +473,20 @@ $utils-db: (
 			),
 			'Bgi': (
 				'properties': background-image,
+			),
+			'-Gdl': (
+				'properties': background-image,
+				'last-transform-value': meta.get-function('-gdl-val-prefix'),
+				'value-type': 'gradient',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': ('position', 'gradients'),
+			),
+			'-Gdrl': (
+				'properties': background-image,
+				'last-transform-value': meta.get-function('-gdrl-val-prefix'),
+				'value-type': 'gradient',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': ('position', 'gradients'),
 			),
 
 			'Ol': (

@@ -60,6 +60,9 @@ ml.$utils-db: map.deep-merge(
 				'ei': ease-in,
 				'eo': ease-out,
 			),
+			'gradients': (
+				'brand0': (black 40%, yellow)
+			),
 		),
 	),
 	'common': (
@@ -168,6 +171,13 @@ ml.$utils-cfg: map.set(
 			'last transform after conversion': (
 				('2e', '-Bdrd'): list.slash(2em, 15px 30px),
 				('10;1r', '-Bdrd'): list.slash(10px 1rem, 15px 30px),
+				('b;r,red,#ff0', '-Gdl'): linear-gradient(to bottom right, red, #ff0),
+				('l,brand0', '-Gdl'): linear-gradient(to left, black 40%, yellow),
+				('50d,prm0;3r,sec0;80p', '-Gdl'): linear-gradient(50deg, #c06 3rem, #0c6 80%),
+				('$gdlf;30p,sec0*80p;70p', '-Gdl'):
+					linear-gradient(var(--ml-gdlf) 30%, rgba(0, 204, 102, 0.8) 70%),
+				('t,#007,cc', '-Gdrl'):
+					repeating-linear-gradient(to top, #007, currentColor),
 			),
 		);
 

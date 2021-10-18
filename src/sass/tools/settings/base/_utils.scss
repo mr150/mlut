@@ -82,6 +82,7 @@ $Trsdu-def: 0.3s !default;
 // Styleguide: sass-tools.settings.utils.states
 
 $cCtx: '-Ctx' !default;
+$kSsVCP: 'Pl' !default;
 $uv-type-base: ('global-kw', 'cust-prop',) !default;
 $uv-type-default: list.join(('keyword', 'number'), $uv-type-base);
 $utils-config: () !default;
@@ -114,6 +115,9 @@ $utils-cfg: (
 		'border': list.join(
 			('keyword', 'color', 'number'), $uv-type-base
 		),
+		'gradient': (
+			'keyword', 'color', 'cust-prop', $kSsVCP, 'number', 'angle', 'global-kw'
+		)
 	),
 
 	'abbr-separators': (),
@@ -142,6 +146,7 @@ $utils-cfg: (
 			'd': 1deg,
 			'g': 1grad,
 			'r': 1rad,
+			'ra': 1rad,
 			't': 1turn,
 		),
 	),
@@ -267,7 +272,6 @@ $kStPC: map.get($utils-cfg, 'tokens', 'generation', 'states-pseudo-classes');
 $kStPE: map.get($utils-cfg, 'tokens', 'generation', 'states-pseudo-elements');
 $kStCb: map.get($utils-cfg, 'tokens', 'generation', 'states-combine');
 $kStOl: map.get($utils-cfg, 'tokens', 'generation', 'states-only');
-$kSsVCP: 'Pl' !default;
 $kCfOv: '/override' !default;
 $kCfBan: '/ban' !default;
 $kCfAl: '/allow' !default;
