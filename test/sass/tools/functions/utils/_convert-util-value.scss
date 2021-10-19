@@ -145,7 +145,7 @@ ml.$utils-cfg: map.set(
 				('', 'Bd'): (1px solid,),
 			),
 			'converts colors': (
-				('t', 'C'): transparent,
+				('tp', 'C'): transparent,
 				('gCPrm0*20p', 'C'): rgba(102, 0, 204, 0.2),
 				('#60c*20p', 'C'): rgba(102, 0, 204, 0.2),
 				('prm0*gOpDef', 'C'): rgba(204, 0, 102, 0.64),
