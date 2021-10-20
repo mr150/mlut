@@ -8,6 +8,42 @@
 
 $utils: () !default;
 $filter-mod: null;
+$-all-utils-map: ();
+
+@function -list2map($list) {
+	$map: ();
+
+	@each $item in $list {
+		$map: map.set($map, $item, null);
+	}
+
+	@return $map;
+}
+
+@each $section, $map in ml.$utils-map {
+	@each $util in map.keys($map) {
+		@if map.has-key($-all-utils-map, $util) {
+			$exist-values: map.get($-all-utils-map, $util);
+			$new-values: map.get($map, $util);
+			$exist-val-type: meta.type-of($exist-values);
+			$new-val-type: meta.type-of($new-values);
+
+			@if $exist-val-type != 'map' and $new-val-type != 'map' {
+				$map: map.set($map, $util, list.join($exist-values, $new-values));
+			} @else if $exist-val-type == 'map' and $new-val-type == 'map' {
+				// Here should be a @break, but it is not yet implemented in Sass
+			} @else if $exist-val-type == 'map' and $new-val-type != 'map' {
+				$map: map.set($map, $util, map.merge($exist-values, -list2map($new-values)));
+			} @else {
+				$map: map.set($map, $util, map.merge(-list2map($exist-values), $new-values));
+			}
+		}
+	}
+
+	$-all-utils-map: map.deep-merge($-all-utils-map, $map);
+}
+
+ml.$utils-map: $-all-utils-map;
 
 $-utils-list: map.keys(ml.$utils-map);
 $-all-groups: map.keys(ml.$utils-groups);

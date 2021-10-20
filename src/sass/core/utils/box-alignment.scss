@@ -99,6 +99,7 @@ Styleguide: core-utils.flex.ac
 
 ml.$utils-map: map.merge(
 	ml.$utils-map,
+	ml.$kSsUMCS,
 	(
 		ml.$kBpAll + '_Fld': ('rr', '#{ml.$kBpAll} #{ml.$kArOl}_r', 'c', 'cr'),
 		'Flg': (1),

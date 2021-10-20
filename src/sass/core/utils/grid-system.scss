@@ -67,6 +67,7 @@ Styleguide: core-utils.grid_system.gscr
 
 ml.$utils-map: map.merge(
 	ml.$utils-map,
+	ml.$kSsUMCS,
 	(
 		ml.$kBpAll + '_-Gsg': ([1su, 8],),
 		ml.$kBpAll + '_-Gsc': (['2_>*', 11],),

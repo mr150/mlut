@@ -76,6 +76,7 @@ $-Ct-list: ('', 'n');
 
 ml.$utils-map: map.merge(
 	ml.$utils-map,
+	ml.$kSsUMCS,
 	(
 		ml.$kBpAll + '_Ps': ('', 'a', 'f', 's', 'st'),
 		ml.$kBpAll + '_Offsets': (0, 'a', 100p, 50p),

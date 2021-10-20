@@ -3,7 +3,7 @@
 @use 'sass:map';
 @use 'sass:list';
 
-@use 'core/utils/load';
+@use 'test-core';
 @use 'test-addon';
 @use 'core/utils/init' with (
 	$utils: (
@@ -14,7 +14,7 @@
 		),
 
 		ml.$kCfAl: (
-			'M', 'F', 'Txs', 'Bgs'
+			'M', 'Bxs', 'H', 'D', 'Txs', 'Bgs'
 		),
 
 		/*
@@ -34,8 +34,21 @@
 			ml.$utils-map,
 			(
 				'M': (1su, 2r),
-				'F': ('', 'r'),
-				'Txs_h,f a': ('-defTxs', 'rv'),
+				'Bxs': (
+					'bb': null,
+					'cb': null,
+					'pb': padding-box,
+				),
+				'H': (
+					'max': 800px,
+					240: null,
+					5r: null,
+				),
+				'D': (
+					'g': grid,
+					'i': inline,
+				),
+				'Txs_h,f a': ('n', '-defTxs', 'rv'),
 				ml.$kBpAll + '_Bgs': (100p, ml.$kUvKA),
 			),
 			$inspect: true,
@@ -47,10 +60,10 @@
 		@include assert-equal(
 			ml.$utils-map,
 			(
+				'reputation': (100, 150),
 				'Overflows': ('', 'a', 's', 'v'),
 				'Borders': ml.$kBpAll + '_',
 				'BdStyle': ('d', 'ds', '#{ml.$kBpAll} #{ml.$kArOl}_s'),
-				'reputation': (100, 150),
 			),
 			$inspect: true,
 		);

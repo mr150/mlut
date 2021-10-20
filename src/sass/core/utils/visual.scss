@@ -107,6 +107,7 @@ Styleguide: core-utils.visual
 
 ml.$utils-map: map.merge(
 	ml.$utils-map,
+	ml.$kSsUMCS,
 	(
 		// background
 		'Bgr': ('nr', 'rx', 'ry'),

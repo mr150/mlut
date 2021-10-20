@@ -83,6 +83,7 @@ $Trsdu-def: 0.3s !default;
 
 $cCtx: '-Ctx' !default;
 $kSsVCP: 'Pl' !default;
+$kSsUMCS: 'core' !default;
 $uv-type-base: ('global-kw', 'cust-prop',) !default;
 $uv-type-default: list.join(('keyword', 'number'), $uv-type-base);
 $utils-config: () !default;

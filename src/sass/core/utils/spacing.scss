@@ -90,6 +90,7 @@ $-M-list: ([ml.$kBpAll + '_-6su', -1], [ml.$kBpAll + '_-2gg', -1], [ml.$kBpAll +
 
 ml.$utils-map: map.merge(
 	ml.$utils-map,
+	ml.$kSsUMCS,
 	(
 		ml.$kBpAll + '_Margins': (0, 'a', 'ih', [1su, 6]),
 		ml.$kBpAll + '_Paddings': (0, 'ih', [1su, 7], [1gg, 6]),

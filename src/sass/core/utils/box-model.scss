@@ -94,6 +94,7 @@ Styleguide: core-utils.bxs.ov
 
 ml.$utils-map: map.merge(
 	ml.$utils-map,
+	ml.$kSsUMCS,
 	(
 		// display
 		ml.$kBpAll + '_D': (
