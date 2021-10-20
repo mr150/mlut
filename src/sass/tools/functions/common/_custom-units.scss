@@ -230,13 +230,14 @@ ml.$utils-db: map.deep-merge(
 			'W': (
 				'preset-properties': (
 					ml.$cv-pref + 'gc': meta.get-function('-gc-prop'),
-					'width': meta.get-function('-gc-fallback'),
+					// space in key is needed to add the second fallback
+					' width': meta.get-function('-gc-fallback'),
 				)
 			),
 			'Ml': (
 				'preset-properties': (
 					ml.$cv-pref + 'mgc': meta.get-function('-gc-prop'),
-					'margin-left': meta.get-function('-gc-fallback'),
+					' margin-left': meta.get-function('-gc-fallback'),
 				)
 			)
 		)
