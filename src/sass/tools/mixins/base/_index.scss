@@ -91,30 +91,3 @@ Styleguide: sass-tools.mixins.ar
 		@content;
 	}
 }
-
-// cCl
-//
-// Generate clearfix for float layout.
-// ```scss
-//.block {
-//		@include cCl;
-//}
-// ```
-// CSS
-// ```css
-//.block:after {
-//		display: table;
-//		clear: both;
-//		content: '';
-//}
-// ```
-//
-// Styleguide: sass-tools.mixins.utils.-cl
-
-@mixin cCl {
-	&:after {
-		display: table;
-		clear: both;
-		content: '';
-	}
-}
