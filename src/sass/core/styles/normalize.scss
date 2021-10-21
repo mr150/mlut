@@ -32,7 +32,7 @@ Styleguide: core-styles.normalize
 	}
 
 	// Add the ability to set border only with `Bd*w` utils
-	@if map.get(ml.$general-cfg, 'base-styles', 'border-for-utils') {
+	@if map.get(ml.$general-cfg, 'base-styles', 'reset-border') {
 		*,
 		*::before,
 		*::after {
