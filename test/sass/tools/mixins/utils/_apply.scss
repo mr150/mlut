@@ -11,6 +11,10 @@ ml.$utils-db: map.deep-merge(
 			'Txt': (
 				'components': 'Txt_af',
 			),
+			'-Cl': (
+				'properties': clear,
+				'selector': '&::after',
+			),
 		),
 	)
 	)
@@ -223,6 +227,25 @@ ml.$utils-db: map.deep-merge(
 				}
 			}
 		}
+
+		@include it('apply util with `selector` option') {
+			@include assert() {
+				@include output(false) {
+					.testou {
+						@include ml.apply(
+							'-Cl-n'
+						);
+					}
+				}
+
+				@include expect(false) {
+					.testou::after {
+						clear: none;
+					}
+				}
+			}
+		}
+
 
 		@include it('make transform utils') {
 			@include assert() {

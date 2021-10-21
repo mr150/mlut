@@ -66,6 +66,11 @@ Styleguide: sass-tools.mixins.utils
 	$utils-list: if(
 		$ready-list, $utils, ml.str-split($utils, ' ')
 	);
+	$util-options: ('components': null);
+
+	@if & != null {
+		$util-options: map.set($util-options, 'selector', &);
+	}
 
 	// TODO: optimize the applying several values of one utility
 	@each $item in $utils-list {
@@ -100,7 +105,7 @@ Styleguide: sass-tools.mixins.utils
 			map.get($abbr-data, 'name'),
 			map.get($abbr-data, 'value'),
 			map.remove($util-data, 'value'),
-			('selector': &, 'components': null)
+			$util-options
 		);
 	}
 }

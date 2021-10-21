@@ -3,6 +3,7 @@
 @use 'sass:map';
 @use 'sass:math';
 @use 'sass:string';
+@use 'sass:selector';
 
 @use '../forward-tools' as ml;
 
@@ -373,6 +374,20 @@
 	}
 
 	$prop: map.get($options, 'properties');
+	$external-selector: map.get($options, 'selector');
+
+	@if (
+		$external-selector and
+		map.has-key(ml.$utils-db, 'utils', 'registry', $name, 'selector') and
+		not string.index(meta.inspect($external-selector), ml.$tSTu)
+	) {
+		$options: map.set(
+			$options,
+			'selector',
+			selector.nest($external-selector, map.get($result, 'selector'))
+		);
+	}
+
 	$result: map.merge($result, $options);
 
 	@return map.set(

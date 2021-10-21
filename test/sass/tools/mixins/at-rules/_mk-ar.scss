@@ -267,7 +267,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 			ml.$tANot: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'not');
 			ml.$tACs: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'custom');
 			ml.$tAAr: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'ar');
-			ml.$tSTu: map.get(ml.$utils-cfg, 'tokens', 'syntax', 'this-util');
+			ml.$tSTu: map.get(ml.$utils-cfg, 'tokens', 'states', 'this-util');
 		}
 
 	}
