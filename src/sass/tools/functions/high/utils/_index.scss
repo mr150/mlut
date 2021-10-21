@@ -75,7 +75,7 @@ Styleguide: sass-tools.functions.high.utils
 				@if $item == ml.$tSTucv {
 					$converted: ml.str-escape(ml.$tSTucv);
 				} @else {
-					$converted: ml.check-class($this-util + ml.str-escape(string.slice($item, 2)));
+					$converted: ml.css-class($this-util + ml.str-escape(string.slice($item, 2)));
 				}
 			} @else if $item == '' {
 				$converted: ' ';

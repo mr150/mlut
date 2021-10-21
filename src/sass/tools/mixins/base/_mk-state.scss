@@ -47,7 +47,7 @@
 		@error '$selector argument must not be null.';
 	}
 
-	$selector: ml.check-class($selector);
+	$selector: ml.css-class($selector);
 	$final-selector-list: ();
 	$pre-comb-list: $selector;
 
@@ -103,7 +103,7 @@
 
 @function -pre-state-selector($list, $selector, $this: null) {
 	$result: ();
-	$selector: ml.check-class($selector, 1);
+	$selector: ml.css-class($selector, 1);
 
 	@each $item in $list {
 		$selector-list: '';

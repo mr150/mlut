@@ -14,21 +14,21 @@ Functions-helpers for general tasks.
 Styleguide: sass-tools.functions.common.helpers
 */
 
-// ml-check-class
+// ml-css-class
 //
 // Checks for a dot in the CSS class name depending on the flag.
 // ```scss
-//ml-check-class('.block') => '.block'
-//ml-check-class('block') => '.block'
-//ml-check-class('.block', 1) => 'block'
+//ml-css-class('.block') => '.block'
+//ml-css-class('block') => '.block'
+//ml-css-class('.block', 1) => 'block'
 // ```
 //
 // $name - class name string.
-// $only-name = null - bool flag. In you want to get class name without dot pass 1. Else, a value with a dot will be returned.
+// $only-name = false - bool flag. In you want to get class name without dot pass 1. Else, a value with a dot will be returned.
 //
-// Styleguide: sass-tools.functions.common.helpers.check_class
+// Styleguide: sass-tools.functions.common.helpers.css_class
 
-@function check-class($name, $only-name: null) {
+@function css-class($name, $only-name: false) {
 	$name: $name + '';
 
 	@if $only-name {
