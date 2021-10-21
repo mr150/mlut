@@ -209,7 +209,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 
 .row__col,
 .row__item {
-	#{ml.$var-gc-diff}: 0px;
+	#{ml.$var-gsfd}: 0px;
 	max-width: 100%;
 
 	@if not ml.$base-border-box {
@@ -221,7 +221,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 		vertical-align: top;
 	}
 
-	@include ml.apply('-Gscr');
+	@include ml.apply('-Gsf');
 
 	& > :first-child:not([class]) {
 		margin-top: 0px;
@@ -233,7 +233,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 }
 
 .row__col {
-	@include ml.apply('-Gscd1gg W12gc M0;1gg;2gg');
+	@include ml.apply('-Gsfd1gg W12gc M0;1gg;2gg');
 
 	&.row {
 		margin-bottom: 0px;

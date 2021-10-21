@@ -25,7 +25,7 @@ Styleguide: core-styles.css_vars
 
 	#{ml.$var-gg}: ml.$gtr-first;
 	#{ml.$var-gg-rem}: ml.px2rem(ml.$gtr-first);
-	#{ml.$var-grid-cols}: ml.$grid-columns;
+	#{ml.$var-gscc}: ml.$grid-columns;
 
 	@each $key, $value in ml.$grid-gutters {
 		@if $value != $prev-value {

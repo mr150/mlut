@@ -133,8 +133,8 @@ $general-cfg: (
 	'css-vars': (
 		'gg': 'gg',
 		'gg-rem': 'gg-rem',
-		'gc-diff': 'gc-diff',
-		'grid-cols': 'grid-cols',
+		'gs-formula-diff': 'gsfd',
+		'gs-columns-count': 'gscc',
 	),
 ) !default;
 
@@ -166,7 +166,7 @@ $general-cfg: map.set($general-cfg, 'css-vars', $-prefixed-vars);
 
 $var-gg: map.get($general-cfg, 'css-vars', 'gg');
 $var-gg-rem: map.get($general-cfg, 'css-vars', 'gg-rem');
-$var-gc-diff: map.get($general-cfg, 'css-vars', 'gc-diff');
-$var-grid-cols: map.get($general-cfg, 'css-vars', 'grid-cols');
+$var-gsfd: map.get($general-cfg, 'css-vars', 'gs-formula-diff');
+$var-gscc: map.get($general-cfg, 'css-vars', 'gs-columns-count');
 
 $base-border-box: map.get($general-cfg, 'base-styles', 'border-box');

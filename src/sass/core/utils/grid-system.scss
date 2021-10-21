@@ -25,14 +25,13 @@ Styleguide: core-utils.grid_system.gsg
 */
 
 /*
--Gsc
+-Gscc
 
 Grid system columns. Sets number of columns in grid system on DOM node. Controls `--mlu.grid-cols`.
 
-* `-Gsc` \- columns number is equal [mlu.$grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
+* `-Gscc` \- columns number is equal [mlu.$grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
 
--Gsc-sm - keyword that means number of columns on `sm` breakpoint. There is on all breakpoints except `sm`.<br> Available selector modifier `chl`. See [example](section-examples.html#kssref-examples-layouts-2ec4ecin2_nd).
--Gsc10_md - only *Responsive*. Available `chl` state.
+-Gscc10_md - only *Responsive*. Available `chl` state.
 
 Markup: ../../../docs/examples/core-utils/grid-system/gsc.hbs
 
@@ -40,13 +39,13 @@ Styleguide: core-utils.grid_system.gsc
 */
 
 /*
--Gscd
+-Gsfd
 
 Grid system columns diff. Controls `--gc-diff` from grid column width [formula](section-core-blocks.html#kssref-core-blocks-row-row__col).
 
-* `-Gscd1gg` \- 1 gutter
+* `-Gsfd1gg` \- 1 gutter
 
--Gscd0 - 0px
+-Gsfd0 - 0px
 
 Markup: ../../../docs/examples/core-utils/grid-system/gscd.hbs
 
@@ -54,11 +53,11 @@ Styleguide: core-utils.grid_system.gscd
 */
 
 /*
--Gscr
+-Gsf
 
 Grid system columns rule. Controls `--gc-rule` and `--mgc-rule` .
 
--Gscr - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the column widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu.gg`.
+-Gsf - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the column widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu.gg`.
 
 Markup: ../../../docs/examples/core-utils/grid-system/gscr.hbs
 
@@ -70,8 +69,7 @@ ml.$utils-map: map.merge(
 	ml.$kSsUMCS,
 	(
 		ml.$kBpAll + '_-Gsg': ([1su, 8],),
-		ml.$kBpAll + '_-Gsc': (['2_>*', 11],),
-		ml.$kBpAll + '_-Gscd': (1gg, 0),
-		ml.$kBpAll + '_-Gscr': (''),
+		ml.$kBpAll + '_-Gsfd': (1gg, 0),
+		ml.$kBpAll + '_-Gsf': (''),
 	)
 );

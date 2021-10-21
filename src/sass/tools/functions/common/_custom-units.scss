@@ -189,7 +189,7 @@ $-gtr-fallback-rem: ml.px2rem(ml.$grid-default-gtr);
 	}
 
 	@return var(
-		#{ml.$cv-pref + if(map.get($data, 'util') == 'Ml', 'mgc', 'gc') + '-rule'},
+		#{ml.$cv-pref + if(map.get($data, 'util') == 'Ml', 'gsof', 'gscf')},
 		#{math.div($n, ml.$grid-columns) * 100%}
 	);
 }
@@ -229,14 +229,14 @@ ml.$utils-db: map.deep-merge(
 		'registry': (
 			'W': (
 				'preset-properties': (
-					ml.$cv-pref + 'gc': meta.get-function('-gc-prop'),
+					ml.$cv-pref + 'gsc': meta.get-function('-gc-prop'),
 					// space in key is needed to add the second fallback
 					' width': meta.get-function('-gc-fallback'),
 				)
 			),
 			'Ml': (
 				'preset-properties': (
-					ml.$cv-pref + 'mgc': meta.get-function('-gc-prop'),
+					ml.$cv-pref + 'gso': meta.get-function('-gc-prop'),
 					' margin-left': meta.get-function('-gc-fallback'),
 				)
 			)

@@ -45,11 +45,11 @@ $-bd-kw-links: ('border', 'line-style', 'line-width');
 $utils-db: (
 	'utils': (
 		'registry': (
-			'-Gsc': (
-				'properties': ml.$var-grid-cols,
+			'-Gscc': (
+				'properties': ml.$var-gscc,
 				'value-type': 'unitless',
 			),
-			'-Gscd': $cv-pref + 'gc-diff',
+			'-Gsfd': ml.$var-gsfd,
 			'-Gsg': (
 				'properties': (
 					ml.$var-gg-rem,
@@ -57,15 +57,15 @@ $utils-db: (
 				),
 				'directions': true,
 			),
-			'-Gscr': (
+			'-Gsf': (
 				'properties': (
-					$cv-pref + 'gc-rule',
-					$cv-pref + 'mgc-rule',
+					$cv-pref + 'gscf',
+					$cv-pref + 'gsof',
 				),
 				'keywords': (
 					'': (
-					calc(var(#{$cv-pref}gc) / var(ml.$var-grid-cols) * 100% - var(ml.$var-gc-diff, var(ml.$var-gg)) * 2),
-					calc(var(#{$cv-pref}mgc) / var(ml.$var-grid-cols) * 100% + var(ml.$var-gc-diff, var(ml.$var-gg))),
+					calc(var(#{$cv-pref}gsc) / var(ml.$var-gscc) * 100% - var(ml.$var-gsfd, var(ml.$var-gg)) * 2),
+					calc(var(#{$cv-pref}gso) / var(ml.$var-gscc) * 100% + var(ml.$var-gsfd, var(ml.$var-gg))),
 				),
 				),
 			),
