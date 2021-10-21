@@ -89,7 +89,7 @@ ml.$general-cfg: map.set(
 	ml.$general-cfg, 'custom-unit-values', 'gg', meta.get-function('gg', false)
 );
 
-$-gtr-fallback-rem: ml.px2rem(ml.$grid-default-gtr);
+$-gtr-fallback-rem: ml.px2rem(ml.$gs-default-gtr);
 
 @function gg-fallback($util, $util-value, $css-value, $important) {
 	$value-part-init: 'calc(var(#{ml.css-var("gg")}';
@@ -111,7 +111,7 @@ $-gtr-fallback-rem: ml.px2rem(ml.$grid-default-gtr);
 			if(
 				$def-unit == 'rem',
 				$-gtr-fallback-rem,
-				ml.$grid-default-gtr
+				ml.$gs-default-gtr
 			)
 		),
 	);
@@ -190,7 +190,7 @@ $-gtr-fallback-rem: ml.px2rem(ml.$grid-default-gtr);
 
 	@return var(
 		#{ml.$cv-pref + if(map.get($data, 'util') == 'Ml', 'gsof', 'gscf')},
-		#{math.div($n, ml.$grid-columns) * 100%}
+		#{math.div($n, ml.$gs-columns) * 100%}
 	);
 }
 
@@ -215,8 +215,8 @@ ml.$general-cfg: map.set(
 		$cols: math.div($n, 1gc);
 
 		@return calc(
-			(math.div($cols, ml.$grid-columns) * 100%) -
-			ml.$grid-default-gtr * if($util == 'Ml', -1, 2)
+			(math.div($cols, ml.$gs-columns) * 100%) -
+			ml.$gs-default-gtr * if($util == 'Ml', -1, 2)
 		);
 	}
 

@@ -132,11 +132,11 @@ Styleguide: sass-tools.functions.base.getters
 // Styleguide: sass-tools.functions.base.getters.grid_gtr
 
 @function grid-gtr($name, $error-handler: 1) {
-	@if map.has-key(ml.$grid-gutters, $name) or $error-handler == 0 {
-		@return map.get(ml.$grid-gutters, $name);
+	@if map.has-key(ml.$gs-gutters, $name) or $error-handler == 0 {
+		@return map.get(ml.$gs-gutters, $name);
 	}
 
-	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-grid-gutters';
+	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-gs-gutters';
 }
 
 // ml-css-var

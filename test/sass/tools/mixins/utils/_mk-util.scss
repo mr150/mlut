@@ -600,7 +600,7 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					.Stretched1gg {
-						@each $key, $value in ml.$main-directions { #{$value}: ml.$grid-default-gtr; }
+						@each $key, $value in ml.$main-directions { #{$value}: ml.$gs-default-gtr; }
 
 						@each $key, $value in ml.$main-directions { #{$value}: ml.gg(1); }
 					}
@@ -770,12 +770,12 @@ ml.$utils-db: map.deep-merge(
 
 				@include expect(false) {
 					.Bdrd13\;1gg_a:active {
-						border-radius: 13px ml.$grid-default-gtr;
+						border-radius: 13px ml.$gs-default-gtr;
 						border-radius: 13px ml.gg(1);
 					}
 
 					.Bdrd1gg\;25\/1\.5gg {
-						border-radius: list.slash((ml.$grid-default-gtr * 1) 25px, ml.$grid-default-gtr * 1.5);
+						border-radius: list.slash((ml.$gs-default-gtr * 1) 25px, ml.$gs-default-gtr * 1.5);
 						border-radius: list.slash(ml.gg(1) 25px, ml.gg(1.5));
 					}
 				}

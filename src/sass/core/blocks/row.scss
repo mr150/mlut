@@ -199,7 +199,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 	display: flex;
 	flex-wrap: wrap;
 	// TODO: replace this with `apply` when `parse-abbr` of 'M0;-1gg' would be fixed
-	margin: 0px -(ml.$grid-default-gtr);
+	margin: 0px -(ml.$gs-default-gtr);
 	margin: 0px calc(var(--ml-gg) * -1);
 
 	padding: 0px;
@@ -216,7 +216,7 @@ Styleguide: examples.nested_layouts.row_nested_col.case7
 		box-sizing: border-box;
 	}
 
-	@if ml.$grid-flex-fallback {
+	@if ml.$gs-flex-fallback {
 		display: inline-block;
 		vertical-align: top;
 	}
