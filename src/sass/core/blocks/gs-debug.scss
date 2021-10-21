@@ -1,7 +1,7 @@
 @use '../../tools' as ml;
 
 /*
-Grid-debug
+Grid-system debug
 
 Block for debugging layouts that built with grid system. It displays a grid system columns and gutters in the background of the container. The grid system are generated depending on the [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
 
@@ -11,10 +11,10 @@ It **turned off** in default MLUT distributive.
 
 Markup: ../../../docs/examples/core-blocks/grid-debug/grid-debug.html
 
-Styleguide: core-blocks.grid-debug
+Styleguide: core-blocks.gs-debug
 */
 
-.grid-debug {
+.gs-debug {
 	/* autoprefixer: off */
 	padding: calc(var(ml.$var-gg-rem) * 3) 0px;
 	background-image: linear-gradient(
