@@ -82,4 +82,28 @@
 			}
 		}
 	}
+
+	@include it('make clearfix util') {
+		@include assert() {
+			@include output(false) {
+				@include ml.mk-util(
+					'-Cl_h', ''
+				);
+			}
+
+			@include expect(false) {
+				.-Cl::after {
+					display: table;
+					content: '';
+					clear: both;
+				}
+
+				.-Cl_h:hover::after {
+					display: table;
+					content: '';
+					clear: both;
+				}
+			}
+		}
+	}
 }

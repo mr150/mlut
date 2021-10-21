@@ -224,6 +224,17 @@ $utils-db: (
 					'r': right,
 				),
 			),
+			'-Cl': (
+				'preset-properties': (
+					'display': table,
+					'content': '',
+				),
+				'properties': clear,
+				'selector': '&::after',
+				'keywords': (
+					'': both,
+				),
+			),
 			'Bxs': (
 				'properties': box-sizing,
 				'keywords': (

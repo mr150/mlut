@@ -113,13 +113,10 @@ ml.$utils-map: map.merge(
 		'Bxs': ('', 'cb'),
 		'F': ('', 'r'),
 		'Cl': ('', 'r', 'l'),
+		'-Cl': '',
 		'Overflows': ('', 'a', 's', 'v'),
 	)
 );
-
-.-Cl {
-	@include ml.cCl;
-}
 
 /*
 W
