@@ -141,7 +141,7 @@ ml.$utils-db: map.deep-merge(
 						'Mxw', (
 						500: false,
 						'n': null,
-						[5x, 7]: null,
+						[5e, 7]: null,
 						'sm0': 560px,
 					));
 				}
@@ -156,8 +156,8 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					@for $i from 5 through 7 {
-						.Mxw#{$i}x {
-							max-width: $i * 1ex;
+						.Mxw#{$i}e {
+							max-width: $i * 1em;
 						}
 					}
 
