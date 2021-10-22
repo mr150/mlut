@@ -374,8 +374,12 @@ $utils-db: (
 					'n': normal,
 				),
 			),
-			'Dir': direction,
-			'Lts': letter-spacing,
+			'Lts': (
+				'properties': letter-spacing,
+				'keywords': (
+					'n': normal,
+				),
+			),
 			'Whs': (
 				'properties': white-space,
 				'keywords': (
@@ -415,7 +419,11 @@ $utils-db: (
 				'properties': text-decoration,
 				'keywords': ('text-decoration', 'line-style'),
 			),
-			'Txs': text-shadow,
+			'Txs': (
+				'properties': text-shadow,
+				'value-type': 'border',
+				'multi-list-separator': ml.$tULs1,
+			),
 			'Va': (
 				'properties': vertical-align,
 				'keywords': (
@@ -432,10 +440,11 @@ $utils-db: (
 			),
 			'-Txo': (
 				'properties': (
-					overflow, text-overflow, white-space,
+					text-overflow, overflow, white-space,
 				),
+				'repeat-prop-values': false,
 				'keywords': (
-					'': (hidden, ellipsis, nowrap),
+					'': (ellipsis, hidden, nowrap),
 				),
 			),
 
@@ -509,7 +518,14 @@ $utils-db: (
 				'properties': outline-color,
 				'value-type': 'color',
 			),
-			'Bxsd': box-shadow,
+			'Bxsd': (
+				'properties': box-shadow,
+				'value-type': 'border',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': (
+					'i': inset,
+				),
+			),
 
 			'Tf': (
 				'properties': (
@@ -594,7 +610,42 @@ $utils-db: (
 					'v': visible,
 				),
 			),
-			'Cs': cursor,
+			'Cs': (
+				'properties': cursor,
+				'keywords': (
+					'': pointer,
+					'c': cell,
+					'clr': col-resize,
+					'cp': copy,
+					'ch': crosshair,
+					'd': default,
+					'er': e-resize,
+					'ewr': ew-resize,
+					'g': grab,
+					'gb': grabbing,
+					'h': help,
+					'm': move,
+					'nr': n-resize,
+					'nta': not-allowed,
+					'ner': ne-resize,
+					'neswr': nesw-resize,
+					'nwser': nwse-resize,
+					'nsr': ns-resize,
+					'nwr': nw-resize,
+					'p': pointer,
+					'pr': progress,
+					'rr': row-resize,
+					'sr': s-resize,
+					'ser': se-resize,
+					'swr': sw-resize,
+					't': text,
+					'vt': vertical-text,
+					'wr': w-resize,
+					'wt': wait,
+					'zi': zoom-in,
+					'zo': zoom-out,
+				),
+			),
 			'O': (
 				'properties': opacity,
 				'value-type': 'alpha',
