@@ -23,11 +23,6 @@ ml.$utils-db: map.deep-merge(
 	('utils':
 	(
 		'registry': (
-			'Gc': (
-				'properties': grid-column,
-				'value-type': 'unitless',
-				'multi-list-separator': '/',
-			),
 			'Red': (
 				'properties': --reputation,
 				'value-type': 'red-ppl',
@@ -153,6 +148,13 @@ ml.$utils-cfg: map.set(
 				('#c06*20', 'C'): rgba(204, 0, 102, 20),
 				('prm10*$co', 'C'): string.unquote('prm10*$co'),
 				('$color*20p', 'C'): rgba(var(--ml-color), 0.2),
+			),
+			'converts grid values': (
+				// used `string.unquote` because tests compiler add parentheses and remove some spaces. Because of this, the test falls
+				('s2/3/4', 'Ga'): string.unquote('(span 2/span 2) / 3 / 4'),
+				('t3/af;d;15r', 'G'): list.slash(
+					repeat(3, minmax(0, 1fr)), auto-flow dense 15rem
+				)
 			),
 			'converts values list': (
 				('1r;2;5p', 'Bdrd'): 1rem 2px 5%,

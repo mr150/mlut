@@ -201,12 +201,102 @@ $utils-db: (
 				'properties': justify-self,
 				'keywords': 'box-alignment',
 			),
+			'Plcc': (
+				'properties': place-content,
+				'keywords': 'box-alignment',
+			),
+			'Plci': (
+				'properties': place-items,
+				'keywords': 'box-alignment',
+			),
+			'Plcs': (
+				'properties': place-self,
+				'keywords': 'box-alignment',
+			),
 			'Od': (
 				'properties': order,
 				'value-type': 'unitless',
 			),
 
-			'G': grid,
+			'G': (
+				'properties': grid,
+				'value-type': 'grid-tpl',
+				'multi-list-separator': ml.$tULs2,
+				'keywords': ('grid', 'sizing'),
+			),
+			'Gt': (
+				'properties': grid-template,
+				'value-type': 'grid-tpl',
+				'keywords': 'sizing',
+			),
+			'Gtc': (
+				'properties': grid-template-columns,
+				'value-type': 'grid-tpl',
+				'keywords': 'sizing',
+			),
+			'Gc': (
+				'properties': grid-column,
+				'value-type': 'grid-span',
+				'multi-list-separator': ml.$tULs2,
+				'keywords': 'grid-area',
+			),
+			'Gcs': (
+				'properties': grid-column-start,
+				'value-type': 'kw-unitless',
+				'keywords': 'grid-area',
+			),
+			'Gce': (
+				'properties': grid-column-end,
+				'value-type': 'kw-unitless',
+				'keywords': 'grid-area',
+			),
+			'Gtr': (
+				'properties': grid-template-rows,
+				'value-type': 'grid-tpl',
+				'keywords': 'sizing',
+			),
+			'Gr': (
+				'properties': grid-row,
+				'value-type': 'grid-span',
+				'multi-list-separator': ml.$tULs2,
+				'keywords': 'grid-area',
+			),
+			'Grs': (
+				'properties': grid-row-start,
+				'value-type': 'kw-unitless',
+				'keywords': 'grid-area',
+			),
+			'Gre': (
+				'properties': grid-row-end,
+				'value-type': 'kw-unitless',
+				'keywords': 'grid-area',
+			),
+			'Ga': (
+				'properties': grid-area,
+				'value-type': 'grid-span',
+				'multi-list-separator': ml.$tULs2,
+				'keywords': 'grid-area',
+			),
+			'Gatc': (
+				'properties': grid-auto-columns,
+				'keywords': 'sizing',
+			),
+			'Gatr': (
+				'properties': grid-auto-rows,
+				'keywords': 'sizing',
+			),
+			'Gatf': (
+				'properties': grid-auto-flow,
+				'keywords': (
+					'c': column,
+					'd': dense,
+					'r': row,
+				),
+			),
+			'Gap': gap,
+			'Rg': row-gap,
+			'Clmg': column-gap,
+
 			'F': (
 				'properties': float,
 				'keywords': (
@@ -912,6 +1002,13 @@ $utils-db: (
 				'cb': content-box,
 				'pb': padding-box,
 				't': text,
+			),
+			'grid-area': (
+				's': span,
+			),
+			'grid': (
+				'af': auto-flow,
+				'd': dense,
 			),
 		),
 	),

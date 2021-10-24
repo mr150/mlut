@@ -237,3 +237,32 @@ $-tUCp-length: string.length(ml.$tUCp);
 
 	@return $value;
 }
+
+@function -is-kw-with-num($value, $str-part, $str-length: 1) {
+	@return (
+		meta.type-of($value) == 'string' and
+		string.slice($value, 1, $str-length) == $str-part and
+		ml.str-digit-index($value) == $str-length + 1
+	);
+}
+
+@function convert-uv-grid-tracks($value, $data: ()) {
+	@return if(
+		-is-kw-with-num($value, 't'),
+		repeat(
+			string.unquote(string.slice($value, 2)), minmax(0, 1fr)
+		),
+		$value
+	);
+}
+
+@function convert-uv-grid-span($value, $data: ()) {
+	@if not -is-kw-with-num($value, 's') {
+		@return $value
+	}
+
+	// string is not converted to the number because it is unlikely to use this value in the future
+	$number: string.unquote(string.slice($value, 2));
+
+	@return span $number / span $number;
+}

@@ -1,0 +1,24 @@
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
+@include describe('core/utils/grid') {
+	@include it('grid utils') {
+		@include assert() {
+			@include output(false) {
+				@include ml.apply(
+					'Gtc-t4 Gc-s3'
+				);
+			}
+
+			@include expect(false) {
+				.Gtc-t4 {
+					grid-template-columns: repeat(4, minmax(0, 1fr));
+				}
+
+				.Gc-s3 {
+					grid-column: span 3 / span 3;
+				}
+			}
+		}
+	}
+}
