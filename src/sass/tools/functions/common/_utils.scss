@@ -61,13 +61,7 @@
 	}
 
 	@if not $result {
-		$converted: apply-value-converter($util-val, $name, $section);
-
-		$result: if(
-			meta.type-of($converted) == 'string',
-			string.unquote($converted),
-			$converted
-		);
+		$result: apply-value-converter($util-val, $name, $section);
 	}
 
 	@return if(
@@ -131,8 +125,15 @@
 		}
 	}
 
+	@if $negative {
+		$util-value: '-' + $util-value;
+	}
+
 	@return if(
-		$negative, '-' + $util-value, $util-value
+		//checks type again because here we could get after the converter pipeline
+		meta.type-of($util-value) == 'string',
+		string.unquote($util-value),
+		$util-value
 	);
 }
 
