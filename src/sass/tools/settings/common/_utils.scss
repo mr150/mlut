@@ -897,15 +897,93 @@ $utils-db: (
 				'properties': border-radius,
 				'multi-list-separator': ml.$tULs2,
 			),
+
 			'Ts': (
 				'properties': transition,
 				'value-type': 'abbr-kw',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': (
-					'mAll': all ml.$Trsdu-def,
+					'mAll': ml.$Trsdu-def,
 				),
 			),
-			'An': animation,
+			'-Ts': (
+				'preset-properties': (
+					'transition-duration': ml.$Trsdu-def,
+				),
+				'properties': transition-property,
+				'value-type': 'abbr-kw',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'transition-props'
+			),
+			'Tsp': (
+				'properties': transition-property,
+				'value-type': 'abbr-kw',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'transition-props'
+			),
+			'Tsd': (
+				'properties': transition-duration,
+				'multi-list-separator': ml.$tULs1,
+			),
+			'Tsdl': (
+				'properties': transition-delay,
+				'multi-list-separator': ml.$tULs1,
+			),
+			'Tstf': (
+				'properties': transition-timing-function,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'easing-function'
+			),
+
+			'An': (
+				'properties': animation,
+				'value-type': 'kw-unitless',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': (
+					// TODO: may be try to optimize it and combine a part of keywords to one map
+					'animation', 'easing-function', 'infinite', 'an-direction', 'an-fill-mode', 'an-play-state',
+				),
+			),
+			'Ann': (
+				'properties': animation-name,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'animation'
+			),
+			'And': (
+				'properties': animation-duration,
+				'multi-list-separator': ml.$tULs1,
+			),
+			'Andl': (
+				'properties': animation-delay,
+				'multi-list-separator': ml.$tULs1,
+			),
+			'Antf': (
+				'properties': animation-timing-function,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'easing-function'
+			),
+			'Anic': (
+				'properties': animation-iteration-count,
+				'value-type': 'kw-unitless',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'infinite',
+			),
+			'Andr': (
+				'properties': animation-direction,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'an-direction'
+			),
+			'Anfm': (
+				'properties': animation-fill-mode,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'an-fill-mode'
+			),
+			'Anps': (
+				'properties': animation-play-state,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'an-play-state'
+			),
+
 			'Rs': (
 				'properties': resize,
 				'keywords': (
@@ -1009,6 +1087,45 @@ $utils-db: (
 			'grid': (
 				'af': auto-flow,
 				'd': dense,
+			),
+			'easing-function': (
+				'e': ease,
+				'ei': ease-in,
+				'eo': ease-out,
+				'eio': ease-in-out,
+				'l': linear,
+				'se': step-end,
+				'ss': step-start,
+			),
+			'an-direction': (
+				'a': alternate,
+				'ar': alternate-reverse,
+				'nm': normal,
+				'r': reverse,
+			),
+			'an-fill-mode': (
+				'b': backwards,
+				'bt': both,
+				'f': forwards,
+			),
+			'an-play-state': (
+				'p': paused,
+				'r': running,
+				'rn': running,
+			),
+			'infinite': (
+				'i': infinite,
+			),
+			'transition-props': (
+				'': (
+					background-color, border-color, color,
+					fill, stroke, backdrop-filter, box-shadow,
+					filter, opacity, transform,
+				),
+				'mClr': (
+					background-color, border-color, color,
+					fill, outline-color, stroke,
+				),
 			),
 		),
 	),

@@ -1,0 +1,52 @@
+@use 'sass-true' as *;
+@use 'tools' as ml;
+@use 'sass:map';
+
+ml.$utils-db: map.set(
+	ml.$utils-db, 'utils', 'keywords', 'animation', ('my2': speak-now)
+);
+
+@include describe('core/utils/animation') {
+	@include it('transition utils') {
+		@include assert() {
+			@include output(false) {
+				@include ml.apply(
+					'-Ts -Ts-mClr,l'
+				);
+			}
+
+			@include expect(false) {
+				.-Ts {
+					transition-duration: ml.$Trsdu-def;
+					transition-property:
+						background-color, border-color, color,
+						fill, stroke, backdrop-filter, box-shadow,
+						filter, opacity, transform;
+				}
+
+				.-Ts-mClr\,l {
+					transition-duration: ml.$Trsdu-def;
+					transition-property:
+						background-color, border-color, color,
+						fill, outline-color, stroke, left;
+				}
+			}
+		}
+	}
+
+	@include it('animation utils') {
+		@include assert() {
+			@include output(false) {
+				@include ml.apply(
+					'An1s;ei;i;r;n;rn;anim0,2s;my2'
+				);
+			}
+
+			@include expect(false) {
+				.An1s\;ei\;i\;r\;n\;rn\;anim0\,2s\;my2 {
+					animation: 1s ease-in infinite reverse none running anim0, 2s speak-now;
+				}
+			}
+		}
+	}
+}
