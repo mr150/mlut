@@ -1,0 +1,62 @@
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
+@include describe('core/utils/text') {
+	@include it('custom font size') {
+		@include assert() {
+			@include output(false) {
+				@include ml.apply(
+					'-Fns-sl -Fns18;1.6'
+				);
+			}
+
+			@include expect(false) {
+				.-Fns-sl {
+					font-size: smaller;
+				}
+
+				.-Fns18\;1\.6 {
+					font-size: 18px;
+					line-height: 1.6rem;
+				}
+			}
+		}
+
+		@include assert() {
+			@include output(false) {
+				@include ml.apply(
+					'-Fns3r;;2 -Fns2r;2e;1'
+				);
+			}
+
+			@include expect(false) {
+				.-Fns3r\;\;2 {
+					font-size: 3rem;
+					letter-spacing: 2px;
+				}
+
+				.-Fns2r\;2e\;1 {
+					font-size: 2rem;
+					line-height: 2em;
+					letter-spacing: 1px;
+				}
+			}
+		}
+	}
+
+	@include it('text decoration') {
+		@include assert() {
+			@include output(false) {
+				@include ml.apply(
+					'Txd-o;dh;#f00*80p;5'
+				);
+			}
+
+			@include expect(false) {
+				.Txd-o\;dh\;\#f00\*80p\;5 {
+					text-decoration: overline dashed rgba(255, 0, 0, 0.8) 5px;
+				}
+			}
+		}
+	}
+}

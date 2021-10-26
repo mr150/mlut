@@ -440,6 +440,17 @@ $utils-db: (
 			'Fns': (
 				'properties': font-size,
 				'default-unit': 'rem',
+				'keywords': 'font-size',
+			),
+			'-Fns': (
+				'properties': (
+					font-size,
+					line-height,
+					letter-spacing,
+				),
+				'repeat-prop-values': false,
+				'default-unit': 'rem',
+				'keywords': 'font-size',
 			),
 			'Fnf': (
 				'properties': font-family,
@@ -505,10 +516,70 @@ $utils-db: (
 					'u': uppercase,
 				),
 			),
+			'Txuo': text-underline-offset,
+			'Txi': (
+				'properties': text-indent,
+				'keywords': (
+					'h': hanging,
+					'el': each-line,
+				),
+			),
+			'Txor': (
+				'properties': text-orientation,
+				'keywords': (
+					'm': mixed,
+					'u': upright,
+					's': sideways,
+				),
+			),
+			'Wrb': (
+				'properties': word-break,
+				'keywords': (
+					'ba': break-all,
+					'ka': keep-all,
+					'n': normal,
+				),
+			),
+			'Ovw': (
+				'properties': overflow-wrap,
+				'keywords': (
+					'a': anywhere,
+					'bw': break-word,
+					'n': normal,
+				),
+			),
+			'Wtm': (
+				'properties': writing-mode,
+				'keywords': (
+					'ht': horizontal-tb,
+					'vr': vertical-rl,
+					'vl': vertical-lr,
+				),
+			),
+
 			'Txd': (
 				'properties': text-decoration,
 				'keywords': ('text-decoration', 'line-style'),
+				'value-type': 'border',
 			),
+			'Txdc': (
+				'properties': text-decoration-color,
+				'range-generator': 'color',
+				'value-type': 'color',
+			),
+			'Txdl': (
+				'properties': text-decoration-line,
+				'keywords': 'text-decoration',
+			),
+			'Txdst': (
+				'properties': text-decoration-style,
+				'keywords': 'line-style',
+			),
+			'Txdt': (
+				'properties': text-decoration-thickness,
+				'keywords': 'text-decoration',
+			),
+
 			'Txs': (
 				'properties': text-shadow,
 				'value-type': 'border',
@@ -536,6 +607,16 @@ $utils-db: (
 				'keywords': (
 					'': (ellipsis, hidden, nowrap),
 				),
+			),
+			'Hp': (
+				'properties': hyphens,
+				'keywords': (
+					'm': manual,
+				),
+			),
+			'Tas': (
+				'properties': tab-size,
+				'value-type': 'unitless',
 			),
 
 			'Bgc': (
@@ -1038,13 +1119,13 @@ $utils-db: (
 				'o': outset,
 				'r': ridge,
 				's': solid,
+				'w': wavy,
 			),
 			'text-decoration': (
 				'ff': from-font,
 				'lt': line-through,
 				'o': overline,
 				'u': underline,
-				'w': wavy,
 			),
 			'line-width': (
 				'm': medium,
@@ -1115,6 +1196,11 @@ $utils-db: (
 			),
 			'infinite': (
 				'i': infinite,
+			),
+			'font-size': (
+				'sl': smaller,
+				// so as not to occupy `lg`
+				'lr': larger,
 			),
 			'transition-props': (
 				'': (
