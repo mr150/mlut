@@ -106,6 +106,8 @@ ml.$utils-cfg: map.set(
 				(-0.7, 'Ml'): -0.7rem,
 				('-3jj', 'Ml'): string.unquote('-3jj'),
 				('-2', 'Zi'): -2,
+				(2, 'Tas'): 2,
+				(1r, 'Tas'): 1rem,
 			),
 			'converts global keyword': (
 				('a', 'W'): auto,

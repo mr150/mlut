@@ -471,6 +471,7 @@ $utils-db: (
 			),
 			'Lnh': (
 				'properties': line-height,
+				'value-type': 'kw-num-length',
 				'keywords': (
 					'n': normal,
 				),
@@ -616,7 +617,7 @@ $utils-db: (
 			),
 			'Tas': (
 				'properties': tab-size,
-				'value-type': 'unitless',
+				'value-type': 'num-length',
 			),
 
 			'Bgc': (

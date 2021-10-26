@@ -143,6 +143,12 @@
 	);
 }
 
+@function convert-uv-num-length($value, $data: ()) {
+	@return convert-uv-number(
+		$value, ('units-key': 'num-length')
+	);
+}
+
 @function convert-uv-global-kw($value, $data: ()) {
 	@if map.has-key(
 		ml.$utils-db, 'common', 'keywords', 'css-oft', $value
@@ -255,7 +261,7 @@ $-tUCp-length: string.length(ml.$tUCp);
 
 @function convert-uv-grid-span($value, $data: ()) {
 	@if not -is-kw-with-num($value, 's') {
-		@return $value
+		@return $value;
 	}
 
 	// string is not converted to the number because it is unlikely to use this value in the future
