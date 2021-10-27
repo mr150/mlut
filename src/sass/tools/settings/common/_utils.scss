@@ -69,6 +69,8 @@ $utils-db: (
 				),
 				),
 			),
+
+			// POSITION
 			'Ps': (
 				'properties': position,
 				'keywords': (
@@ -80,7 +82,6 @@ $utils-db: (
 					'sk': sticky,
 				),
 			),
-
 			'T': (
 				'properties': top,
 				'default-unit': 'rem',
@@ -112,6 +113,8 @@ $utils-db: (
 				'properties': z-index,
 				'value-type': 'unitless',
 			),
+
+			// BOX-MODEL
 			'D': (
 				'properties': display,
 				'keywords': (
@@ -421,6 +424,7 @@ $utils-db: (
 				'keywords': 'overflow',
 			),
 
+			// TYPOGRAPHY
 			'C': (
 				'properties': color,
 				'range-generator': 'color',
@@ -620,6 +624,7 @@ $utils-db: (
 				'value-type': 'num-length',
 			),
 
+			// VISUAL
 			'Bgc': (
 				'properties': background-color,
 				'range-generator': 'color',
@@ -980,6 +985,7 @@ $utils-db: (
 				'multi-list-separator': ml.$tULs2,
 			),
 
+			// TRANSITION AND ANIMATION
 			'Ts': (
 				'properties': transition,
 				'value-type': 'abbr-kw',
@@ -1066,6 +1072,7 @@ $utils-db: (
 				'keywords': 'an-play-state'
 			),
 
+			// OTHER
 			'Rs': (
 				'properties': resize,
 				'keywords': (
@@ -1100,6 +1107,57 @@ $utils-db: (
 			'All': (
 				'properties': all,
 				'keywords': 'css',
+			),
+
+			// SVG
+			'Fi': (
+				'properties': fill,
+				'range-generator': 'color',
+				'value-type': 'color',
+			),
+			'Fio': (
+				'properties': fill-opacity,
+				'value-type': 'alpha',
+			),
+
+			'St': (
+				'properties': stroke,
+				'range-generator': 'color',
+				'value-type': 'color',
+			),
+			'Sto': (
+				'properties': stroke-opacity,
+				'value-type': 'alpha',
+			),
+			'Stda': (
+				'properties': stroke-dasharray,
+				'value-type': 'num-length',
+			),
+			'Stdo': (
+				'properties': stroke-dashoffset,
+				'value-type': 'num-length',
+			),
+			'Stlc': (
+				'properties': stroke-linecap,
+				'keywords': (
+					'b': butt,
+					'r': round,
+					's': square,
+				),
+			),
+			'Stlj': (
+				'properties': stroke-linejoin,
+				'keywords': (
+					'a': arcs,
+					'b': bevel,
+					'r': round,
+					'm': miter,
+					'mc': miter-clip,
+				),
+			),
+			'Stw': (
+				'properties': stroke-width,
+				'value-type': 'num-length',
 			),
 		),
 		'keywords': (
