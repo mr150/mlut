@@ -127,6 +127,8 @@ $utils-db: (
 					'ig': inline-grid,
 					'li': list-item,
 					'ri': run-in,
+					'flr': flow-root,
+					'c': contents,
 					't': table,
 					'it': inline-table,
 					'tr': table-row,
@@ -149,6 +151,9 @@ $utils-db: (
 					'mif': (inline-flex, wrap),
 					'vh': (
 						null, null, absolute, 1px, 1px, -1px, 0, hidden, nowrap, 0, rect(0 0 0 0)
+					),
+					'vv': (
+						null, null, static, auto, auto, 0, null, visible, normal, null, auto
 					),
 				),
 			),
@@ -622,7 +627,10 @@ $utils-db: (
 				'properties': tab-size,
 				'value-type': 'num-length',
 			),
-			'Lss': list-style,
+			'Lss': (
+				'properties': list-style,
+				'keywords': (Lsst, Lssp),
+			),
 			'Lsst': (
 				'properties': list-style-type,
 				'keywords': (
@@ -648,7 +656,7 @@ $utils-db: (
 				),
 			),
 
-			// VISUAL
+			// BACKGROUND
 			'Bgc': (
 				'properties': background-color,
 				'range-generator': 'color',
@@ -710,24 +718,7 @@ $utils-db: (
 				'keywords': ('position', 'gradients'),
 			),
 
-			'Ol': (
-				'properties': outline,
-				'value-type': 'border',
-				'keywords': ('line-style', 'line-width'),
-			),
-			'Olc': (
-				'properties': outline-color,
-				'value-type': 'color',
-			),
-			'Bxsd': (
-				'properties': box-shadow,
-				'value-type': 'border',
-				'multi-list-separator': ml.$tULs1,
-				'keywords': (
-					'i': inset,
-				),
-			),
-
+			// TRANSFORM
 			'Tf': (
 				'properties': (
 					transform,
@@ -802,6 +793,24 @@ $utils-db: (
 				'value-type': 'angle',
 			),
 
+			// VISUAL
+			'Ol': (
+				'properties': outline,
+				'value-type': 'border',
+				'keywords': ('line-style', 'line-width'),
+			),
+			'Olc': (
+				'properties': outline-color,
+				'value-type': 'color',
+			),
+			'Bxsd': (
+				'properties': box-shadow,
+				'value-type': 'border',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': (
+					'i': inset,
+				),
+			),
 			'Vs': (
 				'properties': visibility,
 				'keywords': (
@@ -852,6 +861,7 @@ $utils-db: (
 				'value-type': 'alpha',
 			),
 
+			// BORDER
 			'Bd': (
 				'properties': border,
 				'value-type': 'border',
