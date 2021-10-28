@@ -622,6 +622,31 @@ $utils-db: (
 				'properties': tab-size,
 				'value-type': 'num-length',
 			),
+			'Lss': list-style,
+			'Lsst': (
+				'properties': list-style-type,
+				'keywords': (
+					'd': disc,
+					'c': circle,
+					's': square,
+					'dc': decimal,
+					'dclz': decimal-leading-zero,
+					'la': lower-alpha,
+					'lr': lower-roman,
+					'lg': lower-greek,
+					'll': lower-latin,
+					'ua': upper-alpha,
+					'ul': upper-latin,
+					'ur': upper-roman,
+				),
+			),
+			'Lssp': (
+				'properties': list-style-position,
+				'keywords': (
+					'i': inside,
+					'o': outside,
+				),
+			),
 
 			// VISUAL
 			'Bgc': (
@@ -1106,6 +1131,17 @@ $utils-db: (
 			'All': (
 				'properties': all,
 				'keywords': 'css',
+			),
+			'Ec': (
+				'properties': empty-cells,
+				'keywords': (
+					's': show,
+					'h': hide,
+				),
+			),
+			'Cps': (
+				'properties': caption-side,
+				'keywords': 'position'
 			),
 
 			// SVG
