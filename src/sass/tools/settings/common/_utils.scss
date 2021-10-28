@@ -1052,14 +1052,14 @@ $utils-db: (
 				'value-type': 'kw-unitless',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': (
-					// TODO: may be try to optimize it and combine a part of keywords to one map
-					'animation', 'easing-function', 'infinite', 'an-direction', 'an-fill-mode', 'an-play-state',
+					// TODO: maybe try to optimize it and combine a part of keywords to one map
+					'animation', 'easing-function', 'infinite', Andr, Anfm, Anps,
 				),
 			),
 			'Ann': (
 				'properties': animation-name,
 				'multi-list-separator': ml.$tULs1,
-				'keywords': 'animation'
+				'keywords': 'animation',
 			),
 			'And': (
 				'properties': animation-duration,
@@ -1083,17 +1083,30 @@ $utils-db: (
 			'Andr': (
 				'properties': animation-direction,
 				'multi-list-separator': ml.$tULs1,
-				'keywords': 'an-direction'
+				'keywords': (
+					'a': alternate,
+					'ar': alternate-reverse,
+					'nm': normal,
+					'r': reverse,
+				),
 			),
 			'Anfm': (
 				'properties': animation-fill-mode,
 				'multi-list-separator': ml.$tULs1,
-				'keywords': 'an-fill-mode'
+				'keywords': (
+					'b': backwards,
+					'bt': both,
+					'f': forwards,
+				),
 			),
 			'Anps': (
 				'properties': animation-play-state,
 				'multi-list-separator': ml.$tULs1,
-				'keywords': 'an-play-state'
+				'keywords': (
+					'p': paused,
+					'r': running,
+					'rn': running,
+				),
 			),
 
 			// OTHER
@@ -1271,22 +1284,6 @@ $utils-db: (
 				'l': linear,
 				'se': step-end,
 				'ss': step-start,
-			),
-			'an-direction': (
-				'a': alternate,
-				'ar': alternate-reverse,
-				'nm': normal,
-				'r': reverse,
-			),
-			'an-fill-mode': (
-				'b': backwards,
-				'bt': both,
-				'f': forwards,
-			),
-			'an-play-state': (
-				'p': paused,
-				'r': running,
-				'rn': running,
 			),
 			'infinite': (
 				'i': infinite,

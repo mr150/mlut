@@ -112,6 +112,12 @@
 	@each $item in $links {
 		@if map.has-key(ml.$utils-db, $section, 'keywords', $item, $value) {
 			@return map.get(ml.$utils-db, $section, 'keywords', $item, $value);
+		} @else if map.has-key(
+			ml.$utils-db, $section, 'registry', $item, 'keywords', $value
+		) {
+			@return map.get(
+				ml.$utils-db, $section, 'registry', $item, 'keywords', $value
+			);
 		}
 	}
 
