@@ -103,12 +103,11 @@ $utils-db: (
 				),
 				'default-unit': 'rem',
 			),
-			'-Xy': (
+			'-I': (
 				'properties': (
 					top, right, bottom, left
 				),
 			),
-
 			'Zi': (
 				'properties': z-index,
 				'value-type': 'unitless',
@@ -1347,13 +1346,13 @@ $utils-groups: (
 		'members': (
 			M, Mt, Mr, Mb, Ml, -Mx, -My,
 			P, Pt, Pr, Pb, Pl, -Px, -Py,
-			T, R, B, L, -X, -Y, -Xy,
+			T, R, B, L, -X, -Y, -I,
 			W, H, Mxh,
 		),
 	),
 	'Offsets': (
 		'members': (
-			T, R, B, L, -X, -Y, -Xy,
+			T, R, B, L, -X, -Y, -I,
 		),
 	),
 	'Colors': (

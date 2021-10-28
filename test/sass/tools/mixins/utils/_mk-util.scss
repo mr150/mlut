@@ -13,7 +13,7 @@ ml.$utils-db: map.deep-merge(
 	('utils':
 	(
 		'registry': (
-			'-Xy': (
+			'-I': (
 				'components': 'Stretched',
 		),
 			'-AltPos': (
@@ -585,7 +585,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert('properties list and custom util class name') {
 				@include output(false) {
 					@include ml.mk-util(
-						'-Xy', (
+						'-I', (
 						0: null,
 						1gg: null,
 						'sm0;xs0_h': (1rem, 20px),
@@ -828,7 +828,7 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'-Xy', (
+						'-I', (
 						'2r;12!',
 					));
 				}
