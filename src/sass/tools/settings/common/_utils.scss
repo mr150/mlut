@@ -938,6 +938,7 @@ $utils-db: (
 
 			'Bdc': (
 				'properties': border-color,
+				'range-generator': 'color',
 				'value-type': 'color',
 				'directions': true,
 			),
@@ -1154,6 +1155,46 @@ $utils-db: (
 			),
 
 			// OTHER
+			'Ap': (
+				'properties': appearance,
+				'keywords': (
+					'': none,
+				),
+			),
+			'Acnc': (
+				'properties': accent-color,
+				'value-type': 'color',
+			),
+			'Crc': (
+				'properties': caret-color,
+				'value-type': 'color',
+			),
+			'Pne': (
+				'properties': pointer-events,
+				'keywords': (
+					'': none,
+				),
+			),
+			'Us': (
+				'properties': user-select,
+				'keywords': (
+					'': none,
+					't': text,
+					'c': contain,
+				)
+			),
+			'Ovsb': (
+				'properties': overscroll-behavior,
+				'keywords': 'overscroll',
+			),
+			'Ovsbx': (
+				'properties': overscroll-behavior-x,
+				'keywords': 'overscroll',
+			),
+			'Ovsby': (
+				'properties': overscroll-behavior-y,
+				'keywords': 'overscroll',
+			),
 			'Rs': (
 				'properties': resize,
 				'keywords': (
@@ -1336,6 +1377,9 @@ $utils-db: (
 				'sl': smaller,
 				// so as not to occupy `lg`
 				'lr': larger,
+			),
+			'overscroll': (
+				'c': contain,
 			),
 			'transition-props': (
 				'': (
