@@ -811,6 +811,13 @@ $utils-db: (
 					'i': inset,
 				),
 			),
+			'Bxdb': (
+				'properties': box-decoration-break,
+				'keywords': (
+					's': slice,
+					'c': clone,
+				),
+			),
 			'Vs': (
 				'properties': visibility,
 				'keywords': (
@@ -859,6 +866,33 @@ $utils-db: (
 			'O': (
 				'properties': opacity,
 				'value-type': 'alpha',
+			),
+			'Bfv': (
+				'properties': backface-visibility,
+				'keywords': (
+					'v': visible,
+					'h': hidden,
+				),
+			),
+			'Ojf': (
+				'properties': object-fit,
+				'keywords': (
+					'': cover,
+					'ct': contain,
+					'cv': cover,
+					'f': fill,
+					'sd': scale-down,
+				),
+			),
+			'Ojp': (
+				'properties': object-position,
+				'keywords': 'position'
+			),
+			'Is': (
+				'properties': isolation,
+				'keywords': (
+					'i': isolate,
+				),
 			),
 
 			// BORDER
