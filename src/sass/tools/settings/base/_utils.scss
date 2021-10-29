@@ -5,41 +5,12 @@
 //
 // Settings affecting the values and generation of the core utilities.
 //
-// $ml-Fnf--ss0 - sans serif font stack contains default fonts on different OS.
-// $ml-Fnf--m0 - monospace font stack contains default fonts on different OS.
 // $ml-Trsdu-def = 0.3s - default [transition](section-core-utils.html#kssref-core-utils-anim) duration.
 // $ml-utils-states-psd-cls - map with abbreviations of pseudo-classes for utilities.
 // $ml-utils-states-psd-elm - map with pseudo-elements abbreviations for utilities.
 // $ml-utils-states - map with abbreviations of utility state names. Maps of pseudo-classes and pseudo-elements merge into it.
 //
 // Styleguide: sass-tools.settings.utils
-
-// stylelint-disable
-$Fnf--ss0: (
-	-apple-system,
-	BlinkMacSystemFont,
-	'Segoe UI',
-	Roboto,
-	Oxygen,
-	Cantarell,
-	Ubuntu,
-	'Fira Sans',
-	'Droid Sans',
-	'Helvetica Neue',
-	Arial,
-	sans-serif
-) !default;
-
-$Fnf--m0: (
-	SFMono-Regular,
-	Menlo,
-	Monaco,
-	Consolas,
-	'Liberation Mono',
-	'Courier New',
-	monospace
-) !default;
-// stylelint-enable
 
 $Trsdu-def: 0.3s !default;
 

@@ -472,9 +472,9 @@ $utils-db: (
 			'Fnf': (
 				'properties': font-family,
 				'keywords': (
-					'ss0': ml.$Fnf--ss0,
-					's0': (ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif),
-					'm0': (ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace),
+					'mUss': (ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'),
+					'mUsr': (ui-serif, Georgia, Cambria, Times, 'Times New Roman', serif),
+					'mUm': (ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace),
 				),
 			),
 			'Fnst': (
