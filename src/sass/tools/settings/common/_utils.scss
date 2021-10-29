@@ -158,6 +158,11 @@ $utils-db: (
 				),
 			),
 
+			'Fl': (
+				'properties': flex,
+				'value-type': 'num-length',
+				'keywords': 'sizing',
+			),
 			'Fld': (
 				'properties': flex-direction,
 				'keywords': (
@@ -183,7 +188,11 @@ $utils-db: (
 				'properties': flex-shrink,
 				'value-type': 'unitless',
 			),
-			'Fl': flex,
+			'Flb': (
+				'properties': flex-basis,
+				'keywords': 'sizing',
+			),
+
 			'Ac': (
 				'properties': align-content,
 				'keywords': 'box-alignment',
@@ -597,7 +606,7 @@ $utils-db: (
 			'Va': (
 				'properties': vertical-align,
 				'keywords': (
-					'': top,
+					'': middle,
 					'b': bottom,
 					'bl': baseline,
 					'm': middle,
@@ -606,6 +615,14 @@ $utils-db: (
 					't': top,
 					'txb': text-bottom,
 					'txt': text-top,
+				),
+			),
+			'Txo': (
+				'properties': text-overflow,
+				'keywords': (
+					'': ellipsis,
+					'c': clip,
+					'e': ellipsis,
 				),
 			),
 			'-Txo': (
@@ -665,6 +682,7 @@ $utils-db: (
 			'Bgr': (
 				'properties': background-repeat,
 				'keywords': (
+					'': no-repeat,
 					'nr': no-repeat,
 					'rx': repeat-x,
 					'ry': repeat-y,
@@ -757,6 +775,10 @@ $utils-db: (
 					),
 				),
 			),
+			'Tfo': (
+				'properties': transform-origin,
+				'keywords': 'position'
+			),
 			'-Tr': (
 				'properties': (
 					$cv-pref + 'trx',
@@ -820,12 +842,7 @@ $utils-db: (
 			),
 			'Vs': (
 				'properties': visibility,
-				'keywords': (
-					'': hidden,
-					'c': collapse,
-					'h': hidden,
-					'v': visible,
-				),
+				'keywords': 'visibility',
 			),
 			'Cs': (
 				'properties': cursor,
@@ -869,10 +886,7 @@ $utils-db: (
 			),
 			'Bfv': (
 				'properties': backface-visibility,
-				'keywords': (
-					'v': visible,
-					'h': hidden,
-				),
+				'keywords': 'visibility',
 			),
 			'Ojf': (
 				'properties': object-fit,
@@ -1241,6 +1255,30 @@ $utils-db: (
 				'properties': caption-side,
 				'keywords': 'position'
 			),
+			'Wlc': (
+				'properties': will-change,
+				'keywords': (
+					'sps': scroll-position,
+					'ctn': contents,
+				),
+			),
+			'Ctv': (
+				'properties': content-visibility,
+				'keywords': ('ct-visibility', 'visibility')
+			),
+			'Tca': (
+				'properties': touch-action,
+				'keywords': (
+					'm': manipulation,
+					'pl': pan-left,
+					'pr': pan-right,
+					'pu': pan-up,
+					'pd': pan-down,
+					'px': pan-x,
+					'py': pan-y,
+					'pnz': pinch-zoom,
+				),
+			),
 
 			// SVG
 			'Fi': (
@@ -1380,6 +1418,15 @@ $utils-db: (
 			),
 			'overscroll': (
 				'c': contain,
+			),
+			'visibility': (
+				'': hidden,
+				'c': collapse,
+				'h': hidden,
+				'v': visible,
+			),
+			'ct-visibility': (
+				'': auto,
 			),
 			'transition-props': (
 				'': (
