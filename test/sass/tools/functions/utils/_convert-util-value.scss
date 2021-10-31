@@ -14,7 +14,7 @@ ml.$utils-cfg: map.deep-merge(
 	)
 );
 
-@function bdrd-modify($value) {
+@function bdrd-modify($value, $data: ()) {
 	@return list.append(($value,), 15px 30px, slash);
 }
 
@@ -46,7 +46,7 @@ ml.$utils-db: map.deep-merge(
 			),
 			'-Bdrd': (
 				'properties': border-radius,
-				'last-transform-value': meta.get-function('bdrd-modify'),
+				'value-transformer': 'bdrd-modify',
 			),
 		),
 		'keywords': (
@@ -86,6 +86,13 @@ ml.$utils-cfg: map.set(
 	'value-converters',
 	'cp-suffix',
 	meta.get-function('cp-suffix')
+);
+
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg,
+	'value-transformers',
+	'bdrd-modify',
+	meta.get-function('bdrd-modify')
 );
 
 @include describe('tools/functions/common/utils/') {
@@ -171,9 +178,11 @@ ml.$utils-cfg: map.set(
 				('bdc;3s,c;gTsdDef', 'Ts'): (border-color 3s, color 0.3s),
 				('3/5', 'Gc'): list.slash(3, 5),
 			),
-			'last transform after conversion': (
+			'transform after conversion': (
 				('2e', '-Bdrd'): list.slash(2em, 15px 30px),
 				('10;1r', '-Bdrd'): list.slash(10px 1rem, 15px 30px),
+			),
+			'converts gradient': (
 				('b;r,red,#ff0', '-Gdl'): linear-gradient(to bottom right, red, #ff0),
 				('l,brand0', '-Gdl'): linear-gradient(to left, black 40%, yellow),
 				('50d,prm0;3r,sec0;80p', '-Gdl'): linear-gradient(50deg, #c06 3rem, #0c6 80%),

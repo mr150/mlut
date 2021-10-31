@@ -1,0 +1,42 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
+
+@use '../forward-tools' as ml;
+
+// Value transformers
+//
+// Available transformers:
+// ```scss
+//@debug ml.transform-uv-gradiend();
+// ```
+//
+// $value - value for transforming
+// $data = () - map with data required for transforming
+//
+// Styleguide: sass-tools.functions.high.utils.value_transformers
+
+@function gradient($values, $data: ()) {
+	$first-list: list.nth($values, 1);
+	$first-item: list.nth($first-list, 1);
+
+	@if (
+		meta.type-of($first-item) == 'string' and
+		string.index($first-item, 'var(') != 1
+	) {
+		$first-list: list.join(to, $first-list);
+	}
+
+	@return meta.call(
+		// TODO: add cache with frequently used CSS functions
+		meta.get-function(
+			map.get(
+				ml.$utils-db, 'utils', 'registry', map.get($data, 'name'), 'function'
+			),
+			true
+		),
+		list.set-nth($values, 1, $first-list)
+	);
+}

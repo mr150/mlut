@@ -64,16 +64,21 @@
 		$result: apply-value-converter($util-val, $name, $section);
 	}
 
-	@return if(
-		map.has-key(
-			ml.$utils-db, $section, 'registry', $name, 'last-transform-value'
-		),
-		meta.call(
-			map.get(ml.$utils-db, $section, 'registry', $name, 'last-transform-value'),
-			$result
-		),
-		$result
-	);
+	@if map.has-key(
+			ml.$utils-db, $section, 'registry', $name, 'value-transformer'
+	) {
+		@return meta.call(
+			map.get(
+				ml.$utils-cfg,
+				'value-transformers',
+				map.get(ml.$utils-db, $section, 'registry', $name, 'value-transformer')
+			),
+			$result,
+			('name': $name)
+		);
+	}
+
+	@return $result;
 }
 
 @function apply-value-converter($util-value, $name, $section, $list-length: 1) {

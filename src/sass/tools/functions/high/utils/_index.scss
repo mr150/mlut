@@ -8,6 +8,7 @@
 
 @use '../forward-tools' as ml;
 @use 'value-converters' as converters;
+@use 'value-transformers' as transformers;
 @use 'range-generators';
 @use 'parse-util' as pu;
 
@@ -15,6 +16,7 @@
 @forward 'parse-util';
 @forward 'util-apply-selector';
 @forward 'range-generators' as generate-uv-*;
+@forward 'value-transformers' as transform-uv-*;
 
 /*
 Utilities
@@ -200,6 +202,7 @@ Styleguide: sass-tools.functions.high.utils
 	);
 }
 
+// TODO: replace several `map.set()` to one `map.merge`
 $-util-value-converters: ();
 
 $-fn-prefix-length: string.length('convert-uv-');
@@ -231,5 +234,21 @@ ml.$utils-cfg: map.set(
 	'range-generators',
 	map.merge(
 		$-util-range-generators, map.get(ml.$utils-cfg, 'range-generators')
+	)
+);
+
+$-util-value-transformers: ();
+
+@each $key, $value in meta.module-functions(transformers) {
+	$-util-value-transformers: map.set(
+		$-util-value-transformers, $key, $value
+	);
+}
+
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg,
+	'value-transformers',
+	map.merge(
+		$-util-value-transformers, map.get(ml.$utils-cfg, 'value-transformers') or ()
 	)
 );
