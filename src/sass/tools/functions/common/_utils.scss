@@ -110,15 +110,19 @@
 				(
 					'name': $name,
 					'section': $section,
+					'negative': $negative,
 					'list-length': $list-length,
 				)
 			);
 
 			@if $util-value != $prev-value and not $is-pipeline {
-				@if $negative {
+				@if $negative and ($item == 'keyword' or $item == 'global-kw') {
 					@if meta.type-of($util-value) == 'number' {
 						@return $util-value * -1;
-					} @else if helpers.is-css-var($util-value) {
+					} @else if(
+						meta.type-of($util-value) == 'calculation' or
+						helpers.is-css-var($util-value)
+					) {
 						@return calc($util-value * -1);
 					}
 				}

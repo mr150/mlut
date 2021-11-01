@@ -32,6 +32,10 @@
 		$unit: math.unit($val-number);
 		$units-key: map.get($data, 'units-key');
 
+		@if map.get($data, 'negative') {
+			$val-number: $val-number * -1;
+		}
+
 		@if (
 			$unit == '' and not $units-key and
 			($val-number - math.floor($val-number)) != 0
@@ -134,7 +138,13 @@
 }
 
 @function convert-uv-unitless($value, $data: ()) {
-	@return ml.str2n($value, true) or $value;
+	$val-number: ml.str2n($value, true);
+
+	@if meta.type-of($val-number) == 'number' and map.get($data, 'negative') {
+		@return $val-number * -1;
+	}
+
+	@return $val-number or $value;
 }
 
 @function convert-uv-alpha($value, $data: ()) {
@@ -189,9 +199,10 @@ $-tUCp-length: string.length(ml.$tUCp);
 	}
 
 	$fallback-pos: string.index($value, ml.$tUFv);
+	$result: '';
 
 	@if $fallback-pos {
-		@return var(
+		$result: var(
 			#{
 				'--' + ml.$uv-css-var-prefix + string.slice(
 					$value, $-tUCp-length + 1, $fallback-pos - 1
@@ -199,17 +210,24 @@ $-tUCp-length: string.length(ml.$tUCp);
 			},
 			#{
 				ml.apply-value-converter(
-					string.slice($value, $fallback-pos + 1), $data...
+					string.slice($value, $fallback-pos + 1),
+					map.remove($data, 'negative')...
 				)
 			}
 		);
+	} @else {
+		$result: var(#{
+			'--' + ml.$uv-css-var-prefix + string.slice(
+				$value, $-tUCp-length + 1
+			)
+		});
 	}
 
-	@return var(#{
-		'--' + ml.$uv-css-var-prefix + string.slice(
-			$value, $-tUCp-length + 1
-		)
-	});
+	@return if(
+		map.get($data, 'negative'),
+		calc($result * -1),
+		$result
+	);
 }
 
 @function convert-uv-color($value, $data: ()) {
@@ -227,7 +245,7 @@ $-tUCp-length: string.length(ml.$tUCp);
 		@if list.length($mod-color-list) > 1 {
 			$part-color: list.nth($mod-color-list, 1);
 			$converted-part: ml.apply-value-converter(
-				$part-color, $data...
+				$part-color, map.remove($data, 'negative')...
 			);
 			$color: ml.str-hex2color($converted-part);
 

@@ -115,6 +115,7 @@ ml.$utils-cfg: map.set(
 				('-2', 'Zi'): -2,
 				(2, 'Tas'): 2,
 				(1r, 'Tas'): 1rem,
+				('-2gg', 'Ml'): calc(var(--ml-gg) * -2),
 			),
 			'converts global keyword': (
 				('a', 'W'): auto,
