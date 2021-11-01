@@ -37,13 +37,13 @@
 
 			@each $list in ml.str-split($util-val, $multi-list-sep) {
 				$items: ml.str-split($list, ml.$tUSp);
-				$length: list.length($items);
+				$one-value: list.length($items) == 1;
 				$converted-items: ();
 
 				@each $value in $items {
 					$converted-items: list.append(
 						$converted-items,
-						apply-value-converter($value, $name, $section, $length)
+						apply-value-converter($value, $name, $section, $one-value)
 					);
 				}
 
@@ -81,7 +81,9 @@
 	@return $result;
 }
 
-@function apply-value-converter($util-value, $name, $section, $list-length: 1) {
+@function apply-value-converter(
+	$util-value, $name, $section, $one-value: true
+) {
 	@if ml.str-starts($util-value, ml.$tURv) {
 		@return string.unquote(string.slice($util-value, 2));
 	}
@@ -111,7 +113,7 @@
 					'name': $name,
 					'section': $section,
 					'negative': $negative,
-					'list-length': $list-length,
+					'one-value': $one-value,
 				)
 			);
 

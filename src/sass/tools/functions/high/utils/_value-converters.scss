@@ -61,7 +61,7 @@
 			@if (
 				($unit == 'su' or $unit == 'gg') and
 				map.get(ml.$utils-db, $section, 'registry', $name, 'directions') and
-				map.get($data, 'list-length') == 1
+				map.get($data, 'one-value')
 			) {
 				@return (
 					meta.call($unit-converter, $val-number, ('unit': 'rem'))
