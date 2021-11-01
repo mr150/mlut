@@ -26,7 +26,7 @@ $utils-db: (
 		'registry': (
 			'-Gscc': (
 				'properties': ml.$var-gscc,
-				'value-type': 'unitless',
+				'value-type': 'num-length',
 			),
 			'-Gsfd': ml.$var-gsfd,
 			'-Gsg': (
@@ -89,7 +89,7 @@ $utils-db: (
 			),
 			'Zi': (
 				'properties': z-index,
-				'value-type': 'unitless',
+				'value-type': 'num-length',
 			),
 
 			// BOX-MODEL
@@ -161,11 +161,11 @@ $utils-db: (
 			),
 			'Flg': (
 				'properties': flex-grow,
-				'value-type': 'unitless',
+				'value-type': 'num-length',
 			),
 			'Fls': (
 				'properties': flex-shrink,
-				'value-type': 'unitless',
+				'value-type': 'num-length',
 			),
 			'Flb': (
 				'properties': flex-basis,
@@ -210,7 +210,7 @@ $utils-db: (
 			),
 			'Od': (
 				'properties': order,
-				'value-type': 'unitless',
+				'value-type': 'num-length',
 			),
 
 			'G': (
@@ -237,12 +237,12 @@ $utils-db: (
 			),
 			'Gcs': (
 				'properties': grid-column-start,
-				'value-type': 'kw-unitless',
+				'value-type': 'kw-num-length',
 				'keywords': 'grid-area',
 			),
 			'Gce': (
 				'properties': grid-column-end,
-				'value-type': 'kw-unitless',
+				'value-type': 'kw-num-length',
 				'keywords': 'grid-area',
 			),
 			'Gtr': (
@@ -258,12 +258,12 @@ $utils-db: (
 			),
 			'Grs': (
 				'properties': grid-row-start,
-				'value-type': 'kw-unitless',
+				'value-type': 'kw-num-length',
 				'keywords': 'grid-area',
 			),
 			'Gre': (
 				'properties': grid-row-end,
-				'value-type': 'kw-unitless',
+				'value-type': 'kw-num-length',
 				'keywords': 'grid-area',
 			),
 			'Ga': (
@@ -425,7 +425,7 @@ $utils-db: (
 			'Fn': font,
 			'Fnw': (
 				'properties': font-weight,
-				'value-type': 'kw-unitless',
+				'value-type': 'kw-num-length',
 				'keywords': (
 					'b': bold,
 					'bd': bolder,
@@ -1089,7 +1089,7 @@ $utils-db: (
 
 			'An': (
 				'properties': animation,
-				'value-type': 'kw-unitless',
+				'value-type': 'kw-num-length',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': (
 					// TODO: maybe try to optimize it and combine a part of keywords to one map
@@ -1116,7 +1116,7 @@ $utils-db: (
 			),
 			'Anic': (
 				'properties': animation-iteration-count,
-				'value-type': 'kw-unitless',
+				'value-type': 'kw-num-length',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': 'infinite',
 			),
@@ -1435,7 +1435,7 @@ $utils-db: (
 			),
 			'Apcr': (
 				'properties': aspect-ratio,
-				'value-type': 'unitless',
+				'value-type': 'num-length',
 			),
 		),
 		'keywords': (
@@ -1593,15 +1593,15 @@ $utils-db: map.set(
 				'pfrm': prefers-reduced-motion,
 				'm': (
 					'properties': monochrome,
-					'value-type': 'unitless',
+					'value-type': 'num-length',
 				),
 				'g': (
 					'properties': grid,
-					'value-type': 'unitless',
+					'value-type': 'num-length',
 				),
 				'c': (
 					'properties': color,
-					'value-type': 'unitless',
+					'value-type': 'num-length',
 				),
 				'r': (
 					'properties': resolution,

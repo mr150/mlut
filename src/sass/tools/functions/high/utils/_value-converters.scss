@@ -24,8 +24,6 @@
 
 @function convert-uv-number($value, $data: ()) {
 	$val-number: ml.str2n($value, true);
-	$section: map.get($data, 'section');
-	$name: map.get($data, 'name');
 
 	@if meta.type-of($val-number) == 'number' {
 		$unit-number: 0;
@@ -37,7 +35,7 @@
 		}
 
 		@if (
-			$unit == '' and not $units-key and
+			not $units-key and $unit == '' and
 			($val-number - math.floor($val-number)) != 0
 		) {
 			// TODO: add setting for changing unit
@@ -56,6 +54,8 @@
 			map.has-key(ml.$general-cfg, 'custom-unit-values', $unit) and
 			meta.function-exists($unit, ml)
 		) {
+			$section: map.get($data, 'section');
+			$name: map.get($data, 'name');
 			$unit-converter: meta.get-function($unit, false, ml);
 
 			@if (
@@ -137,16 +137,6 @@
 	);
 }
 
-@function convert-uv-unitless($value, $data: ()) {
-	$val-number: ml.str2n($value, true);
-
-	@if meta.type-of($val-number) == 'number' and map.get($data, 'negative') {
-		@return $val-number * -1;
-	}
-
-	@return $val-number or $value;
-}
-
 @function convert-uv-alpha($value, $data: ()) {
 	@return convert-uv-number(
 		$value, ('units-key': 'alpha')
@@ -161,7 +151,7 @@
 
 @function convert-uv-num-length($value, $data: ()) {
 	@return convert-uv-number(
-		$value, ('units-key': 'num-length')
+		$value, map.set($data, 'units-key', 'num-length')
 	);
 }
 
