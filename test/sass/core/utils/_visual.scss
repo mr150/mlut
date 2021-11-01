@@ -61,4 +61,96 @@
 			}
 		}
 	}
+
+	@include it('filter utils') {
+		@include assert() {
+			@include output(false) {
+				@include ml.apply(
+					'Ft -Bn20p -Drps10;15;#00f,20;2r;5;#0ff'
+				);
+			}
+
+			@include expect(false) {
+				.Ft {
+					filter: var(--ml-blr) var(--ml-bn) var(--ml-ctr) var(--ml-drps) var(--ml-gra) var(--ml-hur) var(--ml-iv) var(--ml-sa) var(--ml-sp);
+
+					--ml-blr: var(--ml-, /*!*/ );
+					--ml-bn: var(--ml-, /*!*/ );
+					--ml-ctr: var(--ml-, /*!*/ );
+					--ml-drps: var(--ml-, /*!*/ );
+					--ml-gra: var(--ml-, /*!*/ );
+					--ml-hur: var(--ml-, /*!*/ );
+					--ml-iv: var(--ml-, /*!*/ );
+					--ml-sa: var(--ml-, /*!*/ );
+					--ml-sp: var(--ml-, /*!*/ );
+				}
+
+				.-Bn20p {
+					--ml-bn: brightness(0.2);
+				}
+
+				.-Drps10\;15\;\#00f\,20\;2r\;5\;\#0ff {
+					--ml-drps: drop-shadow(10px 15px #00f) drop-shadow(20px 2rem 5px #0ff);
+				}
+			}
+		}
+	}
+
+	@include it('backdrop filter utils') {
+		@include assert() {
+			@include output(false) {
+				@include ml.apply(
+					'Bcf -Bcfs0.7'
+				);
+			}
+
+			@include expect(false) {
+				.Bcf {
+					backdrop-filter: var(--ml-blr) var(--ml-bn) var(--ml-ctr) var(--ml-gra) var(--ml-hur) var(--ml-iv) var(--ml-o) var(--ml-sa) var(--ml-sp);
+
+					--ml-blr: var(--ml-, /*!*/ );
+					--ml-bn: var(--ml-, /*!*/ );
+					--ml-ctr: var(--ml-, /*!*/ );
+					--ml-gra: var(--ml-, /*!*/ );
+					--ml-hur: var(--ml-, /*!*/ );
+					--ml-iv: var(--ml-, /*!*/ );
+					--ml-o: var(--ml-, /*!*/ );
+					--ml-sa: var(--ml-, /*!*/ );
+					--ml-sp: var(--ml-, /*!*/ );
+				}
+
+				.-Bcfs0\.7 {
+					--ml-bcfs: saturate(0.7);
+				}
+			}
+		}
+
+		@include assert() {
+			@include output(false) {
+				@include ml.apply(
+					'-Bcf Bcf-n'
+				);
+			}
+
+			@include expect(false) {
+				.-Bcf {
+					backdrop-filter: var(--ml-bcfb) var(--ml-bcfbn) var(--ml-bcfc) var(--ml-bcfg) var(--ml-bcfhr) var(--ml-bcfi) var(--ml-bcfo) var(--ml-bcfs) var(--ml-bcfsp);
+
+					--ml-bcfb: var(--ml-, /*!*/ );
+					--ml-bcfbn: var(--ml-, /*!*/ );
+					--ml-bcfc: var(--ml-, /*!*/ );
+					--ml-bcfg: var(--ml-, /*!*/ );
+					--ml-bcfhr: var(--ml-, /*!*/ );
+					--ml-bcfi: var(--ml-, /*!*/ );
+					--ml-bcfo: var(--ml-, /*!*/ );
+					--ml-bcfs: var(--ml-, /*!*/ );
+					--ml-bcfsp: var(--ml-, /*!*/ );
+				}
+
+				.Bcf-n {
+					backdrop-filter: none;
+				}
+			}
+		}
+	}
 }

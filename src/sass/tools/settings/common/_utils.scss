@@ -889,6 +889,217 @@ $utils-db: (
 					'i': isolate,
 				),
 			),
+			'Ft': (
+				'properties': (
+					filter,
+					$cv-pref + 'blr',
+					$cv-pref + 'bn',
+					$cv-pref + 'ctr',
+					$cv-pref + 'drps',
+					$cv-pref + 'gra',
+					$cv-pref + 'hur',
+					$cv-pref + 'iv',
+					$cv-pref + 'sa',
+					$cv-pref + 'sp',
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'': (
+						(
+							var(#{$cv-pref}blr)
+							var(#{$cv-pref}bn)
+							var(#{$cv-pref}ctr)
+							var(#{$cv-pref}drps)
+							var(#{$cv-pref}gra)
+							var(#{$cv-pref}hur)
+							var(#{$cv-pref}iv)
+							var(#{$cv-pref}sa)
+							var(#{$cv-pref}sp)
+						),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+					),
+				),
+			),
+			'-Blr': (
+				'function': 'blur',
+				'value-transformer': 'to-css-fn',
+			),
+			'-Bn': (
+				'function': 'brightness',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-Ctr': (
+				'function': 'contrast',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-Drps': (
+				'function': 'drop-shadow',
+				'value-transformer': 'to-css-fn',
+				'multi-list-separator': ml.$tULs1,
+				'value-type': 'border',
+			),
+			'-Gra': (
+				'function': 'grayscale',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-Hur': (
+				'function': 'hue-rotate',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'angle',
+			),
+			'-Iv': (
+				'function': 'invert',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-O': (
+				'function': 'opacity',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-Sa': (
+				'function': 'saturate',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-Sp': (
+				'function': 'sepia',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'Bcf': (
+				'properties': (
+					backdrop-filter,
+					$cv-pref + 'blr',
+					$cv-pref + 'bn',
+					$cv-pref + 'ctr',
+					$cv-pref + 'gra',
+					$cv-pref + 'hur',
+					$cv-pref + 'iv',
+					$cv-pref + 'o',
+					$cv-pref + 'sa',
+					$cv-pref + 'sp',
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'': (
+						(
+							var(#{$cv-pref}blr)
+							var(#{$cv-pref}bn)
+							var(#{$cv-pref}ctr)
+							var(#{$cv-pref}gra)
+							var(#{$cv-pref}hur)
+							var(#{$cv-pref}iv)
+							var(#{$cv-pref}o)
+							var(#{$cv-pref}sa)
+							var(#{$cv-pref}sp)
+						),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+					),
+				),
+			),
+			'-Bcf': (
+				'properties': (
+					backdrop-filter,
+					$cv-pref + 'bcfb',
+					$cv-pref + 'bcfbn',
+					$cv-pref + 'bcfc',
+					$cv-pref + 'bcfg',
+					$cv-pref + 'bcfhr',
+					$cv-pref + 'bcfi',
+					$cv-pref + 'bcfo',
+					$cv-pref + 'bcfs',
+					$cv-pref + 'bcfsp',
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'': (
+						(
+							var(#{$cv-pref}bcfb)
+							var(#{$cv-pref}bcfbn)
+							var(#{$cv-pref}bcfc)
+							var(#{$cv-pref}bcfg)
+							var(#{$cv-pref}bcfhr)
+							var(#{$cv-pref}bcfi)
+							var(#{$cv-pref}bcfo)
+							var(#{$cv-pref}bcfs)
+							var(#{$cv-pref}bcfsp)
+						),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+					),
+				),
+			),
+			'-Bcfb': (
+				'function': 'blur',
+				'value-transformer': 'to-css-fn',
+			),
+			'-Bcfbn': (
+				'function': 'brightness',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-Bcfc': (
+				'function': 'contrast',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-Bcfg': (
+				'function': 'grayscale',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-Bcfhr': (
+				'function': 'hue-rotate',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'angle',
+			),
+			'-Bcfi': (
+				'function': 'invert',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-Bcfo': (
+				'function': 'opacity',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-Bcfs': (
+				'function': 'saturate',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
+			'-Bcfsp': (
+				'function': 'sepia',
+				'value-transformer': 'to-css-fn',
+				'value-type': 'alpha',
+			),
 
 			// BORDER
 			'Bd': (

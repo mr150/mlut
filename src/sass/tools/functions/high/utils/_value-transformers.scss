@@ -40,3 +40,28 @@
 		list.set-nth($values, 1, $first-list)
 	);
 }
+
+@function to-css-fn($values, $data: ()) {
+	$result: ();
+
+	@each $item in if(
+		list.separator($values) == comma,
+		$values, ($values,)
+	) {
+		// maybe worth doing it more readable
+		$result: list.append(
+			$result,
+			meta.call(
+				meta.get-function(
+					map.get(
+						ml.$utils-db, 'utils', 'registry', map.get($data, 'name'), 'function'
+					),
+					true
+				),
+				$item
+			)
+		);
+	}
+
+	@return $result;
+}
