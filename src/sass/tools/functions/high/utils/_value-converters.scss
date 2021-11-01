@@ -139,13 +139,13 @@
 
 @function convert-uv-alpha($value, $data: ()) {
 	@return convert-uv-number(
-		$value, ('units-key': 'alpha')
+		$value, map.set($data, 'units-key', 'alpha')
 	);
 }
 
 @function convert-uv-angle($value, $data: ()) {
 	@return convert-uv-number(
-		$value, ('units-key': 'angle')
+		$value, map.set($data, 'units-key', 'angle')
 	);
 }
 
@@ -191,6 +191,8 @@ $-tUCp-length: string.length(ml.$tUCp);
 	$fallback-pos: string.index($value, ml.$tUFv);
 	$result: '';
 
+	// TODO: change stylelint rules to allow this code
+	//stylelint-disable
 	@if $fallback-pos {
 		$result: var(
 			#{
@@ -212,6 +214,7 @@ $-tUCp-length: string.length(ml.$tUCp);
 			)
 		});
 	}
+	//stylelint-enable
 
 	@return if(
 		map.get($data, 'negative'),
@@ -233,11 +236,13 @@ $-tUCp-length: string.length(ml.$tUCp);
 		$mod-color-list: ml.str-split($value, ml.$tUCla);
 
 		@if list.length($mod-color-list) > 1 {
+			//stylelint-disable
 			$part-color: list.nth($mod-color-list, 1);
 			$converted-part: ml.apply-value-converter(
 				$part-color, map.remove($data, 'negative')...
 			);
 			$color: ml.str-hex2color($converted-part);
+			//stylelint-enable
 
 			@if $color or ml.is-css-var($converted-part) {
 				$part-alpha: list.nth($mod-color-list, 2);
