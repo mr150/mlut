@@ -65,7 +65,7 @@
 	}
 
 	@if map.has-key(
-			ml.$utils-db, $section, 'registry', $name, 'value-transformer'
+		ml.$utils-db, $section, 'registry', $name, 'value-transformer'
 	) {
 		@return meta.call(
 			map.get(
@@ -160,11 +160,18 @@
 	}
 
 	$abbr-name: $abbr;
+	$number-index: ml.str-digit-index($abbr);
 	$separator: ml.ls-find(
 		$all-separators, meta.get-function('str-contains-item', false, ml), $abbr
 	);
 
-	@if $separator {
+	$sep-before-digit: if(
+		$separator and $number-index,
+		$number-index > string.index($abbr, $separator),
+		true
+	);
+
+	@if $separator and $sep-before-digit {
 		$abbr-parts: ml.str-split($abbr, $separator, 1);
 		$abbr-name: list.nth($abbr-parts, 1);
 		$abbr-value: list.nth($abbr-parts, 2);
@@ -176,15 +183,9 @@
 		} @else {
 			$result: map.set($result, 'separator', $separator);
 		}
-	} @else {
-		@if ml.$tUNv == '' {
-			$number-index: ml.str-digit-index($abbr);
-
-			@if $number-index {
-				$abbr-name: string.slice($abbr, 1, $number-index - 1);
-				$abbr-value: string.slice($abbr, $number-index);
-			}
-		}
+	} @else if ml.$tUNv == '' and $number-index {
+		$abbr-name: string.slice($abbr, 1, $number-index - 1);
+		$abbr-value: string.slice($abbr, $number-index);
 	}
 
 	@return map.merge(

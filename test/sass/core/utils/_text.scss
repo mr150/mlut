@@ -6,7 +6,7 @@
 		@include assert() {
 			@include output(false) {
 				@include ml.apply(
-					'-Fns-sl -Fns18;1.6'
+					'-Fns-sl -Fns18;=1.6'
 				);
 			}
 
@@ -15,9 +15,9 @@
 					font-size: smaller;
 				}
 
-				.-Fns18\;1\.6 {
+				.-Fns18\;\=1\.6 {
 					font-size: 18px;
-					line-height: 1.6rem;
+					line-height: 1.6;
 				}
 			}
 		}
@@ -25,7 +25,7 @@
 		@include assert() {
 			@include output(false) {
 				@include ml.apply(
-					'-Fns3r;;2 -Fns2r;2e;1'
+					'-Fns3r;;2 -Fns2r;2e;-1'
 				);
 			}
 
@@ -35,10 +35,10 @@
 					letter-spacing: 2px;
 				}
 
-				.-Fns2r\;2e\;1 {
+				.-Fns2r\;2e\;-1 {
 					font-size: 2rem;
 					line-height: 2em;
-					letter-spacing: 1px;
+					letter-spacing: -1px;
 				}
 			}
 		}
