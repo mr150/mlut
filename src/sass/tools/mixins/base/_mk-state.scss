@@ -104,6 +104,7 @@
 @function -pre-state-selector($list, $selector, $this: null) {
 	$result: ();
 	$selector: ml.css-class($selector, 1);
+	$escaped-token: ml.str-escape(ml.$tUCm);
 
 	@each $item in $list {
 		$selector-list: '';
@@ -111,7 +112,6 @@
 		@each $part in ml.str-split(
 			ml.convert-util-states($item, $this, true), ','
 		) {
-			$escaped-token: ml.str-escape(ml.$tUCm);
 			$state-prefix: ml.str-escape($item) + $escaped-token;
 			$ar-separator: string.index($selector, $escaped-token + $this);
 
@@ -134,11 +134,12 @@
 
 @function -post-state-selector($list, $selector, $this: null) {
 	$result: ();
+	$escaped-token: ml.str-escape(ml.$tSTu);
 
 	@each $item in $list {
 		$util-selector: selector.append($selector, ml.str-escape(ml.$tUCm + $item));
 		$state-selector: ml.str-replace-all(
-			ml.convert-util-states($item, $this), ml.str-escape(ml.$tSTucv), $util-selector
+			ml.convert-util-states($item, $this), $escaped-token, $util-selector
 		);
 
 		$result: list.append(

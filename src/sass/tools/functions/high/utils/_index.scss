@@ -74,8 +74,10 @@ Styleguide: sass-tools.functions.high.utils
 					@return ml.error('`#{ml.$tSTu}` cannot be used because $this-util is not passed');
 				}
 
-				@if $item == ml.$tSTucv {
-					$converted: ml.str-escape(ml.$tSTucv);
+				@if $item == ml.$tSTu {
+					$converted: ml.str-escape(ml.$tSTu);
+				} @else if $item == ml.$tSTudv {
+					$converted: ml.css-class($this-util);
 				} @else {
 					$converted: ml.css-class($this-util + ml.str-escape(string.slice($item, 2)));
 				}

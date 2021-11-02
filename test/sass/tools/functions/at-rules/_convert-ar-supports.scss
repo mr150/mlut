@@ -44,7 +44,7 @@ ml.$at-rules-db: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-ar-supports('!&', ('name': 'D', 'value': '-ig')),
+				ml.convert-ar-supports('!&-', ('name': 'D', 'value': '-ig')),
 				'(not (display: initial))',
 			);
 
@@ -71,7 +71,7 @@ ml.$at-rules-db: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-ar-supports('d-ig:&-', ('name': 'Jc', 'value': '-se')),
+				ml.convert-ar-supports('d-ig:&', ('name': 'Jc', 'value': '-se')),
 				'(display: inline-grid) and (justify-content: space-evenly)',
 			);
 

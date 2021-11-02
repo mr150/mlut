@@ -241,7 +241,7 @@ $tSCs: map.get($utils-cfg, 'tokens', 'states', 'custom');
 $tSTu: map.get($utils-cfg, 'tokens', 'states', 'this-util');
 $tSCn: map.get($utils-cfg, 'tokens', 'states', 'context');
 $tSRaw: map.get($utils-cfg, 'tokens', 'states', 'raw');
-$tSTucv: $tSTu + $tUSv;
+$tSTudv: $tSTu + $tUSv;
 
 $kUvKA: map.get($utils-cfg, 'tokens', 'generation', 'uv-keywords-alias');
 $kStPC: map.get($utils-cfg, 'tokens', 'generation', 'states-pseudo-classes');

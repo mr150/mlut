@@ -35,15 +35,15 @@ ml.$utils-cfg: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.mk-state('&-,&-:f', null, null, &, $this) {
+						@include ml.mk-state('&,&:f', null, null, &, $this) {
 							display: flex;
 						}
 					}
 				}
 
 				@include expect(false) {
-					.D-f_\&-\,\&-\:f.D-f_\&-\,\&-\:f,
-					.D-f_\&-\,\&-\:f.D-f_\&-\,\&-\:f:focus {
+					.D-f_\&\,\&\:f.D-f_\&\,\&\:f,
+					.D-f_\&\,\&\:f.D-f_\&\,\&\:f:focus {
 						display: flex;
 					}
 				}
@@ -149,15 +149,15 @@ ml.$utils-cfg: map.set(
 			@include assert() {
 				@include output(false) {
 					.D-f {
-						@include ml.mk-state(null, '=a:^:h,&:^1:+', false, &, $this) {
+						@include ml.mk-state(null, '=a:^:h,&-:^1:+', false, &, $this) {
 							display: flex;
 						}
 					}
 				}
 
 				@include expect(false) {
-					a.-Ctx:hover .\=a\:\^\:h\,\&\:\^1\:\+_D-f,
-					.D.-Ctx1+ .\=a\:\^\:h\,\&\:\^1\:\+_D-f {
+					a.-Ctx:hover .\=a\:\^\:h\,\&-\:\^1\:\+_D-f,
+					.D.-Ctx1+ .\=a\:\^\:h\,\&-\:\^1\:\+_D-f {
 						display: flex;
 					}
 				}
@@ -247,7 +247,7 @@ ml.$utils-cfg: map.set(
 				@include output(false) {
 					.D-f {
 						@include ml.mk-state(
-							'&:af #{ml.$kStCb} af',
+							'&-:af #{ml.$kStCb} af',
 							'^one:h #{ml.$kStCb} ^:f',
 							false,
 							&,
@@ -263,7 +263,7 @@ ml.$utils-cfg: map.set(
 						display: flex;
 					}
 
-					.D-f_\&\:af.D::after {
+					.D-f_\&-\:af.D::after {
 						display: flex;
 					}
 
@@ -277,7 +277,7 @@ ml.$utils-cfg: map.set(
 				@include output(false) {
 					.D-f {
 						@include ml.mk-state(
-							'&:af #{ml.$kStCb} af',
+							'&-:af #{ml.$kStCb} af',
 							'^one:h ^:f',
 							false,
 							&,
@@ -297,7 +297,7 @@ ml.$utils-cfg: map.set(
 						display: flex;
 					}
 
-					.D-f_\&\:af.D::after {
+					.D-f_\&-\:af.D::after {
 						display: flex;
 					}
 				}
@@ -307,7 +307,7 @@ ml.$utils-cfg: map.set(
 				@include output(false) {
 					.D-f {
 						@include ml.mk-state(
-							'&:af af',
+							'&-:af af',
 							'^one:h #{ml.$kStCb} ^:f',
 							false,
 							&,
@@ -323,7 +323,7 @@ ml.$utils-cfg: map.set(
 						display: flex;
 					}
 
-					.D-f_\&\:af.D::after {
+					.D-f_\&-\:af.D::after {
 						display: flex;
 					}
 
@@ -477,7 +477,7 @@ ml.$utils-cfg: map.set(
 
 			@include assert() {
 				@include output(false) {
-					@include ml.mk-state('af', '&:h', true, '.D-ib', $this) {
+					@include ml.mk-state('af', '&-:h', true, '.D-ib', $this) {
 						display: inline-block;
 					}
 				}
@@ -487,7 +487,7 @@ ml.$utils-cfg: map.set(
 						display: inline-block;
 					}
 
-					.D:hover .\&\:h_D-ib {
+					.D:hover .\&-\:h_D-ib {
 						display: inline-block;
 					}
 
@@ -510,13 +510,13 @@ ml.$utils-cfg: map.set(
 			ml.$tSRaw: '?';
 			ml.$tSTu: '$';
 			ml.$tSNot: '*';
-			ml.$tSTucv: ml.$tSTu + ml.$tUSv;
+			ml.$tSTudv: ml.$tSTu + ml.$tUSv;
 
 			@include assert() {
 				@include output(false) {
 					.xs\:md__D-f {
 						@include ml.mk-state(
-							'$~ $~ib&#myState&af',
+							'$ $~ib&#myState&af',
 							'%one&*a|%&?>*',
 							false,
 							&,
@@ -533,7 +533,7 @@ ml.$utils-cfg: map.set(
 						display: flex;
 					}
 
-					.xs\:md__D-f__\$\~.xs\:md__D-f__\$\~ {
+					.xs\:md__D-f__\$.xs\:md__D-f__\$ {
 							display: flex;
 					}
 
@@ -553,7 +553,7 @@ ml.$utils-cfg: map.set(
 			ml.$tSTu: map.get(ml.$utils-cfg, 'tokens', 'states', 'this-util');
 			ml.$tSCn: map.get(ml.$utils-cfg, 'tokens', 'states', 'context');
 			ml.$tSRaw: map.get(ml.$utils-cfg, 'tokens', 'states', 'raw');
-			ml.$tSTucv: ml.$tSTu + ml.$tUSv;
+			ml.$tSTudv: ml.$tSTu + ml.$tUSv;
 		}
 	}
 }

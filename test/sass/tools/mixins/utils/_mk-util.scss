@@ -79,7 +79,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'xl_D_+:h', (
-						'sm@s:&-_^:h_f_af f': flex,
+						'sm@s:&_^:h_f_af f': flex,
 						'_h,f': block,
 						'ib': inline-block,
 					));
@@ -104,7 +104,7 @@ ml.$utils-db: map.deep-merge(
 
 					@media (min-width: ml.bp(sm)) {
 						@supports (display: flex) {
-							.sm\@s\:\&-_D-f {
+							.sm\@s\:\&_D-f {
 								display: flex;
 							}
 						}

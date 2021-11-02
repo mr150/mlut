@@ -230,7 +230,7 @@ ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
 
 			@include assert() {
 				@include output() {
-					@include ml.mk-ar('%s&apcr~4/3OR^?~%m&pr&dm~s&w>=gXlOR#testou', ('name': 'D', 'value': '~ig')) using ($ar) {
+					@include ml.mk-ar('%s&apcr~4/3OR^?%m&pr&dm~s&w>=gXlOR#testou', ('name': 'D', 'value': '~ig')) using ($ar) {
 						width: 50%;
 					}
 				}

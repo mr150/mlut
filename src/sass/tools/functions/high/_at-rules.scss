@@ -219,10 +219,10 @@ $-tACs-length: string.length(ml.$tACs);
 				@return ml.error('`#{ml.$tSTu}` cannot be used because $this-util is not passed');
 			}
 
-			$value: ml.$tUSv + 'initial';
+			$value: map.get($this-util, 'value');
 
 			@if $item == ml.$tSTu + ml.$tUSv {
-				$value: map.get($this-util, 'value');
+				$value: ml.$tUSv + 'ini';
 			} @else if $item != ml.$tSTu {
 				$value: string.slice($item, 2);
 			}

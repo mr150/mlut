@@ -72,18 +72,18 @@ ml.$utils-cfg: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-util-states('&-:&-', 'D'),
-				('&\\&-\\&-'),
+				ml.convert-util-states('&:&', 'D'),
+				('&\\&\\&'),
 			);
 
 			@include assert-equal(
-				ml.convert-util-states(':^:&::^2:+a.link:h', 'D'),
+				ml.convert-util-states(':^:&-::^2:+a.link:h', 'D'),
 				('& .-Ctx.D .-Ctx2+a.link:hover'),
 			);
 
 			@include assert-equal(
-				ml.convert-util-states('^ct0:=>*:h:!&--sec0', 'Bgc', true),
-				('.-Ctx-ct0>*:hover:not(.Bgc--sec0) '),
+				ml.convert-util-states('^ct0:=>*:h:!&-sec0', 'Bgc', true),
+				('.-Ctx-ct0>*:hover:not(.Bgc-sec0) '),
 			);
 		}
 
