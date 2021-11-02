@@ -29,7 +29,7 @@ ml.$at-rules-db: map.set(
 
 		@include it('converts media features') {
 			@include assert-equal(
-				ml.convert-ar-media('anyh'),
+				ml.convert-ar-media('ah'),
 				'(any-hover)',
 			);
 

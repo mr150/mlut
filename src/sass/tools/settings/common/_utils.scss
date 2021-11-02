@@ -1750,21 +1750,21 @@ $utils-db: map.set(
 		'registry': map.deep-merge(
 			$-common-registry,
 			(
+				'ah': any-hover,
+				'ap': (
+					'properties': any-pointer,
+					'keywords': (
+						'c': coarse,
+						'f': fine,
+					)
+				),
 				'hv': hover,
-				'anyh': any-hover,
 				'p': (
 					'properties': pointer,
 					'keywords': (
 						'c': coarse,
 						'f': fine,
 					),
-				),
-				'anyp': (
-					'properties': any-pointer,
-					'keywords': (
-						'c': coarse,
-						'f': fine,
-					)
 				),
 				'dm': (
 					'properties': display-mode,
