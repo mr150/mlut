@@ -802,10 +802,20 @@ $utils-db: (
 				'value-type': 'border',
 				'keywords': ('line-style', 'line-width'),
 			),
+			'Olw': (
+				'properties': outline-width,
+				'keywords': 'line-width',
+			),
 			'Olc': (
 				'properties': outline-color,
 				'value-type': 'color',
 			),
+			'Ols': (
+				'properties': outline-style,
+				'keywords': 'line-style',
+			),
+			'Olo': outline-offset,
+
 			'Bxsd': (
 				'properties': box-shadow,
 				'value-type': 'border',
