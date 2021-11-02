@@ -12,6 +12,7 @@
 // $mlu-main-directions - Map with directions for css properties and values generation. The keys are the first letters of the directions, and the values are directions. <br> Example: `('t': top)`.
 // $is-test-env = false - indicating the test environment
 // $css-vars-fallback = true - add fallback for values in `grid-gutters` units
+// $ml-css-transition-time = 0.3s - default [transition](section-core-utils.html#kssref-core-utils-anim) duration.
 //
 // Styleguide: sass-tools.settings.general
 
@@ -34,6 +35,7 @@
 
 
 $browser-font-size: 16px !default;
+$css-transition-time: 0.3s !default;
 
 $su-cf: 4 !default;
 

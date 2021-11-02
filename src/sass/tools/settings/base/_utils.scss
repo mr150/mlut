@@ -5,14 +5,11 @@
 //
 // Settings affecting the values and generation of the core utilities.
 //
-// $ml-Trsdu-def = 0.3s - default [transition](section-core-utils.html#kssref-core-utils-anim) duration.
 // $ml-utils-states-psd-cls - map with abbreviations of pseudo-classes for utilities.
 // $ml-utils-states-psd-elm - map with pseudo-elements abbreviations for utilities.
 // $ml-utils-states - map with abbreviations of utility state names. Maps of pseudo-classes and pseudo-elements merge into it.
 //
 // Styleguide: sass-tools.settings.utils
-
-$Trsdu-def: 0.3s !default;
 
 // Conversion to CSS
 //

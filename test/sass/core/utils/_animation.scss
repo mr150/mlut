@@ -17,7 +17,7 @@ ml.$utils-db: map.set(
 
 			@include expect(false) {
 				.-Ts {
-					transition-duration: ml.$Trsdu-def;
+					transition-duration: ml.$css-transition-time;
 					transition-property:
 						background-color, border-color, color,
 						fill, stroke, backdrop-filter, box-shadow,
@@ -25,7 +25,7 @@ ml.$utils-db: map.set(
 				}
 
 				.-Ts-mClr\,l {
-					transition-duration: ml.$Trsdu-def;
+					transition-duration: ml.$css-transition-time;
 					transition-property:
 						background-color, border-color, color,
 						fill, outline-color, stroke, left;
