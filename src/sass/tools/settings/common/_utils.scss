@@ -1766,14 +1766,6 @@ $utils-db: map.set(
 						'f': fine,
 					)
 				),
-				'cg': (
-					'properties': color-gamut,
-					'keywords': (
-						'p': p3,
-						's': 'srgb',
-						'r': rec2020,
-					),
-				),
 				'dm': (
 					'properties': display-mode,
 					'keywords': (
@@ -1812,6 +1804,18 @@ $utils-db: map.set(
 				),
 				'c': (
 					'properties': color,
+					'value-type': 'num-length',
+				),
+				'cg': (
+					'properties': color-gamut,
+					'keywords': (
+						'p': p3,
+						's': 'srgb',
+						'r': rec2020,
+					),
+				),
+				'ci': (
+					'properties': color-index,
 					'value-type': 'num-length',
 				),
 				'r': (
