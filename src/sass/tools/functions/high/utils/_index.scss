@@ -188,6 +188,19 @@ Styleguide: sass-tools.functions.high.utils
 		$values: map.get(ml.$utils-db, $section, 'keywords', $group);
 	}
 
+	@if map.has-key($values, '') {
+		$def-value: map.get($values, '');
+		$kw-def-value-index: list.index(
+			map.values(map.set($values, '', null)), $def-value
+		);
+
+		@if $kw-def-value-index {
+			$values: map.remove(
+				$values, list.nth(list.nth($values, $kw-def-value-index), 1)
+			);
+		}
+	}
+
 	@return map.set($result, 'values', $values);
 }
 
