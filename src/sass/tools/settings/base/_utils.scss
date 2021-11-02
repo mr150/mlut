@@ -70,9 +70,10 @@ $utils-cfg: (
 		M, Mt, Mr, Mb, Ml, -Mx, -My,
 		Bdw, Bdtw, Bdrw, Bdbw, Bdlw, -Bdxw, -Bdyw,
 		Bd, Bdt, Bdr, Bdb, Bdl, -Bdx, -Bdy,
-		Mxw, Mnw, Mxh, Mnh, G,
-		Fns, Lnh, Lts, Txs, Va, Txd, Fn,
-		Bxsd, Ol, Bdrd, Bgs, Bgp,
+		Mxw, Mnw, Mxh, Mnh,
+		Fns, -Fns, Txi, Lnh, Lts, Txs, Va, Txd, Fn,
+		Bxsd, Ol, Olw, Bdrd, Bgs, Bgp,
+		Stw, Fl, Flb, Tfo, -Gdl, -Gdrl,
 	),
 
 	'value-types': (
