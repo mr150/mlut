@@ -18,14 +18,12 @@
 //
 // Styleguide: sass-tools.functions.high.utils.value_transformers
 
+$-directions: map.values(ml.$main-directions);
+
 @function gradient($values, $data: ()) {
 	$first-list: list.nth($values, 1);
-	$first-item: list.nth($first-list, 1);
 
-	@if (
-		meta.type-of($first-item) == 'string' and
-		string.index($first-item, 'var(') != 1
-	) {
+	@if list.index($-directions, list.nth($first-list, 1)) {
 		$first-list: list.join(to, $first-list);
 	}
 

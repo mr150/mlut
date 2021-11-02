@@ -50,13 +50,18 @@
 		@include assert() {
 			@include output(false) {
 				@include ml.apply(
-					'-Gdl-r,#fff;30p,#00f;80p,red'
+					'-Gdl-r,#fff;30p,#00f;80p,red -Gdrl#ff0;2gg,#000'
 				);
 			}
 
 			@include expect(false) {
 				.-Gdl-r\,\#fff\;30p\,\#00f\;80p\,red {
 					background-image: linear-gradient(to right, #fff 30%, #00f 80%, red);
+				}
+
+				// there is not enough `gg` fallback here
+				.-Gdrl\#ff0\;2gg\,\#000 {
+					background-image: repeating-linear-gradient(#ff0 calc(var(--ml-gg) * 2), #000);
 				}
 			}
 		}
