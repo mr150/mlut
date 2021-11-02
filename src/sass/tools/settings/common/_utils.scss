@@ -557,7 +557,7 @@ $utils-db: (
 			'Txd': (
 				'properties': text-decoration,
 				'keywords': ('text-decoration', 'line-style'),
-				'value-type': 'border',
+				'value-type': 'outline',
 			),
 			'Txdc': (
 				'properties': text-decoration-color,
@@ -579,7 +579,7 @@ $utils-db: (
 
 			'Txs': (
 				'properties': text-shadow,
-				'value-type': 'border',
+				'value-type': 'outline',
 				'multi-list-separator': ml.$tULs1,
 			),
 			'Va': (
@@ -771,13 +771,13 @@ $utils-db: (
 					$cv-pref + 'sx',
 					$cv-pref + 'sy',
 				),
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Sx': (
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Sy': (
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Sk': (
 				'properties': (
@@ -799,7 +799,7 @@ $utils-db: (
 			// VISUAL
 			'Ol': (
 				'properties': outline,
-				'value-type': 'border',
+				'value-type': 'outline',
 				'keywords': ('line-style', 'line-width'),
 			),
 			'Olw': (
@@ -818,7 +818,7 @@ $utils-db: (
 
 			'Bxsd': (
 				'properties': box-shadow,
-				'value-type': 'border',
+				'value-type': 'outline',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': (
 					'i': inset,
@@ -873,7 +873,7 @@ $utils-db: (
 			),
 			'O': (
 				'properties': opacity,
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'Bfv': (
 				'properties': backface-visibility,
@@ -945,23 +945,23 @@ $utils-db: (
 			'-Bn': (
 				'function': 'brightness',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Ctr': (
 				'function': 'contrast',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Drps': (
 				'function': 'drop-shadow',
 				'value-transformer': 'to-css-fn',
 				'multi-list-separator': ml.$tULs1,
-				'value-type': 'border',
+				'value-type': 'outline',
 			),
 			'-Gra': (
 				'function': 'grayscale',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Hur': (
 				'function': 'hue-rotate',
@@ -971,22 +971,22 @@ $utils-db: (
 			'-Iv': (
 				'function': 'invert',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-O': (
 				'function': 'opacity',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Sa': (
 				'function': 'saturate',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Sp': (
 				'function': 'sepia',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'Bcf': (
 				'properties': (
@@ -1073,17 +1073,17 @@ $utils-db: (
 			'-Bcfbn': (
 				'function': 'brightness',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Bcfc': (
 				'function': 'contrast',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Bcfg': (
 				'function': 'grayscale',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Bcfhr': (
 				'function': 'hue-rotate',
@@ -1093,62 +1093,62 @@ $utils-db: (
 			'-Bcfi': (
 				'function': 'invert',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Bcfo': (
 				'function': 'opacity',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Bcfs': (
 				'function': 'saturate',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'-Bcfsp': (
 				'function': 'sepia',
 				'value-transformer': 'to-css-fn',
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 
 			// BORDER
 			'Bd': (
 				'properties': border,
-				'value-type': 'border',
+				'value-type': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'Bdt': (
 				'properties': border-top,
-				'value-type': 'border',
+				'value-type': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'Bdr': (
 				'properties': border-right,
-				'value-type': 'border',
+				'value-type': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'Bdb': (
 				'properties': border-bottom,
-				'value-type': 'border',
+				'value-type': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'Bdl': (
 				'properties': border-left,
-				'value-type': 'border',
+				'value-type': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'-Bdx': (
 				'properties': (
 					border-right, border-left,
 				),
-				'value-type': 'border',
+				'value-type': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'-Bdy': (
 				'properties': (
 					border-top, border-bottom,
 				),
-				'value-type': 'border',
+				'value-type': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 
@@ -1490,7 +1490,7 @@ $utils-db: (
 			),
 			'Fio': (
 				'properties': fill-opacity,
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 
 			'St': (
@@ -1500,7 +1500,7 @@ $utils-db: (
 			),
 			'Sto': (
 				'properties': stroke-opacity,
-				'value-type': 'alpha',
+				'value-type': 'num-percent',
 			),
 			'Stda': (
 				'properties': stroke-dasharray,

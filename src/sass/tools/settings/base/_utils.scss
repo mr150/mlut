@@ -77,14 +77,14 @@ $utils-cfg: (
 		'default': $uv-type-default,
 		'num-length': list.join('num-length', $uv-type-base),
 		'kw-num-length': list.set-nth($uv-type-default, 2, 'num-length'),
-		'alpha': list.join('alpha', $uv-type-base),
+		'num-percent': list.join('num-percent', $uv-type-base),
 		'angle': list.join('angle', $uv-type-base),
 		'color': list.join('color', $uv-type-base),
 		'abbr-kw': list.join('abbr', $uv-type-default),
 		'grid-tpl': list.join('grid-tracks', $uv-type-default),
 		'grid-span': list.join(('grid-span', 'num-length'), $uv-type-base),
 		'resolution': list.set-nth($uv-type-default, 2, 'resolution'),
-		'border': list.join(
+		'outline': list.join(
 			('keyword', 'color', 'number'), $uv-type-base
 		),
 		'gradient': (
@@ -115,7 +115,7 @@ $utils-cfg: (
 			'c': 1dpcm,
 			'x': 1dppx,
 		),
-		'alpha': (
+		'num-percent': (
 			'p': 0.01,
 		),
 		'angle': (

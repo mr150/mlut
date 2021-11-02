@@ -137,9 +137,9 @@
 	);
 }
 
-@function convert-uv-alpha($value, $data: ()) {
+@function convert-uv-num-percent($value, $data: ()) {
 	@return convert-uv-number(
-		$value, map.set($data, 'units-key', 'alpha')
+		$value, map.set($data, 'units-key', 'num-percent')
 	);
 }
 
