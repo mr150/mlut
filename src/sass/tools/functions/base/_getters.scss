@@ -199,7 +199,7 @@ Styleguide: sass-tools.functions.base.getters
 				// TODO: replace with str-lcfirst function
 				string.to-lower-case(string.slice($name, 2, 2)) + string.slice($name, 3)
 			),
-			$name
+			string.to-lower-case($name)
 		)
 	);
 }
