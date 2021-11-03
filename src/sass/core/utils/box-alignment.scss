@@ -97,23 +97,29 @@ Markup: ../../../docs/examples/core-utils/flex/ac.hbs
 Styleguide: core-utils.flex.ac
 */
 
+$-justify-list: ('st', 'e', 'c', 'str', 'a');
+
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	ml.$kSsUMCS,
 	(
 		ml.$kBpAll + '_Fld': ('rr', '#{ml.$kBpAll} #{ml.$kArOl}_r', 'c', 'cr'),
-		'Flg': (1),
-		'Fls': (0),
-		'Fl': ('ih'),
-		ml.$kBpAll + '_Flw': ('wr', 'w', 'n'),
-		'Ac': ('fs', 'fe', 'c', 'sa', 'sb', 'se'),
+		ml.$kBpAll + '_Flg': (1),
+		ml.$kBpAll + '_Fls': (0),
+		ml.$kBpAll + '_Flw': (ml.$kUvKA),
+		ml.$kBpAll + '_Ac': ('fs', 'fe', 'c', 'sa', 'sb', 'se'),
+		ml.$kBpAll + '_Ai': ('fs', 'fe', 'c', 'b', '#{ml.$kBpAll} #{ml.$kArOl}_str'),
 		ml.$kBpAll + '_As': (
-			'fs', 'fe', 'c', 'b', 'a', '#{ml.$kBpAll} #{ml.$kArOl}_s'
+			'fs', 'fe', 'c', 'b', 'a', '#{ml.$kBpAll} #{ml.$kArOl}_str'
 		),
 		ml.$kBpAll + '_Jc': (
 			'#{ml.$kBpAll} #{ml.$kArOl}_fs', 'fe', 'c', 'sa', 'sb', 'se'
 		),
-		ml.$kBpAll + '_Ai': ('fs', 'fe', 'c', 'b', '#{ml.$kBpAll} #{ml.$kArOl}_s'),
+		ml.$kBpAll + '_Ji': ($-justify-list),
+		ml.$kBpAll + '_Js': ($-justify-list),
+		ml.$kBpAll + '_Plcc': ('fs', 'fe', 'st', 'e', 'c', 'sa', 'sb', 'se', 'str'),
+		ml.$kBpAll + '_Plci': ($-justify-list),
+		ml.$kBpAll + '_Plcs': ($-justify-list),
 		ml.$kBpAll + '_Od': ([-1, 5],),
 	)
 );

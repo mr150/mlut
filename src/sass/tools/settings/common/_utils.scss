@@ -154,6 +154,7 @@ $utils-db: (
 			'Flw': (
 				'properties': flex-wrap,
 				'keywords': (
+					'': wrap,
 					'n': nowrap,
 					'w': wrap,
 					'wr': wrap-reverse,
@@ -274,11 +275,11 @@ $utils-db: (
 			),
 			'Gatc': (
 				'properties': grid-auto-columns,
-				'keywords': 'sizing',
+				'keywords': ('grid-auto-track', 'sizing'),
 			),
 			'Gatr': (
 				'properties': grid-auto-rows,
-				'keywords': 'sizing',
+				'keywords': ('grid-auto-track', 'sizing'),
 			),
 			'Gatf': (
 				'properties': grid-auto-flow,
@@ -1580,10 +1581,12 @@ $utils-db: (
 			'box-alignment': (
 				'b': baseline,
 				'c': center,
-				'n': normal,
+				'e': end,
 				'fs': flex-start,
 				'fe': flex-end,
-				's': stretch,
+				'n': normal,
+				'st': start,
+				'str': stretch,
 				'sb': space-between,
 				'sa': space-around,
 				'se': space-evenly,
@@ -1600,6 +1603,9 @@ $utils-db: (
 			'grid': (
 				'af': auto-flow,
 				'd': dense,
+			),
+			'grid-auto-track': (
+				't1': minmax(0, 1fr),
 			),
 			'easing-function': (
 				'e': ease,
