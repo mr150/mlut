@@ -207,6 +207,13 @@ $utils-cfg: (
 			's': '::selection',
 		),
 		'custom': (
+			'bt': '>*+*',
+			'evc': ':nth-child(2n)',
+			'evot': ':nth-of-type(2n)',
+			'odc': ':nth-child(odd)',
+			'odot': ':nth-of-type(odd)',
+			'op': '[open]',
+			'tif': '[tabindex="0"]',
 		),
 		'special': (
 			'noJs': null,
