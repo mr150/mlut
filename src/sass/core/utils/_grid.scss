@@ -19,21 +19,21 @@ ml.$utils-map: map.merge(
 	ml.$kSsUMCS,
 	(
 		// columns
-		ml.$kBpAll + '_Gtc': ($-templates),
-		ml.$kBpAll + '_Gc': ($-spans),
-		ml.$kBpAll + '_Gcs': ($-col-lines),
-		ml.$kBpAll + '_Gce': ($-col-lines),
-		ml.$kBpAll + '_Gatc': ($-auto-tracks),
+		ml.$cBpAllCp + 'Gtc': ($-templates),
+		ml.$cBpAllCp + 'Gc': ($-spans),
+		ml.$cBpAllCp + 'Gcs': ($-col-lines),
+		ml.$cBpAllCp + 'Gce': ($-col-lines),
+		ml.$cBpAllCp + 'Gatc': ($-auto-tracks),
 		// rows
-		ml.$kBpAll + '_Gtr': ('n'),
-		ml.$kBpAll + '_Gr': ('a', '1/-1'),
-		ml.$kBpAll + '_Grs': ($-row-lines),
-		ml.$kBpAll + '_Gre': ($-row-lines),
-		ml.$kBpAll + '_Gatr': ($-auto-tracks),
+		ml.$cBpAllCp + 'Gtr': ('n'),
+		ml.$cBpAllCp + 'Gr': ('a', '1/-1'),
+		ml.$cBpAllCp + 'Grs': ($-row-lines),
+		ml.$cBpAllCp + 'Gre': ($-row-lines),
+		ml.$cBpAllCp + 'Gatr': ($-auto-tracks),
 		// other
-		ml.$kBpAll + '_Gatf': (
-			'#{ml.$kBpAll} #{ml.$kArOl}_r', 'c', 'd', 'r;d', 'c;d'
+		ml.$cBpAllCp + 'Gatf': (
+			ml.$cArOlBp + 'r', 'c', 'd', 'r;d', 'c;d'
 		),
-		ml.$kBpAll + '_AllGaps': ([1gg, 4], [1su, 8]),
+		ml.$cBpAllCp + 'AllGaps': ([1gg, 4], [1su, 8]),
 	)
 );

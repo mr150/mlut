@@ -103,23 +103,23 @@ ml.$utils-map: map.merge(
 	ml.$utils-map,
 	ml.$kSsUMCS,
 	(
-		ml.$kBpAll + '_Fld': ('rr', '#{ml.$kBpAll} #{ml.$kArOl}_r', 'c', 'cr'),
-		ml.$kBpAll + '_Flg': (1),
-		ml.$kBpAll + '_Fls': (0),
-		ml.$kBpAll + '_Flw': (ml.$kUvKA),
-		ml.$kBpAll + '_Ac': ('fs', 'fe', 'c', 'sa', 'sb', 'se'),
-		ml.$kBpAll + '_Ai': ('fs', 'fe', 'c', 'b', '#{ml.$kBpAll} #{ml.$kArOl}_str'),
-		ml.$kBpAll + '_As': (
-			'fs', 'fe', 'c', 'b', 'a', '#{ml.$kBpAll} #{ml.$kArOl}_str'
+		ml.$cBpAllCp + 'Fld': ('rr', ml.$cArOlBp + 'r', 'c', 'cr'),
+		ml.$cBpAllCp + 'Flg': (1),
+		ml.$cBpAllCp + 'Fls': (0),
+		ml.$cBpAllCp + 'Flw': (ml.$kUvKA),
+		ml.$cBpAllCp + 'Ac': ('fs', 'fe', 'c', 'sa', 'sb', 'se'),
+		ml.$cBpAllCp + 'Ai': ('fs', 'fe', 'c', 'b', ml.$cArOlBp + 'str'),
+		ml.$cBpAllCp + 'As': (
+			'fs', 'fe', 'c', 'b', 'a', ml.$cArOlBp + 'str'
 		),
-		ml.$kBpAll + '_Jc': (
-			'#{ml.$kBpAll} #{ml.$kArOl}_fs', 'fe', 'c', 'sa', 'sb', 'se'
+		ml.$cBpAllCp + 'Jc': (
+			ml.$cArOlBp + 'fs', 'fe', 'c', 'sa', 'sb', 'se'
 		),
-		ml.$kBpAll + '_Ji': ($-justify-list),
-		ml.$kBpAll + '_Js': ($-justify-list),
-		ml.$kBpAll + '_Plcc': ('fs', 'fe', 'st', 'e', 'c', 'sa', 'sb', 'se', 'str'),
-		ml.$kBpAll + '_Plci': ($-justify-list),
-		ml.$kBpAll + '_Plcs': ($-justify-list),
-		ml.$kBpAll + '_Od': ([-1, 5],),
+		ml.$cBpAllCp + 'Ji': ($-justify-list),
+		ml.$cBpAllCp + 'Js': ($-justify-list),
+		ml.$cBpAllCp + 'Plcc': ('fs', 'fe', 'st', 'e', 'c', 'sa', 'sb', 'se', 'str'),
+		ml.$cBpAllCp + 'Plci': ($-justify-list),
+		ml.$cBpAllCp + 'Plcs': ($-justify-list),
+		ml.$cBpAllCp + 'Od': ([-1, 5],),
 	)
 );
