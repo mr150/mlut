@@ -289,8 +289,14 @@ $utils-db: (
 					'r': row,
 				),
 			),
-			'Gap': gap,
-			'Rg': row-gap,
+			'Gap': (
+				'properties': gap,
+				'directions': true,
+			),
+			'Rwg': (
+				'properties': row-gap,
+				'default-unit': 'rem',
+			),
 			'Clmg': column-gap,
 
 			'F': (
@@ -1744,6 +1750,11 @@ $utils-groups: (
 	'Translates': (
 		'members': (
 			-Tr, -Trx, -Try,
+		),
+	),
+	'AllGaps': (
+		'members': (
+			Gap, Clmg, Rwg,
 		),
 	),
 ) !default;
