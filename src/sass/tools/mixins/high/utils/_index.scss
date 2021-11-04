@@ -23,15 +23,15 @@ Styleguide: sass-tools.mixins.utils
 	$group-data: ml.parse-util($raw-name);
 	$name: map.get($group-data, 'value');
 
-	@if not map.has-key(ml.$utils-groups, $name) {
+	@if not map.has-key(ml.$utils-groups-db, $name) {
 		@error 'Group `#{$name}` not defined in registry';
 	}
 
 	$bound-comp-map: (
 		$bound-components and
-		map.has-key(ml.$utils-groups, $name, 'components') and
+		map.has-key(ml.$utils-groups-db, $name, 'components') and
 		ml.parse-util(
-			map.get(ml.$utils-groups, $name, 'components')
+			map.get(ml.$utils-groups-db, $name, 'components')
 		)
 	);
 	$is-bound-comp: list.length($bound-comp-map) > 1;
@@ -44,8 +44,8 @@ Styleguide: sass-tools.mixins.utils
 
 	$i: 1;
 	$members: (
-		map.get(ml.$utils-groups, $name, 'members') or
-		map.get(ml.$utils-groups, $name)
+		map.get(ml.$utils-groups-db, $name, 'members') or
+		map.get(ml.$utils-groups-db, $name)
 	);
 
 	@each $util in $members {

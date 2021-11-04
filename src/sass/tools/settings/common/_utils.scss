@@ -10,6 +10,8 @@ $cv-pref: '--' + ml.$css-var-prefix;
 
 $utils-data: () !default;
 $utils-data-ext: () !default;
+$utils-groups: () !default;
+$utils-groups-ext: () !default;
 $utils-map: ();
 
 $-css-wide-kw: (
@@ -1687,7 +1689,7 @@ $utils-db: (
 	),
 ) !default;
 
-$utils-groups: (
+$utils-groups-db: (
 	'Borders': (
 		'members': (
 			Bd, Bdt, Bdr, Bdb, Bdl, -Bdx, -Bdy,
@@ -1762,7 +1764,6 @@ $utils-groups: (
 		),
 	),
 ) !default;
-
 
 $-common-registry: ();
 
@@ -1863,6 +1864,8 @@ $utils-db: map.set(
 
 $utils-db: map.deep-merge($utils-db, $utils-data);
 $utils-db: map.deep-merge($utils-db, $utils-data-ext);
+$utils-groups-db: map.deep-merge($utils-groups-db, $utils-groups);
+$utils-groups-db: map.deep-merge($utils-groups-db, $utils-groups-ext);
 $utils-db: map.merge(
 	$utils-db,
 	'utils',

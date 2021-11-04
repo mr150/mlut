@@ -3,8 +3,8 @@
 @use 'sass:map';
 @use 'sass:list';
 
-ml.$utils-groups: map.deep-merge(
-	ml.$utils-groups,
+ml.$utils-groups-db: map.deep-merge(
+	ml.$utils-groups-db,
 	(
 		'tSpaces': (
 			'M', 'P',
