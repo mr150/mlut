@@ -113,7 +113,7 @@ $utils-db: (
 					'tr': table-row,
 					'tc': table-cell,
 					'tcl': table-column,
-					'tcg': table-column-group,
+					'tclg': table-column-group,
 					'thg': table-header-group,
 					'tfg': table-footer-group,
 					'trg': table-row-group,
@@ -131,7 +131,7 @@ $utils-db: (
 					'vh': (
 						null, null, absolute, 1px, 1px, -1px, 0, hidden, nowrap, 0, rect(0 0 0 0)
 					),
-					'vv': (
+					'v': (
 						null, null, static, auto, auto, 0, null, visible, normal, null, auto
 					),
 				),
@@ -1579,7 +1579,6 @@ $utils-db: (
 				'v': visible
 			),
 			'sizing': (
-				'n': none,
 				'fc': fit-content,
 				'mc': max-content,
 				'mnc': min-content,
@@ -1729,7 +1728,7 @@ $utils-groups: (
 			M, Mt, Mr, Mb, Ml, -Mx, -My,
 			P, Pt, Pr, Pb, Pl, -Px, -Py,
 			T, R, B, L, -X, -Y, -I,
-			W, H, Mxh,
+			W, H, Gap, Clmg, Rwg
 		),
 	),
 	'Offsets': (
@@ -1755,6 +1754,11 @@ $utils-groups: (
 	'AllGaps': (
 		'members': (
 			Gap, Clmg, Rwg,
+		),
+	),
+	'Sizes': (
+		'members': (
+			W, H, Mxw, Mnh,
 		),
 	),
 ) !default;

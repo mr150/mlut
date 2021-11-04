@@ -97,24 +97,25 @@ ml.$utils-map: map.merge(
 	ml.$kSsUMCS,
 	(
 		// display
-		ml.$kBpAll + '_D': (
-			'', 'i', 'ib', 'if', 'g', 'ig', 'n',
+		ml.$cBpAllCp + 'D': (
+			'', 'i', 'ib', 'f', 'if', 'g', 'ig', 'n', 't', 'it', 'c', 'flr',
 		),
-		'D': (
-			ml.$kBpAll + ' @s_f', 't', 'tc', 'tr', 'it',
-		),
-		ml.$kBpAll + '_-D': ml.$kUvKA,
+		'D': ('tc', 'tr', 'li',),
+		ml.$cBpAllCp + '-D': ml.$kUvKA,
 		// sizes
-		ml.$kBpAll + '_Mxw': list.join((100p, 'n'), ml.$global-kw-bp),
-		ml.$kBpAll + '_W': (100p, 'a', 'ih', [1gc, 12]),
-		'H': (100p, 100vh, 0),
-		'Mnh': (100p, 100vh),
+		ml.$cBpAllCp + 'Mnw': (100p, ml.$kUvKA),
+		ml.$cBpAllCp + 'Mxw': list.join((100p, ml.$kUvKA, 'n'), ml.$global-kw-bp),
+		ml.$cBpAllCp + 'W': (100p, 'a', ml.$kUvKA, [1gc, 12]),
+		ml.$cBpAllCp + 'H': (100p, 100vh, 0, ml.$cArOlBp + 'a'),
+		ml.$cBpAllCp + 'Mnh': (100p, 100vh, 0),
+		ml.$cBpAllCp + 'Mxh': (100p, 100vh, 'n'),
 		// other
-		'Bxs': ('', 'cb'),
-		'F': ('', 'r'),
-		'Cl': ('', 'r', 'l'),
+		'Bxs': (ml.$kUvKA),
+		ml.$cBpAllCp + 'F': (ml.$kUvKA, 'n'),
+		ml.$cBpAllCp + 'Cl': (ml.$kUvKA, 'n'),
 		'-Cl': '',
-		'Overflows': ('', 'a', 's', 'v'),
+		ml.$cBpAllCp + 'Tbl': ('f', 'n'),
+		ml.$cBpAllCp + 'Overflows': (ml.$kUvKA),
 	)
 );
 
