@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use '../../tools/settings' as ml;
+
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	ml.$kSsUMCS,
+	(
+		ml.$cBpAllCp + 'Ts': ('n'),
+		'-Ts': (ml.$kUvKA),
+		'Tsp': ('o', 'tf', 'bxsd'),
+		ml.$cBpAllCp + 'Tsd': (ml.$cArOlBp + ml.$css-transition-time, 1s, 0s),
+		'Tsdl': (ml.$css-transition-time, 1s),
+		'Tstf': (ml.$kUvKA),
+		ml.$cArOlBp + 'An': ('n'),
+	)
+);
