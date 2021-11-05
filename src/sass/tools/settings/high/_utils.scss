@@ -35,6 +35,11 @@ $utils-groups-db: (
 			M, Mt, Mr, '#{ml.$cArStBp}Mb_-bt', '#{ml.$cArStBp}Ml_-bt', -Mx, -My,
 		),
 	),
+	'MarginsNoR': (
+		'members': (
+			M, Mt, '#{ml.$cArStBp}Mb_-bt', '#{ml.$cArStBp}Ml_-bt', -Mx, -My,
+		),
+	),
 	'Paddings': (
 		'members': (
 			P, Pt, Pr, Pb, Pl, -Px, -Py,
