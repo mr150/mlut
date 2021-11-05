@@ -30,10 +30,6 @@
 		$unit: math.unit($val-number);
 		$units-key: map.get($data, 'units-key');
 
-		@if map.get($data, 'negative') {
-			$val-number: $val-number * -1;
-		}
-
 		@if (
 			not $units-key and $unit == '' and
 			($val-number - math.floor($val-number)) != 0
