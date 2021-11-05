@@ -1430,7 +1430,7 @@ $utils-db: (
 			'Ct': (
 				'properties': content,
 				'keywords': (
-					'': "''",
+					'': string.unquote("''"),
 					'nm': normal,
 					'oq': open-quote,
 					'cq': close-quote,
@@ -1466,6 +1466,7 @@ $utils-db: (
 			),
 			'Wlc': (
 				'properties': will-change,
+				'value-type': 'abbr-kw',
 				'keywords': (
 					'sps': scroll-position,
 					'ctn': contents,

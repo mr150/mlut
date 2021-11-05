@@ -83,6 +83,11 @@ $utils-groups-db: (
 			W, H, Mxw, Mnh,
 		),
 	),
+	'Overscrolls': (
+		'members': (
+			Ovsb, Ovsbx, Ovsby
+		),
+	),
 ) !default;
 
 $utils-groups-db: map.deep-merge($utils-groups-db, $utils-groups);
