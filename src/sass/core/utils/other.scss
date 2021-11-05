@@ -78,11 +78,18 @@ ml.$utils-map: map.merge(
 	ml.$utils-map,
 	ml.$kSsUMCS,
 	(
-		ml.$kBpAll + '_Ps': ('', 'a', 'f', 's', 'sk'),
-		ml.$kBpAll + '_Offsets': (0, 'a', 100p, 50p),
-		'Zi': ('a', [-1, 5]),
+		// position
+		ml.$cBpAllCp + 'Ps': (ml.$kUvKA),
+		ml.$cBpAllCp + 'Offsets': ('a', 0, -1, 1, -50p, 50p, -100p, 100p),
+		ml.$cBpAllCp + 'Zi': ('a', [-1, 5]),
 		// animation
-		'Ts': ('mAll'),
+		ml.$cBpAllCp + 'Ts': ('mAll', 'n'),
+		ml.$cBpAllCp + '-Ts': (ml.$kUvKA),
+		ml.$cBpAllCp + 'Tsp': ('o', 'tf', 'bxsd'),
+		'Tsd': (ml.$cArOlBp + ml.$css-transition-time, 1s),
+		'Tsdl': (ml.$css-transition-time, 1s),
+		'Tstf': (ml.$kUvKA),
+		ml.$cArOlBp + 'An': ('n'),
 		// misc
 		'Rs': (ml.$kUvKA),
 		'Ct_b af ' + ml.$kStOl: list.append($-Ct-list, 'mAtt'),
