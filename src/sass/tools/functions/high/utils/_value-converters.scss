@@ -185,9 +185,11 @@
 
 @function convert-uv-abbr($value, $data: ()) {
 	@return (
-		ml.util-prop(ml.str-ucfirst($value), map.get($data, 'section')) or
+		ml.util-prop(
+			ml.str-ucfirst($value), map.get($data, 'section'), false, true
+		) or
 		// maybe in the future, the keys of utils in the registry will be unified
-		ml.util-prop($value, map.get($data, 'section')) or
+		ml.util-prop($value, map.get($data, 'section'), false, true) or
 		$value
 	);
 }

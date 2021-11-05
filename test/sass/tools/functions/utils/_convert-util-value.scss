@@ -150,6 +150,7 @@ ml.$utils-cfg: map.set(
 			),
 			'converts property abbreviation': (
 				('bgc', 'Ts'): background-color,
+				('tf', 'Tsp'): transform,
 				('=bgc', 'Ts'): bgc,
 			),
 			'converts utility keyword': (
