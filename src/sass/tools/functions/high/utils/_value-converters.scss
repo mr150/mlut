@@ -24,11 +24,11 @@
 
 @function convert-uv-number($value, $data: ()) {
 	$val-number: ml.str2n($value, true);
+	$units-key: map.get($data, 'units-key');
 
 	@if meta.type-of($val-number) == 'number' {
 		$unit-number: 0;
 		$unit: math.unit($val-number);
-		$units-key: map.get($data, 'units-key');
 
 		@if (
 			not $units-key and $unit == '' and
@@ -76,6 +76,24 @@
 		}
 
 		@return $val-number;
+	}
+
+	@if not $units-key and meta.type-of($value) == 'string' {
+		$fraction: ml.str-split($value, '/');
+
+		@if list.length($fraction) > 1 {
+			$dividend: list.nth($fraction, 1);
+
+			@if map.get($data, 'negative') {
+				$dividend: '-' + $dividend;
+			}
+
+			@return calc(
+				ml.apply-value-converter($dividend, 'O')
+				/ ml.apply-value-converter(list.nth($fraction, 2), 'O')
+				* 100%
+			);
+		}
 	}
 
 	@return $value;
@@ -242,7 +260,7 @@ $-tUCp-length: string.length(ml.$tUCp);
 
 			@if $color or ml.is-css-var($converted-part) {
 				$part-alpha: list.nth($mod-color-list, 2);
-				$alpha: ml.apply-value-converter($part-alpha, 'O', 'utils');
+				$alpha: ml.apply-value-converter($part-alpha, 'O');
 
 				@if ml.is-css-var($alpha) and not string.index($part-alpha, ml.$tUFv) {
 					$alpha: string.insert($alpha, ', 1', -2);

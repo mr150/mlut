@@ -118,6 +118,14 @@ ml.$utils-cfg: map.set(
 				(1r, 'Tas'): 1rem,
 				('-2gg', 'Ml'): calc(var(--ml-gg) * -2),
 			),
+			'converts fractions': (
+				('1/3', 'W'): 33.3333333333%,
+				('-1/4', 'Ml'): -25%,
+				('2/2.5', 'T'): 80%,
+				('1/$div', 'W'): calc(1 / var(--ml-div) * 100%),
+				('-$div/5', 'L'): calc(calc(var(--ml-div) * -1) / 5 * 100%),
+				('2/-$div', 'L'): calc(2 / calc(var(--ml-div) * -1) * 100%),
+			),
 			'converts global keyword': (
 				('a', 'W'): auto,
 				// this behavior is useless now because it may change in the future

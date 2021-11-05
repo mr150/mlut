@@ -82,7 +82,7 @@
 }
 
 @function apply-value-converter(
-	$util-value, $name, $section, $one-value: true
+	$util-value, $name, $section: 'utils', $one-value: true
 ) {
 	@if ml.str-starts($util-value, ml.$tURv) {
 		@return string.unquote(string.slice($util-value, 2));
