@@ -1,0 +1,84 @@
+@use 'sass:map';
+@use 'forward-tools' as ml;
+
+$utils-groups: () !default;
+$utils-groups-ext: () !default;
+
+$utils-groups-db: (
+	'Borders': (
+		'members': (
+			Bd, Bdt, Bdr, Bdb, Bdl, -Bdx, -Bdy,
+		),
+	),
+	'BdWidth': (
+		'members': (
+			Bdw, Bdtw, Bdrw, Bdbw, Bdlw, -Bdxw, -Bdyw,
+		),
+	),
+	'BdStyle': (
+		'members': (
+			Bds, Bdts, Bdrs, Bdbs, Bdls, -Bdxs, -Bdys,
+		),
+	),
+	'BdSidesColor': (
+		'members': (
+			Bdtc, Bdrc, Bdbc, Bdlc, -Bdxc, -Bdyc,
+		),
+	),
+	'Overflows': (
+		'members': (
+			Ov, Ovx, Ovy,
+		),
+	),
+	'Margins': (
+		'members': (
+			M, Mt, Mr, '#{ml.$cArStBp}Mb_-bt', '#{ml.$cArStBp}Ml_-bt', -Mx, -My,
+		),
+	),
+	'Paddings': (
+		'members': (
+			P, Pt, Pr, Pb, Pl, -Px, -Py,
+		),
+	),
+	'Spaces': (
+		'members': (
+			M, Mt, Mr, '#{ml.$cArStBp}Mb_-bt', '#{ml.$cArStBp}Ml_-bt', -Mx, -My,
+			P, Pt, Pr, Pb, Pl, -Px, -Py,
+			T, R, B, L, -X, -Y, -I,
+			W, H, Gap, Clmg, Rwg
+		),
+	),
+	'Offsets': (
+		'members': (
+			T, R, B, L, -X, -Y, -I,
+		),
+	),
+	'Colors': (
+		'members': (
+			C, Bgc, Bdc,
+		),
+	),
+	'ColorsExt': (
+		'members': (
+			C, Bgc, Bdc, Olc,
+		),
+	),
+	'Translates': (
+		'members': (
+			-Tr, -Trx, -Try,
+		),
+	),
+	'AllGaps': (
+		'members': (
+			Gap, Clmg, Rwg,
+		),
+	),
+	'Sizes': (
+		'members': (
+			W, H, Mxw, Mnh,
+		),
+	),
+) !default;
+
+$utils-groups-db: map.deep-merge($utils-groups-db, $utils-groups);
+$utils-groups-db: map.deep-merge($utils-groups-db, $utils-groups-ext);

@@ -136,6 +136,7 @@ $kArSO: map.get($at-rules-cfg, 'tokens', 'generation', 'at-rules-states-only');
 
 $cBpAllCp: $kBpAll + '_';
 $cArOlBp: '#{$kBpAll} #{$kArOl}_';
+$cArStBp: '#{$kBpAll} #{$kArSt}_';
 
 $at-rules-cfg: map.merge(
 	$at-rules-cfg,

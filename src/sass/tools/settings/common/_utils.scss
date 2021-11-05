@@ -10,8 +10,6 @@ $cv-pref: '--' + ml.$css-var-prefix;
 
 $utils-data: () !default;
 $utils-data-ext: () !default;
-$utils-groups: () !default;
-$utils-groups-ext: () !default;
 $utils-map: ();
 
 $-css-wide-kw: (
@@ -1689,82 +1687,6 @@ $utils-db: (
 	),
 ) !default;
 
-$utils-groups-db: (
-	'Borders': (
-		'members': (
-			Bd, Bdt, Bdr, Bdb, Bdl, -Bdx, -Bdy,
-		),
-	),
-	'BdWidth': (
-		'members': (
-			Bdw, Bdtw, Bdrw, Bdbw, Bdlw, -Bdxw, -Bdyw,
-		),
-	),
-	'BdStyle': (
-		'members': (
-			Bds, Bdts, Bdrs, Bdbs, Bdls, -Bdxs, -Bdys,
-		),
-	),
-	'BdSidesColor': (
-		'members': (
-			Bdtc, Bdrc, Bdbc, Bdlc, -Bdxc, -Bdyc,
-		),
-	),
-	'Overflows': (
-		'members': (
-			Ov, Ovx, Ovy,
-		),
-	),
-	'Margins': (
-		'members': (
-			M, Mt, Mr, Mb, Ml, -Mx, -My,
-		),
-	),
-	'Paddings': (
-		'members': (
-			P, Pt, Pr, Pb, Pl, -Px, -Py,
-		),
-	),
-	'Spaces': (
-		'members': (
-			M, Mt, Mr, Mb, Ml, -Mx, -My,
-			P, Pt, Pr, Pb, Pl, -Px, -Py,
-			T, R, B, L, -X, -Y, -I,
-			W, H, Gap, Clmg, Rwg
-		),
-	),
-	'Offsets': (
-		'members': (
-			T, R, B, L, -X, -Y, -I,
-		),
-	),
-	'Colors': (
-		'members': (
-			C, Bgc, Bdc,
-		),
-	),
-	'ColorsExt': (
-		'members': (
-			C, Bgc, Bdc, Olc,
-		),
-	),
-	'Translates': (
-		'members': (
-			-Tr, -Trx, -Try,
-		),
-	),
-	'AllGaps': (
-		'members': (
-			Gap, Clmg, Rwg,
-		),
-	),
-	'Sizes': (
-		'members': (
-			W, H, Mxw, Mnh,
-		),
-	),
-) !default;
-
 $-common-registry: ();
 
 @each $key, $value in map.get($utils-db, 'common', 'registry') {
@@ -1864,8 +1786,6 @@ $utils-db: map.set(
 
 $utils-db: map.deep-merge($utils-db, $utils-data);
 $utils-db: map.deep-merge($utils-db, $utils-data-ext);
-$utils-groups-db: map.deep-merge($utils-groups-db, $utils-groups);
-$utils-groups-db: map.deep-merge($utils-groups-db, $utils-groups-ext);
 $utils-db: map.merge(
 	$utils-db,
 	'utils',
