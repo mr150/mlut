@@ -7,22 +7,22 @@ $utils-groups-ext: () !default;
 $utils-groups-db: (
 	'Borders': (
 		'members': (
-			Bd, Bdt, Bdr, Bdb, Bdl, -Bdx, -Bdy,
+			Bd, Bdt, Bdr, '#{ml.$cArStBp}Bdb_-btc', '#{ml.$cArStBp}Bdl_-btc', -Bdx, -Bdy,
 		),
 	),
 	'BdWidth': (
 		'members': (
-			Bdw, Bdtw, Bdrw, Bdbw, Bdlw, -Bdxw, -Bdyw,
+			Bdw, Bdtw, Bdrw, '#{ml.$cArStBp}Bdbw_-btc', '#{ml.$cArStBp}Bdlw_-btc', -Bdxw, -Bdyw,
 		),
 	),
 	'BdStyle': (
 		'members': (
-			Bds, Bdts, Bdrs, Bdbs, Bdls, -Bdxs, -Bdys,
+			Bds, Bdts, Bdrs, '#{ml.$cArStBp}Bdbs_-btc', '#{ml.$cArStBp}Bdls_-btc', -Bdxs, -Bdys,
 		),
 	),
 	'BdSidesColor': (
 		'members': (
-			Bdtc, Bdrc, Bdbc, Bdlc, -Bdxc, -Bdyc,
+			Bdtc, Bdrc, '#{ml.$cArStBp}Bdbc_-btc', '#{ml.$cArStBp}Bdlc_-btc', -Bdxc, -Bdyc,
 		),
 	),
 	'Overflows': (
