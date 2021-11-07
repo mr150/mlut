@@ -97,11 +97,13 @@ ml.$utils-map: map.merge(
 	ml.$kSsUMCS,
 	(
 		// display
-		ml.$cBpAllCp + 'D': (
-			'', 'i', 'ib', 'f', 'if', 'g', 'ig', 'n', 't', 'it', 'c', 'flr',
+		'D': ml.$kUvKA,
+		ml.$cArOlBp + 'D': (
+			'', 'b', 'i', 'ib', 'f', 'if', 'g', 'ig', 'n', 't', 'it', 'c', 'flr', 'tc', 'tr',
 		),
-		'D': ('tc', 'tr', 'li',),
-		ml.$cBpAllCp + '-D': ml.$kUvKA,
+		ml.$cBpAllCp + '-D': (
+			'mf', 'mif', 'vh', '#{ml.$kBpAll} #{ml.$kArSt}_v_f fw'
+		),
 		// sizes
 		ml.$cBpAllCp + 'Mnw': (100p, ml.$kUvKA),
 		ml.$cBpAllCp + 'Mxw': list.join((100p, ml.$kUvKA, 'n'), ml.$global-kw-bp),

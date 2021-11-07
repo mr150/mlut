@@ -72,7 +72,7 @@ Markup: ../../../docs/examples/core-utils/visual-formatting/-all.html
 Styleguide: core-utils.misc.-all
 */
 
-$-Ct-list: ('', 'n');
+$-Ct-list: ('', 'n', 'mAtt');
 
 ml.$utils-map: map.merge(
 	ml.$utils-map,
@@ -81,14 +81,14 @@ ml.$utils-map: map.merge(
 		// position
 		ml.$cBpAllCp + 'Ps': (ml.$kUvKA),
 		ml.$cBpAllCp + 'Offsets': ('a', 0, -1, 1, -50p, 50p, -100p, 100p),
-		ml.$cBpAllCp + 'Zi': ('a', [-1, 5]),
+		'#{ml.$kBpAll} #{ml.$kArSt}_Zi_f fw': ('a', [-1, 5]),
 		// interactive
 		'Overscrolls': ('c', 'a', 'n'),
 		'Ap': (''),
-		ml.$cBpAllCp + 'Pne': ('', 'a'),
+		ml.$cBpAllCp + 'Pne': ('', 'n', 'a'),
 		'Rs': (ml.$kUvKA),
 		'Us': (ml.$kUvKA),
-		ml.$cBpAllCp + 'Ctv': (ml.$cArOlBp + 'v', 'h', 'a'),
+		ml.$cBpAllCp + 'Ctv': ('v', 'h', 'a'),
 		'Tca': (ml.$kUvKA, 'n'),
 		// SVG
 		'Stlc': (ml.$kUvKA),
@@ -97,7 +97,7 @@ ml.$utils-map: map.merge(
 		'Ec': (ml.$kUvKA),
 		'Cps': ('t', 'b'),
 		'Wlc': ('sps', 'ctn', 'tf'),
-		'Ct_b af ' + ml.$kStOl: list.append($-Ct-list, 'mAtt'),
+		'Ct_b af ' + ml.$kStOl: $-Ct-list,
 		'#{ml.$kBpAll} #{ml.$kArSO}_Ct_b af': $-Ct-list,
 		'-All': ('sr'),
 	)
