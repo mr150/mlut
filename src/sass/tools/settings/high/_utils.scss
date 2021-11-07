@@ -25,6 +25,11 @@ $utils-groups-db: (
 			Bdtc, Bdrc, '#{ml.$cArStBp}Bdbc_-btc', '#{ml.$cArStBp}Bdlc_-btc', -Bdxc, -Bdyc,
 		),
 	),
+	'BdRadius': (
+		'members': (
+			Bdrd, Bdtrr, Bdtlr, Bdbrr, Bdblr, -Bdtrd, -Bdbrd,
+		),
+	),
 	'Overflows': (
 		'members': (
 			Ov, Ovx, Ovy,

@@ -1279,6 +1279,22 @@ $utils-db: (
 				'properties': border-radius,
 				'multi-list-separator': ml.$tULs2,
 			),
+			'Bdtrr': border-top-right-radius,
+			'Bdtlr': border-top-left-radius,
+			'Bdbrr': border-bottom-right-radius,
+			'Bdblr': border-bottom-left-radius,
+			'-Bdtrd': (
+				'properties': (
+					border-top-right-radius,
+					border-top-left-radius,
+				),
+			),
+			'-Bdbrd': (
+				'properties': (
+					border-bottom-right-radius,
+					border-bottom-left-radius,
+				),
+			),
 
 			// TRANSITION AND ANIMATION
 			'Ts': (
