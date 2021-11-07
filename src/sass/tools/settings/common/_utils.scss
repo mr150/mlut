@@ -15,8 +15,8 @@ $utils-map: ();
 $-css-wide-kw: (
 	'ih': inherit,
 	'ini': initial,
-	'rv': revert,
-	'us': unset,
+	'rvr': revert,
+	'ust': unset,
 );
 $-bd-kw-links: ('border', 'line-style', 'line-width');
 
@@ -514,7 +514,6 @@ $utils-db: (
 				'keywords': (
 					'': uppercase,
 					'c': capitalize,
-					'fw': full-width,
 					'l': lowercase,
 					'u': uppercase,
 				),

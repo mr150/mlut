@@ -75,8 +75,8 @@ ml.$utils-db: map.set(
 					'values': (
 						'ih': inherit,
 						'ini': initial,
-						'rv': revert,
-						'us': unset,
+						'rvr': revert,
+						'ust': unset,
 					)
 				),
 			),
@@ -93,8 +93,8 @@ ml.$utils-db: map.set(
 					'values': (
 						'ih': inherit,
 						'ini': initial,
-						'rv': revert,
-						'us': unset,
+						'rvr': revert,
+						'ust': unset,
 						'gODef': 0.88,
 						'gTsdDef': 0.3s,
 					)
@@ -103,8 +103,8 @@ ml.$utils-db: map.set(
 					'values': (
 						'ih': inherit,
 						'ini': initial,
-						'rv': revert,
-						'us': unset,
+						'rvr': revert,
+						'ust': unset,
 						'gODef': 0.88,
 						'gTsdDef': 0.3s,
 						'e': end,
@@ -126,8 +126,8 @@ ml.$utils-db: map.set(
 					'values': (
 						'ih': inherit,
 						'ini': initial,
-						'rv': revert,
-						'us': unset,
+						'rvr': revert,
+						'ust': unset,
 					)
 				),
 				('KW.speak.now', 'Ai'): 'ERROR: Not found keywords on this path: `speak.now`',
