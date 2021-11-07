@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use '../../tools' as ml;
+
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	ml.$kSsUMCS,
+	(
+		// background
+		ml.$cBpAllCp + 'Bg': 'n',
+		ml.$cBpAllCp + 'Bgc': 'tp',
+		'Bgr': ml.$kUvKA,
+		ml.$cBpAllCp + 'Bgs': (100p, ml.$kUvKA),
+		'Bga': ml.$kUvKA,
+		'Bgcl': ml.$kUvKA,
+		'Bgo': ('bb', 'cb', 'pb'),
+		ml.$cBpAllCp + 'Bgi': 'n',
+		'Bgp': (ml.$kUvKA, 'r;t', 'r;b', 'l;b', 'l;t'),
+		// border
+		'Bd': '0;s',
+		ml.$cBpAllCp + 'Borders': '',
+		ml.$cBpAllCp + 'BdWidth': (0, 2),
+		'BdStyle': ('d', 'h', 'dh', 'db', 's'),
+		ml.$cBpAllCp + 'Bdc': 'tp',
+		'Bdcl': ml.$kUvKA,
+		'Bdrd': (50p),
+	)
+);
