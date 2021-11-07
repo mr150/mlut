@@ -189,15 +189,19 @@ Styleguide: sass-tools.functions.high.utils
 	}
 
 	@if map.has-key($values, '') {
-		$def-value: map.get($values, '');
-		$kw-def-value-index: list.index(
-			map.values(map.set($values, '', null)), $def-value
-		);
-
-		@if $kw-def-value-index {
-			$values: map.remove(
-				$values, list.nth(list.nth($values, $kw-def-value-index), 1)
+		@if ml.$uv-kw-alias-behavior == 1 {
+			$def-value: map.get($values, '');
+			$kw-def-value-index: list.index(
+				map.values(map.set($values, '', null)), $def-value
 			);
+
+			@if $kw-def-value-index {
+				$values: map.remove(
+					$values, list.nth(list.nth($values, $kw-def-value-index), 1)
+				);
+			}
+		} @else if ml.$uv-kw-alias-behavior == 2 {
+			$values: map.remove($values, '');
 		}
 	}
 

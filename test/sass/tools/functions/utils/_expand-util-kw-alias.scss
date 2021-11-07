@@ -52,6 +52,7 @@ ml.$utils-db: map.set(
 				('KW', 'Ts'): (
 					'values': (
 						'': all 3s,
+						'all': all 3s,
 						'def0': (color 3s, background-color 3s),
 						'e': ease,
 						'ei': ease-in,
@@ -143,6 +144,34 @@ ml.$utils-db: map.set(
 					);
 				}
 			}
+		}
+
+		@include it('expand alias with different behavior') {
+			ml.$uv-kw-alias-behavior: 1;
+
+			@include assert-equal (
+				ml.expand-util-kw-alias('KW.utils.transition', 'Ts'),
+				(
+					'values': (
+						'': all 3s,
+						'def0': (color 3s, background-color 3s),
+					),
+				),
+				$inspect: true,
+			);
+
+			ml.$uv-kw-alias-behavior: 2;
+
+			@include assert-equal (
+				ml.expand-util-kw-alias('KW.utils.transition', 'Ts'),
+				(
+					'values': (
+						'all': all 3s,
+						'def0': (color 3s, background-color 3s),
+					),
+				),
+				$inspect: true,
+			);
 		}
 	}
 }

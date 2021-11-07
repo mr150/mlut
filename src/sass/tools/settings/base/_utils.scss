@@ -54,6 +54,7 @@ $kSsVCP: 'Pl' !default;
 $kSsUMCS: 'core' !default;
 $uv-type-base: ('global-kw', 'cust-prop',) !default;
 $uv-type-default: list.join(('keyword', 'number'), $uv-type-base);
+$uv-kw-alias-behavior: 0 !default;
 $utils-config: () !default;
 $utils-config-ext: () !default;
 
