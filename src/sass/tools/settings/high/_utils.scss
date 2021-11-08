@@ -70,7 +70,7 @@ $utils-groups-db: (
 	),
 	'ColorsExt': (
 		'members': (
-			C, Bgc, Bdc, Olc,
+			C, Bgc, Bdc, Olc, Txdc
 		),
 	),
 	'Translates': (
@@ -91,6 +91,11 @@ $utils-groups-db: (
 	'Overscrolls': (
 		'members': (
 			Ovsb, Ovsbx, Ovsby
+		),
+	),
+	'Periods': (
+		'members': (
+			Tsd, Tsdl, And, Andl,
 		),
 	),
 ) !default;
