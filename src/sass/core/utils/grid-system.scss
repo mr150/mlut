@@ -64,7 +64,9 @@ Markup: ../../../docs/examples/core-utils/grid-system/gscr.hbs
 Styleguide: core-utils.grid_system.gscr
 */
 
-@if ml.$legacy-grid-system {
+$enabled: false !default;
+
+@if ml.$legacy-grid-system or $enabled {
 	ml.$utils-map: map.merge(
 		ml.$utils-map,
 		ml.$kSsUMCS,
@@ -72,6 +74,8 @@ Styleguide: core-utils.grid_system.gscr
 			ml.$cBpAllCp + '-Gsg': ([1su, 8],),
 			ml.$cBpAllCp + '-Gsfd': (1gg, 0),
 			ml.$cBpAllCp + '-Gsf': (''),
+			ml.$kBpAll + '  _W': ([1gc, 12],),
+			ml.$cBpAllCp + 'Ml': ([1gc, 10],),
 		)
 	);
 }

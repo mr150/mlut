@@ -92,6 +92,8 @@ Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
 Styleguide: core-utils.bxs.ov
 */
 
+$-W-list: ('a', ml.$kUvKA);
+
 ml.$utils-map: map.merge(
 	ml.$utils-map,
 	ml.$kSsUMCS,
@@ -107,7 +109,7 @@ ml.$utils-map: map.merge(
 		// sizes
 		ml.$cBpAllCp + 'Mnw': (100p, ml.$kUvKA),
 		ml.$cBpAllCp + 'Mxw': list.join((100p, ml.$kUvKA, 'n'), ml.$global-kw-bp),
-		ml.$cBpAllCp + 'W': (100p, 'a', ml.$kUvKA, [1gc, 12]),
+		ml.$cBpAllCp + 'W': $-W-list,
 		ml.$cBpAllCp + 'H': (100p, 100vh, 0, ml.$cArOlBp + 'a'),
 		ml.$cBpAllCp + 'Mnh': (100p, 100vh, 0),
 		ml.$cBpAllCp + 'Mxh': (100p, 100vh, 'n'),
