@@ -121,7 +121,7 @@ $general-cfg: (
 			't': 1t,
 		),
 	),
-	'base-styles': (
+	'generic-css': (
 		'border-box': true,
 		'sup-sub-no-v-align': true,
 		'embeds-v-align': true,
@@ -172,4 +172,4 @@ $var-gg-rem: map.get($general-cfg, 'css-vars', 'gg-rem');
 $var-gsfd: map.get($general-cfg, 'css-vars', 'gs-formula-diff');
 $var-gscc: map.get($general-cfg, 'css-vars', 'gs-columns-count');
 
-$base-border-box: map.get($general-cfg, 'base-styles', 'border-box');
+$base-border-box: map.get($general-cfg, 'generic-css', 'border-box');

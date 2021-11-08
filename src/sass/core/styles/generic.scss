@@ -12,7 +12,7 @@ Styleguide: core-styles.normalize
 
 //stylelint-disable
 
-@if map.get(ml.$general-cfg, 'base-styles') {
+@if map.get(ml.$general-cfg, 'generic-css') {
 	// Prevent adjustments of font size after orientation changes in iOS
 	html {
 		-webkit-text-size-adjust: 100%;
@@ -32,7 +32,7 @@ Styleguide: core-styles.normalize
 	}
 
 	// Add the ability to set border only with `Bd*w` utils
-	@if map.get(ml.$general-cfg, 'base-styles', 'reset-border') {
+	@if map.get(ml.$general-cfg, 'generic-css', 'reset-border') {
 		*,
 		*::before,
 		*::after {
@@ -80,7 +80,7 @@ Styleguide: core-styles.normalize
 	}
 
 	// Prevent 'sub' and 'sup' elements from affecting the line height in all browsers
-	@if map.get(ml.$general-cfg, 'base-styles', 'sup-sub-no-v-align') {
+	@if map.get(ml.$general-cfg, 'generic-css', 'sup-sub-no-v-align') {
 		sub,
 		sup {
 			line-height: 0;
@@ -103,11 +103,11 @@ Styleguide: core-styles.normalize
 		border-color: inherit; // 2
 	}
 
-	@if map.get(ml.$general-cfg, 'base-styles', 'embeds-v-align') {
+	@if map.get(ml.$general-cfg, 'generic-css', 'embeds-v-align') {
 		img, svg, video, canvas, audio, iframe, embed, object {
 			vertical-align: bottom;
 
-			@if map.get(ml.$general-cfg, 'base-styles', 'embeds-block') {
+			@if map.get(ml.$general-cfg, 'generic-css', 'embeds-block') {
 				display: block;
 			}
 		}
@@ -117,7 +117,7 @@ Styleguide: core-styles.normalize
 		display: none;
 	}
 
-	@if map.get(ml.$general-cfg, 'base-styles', 'embeds-aspect-ratio') {
+	@if map.get(ml.$general-cfg, 'generic-css', 'embeds-aspect-ratio') {
 		img,
 		svg,
 		canvas,
@@ -127,7 +127,7 @@ Styleguide: core-styles.normalize
 		}
 	}
 
-	@if map.get(ml.$general-cfg, 'base-styles', 'svg-fill-cur-color') {
+	@if map.get(ml.$general-cfg, 'generic-css', 'svg-fill-cur-color') {
 		svg:not([fill]) {
 			fill: currentColor;
 		}
@@ -164,7 +164,7 @@ Styleguide: core-styles.normalize
 	1. Change the font styles in all browsers.
 	2. Remove the margin in Firefox and Safari.
 	*/
-	@if map.get(ml.$general-cfg, 'base-styles', 'forms-normalize') {
+	@if map.get(ml.$general-cfg, 'generic-css', 'forms-normalize') {
 		button,
 		input,
 		optgroup,
@@ -174,7 +174,7 @@ Styleguide: core-styles.normalize
 			font-size: 100%; // 1
 			margin: 0; // 2
 
-			@if map.get(ml.$general-cfg, 'base-styles', 'reset') {
+			@if map.get(ml.$general-cfg, 'generic-css', 'reset') {
 				color: inherit;
 				line-height: inherit;
 			}
@@ -241,7 +241,7 @@ Styleguide: core-styles.normalize
 		font: inherit; // 2
 	}
 
-	@if map.get(ml.$general-cfg, 'base-styles', 'default-reduce-motion') {
+	@if map.get(ml.$general-cfg, 'generic-css', 'default-reduce-motion') {
 		@media (prefers-reduced-motion: reduce) {
 			*,
 			::before,
@@ -257,7 +257,7 @@ Styleguide: core-styles.normalize
 		}
 	}
 
-	@if map.get(ml.$general-cfg, 'base-styles', 'reset') {
+	@if map.get(ml.$general-cfg, 'generic-css', 'reset') {
 		p, blockquote, iframe,
 		pre, figure, fieldset, hr,
 		button, input, optgroup,
