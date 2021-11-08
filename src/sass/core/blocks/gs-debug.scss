@@ -19,10 +19,10 @@ Styleguide: core-blocks.gs-debug
 	padding: calc(var(ml.$var-gg-rem) * 3) 0px;
 	background-image: linear-gradient(
 		90deg,
-		ml.$debug-gs-gtr-color var(ml.$var-gg),
-		ml.$debug-gs-col-color var(ml.$var-gg),
-		ml.$debug-gs-col-color calc(100% - var(ml.$var-gg)),
-		ml.$debug-gs-gtr-color 0
+		ml.$gs-debug-gtr-color var(ml.$var-gg),
+		ml.$gs-debug-col-color var(ml.$var-gg),
+		ml.$gs-debug-col-color calc(100% - var(ml.$var-gg)),
+		ml.$gs-debug-gtr-color 0
 	);
 	background-size: calc(1 / var(ml.$var-gscc) * 100%);
 }

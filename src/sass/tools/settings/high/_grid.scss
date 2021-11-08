@@ -36,6 +36,9 @@ $gs-gutters-ext: () !default;
 $gtr-first: (ml.$su * 3);
 $gs-flex-fallback: false !default;
 
+$gs-debug-col-color: #d15 !default;
+$gs-debug-gtr-color: #336 !default;
+
 @if $gs-gutters == () {
 	@each $bp, $gtr in list.zip(
 		ml.$bp-keys, ($gtr-first, $gtr-first, $gs-default-gtr, $gs-default-gtr)
