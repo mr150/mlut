@@ -19,9 +19,9 @@
 				'xsm': 480px,
 				'sm': 520px,
 				'xmd': 640px,
-				'md': 760px,
-				'lg': 960px,
-				'xl': 1168px,
+				'md': 768px,
+				'lg': 992px,
+				'xl': 1200px,
 				'xxl': 1400px,
 			),
 			$inspect: true,
@@ -30,9 +30,9 @@
 
 	ml.$bp-map: (
 		'sm': 520px,
-		'md': 760px,
-		'lg': 960px,
-		'xl': 1168px,
+		'md': 768px,
+		'lg': 992px,
+		'xl': 1200px,
 	);
 
 	ml.$at-rules-cfg: map.set(
