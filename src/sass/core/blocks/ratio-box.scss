@@ -44,12 +44,14 @@ Styleguide: examples.other.responsive_iframe
 	}
 }
 
-.ratio-box-flex {
-	&::before {
-		float: left;
-		padding-top: 56.25%;
-		content: '';
-	}
+@if ml.$ratio-box-flex {
+	.ratio-box-flex {
+		&::before {
+			float: left;
+			padding-top: 56.25%;
+			content: '';
+		}
 
-	@include ml.apply('-Cl');
+		@include ml.apply('-Cl');
+	}
 }
