@@ -28,6 +28,7 @@ xl | 16px
 Styleguide: sass-tools.settings.gs.gtr
 */
 
+$legacy-grid-system: false !default;
 $gs-columns: 12 !default;
 $gs-default-gtr: (ml.$su * 4) !default;
 $gs-gutters: () !default;

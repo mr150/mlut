@@ -64,12 +64,14 @@ Markup: ../../../docs/examples/core-utils/grid-system/gscr.hbs
 Styleguide: core-utils.grid_system.gscr
 */
 
-ml.$utils-map: map.merge(
-	ml.$utils-map,
-	ml.$kSsUMCS,
-	(
-		ml.$kBpAll + '_-Gsg': ([1su, 8],),
-		ml.$kBpAll + '_-Gsfd': (1gg, 0),
-		ml.$kBpAll + '_-Gsf': (''),
-	)
-);
+@if ml.$legacy-grid-system {
+	ml.$utils-map: map.merge(
+		ml.$utils-map,
+		ml.$kSsUMCS,
+		(
+			ml.$cBpAllCp + '-Gsg': ([1su, 8],),
+			ml.$cBpAllCp + '-Gsfd': (1gg, 0),
+			ml.$cBpAllCp + '-Gsf': (''),
+		)
+	);
+}
