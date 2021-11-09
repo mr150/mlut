@@ -197,6 +197,8 @@ $-color-scale-fn: meta.get-function('scale', false, color);
 		//stylelint-enable
 	}
 
+	$max-step: math.abs($max-step);
+
 	@if $step-fn == $-color-adjust-fn {
 		$shade-step: ml.ls-find(
 			(5, 10, 50), meta.get-function('-shade-name'), $max-step
