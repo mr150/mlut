@@ -100,6 +100,18 @@
 				),
 				$inspect: true,
 			);
+
+			@include assert-equal(
+				ml.generate-uv-number-range([25p, 75, 25], 'O'),
+				(
+					'values': (
+						25p: 0.25,
+						50p: 0.5,
+						75p: 0.75,
+					)
+				),
+				$inspect: true,
+			);
 		}
 
 		@include it('generate range with util components') {

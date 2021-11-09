@@ -46,7 +46,15 @@
 
 		@if meta.type-of($converted-start) == 'number' {
 			$css-unit-name: math.unit($converted-start);
-			$css-unit: map.get(ml.$units-all, $css-unit-name);
+			$css-unit: (
+				map.get(
+					ml.$utils-cfg,
+					'units',
+					map.get(ml.$utils-db, 'utils', 'registry', $util, 'value-type'),
+					$unit-name
+				) or
+				map.get(ml.$units-all, $css-unit-name)
+			);
 		}
 
 		@if map.has-key(ml.$general-cfg, 'custom-unit-values', $unit-name) {
