@@ -10,6 +10,7 @@ $cv-pref: '--' + ml.$css-var-prefix;
 
 $utils-data: () !default;
 $utils-data-ext: () !default;
+$colors: () !default;
 $utils-map: ();
 
 $-css-wide-kw: (
@@ -1803,6 +1804,7 @@ $utils-db: map.set(
 
 $utils-db: map.deep-merge($utils-db, $utils-data);
 $utils-db: map.deep-merge($utils-db, $utils-data-ext);
+$utils-db: map.merge($utils-db, 'common', 'keywords', 'colors', $colors);
 $utils-db: map.merge(
 	$utils-db,
 	'utils',

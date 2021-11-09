@@ -62,9 +62,8 @@ ml.$utils-db: map.deep-merge(
 	),
 	'common': (
 		'keywords': (
+			// other colors are defined in the module config
 			'colors': (
-				'prm0': #c06,
-				'sec0': #0c6,
 				'varFb': (204, 0, 102),
 			),
 			'global': (
