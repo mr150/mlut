@@ -43,11 +43,6 @@ ml.$utils-cfg: map.set(
 				ml.convert-util-states('>*'),
 				('&>*'),
 			);
-
-			@include assert-equal(
-				ml.convert-util-states('noJs'),
-				('&'),
-			);
 		}
 
 		@include it('converts complex state') {
@@ -94,8 +89,8 @@ ml.$utils-cfg: map.set(
 			);
 
 			@include assert-equal(
-				ml.convert-util-states('h:a:b,noJs:-testou:a,:^:!-testou:!=h2'),
-				('&:hover:active::before, &.pa.ro.voz:active, & .-Ctx:not(.pa.ro.voz):not(h2)'),
+				ml.convert-util-states('h:a:b,-nojs:a,:^:!-testou:!=h2'),
+				('&:hover:active::before, &.no-js:active, & .-Ctx:not(.pa.ro.voz):not(h2)'),
 			);
 		}
 	}

@@ -2,9 +2,7 @@ var gulp = require('gulp'),
 		sass = require('gulp-sass')(require('sass')),
 		pug = require('gulp-pug'),
 		browserSync = require('browser-sync'),
-		rigger = require('gulp-rigger'),
 		cleancss = require('gulp-clean-css'),
-		uglify = require('gulp-uglify'),
 		rename = require('gulp-rename'),
 		del = require('del'),
 		plumber = require('gulp-plumber'),
@@ -12,34 +10,24 @@ var gulp = require('gulp'),
 		groupMedia = require('gulp-group-css-media-queries'),
 		tabify = require('gulp-tabify'),
 		sourcemaps = require('gulp-sourcemaps'),
-		pkg = require('./package.json'),
 		fileSize = require('gulp-size'),
 		shell = require('gulp-shell'),
 		ftp = require('vinyl-ftp'),
 		autoprefixer = require('gulp-autoprefixer');
 
 var dirs = {
-	src: 'src/',
 	test: 'test/',
 	docs: 'docs/',
 	libs: 'test/libs/',
-	build: 'dist/',
 	ftp: ''
 };
 
 var path = {
-	src: {
-		sass: dirs.src + 'sass/',
-		js: dirs.src + 'js/'
-	},
-	build: {
-		css: dirs.build + 'css/',
-		js: dirs.build + 'js/'
-	},
+	src: 'src/',
+	build: 'dist/',
 	test: {
 		css: dirs.test + 'css/',
 		sass: dirs.test + 'sass/',
-		js: dirs.test + 'js/',
 		pug: dirs.test + 'pug/'
 	}
 };
@@ -56,7 +44,7 @@ path = Object.assign({
 	watch: {
 		styles: [
 			dirs.libs + files.styles,
-			path.src.sass + files.styles,
+			path.src + files.styles,
 			path.test.sass + files.styles,
 		],
 		pug: dirs.test + files.pug,
@@ -67,10 +55,6 @@ path = Object.assign({
 			dirs.docs + '*.md',
 			path.test.css + 'test.css',
 		],
-		js: [
-			path.src.js + files.js,
-			dirs.libs + files.js
-		]
 	}
 }, path);
 
@@ -95,8 +79,8 @@ ftpConfig = {
 
 gulp.task('css-lint', function(){
 	return gulp.src([
-		path.src.sass + files.styles,
-		`!${path.src.sass}tools/mixins/base/_mk-ar.scss`,
+		path.src + files.styles,
+		`!${path.src}tools/mixins/base/_mk-ar.scss`,
 	])
 		.pipe(stylelint({
 			reporters:[
@@ -111,14 +95,14 @@ gulp.task('sass-test', shell.task(
 ));
 
 gulp.task('style', gulp.series('css-lint', function(){
-	return gulp.src(path.src.sass + '*.scss')
+	return gulp.src(path.src + '*.scss')
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sass({
 			indentType: 'tab',
 			includePaths: [
 				'node_modules',
-				'src/sass',
+				path.src,
 			],
 			outputStyle: 'expanded',
 			indentWidth: 1
@@ -139,28 +123,12 @@ gulp.task('style', gulp.series('css-lint', function(){
 			path.basename += '.min';
 		}))
 		.pipe(fileSize(sizeConfig))
-		.pipe(gulp.dest(path.build.css))
+		.pipe(gulp.dest(path.build))
 		.pipe(gulp.dest(dirs.docs + 'styleguide/kss-assets/'))
 		.pipe(sourcemaps.write(''))
 		.pipe(gulp.dest(path.test.css))
 		.pipe(browserSync.stream());
 }));
-
-gulp.task('scripts', function(){
-	return gulp.src(path.src.js + 'mlut.js', {allowEmpty: true})
-		.pipe(plumber())
-		.pipe(rigger())
-		.pipe(sourcemaps.init())
-		.pipe(gulp.dest(path.test.js))
-		.pipe(uglify())
-		.pipe(rename({suffix: '.min'}))
-		.pipe(fileSize(sizeConfig))
-		.pipe(gulp.dest(path.build.js))
-		.pipe(gulp.dest(dirs.docs + 'styleguide/kss-assets/'))
-		.pipe(sourcemaps.write(''))
-		.pipe(gulp.dest(path.test.js))
-		.pipe(browserSync.stream());
-});
 
 gulp.task('pug', function(){
 	return gulp.src(path.test.pug + '*.pug', {allowEmpty: true})
@@ -184,11 +152,10 @@ gulp.task('kss', shell.task([
 	'cp ' + path.test.css + 'test.css ' + dirs.docs + 'styleguide/kss-assets'
 ]));
 
-gulp.task('default', gulp.parallel('server', 'kss', 'style', 'pug', 'scripts', function(){
+gulp.task('default', gulp.parallel('server', 'kss', 'style', 'pug', function(){
 	gulp.watch(path.watch.styles, gulp.series('kss', 'style'));
 	gulp.watch(path.watch.pug, gulp.series('pug'));
 	gulp.watch(path.watch.html, gulp.series('html'));
-	gulp.watch(path.watch.js, gulp.series('scripts', 'kss'));
 	gulp.watch(path.watch.docs, gulp.series('kss'));
 }));
 
@@ -204,8 +171,8 @@ gulp.task('ftp', function(){
 });
 
 gulp.task('clear', function(cb){
-	del.sync(dirs.build);
+	del.sync(path.build);
 	cb();
 });
 
-gulp.task('build', gulp.series('clear', 'style', 'sass-test', 'pug', 'scripts', 'kss'));
+gulp.task('build', gulp.series('clear', 'style', 'sass-test', 'pug', 'kss'));

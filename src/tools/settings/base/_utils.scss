@@ -188,7 +188,7 @@ $utils-cfg: (
 			'oc': ':only-child',
 			'oot': ':only-of-type',
 			'ot': ':optional',
-			'outor': ':out-of-range',
+			'ouor': ':out-of-range',
 			'phs': ':placeholder-shown',
 			'r': ':required',
 			'rt': ':root',
@@ -203,6 +203,7 @@ $utils-cfg: (
 			'b': '::before',
 			'frl': '::first-line',
 			'frlt': '::first-letter',
+			'flsb': '::file-selector-button',
 			'm': '::marker',
 			'ph': '::placeholder',
 			's': '::selection',
@@ -215,9 +216,7 @@ $utils-cfg: (
 			'odot': ':nth-of-type(odd)',
 			'op': '[open]',
 			'tif': '[tabindex="0"]',
-		),
-		'special': (
-			'noJs': null,
+			'nojs': '.no-js',
 		),
 	),
 ) !default;
@@ -295,11 +294,7 @@ $utils-cfg: map.merge(
 	)
 );
 
-
 $utils-states: map.merge(
-	map.merge(
-		map.get($utils-cfg, 'states', 'pseudo-cls'),
-		map.get($utils-cfg, 'states', 'pseudo-elm'),
-	),
-	map.get($utils-cfg, 'states', 'special'),
+	map.get($utils-cfg, 'states', 'pseudo-cls'),
+	map.get($utils-cfg, 'states', 'pseudo-elm'),
 );
