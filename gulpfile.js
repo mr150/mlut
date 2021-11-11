@@ -2,13 +2,12 @@ var gulp = require('gulp'),
 		sass = require('gulp-sass')(require('sass')),
 		pug = require('gulp-pug'),
 		browserSync = require('browser-sync'),
-		cleancss = require('gulp-clean-css'),
+		csso = require('gulp-csso'),
 		rename = require('gulp-rename'),
 		del = require('del'),
 		plumber = require('gulp-plumber'),
 		stylelint = require('gulp-stylelint'),
 		groupMedia = require('gulp-group-css-media-queries'),
-		tabify = require('gulp-tabify'),
 		sourcemaps = require('gulp-sourcemaps'),
 		fileSize = require('gulp-size'),
 		shell = require('gulp-shell'),
@@ -67,6 +66,7 @@ var servConfig = {
 },
 sizeConfig = {
 	gzip: true,
+	brotli: true,
 	pretty: false,
 	showFiles: true
 },
@@ -107,16 +107,15 @@ gulp.task('style', gulp.series('css-lint', function(){
 			outputStyle: 'expanded',
 			indentWidth: 1
 		}))
-		.pipe(groupMedia())
+	// for debug
+		//.pipe(groupMedia())
 		.pipe(autoprefixer({
 			cascade: false,
 			flexbox: false
 		}))
-		.pipe(tabify(2, false))
 		.pipe(gulp.dest(path.test.css))
-		.pipe(cleancss({
-			level: 2,
-			compatibility: 'ie8'
+		.pipe(csso({
+			forceMediaMerge: true
 		}))
 		.pipe(rename(function(path) {
 			if(path.basename === 'index') path.basename = 'mlut';
