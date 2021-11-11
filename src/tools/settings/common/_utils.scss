@@ -346,10 +346,12 @@ $utils-db: (
 			),
 			'Mnh': (
 				'properties': min-height,
+				'default-unit': 'rem',
 				'keywords': 'sizing',
 			),
 			'Mxh': (
 				'properties': max-height,
+				'default-unit': 'rem',
 				'keywords': 'sizing',
 			),
 			'Tbl': (
@@ -476,6 +478,7 @@ $utils-db: (
 			'Lnh': (
 				'properties': line-height,
 				'value-type': 'kw-num-length',
+				'default-unit': 'rem',
 				'keywords': (
 					'n': normal,
 				),
@@ -776,6 +779,10 @@ $utils-db: (
 					$cv-pref + 'trx',
 					$cv-pref + 'try',
 				),
+			),
+			'-Trx': $cv-pref + 'trx',
+			'-Try': (
+				'default-unit': 'rem',
 			),
 			'-S': (
 				'properties': (
@@ -1677,6 +1684,7 @@ $utils-db: (
 		'registry': (
 			'H': (
 				'properties': height,
+				'default-unit': 'rem',
 				'keywords': 'sizing',
 			),
 			'W': (

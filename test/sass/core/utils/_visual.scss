@@ -6,7 +6,7 @@
 		@include assert() {
 			@include output(false) {
 				@include ml.apply(
-					'Tf Tf-n -Tr-50p -Skx40d'
+					'Tf Tf-n'
 				);
 			}
 
@@ -33,10 +33,28 @@
 				.Tf-n {
 					transform: none;
 				}
+			}
+		}
 
+		@include assert() {
+			@include output(false) {
+				@include ml.apply(
+					'-Tr-50p -Trx8su -Try8su -Skx40d'
+				);
+			}
+
+			@include expect(false) {
 				.-Tr-50p {
 					--ml-trx: -50%;
 					--ml-try: -50%;
+				}
+
+				.-Trx8su {
+					--ml-trx: 32px;
+				}
+
+				.-Try8su {
+					--ml-try: 2rem;
 				}
 
 				.-Skx40d {

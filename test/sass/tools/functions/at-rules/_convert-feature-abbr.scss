@@ -116,7 +116,7 @@ ml.$utils-db: map.deep-merge(
 
 			@include assert-equal(
 				ml.convert-feature-abbr('H<=100su'),
-				'(max-height: 400px)',
+				'(max-height: 25rem)',
 			);
 		}
 
