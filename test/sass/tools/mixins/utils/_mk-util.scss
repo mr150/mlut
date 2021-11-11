@@ -882,7 +882,7 @@ ml.$utils-db: map.deep-merge(
 			}
 
 			@include assert() {
-				ml.$utils-up-specif: true;
+				ml.$utils-up-specificity: true;
 
 				@include output(false) {
 					@include ml.mk-util(
@@ -906,13 +906,13 @@ ml.$utils-db: map.deep-merge(
 					}
 				}
 
-				ml.$utils-up-specif: false;
+				ml.$utils-up-specificity: false;
 			}
 		}
 
 		@include it('increased specificity with selector') {
 			@include assert() {
-				ml.$utils-up-specif: '#super .app';
+				ml.$utils-up-specificity: '#super .app';
 
 				@include output(false) {
 					@include ml.mk-util(
@@ -935,7 +935,7 @@ ml.$utils-db: map.deep-merge(
 					}
 				}
 
-				ml.$utils-up-specif: false;
+				ml.$utils-up-specificity: false;
 			}
 		}
 

@@ -9,8 +9,8 @@
 @function util-apply-selector($selector, $util-sel-list) {
 	@if not $selector {
 		@return if(
-			meta.type-of(ml.$utils-up-specif) == 'string',
-			selector.nest(ml.$utils-up-specif, $util-sel-list),
+			meta.type-of(ml.$utils-up-specificity) == 'string',
+			selector.nest(ml.$utils-up-specificity, $util-sel-list),
 			$util-sel-list
 		);
 	}
@@ -21,8 +21,8 @@
 		-apply-external($selector, $util-sel-list)
 	);
 
-	@if meta.type-of(ml.$utils-up-specif) == 'string' {
-		$result: selector.nest(ml.$utils-up-specif, $result);
+	@if meta.type-of(ml.$utils-up-specificity) == 'string' {
+		$result: selector.nest(ml.$utils-up-specificity, $result);
 	}
 
 	@return if(

@@ -322,7 +322,7 @@
 	$i: if($repeat-values == null, 0, 1);
 	$values-count: list.length($values);
 	$important: (
-		(ml.$utils-up-specif == true) or $is-important
+		(ml.$utils-up-specificity == true) or $is-important
 	) and string.unquote('!important');
 
 	$css-values: if(

@@ -55,13 +55,12 @@ $kSsUMCS: 'core' !default;
 $uv-type-base: ('global-kw', 'cust-prop',) !default;
 $uv-type-default: list.join(('keyword', 'number'), $uv-type-base);
 $uv-kw-alias-behavior: 0 !default;
+$utils-up-specificity: false !default;
 $utils-config: () !default;
 $utils-config-ext: () !default;
 
 //stylelint-disable
 $utils-cfg: (
-	'up-specificity': false,
-
 	'gg-fallback-list': (
 		T, R, B, L, -X, -Y, -I,
 		P, Pt, Pr, Pb, Pl, -Px, -Py,
@@ -223,7 +222,6 @@ $utils-cfg: (
 
 $utils-cfg: map.deep-merge($utils-cfg, $utils-config);
 $utils-cfg: map.deep-merge($utils-cfg, $utils-config-ext);
-$utils-up-specif: map.get($utils-cfg, 'up-specificity');
 
 $tUSv: map.get($utils-cfg, 'tokens', 'util', 'str-value');
 $tUNv: map.get($utils-cfg, 'tokens', 'util', 'num-value');
