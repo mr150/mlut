@@ -2,96 +2,6 @@
 @use 'sass:map';
 @use '../../tools' as ml;
 
-/*
-Box sizing
-
-Utilities for DOM nodes size management.
-
-* `H100p`
-* `H100vh`
-* `H0`
-* `Mnh100vh`
-* `Mnh100p`
-* `Bxs`
-* `Bxs-cb`
-* `F` \- turn on wrapping text on the right.
-* `F-r` \- turn on wrapping text on the left.
-
-Styleguide: core-utils.bxs
-*/
-
-/*
-D
-
-Display. Sets the display type.
-
-* `D-t`
-* `D-tc`
-* `D-tr`
-* `D-it`
-* `D-g` \- grid. *Responsive*.
-
-D - block. The DOM node stretches on the full width of the container and creates line breaks before and after. *Responsive*.
-D-ib - inline-block. The width of the DOM node depends on the width of the content. Inline-blocks line up in one line like a letters and wrap if they don’t fit. *Responsive*.
-D-f - flex. Turns an DOM node into a flex container. Can be used to progressive enhancement the [row](section-core-blocks.html#kssref-core-blocks-row) layouts. Child DOM nodes will be stretched to the full height of the container. By default, child DOM nodes are not wrap to the new line and are compressed in width until they go beyond the line. *Responsive*.
-D-if - inline-flex. Combines inline-block and flex container. *Responsive*.
-D-n - none. Hides the DOM node as if it is not on the page. *Responsive*.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/d.hbs
-
-Styleguide: core-utils.bxs.d
-*/
-
-/*
--D
-
-Custom display.
-
--D-mf - multiline flex
--D-mif - multiline inline-flex
--D-vh - visually hidden. Hides the DOM node but leaves it accessible to the screen readers and robots.
-
-Styleguide: core-utils.bxs.-d
-*/
-
-/*
-Mxw
-
-Max-width.
-
-* gSm, gMd, gLg, gXl \- global keywords with breakpoints values
-
-100p - 100%
-n - none
-
-Styleguide: core-utils.bxs.mxw
-*/
-
-/*
--Cl
-
-Custom clear. It is clearfix utility. Use it with a container whose child DOM nodes have `Fl`.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/-cl.html
-
-Styleguide: core-utils.bxs.-cl
-*/
-
-/*
-Ov
-
-Controls content display in case of overflow
-
-Ov - hidden.
-Ov-a - auto. Adds a scrollbar if the content does not fit into the container.
-Ov.Ovx-a - auto. Scrollbar on X axis.
-Ov.Ovy-a - auto. Scrollbar on Y axis.
-
-Markup: ../../../docs/examples/core-utils/visual-formatting/ov.hbs
-
-Styleguide: core-utils.bxs.ov
-*/
-
 $-W-list: ('a', ml.$kUvKA, [20p, 100, 20]);
 
 @if not ml.$legacy-grid-system {
@@ -111,7 +21,7 @@ ml.$utils-map: map.merge(
 			'', 'b', 'i', 'ib', 'f', 'if', 'g', 'ig', 'n', 't', 'it', 'c', 'flr', 'tc', 'tr',
 		),
 		ml.$cBpAllCp + '-D': (
-			'mf', 'mif', 'vh', '#{ml.$kBpAll} #{ml.$kArSt}_v_f fw'
+			'mf', 'mif', 'vh', '#{ml.$kBpAll} #{ml.$kArSt} _v_ f fw'
 		),
 		// sizes
 		ml.$cBpAllCp + 'Mnw': (100p, ml.$kUvKA),
@@ -129,20 +39,3 @@ ml.$utils-map: map.merge(
 		ml.$cBpAllCp + 'Overflows': (ml.$kUvKA),
 	)
 );
-
-/*
-W
-
-Width. You can set width in the variable columns(`c`).
-
-If you specify the width in grid units on one breakpoint, then the width is preserved on all subsequent breakpoints.
-
-* `W-a` \- default DOM node width. Depends on DOM node [display type](#kssref-core-utils-bxs-d). *Responsive*.
-* `W-i` \- inherit value from parent DOM node. *Responsive*.
-* `W100p` \- for browsers which not support custom properties.
-* `W1gc..W12gc` \- available width in `gc` on all breakpoints.
-
-Markup: ../../../docs/examples/core-utils/box-sizing/w.html
-
-Styleguide: core-utils.bxs.w
-*/

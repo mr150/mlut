@@ -1,69 +1,6 @@
 @use 'sass:map';
 @use '../../tools/settings' as ml;
 
-/*
-Grid system
-
-Utilities that manage MLUT grid system.
-
-Styleguide: core-utils.grid_system
-*/
-
-/*
--Gsg
-
-Grid system gutter. Controls gutters: `--mlu.-gg` and `--mlu.gg-rem`.
-
-* `-Gsg1su..-Gsg5su` \- *Responsive*.
-
--Gsg1su - gutter is 8px
--Gsg5su_xl - gutter is 20px on `xl`
-
-Markup: ../../../docs/examples/core-utils/grid-system/gsg.hbs
-
-Styleguide: core-utils.grid_system.gsg
-*/
-
-/*
--Gscc
-
-Grid system columns. Sets number of columns in grid system on DOM node. Controls `--mlu.grid-cols`.
-
-* `-Gscc` \- columns number is equal [mlu.$grid-default-cols](section-sass-tools.html#kssref-sass-tools-settings-grid). *Responsive* only.
-
--Gscc10_md - only *Responsive*. Available `chl` state.
-
-Markup: ../../../docs/examples/core-utils/grid-system/gsc.hbs
-
-Styleguide: core-utils.grid_system.gsc
-*/
-
-/*
--Gsfd
-
-Grid system columns diff. Controls `--gc-diff` from grid column width [formula](section-core-blocks.html#kssref-core-blocks-row-row__col).
-
-* `-Gsfd1gg` \- 1 gutter
-
--Gsfd0 - 0px
-
-Markup: ../../../docs/examples/core-utils/grid-system/gscd.hbs
-
-Styleguide: core-utils.grid_system.gscd
-*/
-
-/*
--Gsf
-
-Grid system columns rule. Controls `--gc-rule` and `--mgc-rule` .
-
--Gsf - sets the standard formula from [row__col](section-core-blocks.html#kssref-core-blocks-row-row__col) for calculating the column widths for utilities W and M. <br>The difference of the formula is that `--gc-diff` has fallback value `--mlu.gg`.
-
-Markup: ../../../docs/examples/core-utils/grid-system/gscr.hbs
-
-Styleguide: core-utils.grid_system.gscr
-*/
-
 $enabled: false !default;
 
 @if ml.$legacy-grid-system or $enabled {
