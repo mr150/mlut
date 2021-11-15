@@ -9,13 +9,11 @@
 
 @forward 'mk-util';
 
-/*
-Utilities
-
-Mixins for creating utilities and working with them.
-
-Styleguide: sass-tools.mixins.utils
-*/
+// Utilities
+//
+// Mixins for creating utilities and working with them.
+//
+// Styleguide: sass-tools.mixins.utils
 
 @mixin mk-utils-group(
 	$raw-name, $values, $components: (), $bound-components: true

@@ -1,11 +1,3 @@
-/*
-At-rules
-
-Functions for working with at-rules.
-
-Styleguide: sass-tools.functions.high.at_rules
-*/
-
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:string';
@@ -13,6 +5,12 @@ Styleguide: sass-tools.functions.high.at_rules
 @use 'sass:meta';
 
 @use 'forward-tools' as ml;
+
+// At-rules
+//
+// Functions for working with at-rules.
+//
+// Styleguide: sass-tools.functions.high.at_rules
 
 $-tALs-length: string.length(ml.$tALs);
 $-tACs-length: string.length(ml.$tACs);

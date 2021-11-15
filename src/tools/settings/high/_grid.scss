@@ -12,21 +12,19 @@
 //
 // Styleguide: sass-tools.settings.gs
 
-/*
-Gutters
-
-Gutters value on breakpoints.
-
-Breakpoint | Gutter
-:---:  | :---:
-<sm | 12px
-sm | 12px
-md | 12px
-lg | 16px
-xl | 16px
-
-Styleguide: sass-tools.settings.gs.gtr
-*/
+// Gutters
+//
+// Gutters value on breakpoints.
+//
+// Breakpoint | Gutter
+// :---:  | :---:
+// <sm | 12px
+// sm | 12px
+// md | 12px
+// lg | 16px
+// xl | 16px
+//
+// Styleguide: sass-tools.settings.gs.gtr
 
 $legacy-grid-system: false !default;
 $gs-columns: 12 !default;

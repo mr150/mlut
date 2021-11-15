@@ -18,13 +18,11 @@
 @forward 'range-generators' as generate-uv-*;
 @forward 'value-transformers' as transform-uv-*;
 
-/*
-Utilities
-
-Functions for working with utilities.
-
-Styleguide: sass-tools.functions.high.utils
-*/
+// Utilities
+//
+// Functions for working with utilities.
+//
+// Styleguide: sass-tools.functions.high.utils
 
 @function convert-util-states($states, $this-util: null, $pre: false) {
 	$prefix: '&';
