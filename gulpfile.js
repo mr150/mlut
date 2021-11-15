@@ -24,6 +24,7 @@ var dirs = {
 var path = {
 	src: 'src/',
 	build: 'dist/',
+	docsAssets: dirs.docs + 'styleguide/kss-assets/',
 	test: {
 		css: dirs.test + 'css/',
 		sass: dirs.test + 'sass/',
@@ -81,6 +82,7 @@ gulp.task('css-lint', function(){
 	return gulp.src([
 		path.src + files.styles,
 		`!${path.src}tools/mixins/base/_mk-ar.scss`,
+		`!${path.src}generate.css`,
 	])
 		.pipe(stylelint({
 			reporters:[
@@ -123,7 +125,7 @@ gulp.task('style', gulp.series('css-lint', function(){
 		}))
 		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build))
-		.pipe(gulp.dest(dirs.docs + 'styleguide/kss-assets/'))
+		.pipe(gulp.dest(path.docsAssets))
 		.pipe(sourcemaps.write(''))
 		.pipe(gulp.dest(path.test.css))
 		.pipe(browserSync.stream());
@@ -146,9 +148,25 @@ gulp.task('html', function(){
 		.pipe(browserSync.stream());
 });
 
+gulp.task('sass-compile-doc', () => {
+	return gulp.src(dirs.docs + 'generate.scss', {allowEmpty: true})
+		.pipe(plumber())
+		.pipe(sass({
+			indentType: 'tab',
+			outputStyle: 'expanded',
+			indentWidth: 1
+		}))
+		.pipe(gulp.dest(path.src))
+		.pipe(csso({
+			forceMediaMerge: true
+		}))
+		.pipe(rename({suffix: '.min'}))
+		.pipe(gulp.dest(path.docsAssets));
+});
+
 gulp.task('kss', shell.task([
 	'node_modules/.bin/kss --config ' + dirs.docs + 'kss-config.json',
-	'cp ' + path.test.css + 'test.css ' + dirs.docs + 'styleguide/kss-assets'
+	'cp ' + path.test.css + 'test.css ' + path.docsAssets
 ]));
 
 gulp.task('default', gulp.parallel('server', 'kss', 'style', 'pug', function(){
@@ -160,6 +178,12 @@ gulp.task('default', gulp.parallel('server', 'kss', 'style', 'pug', function(){
 
 gulp.task('watch-test', gulp.parallel('sass-test', 'kss', function(){
 	gulp.watch(path.watch.styles, gulp.series('kss', 'sass-test'));
+}));
+
+gulp.task('sass-mk-doc', gulp.series('sass-compile-doc', 'kss'));
+
+gulp.task('sass-watch-doc', gulp.series('sass-compile-doc', () => {
+	gulp.watch(dirs.docs + 'generate.scss', gulp.series('sass-compile-doc', 'kss'));
 }));
 
 gulp.task('ftp', function(){

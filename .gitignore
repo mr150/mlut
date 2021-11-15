@@ -2,10 +2,10 @@ test/**/*.map
 
 test/**/*.html
 
-test/js/scripts.js
-
 test/libs/**/*
 
 docs/styleguide
+
+src/generate.css
 
 node_modules

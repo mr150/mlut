@@ -75,7 +75,7 @@
 
 .kss-description,
 .kss-parameters {
-	max-width: 872px;
+	max-width: 78ch;
 }
 
 .kss-description table:not([class]) td,

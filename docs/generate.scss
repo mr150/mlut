@@ -1,0 +1,99 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:string';
+@use '../src/tools' as ml;
+@use '../src/tools/functions/base' as bf;
+@use '../src/core/utils/load';
+
+@function format-map-value($value, $util) {
+	$type: meta.type-of($value);
+	$result: '';
+
+	@if $type == 'map' {
+		$result: map2html($value, $util, null);
+	} @else if $type == 'list' {
+		$result: '<ul class="-All-sr_&">';
+
+		@each $item in $value {
+			$result: $result + '<li><code>' + meta.inspect($item) + '</code>';
+		}
+
+		$result: $result + '</ul>';
+	} @else {
+		$result: '<code>' + meta.inspect($value) + '</code>';
+	}
+
+	@return $result;
+}
+
+@function map2html($map, $util, $top: true) {
+	$result: '<table class="#{if($top, "W100p Mt5su Mb6su", "Bdb-;#ccc_:tr:!lc:td")}">';
+	$cell-css: if($top, 'Bdb -Py2su', '-Py1su');
+
+	@if $top {
+		@if meta.type-of($map) != "map" {
+			$map: ('property': $map);
+			$result: '<div class="Fnw-b Mt6su Mb1su">No options</div> \
+<table class="Mb6su">';
+			$cell-css: '';
+		} @else if not map.has-key($map, 'properties') {
+			$map: map.set($map, 'properties', ml.util-prop($util, 'utils', true));
+		}
+	}
+
+	@each $key, $value in $map {
+		$result: $result + '<tr> \
+<td class="#{$cell-css}">#{if($key == '', "<i>default</i>", $key)}</td> \
+<td class="#{$cell-css} Pl2gg Mxw-gSm">#{format-map-value($value, $util)}</td> \
+</tr>'
+	}
+
+	@return $result + '</table>';
+}
+
+@function core-values($util) {
+	$util-map: ();
+
+	@each $item in map.keys(map.get(ml.$utils-map, 'core')) {
+		@if (
+			string.index($item, $util) and (
+				$item == $util or
+				list.index(bf.str-split($item, ml.$tUCm), $util)
+			)
+		) {
+			$util-map: map.set($util-map, $item, map.get(ml.$utils-map, 'core', $item));
+		}
+	}
+
+	@if list.length($util-map) > 0 {
+		$result: '<div class="Fnw-b Mt6su Mb1su">In the Core</div><ul class="-All-sr_& Mb6su_&">';
+
+		@each $utility, $values in $util-map {
+			$inspected: meta.inspect($values);
+			$result: $result + '<li><code>"#{$utility}": ' + if(
+				not string.index($inspected, '(') and list.length($values) > 1,
+				'(#{$inspected})',
+				$inspected,
+			) + '</code>';
+		}
+
+		@return $result + '</ul>';
+	}
+
+	@return null;
+}
+
+@include ml.apply('-All-sr_& Mb6su_& Bdb-;#ccc_:tr:!lc:td');
+
+@each $util, $options in map.get(ml.$utils-db, 'utils', 'registry') {
+/*
+#{$util}
+
+#{map2html($options, $util)}
+
+#{core-values($util)}
+
+Styleguide: utils-reference.#{string.to-lower-case($util)}
+*/
+}
