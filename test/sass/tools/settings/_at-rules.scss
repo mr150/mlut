@@ -11,6 +11,10 @@
 	)
 );
 
+@use 'tools/settings/high/grid' with (
+	$legacy-grid-system: true,
+);
+
 @include describe('tools/settings/common/at-rules') {
 	@include it('change breakpoints') {
 		@include assert-equal(
