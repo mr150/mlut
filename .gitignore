@@ -1,8 +1,8 @@
 test/**/*.map
-
 test/**/*.html
-
 test/libs/**/*
+test/css/index.css
+test/css/mlut.min.css
 
 docs/styleguide
 
