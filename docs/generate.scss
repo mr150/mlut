@@ -6,6 +6,10 @@
 @use '../src/tools/functions/base' as bf;
 @use '../src/core/utils/load';
 
+$url-map: (
+	'keywords': 'section-general_reference.html#kssref-general_reference-kw',
+);
+
 @function format-map-value($key, $value, $util) {
 	$type: meta.type-of($value);
 	$result: '';
@@ -14,17 +18,37 @@
 		$result: map2html($value, $util, 'sub');
 	} @else if $type == 'list' {
 		$result: '<ul class="-All-sr_&">';
+		$is-kw-link: (
+			$key == 'keywords' and map.has-key(ml.$utils-db, 'utils', 'keywords', list.nth($value, 1))
+		);
 
 		@each $item in $value {
-			$result: $result + '<li><code>' + meta.inspect($item) + '</code>';
+			$result: $result + '<li>' + value-link($key, $item);
 		}
 
 		$result: $result + '</ul>';
 	} @else {
-		$result: '<code>' + meta.inspect($value) + '</code>';
+		$result: $result + value-link($key, $value);
 	}
 
 	@return $result;
+}
+
+@function value-link($key, $value) {
+	$is-link: if(
+		$key == 'keywords',
+		(
+			map.has-key(ml.$utils-db, 'utils', 'keywords', $value) or
+			map.has-key(ml.$utils-db, 'common', 'keywords', $value)
+		),
+		map.has-key($url-map, $key)
+	);
+
+	@return if(
+		$is-link,
+		'<a href="#{map.get($url-map, $key)}-#{$value}">' + $value + '</a>',
+		'<code>' + meta.inspect($value) + '</code>'
+	);
 }
 
 @function map2html($map, $util, $type: 'top') {
