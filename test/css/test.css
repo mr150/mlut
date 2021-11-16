@@ -76,6 +76,7 @@
 .kss-description,
 .kss-parameters {
 	max-width: 78ch;
+	overflow: auto;
 }
 
 .kss-description table:not([class]) td,
@@ -94,4 +95,10 @@
 
 .kss-description table:not([class]) {
   margin-bottom: 24px;
+}
+
+@media (max-width:519px) {
+	.kss-style h1 {
+		font-size: 32px;
+	}
 }

@@ -182,7 +182,7 @@ gulp.task('watch-test', gulp.parallel('sass-test', 'kss', function(){
 
 gulp.task('sass-mk-doc', gulp.series('sass-compile-doc', 'kss'));
 
-gulp.task('sass-watch-doc', gulp.series('sass-compile-doc', () => {
+gulp.task('sass-watch-doc', gulp.series('sass-compile-doc', 'kss', () => {
 	gulp.watch(dirs.docs + 'generate.scss', gulp.series('sass-compile-doc', 'kss'));
 }));
 
