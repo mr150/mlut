@@ -267,11 +267,11 @@
 }
 
 @mixin -save-new-keywords($new-keywords, $util-name, $props, $group-item-index) {
-	$value-type: (
-		map.get(ml.$utils-db, 'utils', 'registry', $util-name, 'value-type') or
+	$conversion: (
+		map.get(ml.$utils-db, 'utils', 'registry', $util-name, 'conversion') or
 		'default'
 	);
-	$converters-list: map.get(ml.$utils-cfg, 'value-types', $value-type);
+	$converters-list: map.get(ml.$utils-cfg, 'conversion-types', $conversion);
 
 	@if list.nth($converters-list, 1) != 'color' {
 		$util-keywords: map.get(
@@ -283,19 +283,19 @@
 		);
 
 		@if not list.index($converters-list, 'keyword') {
-			$value-type: 'kw_' + $value-type;
-			$util-map: map.set($util-map, 'value-type', $value-type);
+			$conversion: 'kw_' + $conversion;
+			$util-map: map.set($util-map, 'conversion', $conversion);
 
-			@if not map.has-key(ml.$utils-cfg, 'value-types', $value-type) {
+			@if not map.has-key(ml.$utils-cfg, 'conversion-types', $conversion) {
 				$converters-list: list.join('keyword', $converters-list);
 				ml.$utils-cfg: map.set(
 					ml.$utils-cfg,
-					'value-types',
-					$value-type,
+					'conversion-types',
+					$conversion,
 					$converters-list
 				);
 			} @else {
-				$converters-list: map.get(ml.$utils-cfg, 'value-types', $value-type);
+				$converters-list: map.get(ml.$utils-cfg, 'conversion-types', $conversion);
 			}
 		}
 

@@ -73,7 +73,7 @@ $utils-cfg: (
 		Stw, Fl, Flb, Tfo, -Gdl, -Gdrl,
 	),
 
-	'value-types': (
+	'conversion-types': (
 		'default': $uv-type-default,
 		'num-length': list.join('num-length', $uv-type-base),
 		'kw-num-length': list.set-nth($uv-type-default, 2, 'num-length'),

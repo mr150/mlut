@@ -65,13 +65,13 @@
 	}
 
 	@if map.has-key(
-		ml.$utils-db, $section, 'registry', $name, 'value-transformer'
+		ml.$utils-db, $section, 'registry', $name, 'transformer'
 	) {
 		@return meta.call(
 			map.get(
 				ml.$utils-cfg,
 				'value-transformers',
-				map.get(ml.$utils-db, $section, 'registry', $name, 'value-transformer')
+				map.get(ml.$utils-db, $section, 'registry', $name, 'transformer')
 			),
 			$result,
 			('name': $name)
@@ -88,8 +88,8 @@
 		@return string.unquote(string.slice($util-value, 2));
 	}
 
-	$value-type: (
-		map.get(ml.$utils-db, $section, 'registry', $name, 'value-type') or
+	$conversion: (
+		map.get(ml.$utils-db, $section, 'registry', $name, 'conversion') or
 		'default'
 	);
 	$is-pipeline: false;
@@ -103,7 +103,7 @@
 		$util-value: string.slice($util-value, 2);
 	}
 
-	@each $item in map.get(ml.$utils-cfg, 'value-types', $value-type) {
+	@each $item in map.get(ml.$utils-cfg, 'conversion-types', $conversion) {
 		@if map.has-key(ml.$utils-cfg, 'value-converters', $item) {
 			$prev-value: $util-value;
 

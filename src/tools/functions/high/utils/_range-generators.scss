@@ -50,7 +50,7 @@
 				map.get(
 					ml.$utils-cfg,
 					'units',
-					map.get(ml.$utils-db, 'utils', 'registry', $util, 'value-type'),
+					map.get(ml.$utils-db, 'utils', 'registry', $util, 'conversion'),
 					$unit-name
 				) or
 				map.get(ml.$units-all, $css-unit-name)

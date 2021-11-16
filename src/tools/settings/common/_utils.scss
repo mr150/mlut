@@ -27,7 +27,7 @@ $utils-db: (
 		'registry': (
 			'-Gscc': (
 				'properties': ml.$var-gscc,
-				'value-type': 'num-length',
+				'conversion': 'num-length',
 			),
 			'-Gsfd': ml.$var-gsfd,
 			'-Gsg': (
@@ -90,7 +90,7 @@ $utils-db: (
 			),
 			'Zi': (
 				'properties': z-index,
-				'value-type': 'num-length',
+				'conversion': 'num-length',
 			),
 
 			// BOX-MODEL
@@ -140,7 +140,7 @@ $utils-db: (
 
 			'Fl': (
 				'properties': flex,
-				'value-type': 'num-length',
+				'conversion': 'num-length',
 				'keywords': 'sizing',
 			),
 			'Fld': (
@@ -163,11 +163,11 @@ $utils-db: (
 			),
 			'Flg': (
 				'properties': flex-grow,
-				'value-type': 'num-length',
+				'conversion': 'num-length',
 			),
 			'Fls': (
 				'properties': flex-shrink,
-				'value-type': 'num-length',
+				'conversion': 'num-length',
 			),
 			'Flb': (
 				'properties': flex-basis,
@@ -212,65 +212,65 @@ $utils-db: (
 			),
 			'Od': (
 				'properties': order,
-				'value-type': 'num-length',
+				'conversion': 'num-length',
 			),
 
 			'G': (
 				'properties': grid,
-				'value-type': 'grid-tpl',
+				'conversion': 'grid-tpl',
 				'multi-list-separator': ml.$tULs2,
 				'keywords': ('grid', 'sizing'),
 			),
 			'Gt': (
 				'properties': grid-template,
-				'value-type': 'grid-tpl',
+				'conversion': 'grid-tpl',
 				'keywords': 'sizing',
 			),
 			'Gtc': (
 				'properties': grid-template-columns,
-				'value-type': 'grid-tpl',
+				'conversion': 'grid-tpl',
 				'keywords': 'sizing',
 			),
 			'Gc': (
 				'properties': grid-column,
-				'value-type': 'grid-span',
+				'conversion': 'grid-span',
 				'multi-list-separator': ml.$tULs2,
 				'keywords': 'grid-area',
 			),
 			'Gcs': (
 				'properties': grid-column-start,
-				'value-type': 'kw-num-length',
+				'conversion': 'kw-num-length',
 				'keywords': 'grid-area',
 			),
 			'Gce': (
 				'properties': grid-column-end,
-				'value-type': 'kw-num-length',
+				'conversion': 'kw-num-length',
 				'keywords': 'grid-area',
 			),
 			'Gtr': (
 				'properties': grid-template-rows,
-				'value-type': 'grid-tpl',
+				'conversion': 'grid-tpl',
 				'keywords': 'sizing',
 			),
 			'Gr': (
 				'properties': grid-row,
-				'value-type': 'grid-span',
+				'conversion': 'grid-span',
 				'multi-list-separator': ml.$tULs2,
 				'keywords': 'grid-area',
 			),
 			'Grs': (
 				'properties': grid-row-start,
-				'value-type': 'kw-num-length',
+				'conversion': 'kw-num-length',
 				'keywords': 'grid-area',
 			),
 			'Gre': (
 				'properties': grid-row-end,
-				'value-type': 'kw-num-length',
+				'conversion': 'kw-num-length',
 				'keywords': 'grid-area',
 			),
 			'Ga': (
 				'properties': grid-area,
-				'value-type': 'grid-span',
+				'conversion': 'grid-span',
 				'multi-list-separator': ml.$tULs2,
 				'keywords': 'grid-area',
 			),
@@ -430,12 +430,12 @@ $utils-db: (
 			'C': (
 				'properties': color,
 				'range-generator': 'color',
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'Fn': font,
 			'Fnw': (
 				'properties': font-weight,
-				'value-type': 'kw-num-length',
+				'conversion': 'kw-num-length',
 				'keywords': (
 					'b': bold,
 					'bd': bolder,
@@ -477,7 +477,7 @@ $utils-db: (
 			),
 			'Lnh': (
 				'properties': line-height,
-				'value-type': 'kw-num-length',
+				'conversion': 'kw-num-length',
 				'default-unit': 'rem',
 				'keywords': (
 					'n': normal,
@@ -566,12 +566,12 @@ $utils-db: (
 			'Txd': (
 				'properties': text-decoration,
 				'keywords': ('text-decoration', 'line-style'),
-				'value-type': 'outline',
+				'conversion': 'outline',
 			),
 			'Txdc': (
 				'properties': text-decoration-color,
 				'range-generator': 'color',
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'Txdl': (
 				'properties': text-decoration-line,
@@ -588,7 +588,7 @@ $utils-db: (
 
 			'Txs': (
 				'properties': text-shadow,
-				'value-type': 'outline',
+				'conversion': 'outline',
 				'multi-list-separator': ml.$tULs1,
 			),
 			'Va': (
@@ -630,7 +630,7 @@ $utils-db: (
 			),
 			'Tas': (
 				'properties': tab-size,
-				'value-type': 'num-length',
+				'conversion': 'num-length',
 			),
 			'Lss': (
 				'properties': list-style,
@@ -664,13 +664,13 @@ $utils-db: (
 			// BACKGROUND
 			'Bg': (
 				'properties': background,
-				'value-type': 'outline',
+				'conversion': 'outline',
 				'multi-list-separator': ml.$tULs1,
 			),
 			'Bgc': (
 				'properties': background-color,
 				'range-generator': 'color',
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'Bgr': (
 				'properties': background-repeat,
@@ -716,16 +716,16 @@ $utils-db: (
 			),
 			'-Gdl': (
 				'properties': background-image,
-				'value-transformer': 'gradient',
+				'transformer': 'gradient',
 				'function': 'linear-gradient',
-				'value-type': 'gradient',
+				'conversion': 'gradient',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': ('position', 'gradients'),
 			),
 			'-Gdrl': (
 				'properties': background-image,
-				'value-transformer': 'gradient',
-				'value-type': 'gradient',
+				'transformer': 'gradient',
+				'conversion': 'gradient',
 				'function': 'repeating-linear-gradient',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': ('position', 'gradients'),
@@ -789,35 +789,35 @@ $utils-db: (
 					$cv-pref + 'sx',
 					$cv-pref + 'sy',
 				),
-				'value-type': 'num-percent',
+				'conversion': 'num-percent',
 			),
 			'-Sx': (
-				'value-type': 'num-percent',
+				'conversion': 'num-percent',
 			),
 			'-Sy': (
-				'value-type': 'num-percent',
+				'conversion': 'num-percent',
 			),
 			'-Sk': (
 				'properties': (
 					$cv-pref + 'skx',
 					$cv-pref + 'sky',
 				),
-				'value-type': 'angle',
+				'conversion': 'angle',
 			),
 			'-Skx': (
-				'value-type': 'angle',
+				'conversion': 'angle',
 			),
 			'-Sky': (
-				'value-type': 'angle',
+				'conversion': 'angle',
 			),
 			'-Rt': (
-				'value-type': 'angle',
+				'conversion': 'angle',
 			),
 
 			// VISUAL
 			'Ol': (
 				'properties': outline,
-				'value-type': 'outline',
+				'conversion': 'outline',
 				'keywords': ('line-style', 'line-width'),
 			),
 			'Olw': (
@@ -826,7 +826,7 @@ $utils-db: (
 			),
 			'Olc': (
 				'properties': outline-color,
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'Ols': (
 				'properties': outline-style,
@@ -836,7 +836,7 @@ $utils-db: (
 
 			'Bxsd': (
 				'properties': box-shadow,
-				'value-type': 'outline',
+				'conversion': 'outline',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': (
 					'i': inset,
@@ -891,7 +891,7 @@ $utils-db: (
 			),
 			'O': (
 				'properties': opacity,
-				'value-type': 'num-percent',
+				'conversion': 'num-percent',
 			),
 			'Bfv': (
 				'properties': backface-visibility,
@@ -958,53 +958,53 @@ $utils-db: (
 			),
 			'-Blr': (
 				'function': 'blur',
-				'value-transformer': 'to-css-fn',
+				'transformer': 'to-css-fn',
 			),
 			'-Bn': (
 				'function': 'brightness',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-Ctr': (
 				'function': 'contrast',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-Drps': (
 				'function': 'drop-shadow',
-				'value-transformer': 'to-css-fn',
+				'transformer': 'to-css-fn',
 				'multi-list-separator': ml.$tULs1,
-				'value-type': 'outline',
+				'conversion': 'outline',
 			),
 			'-Gra': (
 				'function': 'grayscale',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-Hur': (
 				'function': 'hue-rotate',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'angle',
+				'transformer': 'to-css-fn',
+				'conversion': 'angle',
 			),
 			'-Iv': (
 				'function': 'invert',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-O': (
 				'function': 'opacity',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-Sa': (
 				'function': 'saturate',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-Sp': (
 				'function': 'sepia',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'Bcf': (
 				'properties': (
@@ -1086,123 +1086,123 @@ $utils-db: (
 			),
 			'-Bcfb': (
 				'function': 'blur',
-				'value-transformer': 'to-css-fn',
+				'transformer': 'to-css-fn',
 			),
 			'-Bcfbn': (
 				'function': 'brightness',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-Bcfc': (
 				'function': 'contrast',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-Bcfg': (
 				'function': 'grayscale',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-Bcfhr': (
 				'function': 'hue-rotate',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'angle',
+				'transformer': 'to-css-fn',
+				'conversion': 'angle',
 			),
 			'-Bcfi': (
 				'function': 'invert',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-Bcfo': (
 				'function': 'opacity',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-Bcfs': (
 				'function': 'saturate',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 			'-Bcfsp': (
 				'function': 'sepia',
-				'value-transformer': 'to-css-fn',
-				'value-type': 'num-percent',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
 			),
 
 			// BORDER
 			'Bd': (
 				'properties': border,
-				'value-type': 'outline',
+				'conversion': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'Bdt': (
 				'properties': border-top,
-				'value-type': 'outline',
+				'conversion': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'Bdr': (
 				'properties': border-right,
-				'value-type': 'outline',
+				'conversion': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'Bdb': (
 				'properties': border-bottom,
-				'value-type': 'outline',
+				'conversion': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'Bdl': (
 				'properties': border-left,
-				'value-type': 'outline',
+				'conversion': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'-Bdx': (
 				'properties': (
 					border-right, border-left,
 				),
-				'value-type': 'outline',
+				'conversion': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 			'-Bdy': (
 				'properties': (
 					border-top, border-bottom,
 				),
-				'value-type': 'outline',
+				'conversion': 'outline',
 				'keywords': $-bd-kw-links,
 			),
 
 			'Bdc': (
 				'properties': border-color,
 				'range-generator': 'color',
-				'value-type': 'color',
+				'conversion': 'color',
 				'directions': true,
 			),
 			'Bdtc': (
 				'properties': border-top-color,
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'Bdrc': (
 				'properties': border-right-color,
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'Bdbc': (
 				'properties': border-bottom-color,
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'Bdlc': (
 				'properties': border-left-color,
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'-Bdxc': (
 				'properties': (
 					border-right-color, border-left-color
 				),
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'-Bdyc': (
 				'properties': (
 					border-top-color, border-bottom-color
 				),
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 
 			'Bds': (
@@ -1307,7 +1307,7 @@ $utils-db: (
 			// TRANSITION AND ANIMATION
 			'Ts': (
 				'properties': transition,
-				'value-type': 'abbr-kw',
+				'conversion': 'abbr-kw',
 				'multi-list-separator': ml.$tULs1,
 			),
 			'-Ts': (
@@ -1315,13 +1315,13 @@ $utils-db: (
 					'transition-duration': ml.$css-transition-time,
 				),
 				'properties': transition-property,
-				'value-type': 'abbr-kw',
+				'conversion': 'abbr-kw',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': 'transition-props'
 			),
 			'Tsp': (
 				'properties': transition-property,
-				'value-type': 'abbr-kw',
+				'conversion': 'abbr-kw',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': 'transition-props'
 			),
@@ -1341,7 +1341,7 @@ $utils-db: (
 
 			'An': (
 				'properties': animation,
-				'value-type': 'kw-num-length',
+				'conversion': 'kw-num-length',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': (
 					// TODO: maybe try to optimize it and combine a part of keywords to one map
@@ -1368,7 +1368,7 @@ $utils-db: (
 			),
 			'Anic': (
 				'properties': animation-iteration-count,
-				'value-type': 'kw-num-length',
+				'conversion': 'kw-num-length',
 				'multi-list-separator': ml.$tULs1,
 				'keywords': 'infinite',
 			),
@@ -1410,11 +1410,11 @@ $utils-db: (
 			),
 			'Acnc': (
 				'properties': accent-color,
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'Crc': (
 				'properties': caret-color,
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'Pne': (
 				'properties': pointer-events,
@@ -1490,7 +1490,7 @@ $utils-db: (
 			),
 			'Wlc': (
 				'properties': will-change,
-				'value-type': 'abbr-kw',
+				'conversion': 'abbr-kw',
 				'keywords': (
 					'sps': scroll-position,
 					'ctn': contents,
@@ -1518,29 +1518,29 @@ $utils-db: (
 			'Fi': (
 				'properties': fill,
 				'range-generator': 'color',
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'Fio': (
 				'properties': fill-opacity,
-				'value-type': 'num-percent',
+				'conversion': 'num-percent',
 			),
 
 			'St': (
 				'properties': stroke,
 				'range-generator': 'color',
-				'value-type': 'color',
+				'conversion': 'color',
 			),
 			'Sto': (
 				'properties': stroke-opacity,
-				'value-type': 'num-percent',
+				'conversion': 'num-percent',
 			),
 			'Stda': (
 				'properties': stroke-dasharray,
-				'value-type': 'num-length',
+				'conversion': 'num-length',
 			),
 			'Stdo': (
 				'properties': stroke-dashoffset,
-				'value-type': 'num-length',
+				'conversion': 'num-length',
 			),
 			'Stlc': (
 				'properties': stroke-linecap,
@@ -1562,7 +1562,7 @@ $utils-db: (
 			),
 			'Stw': (
 				'properties': stroke-width,
-				'value-type': 'num-length',
+				'conversion': 'num-length',
 			),
 		),
 		'keywords': (
@@ -1693,7 +1693,7 @@ $utils-db: (
 			),
 			'Apcr': (
 				'properties': aspect-ratio,
-				'value-type': 'num-length',
+				'conversion': 'num-length',
 			),
 		),
 		'keywords': (
@@ -1776,15 +1776,15 @@ $utils-db: map.set(
 				'pfrm': prefers-reduced-motion,
 				'm': (
 					'properties': monochrome,
-					'value-type': 'num-length',
+					'conversion': 'num-length',
 				),
 				'g': (
 					'properties': grid,
-					'value-type': 'num-length',
+					'conversion': 'num-length',
 				),
 				'c': (
 					'properties': color,
-					'value-type': 'num-length',
+					'conversion': 'num-length',
 				),
 				'cg': (
 					'properties': color-gamut,
@@ -1796,11 +1796,11 @@ $utils-db: map.set(
 				),
 				'ci': (
 					'properties': color-index,
-					'value-type': 'num-length',
+					'conversion': 'num-length',
 				),
 				'r': (
 					'properties': resolution,
-					'value-type': 'resolution',
+					'conversion': 'resolution',
 					'keywords': (
 						'i': infinite,
 					),

@@ -7,7 +7,7 @@
 
 ml.$utils-cfg: map.deep-merge(
 	ml.$utils-cfg,
-	('value-types': (
+	('conversion-types': (
 		'red-ppl': ('number', ml.$kSsVCP, 'cust-prop', 'cp-suffix'),
 		'tst-ppl': ('cust-prop', ml.$kSsVCP, 'cp-suffix'),
 	)
@@ -25,11 +25,11 @@ ml.$utils-db: map.deep-merge(
 		'registry': (
 			'Red': (
 				'properties': --reputation,
-				'value-type': 'red-ppl',
+				'conversion': 'red-ppl',
 			),
 			'-Tst': (
 				'properties': --testou,
-				'value-type': 'tst-ppl',
+				'conversion': 'tst-ppl',
 			),
 			'Ai': (
 				'keywords': (
@@ -46,7 +46,7 @@ ml.$utils-db: map.deep-merge(
 			),
 			'-Bdrd': (
 				'properties': border-radius,
-				'value-transformer': 'bdrd-modify',
+				'transformer': 'bdrd-modify',
 			),
 		),
 		'keywords': (
