@@ -31,7 +31,7 @@ $-directions: map.values(ml.$main-directions);
 		// TODO: add cache with frequently used CSS functions
 		meta.get-function(
 			map.get(
-				ml.$utils-db, 'utils', 'registry', map.get($data, 'name'), 'function'
+				ml.$utils-db, 'utils', 'registry', map.get($data, 'name'), 'css-function'
 			),
 			true
 		),
@@ -52,7 +52,7 @@ $-directions: map.values(ml.$main-directions);
 			meta.call(
 				meta.get-function(
 					map.get(
-						ml.$utils-db, 'utils', 'registry', map.get($data, 'name'), 'function'
+						ml.$utils-db, 'utils', 'registry', map.get($data, 'name'), 'css-function'
 					),
 					true
 				),

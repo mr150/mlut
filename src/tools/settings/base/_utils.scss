@@ -94,7 +94,9 @@ $utils-cfg: (
 
 	'abbr-separators': (),
 
-	'value-converters': (),
+	'converters': (),
+
+	'transformers': (),
 
 	'range-generators': (),
 

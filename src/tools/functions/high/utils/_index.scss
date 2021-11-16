@@ -232,9 +232,9 @@ $-fn-prefix-length: string.length('convert-uv-');
 
 ml.$utils-cfg: map.set(
 	ml.$utils-cfg,
-	'value-converters',
+	'converters',
 	map.merge(
-		$-util-value-converters, map.get(ml.$utils-cfg, 'value-converters')
+		$-util-value-converters, map.get(ml.$utils-cfg, 'converters')
 	)
 );
 
@@ -264,8 +264,8 @@ $-util-value-transformers: ();
 
 ml.$utils-cfg: map.set(
 	ml.$utils-cfg,
-	'value-transformers',
+	'transformers',
 	map.merge(
-		$-util-value-transformers, map.get(ml.$utils-cfg, 'value-transformers') or ()
+		$-util-value-transformers, map.get(ml.$utils-cfg, 'transformers')
 	)
 );

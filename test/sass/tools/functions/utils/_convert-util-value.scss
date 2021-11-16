@@ -82,14 +82,14 @@ ml.$utils-db: map.deep-merge(
 
 ml.$utils-cfg: map.set(
 	ml.$utils-cfg,
-	'value-converters',
+	'converters',
 	'cp-suffix',
 	meta.get-function('cp-suffix')
 );
 
 ml.$utils-cfg: map.set(
 	ml.$utils-cfg,
-	'value-transformers',
+	'transformers',
 	'bdrd-modify',
 	meta.get-function('bdrd-modify')
 );

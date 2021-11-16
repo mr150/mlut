@@ -70,7 +70,7 @@
 		@return meta.call(
 			map.get(
 				ml.$utils-cfg,
-				'value-transformers',
+				'transformers',
 				map.get(ml.$utils-db, $section, 'registry', $name, 'transformer')
 			),
 			$result,
@@ -104,11 +104,11 @@
 	}
 
 	@each $item in map.get(ml.$utils-cfg, 'conversion-types', $conversion) {
-		@if map.has-key(ml.$utils-cfg, 'value-converters', $item) {
+		@if map.has-key(ml.$utils-cfg, 'converters', $item) {
 			$prev-value: $util-value;
 
 			$util-value: meta.call(
-				map.get(ml.$utils-cfg, 'value-converters', $item),
+				map.get(ml.$utils-cfg, 'converters', $item),
 				$util-value,
 				(
 					'name': $name,
