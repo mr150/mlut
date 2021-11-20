@@ -161,6 +161,8 @@ The order of adding the letter:
 
 Examples you can see in the [utils reference](section-utils-reference.html). More visual examples here will appear later.
 
+Weight: 0
+
 Styleguide: concepts.naming
 */
 
@@ -169,7 +171,7 @@ Utility
 
 An entity that, depending on the parameters, does 1 action with the element styles. Utilities can change both one CSS property and several.
 
-Weight: 6
+Weight: 1
 
 Styleguide: concepts.util
 */
@@ -188,7 +190,7 @@ Utilities consist of out:
 
 Each part is separated by the lower underscore.
 
-Weight: 1
+Weight: 0
 
 Styleguide: concepts.util.syntax
 */
@@ -202,6 +204,8 @@ By origin, the utilities are:
 * **Custom** \- affects several CSS properties or manages custom properties. Their names begin with a hyphen. All utilities that you will add, it is recommended to name as custom.
 
 The names of utilities are written in upper CamelCase and can only contain letters. Thanks to the first capital letter, they are easy to add to an existing project without fear of name conflicts.
+
+Weight: 1
 
 Styleguide: concepts.util.naming
 */
@@ -238,6 +242,8 @@ This syntax is used in all places where utilities, utils groups, ranges, etc. ar
 
 Most of the components in the Mlut is convertible. This means that if the component or part of it correspond the rules of conversion, it will unfold into some CSS value. How to convert different components, you can read below in the relevant sections. If the Mlut does not know how to convert the component, the behavior will depend on its type.
 
+Weight: 2
+
 Styleguide: concepts.util.components
 */
 
@@ -265,6 +271,8 @@ To explicitly prevent conversion, use the `=` before the value. Also, use `= bef
 }
 ```
 
+Weight: 2
+
 Styleguide: concepts.values
 */
 
@@ -272,6 +280,8 @@ Styleguide: concepts.values
 Types
 
 Mlut has the following types of values that partially intersect with [CSS data types](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Types). In the examples below will use a function that get a CSS value of the utility.
+
+Weight: 0
 
 Styleguide: concepts.values.type
 */
@@ -356,6 +366,8 @@ Conversion type
 
 In different utilities, the values will be converted in different ways. Conversion type is a rule by which the value will be converted. It consists of a sequence of converters and keywords. Conversion type is specified in the `conversion` option of utilities. For details on conversion and existing types, see here.
 
+Weight: 1
+
 Styleguide: concepts.values.convert
 */
 
@@ -375,6 +387,8 @@ The separator for multi-list is specified in the `multi-list-separator` utility 
 @debug ml.uv('M1r;=10x'); // 1rem 10x
 ```
 
+Weight: 2
+
 Styleguide: concepts.values.multi
 */
 
@@ -384,6 +398,8 @@ Separators
 Depending on the value type, different separators between the name and value of the utility are used. By default, only for strings without quotes (including empty) and CSS variables, the separator `-` are used: `Txd-u`, `C-$prime`. For all other values, separators are not used: `W100p`, `Fnw700`, but you can set them in the settings.
 
 `=` token will also be a separator if you want to prevent conversion: `-Mut=5`.
+
+Weight: 3
 
 Styleguide: concepts.values.sep
 */
@@ -408,6 +424,8 @@ At the end of the value or their sequences, you can specify `!` which will add t
 }
 ```
 
+Weight: 4
+
 Styleguide: concepts.values.important
 */
 
@@ -431,6 +449,8 @@ The negation is denoted by `-` before the value and works everywhere where it is
 	margin-left: calc(var(--ml-myVar) * -1);
 }
 ```
+
+Weight: 5
 
 Styleguide: concepts.values.negation
 */
@@ -461,6 +481,8 @@ In all at-rules, you can create complex conditions using the `:` and `, ` operat
 @debug ml.convert-ar-media('pr:h>gSm:dm,p-c:w>=90r'); // print and (min-height: #{ml.bp(sm) + 1}) and (display-mode: fullscreen), (pointer: coarse) and (min-width: 90rem)
 ```
 And of course, Rules can be used in any order and in any combination.
+
+Weight: 3
 
 Styleguide: concepts.at_rules
 */
@@ -566,47 +588,201 @@ Custom expressions
 
 You can add custom expressions to any at-rule. Regardless of the name you specify, custom expressions always begin with `-`. See in the settings how to add it.
 
+Weight: 1
+
 Styleguide: concepts.at_rules.custom
+*/
+
+/*
+States
+
+In the states you can use pseudo-class, pseudo-elements and almost everything that CSS selectors allow. States are two types: `pre` and `post`, depending on the position in the CSS utility selector. In both of them, you can use the same parts.
+```scss
+@include ml.mk-util(':h _D_ af', 'f');
+
+// CSS
+.D-f {
+	display: flex;
+}
+
+:hover .\:h_D-f {
+	display: flex;
+}
+
+.D-f_af::after {
+	display: flex;
+}
+```
+In essence, the states is a simplified [CSS selector list](https://developer.mozilla.org/en-US/docs/Web/CSS/Selector_list). To combine the states, use `:`, and for the separation of selector to the lists - `,`. For a space in the selector, use `::` or `:` if post-state is the first in the list.
+```scss
+@include ml.mk-util('D_ h,f h:b :fc', '');
+
+// CSS
+...
+
+.D_h\,f:hover,
+.D_h\,f:focus {
+	display: block;
+}
+
+.D_h\:b:hover::before {
+	display: block;
+}
+
+.D_\:fc :first-child {
+	display: block;
+}
+```
+
+You can use almost arbitrary parts in any order: combinators, classes, etc. In terms of conversion, the states are similar to the values of utilities:
+- unconvertible parts will fall into the selector unchanged
+- use `=` to prevent conversion
+```scss
+@include ml.mk-util('=a. h1+ _D_ .js:a', '');
+
+// CSS
+...
+
+a.\=a\._D {
+	display: block;
+}
+
+h1 + .h1\+_D {
+	display: block;
+}
+
+.D_\.js\:a.js:active {
+	display: block;
+}
+```
+Full list of existing states see in the configuration.
+
+Weight: 4
+
+Styleguide: concepts.states
+*/
+
+/*
+Special states
+
+There are several special states that are converted by a special way.
+
+Styleguide: concepts.states.special
+*/
+
+/*
+Context
+
+With the help of a context, the utilities can react to the state of the container, adjacent item etc. It is denoted by `^` and is just an alias for `.-Ctx`. Add this class to markup, and in the states of utilities, make a combination for the necessary behavior.
+
+You can also specify the name of the context. Allowed lower camelCase and numbers.
+```scss
+@include ml.mk-util('^:h ^one:lc:>_D', 'f');
+
+// CSS
+...
+
+.-Ctx:hover .\^\:h_D-f {
+	display: flex;
+}
+
+.-Ctx-one:last-child > .\^one\:lc\>_D-f {
+	display: flex;
+}
+```
+
+Styleguide: concepts.states.special.ctx
+*/
+
+/*
+Not
+
+To use a pseudo-class `not`, add `! ` before any part of state:
+```scss
+@include ml.mk-util('D_!fc !input', '');
+
+// CSS
+...
+
+.D_\!fc:not(:first-child) {
+	display: block;
+}
+
+.D_\!input:not(input) {
+	display: block;
+}
+```
+
+Styleguide: concepts.states.special.not
+*/
+
+/*
+This utility alias
+
+As in [@supports](#kssref-concepts-at_rules-supports), `&` can be used in the states. To increase specificity, it can only be used in post-states so many times as much as you need:
+```scss
+@include ml.apply('D_&');
+
+// CSS
+...
+
+.D_\&.D_\& {
+	display: block;
+}
+```
+
+Styleguide: concepts.states.special.tu
+*/
+
+/*
+Custom states
+
+Works similarly as the [custom at-rules expressions](#kssref-concepts-at_rules-custom), see more here.
+
+Weight: 1
+
+Styleguide: concepts.states.custom
+*/
+
+/*
+Custom units of measure
+
+In Mlut there are 3 custom units:
+- `su` \- space unit
+- `gg` \- grid gutter
+- `gc` \- grid column. Used only in the legacy grid-system
+
+*Important note*: in some utilities, `su` and` gg` are converted to `rem`, and not in `px`. About such behavior says the `default-unit` in the value "rem". It helps accessibility, if the user has increased default font in the browser.
+
+You can set the custom units values in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general).
+
+Weight: 5
+
+Styleguide: concepts.custom_unit
 */
 
 /*
 Space unit
 
-Abbreviated '`su`'. Units of measure for any dimensions. Widths, indents, line height, etc. By default, 1su is 4px. All sizes and indents in MLUT are multiple 1su.
+Unit of measurement to create a scale of sizes and indents in your design system. By default `1su = 4px`.
+```scss
+@debug ml.uv('Ml3su'); // 12px
+@debug ml.uv('Fns6su'); // 1.5rem
+```
 
-You can set value of `su` in [settings](section-sass-tools.html#kssref-sass-tools-settings-general).
-
-Weight: 7
-
-Styleguide: concepts.su
+Styleguide: concepts.custom_unit.su
 */
 
 /*
-Modular grid
+Grid gutter
 
-Space on the page divided into a certain number of columns with gutters.
+The value of this unit depends on the corresponding CSS variables: `--ml-gg` and `--ml-gg-rem`. Due to this, its value can be changed dynamically. By default `--ml-gg = 3su` but increase to `4su` on the `lg` breakpoint.
+```scss
+@debug ml.uv('Ml3su'); // 12px
+@debug ml.uv('Fns6su'); // 1.5rem
+```
 
-In MLUT on the `xs` and `sm` breakpoint, the grid has 4 columns. On `md` and above - 12. This means that the grid divides the space into 4 equal parts on `sm` and 12 parts on `md` and above. These parts called **columns**. Columns are separated by indents which are called **gutters**.
-
-The gutters have different widths at different breakpoints. From `xs` to `lg` gutter is 12px. From `lg` gutter is 16px.
-
-Using the [grid-debug](section-core-blocks.html#kssref-core-blocks-grid-debug) block you can see the graphic display of the grid.
-
-### Grid units
-
-These are units of measure that you can use for number values of utilities just like any other units in CSS. There are 4 types of grid units:
-* **variable columns** \- abbreviated `c`. 1c is 1 column width which changes dynamically depending on the [formula](section-core-blocks.html#kssref-core-blocks-row-row__col). Using [custom utilities](section-core-utils.html#kssref-core-utils-custom), you can get values equal to both `gc` and `gs`.
-* **grid-columns** \- `gc`. 1gc is width of 1 column.
-* **grid-spans** \- `gs`. 1gs is width of 1 column with 2 gutters.
-* **grid-gutters** \- `gg`. 1gg is width of 1 gutter.
-
-In the standard MLUT build, only `c` and `gg` are used. Other units can be used in some [mixins](section-sass-tools.html#kssref-sass-tools-mixins-w).
-
-Modular grid are generated depending on this [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
-
-Weight: 8
-
-Styleguide: concepts.grid
+Styleguide: concepts.custom_unit.gg
 */
 
 /*
