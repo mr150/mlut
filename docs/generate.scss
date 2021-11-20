@@ -132,7 +132,7 @@ Styleguide: utils-reference.#{string.to-lower-case($util)}
 /*
 #{$group}
 
-`#{meta.inspect(map.get($members, 'members'))}`
+<code class>#{meta.inspect(map.get($members, 'members'))}`</class>
 
 Styleguide: general_reference.groups.#{string.to-lower-case($group)}
 */
