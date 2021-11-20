@@ -1,5 +1,3 @@
-@use '../tools' as ml;
-
 /*
 Getting started
 
@@ -323,7 +321,7 @@ Styleguide: concepts.values.type.color
 /*
 Keywords
 
-Keywords - abbreviations that comply with CSS keywords. They are written Camel Camel Case and may contain numbers. How to add your keywords look here.
+Keywords \- abbreviations that comply with CSS keywords. They are written Camel Camel Case and may contain numbers. How to add your keywords look here.
 ```scss
 @debug ml.uv('D-if'); // inline-flex
 ```
@@ -435,6 +433,140 @@ The negation is denoted by `-` before the value and works everywhere where it is
 ```
 
 Styleguide: concepts.values.negation
+*/
+
+/*
+At-rules
+
+At-rules component may consist of breakpoints and rules. To specify breakpoint, just write it name: `lg_D-f`. To add rule, specify `@` before its name: `@s:ctv_D-g`. Breakpoints can only be specified 1 time in the entire component and only at the beginning, and rules - as much as you need.
+```scss
+@include ml.mk-util('D', ('xl_', '@s:ctv_g'));
+
+// CSS
+@media (min-width: 1200px) {
+  .xl_D {
+    display: block;
+  }
+}
+
+@supports (content-visibility: auto) {
+  .\@s\:ctv_D-g {
+    display: grid;
+  }
+}
+```
+
+In all at-rules, you can create complex conditions using the `:` and `, ` operators, which corresponds `and` and `or` in CSS. In some examples below, functions for at-rules conversion will be used for brevity.
+```scss
+@debug ml.convert-ar-media('pr:h>gSm:dm,p-c:w>=90r'); // print and (min-height: #{ml.bp(sm) + 1}) and (display-mode: fullscreen), (pointer: coarse) and (min-width: 90rem)
+```
+And of course, Rules can be used in any order and in any combination.
+
+Styleguide: concepts.at_rules
+*/
+
+/*
+Breakpoints
+
+The width of the screen on which the styles change. The default mobile-first approach is used, so breakpoints are converted to `min-width` media queries. How to configure breakpoints see here.
+
+If required `max-width`, add the `<` before the breakpoint:
+```scss
+@debug ml.convert-ar-bp('<sm'); // (max-width: 519px)
+```
+Or use operators to create a range:
+```scss
+@debug ml.convert-ar-bp('sm:md,xl'); // (min-width: 520px) and (max-width: 767px), (min-width: 1200px)
+```
+
+Styleguide: concepts.at_rules.bp
+*/
+
+/*
+@media
+
+In @media rule, you can use the type, features and custom queries. There are two media types:
+- `pr` \- `print`
+- `s` \- `screen`
+
+`@media` is the default rule. To choose it, just write `@` and then specify queries. The default rule can be selected in the settings.
+```scss
+@include ml.mk-util('@:w>=gSm:o _D', 'if');
+
+// CSS
+@media (min-width: 520px) and (orientation: landscape) {
+  .\@\:w\>\=gSm\:o_D-if {
+    display: inline-flex;
+  }
+}
+```
+
+Styleguide: concepts.at_rules.media
+*/
+
+/*
+Media features
+
+Work almost as well as utilities. Key differences:
+- if the feature has only two values, then to check its presence, you can simply write a name. For checking lack, you can use the `none` keyword. *Note* that some features also have the default value.
+- if the features can check the range of values, then you can use the range syntax from [The Media Queries Level 4](https://www.w3.org/TR/mediaqueries-4/#mq-range-context)
+```scss
+@debug ml.convert-ar-media('ah'); // (any-hover)
+@debug ml.convert-ar-media('h-n'); // (hover: none)
+@debug ml.convert-ar-media('dm'); // (display-mode: fullscreen)
+@debug ml.convert-ar-media('c<256'); // (max-color: 255)
+```
+
+Styleguide: concepts.at_rules.media.feat
+*/
+
+/*
+@supports
+
+In @supports rule, you can check the support of properties and values of any utility from the registry. To check the current value of the utility used, leave the rule blank.
+```scss
+@include ml.mk-util('Ps', '@s:d-flr_sk');
+@include ml.mk-util('D', '@s_f');
+
+// CSS
+@supports (display: flow-root) {
+  .\@s\:d-flr_Ps-sk {
+    position: sticky;
+  }
+}
+
+@supports (display: flex) {
+  .\@s_D-f {
+		display: flex;
+	}
+}
+```
+To check the property, it is not necessary to specify the value:
+```scss
+@debug ml.convert-ar-supports('apcr'); // (aspect-ratio: initial)
+```
+You can also use this-utility alias `&` in a complex condition.
+```scss
+@debug ml.convert-ar-supports('d-ig:&', ('name': 'Jc', 'value': '-se'); // (display: inline-grid) and (justify-content: space-evenly)
+```
+To check the lack of support, add an operator `!` before the utility:
+```scss
+@debug ml.convert-ar-supports('!d-ig'); // (not (display: inline-grid))
+```
+Please note that in one supports rule, only one type of the operator is supported for a combination of expressions. When using both immediately, an error will appear
+```scss
+@debug ml.convert-ar-supports('ps-sc,h1vh:m-a'); // ERROR: Different operators are not allowed in one abbreviations list
+```
+
+Styleguide: concepts.at_rules.supports
+*/
+
+/*
+Custom expressions
+
+You can add custom expressions to any at-rule. Regardless of the name you specify, custom expressions always begin with `-`. See in the settings how to add it.
+
+Styleguide: concepts.at_rules.custom
 */
 
 /*
