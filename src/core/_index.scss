@@ -1,3 +1,5 @@
+@use '../tools' as ml;
+
 /*
 Getting started
 
@@ -124,7 +126,7 @@ Styleguide: start.usage
 /*
 Basic concepts
 
-Before reading the documentation, learn MLUT basic concepts.
+Before reading the documentation, learn Mlut basic concepts.
 
 Weight: 1
 
@@ -132,131 +134,307 @@ Styleguide: concepts
 */
 
 /*
-Breakpoint
+Naming algorithm
 
-The width of the screen on which the styles change. In MLUT, the default breakpoints are:
-* `xs` \- minimum width `0px-520px`
-* `sm` \- horizontal orientation of smartphone `520px-760px`
-* `md` \- small tablet `760px-960px`
-* `lg` \- square monitor `960px-1168px`
-* `xl` \- wide screen `>1168px`
+Almost all abbreviations in Mlut are compiled by one algorithm. Below will be a simplified algorithm for compiling the abbreviations of the utilities names. Later it will be supplemented
 
-Weight: 5
+1. get all CSS properties that starts with one letter
+1. make ranking of them by popularity or alphabet if the popularity is not possible to calculate. Popularity for properties is calculated based on [Chrome platforf statistic](https://chromestatus.com/metrics/css/popularity)
+1. compose groups of properties that starts with one word. Select a group leader: repeating first word. Leader rating is the max rating of the property from group
+1. make abbreviations by the scheme below. Important notes:
+	- in descending order by rating, regardless of the relationship of the property to the group
+	- abbreviate the property, group leader or the first word property so that it does not intersect with already abbreviated properties
+	- subsequent abbreviations of all properties of the group and properties with the same initial word should begin with the same abbreviation, which was previously done
+	- if the group contains 2 or more subgroups (excluding logical: `block`, `inline`), its leader is abbreviate by at least 2 letters: `Fn`, `Bd`
+	- properties from 3 and less letters do not abbreviate: `Gap`, `All`
+	- properties and subproperties with physical directions have fixed abbreviations: `T`, `R`, `B`, `L`, `I`
+	- subsequent words in properties are abbreviated by the same rules recursively
 
-Styleguide: concepts.breakpoint
+The one abbreviation scheme:
+- the name must be abbreviate to the first letter of the source word.
+- if the name is from several words, then every word is abbreviate to one letter
+- if two names have the same first letter, then in the next name, when sorting them by the rating, the letter is added
+- if the name is from several words, then the letter is added, depending on the name affiliation to the group
+
+The order of adding the letter:
+1. consonant of the next syllable. If the next syllable begins to vowel, then we take the nearest previous consonant from it
+1. next consonant
+1. next vowel without a jump through the consonant
+
+Examples you can see in the [utils reference](section-utils-reference.html). More visual examples here will appear later.
+
+Styleguide: concepts.naming
 */
 
 /*
 Utility
 
-An entity that, depending on the parameters, does 1 action with the DOM node styles. Utilities change 1 CSS property or group of related properties.
-
-Utility class names are formed according to the scheme:
-1. optional pseudo-class, pseudo-element, selector modifier or state: `h` - hover, `af` - after, `noJs` - javascript disabled etc. Allowed several states in the same class. States are separated by a hyphen: `h-f` - hover, focus. States separated from the utility name by underscore `_`. More about states [below](#kssref-concepts-utility-states).
-1. utility name. Written with capital letter. Most utility names are [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations([pdf](https://yadi.sk/i/VcKfz5u7DBHrLA)).
-1. optional value. Valid are:
-	* number
-	* CSS or MLUT keywords
-	* MLUT variables
-
-	Values are set according to	[Emmet rules](https://docs.emmet.io/css-abbreviations/#supplying-values-with-units). Keywords are separated from the utility name with a hyphen `-`, and variables by two hyphens  `--`.
-1. optional breakpoint name: `sm`, `lg`, etc. Separated from the utility value by underscore `_`.
-
-Utility class name example: `Tt`, `Mb2r`, `D-ib_sm`, `h_Bgc-bd0`, `Fz--h1`.
-
-There are some special abbreviations for color utilities:
-* `t` - `transparent`
-* `i` - `inherit`
-* `cc` - `curentColor`
+An entity that, depending on the parameters, does 1 action with the element styles. Utilities can change both one CSS property and several.
 
 Weight: 6
 
-Styleguide: concepts.utility
+Styleguide: concepts.util
+*/
+
+/*
+General syntax
+
+Utilities consist of out:
+<img class="D" src="kss-assets/utils-syntax.jpg" alt="utilities syntax">
+
+1. CSS [at-rule](https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule): breakpoints, `@supports`, ect
+1. pre-states \- part of selector before the utility class name
+1. name
+1. value
+1. post-states \- part of selector after the utility class name
+
+Each part is separated by the lower underscore.
+
+Weight: 1
+
+Styleguide: concepts.util.syntax
+*/
+
+/*
+Naming
+
+By origin, the utilities are:
+
+* **Common** \- named and work like CSS properties.
+* **Custom** \- affects several CSS properties or manages custom properties. Their names begin with a hyphen. All utilities that you will add, it is recommended to name as custom.
+
+The names of utilities are written in upper CamelCase and can only contain letters. Thanks to the first capital letter, they are easy to add to an existing project without fear of name conflicts.
+
+Styleguide: concepts.util.naming
+*/
+
+/*
+Components
+
+To work with utilities in Mlut, the parsing to parts (components) is used. Most of them correspond to the usual syntax. The utility divides to this components:
+- at-rules
+- pre-states
+- post-states
+- important: `!` modifier at the end of the utility value adds `!important` to CSS
+- value: it can be a separate value, the name of the utility, group etc
+
+Here is an example, as the utility will be parsed to the components:
+```scss
+@debug ml.parse-util('<sm_:f:>_D!_h::^sub');
+// (
+//   'at-rules': '<sm',
+//   'pre-states': ':f:>',
+//   'post-states': 'h::^sub',
+//   'important': true,
+//   'value': 'D',
+// ),
+```
+Note that the *order* of components is important.
+
+Utility Components Syntax - the way to describe, with which components we want to generate utilities. It is similar to the syntax utilities in the final code, but has a number of differences:
+- components of the same type are separated by spaces
+- by default, the utilities with the components of each type are generated *separately*. It means that: `xl_^:h_Bdb_h,f` => `xl_Bdb`, `^:h_Bdb`, `Bdb_f`
+- keywords are used, for explicit instructions, with what components we need utilities and not only: `BpAll ArSt _Bdb_h`
+
+This syntax is used in all places where utilities, utils groups, ranges, etc. are generated.
+
+Most of the components in the Mlut is convertible. This means that if the component or part of it correspond the rules of conversion, it will unfold into some CSS value. How to convert different components, you can read below in the relevant sections. If the Mlut does not know how to convert the component, the behavior will depend on its type.
+
+Styleguide: concepts.util.components
+*/
+
+/*
+Values
+
+The values of utilities are almost arbitrary. That is, if the value is not converted, it appear in the CSS without changes.
+
+To explicitly prevent conversion, use the `=` before the value. Also, use `= before` the value in quotes `''`: `Ct='test'_af`, since in the future quotes will be used in the values *without* separator.
+
+```scss
+@include ml.mk-util('Ml', (5, 5exe, '=5'));
+
+// CSS
+.Ml5 {
+	margin-left: 5px;
+}
+
+.Ml5exe {
+	margin-left: 5exe;
+}
+
+.Ml\=5 {
+	margin-left: 5;
+}
+```
+
+Styleguide: concepts.values
 */
 
 /*
 Types
 
-Utilities in MLUT come in 2 types:
+Mlut has the following types of values that partially intersect with [CSS data types](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Types). In the examples below will use a function that get a CSS value of the utility.
 
-* **Common** \- named and work like CSS properties.
-* **Custom** \- affects several common CSS properties or manages custom properties. Their names begin with a hyphen. Examples: `-D`, `-Xy`, `-Gg`.
-
-Weight: 0
-
-Styleguide: concepts.utility.types
+Styleguide: concepts.values.type
 */
 
 /*
-Directions
+Number
 
-Some utilities have directions. There are 7 of them:
-* 4 main directions - top, right, bottom, left. They are registered in the map [$mlu-main-directions](section-sass-tools.html#kssref-sass-tools-settings-general).
-* 3 combined direction - `x`(left, right), `y`(top, bottom) and `xy`(all main directions).
+Numbers can be both with units of measurements and without. Float values are allowed, and fractions also can be used in the default conversion type:
+```scss
+@debug ml.uv('Fnw100'); // 100
+@debug ml.uv('Ml3r'); // 3rem
+@debug ml.uv('W1/4'); // 25%
+```
 
-The direction is used in the names of utilities, as well as in some mixins. 1 letter is used to indicate the direction(`Mt`, `Pb`), with the exception of `xy`. In the names of utilities `xy` is not indicated(`M`, `P`), and 2 letters `xy` are passed in mixins.
-
-Weight: 1
-
-Styleguide: concepts.utility.dirs
+Styleguide: concepts.values.type.number
 */
 
 /*
-MLUT keywords and variables
+CSS variables
 
-**MLUT keywords** are strings values. Their names can only contain lowercase letters. Keywords include:
-* names of breakpoints - `sm`, `lg`, etc. Permissible to use only in custom utilities
-* `min` and `max`. Allowed to use only in utils with number values
-* abbreviations for invented values that are not in the CSS specification. Allowed to use only in custom utilities.
+Their names begin with `$` written in lower camelCase and may contain numbers. They can be used almost everywhere, even as part of a complex value, for example in fractions:
+```scss
+@debug ml.uv('W1/$div'); // calc(1 / var(--ml-div) * 100%);
+```
+To specify a fallback, use `?`. In the fallback, you can specify any value, including another variable with fallback:
+```scss
+@debug ml.uv('W-$myCard?200'); // var(--ml-myCard, 200px)
+@debug ml.uv('W-$myCard?$defWd?150'); // var(--ml-myCard, var(--ml-defWd, 150px))
+```
 
-**MLUT variables** exist only at the agreement level. Essentially, they are similar to Sass variables, which are compiled into CSS values. They can take any value, including CSS custom properties. Variable name is written in lower camelCase, may contain letters and numbers: `bd0`, `myBxsh` etc. Example: [Maw--fx0](section-core-utils.html#kssref-core-utils-bxz-maw).
-
-Weight: 1
-
-Styleguide: concepts.utility.mlut_kw_var
+Styleguide: concepts.values.type.css_var
 */
 
 /*
-Creation
+Color
 
-For convenient creation of frequently used utilities, a [group of mixins](section-sass-tools.html#kssref-sass-tools-mixins-util_wrappers) has been prepared. They are wrappers over the main mixins for creating utilities:
-- [mk-util](section-sass-tools.html#kssref-sass-tools-mixins-mk_util)
-- [mk-state](section-sass-tools.html#kssref-sass-tools-mixins-mk_state)
+You can use both HEX colors and color names set by the user. Read more about adding your colors here. With colors, you can specify the opacity modifier `*`. This converter is used to convert opacity. With modifier, you can use CSS variables or global keywords in any position:
+```scss
+@debug ml.uv('C#60c*20p'); // rgba(102, 0, 204, 0.2)
+@debug ml.uv('C-red0*$co'); // rgba(204, 0, 102, var(--ml-co, 1))
+```
+If a variable is specified as opacity, then by default, it will have fallback `1`.
 
-Weight: 2
-
-Styleguide: concepts.utility.creation
+Styleguide: concepts.values.type.color
 */
 
 /*
-States
+Keywords
 
-States in MLUT called the implementation of some features of the CSS using utilities, such as pseudo-classes, selectors combinators etc.
-States also include utilities values that work under certain conditions that are not related with CSS.
-The state name is written in lower camelCase.
-Available states for utilities are listed in the [settings](section-sass-tools.html#kssref-sass-tools-settings-utils-states).
-States are created using the [mk-state](section-sass-tools.html#kssref-sass-tools-mixins-mk_state) mixin. It can create 3 types of states based on the types of values in the states map:
-1. pseudo-classes and pseudo-elements. In states map the value is a string - `'h': 'hover'`
-1. multiple selectors with pseudo-classes. State value is a list - `'h-f': ('hover', 'focus')`
-1. just the utilities values that work under certain conditions. State value is a null - `'noJs': null`
+Keywords - abbreviations that comply with CSS keywords. They are written Camel Camel Case and may contain numbers. How to add your keywords look here.
+```scss
+@debug ml.uv('D-if'); // inline-flex
+```
 
-In the core there are utilities with states whose creation has not yet been implemented:
-* `sp` \- utility inside the @supports at-rule. It will only work if the CSS property, value, or @supports supported by the browser.
-* `chl` \- utility will work on all children. Means `> *`.
+Styleguide: concepts.values.type.kw
+*/
 
-#### Javascript on/off
+/*
+Global keywords
 
-Using the `js` and `noJs` states, you can add utilities that work depending on the presence of javascript in the browser.
-* if you want the utility to work only when javascript is loaded, just add the `js` state to it in the markup.
-* if the utility should work only without javascript, create a value for it with the `noJs` state using a mixins.
+Similar to ordinary, but differ in that they can be used in any utility. You can add your global keywords in the settings. It is recommended to use the prefix, for example: `gMyKw`. You can find the default Mlut global keywords in the settings.
+```scss
+@debug ml.uv('W-ih'); // inherit
+```
 
-Note that if the utility has other states, `js` and `noJs` should be indicated first: `js-h_Bgc-mn0`, `noJs-sp_D-f`.
+Styleguide: concepts.values.type.gkw
+*/
 
-This mechanism is implemented using the [init.js](section-core-scripts.html#kssref-core-scripts-init) script.
+/*
+Abbreviations
 
-Weight: 1
+In the values of some utilities you can use the names of other utilities.
+```scss
+@debug ml.uv('Tsp-bdc'); // border-color
+```
 
-Styleguide: concepts.utility.states
+Styleguide: concepts.values.type.abbr
+*/
+
+/*
+Conversion type
+
+In different utilities, the values will be converted in different ways. Conversion type is a rule by which the value will be converted. It consists of a sequence of converters and keywords. Conversion type is specified in the `conversion` option of utilities. For details on conversion and existing types, see here.
+
+Styleguide: concepts.values.convert
+*/
+
+/*
+Multiple values
+
+For any utility you can specify multiple values. Instead of a blank used `;`:
+```scss
+@debug ml.uv('Bd3;sec0;d'); // 3px #0c6 dotted
+```
+In some utilities, you can specify several lists of values. To do this, use the same separator as in CSS: `/` or `,`
+```scss
+@debug ml.uv('Bdrd1r;2/5p'); // 1rem 2px / 5%
+```
+The separator for multi-list is specified in the `multi-list-separator` utility option. Please note that each value is converted separately. The prevent-conversion token `=` also applies to each value in the list separately:
+```scss
+@debug ml.uv('M1r;=10x'); // 1rem 10x
+```
+
+Styleguide: concepts.values.multi
+*/
+
+/*
+Separators
+
+Depending on the value type, different separators between the name and value of the utility are used. By default, only for strings without quotes (including empty) and CSS variables, the separator `-` are used: `Txd-u`, `C-$prime`. For all other values, separators are not used: `W100p`, `Fnw700`, but you can set them in the settings.
+
+`=` token will also be a separator if you want to prevent conversion: `-Mut=5`.
+
+Styleguide: concepts.values.sep
+*/
+
+/*
+CSS important
+
+At the end of the value or their sequences, you can specify `!` which will add the CSS `!important` to the final value. If the utility affects several properties, then `!important` adds to each.
+```scss
+@include ml.apply('M2r;12! -I2r!');
+
+// CSS
+.M2r\;12\! {
+	margin: 2rem 12px !important;
+}
+
+.-I2r! {
+	top: 2rem !important;
+	right: 2rem !important;
+	bottom: 2rem !important;
+	left: 2rem !important;
+}
+```
+
+Styleguide: concepts.values.important
+*/
+
+/*
+Negation
+
+The negation is denoted by `-` before the value and works everywhere where it is appropriate. With numbers, with CSS variables and with keywords, if the final value may be negative.
+```scss
+@include ml.mk-util('Ml', ('2/-8', -0.7, '-$myVar'));
+
+// CSS
+.Ml2\/-8 {
+	margin-left: -25%;
+}
+
+.Ml-0\.7 {
+	margin-left: -0.7rem;
+}
+
+.Ml--\$myVar {
+	margin-left: calc(var(--ml-myVar) * -1);
+}
+```
+
+Styleguide: concepts.values.negation
 */
 
 /*
@@ -375,16 +553,6 @@ You can find their in `sass/core/`.
 Weight: 4
 
 Styleguide: core-styles
-*/
-
-/*
-Core scripts
-
-Scripts that complement the MLUT core functionality.
-
-Weight: 5
-
-Styleguide: core-scripts
 */
 
 /*

@@ -24,11 +24,15 @@ var dirs = {
 var path = {
 	src: 'src/',
 	build: 'dist/',
-	docsAssets: dirs.docs + 'styleguide/kss-assets/',
+	docs: {
+		assets: dirs.docs + 'styleguide/kss-assets/',
+		img: dirs.docs + 'img/',
+	},
 	test: {
 		css: dirs.test + 'css/',
 		sass: dirs.test + 'sass/',
-		pug: dirs.test + 'pug/'
+		pug: dirs.test + 'pug/',
+		img: dirs.test + 'img/'
 	}
 };
 
@@ -125,7 +129,7 @@ gulp.task('style', gulp.series('css-lint', function(){
 		}))
 		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build))
-		.pipe(gulp.dest(path.docsAssets))
+		.pipe(gulp.dest(path.docs.assets))
 		.pipe(sourcemaps.write(''))
 		.pipe(gulp.dest(path.test.css))
 		.pipe(browserSync.stream());
@@ -161,12 +165,12 @@ gulp.task('sass-compile-doc', () => {
 			forceMediaMerge: true
 		}))
 		.pipe(rename({suffix: '.min'}))
-		.pipe(gulp.dest(path.docsAssets));
+		.pipe(gulp.dest(path.docs.assets));
 });
 
 gulp.task('kss', shell.task([
 	'node_modules/.bin/kss --config ' + dirs.docs + 'kss-config.json',
-	'cp ' + path.test.css + 'test.css ' + path.docsAssets
+	'cp ' + path.test.css + 'test.css ' + path.docs.assets,
 ]));
 
 gulp.task('default', gulp.parallel('server', 'kss', 'style', 'pug', function(){
@@ -198,4 +202,9 @@ gulp.task('clear', function(cb){
 	cb();
 });
 
-gulp.task('build', gulp.series('clear', 'style', 'sass-test', 'pug', 'kss'));
+gulp.task('img', () => {
+	return gulp.src(path.docs.img + files.all, {buffer: false})
+		.pipe(gulp.dest(path.docs.assets));
+});
+
+gulp.task('build', gulp.series('clear', 'style', 'sass-test', 'pug', 'kss', 'img'));
