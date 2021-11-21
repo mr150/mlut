@@ -3,19 +3,13 @@
 /*
 CSS variables
 
-Global CSS custom properties which used in MLT. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties. Global custom properties names begin with the `ml` prefix.
+Global CSS custom properties which used in Mlut. Their names are stored in variables and can be changed in [settings](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names). Names of such variables correspond to the original names of custom properties. Global custom properties names begin with the `ml` prefix.
 
-The values and meaning of many custom properties correspond to the [SASS settings](section-sass-tools.html#kssref-sass-tools-settings) of MLT core. But unlike them, custom properties can be changed dynamically without recompiling.
-
-In some blocks and utilities, custom properties are also used. Look for info about them in the description of the corresponding block or utility.
-
-You can find global CSS variables in `sass/core/variables.scss`.
-
---ml.gg = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
+--ml-gg = 12px - [grid gutter](section-concepts.html#kssref-concepts-grid) in `px`.
 Value sets [here](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters).
 Fallback is [ml.$grid-default-gtr](section-sass-tools.html#kssref-sass-tools-settings-general).
---ml.gg-rem = 0.75rem - grid gutter in `rem`.
---ml.grid-cols = 12 - number of columns in the [grid system](section-concepts.html#kssref-concepts-grid). Sets by [ml.$grid-columns](section-sass-tools.html#kssref-sass-tools-settings-grid).
+--ml-gg-rem = 0.75rem - grid gutter in `rem`.
+--ml-grid-cols = 12 - number of columns in the grid system. Sets by [$gs-columns](section-sass-tools.html#kssref-sass-tools-settings-grid). Available only with `$legacy-grid-system` flag enabled
 
 Styleguide: core-styles.css_vars
 */
@@ -25,7 +19,10 @@ Styleguide: core-styles.css_vars
 
 	#{ml.$var-gg}: ml.$gtr-first;
 	#{ml.$var-gg-rem}: ml.px2rem(ml.$gtr-first);
-	#{ml.$var-gscc}: ml.$gs-columns;
+
+	@if ml.$legacy-grid-system {
+		#{ml.$var-gscc}: ml.$gs-columns;
+	}
 
 	@each $key, $value in ml.$gs-gutters {
 		@if $value != $prev-value {
