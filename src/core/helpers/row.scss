@@ -1,0 +1,118 @@
+@use '../../tools' as ml;
+
+/*
+Row
+
+**DOCUMENTATION IN PROGRESS**
+
+Helper for creating layouts. Suitable for columns, cards and horizontal lists. By default, [flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox) technology is used for layouts.
+
+Parts of the layout within a `row` are created using the elements:
+* [row__col](#kssref-core-helpers-row-row__col)
+* [row__item](#kssref-core-helpers-row-row__item)
+
+`Rows` can be put into each other an unlimited number of times.
+
+`Row` contains CSS counter named `ml-row-item`.
+
+It **not included** in the default MLUT distributive.
+
+Markup: ../../../docs/examples/core-helpers/row/row.html
+
+Styleguide: core-helpers.row
+*/
+
+/*
+row__col
+
+The main element for creating columns in layout. By default, it stretches the entire width of the container. The columns have gutters on the sides and bottom.
+
+The gutters are implemented using the `margin` and [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars).
+If `var()` is not supported by the browser, then fallback are provided:
+```scss
+margin-right: 16px;
+margin-left: 16px;
+margin-right: var(--ml.gg);
+margin-left: var(--ml.gg);
+margin-bottom: 2rem;
+margin-bottom: calc(var(--ml.gg-rem) * 2);
+```
+The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$grid-default-gtr`.
+
+Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-helpers-row). The formulas for calculating the width and offset for the column are stored in the custom properties. In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
+```scss
+--gc-rule: calc((var(--gc) - 0.0001) / var(--ml.grid-cols) * 100% - var(--gc-diff) * 2);
+--mgc-rule: calc((var(--mgc) - 0.0001) / var(--ml.grid-cols) * 100% + var(--gc-diff));
+```
+`--gc` or `--mgc` is the value of the width or offset in the grid columns. This is a custom property of the utility.<br>
+`(var(--gc) - 0.0001)` - fix for calc() [bug](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/15637241/) in Edge 16-18.<br>
+`--ml.grid-cols` - the number of columns in the grid system. This is a [global](section-core-styles.html#kssref-core-styles-css_vars) custom property that can be changed on any DOM node.<br>
+`--gc-diff` - variable is equal to the gutter if the gutter at the columns is created using margin. In `row__col` is equal 1gg.<br>
+Some of these variables can be changed using [custom utilities](section-core-utils.html#kssref-core-utils-custom).
+
+You can create nested layouts with a mix of `row` and `row__col` on the same DOM node. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
+
+All examples of the work of nested layouts are [here](section-examples.html#kssref-examples-nested_layouts).
+
+Markup: ../../../docs/examples/core-helpers/row/row__col.html
+
+Styleguide: core-helpers.row.row__col
+*/
+
+/*
+row__item
+
+Element for creating parts of the layout. By default, it stretches across the width of the content.
+
+The sizes and offsets are set with help of utilities.
+
+Like a `row__col`, an element contains formulas for calculating width and offset. But `gc-diff` here is equal 0px.
+
+Markup: ../../../docs/examples/core-helpers/row/row__item.html
+
+Styleguide: core-helpers.row.row__item
+*/
+
+.row {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0px;
+	list-style: none;
+	counter-reset: ml-row-item;
+
+	@include ml.apply('M0;-1gg');
+}
+
+.row__col,
+.row__item {
+	#{ml.$var-gsfd}: 0px;
+	max-width: 100%;
+
+	@if not ml.$base-border-box {
+		box-sizing: border-box;
+	}
+
+	@if ml.$gs-flex-fallback {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	@include ml.apply('-Gsf');
+
+	& > :first-child:not([class]) {
+		margin-top: 0px;
+	}
+
+	& > :last-child:not([class]) {
+		margin-bottom: 0px;
+	}
+}
+
+.row__col {
+	@include ml.apply('-Gsfd1gg W12gc M0;1gg;2gg');
+
+	&.row {
+		margin-bottom: 0px;
+	}
+}

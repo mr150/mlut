@@ -1,0 +1,47 @@
+@use '../../tools' as ml;
+
+/*
+Ratio-box
+
+Helper for creating containers, with proportional width and height. Implemented using a pseudo-element with a `padding-bottom` in %.
+
+The default aspect ratio is 16:9.
+
+.Pt75p_b - 4:3 aspect ratio.
+.Pt100p_b - 1:1 aspect ratio.
+
+Markup: ../../../docs/examples/core-helpers/ratio-block/ratio-block.hbs
+
+Styleguide: core-helpers.ratio-box
+*/
+
+.ratio-box {
+	position: relative;
+
+	&::before {
+		display: block;
+		width: 100%;
+		padding-top: 56.25%;
+		content: '';
+	}
+
+	> :first-child {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+@if ml.$ratio-box-flex {
+	.ratio-box-flex {
+		&::before {
+			float: left;
+			padding-top: 56.25%;
+			content: '';
+		}
+
+		@include ml.apply('-Cl');
+	}
+}

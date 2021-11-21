@@ -3,15 +3,17 @@
 /*
 Grid-system debug
 
-Block for debugging layouts that built with grid system. It displays a grid system columns and gutters in the background of the container. The grid system are generated depending on the [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
+**DOCUMENTATION IN PROGRESS**
+
+Helper for debugging layouts that built with grid system. It displays a grid system columns and gutters in the background of the container. The grid system are generated depending on the [settings](section-sass-tools.html#kssref-sass-tools-settings-grid).
 
 There may be minor inaccuracies in the drawing of the grid, because the grid is generated with CSS `linear-gradient()`. For gutters calculation are used [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) *without* fallback.
 
-It **turned off** in default MLUT distributive.
+It **not included** in the default MLUT distributive.
 
-Markup: ../../../docs/examples/core-blocks/grid-debug/grid-debug.html
+Markup: ../../../docs/examples/core-helpers/grid-debug/grid-debug.html
 
-Styleguide: core-blocks.gs-debug
+Styleguide: core-helpers.gs-debug
 */
 
 .gs-debug {
