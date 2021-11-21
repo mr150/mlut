@@ -235,8 +235,8 @@ Note that the *order* of components is important.
 
 Utility Components Syntax - the way to describe, with which components we want to generate utilities. It is similar to the syntax utilities in the final code, but has a number of differences:
 - components of the same type are separated by spaces
-- by default, the utilities with the components of each type are generated *separately*. It means that: `xl_^:h_Bdb_h,f` => `xl_Bdb`, `^:h_Bdb`, `Bdb_f`
-- keywords are used, for explicit instructions, with what components we need utilities and not only: `BpAll ArSt _Bdb_h`
+- by default, the utilities with the components of each type are generated *separately*. It means that: `xl_^:h_Bdb_h,f` => `xl_Bdb`, `^:h_Bdb` and `Bdb_f`
+- [keywords](section-how_to.html#kssref-how_to-mk_utils-kw_cp) are used, for explicit instructions, with what components we need utilities and not only: `BpAll ArSt _Bdb_h`
 
 This syntax is used in all places where utilities, utils groups, ranges, etc. are generated.
 
@@ -783,6 +783,258 @@ The value of this unit depends on the corresponding CSS variables: `--ml-gg` and
 ```
 
 Styleguide: concepts.custom_unit.gg
+*/
+
+/*
+How to
+
+Ways to solve standard tasks
+
+Weight: 4
+
+Styleguide: how_to
+*/
+
+/*
+Utils Generation
+
+Mlut has 3 methods for generating utility classes:
+1. in the configuration when importing
+1. with special mixins
+1. with top-level `apply` mixin
+
+Styleguide: how_to.mk_utils
+*/
+
+/*
+Standard ways
+
+Standard methods include creating through config and using `mk-` mixins. As the values of utilities, you can use a list or map. The components syntax can be used both in the names of utilities/groups and in the values.
+```scss
+@include ml.mk-util(
+	'Mxw',
+	(
+		'cardXs': 12r,
+		'sm0': 560px,
+	)
+);
+
+// CSS
+.Mxw-cardXs {
+	max-width: 12rem;
+}
+
+.Mxw-sm0 {
+	max-width: 560px;
+}
+```
+If you add new values via map, they will appended to the registry and after ,you can use them again.
+
+You can find other examples of the standard way usage in the [basic concepts](section-concepts.html#kssref-concepts-values-negation).
+
+Weight: 0
+
+Styleguide: how_to.mk_utils.std
+*/
+
+/*
+Utilities groups
+
+For mass generation utilities, you can use groups. Existing groups can be found [here](section-general_reference.html#kssref-general_reference-groups), and you can add new ones to `$utils-groups` map.
+```scss
+@include ml.mk-utils-group('Paddings', 150);
+
+// CSS
+.P150 {
+	padding: 150px;
+}
+
+.Pt150 {
+	padding-top: 150px;
+}
+
+.Pr150 {
+	padding-right: 150px;
+}
+
+// etc.
+```
+
+Weight: 1
+
+Styleguide: how_to.mk_utils.groups
+*/
+
+/*
+In the config
+
+The main method of creating utilities - in config. Use map `$utils`. As keys, specify the names of utilities or groups.
+```scss
+@use 'mlut' with (
+	$utils: (
+		'D': ('', 'n'),
+		'xl_P': 10e,
+	)
+);
+
+// CSS
+.D {
+	display: block;
+}
+
+.D-n {
+	display: none;
+}
+
+.P10e {
+	padding: 10em;
+}
+
+@media (min-width: 1200px) {
+	.xl_P10e {
+		padding: 10em;
+	}
+}
+```
+
+
+Styleguide: how_to.mk_utils.std.cfg
+*/
+
+/*
+Keywords alias
+
+To generate the values of the utility with all the keywords, use `KW` in the list or map of values. You can also get a specific keywords group from `common` section of the utils registry. To do this, specify the name of the group through the dot: `KW.colors`
+```scss
+@include ml.mk-util('Ec', 'KW');
+
+// CSS
+.Ec-s {
+	empty-cells: show;
+}
+
+.Ec-h {
+	empty-cells: hide;
+}
+```
+
+Weight: 2
+
+Styleguide: how_to.mk_utils.kw
+*/
+
+/*
+Top-level apply
+
+If you want to create only a few utilities with specific values or components, you can use the apply mixin. If you call it outside another rule, it will generate the specified utilities:
+```scss
+@include ml.apply(
+	'-Gdl-r,#fff;30p,#00f;80p,red -Drps10;15;#00f,20;2r;5;#0ff'
+);
+
+// CSS
+.-Gdl-r\,\#fff\;30p\,\#00f\;80p\,red {
+	background-image: linear-gradient(to right, #fff 30%, #00f 80%, red);
+}
+
+.-Drps10\;15\;\#00f\,20\;2r\;5\;\#0ff {
+	--ml-drps: drop-shadow(10px 15px #00f) drop-shadow(20px 2rem 5px #0ff);
+}
+```
+
+Weight: 5
+
+Styleguide: how_to.mk_utils.kw
+*/
+
+/*
+Range syntax
+
+To generate a range of values, Mlut has range syntaxes. Now there are 2 types of such syntaxes: `number` and `color`. Range syntax is written in square brackets in the list or map of values. Range syntax depends on `range-generator` utility option.
+
+*Note*: if only one range is specified in the list of values, after it you need to put a comma:<br> `([-1, 5],)`. Otherwise, the program will take the range for the list of values.
+
+Weight: 3
+
+Styleguide: how_to.mk_utils.range
+*/
+
+/*
+Number
+
+Number is default range syntax. You can use it with any utility if another range generator is not specified in its options. May consist of 2 or 3 arguments. General form: <br>`[$start, $end, $step: 1]`.<br> In the `$start` value, and only in it, you can specify a measurement unit, as well as the utility components.
+```scss
+@include ml.mk-util('Bdw', ([2su, 4],));
+
+// CSS
+.Bdw2su {
+	border-width: 8px;
+}
+
+.Bdw3su {
+	border-width: 12px;
+}
+
+// etc.
+```
+
+Styleguide: how_to.mk_utils.range.number
+*/
+
+/*
+Color
+
+May consist of three or four arguments. General form: <br>`[$colors-list, $shades, $step, $function: 'adjust']`.
+```scss
+@include ml.mk-util('C', (
+	['prm0', '2_h StOl', ('alpha': 0.2, 'green': 30)],
+));
+
+// CSS
+.C-prm0_h:hover {
+	color: #c06;
+}
+
+.C-prm0\*80p_h:hover {
+	color: rgba(204, 0, 102, 0.8);
+}
+
+.C-prm50_h:hover {
+	color: #cc1e66;
+}
+
+.C-prm50\*80p_h:hover {
+	color: rgba(204, 30, 102, 0.8);
+}
+```
+
+$colors-list - In the color list, you can specify: <ul><li>in advance declared color <li>hex color <li> global keyword that contains color <li> CSS variable
+$shades - the number of shades to generate. *Note* that alpha shades are generated separately from the other shades. Components syntax is allowed
+$step - map with arguments for a function, with which the shades is generated. If the `red`, `green` and `blue` arguments have the same value, then you can specify one `rgb` argument. In `alpha` you can specify CSS Variable.
+$function = 'adjust' - a function that is used to generate a shades. You can specify the name of the function from the `sass:color` module, or the custom function with [meta.get-function()](https://www.sass-lang.com/documentation/modules/meta#get-function)
+
+Styleguide: how_to.mk_utils.range.color
+*/
+
+/*
+Keywords of components control
+
+In the components syntax, you can use keywords to specified with what components you need to generate utilities. Keywords are written as ordinary components through a space. *Note* that by default when specifying the components, the value of the utility without components is also generated. This behavior can also be changed.
+
+Also, using one keyword, you can specify several of the same type of components.
+
+More detailed examples will be added later.
+
+ArOl - at-rules only. No generate values without at-rules
+ArSt - at-rules states. Generate values with states, with at-rules and with states + at-rules
+ArSO - at-rules states only. Generate only values with states + at-rules
+StOl - states only. No generate values without states
+StCb - states combine. Generates values with post and pre states at the same time, if they are listed after the keyword. Example: `StCb ^:h_C-red_ StCb lc` => `^:h_C-red_lc`
+BpAll - all breakpoints. Generate values with all breakpoints
+
+Weight: 3
+
+Styleguide: how_to.mk_utils.kw_cp
 */
 
 /*

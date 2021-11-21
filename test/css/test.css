@@ -83,14 +83,15 @@
 }
 
 .kss-description code:not([class]),
-.kss-parameters code:not([class]) {
+.kss-parameters__description code:not([class]) {
 	font-size: 90%;
 	padding: .2em .4em;
 	background-color: rgb(239, 241, 243);
 }
 
 /* because selector list in :not() not well supported enough */
-.kss-description table code:not([class]) {
+.kss-description table code:not([class]),
+.kss-parameters__default-value code:not([class]) {
 	font-size: 100%;
 	padding: 0;
 	background: none;
