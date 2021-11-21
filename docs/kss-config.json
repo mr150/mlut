@@ -1,6 +1,9 @@
 {
   "//": "The source and destination paths are relative to this file.",
-  "source": "../src",
+  "source": [
+		"content",
+		"../src"
+	],
   "destination": "styleguide",
   "homepage": "../docs/homepage.md",
 	"mask": "*.css|*.less|*.sass|*.scss|*.styl|*.stylus|*.js",
@@ -15,5 +18,5 @@
     "kss-assets/mlut.min.js"
 	],
 
-  "title": "MLUT documentation"
+  "title": "Mlut documentation"
 }

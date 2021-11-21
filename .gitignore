@@ -5,7 +5,6 @@ test/css/index.css
 test/css/mlut.min.css
 
 docs/styleguide
-
-src/generate.css
+docs/content/generate.css
 
 node_modules
