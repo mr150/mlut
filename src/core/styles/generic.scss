@@ -3,15 +3,16 @@
 @use '../../tools/settings' as ml;
 
 /*
-Normalize
+Generic
 
-Simple css normalization that correcting old browsers bugs and not affecting other styles.
+Generic CSS that contains `box-sizing`, reset, browser bugs fixes etc. You can configure it with settings.
 
-Styleguide: core-styles.normalize
+Styleguide: core-styles.generic
 */
 
 //stylelint-disable
 
+/*! purgecss start ignore */
 @if map.get(ml.$general-cfg, 'generic-css') {
 	// Prevent adjustments of font size after orientation changes in iOS
 	html {
@@ -292,3 +293,4 @@ Styleguide: core-styles.normalize
 		}
 	}
 }
+/*! purgecss end ignore */
