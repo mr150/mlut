@@ -1,53 +1,53 @@
 # My Little UI Toolkit #
-Atomic CSS based, modular and lightweight toolkit with progressive enhancement.
+Full-featured and hackable toolkit for writing standards-based Atomic CSS. Get almost all power of CSS in one utility.
 
 [![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
 
+## Mission ##
+- Maximum realize the potential of the Atomic CSS methodology
+- Destroy the myth that Atomic CSS for those who don't know or don't like CSS
+
 ## Features ##
-- Strong naming conventions: [Emmet](https://github.com/emmetio) abbreviations and BEM naming
-- Lightweight: CSS core ~3.9KB, themes from 0.8KB
-- Modular and easily extensible
-- Designed with progressive enhancement
-- Well customizable
-- Advanced grid system with CSS custom properties
-- Responsive and mobile first
-- Reusable across projects
-- Written in Sass and vanilla JS
+- Strong naming convention: [one algorithm](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-naming) for all. If you know CSS, you almost know Mlut
+- Constructable and almost arbitrary [values](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-values), [states](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states) and [at-rules](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-at_rules) by design
+- Fully customizable: change tokens, utils names and any settings
+- Configuration with great DX. All in one config: add utils, states, change settings and more with few lines of code
+- Easiest utilities generation: [range](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range) and [components](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-util-components) syntaxes, utils [groups](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-groups), [top-level](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-apply) `apply` and not only
+- Well compatible with CSS conceptually. Designed for organic growing together with CSS.
+- Easy to use in existing project
+- Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
 
 ## Structure ##
-- CSS library
-- JS library (optional)
 - Sass tools
+- opt-in CSS library
+- addons
 
 ### Library ###
-The library part of toolkit united in itself ideas from [Atomic CSS](https://acss.io/) and [BEM](https://bem.info/). It consists of 2 layers:
+The library part of toolkit named `Core` and consists of:
 
-- Core - all that can be used at any project. This layer contains BEM blocks, CSS utilities and simple optional scripts.
-- Modules - themes, utilities sets and scripts, that can be reused in different projects.
+- base styles - variables and generic CSS like reset, normalize etc.
+- helpers - similar to utilities: the same universal, but more complex and can consist of several CSS rules
+- utilities - such that can be used in any project, regardless of design: no colors, typography, etc. Theme utils you can find in addons
 
-In most projects, you will probably need to add another "design" layer that will be specific to your interface. It may contain any styles and scripts.
+The library is **modular** and you can include only what you need
 
 ### Tools ###
 Sass tools include:
 
-- settings based on which the CSS library is generated.
-- mixins and functions. Most of them are needed to generate the library, but can also be used for UI creating.
+- settings based on which the everything works 
+- mixins and functions with which you can generate utilities and write styles
 
-Most modules use existing MLUT Sass tools, but some may contain new ones or entirely consist of them.
+### Addons ###
+Addons may contains any tools, utilities and styles. In the `core/utils/init.scss` module implemented a method to work with sets of utilities from addons. Addons now at the **preview** stage and in the future, may be moved to separate packages
 
 ## Getting Started ##
-There are 2 ways to start using MLUT:
+There are 2 ways to start using Mlut:
 
-- assembled dist
-- developer toolkit
+- assembled distributive
+- toolkit
 
 ### Installation ###
-
-#### Git ####
-```
-git clone https://github.com/mr150/mlut.git
-```
 
 #### NPM ####
 ```
@@ -58,46 +58,84 @@ npm i mlut -D
 ```html
 <link href="https://unpkg.com/mlut@latest/dist/css/mlut.min.css" rel="stylesheet">
 ```
-```html
-<script src="https://unpkg.com/mlut@latest/dist/js/mlut.min.js"></script>
-```
-
-### Download ###
-Download assembled files: [CSS](https://unpkg.com/mlut@latest/dist/css/mlut.min.css), [JS](https://unpkg.com/mlut@latest/dist/js/mlut.min.js)
 
 ### Usage ###
 
 #### Distributive ####
 
-You can get assembled MLUT code and include it to your project. There are some ways to get a distributive.
+You can get assembled Mlut code and include it to your project. There are some ways to get a distributive.
 
 - just plug in with CDN
-- if used `git clone`, files are located in the `dist/` folder
 - if used `npm`, files are in `node_modules/mlut/dist/`
 
 Add the files to your page like here:
 ```html
 <link href="css/mlut.min.css" rel="stylesheet">
-<script src="js/mlut.min.js"></script>
 ```
-And just add MLUT classes to markup:
+And just add classes to markup:
 ```html
-<div class="row D-f">
-	<div class="row__col W3c_md">
+<div class="D-g Gtc-t3">
+	<div class="Bd P2su">
 		<h3>Simple text</h3>
 ```
 
 #### Toolkit ####
-To use all MLUT features you need an assembly. There are 3 ways:
+To use all Mlut features you need an assembly. You will need to install a package via NPM and:
 
-- Use [MLUT project template](https://github.com/mr150/mlut-project)
-- Use [npm](#npm), import tools from `node_modules/mlut/src/` and setup assembly based on [technologies list](https://mr150.github.io/mlut/)
-- [Clone](#git) this repo and use configured assembly from it
+- [Dart Sass](https://github.com/sass/sass)
+- CSS minifier or PostCSS plugin that can group media queries. For example: [CSSO](https://github.com/css/csso) or [this](https://github.com/SassNinja/postcss-combine-media-query) plugin
+- [PurgeCSS](https://github.com/FullHuman/purgecss) is recommended for removing unused CSS
 
-Further instructions see [here](https://mr150.github.io/mlut/section-start.html#kssref-start-usage)
+Once the assembly is configured, just import Mlut to your stylesheet, and configure it as you need:
+```scss
+@use '../../node_modules/mlut' as ml with (
+	$su-cf: 5,
+	$breakpoints: (
+		'xxl': 1400px
+	),
+	$colors: (
+		'red0': #f20,
+	),
+	$utils: (
+		'^_D': ('', 'n', 'f'),
+	),
+);
+```
+Also now you can use Sass tools for writing CSS manually:
+```scss
+.my-card {
+	display: block;
+
+	@include ml.apply(
+		'P2su Fns1r'
+	);
+
+	@include ml.bp('md') {
+		font-size: calc(ml.px2rem(20px) + 1vw);
+	}
+}
+```
+Probably you want to set the Sass [load path](https://sass-lang.com/documentation/js-api/interfaces/LegacyFileOptions#includePaths) for easier import:
+```scss
+@use 'mlut' as ml with (
+```
 
 ## Documentation ##
 Available [here](https://mr150.github.io/mlut/) or can be run locally. Documentation is included in this repo and is generated using [KSS-node](https://github.com/kss-node/kss-node) from the comments in the sources.
+
+## What's next? ##
+- complete the documentation and add more examples
+- more utilities
+- JIT mode
+- first class CSS functions in utils values
+- and much more!
+
+## Acknowledgement ##
+- [CSS](https://www.w3.org/Style/CSS/)
+- [Emmet](https://github.com/emmetio)
+- [ACSS](https://acss.io/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Tachyons](https://tachyons.io/)
 
 ## License ##
 MIT
