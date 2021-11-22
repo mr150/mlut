@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>MLUT documentation</title>
+  <title>Mlut documentation</title>
 
   <meta name="description" content=""/>
   <meta name="generator" content="kss-node"/>
@@ -11,13 +11,14 @@
   <link rel="stylesheet" href="kss-assets/kss.css"/>
   <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
+<link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
 </head>
 <body id="kss-node" class="kss-fullscreen-mode">
 
 <div class="kss-sidebar kss-style">
   <header class="kss-header">
-    <h1 class="kss-doc-title">MLUT documentation</h1>
+    <h1 class="kss-doc-title">Mlut documentation</h1>
   </header>
   <nav class="kss-nav" aria-label="Style Guide">
     <ul class="kss-nav__menu">
@@ -38,38 +39,43 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-blocks.html">
-          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Core blocks</span>
+        <a class="kss-nav__menu-link" href="section-core-helpers.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Core helpers</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-utils.html">
-          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        <a class="kss-nav__menu-link" href="section-general_reference.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">General reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-utils-reference.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Utils reference</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-core-styles.html">
-          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core styles</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-scripts.html">
-          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        <a class="kss-nav__menu-link" href="section-how_to.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">How to</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-sass-tools.html">
-          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass tools</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-sass_modules.html">
-          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Sass modules</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-examples.html">
-          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+          <span class="kss-nav__ref">10</span><span class="kss-nav__name">Examples</span>
         </a>
       </li>
     </ul>
@@ -84,7 +90,7 @@
         <h3 class="kss-title kss-title--level-3">
           <a class="kss-title__permalink" href="#kssref-examples-other-responsive_iframe">
             <span class="kss-title__ref">
-              9.3.2
+              10.1.1
               <span class="kss-title__permalink-hash">
                   #examples.other.responsive_iframe
               </span>
@@ -125,7 +131,7 @@
           </p>
 
           <div class="kss-description">
-            <p>Responsive <code>iframe</code> with <a href="section-core-blocks.html#kssref-core-blocks-ratio-block">ratio-block</a>. Width is set for example. Use modifiers to change the aspect ratio.</p>
+            <p>Responsive <code>iframe</code> with <a href="section-core-helpers.html#kssref-core-helpers-ratio-box">ratio-box</a>. Width is set for example. Use modifiers to change the aspect ratio.</p>
 
           </div>
 
@@ -139,8 +145,8 @@
 
 
           <div class="kss-modifier__example">
-            <div class="ratio-block W7c_md">
-	<iframe class="ratio-block__content" src="https://www.youtube.com/embed/jNQXAC9IVRw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="ratio-box md_W7gc">
+	<iframe src="https://www.youtube.com/embed/jNQXAC9IVRw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
             <div class="kss-modifier__example-footer"></div>
@@ -150,16 +156,16 @@
 
           <details class="kss-markup kss-style">
             <summary>
-                Markup: <code>../docs/examples/core-blocks/ratio-block/iframe.html</code>
+                Markup: <code>../examples/core-helpers/ratio-block/iframe.html</code>
             </summary>
-            <pre class="hljs"><code class="language-handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ratio-block W7c_md"</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ratio-block__content"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://www.youtube.com/embed/jNQXAC9IVRw"</span> <span class="hljs-attr">frameborder</span>=<span class="hljs-string">"0"</span> <span class="hljs-attr">allow</span>=<span class="hljs-string">"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"</span> <span class="hljs-attr">allowfullscreen</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span>
+            <pre class="hljs"><code class="language-handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ratio-box md_W7gc"</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://www.youtube.com/embed/jNQXAC9IVRw"</span> <span class="hljs-attr">frameborder</span>=<span class="hljs-string">"0"</span> <span class="hljs-attr">allow</span>=<span class="hljs-string">"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"</span> <span class="hljs-attr">allowfullscreen</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </span></code></pre>
           </details>
 
         <div class="kss-source kss-style">
-          Source: <code>../src/sass/core/blocks/ratio-block.scss</code>, line 24
+          Source: <code>../src/core/helpers/ratio-box.scss</code>, line 18
         </div>
 
     </div>

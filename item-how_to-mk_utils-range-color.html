@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Mlut documentation</title>
+
+  <meta name="description" content=""/>
+  <meta name="generator" content="kss-node"/>
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="kss-assets/kss.css"/>
+  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+<link rel="stylesheet" href="kss-assets/test.css"/>
+<link rel="stylesheet" href="kss-assets/generate.min.css"/>
+
+</head>
+<body id="kss-node" class="kss-fullscreen-mode">
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">Mlut documentation</h1>
+  </header>
+  <nav class="kss-nav" aria-label="Style Guide">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-start.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Getting started</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-concepts.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Basic concepts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-how_to.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">How to</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-styles.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core styles</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-helpers.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core helpers</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-utils-reference.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Utils reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-general_reference.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">General reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass-tools.html">
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass tools</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-addons.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Addons</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<main class="kss-main" aria-label="Content">
+  <article>
+
+    <div id="kssref-how_to-mk_utils-range-color" class="kss-section kss-section--depth-4 is-fullscreen">
+
+      <div class="kss-style">
+        <h4 class="kss-title kss-title--level-4">
+          <a class="kss-title__permalink" href="#kssref-how_to-mk_utils-range-color">
+            <span class="kss-title__ref">
+              3.1.5.1
+              <span class="kss-title__permalink-hash">
+                  #how_to.mk_utils.range.color
+              </span>
+            </span>
+            Color
+          </a>
+        </h4>
+
+
+          <div class="kss-description">
+            <p>May consist of three or four arguments. General form: <br><code>[$colors-list, $shades, $step, $function: 'adjust']</code>.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@include</span> ml.mk-util(<span class="hljs-string">'C'</span>, (
+	[<span class="hljs-string">'prm0'</span>, <span class="hljs-string">'2_h StOl'</span>, (<span class="hljs-string">'alpha'</span>: <span class="hljs-number">0.2</span>, <span class="hljs-string">'green'</span>: <span class="hljs-number">30</span>)],
+));
+
+<span class="hljs-comment">// CSS</span>
+<span class="hljs-selector-class">.C-prm0_h</span><span class="hljs-selector-pseudo">:hover</span> {
+	<span class="hljs-attribute">color</span>: <span class="hljs-number">#c06</span>;
+}
+
+<span class="hljs-selector-class">.C-prm0</span>\*80p_h<span class="hljs-selector-pseudo">:hover</span> {
+	<span class="hljs-attribute">color</span>: rgba(<span class="hljs-number">204</span>, <span class="hljs-number">0</span>, <span class="hljs-number">102</span>, <span class="hljs-number">0.8</span>);
+}
+
+<span class="hljs-selector-class">.C-prm50_h</span><span class="hljs-selector-pseudo">:hover</span> {
+	<span class="hljs-attribute">color</span>: <span class="hljs-number">#cc1e66</span>;
+}
+
+<span class="hljs-selector-class">.C-prm50</span>\*80p_h<span class="hljs-selector-pseudo">:hover</span> {
+	<span class="hljs-attribute">color</span>: rgba(<span class="hljs-number">204</span>, <span class="hljs-number">30</span>, <span class="hljs-number">102</span>, <span class="hljs-number">0.8</span>);
+}
+</code></pre>
+
+          </div>
+
+
+          <div class="kss-parameters__title">Parameters:</div>
+          <ul class="kss-parameters">
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$colors-list</code></div>
+              <div class="kss-parameters__description">
+                In the color list, you can specify: <ul><li>in advance declared color <li>hex color <li> global keyword that contains color <li> CSS variable
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$shades</code></div>
+              <div class="kss-parameters__description">
+                the number of shades to generate. <em>Note</em> that alpha shades are generated separately from the other shades. Components syntax is allowed
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$step</code></div>
+              <div class="kss-parameters__description">
+                map with arguments for a function, with which the shades is generated. If the <code>red</code>, <code>green</code> and <code>blue</code> arguments have the same value, then you can specify one <code>rgb</code> argument. In <code>alpha</code> you can specify CSS Variable.
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$function</code></div>
+              <div class="kss-parameters__description">
+                a function that is used to generate a shades. You can specify the name of the function from the <code>sass:color</code> module, or the custom function with <a href="https://www.sass-lang.com/documentation/modules/meta#get-function">meta.get-function()</a>
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>&#x27;adjust&#x27;</code>
+                  </div>
+              </div>
+            </li>
+          </ul>
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>content/main.css</code>, line 968
+        </div>
+
+    </div>
+</article>
+</main>
+
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
+<script src="kss-assets/mlut.min.js"></script>
+
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>

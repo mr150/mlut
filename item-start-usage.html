@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>MLUT documentation</title>
+  <title>Mlut documentation</title>
 
   <meta name="description" content=""/>
   <meta name="generator" content="kss-node"/>
@@ -11,13 +11,14 @@
   <link rel="stylesheet" href="kss-assets/kss.css"/>
   <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
+<link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
 </head>
 <body id="kss-node" class="kss-fullscreen-mode">
 
 <div class="kss-sidebar kss-style">
   <header class="kss-header">
-    <h1 class="kss-doc-title">MLUT documentation</h1>
+    <h1 class="kss-doc-title">Mlut documentation</h1>
   </header>
   <nav class="kss-nav" aria-label="Style Guide">
     <ul class="kss-nav__menu">
@@ -38,38 +39,38 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-blocks.html">
-          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Core blocks</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-utils.html">
-          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        <a class="kss-nav__menu-link" href="section-how_to.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">How to</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-core-styles.html">
-          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core styles</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-scripts.html">
-          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        <a class="kss-nav__menu-link" href="section-core-helpers.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core helpers</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-utils-reference.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Utils reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-general_reference.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">General reference</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-sass-tools.html">
-          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass tools</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-sass_modules.html">
-          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-examples.html">
-          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+        <a class="kss-nav__menu-link" href="section-addons.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Addons</span>
         </a>
       </li>
     </ul>
@@ -103,57 +104,55 @@
 <pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1"</span>&gt;</span>
 </code></pre>
 <h3>Distributive</h3>
-<p>You can get assembled MLUT code and include it to your project. There are some ways to get a distributive.</p>
+<p>You can get assembled Mlut code and include it to your project. There are some ways to get a distributive.</p>
 <ul>
 <li>just plug in with CDN</li>
-<li>if used <code>git clone</code>, files are located in the <code>dist/</code> folder</li>
 <li>if used <code>npm</code>, files are in <code>node_modules/mlut/dist/</code></li>
 </ul>
 <p>Add the file to your page like here:</p>
 <pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"css/mlut.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"js/mlut.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 </code></pre>
-<p>And just add MLUT classes to markup:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row D-f"</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W3c_md"</span>&gt;</span>
+<p>And just add Mlut classes to markup:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"D-g Gtc-t3"</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"Bd P2su"</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Simple text<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 </code></pre>
-<p>Try <a href="section-examples.html">examples</a> with ready HTML.</p>
 <h3>Toolkit</h3>
-<p>To use all MLUT features you need an assembly. There are 3 ways:</p>
+<p>To use all Mlut features you need an assembly. You will need to install a package via NPM and:</p>
 <ul>
-<li>Use <a href="https://github.com/mr150/mlut-project">MLUT project template</a></li>
-<li>Use <a href="#kssref-start-install">npm</a>, import tools from <code>node_modules/mlut/src/</code> and setup assembly based on <a href="./">technologies list</a></li>
-<li><a href="#kssref-start-install">Clone</a> MLUT repo and use configured assembly from it</li>
+<li><a href="https://github.com/sass/sass">Dart Sass</a></li>
+<li>CSS minifier or PostCSS plugin that can group media queries. For example: <a href="https://github.com/css/csso">CSSO</a> or <a href="https://github.com/SassNinja/postcss-combine-media-query">this</a> plugin</li>
+<li><a href="https://github.com/FullHuman/purgecss">PurgeCSS</a> is recommended for removing unused CSS</li>
 </ul>
-<h4>Assembly</h4>
-<p>If you cloned git repo:</p>
-<pre class="hljs"><code class="language-">npm i
+<p>Once the assembly is configured, just import Mlut to your stylesheet, and configure it as you need:</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'../../node_modules/mlut'</span> as ml with (
+	<span class="hljs-variable">$su-cf</span>: <span class="hljs-number">5</span>,
+	<span class="hljs-variable">$breakpoints</span>: (
+		<span class="hljs-string">'xxl'</span>: <span class="hljs-number">1400px</span>
+	),
+	<span class="hljs-variable">$colors</span>: (
+		<span class="hljs-string">'red0'</span>: <span class="hljs-number">#f20</span>,
+	),
+	<span class="hljs-variable">$utils</span>: (
+		<span class="hljs-string">'^_D'</span>: (<span class="hljs-string">''</span>, <span class="hljs-string">'n'</span>, <span class="hljs-string">'f'</span>),
+	),
+);
 </code></pre>
-<p>Run dev server with live reload, code linting and documentation building:</p>
-<pre class="hljs"><code class="language-">npm run dev
-</code></pre>
-<p>or</p>
-<pre class="hljs"><code class="language-">gulp
-</code></pre>
-<p>Build without dev server:</p>
-<pre class="hljs"><code class="language-">npm run build
-</code></pre>
-<h4>Styles</h4>
-<p>Once the assembly is configured, import sass tools and settings to your <code>style.scss</code></p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@import</span> <span class="hljs-string">"tools/settings"</span>;
-<span class="hljs-keyword">@import</span> <span class="hljs-string">"tools/functions"</span>;
-<span class="hljs-keyword">@import</span> <span class="hljs-string">"tools/mixins"</span>;
-</code></pre>
-<p>Then you can import blocks and utilities how it is done in the <a href="https://github.com/mr150/mlut/blob/master/src/sass/mlut.scss">src/sass/mlut.scss</a> to get the standard build. Or you can import only what you need:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@import</span> <span class="hljs-string">"core/blocks/wrapper"</span>;
-<span class="hljs-keyword">@import</span> <span class="hljs-string">"core/utils/display"</span>;
+<p>Also now you can use Sass tools for writing CSS manually:</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.my-card</span> {
+	<span class="hljs-attribute">display</span>: block;
 
-<span class="hljs-keyword">@include</span> mlu-bpm(<span class="hljs-string">"md"</span>) {
-	<span class="hljs-selector-class">.inp--common</span> {
-		<span class="hljs-attribute">padding</span>: mlu-px2em(<span class="hljs-number">16px</span>) <span class="hljs-number">16px</span>;
+	<span class="hljs-keyword">@include</span> ml.apply(
+		<span class="hljs-string">'P2su Fns1r'</span>
+	);
+
+	<span class="hljs-keyword">@include</span> ml.bp(<span class="hljs-string">'md'</span>) {
+		<span class="hljs-attribute">font-size</span>: calc(ml.px2rem(<span class="hljs-number">20px</span>) + <span class="hljs-number">1vw</span>);
 	}
 }
+</code></pre>
+<p>Probably you want to set the Sass <a href="https://sass-lang.com/documentation/js-api/interfaces/LegacyFileOptions#includePaths">load path</a> for easier import:</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> as ml with (
 </code></pre>
 
           </div>
@@ -163,7 +162,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>../src/sass/tools/_settings.scss</code>, line 44
+          Source: <code>content/main.css</code>, line 32
         </div>
 
     </div>

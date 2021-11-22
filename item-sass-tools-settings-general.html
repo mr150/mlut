@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>MLUT documentation</title>
+  <title>Mlut documentation</title>
 
   <meta name="description" content=""/>
   <meta name="generator" content="kss-node"/>
@@ -11,13 +11,14 @@
   <link rel="stylesheet" href="kss-assets/kss.css"/>
   <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
+<link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
 </head>
 <body id="kss-node" class="kss-fullscreen-mode">
 
 <div class="kss-sidebar kss-style">
   <header class="kss-header">
-    <h1 class="kss-doc-title">MLUT documentation</h1>
+    <h1 class="kss-doc-title">Mlut documentation</h1>
   </header>
   <nav class="kss-nav" aria-label="Style Guide">
     <ul class="kss-nav__menu">
@@ -38,38 +39,38 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-blocks.html">
-          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Core blocks</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-utils.html">
-          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        <a class="kss-nav__menu-link" href="section-how_to.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">How to</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-core-styles.html">
-          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core styles</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-scripts.html">
-          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        <a class="kss-nav__menu-link" href="section-core-helpers.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core helpers</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-utils-reference.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Utils reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-general_reference.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">General reference</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-sass-tools.html">
-          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass tools</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-sass_modules.html">
-          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-examples.html">
-          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+        <a class="kss-nav__menu-link" href="section-addons.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Addons</span>
         </a>
       </li>
     </ul>
@@ -84,7 +85,7 @@
         <h3 class="kss-title kss-title--level-3">
           <a class="kss-title__permalink" href="#kssref-sass-tools-settings-general">
             <span class="kss-title__ref">
-              7.3.4
+              8.3.3
               <span class="kss-title__permalink-hash">
                   #sass-tools.settings.general
               </span>
@@ -103,7 +104,7 @@
           <div class="kss-parameters__title">Parameters:</div>
           <ul class="kss-parameters">
             <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>$MLU-BROWSER-FONT-SIZE</code></div>
+              <div class="kss-parameters__name"><code>$mlu-browser-font-size</code></div>
               <div class="kss-parameters__description">
                 font size for converting <a href="section-sass-tools.html#kssref-sass-tools-functions-px2rem">px to rem</a>. 16px used because is default font size in settings of most browsers.
                   <div class="kss-parameters__default-value">
@@ -130,35 +131,35 @@
               </div>
             </li>
             <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>$mlu-base-font-size</code></div>
-              <div class="kss-parameters__description">
-                base font size on website. Is used for <code>rems</code> fallback in <a href="section-core-blocks.html#kssref-core-blocks-row">row elements</a> and in <a href="section-sass-tools.html#kssref-sass-tools-functions-px2em">mlu-px2em</a> default font size.
-                  <div class="kss-parameters__default-value">
-                    Defaults to: <code>$MLU-BROWSER-FONT-SIZE</code>
-                  </div>
-              </div>
-            </li>
-            <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>$mlu-grid-default-gtr</code></div>
-              <div class="kss-parameters__description">
-                default gutter on large width screen. Used as fallback for <a href="section-core-styles.html#kssref-core-styles-css_vars">--mlu-gg</a>.
-                  <div class="kss-parameters__default-value">
-                    Defaults to: <code>16px</code>
-                  </div>
-              </div>
-            </li>
-            <li class="kss-parameters__item">
               <div class="kss-parameters__name"><code>$mlu-main-directions</code></div>
               <div class="kss-parameters__description">
-                Map with directions for css properties and values generation. The keys are the first letters of the directions, and the values are directions. <br> Example: <code>(&quot;t&quot;: top)</code>.
+                Map with directions for css properties and values generation. The keys are the first letters of the directions, and the values are directions. <br> Example: <code>('t': top)</code>.
               </div>
             </li>
             <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>$mlu-grid-gutter-fallback</code></div>
+              <div class="kss-parameters__name"><code>$is-test-env</code></div>
               <div class="kss-parameters__description">
-                Fallback for grid gutter's width if CSS <code>calc()</code> not supported
+                indicating the test environment
                   <div class="kss-parameters__default-value">
-                    Defaults to: <code>1.5%</code>
+                    Defaults to: <code>false</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$css-vars-fallback</code></div>
+              <div class="kss-parameters__description">
+                add fallback for values in <code>grid-gutters</code> units
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>true</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$ml-css-transition-time</code></div>
+              <div class="kss-parameters__description">
+                default <a href="section-core-utils.html#kssref-core-utils-anim">transition</a> duration.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>0.3s</code>
                   </div>
               </div>
             </li>
@@ -167,7 +168,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>../src/sass/tools/_settings.scss</code>, line 484
+          Source: <code>../src/tools/settings/base/_general.scss</code>, line 5
         </div>
 
     </div>

@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>MLUT documentation</title>
+  <title>Mlut documentation</title>
 
   <meta name="description" content=""/>
   <meta name="generator" content="kss-node"/>
@@ -11,13 +11,14 @@
   <link rel="stylesheet" href="kss-assets/kss.css"/>
   <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
+<link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
 </head>
 <body id="kss-node" class="kss-fullscreen-mode">
 
 <div class="kss-sidebar kss-style">
   <header class="kss-header">
-    <h1 class="kss-doc-title">MLUT documentation</h1>
+    <h1 class="kss-doc-title">Mlut documentation</h1>
   </header>
   <nav class="kss-nav" aria-label="Style Guide">
     <ul class="kss-nav__menu">
@@ -43,33 +44,38 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-utils.html">
-          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        <a class="kss-nav__menu-link" href="section-general_reference.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">General reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-utils-reference.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Utils reference</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-core-styles.html">
-          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core styles</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-scripts.html">
-          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        <a class="kss-nav__menu-link" href="section-how_to.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">How to</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-sass-tools.html">
-          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass tools</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-sass_modules.html">
-          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Sass modules</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-examples.html">
-          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+          <span class="kss-nav__ref">10</span><span class="kss-nav__name">Examples</span>
         </a>
       </li>
     </ul>
@@ -84,7 +90,7 @@
         <h2 class="kss-title kss-title--level-2">
           <a class="kss-title__permalink" href="#kssref-core-blocks-row">
             <span class="kss-title__ref">
-              3.5
+              3.4
               <span class="kss-title__permalink-hash">
                   #core-blocks.row
               </span>
@@ -126,14 +132,13 @@
 
           <div class="kss-description">
             <p>Block for creating layouts. Suitable for columns, cards and horizontal lists. By default, <code>inline-block</code> technology is used for layouts. Using <a href="section-core-utils.html#kssref-core-utils-bxz-d">D utility</a>, you can change the layout technology to flexbox.</p>
-<p>if the <a href="section-sass-tools.html#kssref-sass-tools-settings-flags">$MLU-FLAG-CSS-VARS</a> = 2, then the styles for correct work of layouts which using inline-blocks will be disabled.</p>
 <p>Parts of the layout within a <code>row</code> are created using the elements:</p>
 <ul>
 <li><a href="#kssref-core-blocks-row-row__col">row__col</a></li>
 <li><a href="#kssref-core-blocks-row-row__item">row__item</a></li>
 </ul>
 <p><code>Rows</code> can be put into each other an unlimited number of times.</p>
-<p><code>Row</code> contains CSS counter named <code>mlu-row-item</code>.</p>
+<p><code>Row</code> contains CSS counter named <code>ml.row-item</code>.</p>
 
           </div>
 
@@ -169,7 +174,7 @@
 
           <details class="kss-markup kss-style">
             <summary>
-                Markup: <code>../docs/examples/core-blocks/row/row.html</code>
+                Markup: <code>../examples/core-blocks/row/row.html</code>
             </summary>
             <pre class="hljs"><code class="language-handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
 	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W3c_md"</span>&gt;</span>
@@ -189,7 +194,7 @@
           </details>
 
         <div class="kss-source kss-style">
-          Source: <code>../src/sass/core/blocks/row.scss</code>, line 1
+          Source: <code>../src/core/blocks/row.scss</code>, line 3
         </div>
 
     </div>

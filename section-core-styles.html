@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>MLUT documentation</title>
+  <title>Mlut documentation</title>
 
   <meta name="description" content=""/>
   <meta name="generator" content="kss-node"/>
@@ -11,13 +11,14 @@
   <link rel="stylesheet" href="kss-assets/kss.css"/>
   <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
+<link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
 </head>
 <body id="kss-node" >
 
 <div class="kss-sidebar kss-style">
   <header class="kss-header">
-    <h1 class="kss-doc-title">MLUT documentation</h1>
+    <h1 class="kss-doc-title">Mlut documentation</h1>
   </header>
   <nav class="kss-nav" aria-label="Style Guide">
     <ul class="kss-nav__menu">
@@ -38,58 +39,52 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-blocks.html">
-          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Core blocks</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-utils.html">
-          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        <a class="kss-nav__menu-link" href="section-how_to.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">How to</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-core-styles.html">
-          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core styles</span>
         </a>
             <ul class="kss-nav__menu-child">
               <li class="kss-nav__menu-item">
                 <a class="kss-nav__menu-link" href="section-core-styles.html#kssref-core-styles-css_vars">
-                  <span class="kss-nav__ref ">5.1</span
+                  <span class="kss-nav__ref ">4.1</span
                   ><span class="kss-nav__name">CSS variables</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a class="kss-nav__menu-link" href="section-core-styles.html#kssref-core-styles-normalize">
-                  <span class="kss-nav__ref ">5.2</span
-                  ><span class="kss-nav__name">Normalize</span>
-                </a>
-              </li>
-              <li class="kss-nav__menu-item">
-                <a class="kss-nav__menu-link" href="section-core-styles.html#kssref-core-styles-system_font">
-                  <span class="kss-nav__ref ">5.3</span
-                  ><span class="kss-nav__name">System font</span>
+                <a class="kss-nav__menu-link" href="section-core-styles.html#kssref-core-styles-generic">
+                  <span class="kss-nav__ref ">4.2</span
+                  ><span class="kss-nav__name">Generic</span>
                 </a>
               </li>
             </ul>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-scripts.html">
-          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        <a class="kss-nav__menu-link" href="section-core-helpers.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core helpers</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-utils-reference.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Utils reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-general_reference.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">General reference</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-sass-tools.html">
-          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass tools</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-sass_modules.html">
-          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-examples.html">
-          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+        <a class="kss-nav__menu-link" href="section-addons.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Addons</span>
         </a>
       </li>
     </ul>
@@ -104,7 +99,7 @@
         <h1 class="kss-title kss-title--level-1">
           <a class="kss-title__permalink" href="#kssref-core-styles">
             <span class="kss-title__ref">
-              5
+              4
               <span class="kss-title__permalink-hash">
                   #core-styles
               </span>
@@ -115,7 +110,7 @@
 
 
           <div class="kss-description">
-            <p>You can find their in <code>sass/core/</code>.</p>
+            <p>Base styles for Mlut library.</p>
 
           </div>
 
@@ -124,7 +119,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>../src/sass/tools/_settings.scss</code>, line 382
+          Source: <code>content/main.css</code>, line 1078
         </div>
 
     </div>
@@ -134,7 +129,7 @@
         <h2 class="kss-title kss-title--level-2">
           <a class="kss-title__permalink" href="#kssref-core-styles-css_vars">
             <span class="kss-title__ref">
-              5.1
+              4.1
               <span class="kss-title__permalink-hash">
                   #core-styles.css_vars
               </span>
@@ -145,12 +140,7 @@
 
 
           <div class="kss-description">
-            <p>Global CSS custom properties which used in MLUT. Their names are stored in variables and can be changed in <a href="section-sass-tools.html#kssref-sass-tools-settings-css_vars-names">settings</a>. Names of such variables correspond to the original names of custom properties. Global custom properties names begin with the <code>mlu</code> prefix.</p>
-<p>The values and meaning of many custom properties correspond to the <a href="section-sass-tools.html#kssref-sass-tools-settings">SASS settings</a> of MLUT core. But unlike them, custom properties can be changed dynamically without recompiling.</p>
-<p>Custom properties are used as a progressive enhancement. By default, fallback is enabled for browsers that do not support them. Generation of custom properties is controlled by <a href="section-sass-tools.html#kssref-sass-tools-settings-flags">$MLU-FLAG-CSS-VARS</a>.</p>
-<p>Remember that custom properties do not work in all browsers. This means that part of the settings, such as dynamically changing the gutters and the number of columns in the grid system, also does not work everywhere.</p>
-<p>In some blocks and utilities, custom properties are also used. Look for info about them in the description of the corresponding block or utility.</p>
-<p>You can find global CSS variables in <code>sass/core/variables.scss</code>.</p>
+            <p>Global CSS custom properties which used in Mlut. Their names are stored in variables and can be changed in <a href="section-sass-tools.html#kssref-sass-tools-settings-css_vars-names">settings</a>. Names of such variables correspond to the original names of custom properties. Global custom properties names begin with the <code>ml</code> prefix.</p>
 
           </div>
 
@@ -158,16 +148,16 @@
           <div class="kss-parameters__title">Parameters:</div>
           <ul class="kss-parameters">
             <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>--mlu-gg</code></div>
+              <div class="kss-parameters__name"><code>--ml-gg</code></div>
               <div class="kss-parameters__description">
-                <a href="section-concepts.html#kssref-concepts-grid">grid gutter</a> in <code>px</code>. Value sets <a href="section-sass-tools.html#kssref-sass-tools-settings-grid-gutters">here</a>. Fallback is <a href="section-sass-tools.html#kssref-sass-tools-settings-general">$mlu-grid-default-gtr</a>.
+                <a href="section-concepts.html#kssref-concepts-grid">grid gutter</a> in <code>px</code>. Value sets <a href="section-sass-tools.html#kssref-sass-tools-settings-grid-gutters">here</a>. Fallback is <a href="section-sass-tools.html#kssref-sass-tools-settings-general">ml.$grid-default-gtr</a>.
                   <div class="kss-parameters__default-value">
                     Defaults to: <code>12px</code>
                   </div>
               </div>
             </li>
             <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>--mlu-gg-rem</code></div>
+              <div class="kss-parameters__name"><code>--ml-gg-rem</code></div>
               <div class="kss-parameters__description">
                 grid gutter in <code>rem</code>.
                   <div class="kss-parameters__default-value">
@@ -176,11 +166,11 @@
               </div>
             </li>
             <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>--mlu-grid-cols</code></div>
+              <div class="kss-parameters__name"><code>--ml-grid-cols</code></div>
               <div class="kss-parameters__description">
-                number of columns in the <a href="section-concepts.html#kssref-concepts-grid">grid system</a>. Sets by <a href="section-sass-tools.html#kssref-sass-tools-settings-grid">$mlu-grid-cols-xs</a> and changes on breakpoints according to the <a href="section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints">settings</a>.
+                number of columns in the grid system. Sets by <a href="section-sass-tools.html#kssref-sass-tools-settings-grid">$gs-columns</a>. Available only with <code>$legacy-grid-system</code> flag enabled
                   <div class="kss-parameters__default-value">
-                    Defaults to: <code>4</code>
+                    Defaults to: <code>12</code>
                   </div>
               </div>
             </li>
@@ -189,28 +179,28 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>../src/sass/core/variables.scss</code>, line 1
+          Source: <code>../src/core/styles/variables.scss</code>, line 3
         </div>
 
     </section>
-    <section id="kssref-core-styles-normalize" class="kss-section kss-section--depth-2 ">
+    <section id="kssref-core-styles-generic" class="kss-section kss-section--depth-2 ">
 
       <div class="kss-style">
         <h2 class="kss-title kss-title--level-2">
-          <a class="kss-title__permalink" href="#kssref-core-styles-normalize">
+          <a class="kss-title__permalink" href="#kssref-core-styles-generic">
             <span class="kss-title__ref">
-              5.2
+              4.2
               <span class="kss-title__permalink-hash">
-                  #core-styles.normalize
+                  #core-styles.generic
               </span>
             </span>
-            Normalize
+            Generic
           </a>
         </h2>
 
 
           <div class="kss-description">
-            <p>Simple css normalization that correcting old browsers bugs and not affecting other styles.</p>
+            <p>Generic CSS that contains <code>box-sizing</code>, reset, browser bugs fixes etc. You can configure it with settings.</p>
 
           </div>
 
@@ -219,42 +209,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>../src/sass/core/normalize.scss</code>, line 1
-        </div>
-
-    </section>
-    <section id="kssref-core-styles-system_font" class="kss-section kss-section--depth-2 ">
-
-      <div class="kss-style">
-        <h2 class="kss-title kss-title--level-2">
-          <a class="kss-title__permalink" href="#kssref-core-styles-system_font">
-            <span class="kss-title__ref">
-              5.3
-              <span class="kss-title__permalink-hash">
-                  #core-styles.system_font
-              </span>
-            </span>
-            System font
-          </a>
-        </h2>
-
-
-          <div class="kss-description">
-            <p>This is a directive <code>@font-face</code> that creates a font called <code>system-font</code>.
-System-font set native font family on user's OS.
-Use it for safety in <code>font-family</code> with custom web font:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-attribute">font-family</span>: <span class="hljs-string">"PT Sans"</span>, system-font, Arial, sans-serif;
-</code></pre>
-<p>It <em>turned off</em> in default MLUT distributive.</p>
-
-          </div>
-
-
-      </div>
-
-
-        <div class="kss-source kss-style">
-          Source: <code>../src/sass/core/system-font.scss</code>, line 1
+          Source: <code>../src/core/styles/generic.scss</code>, line 5
         </div>
 
     </section>

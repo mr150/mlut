@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>MLUT documentation</title>
+  <title>Mlut documentation</title>
 
   <meta name="description" content=""/>
   <meta name="generator" content="kss-node"/>
@@ -11,13 +11,14 @@
   <link rel="stylesheet" href="kss-assets/kss.css"/>
   <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
+<link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
 </head>
 <body id="kss-node" class="kss-fullscreen-mode">
 
 <div class="kss-sidebar kss-style">
   <header class="kss-header">
-    <h1 class="kss-doc-title">MLUT documentation</h1>
+    <h1 class="kss-doc-title">Mlut documentation</h1>
   </header>
   <nav class="kss-nav" aria-label="Style Guide">
     <ul class="kss-nav__menu">
@@ -43,33 +44,38 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-utils.html">
-          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        <a class="kss-nav__menu-link" href="section-general_reference.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">General reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-utils-reference.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Utils reference</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-core-styles.html">
-          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core styles</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-scripts.html">
-          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        <a class="kss-nav__menu-link" href="section-how_to.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">How to</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-sass-tools.html">
-          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass tools</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-sass_modules.html">
-          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Sass modules</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-examples.html">
-          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+          <span class="kss-nav__ref">10</span><span class="kss-nav__name">Examples</span>
         </a>
       </li>
     </ul>
@@ -84,7 +90,7 @@
         <h3 class="kss-title kss-title--level-3">
           <a class="kss-title__permalink" href="#kssref-core-blocks-row-row__col">
             <span class="kss-title__ref">
-              3.5.1
+              3.4.1
               <span class="kss-title__permalink-hash">
                   #core-blocks.row.row__col
               </span>
@@ -130,20 +136,19 @@
 If <code>var()</code> is not supported by the browser, then fallback are provided:</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-attribute">margin-right</span>: <span class="hljs-number">16px</span>;
 <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">16px</span>;
-<span class="hljs-attribute">margin-right</span>: var(--mlu-gg);
-<span class="hljs-attribute">margin-left</span>: var(--mlu-gg);
+<span class="hljs-attribute">margin-right</span>: var(--ml.gg);
+<span class="hljs-attribute">margin-left</span>: var(--ml.gg);
 <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">2rem</span>;
-<span class="hljs-attribute">margin-bottom</span>: calc(var(--mlu-gg-rem) * <span class="hljs-number">2</span>);
+<span class="hljs-attribute">margin-bottom</span>: calc(var(--ml.gg-rem) * <span class="hljs-number">2</span>);
 </code></pre>
-<p>similar fallback used in the <a href="#kssref-core-blocks-wrapper">wrapper</a> for fields and everywhere for gutters if <a href="section-sass-tools.html#kssref-sass-tools-settings-flags">$MLU-FLAG-CSS-VARS</a> = 1.</p>
-<p>The size of gutter fallback you can find in the <a href="section-sass-tools.html#kssref-sass-tools-settings-general">settings</a> in <code>$mlu-grid-default-gtr</code>.</p>
+<p>The size of gutter fallback you can find in the <a href="section-sass-tools.html#kssref-sass-tools-settings-general">settings</a> in <code>ml.$grid-default-gtr</code>.</p>
 <p>Column width is set using <a href="section-core-utils.html#kssref-core-utils-bxz-w">W utility</a>. See example <a href="#kssref-core-blocks-row">above</a>. The formulas for calculating the width and offset for the column are stored in the custom properties. In <code>--gc-rule</code> for W and <code>--mgc-rule</code> for <a href="section-core-utils.html#kssref-core-utils-margin-ml">Ml utility</a>. These formulas:</p>
-<pre class="hljs"><code class="language-scss">--gc-rule: calc((var(--gc) - <span class="hljs-number">0.0001</span>) / var(--mlu-grid-cols) * <span class="hljs-number">100%</span> - var(--gc-diff) * <span class="hljs-number">2</span>);
---mgc-rule: calc((var(--mgc) - <span class="hljs-number">0.0001</span>) / var(--mlu-grid-cols) * <span class="hljs-number">100%</span> + var(--gc-diff));
+<pre class="hljs"><code class="language-scss">--gc-rule: calc((var(--gc) - <span class="hljs-number">0.0001</span>) / var(--ml.grid-cols) * <span class="hljs-number">100%</span> - var(--gc-diff) * <span class="hljs-number">2</span>);
+--mgc-rule: calc((var(--mgc) - <span class="hljs-number">0.0001</span>) / var(--ml.grid-cols) * <span class="hljs-number">100%</span> + var(--gc-diff));
 </code></pre>
 <p><code>--gc</code> or <code>--mgc</code> is the value of the width or offset in the grid columns. This is a custom property of the utility.<br>
 <code>(var(--gc) - 0.0001)</code> - fix for calc() <a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/15637241/">bug</a> in Edge 16-18.<br>
-<code>--mlu-grid-cols</code> - the number of columns in the grid system. This is a <a href="section-core-styles.html#kssref-core-styles-css_vars">global</a> custom property that can be changed on any DOM node.<br>
+<code>--ml.grid-cols</code> - the number of columns in the grid system. This is a <a href="section-core-styles.html#kssref-core-styles-css_vars">global</a> custom property that can be changed on any DOM node.<br>
 <code>--gc-diff</code> - variable is equal to the gutter if the gutter at the columns is created using margin. In <code>row__col</code> is equal 1gg.<br>
 Some of these variables can be changed using <a href="section-core-utils.html#kssref-core-utils-custom">custom utilities</a>.</p>
 <p>You can create nested layouts with a mix of <code>row</code> and <code>row__col</code> on the same DOM node. If you don't need double fields in the nested row, use the mix with the <code>row__item</code>. See example below.</p>
@@ -208,7 +213,7 @@ Some of these variables can be changed using <a href="section-core-utils.html#ks
 
           <details class="kss-markup kss-style">
             <summary>
-                Markup: <code>../docs/examples/core-blocks/row/row__col.html</code>
+                Markup: <code>../examples/core-blocks/row/row__col.html</code>
             </summary>
             <pre class="hljs"><code class="language-handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
 	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col row test-row W4c_sm W9c_md"</span>&gt;</span>
@@ -253,7 +258,7 @@ Some of these variables can be changed using <a href="section-core-utils.html#ks
           </details>
 
         <div class="kss-source kss-style">
-          Source: <code>../src/sass/core/blocks/row.scss</code>, line 21
+          Source: <code>../src/core/blocks/row.scss</code>, line 21
         </div>
 
     </div>

@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>MLUT documentation</title>
+  <title>Mlut documentation</title>
 
   <meta name="description" content=""/>
   <meta name="generator" content="kss-node"/>
@@ -11,13 +11,14 @@
   <link rel="stylesheet" href="kss-assets/kss.css"/>
   <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
+<link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
 </head>
 <body id="kss-node" >
 
 <div class="kss-sidebar kss-style">
   <header class="kss-header">
-    <h1 class="kss-doc-title">MLUT documentation</h1>
+    <h1 class="kss-doc-title">Mlut documentation</h1>
   </header>
   <nav class="kss-nav" aria-label="Style Guide">
     <ul class="kss-nav__menu">
@@ -38,38 +39,38 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-blocks.html">
-          <span class="kss-nav__ref">3</span><span class="kss-nav__name">Core blocks</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-utils.html">
-          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core utilities</span>
+        <a class="kss-nav__menu-link" href="section-how_to.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">How to</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-core-styles.html">
-          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core styles</span>
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core styles</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-scripts.html">
-          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Core scripts</span>
+        <a class="kss-nav__menu-link" href="section-core-helpers.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core helpers</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-utils-reference.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Utils reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-general_reference.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">General reference</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-sass-tools.html">
-          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass tools</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-sass_modules.html">
-          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass modules</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-examples.html">
-          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Examples</span>
+        <a class="kss-nav__menu-link" href="section-addons.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Addons</span>
         </a>
       </li>
     </ul>
@@ -79,78 +80,65 @@
   <article>
       <div id="kssref-0" class="kss-section kss-section--depth-0 kss-overview kss-style">
         <h1>My Little UI Toolkit</h1>
-<p>Atomic CSS based, modular and lightweight toolkit with progressive enhancement.</p>
+<p>Full-featured and hackable toolkit for writing standards-based Atomic CSS. Get almost all power of CSS in one utility.</p>
 <p><a href="https://travis-ci.com/mr150/mlut"><img src="https://travis-ci.com/mr150/mlut.svg?branch=master" alt="Build Status"></a>
 <a href="https://www.npmjs.com/package/mlut"><img src="https://img.shields.io/npm/v/mlut.svg" alt=""></a></p>
+<h2>Mission</h2>
+<ul>
+<li>Maximum realize the potential of the Atomic CSS methodology</li>
+<li>Destroy the myth that Atomic CSS for those who don't know or don't like CSS</li>
+</ul>
 <h2>Features</h2>
 <ul>
-<li>Strong naming conventions: <a href="https://github.com/emmetio">Emmet</a> abbreviations and BEM naming</li>
-<li>Lightweight: CSS core ~3.9KB, themes from 0.8KB</li>
-<li>Modular and easily extensible</li>
-<li>Designed with progressive enhancement</li>
-<li>Well customizable</li>
-<li>Advanced grid system with CSS custom properties</li>
-<li>Responsive and mobile first</li>
-<li>Reusable across projects</li>
-<li>Written in Sass and vanilla JS</li>
+<li>Strong naming convention: <a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-naming">one algorithm</a> for all. If you know CSS, you almost know Mlut</li>
+<li>Constructable and almost arbitrary <a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-values">values</a>, <a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states">states</a> and <a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-at_rules">at-rules</a> by design</li>
+<li>Fully customizable: change tokens, utils names and any settings</li>
+<li>Configuration with great DX. All in one config: add utils, states, change settings and more with few lines of code</li>
+<li>Easiest utilities generation: <a href="https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range">range</a> and <a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-util-components">components</a> syntaxes, utils <a href="https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-groups">groups</a>, <a href="https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-apply">top-level</a> <code>apply</code> and not only</li>
+<li>Well compatible with CSS conceptually. Designed for organic growing together with CSS.</li>
+<li>Easy to use in existing project</li>
+<li>Written in <a href="https://www.sass-lang.com/">Sass</a> and includes all its benefits</li>
 </ul>
 <h2>Structure</h2>
 <ul>
-<li>CSS library</li>
-<li>JS library (optional)</li>
 <li>Sass tools</li>
+<li>opt-in CSS library</li>
+<li>addons</li>
 </ul>
 <h3>Library</h3>
-<p>The library part of toolkit united in itself ideas from <a href="https://acss.io/">Atomic CSS</a> and <a href="https://bem.info/">BEM</a>. It consists of 2 layers:</p>
+<p>The library part of toolkit named <code>Core</code> and consists of:</p>
 <ul>
-<li>Core - all that can be used at any project. This layer contains BEM blocks, CSS utilities and simple optional scripts.</li>
-<li>Modules - themes, utilities sets and scripts, that can be reused in different projects.</li>
+<li>base styles - variables and generic CSS like reset, normalize etc.</li>
+<li>helpers - similar to utilities: the same universal, but more complex and can consist of several CSS rules</li>
+<li>utilities - such that can be used in any project, regardless of design: no colors, typography, etc. Theme utils you can find in addons</li>
 </ul>
-<p>In most projects, you will probably need to add another &quot;design&quot; layer that will be specific to your interface. It may contain any styles and scripts.</p>
+<p>The library is <strong>modular</strong> and you can include only what you need</p>
 <h3>Tools</h3>
 <p>Sass tools include:</p>
 <ul>
-<li>settings based on which the CSS library is generated.</li>
-<li>mixins and functions. Most of them are needed to generate the library, but can also be used for UI creating.</li>
+<li>settings based on which the everything works</li>
+<li>mixins and functions with which you can generate utilities and write styles</li>
 </ul>
-<p>Most modules use existing MLUT Sass tools, but some may contain new ones or entirely consist of them.</p>
-<h2>Technologies</h2>
+<h3>Addons</h3>
+<p>Addons may contains any tools, utilities and styles. In the <code>core/utils/init.scss</code> module implemented a method to work with sets of utilities from addons. Addons now at the <strong>preview</strong> stage and in the future, may be moved to separate packages</p>
+<h2>What's next?</h2>
 <ul>
-<li><a href="https://github.com/sass/libsass">LibSass</a></li>
+<li>complete the documentation and add more examples</li>
+<li>more utilities</li>
+<li>JIT mode</li>
+<li>first class CSS functions in utils values</li>
+<li>and much more!</li>
 </ul>
-<h3>Assembly</h3>
+<h2>Acknowledgement</h2>
 <ul>
-<li><a href="https://github.com/gulpjs/gulp">Gulp</a></li>
-<li><a href="https://github.com/jakubpawlowicz/clean-css">Clean-css</a></li>
-<li><a href="https://github.com/postcss/autoprefixer">Autoprefixer</a></li>
-<li><a href="https://github.com/Se7enSky/group-css-media-queries">group-css-media-queries</a></li>
-<li><a href="https://github.com/buildjs/rigger">Rigger</a></li>
-<li><a href="https://github.com/mishoo/UglifyJS2">UglifyJS</a></li>
+<li><a href="https://www.w3.org/Style/CSS/">CSS</a></li>
+<li><a href="https://github.com/emmetio">Emmet</a></li>
+<li><a href="https://acss.io/">ACSS</a></li>
+<li><a href="https://tailwindcss.com/">Tailwind CSS</a></li>
+<li><a href="https://tachyons.io/">Tachyons</a></li>
 </ul>
-<h3>Documentation and examples</h3>
-<ul>
-<li><a href="https://github.com/kss-node/kss-node">KSS-node</a></li>
-<li><a href="https://github.com/pugjs/pug">Pug</a></li>
-</ul>
-<h2>Supported browsers</h2>
-<p>Autoprefixer use <a href="https://github.com/mr150/mlut/blob/master/.browserslistrc">this</a> <code>browserslist</code> during assembly. Tested in last versions of modern browsers and some old:</p>
-<ul>
-<li>Desktop
-<ul>
-<li>Firefox - last, ESR</li>
-<li>Chrome</li>
-<li>Safari</li>
-<li>Edge</li>
-<li>IE9+ with progressive enhancement</li>
-</ul>
-</li>
-<li>Mobile
-<ul>
-<li>Android 4.4.4</li>
-<li>IOS</li>
-</ul>
-</li>
-</ul>
+<h2>License</h2>
+<p>MIT</p>
 
       </div>
 </article>
