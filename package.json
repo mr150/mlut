@@ -24,6 +24,7 @@
 	},
 	"files": [
 		"src/",
+		"_index.scss",
 		"dist/"
 	],
 	"scripts": {
