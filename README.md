@@ -35,7 +35,7 @@ The library is **modular** and you can include only what you need
 ### Tools ###
 Sass tools include:
 
-- settings based on which the everything works 
+- settings based on which the everything works
 - mixins and functions with which you can generate utilities and write styles
 
 ### Addons ###
@@ -75,8 +75,8 @@ Add the files to your page like here:
 And just add classes to markup:
 ```html
 <div class="D-g Gtc-t3">
-	<div class="Bd P2su">
-		<h3>Simple text</h3>
+  <div class="Bd P2su">
+    <h3>Simple text</h3>
 ```
 
 #### Toolkit ####
@@ -89,30 +89,30 @@ To use all Mlut features you need an assembly. You will need to install a packag
 Once the assembly is configured, just import Mlut to your stylesheet, and configure it as you need:
 ```scss
 @use '../../node_modules/mlut' as ml with (
-	$su-cf: 5,
-	$breakpoints: (
-		'xxl': 1400px
-	),
-	$colors: (
-		'red0': #f20,
-	),
-	$utils: (
-		'^_D': ('', 'n', 'f'),
-	),
+  $su-cf: 5,
+  $breakpoints: (
+    'xxl': 1400px
+  ),
+  $colors: (
+    'red0': #f20,
+  ),
+  $utils: (
+    '^_D': ('', 'n', 'f'),
+  ),
 );
 ```
 Also now you can use Sass tools for writing CSS manually:
 ```scss
 .my-card {
-	display: block;
+  display: block;
 
-	@include ml.apply(
-		'P2su Fns1r'
-	);
+  @include ml.apply(
+    'P2su Fns1r'
+  );
 
-	@include ml.bp('md') {
-		font-size: calc(ml.px2rem(20px) + 1vw);
-	}
+  @include ml.bp('md') {
+    font-size: calc(ml.px2rem(20px) + 1vw);
+  }
 }
 ```
 Probably you want to set the Sass [load path](https://sass-lang.com/documentation/js-api/interfaces/LegacyFileOptions#includePaths) for easier import:
