@@ -1,0 +1,57 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
+@use 'sass:list';
+
+@use '../base' as ml;
+
+// Helpers
+//
+// Functions-helpers for general tasks.
+//
+// Styleguide: sass-tools.functions.common.helpers
+
+@function css-class($name, $only-name: false) {
+	$name: $name + '';
+
+	@if $only-name {
+		@return if(string.slice($name, 1, 1) == '.', string.slice($name, 2), $name);
+	}
+
+	@return if(string.slice($name, 1, 1) == '.', $name, '.' + $name);
+}
+
+@function replace-keyword($list, $keyword, $replacement) {
+	@each $item in $list {
+		$keyword-pos: string.index($item, $keyword);
+
+		@if $keyword-pos {
+			$list: ml.remove-nth($list, list.index($list, $item));
+
+			@each $rep-item in $replacement {
+				$item-with-kw: ml.str-replace($item, $keyword, $rep-item);
+
+				@if $item-with-kw != '' {
+					$list: list.append($list, $item-with-kw);
+				}
+			}
+		}
+	}
+
+	@return $list;
+}
+
+@function is-css-var($value, $in-color: false) {
+	@return (
+		ml.str-starts($value, 'var(') or
+		(
+			$in-color and (
+				ml.str-starts($value, 'rgba(var(') or
+				ml.str-starts($value, 'rgb(var(') or
+				ml.str-starts($value, 'hsla(var(') or
+				ml.str-starts($value, 'hsl(var(')
+			)
+		)
+	);
+}

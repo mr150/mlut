@@ -5,7 +5,7 @@ html(lang="ru")
 	head
 		- pageTitle = "Grid tests"
 		include includes/head.pug
-	body.M0.H100p.Ff-ss0
+	body.M0.H100p.Ff--ss0
 		include includes/header.pug
 		main
 			.wrapper
@@ -24,7 +24,7 @@ html(lang="ru")
 						.row__col.test-content.W1c_sm.W6c_md
 							h3 1
 						- for(i = 0; i < 3; i++)
-							.test-content.-Gcr.D-ib.Bxz.Mx1gg.Mb2gg.W4c_md
+							.test-content.-Gscr.D-ib.Bxz.Mx1gg.Mb2gg.W4c_md
 								h3 1
 						- for(i = 0; i < 4; i++)
 							.row__col.test-content.W3c_md
@@ -86,7 +86,7 @@ html(lang="ru")
 				h2 Fix width cards
 				.row.Ml-2gg
 					- for(i = 3; i < 6; i++)
-						.row__item.test-card.Ml2gg.Mb2gg.Maw-fx0.P2su
+						.row__item.test-card.Ml2gg.Mb2gg.Maw--fx0.P2su
 							h3 Карточка #{i}
 							p Описание карточки в несколько строчек с подробностями
 				hr

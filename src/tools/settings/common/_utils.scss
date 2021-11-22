@@ -1,0 +1,1821 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:meta';
+
+@use '../base' as ml;
+
+$uv-css-var-prefix: ml.$css-var-prefix !default;
+$cv-pref: '--' + ml.$css-var-prefix;
+
+$utils-data: () !default;
+$utils-data-ext: () !default;
+$colors: () !default;
+$utils-map: ();
+
+$-css-wide-kw: (
+	'ih': inherit,
+	'ini': initial,
+	'rvr': revert,
+	'ust': unset,
+);
+$-bd-kw-links: ('border', 'line-style', 'line-width');
+
+//stylelint-disable
+$utils-db: (
+	'utils': (
+		'registry': (
+			'-Gscc': (
+				'properties': ml.$var-gscc,
+				'conversion': 'num-length',
+			),
+			'-Gsfd': ml.$var-gsfd,
+			'-Gsg': (
+				'properties': (
+					ml.$var-gg-rem,
+					ml.$var-gg,
+				),
+				'directions': true,
+			),
+			'-Gsf': (
+				'properties': (
+					$cv-pref + 'gscf',
+					$cv-pref + 'gsof',
+				),
+				'keywords': (
+					'': (
+					calc(var(#{$cv-pref}gsc) / var(ml.$var-gscc) * 100% - var(ml.$var-gsfd, var(ml.$var-gg)) * 2),
+					calc(var(#{$cv-pref}gso) / var(ml.$var-gscc) * 100% + var(ml.$var-gsfd, var(ml.$var-gg))),
+				),
+				),
+			),
+
+			// POSITION
+			'Ps': (
+				'properties': position,
+				'keywords': (
+					'': relative,
+					'a': absolute,
+					'f': fixed,
+					'r': relative,
+					's': static,
+					'sk': sticky,
+				),
+			),
+			'T': (
+				'properties': top,
+				'default-unit': 'rem',
+			),
+			'R': right,
+			'B': (
+				'properties': bottom,
+				'default-unit': 'rem',
+			),
+			'L': left,
+			'-X': (
+				'properties': (
+					right, left,
+				),
+			),
+			'-Y': (
+				'properties': (
+					top, bottom,
+				),
+				'default-unit': 'rem',
+			),
+			'-I': (
+				'properties': (
+					top, right, bottom, left
+				),
+			),
+			'Zi': (
+				'properties': z-index,
+				'conversion': 'num-length',
+			),
+
+			// BOX-MODEL
+			'D': (
+				'properties': display,
+				'keywords': (
+					'': block,
+					'b': block,
+					'i': inline,
+					'ib': inline-block,
+					'f': flex,
+					'if': inline-flex,
+					'g': grid,
+					'ig': inline-grid,
+					'li': list-item,
+					'ri': run-in,
+					'flr': flow-root,
+					'c': contents,
+					't': table,
+					'it': inline-table,
+					'tr': table-row,
+					'tc': table-cell,
+					'tcl': table-column,
+					'tclg': table-column-group,
+					'thg': table-header-group,
+					'tfg': table-footer-group,
+					'trg': table-row-group,
+				),
+			),
+			'-D': (
+				'properties': (
+					display, flex-wrap, position, width, height,
+					margin, padding, overflow, white-space, border, clip,
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'mf': (flex, wrap),
+					'mif': (inline-flex, wrap),
+					'vh': (
+						null, null, absolute, 1px, 1px, -1px, 0, hidden, nowrap, 0, rect(0 0 0 0)
+					),
+					'v': (
+						null, null, static, auto, auto, 0, null, visible, normal, null, auto
+					),
+				),
+			),
+
+			'Fl': (
+				'properties': flex,
+				'conversion': 'num-length',
+				'keywords': 'sizing',
+			),
+			'Fld': (
+				'properties': flex-direction,
+				'keywords': (
+					'c': column,
+					'cr': column-reverse,
+					'r': row,
+					'rr': row-reverse,
+				),
+			),
+			'Flw': (
+				'properties': flex-wrap,
+				'keywords': (
+					'': wrap,
+					'n': nowrap,
+					'w': wrap,
+					'wr': wrap-reverse,
+				),
+			),
+			'Flg': (
+				'properties': flex-grow,
+				'conversion': 'num-length',
+			),
+			'Fls': (
+				'properties': flex-shrink,
+				'conversion': 'num-length',
+			),
+			'Flb': (
+				'properties': flex-basis,
+				'keywords': 'sizing',
+			),
+
+			'Ac': (
+				'properties': align-content,
+				'keywords': 'box-alignment',
+			),
+			'As': (
+				'properties': align-self,
+				'keywords': 'box-alignment',
+			),
+			'Ai': (
+				'properties': align-items,
+				'keywords': 'box-alignment',
+			),
+			'Jc': (
+				'properties': justify-content,
+				'keywords': 'box-alignment',
+			),
+			'Ji': (
+				'properties': justify-items,
+				'keywords': 'box-alignment',
+			),
+			'Js': (
+				'properties': justify-self,
+				'keywords': 'box-alignment',
+			),
+			'Plcc': (
+				'properties': place-content,
+				'keywords': 'box-alignment',
+			),
+			'Plci': (
+				'properties': place-items,
+				'keywords': 'box-alignment',
+			),
+			'Plcs': (
+				'properties': place-self,
+				'keywords': 'box-alignment',
+			),
+			'Od': (
+				'properties': order,
+				'conversion': 'num-length',
+			),
+
+			'G': (
+				'properties': grid,
+				'conversion': 'grid-tpl',
+				'multi-list-separator': ml.$tULs2,
+				'keywords': ('grid', 'sizing'),
+			),
+			'Gt': (
+				'properties': grid-template,
+				'conversion': 'grid-tpl',
+				'keywords': 'sizing',
+			),
+			'Gtc': (
+				'properties': grid-template-columns,
+				'conversion': 'grid-tpl',
+				'keywords': 'sizing',
+			),
+			'Gc': (
+				'properties': grid-column,
+				'conversion': 'grid-span',
+				'multi-list-separator': ml.$tULs2,
+				'keywords': 'grid-area',
+			),
+			'Gcs': (
+				'properties': grid-column-start,
+				'conversion': 'kw-num-length',
+				'keywords': 'grid-area',
+			),
+			'Gce': (
+				'properties': grid-column-end,
+				'conversion': 'kw-num-length',
+				'keywords': 'grid-area',
+			),
+			'Gtr': (
+				'properties': grid-template-rows,
+				'conversion': 'grid-tpl',
+				'keywords': 'sizing',
+			),
+			'Gr': (
+				'properties': grid-row,
+				'conversion': 'grid-span',
+				'multi-list-separator': ml.$tULs2,
+				'keywords': 'grid-area',
+			),
+			'Grs': (
+				'properties': grid-row-start,
+				'conversion': 'kw-num-length',
+				'keywords': 'grid-area',
+			),
+			'Gre': (
+				'properties': grid-row-end,
+				'conversion': 'kw-num-length',
+				'keywords': 'grid-area',
+			),
+			'Ga': (
+				'properties': grid-area,
+				'conversion': 'grid-span',
+				'multi-list-separator': ml.$tULs2,
+				'keywords': 'grid-area',
+			),
+			'Gatc': (
+				'properties': grid-auto-columns,
+				'keywords': ('grid-auto-track', 'sizing'),
+			),
+			'Gatr': (
+				'properties': grid-auto-rows,
+				'keywords': ('grid-auto-track', 'sizing'),
+			),
+			'Gatf': (
+				'properties': grid-auto-flow,
+				'keywords': (
+					'c': column,
+					'd': dense,
+					'r': row,
+				),
+			),
+			'Gap': (
+				'properties': gap,
+				'directions': true,
+			),
+			'Rwg': (
+				'properties': row-gap,
+				'default-unit': 'rem',
+			),
+			'Clmg': column-gap,
+
+			'F': (
+				'properties': float,
+				'keywords': (
+					'': left,
+					'l': left,
+					'r': right,
+				),
+			),
+			'Cl': (
+				'properties': clear,
+				'keywords': (
+					'': both,
+					'b': both,
+					'l': left,
+					'r': right,
+				),
+			),
+			'-Cl': (
+				'preset-properties': (
+					'display': table,
+					'content': '',
+				),
+				'properties': clear,
+				'selector': '&::after',
+				'keywords': (
+					'': both,
+				),
+			),
+			'Bxs': (
+				'properties': box-sizing,
+				'keywords': (
+					'': border-box,
+					'bb': border-box,
+					'cb': content-box,
+				),
+			),
+			'Mnw': (
+				'properties': min-width,
+				'keywords': 'sizing',
+			),
+			'Mxw': (
+				'properties': max-width,
+				'keywords': 'sizing',
+			),
+			'Mnh': (
+				'properties': min-height,
+				'default-unit': 'rem',
+				'keywords': 'sizing',
+			),
+			'Mxh': (
+				'properties': max-height,
+				'default-unit': 'rem',
+				'keywords': 'sizing',
+			),
+			'Tbl': (
+				'properties': table-layout,
+				'keywords': (
+					'f': fixed,
+				),
+			),
+
+			'M': (
+				'properties': margin,
+				'directions': true,
+			),
+			'Mt': (
+				'properties': margin-top,
+				'default-unit': 'rem',
+			),
+			'Mr': margin-right,
+			'Mb': (
+				'properties': margin-bottom,
+				'default-unit': 'rem',
+			),
+			'Ml': margin-left,
+			'-Mx': (
+				'properties': (
+					margin-right, margin-left
+				),
+			),
+			'-My': (
+				'properties': (
+					margin-top, margin-bottom
+				),
+				'default-unit': 'rem',
+			),
+
+			'P': (
+				'properties': padding,
+				'directions': true,
+			),
+			'Pt': (
+				'properties': padding-top,
+				'default-unit': 'rem',
+			),
+			'Pr': padding-right,
+			'Pb': (
+				'properties': padding-bottom,
+				'default-unit': 'rem',
+			),
+			'Pl': padding-left,
+			'-Px': (
+				'properties': (
+					padding-right, padding-left
+				),
+			),
+			'-Py': (
+				'properties': (
+					padding-top, padding-bottom
+				),
+				'default-unit': 'rem',
+			),
+
+			'Ov': (
+				'properties': overflow,
+				'keywords': 'overflow',
+			),
+			'Ovx': (
+				'properties': overflow-x,
+				'keywords': 'overflow',
+			),
+			'Ovy': (
+				'properties': overflow-y,
+				'keywords': 'overflow',
+			),
+
+			// TYPOGRAPHY
+			'C': (
+				'properties': color,
+				'range-generator': 'color',
+				'conversion': 'color',
+			),
+			'Fn': font,
+			'Fnw': (
+				'properties': font-weight,
+				'conversion': 'kw-num-length',
+				'keywords': (
+					'b': bold,
+					'bd': bolder,
+					'l': lighter,
+					'n': normal,
+				),
+			),
+			'Fns': (
+				'properties': font-size,
+				'default-unit': 'rem',
+				'keywords': 'font-size',
+			),
+			'-Fns': (
+				'properties': (
+					font-size,
+					line-height,
+					letter-spacing,
+				),
+				'repeat-prop-values': false,
+				'default-unit': 'rem',
+				'keywords': 'font-size',
+			),
+			'Fnf': (
+				'properties': font-family,
+				'keywords': (
+					'mUss': (ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'),
+					'mUsr': (ui-serif, Georgia, Cambria, Times, 'Times New Roman', serif),
+					'mUm': (ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace),
+				),
+			),
+			'Fnst': (
+				'properties': font-style,
+				'keywords': (
+					'': italic,
+					'i': italic,
+					'n': normal,
+					'o': oblique,
+				),
+			),
+			'Lnh': (
+				'properties': line-height,
+				'conversion': 'kw-num-length',
+				'default-unit': 'rem',
+				'keywords': (
+					'n': normal,
+				),
+			),
+			'Lts': (
+				'properties': letter-spacing,
+				'keywords': (
+					'n': normal,
+				),
+			),
+			'Whs': (
+				'properties': white-space,
+				'keywords': (
+					'': nowrap,
+					'n': nowrap,
+					'nm': normal,
+					'p': pre,
+					'pw': pre-wrap,
+					'pl': pre-line,
+				),
+			),
+			'Txa': (
+				'properties': text-align,
+				'keywords': (
+					'': center,
+					'c': center,
+					'e': end,
+					'j': justify,
+					'l': left,
+					'mp': match-parent,
+					'r': right,
+					's': start,
+				),
+			),
+			'Txt': (
+				'properties': text-transform,
+				'keywords': (
+					'': uppercase,
+					'c': capitalize,
+					'l': lowercase,
+					'u': uppercase,
+				),
+			),
+			'Txuo': text-underline-offset,
+			'Txi': (
+				'properties': text-indent,
+				'keywords': (
+					'h': hanging,
+					'el': each-line,
+				),
+			),
+			'Txor': (
+				'properties': text-orientation,
+				'keywords': (
+					'm': mixed,
+					'u': upright,
+					's': sideways,
+				),
+			),
+			'Wrb': (
+				'properties': word-break,
+				'keywords': (
+					'ba': break-all,
+					'ka': keep-all,
+					'n': normal,
+				),
+			),
+			'Ovw': (
+				'properties': overflow-wrap,
+				'keywords': (
+					'a': anywhere,
+					'bw': break-word,
+					'n': normal,
+				),
+			),
+			'Wtm': (
+				'properties': writing-mode,
+				'keywords': (
+					'ht': horizontal-tb,
+					'vr': vertical-rl,
+					'vl': vertical-lr,
+				),
+			),
+
+			'Txd': (
+				'properties': text-decoration,
+				'keywords': ('text-decoration', 'line-style'),
+				'conversion': 'outline',
+			),
+			'Txdc': (
+				'properties': text-decoration-color,
+				'range-generator': 'color',
+				'conversion': 'color',
+			),
+			'Txdl': (
+				'properties': text-decoration-line,
+				'keywords': 'text-decoration',
+			),
+			'Txdst': (
+				'properties': text-decoration-style,
+				'keywords': 'line-style',
+			),
+			'Txdt': (
+				'properties': text-decoration-thickness,
+				'keywords': 'text-decoration',
+			),
+
+			'Txs': (
+				'properties': text-shadow,
+				'conversion': 'outline',
+				'multi-list-separator': ml.$tULs1,
+			),
+			'Va': (
+				'properties': vertical-align,
+				'keywords': (
+					'': middle,
+					'b': bottom,
+					'bl': baseline,
+					'm': middle,
+					'sb': sub,
+					'sp': super,
+					't': top,
+					'txb': text-bottom,
+					'txt': text-top,
+				),
+			),
+			'Txo': (
+				'properties': text-overflow,
+				'keywords': (
+					'': ellipsis,
+					'c': clip,
+					'e': ellipsis,
+				),
+			),
+			'-Txo': (
+				'properties': (
+					text-overflow, overflow, white-space,
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'': (ellipsis, hidden, nowrap),
+				),
+			),
+			'Hp': (
+				'properties': hyphens,
+				'keywords': (
+					'm': manual,
+				),
+			),
+			'Tas': (
+				'properties': tab-size,
+				'conversion': 'num-length',
+			),
+			'Lss': (
+				'properties': list-style,
+				'keywords': (Lsst, Lssp),
+			),
+			'Lsst': (
+				'properties': list-style-type,
+				'keywords': (
+					'd': disc,
+					'c': circle,
+					's': square,
+					'dc': decimal,
+					'dclz': decimal-leading-zero,
+					'la': lower-alpha,
+					'lr': lower-roman,
+					'lg': lower-greek,
+					'll': lower-latin,
+					'ua': upper-alpha,
+					'ul': upper-latin,
+					'ur': upper-roman,
+				),
+			),
+			'Lssp': (
+				'properties': list-style-position,
+				'keywords': (
+					'i': inside,
+					'o': outside,
+				),
+			),
+
+			// BACKGROUND
+			'Bg': (
+				'properties': background,
+				'conversion': 'outline',
+				'multi-list-separator': ml.$tULs1,
+			),
+			'Bgc': (
+				'properties': background-color,
+				'range-generator': 'color',
+				'conversion': 'color',
+			),
+			'Bgr': (
+				'properties': background-repeat,
+				'keywords': (
+					'': no-repeat,
+					'nr': no-repeat,
+					'rx': repeat-x,
+					'ry': repeat-y,
+					'r': repeat,
+					's': space,
+					'rn': round,
+				)
+			),
+			'Bgp': (
+				'properties': background-position,
+				'keywords': 'position'
+			),
+			'Bgs': (
+				'properties': background-size,
+				'keywords': (
+					'ct': contain,
+					'cv': cover,
+				),
+			),
+			'Bga': (
+				'properties': background-attachment,
+				'keywords': (
+					'f': fixed,
+					'l': local,
+					's': scroll,
+				),
+			),
+			'Bgcl': (
+				'properties': background-clip,
+				'keywords': 'box-ext',
+			),
+			'Bgo': (
+				'properties': background-origin,
+				'keywords': 'box-ext',
+			),
+			'Bgi': (
+				'properties': background-image,
+			),
+			'-Gdl': (
+				'properties': background-image,
+				'transformer': 'gradient',
+				'css-function': 'linear-gradient',
+				'conversion': 'gradient',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': ('position', 'gradients'),
+			),
+			'-Gdrl': (
+				'properties': background-image,
+				'transformer': 'gradient',
+				'conversion': 'gradient',
+				'css-function': 'repeating-linear-gradient',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': ('position', 'gradients'),
+			),
+
+			// TRANSFORM
+			'Tf': (
+				'properties': (
+					transform,
+					$cv-pref + 'trx',
+					$cv-pref + 'try',
+					$cv-pref + 'sx',
+					$cv-pref + 'sy',
+					$cv-pref + 'rt',
+					$cv-pref + 'skx',
+					$cv-pref + 'sky',
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'': (
+						(
+							translateX(var(#{$cv-pref}trx))
+							translateY(var(#{$cv-pref}try))
+							scaleX(var(#{$cv-pref}sx))
+							scaleY(var(#{$cv-pref}sy))
+							rotate(var(#{$cv-pref}rt))
+							skewX(var(#{$cv-pref}skx))
+							skewY(var(#{$cv-pref}sky))
+						),
+						0, 0, 1, 1, 0, 0, 0,
+					),
+					'mGpu': (
+						(
+							translate3d(var(#{$cv-pref}trx), var(#{$cv-pref}try), 0)
+							scaleX(var(#{$cv-pref}sx))
+							scaleY(var(#{$cv-pref}sy))
+							rotate(var(#{$cv-pref}rt))
+							skewX(var(#{$cv-pref}skx))
+							skewY(var(#{$cv-pref}sky))
+						),
+						0, 0, 1, 1, 0, 0, 0,
+					),
+				),
+			),
+			'Tfo': (
+				'properties': transform-origin,
+				'keywords': 'position'
+			),
+			'-Tr': (
+				'properties': (
+					$cv-pref + 'trx',
+					$cv-pref + 'try',
+				),
+			),
+			'-Trx': $cv-pref + 'trx',
+			'-Try': (
+				'default-unit': 'rem',
+			),
+			'-S': (
+				'properties': (
+					$cv-pref + 'sx',
+					$cv-pref + 'sy',
+				),
+				'conversion': 'num-percent',
+			),
+			'-Sx': (
+				'conversion': 'num-percent',
+			),
+			'-Sy': (
+				'conversion': 'num-percent',
+			),
+			'-Sk': (
+				'properties': (
+					$cv-pref + 'skx',
+					$cv-pref + 'sky',
+				),
+				'conversion': 'angle',
+			),
+			'-Skx': (
+				'conversion': 'angle',
+			),
+			'-Sky': (
+				'conversion': 'angle',
+			),
+			'-Rt': (
+				'conversion': 'angle',
+			),
+
+			// VISUAL
+			'Ol': (
+				'properties': outline,
+				'conversion': 'outline',
+				'keywords': ('line-style', 'line-width'),
+			),
+			'Olw': (
+				'properties': outline-width,
+				'keywords': 'line-width',
+			),
+			'Olc': (
+				'properties': outline-color,
+				'conversion': 'color',
+			),
+			'Ols': (
+				'properties': outline-style,
+				'keywords': 'line-style',
+			),
+			'Olo': outline-offset,
+
+			'Bxsd': (
+				'properties': box-shadow,
+				'conversion': 'outline',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': (
+					'i': inset,
+				),
+			),
+			'Bxdb': (
+				'properties': box-decoration-break,
+				'keywords': (
+					's': slice,
+					'c': clone,
+				),
+			),
+			'Vs': (
+				'properties': visibility,
+				'keywords': 'visibility',
+			),
+			'Cs': (
+				'properties': cursor,
+				'keywords': (
+					'': pointer,
+					'c': cell,
+					'clr': col-resize,
+					'cp': copy,
+					'ch': crosshair,
+					'd': default,
+					'er': e-resize,
+					'ewr': ew-resize,
+					'g': grab,
+					'gb': grabbing,
+					'h': help,
+					'm': move,
+					'nr': n-resize,
+					'nta': not-allowed,
+					'ner': ne-resize,
+					'neswr': nesw-resize,
+					'nwser': nwse-resize,
+					'nsr': ns-resize,
+					'nwr': nw-resize,
+					'p': pointer,
+					'pr': progress,
+					'rr': row-resize,
+					'sr': s-resize,
+					'ser': se-resize,
+					'swr': sw-resize,
+					't': text,
+					'vt': vertical-text,
+					'wr': w-resize,
+					'wt': wait,
+					'zi': zoom-in,
+					'zo': zoom-out,
+				),
+			),
+			'O': (
+				'properties': opacity,
+				'conversion': 'num-percent',
+			),
+			'Bfv': (
+				'properties': backface-visibility,
+				'keywords': 'visibility',
+			),
+			'Ojf': (
+				'properties': object-fit,
+				'keywords': (
+					'': cover,
+					'ct': contain,
+					'cv': cover,
+					'f': fill,
+					'sd': scale-down,
+				),
+			),
+			'Ojp': (
+				'properties': object-position,
+				'keywords': 'position'
+			),
+			'Is': (
+				'properties': isolation,
+				'keywords': (
+					'i': isolate,
+				),
+			),
+			'Ft': (
+				'properties': (
+					filter,
+					$cv-pref + 'blr',
+					$cv-pref + 'bn',
+					$cv-pref + 'ctr',
+					$cv-pref + 'drps',
+					$cv-pref + 'gra',
+					$cv-pref + 'hur',
+					$cv-pref + 'iv',
+					$cv-pref + 'sa',
+					$cv-pref + 'sp',
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'': (
+						(
+							var(#{$cv-pref}blr)
+							var(#{$cv-pref}bn)
+							var(#{$cv-pref}ctr)
+							var(#{$cv-pref}drps)
+							var(#{$cv-pref}gra)
+							var(#{$cv-pref}hur)
+							var(#{$cv-pref}iv)
+							var(#{$cv-pref}sa)
+							var(#{$cv-pref}sp)
+						),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+					),
+				),
+			),
+			'-Blr': (
+				'css-function': 'blur',
+				'transformer': 'to-css-fn',
+			),
+			'-Bn': (
+				'css-function': 'brightness',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-Ctr': (
+				'css-function': 'contrast',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-Drps': (
+				'css-function': 'drop-shadow',
+				'transformer': 'to-css-fn',
+				'multi-list-separator': ml.$tULs1,
+				'conversion': 'outline',
+			),
+			'-Gra': (
+				'css-function': 'grayscale',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-Hur': (
+				'css-function': 'hue-rotate',
+				'transformer': 'to-css-fn',
+				'conversion': 'angle',
+			),
+			'-Iv': (
+				'css-function': 'invert',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-O': (
+				'css-function': 'opacity',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-Sa': (
+				'css-function': 'saturate',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-Sp': (
+				'css-function': 'sepia',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'Bcf': (
+				'properties': (
+					backdrop-filter,
+					$cv-pref + 'blr',
+					$cv-pref + 'bn',
+					$cv-pref + 'ctr',
+					$cv-pref + 'gra',
+					$cv-pref + 'hur',
+					$cv-pref + 'iv',
+					$cv-pref + 'o',
+					$cv-pref + 'sa',
+					$cv-pref + 'sp',
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'': (
+						(
+							var(#{$cv-pref}blr)
+							var(#{$cv-pref}bn)
+							var(#{$cv-pref}ctr)
+							var(#{$cv-pref}gra)
+							var(#{$cv-pref}hur)
+							var(#{$cv-pref}iv)
+							var(#{$cv-pref}o)
+							var(#{$cv-pref}sa)
+							var(#{$cv-pref}sp)
+						),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+					),
+				),
+			),
+			'-Bcf': (
+				'properties': (
+					backdrop-filter,
+					$cv-pref + 'bcfb',
+					$cv-pref + 'bcfbn',
+					$cv-pref + 'bcfc',
+					$cv-pref + 'bcfg',
+					$cv-pref + 'bcfhr',
+					$cv-pref + 'bcfi',
+					$cv-pref + 'bcfo',
+					$cv-pref + 'bcfs',
+					$cv-pref + 'bcfsp',
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'': (
+						(
+							var(#{$cv-pref}bcfb)
+							var(#{$cv-pref}bcfbn)
+							var(#{$cv-pref}bcfc)
+							var(#{$cv-pref}bcfg)
+							var(#{$cv-pref}bcfhr)
+							var(#{$cv-pref}bcfi)
+							var(#{$cv-pref}bcfo)
+							var(#{$cv-pref}bcfs)
+							var(#{$cv-pref}bcfsp)
+						),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+						var(--ml-, string.unquote('/*!*/ ')),
+					),
+				),
+			),
+			'-Bcfb': (
+				'css-function': 'blur',
+				'transformer': 'to-css-fn',
+			),
+			'-Bcfbn': (
+				'css-function': 'brightness',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-Bcfc': (
+				'css-function': 'contrast',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-Bcfg': (
+				'css-function': 'grayscale',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-Bcfhr': (
+				'css-function': 'hue-rotate',
+				'transformer': 'to-css-fn',
+				'conversion': 'angle',
+			),
+			'-Bcfi': (
+				'css-function': 'invert',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-Bcfo': (
+				'css-function': 'opacity',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-Bcfs': (
+				'css-function': 'saturate',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+			'-Bcfsp': (
+				'css-function': 'sepia',
+				'transformer': 'to-css-fn',
+				'conversion': 'num-percent',
+			),
+
+			// BORDER
+			'Bd': (
+				'properties': border,
+				'conversion': 'outline',
+				'keywords': $-bd-kw-links,
+			),
+			'Bdt': (
+				'properties': border-top,
+				'conversion': 'outline',
+				'keywords': $-bd-kw-links,
+			),
+			'Bdr': (
+				'properties': border-right,
+				'conversion': 'outline',
+				'keywords': $-bd-kw-links,
+			),
+			'Bdb': (
+				'properties': border-bottom,
+				'conversion': 'outline',
+				'keywords': $-bd-kw-links,
+			),
+			'Bdl': (
+				'properties': border-left,
+				'conversion': 'outline',
+				'keywords': $-bd-kw-links,
+			),
+			'-Bdx': (
+				'properties': (
+					border-right, border-left,
+				),
+				'conversion': 'outline',
+				'keywords': $-bd-kw-links,
+			),
+			'-Bdy': (
+				'properties': (
+					border-top, border-bottom,
+				),
+				'conversion': 'outline',
+				'keywords': $-bd-kw-links,
+			),
+
+			'Bdc': (
+				'properties': border-color,
+				'range-generator': 'color',
+				'conversion': 'color',
+				'directions': true,
+			),
+			'Bdtc': (
+				'properties': border-top-color,
+				'conversion': 'color',
+			),
+			'Bdrc': (
+				'properties': border-right-color,
+				'conversion': 'color',
+			),
+			'Bdbc': (
+				'properties': border-bottom-color,
+				'conversion': 'color',
+			),
+			'Bdlc': (
+				'properties': border-left-color,
+				'conversion': 'color',
+			),
+			'-Bdxc': (
+				'properties': (
+					border-right-color, border-left-color
+				),
+				'conversion': 'color',
+			),
+			'-Bdyc': (
+				'properties': (
+					border-top-color, border-bottom-color
+				),
+				'conversion': 'color',
+			),
+
+			'Bds': (
+				'properties': border-style,
+				'keywords': 'line-style',
+			),
+			'Bdts': (
+				'properties': border-top-style,
+				'keywords': 'line-style',
+			),
+			'Bdrs': (
+				'properties': border-right-style,
+				'keywords': 'line-style',
+			),
+			'Bdbs': (
+				'properties': border-bottom-style,
+				'keywords': 'line-style',
+			),
+			'Bdls': (
+				'properties': border-left-style,
+				'keywords': 'line-style',
+			),
+			'-Bdxs': (
+				'properties': (
+					border-right-style,
+					border-left-style,
+				),
+				'keywords': 'line-style',
+			),
+			'-Bdys': (
+				'properties': (
+					border-top-style,
+					border-bottom-style,
+				),
+				'keywords': 'line-style',
+			),
+
+			'Bdw': (
+				'properties': border-width,
+				'keywords': 'line-width',
+			),
+			'Bdtw': (
+				'properties': border-top-width,
+				'keywords': 'line-width',
+			),
+			'Bdrw': (
+				'properties': border-right-width,
+				'keywords': 'line-width',
+			),
+			'Bdbw': (
+				'properties': border-bottom-width,
+				'keywords': 'line-width',
+			),
+			'Bdlw': (
+				'properties': border-left-width,
+				'keywords': 'line-width',
+			),
+			'-Bdxw': (
+				'properties': (
+					border-right-width,
+					border-left-width,
+				),
+				'keywords': 'line-width',
+			),
+			'-Bdyw': (
+				'properties': (
+					border-top-width,
+					border-bottom-width,
+				),
+				'keywords': 'line-width',
+			),
+
+			'Bdcl': (
+				'properties': border-collapse,
+				'keywords': (
+					'': collapse,
+					'c': collapse,
+					's': separate,
+				),
+			),
+			'Bdrd': (
+				'properties': border-radius,
+				'multi-list-separator': ml.$tULs2,
+			),
+			'Bdtrr': border-top-right-radius,
+			'Bdtlr': border-top-left-radius,
+			'Bdbrr': border-bottom-right-radius,
+			'Bdblr': border-bottom-left-radius,
+			'-Bdtrd': (
+				'properties': (
+					border-top-right-radius,
+					border-top-left-radius,
+				),
+			),
+			'-Bdbrd': (
+				'properties': (
+					border-bottom-right-radius,
+					border-bottom-left-radius,
+				),
+			),
+
+			// TRANSITION AND ANIMATION
+			'Ts': (
+				'properties': transition,
+				'conversion': 'abbr-kw',
+				'multi-list-separator': ml.$tULs1,
+			),
+			'-Ts': (
+				'preset-properties': (
+					'transition-duration': ml.$css-transition-time,
+				),
+				'properties': transition-property,
+				'conversion': 'abbr-kw',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'transition-props'
+			),
+			'Tsp': (
+				'properties': transition-property,
+				'conversion': 'abbr-kw',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'transition-props'
+			),
+			'Tsd': (
+				'properties': transition-duration,
+				'multi-list-separator': ml.$tULs1,
+			),
+			'Tsdl': (
+				'properties': transition-delay,
+				'multi-list-separator': ml.$tULs1,
+			),
+			'Tstf': (
+				'properties': transition-timing-function,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'easing-function'
+			),
+
+			'An': (
+				'properties': animation,
+				'conversion': 'kw-num-length',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': (
+					// TODO: maybe try to optimize it and combine a part of keywords to one map
+					'animation', 'easing-function', 'infinite', Andr, Anfm, Anps,
+				),
+			),
+			'Ann': (
+				'properties': animation-name,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'animation',
+			),
+			'And': (
+				'properties': animation-duration,
+				'multi-list-separator': ml.$tULs1,
+			),
+			'Andl': (
+				'properties': animation-delay,
+				'multi-list-separator': ml.$tULs1,
+			),
+			'Antf': (
+				'properties': animation-timing-function,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'easing-function'
+			),
+			'Anic': (
+				'properties': animation-iteration-count,
+				'conversion': 'kw-num-length',
+				'multi-list-separator': ml.$tULs1,
+				'keywords': 'infinite',
+			),
+			'Andr': (
+				'properties': animation-direction,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': (
+					'a': alternate,
+					'ar': alternate-reverse,
+					'nm': normal,
+					'r': reverse,
+				),
+			),
+			'Anfm': (
+				'properties': animation-fill-mode,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': (
+					'b': backwards,
+					'bt': both,
+					'f': forwards,
+				),
+			),
+			'Anps': (
+				'properties': animation-play-state,
+				'multi-list-separator': ml.$tULs1,
+				'keywords': (
+					'p': paused,
+					'r': running,
+					'rn': running,
+				),
+			),
+
+			// OTHER
+			'Ap': (
+				'properties': appearance,
+				'keywords': (
+					'': none,
+				),
+			),
+			'Acnc': (
+				'properties': accent-color,
+				'conversion': 'color',
+			),
+			'Crc': (
+				'properties': caret-color,
+				'conversion': 'color',
+			),
+			'Pne': (
+				'properties': pointer-events,
+				'keywords': (
+					'': none,
+				),
+			),
+			'Us': (
+				'properties': user-select,
+				'keywords': (
+					'': none,
+					't': text,
+					'c': contain,
+				)
+			),
+			'Ovsb': (
+				'properties': overscroll-behavior,
+				'keywords': 'overscroll',
+			),
+			'Ovsbx': (
+				'properties': overscroll-behavior-x,
+				'keywords': 'overscroll',
+			),
+			'Ovsby': (
+				'properties': overscroll-behavior-y,
+				'keywords': 'overscroll',
+			),
+			'Rs': (
+				'properties': resize,
+				'keywords': (
+					'': none,
+					'b': both,
+					'h': horizontal,
+					'v': vertical,
+				),
+			),
+			'Ct': (
+				'properties': content,
+				'keywords': (
+					'': string.unquote("''"),
+					'nm': normal,
+					'oq': open-quote,
+					'cq': close-quote,
+					'noq': no-open-quote,
+					'ncq': no-close-quote,
+					'ct': contents,
+					'mAtt': attr(data-#{ml.$css-var-prefix}ct),
+				),
+			),
+			'-All': (
+				'properties': (
+					margin, padding, font, list-style, border,
+				),
+				'repeat-prop-values': false,
+				'keywords': (
+					'sr': (0, 0, inherit, none, 0),
+				),
+			),
+			'All': (
+				'properties': all,
+				'keywords': 'css',
+			),
+			'Ec': (
+				'properties': empty-cells,
+				'keywords': (
+					's': show,
+					'h': hide,
+				),
+			),
+			'Cps': (
+				'properties': caption-side,
+				'keywords': 'position'
+			),
+			'Wlc': (
+				'properties': will-change,
+				'conversion': 'abbr-kw',
+				'keywords': (
+					'sps': scroll-position,
+					'ctn': contents,
+				),
+			),
+			'Ctv': (
+				'properties': content-visibility,
+				'keywords': ('ct-visibility', 'visibility')
+			),
+			'Tca': (
+				'properties': touch-action,
+				'keywords': (
+					'm': manipulation,
+					'pl': pan-left,
+					'pr': pan-right,
+					'pu': pan-up,
+					'pd': pan-down,
+					'px': pan-x,
+					'py': pan-y,
+					'pnz': pinch-zoom,
+				),
+			),
+
+			// SVG
+			'Fi': (
+				'properties': fill,
+				'range-generator': 'color',
+				'conversion': 'color',
+			),
+			'Fio': (
+				'properties': fill-opacity,
+				'conversion': 'num-percent',
+			),
+
+			'St': (
+				'properties': stroke,
+				'range-generator': 'color',
+				'conversion': 'color',
+			),
+			'Sto': (
+				'properties': stroke-opacity,
+				'conversion': 'num-percent',
+			),
+			'Stda': (
+				'properties': stroke-dasharray,
+				'conversion': 'num-length',
+			),
+			'Stdo': (
+				'properties': stroke-dashoffset,
+				'conversion': 'num-length',
+			),
+			'Stlc': (
+				'properties': stroke-linecap,
+				'keywords': (
+					'b': butt,
+					'r': round,
+					's': square,
+				),
+			),
+			'Stlj': (
+				'properties': stroke-linejoin,
+				'keywords': (
+					'a': arcs,
+					'b': bevel,
+					'r': round,
+					'm': miter,
+					'mc': miter-clip,
+				),
+			),
+			'Stw': (
+				'properties': stroke-width,
+				'conversion': 'num-length',
+			),
+		),
+		'keywords': (
+			'border': (
+				'': (1px solid,),
+			),
+			'position': map.set(
+				ml.$main-directions, 'c', center
+			),
+			'line-style': (
+				'': none,
+				'd': dotted,
+				'dh': dashed,
+				'db': double,
+				'g': groove,
+				'h': hidden,
+				'i': inset,
+				'o': outset,
+				'r': ridge,
+				's': solid,
+				'w': wavy,
+			),
+			'text-decoration': (
+				'ff': from-font,
+				'lt': line-through,
+				'o': overline,
+				'u': underline,
+			),
+			'line-width': (
+				'm': medium,
+				't': thick,
+				'th': thin,
+			),
+			'overflow': (
+				'': hidden,
+				'a': auto,
+				'h': hidden,
+				's': scroll,
+				'v': visible
+			),
+			'sizing': (
+				'fc': fit-content,
+				'mc': max-content,
+				'mnc': min-content,
+			),
+			'box-alignment': (
+				'b': baseline,
+				'c': center,
+				'e': end,
+				'fs': flex-start,
+				'fe': flex-end,
+				'n': normal,
+				'st': start,
+				'str': stretch,
+				'sb': space-between,
+				'sa': space-around,
+				'se': space-evenly,
+			),
+			'box-ext': (
+				'bb': border-box,
+				'cb': content-box,
+				'pb': padding-box,
+				't': text,
+			),
+			'grid-area': (
+				's': span,
+			),
+			'grid': (
+				'af': auto-flow,
+				'd': dense,
+			),
+			'grid-auto-track': (
+				't1': minmax(0, 1fr),
+			),
+			'easing-function': (
+				'e': ease,
+				'ei': ease-in,
+				'eo': ease-out,
+				'eio': ease-in-out,
+				'l': linear,
+				'se': step-end,
+				'ss': step-start,
+			),
+			'infinite': (
+				'i': infinite,
+			),
+			'font-size': (
+				'sl': smaller,
+				// so as not to occupy `lg`
+				'lr': larger,
+			),
+			'overscroll': (
+				'c': contain,
+			),
+			'visibility': (
+				'': hidden,
+				'c': collapse,
+				'h': hidden,
+				'v': visible,
+			),
+			'ct-visibility': (
+				'': auto,
+			),
+			'transition-props': (
+				'': (
+					background-color, border-color, color,
+					fill, stroke, backdrop-filter, box-shadow,
+					filter, opacity, transform,
+				),
+				'mClr': (
+					background-color, border-color, color,
+					fill, outline-color, stroke,
+				),
+			),
+		),
+	),
+
+	'common': (
+		'registry': (
+			'H': (
+				'properties': height,
+				'default-unit': 'rem',
+				'keywords': 'sizing',
+			),
+			'W': (
+				'properties': width,
+				'keywords': 'sizing',
+			),
+			'Apcr': (
+				'properties': aspect-ratio,
+				'conversion': 'num-length',
+			),
+		),
+		'keywords': (
+			'css': $-css-wide-kw,
+			'css-oft': map.merge(
+				$-css-wide-kw,
+				(
+					'a': auto,
+					'n': none,
+				)
+			),
+			'colors': (
+				'tp': transparent,
+				'cc': currentColor,
+			),
+		),
+	),
+) !default;
+
+$-common-registry: ();
+
+@each $key, $value in map.get($utils-db, 'common', 'registry') {
+	$-common-registry: map.set(
+		$-common-registry,
+		string.to-lower-case($key),
+		$value
+	);
+}
+
+$utils-db: map.set(
+	$utils-db,
+	'media',
+	(
+		'registry': map.deep-merge(
+			$-common-registry,
+			(
+				'ah': any-hover,
+				'ap': (
+					'properties': any-pointer,
+					'keywords': (
+						'c': coarse,
+						'f': fine,
+					)
+				),
+				'hv': hover,
+				'p': (
+					'properties': pointer,
+					'keywords': (
+						'c': coarse,
+						'f': fine,
+					),
+				),
+				'dm': (
+					'properties': display-mode,
+					'keywords': (
+						'': fullscreen,
+						'f': fullscreen,
+						's': standalone,
+						'mu': minimal-ui,
+						'b': browser,
+					),
+				),
+				'fc': forced-colors,
+				'o': (
+					'properties': orientation,
+					'keywords': (
+						'': landscape,
+						'l': landscape,
+						'p': portrait,
+					),
+				),
+				'pfcs': (
+					'properties': prefers-color-scheme,
+					'keywords': (
+						'': dark,
+						'd': dark,
+						'l': light,
+					),
+				),
+				'pfrm': prefers-reduced-motion,
+				'm': (
+					'properties': monochrome,
+					'conversion': 'num-length',
+				),
+				'g': (
+					'properties': grid,
+					'conversion': 'num-length',
+				),
+				'c': (
+					'properties': color,
+					'conversion': 'num-length',
+				),
+				'cg': (
+					'properties': color-gamut,
+					'keywords': (
+						'p': p3,
+						's': 'srgb',
+						'r': rec2020,
+					),
+				),
+				'ci': (
+					'properties': color-index,
+					'conversion': 'num-length',
+				),
+				'r': (
+					'properties': resolution,
+					'conversion': 'resolution',
+					'keywords': (
+						'i': infinite,
+					),
+				),
+			),
+		),
+	),
+);
+
+$utils-db: map.deep-merge($utils-db, $utils-data);
+$utils-db: map.deep-merge($utils-db, $utils-data-ext);
+$utils-db: map.merge($utils-db, 'common', 'keywords', 'colors', $colors);
+$utils-db: map.merge(
+	$utils-db,
+	'utils',
+	'registry',
+	map.get($utils-db, 'common', 'registry')
+);

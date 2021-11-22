@@ -76,7 +76,7 @@
 
 ### Fixed
 - Bottom gutter in `row__col` to rem.
-- Calc fallback in `mlu-mk-gtr` with `$direct = "xy"`.
+- Calc fallback in `mlu-mk-gtr` with `$direct = 'xy'`.
 
 ### Changed
 - Rethought the concept of themes and added `demo-theme` as an example.
@@ -113,7 +113,7 @@
 ### Fixed
 - `Pl` and `Pr` utils.
 - Gutter in `mlu-row-col` mixin.
-- Mixin `mlu-mk-gtr` with `$direct="xy"` with `$type = "padding"` or `"margin"`.
+- Mixin `mlu-mk-gtr` with `$direct='xy'` with `$type = 'padding'` or `'margin'`.
 
 ### Changed
 - Columns count on `xs` from 2 to 4.

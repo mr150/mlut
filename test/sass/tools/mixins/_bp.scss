@@ -1,0 +1,68 @@
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
+@include describe('tools/mixins/base/') {
+	@include describe('bp') {
+		@include it('make breakpoint from string') {
+			@include assert() {
+				@include output() {
+					@include ml.bp('<sm,md:lg,xl') {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (max-width: (ml.bp(sm) - 1px)),(min-width: ml.bp(md)) and (max-width: (ml.bp(lg) - 1px)),(min-width: ml.bp(xl)){
+						width: 50%;
+					}
+				}
+			}
+		}
+
+		@include it('make breakpoint from number') {
+			@include assert() {
+				@include output() {
+					@include ml.bp(48rem) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (min-width: 48rem) {
+						width: 50%;
+					}
+				}
+			}
+		}
+
+		@include it('make breakpoints range from numbers') {
+			@include assert() {
+				@include output() {
+					@include ml.bp(0 600px) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (max-width: 599px) {
+						width: 50%;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output() {
+					@include ml.bp(16em 32em) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (min-width: 16em) and (max-width: 31.94em) {
+						width: 50%;
+					}
+				}
+			}
+		}
+	}
+}

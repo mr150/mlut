@@ -1,0 +1,38 @@
+@use 'sass:map';
+@use 'sass-true' as * with (
+	$terminal-output: false,
+);
+
+@use 'tools/settings/base/general' with (
+	$is-test-env: true,
+);
+
+@use 'tools/settings/common/utils' as cu with (
+	$utils-data: (
+		'utils': (
+			'registry': (
+				'Ps': null,
+			),
+		),
+	),
+	$utils-data-ext: (
+		'utils': (
+			'registry': (
+				'Ps': (
+					'properties': position,
+					'keywords': ('sc': sticky),
+				),
+			)
+		),
+	),
+	$colors: (
+		'prm0': #c06,
+		'sec0': #0c6,
+		'ter': #06c,
+	)
+);
+
+@use 'tools/settings/at-rules';
+@use 'tools/functions';
+@use 'tools/mixins';
+@use 'core/utils';

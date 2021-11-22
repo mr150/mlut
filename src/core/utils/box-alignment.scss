@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use '../../tools/settings' as ml;
+
+$-justify-list: ('st', 'e', 'c', 'str', 'a');
+
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	ml.$kSsUMCS,
+	(
+		ml.$cBpAllCp + 'Fld': (ml.$kUvKA),
+		ml.$cBpAllCp + 'Flg': (1),
+		ml.$cBpAllCp + 'Fls': (0),
+		ml.$cBpAllCp + 'Flw': (ml.$kUvKA),
+		ml.$cBpAllCp + 'Ac': ('fs', 'fe', 'c', 'sa', 'sb', 'se'),
+		ml.$cBpAllCp + 'Ai': ('fs', 'fe', 'c', 'b', 'str'),
+		ml.$cBpAllCp + 'As': (
+			'fs', 'fe', 'c', 'b', 'a', 'str'
+		),
+		ml.$cBpAllCp + 'Jc': (
+			'fs', 'fe', 'c', 'sa', 'sb', 'se'
+		),
+		ml.$cBpAllCp + 'Ji': ($-justify-list),
+		ml.$cBpAllCp + 'Js': ($-justify-list),
+		ml.$cBpAllCp + 'Plcc': ('fs', 'fe', 'st', 'e', 'c', 'sa', 'sb', 'se', 'str'),
+		ml.$cBpAllCp + 'Plci': ($-justify-list),
+		ml.$cBpAllCp + 'Plcs': ($-justify-list),
+		ml.$cBpAllCp + 'Od': ([-1, 5],),
+	)
+);

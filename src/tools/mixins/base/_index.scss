@@ -1,0 +1,91 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:string';
+
+@use 'forward-tools' as ml;
+
+@forward 'mk-ar';
+@forward 'mk-state';
+
+// At-Rules
+//
+// At-Rules mixins.
+//
+// Styleguide: sass-tools.mixins.ar
+
+// bp
+//
+// Mixin for creation media queries with breakpoints
+// ```scss
+// @include bpm('md') {
+//		.inp--common {
+//			padding-left: 48px;
+//		}
+// }
+//
+// @include bpm($to: 'lg') {
+//		.btn--common {
+//			margin-left: 48px;
+//		}
+// }
+//
+// @include bpm('sm', 'lg') {
+//		.btn--common {
+//			margin-top: 48px;
+//		}
+// }
+// ```
+// Compile into:
+// ```css
+// @media (min-width: 760px) {
+//		.inp--common {
+//			padding-left: 48px;
+//		}
+// }
+//
+// @media (max-width: 959px) {
+//		.btn--common {
+//			margin-left: 48px;
+//		}
+// }
+//
+// @media (min-width: 520px) and (max-width: 959px) {
+//		.btn--common {
+//			margin-top: 48px;
+//		}
+// }
+// ```
+//
+// $bp - breakpoint. Can be keyword (string) or number. Generate to 'min-width' mediaquery, and `$to` to 'max-width' - 1.
+// @content - CSS relus that will be placed into mediaquery.
+//
+// Styleguide: sass-tools.mixins.ar.bp
+
+@mixin bp($bp) {
+	$bp-type: meta.type-of($bp);
+	$mq-str: '';
+
+	@if $bp-type == 'string' {
+		$mq-str: ml.convert-ar-bp($bp);
+	} @else if $bp-type == 'number' {
+		$mq-str: '(min-width: #{$bp})';
+	} @else if $bp-type == 'list' {
+		$from: list.nth($bp, 1);
+		$to: list.nth($bp, 2);
+		$to: $to - ml.bp-value-diff($to);
+
+		$mq-str: if(
+			$from == 0,
+			'(max-width: #{$to})',
+			'(min-width: #{$from}) and (max-width: #{$to})'
+		);
+	} @else {
+		@error 'Wrong type of argument $bp: `#{$bp-type}`. Expected `string`, `number` or numbers `list`';
+	}
+
+	@media #{$mq-str} {
+		@content;
+	}
+}

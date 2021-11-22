@@ -1,0 +1,72 @@
+@use 'sass-true' as *;
+@use 'tools' as ml;
+@use 'sass:map';
+@use 'sass:list';
+
+@use 'test-core';
+@use 'test-addon';
+@use 'core/utils/init' with (
+	$utils: (
+		'^_D': ('', 'n', 'f'),
+
+		ml.$kCfOv: (
+			'M': (1su, 2r)
+		),
+
+		ml.$kCfAl: (
+			'M', 'Bxs', 'H', 'D', 'Txs', 'Bgs'
+		),
+
+		/*
+		//`ban` test commented because it and `allow` is mutually exclusive
+		// and module can be configure only once
+		ml.$kCfBan: list.join(
+			map.keys(map.get(ml.$utils-db, 'utils', 'registry')),
+			('Offsets', 'Paddings', 'Margins', 'BdWidth')
+		),
+		*/
+	),
+);
+
+@include describe('core/utils/init') {
+	@include it('override and allow loaded utils') {
+		@include assert-equal(
+			ml.$utils-map,
+			(
+				'M': (1su, 2r),
+				'Bxs': (
+					'bb': null,
+					'cb': null,
+					'pb': padding-box,
+				),
+				'H': (
+					'max': 800px,
+					240: null,
+					5r: null,
+				),
+				'D': (
+					'g': grid,
+					'i': inline,
+				),
+				'Txs_h,f a': ('n', '-defTxs', 'rv'),
+				ml.$kBpAll + '_Bgs': (100p, ml.$kUvKA),
+			),
+			$inspect: true,
+		);
+	}
+
+	/*
+	@include it('ban utils') {
+		@include assert-equal(
+			ml.$utils-map,
+			(
+				'reputation': (100, 150),
+				'Overflows': ('', 'a', 's', 'v'),
+				'Borders': ml.$kBpAll + '_',
+				'BdStyle': ('d', 'ds', '#{ml.$kBpAll} #{ml.$kArOl}_s'),
+			),
+			$inspect: true,
+		);
+	}
+ */
+}

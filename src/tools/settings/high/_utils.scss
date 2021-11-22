@@ -1,0 +1,104 @@
+@use 'sass:map';
+@use 'forward-tools' as ml;
+
+$utils-groups: () !default;
+$utils-groups-ext: () !default;
+
+$utils-groups-db: (
+	'Borders': (
+		'members': (
+			Bd, Bdt, Bdr, '#{ml.$cArStBp}Bdb_-btc', '#{ml.$cArStBp}Bdl_-btc', -Bdx, -Bdy,
+		),
+	),
+	'BdWidth': (
+		'members': (
+			Bdw, Bdtw, Bdrw, '#{ml.$cArStBp}Bdbw_-btc', '#{ml.$cArStBp}Bdlw_-btc', -Bdxw, -Bdyw,
+		),
+	),
+	'BdStyle': (
+		'members': (
+			Bds, Bdts, Bdrs, '#{ml.$cArStBp}Bdbs_-btc', '#{ml.$cArStBp}Bdls_-btc', -Bdxs, -Bdys,
+		),
+	),
+	'BdSidesColor': (
+		'members': (
+			Bdtc, Bdrc, '#{ml.$cArStBp}Bdbc_-btc', '#{ml.$cArStBp}Bdlc_-btc', -Bdxc, -Bdyc,
+		),
+	),
+	'BdRadius': (
+		'members': (
+			Bdrd, Bdtrr, Bdtlr, Bdbrr, Bdblr, -Bdtrd, -Bdbrd,
+		),
+	),
+	'Overflows': (
+		'members': (
+			Ov, Ovx, Ovy,
+		),
+	),
+	'Margins': (
+		'members': (
+			M, Mt, Mr, '#{ml.$cArStBp}Mb_-btc', '#{ml.$cArStBp}Ml_-btc', -Mx, -My,
+		),
+	),
+	'MarginsNoR': (
+		'members': (
+			M, Mt, '#{ml.$cArStBp}Mb_-btc', '#{ml.$cArStBp}Ml_-btc', -Mx, -My,
+		),
+	),
+	'Paddings': (
+		'members': (
+			P, Pt, Pr, Pb, Pl, -Px, -Py,
+		),
+	),
+	'Spaces': (
+		'members': (
+			M, Mt, Mr, '#{ml.$cArStBp}Mb_-btc', '#{ml.$cArStBp}Ml_-btc', -Mx, -My,
+			P, Pt, Pr, Pb, Pl, -Px, -Py,
+			-I, -X, -Y, T, R, B, L,
+			W, H, Gap, Clmg, Rwg
+		),
+	),
+	'Offsets': (
+		'members': (
+			-I, -X, -Y, T, R, B, L,
+		),
+	),
+	'Colors': (
+		'members': (
+			C, Bgc, Bdc,
+		),
+	),
+	'ColorsExt': (
+		'members': (
+			C, Bgc, Bdc, Olc, Txdc
+		),
+	),
+	'Translates': (
+		'members': (
+			-Tr, -Trx, -Try,
+		),
+	),
+	'AllGaps': (
+		'members': (
+			Gap, Clmg, Rwg,
+		),
+	),
+	'Sizes': (
+		'members': (
+			W, H, Mxw, Mnh,
+		),
+	),
+	'Overscrolls': (
+		'members': (
+			Ovsb, Ovsbx, Ovsby
+		),
+	),
+	'Periods': (
+		'members': (
+			Tsd, Tsdl, And, Andl,
+		),
+	),
+) !default;
+
+$utils-groups-db: map.deep-merge($utils-groups-db, $utils-groups);
+$utils-groups-db: map.deep-merge($utils-groups-db, $utils-groups-ext);

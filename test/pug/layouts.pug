@@ -5,7 +5,7 @@ html(lang="ru")
 	head
 		- pageTitle = "Set of ready layouts";
 		include includes/head.pug
-	body.M0.Ff-ss0
+	body.M0.Ff--ss0
 		include includes/header.pug
 		main
 			.wrapper
@@ -17,30 +17,30 @@ html(lang="ru")
 							h3 Колонка №#{i}
 							p Et molestie ac, feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa, eget egestas purus viverra?
 				h2 Раскладка 2
-				.row.mD-f
+				.row.-D-f
 					.row__col.test-content.W6c_md
-						h3 Контент 
-					.row__item.row.W6c_md.chl_-Gcc-sm
+						h3 Контент
+					.row__item.row.W6c_md.chl_-Gsc-sm
 						- for(i = 0; i < 4; i++)
 							.row__col.W2c_sm
 								h3 Контент
 								p Колонка внутри другой колонки
 				h2 Раскладка 3
-				.row.mD-f.-Gcc-sm
+				.row.-D-f.-Gsc-sm
 					.row__col.W2c_sm
-						h3 Контент 
+						h3 Контент
 					.row__item.row.W2c_sm
 						- for(i = 0; i < 2; i++)
 							.row__col
 								p Какой то контент #{i}
 				h2 Раскладка 4
-				.row.mD-f.-Gcc-sm
+				.row.-D-f.-Gsc-sm
 					.row__item.row.W2c_sm
 						- for(i = 0; i < 2; i++)
 							.row__col
 								p Колонка #{i}
 					.row__col.W2c_sm
-						h3 Контент 
+						h3 Контент
 				h2 Раскладка 5
 				.row
 					- for(i = 0; i < 3; i++)
@@ -49,31 +49,31 @@ html(lang="ru")
 								.row__col.W2c_sm.W12c_md
 									p Подколонка #{j} <br> в колонке #{i}
 				h2 Раскладка 6
-				.row.-Gcc-sm
+				.row.-Gsc-sm
 					.row__col
-						h3 Контент 
-					.row.mD-f
+						h3 Контент
+					.row.-D-f
 						- for(i = 0; i < 2; i++)
 							.row__col.W2c_sm
 								p Колонка #{i}
 					.row__col
-						h3 Контент 
+						h3 Контент
 				h2 Раскладка 7
-				.row.mD-f.-Gcc-sm
+				.row.-D-f.-Gsc-sm
 					.row__col.W2c_sm
-						h3 Контент 
+						h3 Контент
 					.row__item.row.W2c_sm
 						- for(i = 0; i < 4; i++)
 							.row__col
 								p Колонка #{i}
 				h2 Раскладка 8
-				.row.mJc-c
+				.row.-Jc-c
 					- for(i = 0; i < 3; i++)
-						.row__col.Maw-fx0
+						.row__col.Maw--fx0
 							h3 Карточка #{i}
 							p с фиксированной шириной
 				h2 Раскладка 9
-				.row.-Gcc-sm
+				.row.-Gsc-sm
 					.row__col.W2c_sm
 						h3 Заголовок
 						p 2 равные колонки

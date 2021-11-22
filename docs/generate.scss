@@ -1,0 +1,161 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:string';
+@use '../src/tools' as ml;
+@use '../src/tools/functions/base' as bf;
+@use '../src/core/utils/load';
+
+$url-map: (
+	'keywords': 'section-general_reference.html#kssref-general_reference-kw',
+);
+
+@function format-map-value($key, $value, $util) {
+	$type: meta.type-of($value);
+	$result: '';
+
+	@if $type == 'map' {
+		$result: map2html($value, $util, 'sub');
+	} @else if $type == 'list' {
+		$result: '<ul class="-All-sr_&">';
+		$is-kw-link: (
+			$key == 'keywords' and map.has-key(ml.$utils-db, 'utils', 'keywords', list.nth($value, 1))
+		);
+
+		@each $item in $value {
+			$result: $result + '<li>' + value-link($key, $item);
+		}
+
+		$result: $result + '</ul>';
+	} @else {
+		$result: $result + value-link($key, $value);
+	}
+
+	@return $result;
+}
+
+@function value-link($key, $value) {
+	$is-link: if(
+		$key == 'keywords',
+		(
+			map.has-key(ml.$utils-db, 'utils', 'keywords', $value) or
+			map.has-key(ml.$utils-db, 'common', 'keywords', $value)
+		),
+		map.has-key($url-map, $key)
+	);
+
+	@return if(
+		$is-link,
+		'<a href="#{map.get($url-map, $key)}-#{$value}">' + $value + '</a>',
+		'<code>' + meta.inspect($value) + '</code>'
+	);
+}
+
+@function map2html($map, $util, $type: 'top') {
+	$result: '<table class="W100p Mt5su Mb6su">';
+	$cell-css: 'Bdb -Py2su';
+
+	@if $type == 'top' {
+		@if meta.type-of($map) != "map" {
+			$map: ('property': $map);
+			$result: '<div class="Fnw-b Mt6su Mb1su">No options</div> \
+<table class="Mb6su">';
+			$cell-css: '';
+		} @else if not map.has-key($map, 'properties') {
+			$map: map.set($map, 'properties', ml.util-prop($util, 'utils', true));
+		}
+	} @else if $type == 'sub' {
+		$result: '<table class="Bdb-;#ccc_:tr:!lc:td">';
+		$cell-css: '-Py1su';
+	} @else {
+		$result: '<table class="Bdb-;#ccc_:tr:!lc:td -Py2su_:tr:!oc:td -My5su">';
+		$cell-css: '';
+	}
+
+	@each $key, $value in $map {
+		$result: $result + '<tr> \
+<td class="#{$cell-css}">#{if($key == '', "<i>default</i>", $key)}</td> \
+<td class="#{$cell-css} Pl2gg Mxw-gSm">#{format-map-value($key, $value, $util)}</td> \
+</tr>'
+	}
+
+	@return $result + '</table>';
+}
+
+@function core-values($util) {
+	$util-map: ();
+
+	@each $item in map.keys(map.get(ml.$utils-map, 'core')) {
+		@if (
+			string.index($item, $util) and (
+				$item == $util or
+				list.index(bf.str-split($item, ml.$tUCm), $util)
+			)
+		) {
+			$util-map: map.set($util-map, $item, map.get(ml.$utils-map, 'core', $item));
+		}
+	}
+
+	@if list.length($util-map) > 0 {
+		$result: '<div class="Fnw-b Mt6su Mb1su">In the Core</div><ul class="-All-sr_& Mb6su_&">';
+
+		@each $utility, $values in $util-map {
+			$inspected: meta.inspect($values);
+			$result: $result + '<li><code>"#{$utility}": ' + if(
+				not string.index($inspected, '(') and list.length($values) > 1,
+				'(#{$inspected})',
+				$inspected,
+			) + '</code>';
+		}
+
+		@return $result + '</ul>';
+	}
+
+	@return null;
+}
+
+@include ml.apply('-All-sr_& Mb6su_& Bdb-;#ccc_:tr:!lc:td -Py2su_:tr:!oc:td');
+
+@each $util, $options in map.get(ml.$utils-db, 'utils', 'registry') {
+/*
+#{$util}
+
+#{map2html($options, $util)}
+
+#{core-values($util)}
+
+Styleguide: utils-reference.#{string.to-lower-case($util)}
+*/
+}
+
+@each $group, $members in ml.$utils-groups-db {
+/*
+#{$group}
+
+<code class>#{meta.inspect(map.get($members, 'members'))}`</class>
+
+Styleguide: general_reference.groups.#{string.to-lower-case($group)}
+*/
+}
+
+@each $feature, $options in map.get(ml.$utils-db, 'media', 'registry') {
+/*
+#{$feature}
+
+#{map2html($options, $feature)}
+
+#{core-values($feature)}
+
+Styleguide: general_reference.media.#{$feature}
+*/
+}
+
+@each $group-name, $keywords in map.get(ml.$utils-db, 'utils', 'keywords') {
+/*
+#{$group-name}
+
+#{map2html($keywords, null, null)}
+
+Styleguide: general_reference.kw.#{$group-name}
+*/
+}

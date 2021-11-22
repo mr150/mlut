@@ -1,0 +1,225 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:meta';
+@use 'sass:color';
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
+ml.$utils-db: map.deep-merge(
+	ml.$utils-db,
+	(
+	'common': (
+		'keywords': (
+			'global': (
+				// other colors are defined in the module config
+				'gCPrm0': #60c,
+			),
+		),
+	),
+	),
+);
+
+$alpha-step: ('alpha': 0.1);
+$green-step: ('green': 30);
+$green-alpha-step: ('green': 30, 'alpha': 0.1);
+$green-alpha-var: ('green': 30, 'alpha': '$bgAlpha');
+$rgb-step5: ('green': 5, 'red': 5, 'blue': 5);
+$rgb-short: ('rgb': 51);
+$rgba-short: ('rgb': 51, 'alpha': 0.2);
+$rgba-scale: ('rgb': 15%, 'alpha': 10%);
+
+@function custom-color-change($color, $args...) {
+	$args-map: meta.keywords($args);
+	$args-map: map.set($args-map, 'red', 255);
+	@return color.adjust($color, $args-map...);
+}
+
+@include describe('tools/functions/high/utils/range-generators') {
+	@include describe('color-range') {
+		$tests: (
+			'colors and alpha': (
+				([#60c, 3, $alpha-step], 'C'): (
+					'values': (
+						#60c: #60c,
+						'#60c*90p': rgba(102, 0, 204, 0.9),
+						'#60c*80p': rgba(102, 0, 204, 0.8),
+				)),
+				(['gCPrm0*50p', 3, ('alpha': -0.1)], 'C'): (
+					'values': (
+						'gCPrm0*50p': rgba(102, 0, 204, 0.5),
+						'gCPrm0*60p': rgba(102, 0, 204, 0.6),
+						'gCPrm0*70p': rgba(102, 0, 204, 0.7),
+				)),
+				([(#60c, 'prm0'), 'BpAll_3_f,a', $alpha-step], 'C'): (
+					'components': (
+						'at-rules': 'BpAll',
+						'post-states': 'f,a',
+					),
+					'values': (
+						#60c: #60c,
+						'#60c*90p': rgba(102, 0, 204, 0.9),
+						'#60c*80p': rgba(102, 0, 204, 0.8),
+						'prm0': #c06,
+						'prm0*90p': rgba(204, 0, 102, 0.9),
+						'prm0*80p': rgba(204, 0, 102, 0.8),
+					),
+				),
+			),
+			'rgb step': (
+				([(#066, 'prm0', 'gCPrm0'), 3, $green-step], 'C'): (
+					'values': (
+						#066: #066,
+						'prm0': #c06,
+						'prm50': #cc1e66,
+						'prm100': #cc3c66,
+						 'gCPrm0': #60c,
+						 'gCPrm50': #661ecc,
+						 'gCPrm100': #663ccc,
+				)),
+				(['sec0', 3, $rgb-step5], 'C'): (
+					'values': (
+						'sec0': #0c6,
+						'sec5': #05d16b,
+						'sec10': #0ad670,
+				)),
+				([('ter', 'sec0'), 3, $rgb-short], 'C'): (
+					'values': (
+						'ter': #06c,
+						'ter100': #3399ff,
+						'ter200': #66ccff,
+						'sec0': #0c6,
+						'sec100': #33ff99,
+						'sec200': #66ffcc,
+				)),
+			),
+			'rgb and alpha step': (
+				(['prm0', 3, $green-alpha-step], 'C'): (
+					'values': (
+						'prm0': #c06,
+						'prm0*90p': rgba(204, 0, 102, 0.9),
+						'prm0*80p': rgba(204, 0, 102, 0.8),
+						'prm50': #cc1e66,
+						'prm50*90p': rgba(204, 30, 102, 0.9),
+						'prm50*80p': rgba(204, 30, 102, 0.8),
+						'prm100': #cc3c66,
+						'prm100*90p': rgba(204, 60, 102, 0.9),
+						'prm100*80p': rgba(204, 60, 102, 0.8),
+				)),
+				([('ter', 'sec0'), 2, $rgba-short], 'C'): (
+					'values': (
+						'ter': #06c,
+						'ter*80p': rgba(0, 102, 204, 0.8),
+						'ter100': #3399ff,
+						'ter100*80p': rgba(51, 153, 255, 0.8),
+						'sec0': #0c6,
+						'sec0*80p': rgba(0, 204, 102, 0.8),
+						'sec100': #33ff99,
+						'sec100*80p': rgba(51, 255, 153, 0.8),
+				)),
+			),
+			'different count of shades and opacities': (
+				(['prm0', ('BpAll_3_h f', 2), $green-alpha-step], 'C'): (
+					'components': (
+						'at-rules': 'BpAll',
+						'post-states': 'h f',
+					),
+					'values': (
+						'prm0': #c06,
+						'prm0*90p': rgba(204, 0, 102, 0.9),
+						'prm50': #cc1e66,
+						'prm50*90p': rgba(204, 30, 102, 0.9),
+						'prm100': #cc3c66,
+						'prm100*90p': rgba(204, 60, 102, 0.9),
+				)),
+			),
+			'another color changing function': (
+				(['prm0', 3, $rgba-scale, 'scale'], 'C'): (
+					'values': (
+						'prm0': #c06,
+						'prm0*90p': rgba(204, 0, 102, 0.9),
+						'prm0*81p': rgba(204, 0, 102, 0.81),
+						'prm50': #d4267d,
+						'prm50*90p': rgba(212, 38, 125, 0.9),
+						'prm50*81p': rgba(212, 38, 125, 0.81),
+						'prm100': #da4791,
+						'prm100*90p': rgba(218, 71, 145, 0.90),
+						'prm100*81p': rgba(218, 71, 145, 0.81),
+				)),
+				(['sec0', 3, $rgb-step5, meta.get-function('custom-color-change')], 'C'): (
+					'values': (
+						'sec0': #0c6,
+						'sec50': #ffd16b,
+						'sec100': #ffd670,
+				)),
+			),
+			'css variables as colors': (
+				(['$bgColor', 3, $alpha-step], 'C'): (
+					'values': (
+						'$bgColor': var(--ml-bgColor),
+						'$bgColor*90p': rgba(var(--ml-bgColor), 0.9),
+						'$bgColor*80p': rgba(var(--ml-bgColor), 0.8),
+				)),
+				(['$bgColor*60p', 3, ('alpha': -15%)], 'C'): (
+					'values': (
+						'$bgColor*60p': rgba(var(--ml-bgColor), 0.6),
+						'$bgColor*75p': rgba(var(--ml-bgColor), 0.75),
+						'$bgColor*90p': rgba(var(--ml-bgColor), 0.90),
+				)),
+				([('$bgColor', 'prm0', '$bdColor'), 2, $green-alpha-step], 'C'): (
+					'values': (
+						'$bgColor': var(--ml-bgColor),
+						'$bgColor*90p': rgba(var(--ml-bgColor), 0.9),
+						'prm0': #c06,
+						'prm0*90p': rgba(204, 0, 102, 0.9),
+						'prm50': #cc1e66,
+						'prm50*90p': rgba(204, 30, 102, 0.9),
+						'$bdColor': var(--ml-bdColor),
+						'$bdColor*90p': rgba(var(--ml-bdColor), 0.9),
+				)),
+			),
+			'css variables as alpha': (
+				([('$bgColor', 'prm0', #60c), 2, $green-alpha-var], 'C'): (
+					'values': (
+						'$bgColor': var(--ml-bgColor),
+						'$bgColor*$bgAlpha': rgba(var(--ml-bgColor), var(--ml-bgAlpha, 1)),
+						'prm0': #c06,
+						'prm0*$bgAlpha': rgba(204, 0, 102, var(--ml-bgAlpha, 1)),
+						'prm50': #cc1e66,
+						'prm50*$bgAlpha': rgba(204, 30, 102, var(--ml-bgAlpha, 1)),
+						#60c: #60c,
+						'#60c*$bgAlpha': rgba(102, 0, 204, var(--ml-bgAlpha, 1)),
+				)),
+			),
+			'invalid value in range': (
+				([100, 2, $alpha-step], 'C'): (
+					'values': 'ERROR: invalid value in range: `100`. Expected color or CSS variable'
+				),
+				([('prm0', 'color', 'gCPrm0'), 2, $green-alpha-var], 'C'): (
+					'values': 'ERROR: invalid value in range: `ERROR: invalid value in range: `color`. Expected color or CSS variable`. Expected color or CSS variable'
+				),
+			),
+			'syntax error': (
+				([#100, 3], 'C'): (
+					'ERROR: invalid range syntax: `[#100, 3]`. Expected 3 or 4 arguments'
+				),
+			),
+		);
+
+		@each $test, $data in $tests {
+			@include it($test) {
+				ml.$utils-db: map.set(
+					ml.$utils-db, 'common', 'keywords', 'colors', ml.$colors
+				);
+
+				@each $args, $expect in $data {
+					@include assert-equal(
+						ml.generate-uv-color-range($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
+}

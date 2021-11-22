@@ -1,0 +1,274 @@
+@use 'sass-true' as *;
+@use 'sass:map';
+@use 'sass:list';
+@use 'tools' as ml;
+
+ml.$at-rules-cfg: map.set(ml.$at-rules-cfg, 'keywords', 'bp2', ('md' 'lg'));
+
+@include describe('tools/mixins/base/') {
+	@include describe('mk-ar') {
+		@include it('make only media queries from breakpoints') {
+			@include assert() {
+				@include output() {
+					@include ml.mk-ar('<sm,md:lg,xl') using ($ar) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (max-width: (ml.bp(sm) - 1px)),(min-width: ml.bp(md)) and (max-width: (ml.bp(lg) - 1px)),(min-width: ml.bp(xl)){
+						width: 50%;
+					}
+				}
+			}
+		}
+
+		@include it('make only media queries from abbreviations') {
+			@include assert('complex') {
+				@include output() {
+					@include ml.mk-ar('@:pr:h<gMd:dm,p-c:w>=90r') using ($ar) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media print and (max-height: #{ml.bp(md) - 1}) and (display-mode: fullscreen),(pointer: coarse) and (min-width: 90rem) {
+						width: 50%;
+					}
+				}
+			}
+		}
+
+		@include it('make only feature queries from abbreviations') {
+			@include assert('simple') {
+				@include output(false) {
+					@include ml.mk-ar('@s', ('name': 'D', 'value': '-ig')) using ($ar) {
+						.D-ig {
+							display: inline-grid;
+						}
+					}
+				}
+
+				@include expect(false) {
+					@supports (display: inline-grid) {
+						.D-ig {
+							display: inline-grid;
+						}
+					}
+				}
+			}
+
+			@include assert('complex') {
+				@include output() {
+					@include ml.mk-ar('@s:ps-sc,h100vh') using ($ar) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@supports (position: sticky) or (height: 100vh) {
+						width: 50%;
+					}
+				}
+			}
+		}
+
+		@include it('make at-rules from abbreviations and breakpoints') {
+			@include assert() {
+				@include output() {
+					@include ml.mk-ar('@s:apcr4/3@:dm') using ($ar) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@supports (aspect-ratio: 4/3) {
+						@media (display-mode: fullscreen) {
+							width: 50%;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output() {
+					@include ml.mk-ar('sm@s:ps-sc') using ($ar) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (min-width: ml.bp(sm)) {
+						@supports (position: sticky) {
+							width: 50%;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output() {
+					@include ml.mk-ar(ml.$kBpAll + '@s:d-ig') using ($ar) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@each $bp, $value in ml.$bp-map {
+						@media (min-width: $value) {
+							@supports (display: inline-grid) {
+								width: 50%;
+							}
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output() {
+					@include ml.mk-ar('bp2@s:d-ig') using ($ar) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@each $value in map.get(ml.$at-rules-cfg, 'keywords', 'bp2') {
+						@media (min-width: ml.bp($value)) {
+							@supports (display: inline-grid) {
+								width: 50%;
+							}
+						}
+					}
+				}
+			}
+
+			// no tests for media with breakpoints(like `md@m:ori`) because Sass compiler
+			// in test runner merges expected nested media queries and test always failed
+		}
+
+		@include it('make several at-rules from list') {
+			@include assert() {
+				@include output() {
+					@include ml.mk-ar('lg @m:s @s:d-ig') using ($ar) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (min-width: ml.bp(lg)) {
+						width: 50%;
+					}
+
+					@media screen {
+						width: 50%;
+					}
+
+					@supports (display: inline-grid) {
+						width: 50%;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output() {
+					@include ml.mk-ar(ml.$kBpAll + ' @s:d-ig') using ($ar) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@supports (display: inline-grid) {
+						width: 50%;
+					}
+
+					@each $bp, $value in ml.$bp-map {
+						@media (min-width: $value) {
+							width: 50%;
+						}
+					}
+				}
+			}
+		}
+
+		@include it('make util with at-rules') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-ar('lg @m:s') using ($ar) {
+						.#{ml.str-escape($ar)}_W50p {
+							width: 50%;
+						}
+					}
+				}
+
+				@include expect(false) {
+					@media (min-width: ml.bp(lg)) {
+						.lg_W50p {
+							width: 50%;
+						}
+					}
+
+					@media screen {
+						.\@m\:s_W50p {
+							width: 50%;
+						}
+					}
+				}
+			}
+		}
+
+		@include it('make at-rules with custom tokens') {
+			ml.$tUSv: '~';
+			ml.$tUNv: '~';
+			ml.$tAOr: 'OR';
+			ml.$tAAnd: '&';
+			ml.$tACs: '#';
+			ml.$tAAr: '%';
+			ml.$tSTu: '?';
+			ml.$tANot: '^';
+
+			ml.$abbr-separators: list.append(ml.$abbr-separators, '~');
+
+			@include assert() {
+				@include output() {
+					@include ml.mk-ar('%s&apcr~4/3OR^?%m&pr&dm~s&w>=gXlOR#testou', ('name': 'D', 'value': '~ig')) using ($ar) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@supports (aspect-ratio: 4/3) or (not (display: inline-grid)) {
+						@media print and (display-mode: standalone) and (min-width: ml.bp(xl)), (orientation: landscape) and (min-height: 20rem) {
+							width: 50%;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output() {
+					@include ml.mk-ar('<smORmd&lgORxl%s&ps~sc') using ($ar) {
+						width: 50%;
+					}
+				}
+
+				@include expect() {
+					@media (max-width: (ml.bp(sm) - 1px)),(min-width: ml.bp(md)) and (max-width: (ml.bp(lg) - 1px)),(min-width: ml.bp(xl)) {
+						@supports (position: sticky) {
+							width: 50%;
+						}
+					}
+				}
+			}
+
+			ml.$tUSv: map.get(ml.$utils-cfg, 'tokens', 'util', 'str-value');
+			ml.$tUNv: map.get(ml.$utils-cfg, 'tokens', 'util', 'num-value');
+			ml.$tAOr: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'or');
+			ml.$tAAnd: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'and');
+			ml.$tANot: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'not');
+			ml.$tACs: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'custom');
+			ml.$tAAr: map.get(ml.$at-rules-cfg, 'tokens', 'syntax', 'ar');
+			ml.$tSTu: map.get(ml.$utils-cfg, 'tokens', 'states', 'this-util');
+		}
+
+	}
+}

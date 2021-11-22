@@ -1,0 +1,559 @@
+@use 'sass-true' as *;
+@use 'tools' as ml;
+@use 'sass:map';
+
+$this: 'D';
+
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg, 'states', 'keywords', 'st1', ('i' 'vl')
+);
+
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg, 'states', 'custom', 'myState', '.pa.ro.voz'
+);
+
+@include describe('tools/mixins/base/utils') {
+	@include describe('mk-state') {
+		@include it('make only post states') {
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state('h:af,!a:af', null, false) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.D-f_h\:af\,\!a\:af:hover::after,
+					.D-f_h\:af\,\!a\:af:not(:active)::after {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state('&,&:f', null, null, &, $this) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.D-f_\&\,\&\:f.D-f_\&\,\&\:f,
+					.D-f_\&\,\&\:f.D-f_\&\,\&\:f:focus {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state('::^one:fw:=+*', null) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.D-f {
+						display: flex;
+					}
+
+					.D-f_\:\:\^one\:fw\:\=\+\* .-Ctx-one:focus-within+* {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state('h,f ' + ml.$kStPC, null, false) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.D-f_h\,f:hover,
+					.D-f_h\,f:focus {
+						display: flex;
+					}
+
+					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo-cls') {
+						.D-f_#{$key + $value} {
+							display: flex;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(':^:' + ml.$kStPC, null, null) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo-cls') {
+						.D-f_\:\^\:#{$key} .-Ctx#{$value} {
+							display: flex;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state('h:' + 'st1', null, null) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					@each $item in map.get(ml.$utils-cfg, 'states', 'keywords', 'st1') {
+						.D-f_h\:#{$item + ':hover' + map.get(ml.$utils-states, $item)} {
+							display: flex;
+						}
+					}
+				}
+			}
+		}
+
+		@include it('make only pre states') {
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(null, '^:h', false) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.-Ctx:hover .\^\:h_D-f {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(null, '=a:^:h,&-:^1:+', false, &, $this) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					a.-Ctx:hover .\=a\:\^\:h\,\&-\:\^1\:\+_D-f,
+					.D.-Ctx1+ .\=a\:\^\:h\,\&-\:\^1\:\+_D-f {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(null, '=h2. =ul:h', false) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					h2.\=h2\._D-f {
+						display: flex;
+					}
+
+					ul:hover .\=ul\:h_D-f {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(null, '^ct1:' + ml.$kStPC, false) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					@each $key, $value in map.get(ml.$utils-cfg, 'states', 'pseudo-cls') {
+						.-Ctx-ct1#{$value} .\^ct1\:#{$key}_D-f {
+							display: flex;
+						}
+					}
+				}
+			}
+		}
+
+		@include it('make pre and post states without no-state rule') {
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state('&-ib:af', '^one:h', false, &, $this) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.-Ctx-one:hover .\^one\:h_D-f {
+						display: flex;
+					}
+
+					.D-f_\&-ib\:af.D-ib::after {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(
+							ml.$kStCb + ' af',
+							ml.$kStCb + ' ^one:h',
+							false,
+						) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.-Ctx-one:hover .\^one\:h_D-f_af::after {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(
+							'&-:af #{ml.$kStCb} af',
+							'^one:h #{ml.$kStCb} ^:f',
+							false,
+							&,
+							$this
+						) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.-Ctx-one:hover .\^one\:h_D-f {
+						display: flex;
+					}
+
+					.D-f_\&-\:af.D::after {
+						display: flex;
+					}
+
+					.-Ctx:focus .\^\:f_D-f_af::after {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(
+							'&-:af #{ml.$kStCb} af',
+							'^one:h ^:f',
+							false,
+							&,
+							$this
+						) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.-Ctx-one:hover .\^one\:h_D-f {
+						display: flex;
+					}
+
+					.-Ctx:focus .\^\:f_D-f {
+						display: flex;
+					}
+
+					.D-f_\&-\:af.D::after {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(
+							'&-:af af',
+							'^one:h #{ml.$kStCb} ^:f',
+							false,
+							&,
+							$this
+						) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.-Ctx-one:hover .\^one\:h_D-f {
+						display: flex;
+					}
+
+					.D-f_\&-\:af.D::after {
+						display: flex;
+					}
+
+					.D-f_af::after {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(
+							ml.$kStCb + ' fw:af,a:af',
+							ml.$kStCb + ' ^1:f,^2:>',
+							false,
+						) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.-Ctx1:focus .\^1\:f\,\^2\:\>_D-f_fw\:af\,a\:af:focus-within::after,
+					.-Ctx1:focus .\^1\:f\,\^2\:\>_D-f_fw\:af\,a\:af:active::after,
+					.-Ctx2> .\^1\:f\,\^2\:\>_D-f_fw\:af\,a\:af:focus-within::after,
+					.-Ctx2> .\^1\:f\,\^2\:\>_D-f_fw\:af\,a\:af:active::after {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(
+							ml.$kStCb + 'af,b a:af',
+							ml.$kStCb + ':h =a:a:>,=a.act:>',
+							false,
+						) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					:hover .\:h_D-f_af\,b::after,
+					:hover .\:h_D-f_af\,b::before {
+						display: flex;
+					}
+
+					:hover .\:h_D-f_a\:af:active::after {
+						display: flex;
+					}
+
+					a:active> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,b::after,
+					a:active> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,b::before,
+					a.act> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,b::after,
+					a.act> .\=a\:a\:\>\,\=a\.act\:\>_D-f_af\,b::before {
+						display: flex;
+					}
+
+					a:active> .\=a\:a\:\>\,\=a\.act\:\>_D-f_a\:af:active::after,
+					a.act> .\=a\:a\:\>\,\=a\.act\:\>_D-f_a\:af:active::after {
+						display: flex;
+					}
+				}
+			}
+		}
+
+		@include it('make pre and post states and no-state rule') {
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(null, '^:f', true) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.D-f {
+						display: flex;
+					}
+
+					.-Ctx:focus .\^\:f_D-f {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+							@include ml.mk-state('f:af') {
+								display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.D-f {
+						display: flex;
+					}
+
+					.D-f_f\:af:focus::after {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state(null) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.D-f {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.D-f {
+						@include ml.mk-state('h:af', '^act') {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.D-f {
+						display: flex;
+					}
+
+					.-Ctx-act .\^act_D-f {
+						display: flex;
+					}
+
+					.D-f_h\:af:hover::after {
+						display: flex;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-state('af', '&-:h', true, '.D-ib', $this) {
+						display: inline-block;
+					}
+				}
+
+				@include expect(false) {
+					.D-ib {
+						display: inline-block;
+					}
+
+					.D:hover .\&-\:h_D-ib {
+						display: inline-block;
+					}
+
+					.D-ib_af::after {
+						display: inline-block;
+					}
+				}
+			}
+
+		}
+
+		@include it('make states with custom tokens') {
+			ml.$tUSv: '~';
+			ml.$tUNv: '~';
+			ml.$tUCm: '__';
+			ml.$tSOr: '|';
+			ml.$tSAnd: '&';
+			ml.$tSCs: '#';
+			ml.$tSCn: '%';
+			ml.$tSRaw: '?';
+			ml.$tSTu: '$';
+			ml.$tSNot: '*';
+			ml.$tSTudv: ml.$tSTu + ml.$tUSv;
+
+			@include assert() {
+				@include output(false) {
+					.xs\:md__D-f {
+						@include ml.mk-state(
+							'$ $~ib&#myState&af',
+							'%one&*a|%&?>*',
+							false,
+							&,
+							$this
+						) {
+							display: flex;
+						}
+					}
+				}
+
+				@include expect(false) {
+					.-Ctx\~one:not(:active) .xs\:md__\%one\&\*a\|\%\&\?\>\*__D-f,
+					.-Ctx>* .xs\:md__\%one\&\*a\|\%\&\?\>\*__D-f {
+						display: flex;
+					}
+
+					.xs\:md__D-f__\$.xs\:md__D-f__\$ {
+							display: flex;
+					}
+
+					.xs\:md__D-f__\$\~ib\&\#myState\&af.D\~ib.pa.ro.voz::after {
+						display: flex;
+					}
+				}
+			}
+
+			ml.$tUSv: map.get(ml.$utils-cfg, 'tokens', 'util', 'str-value');
+			ml.$tUNv: map.get(ml.$utils-cfg, 'tokens', 'util', 'num-value');
+			ml.$tUCm: map.get(ml.$utils-cfg, 'tokens', 'util', 'component');
+			ml.$tSOr: map.get(ml.$utils-cfg, 'tokens', 'states', 'or');
+			ml.$tSAnd: map.get(ml.$utils-cfg, 'tokens', 'states', 'and');
+			ml.$tSNot: map.get(ml.$utils-cfg, 'tokens', 'states', 'not');
+			ml.$tSCs: map.get(ml.$utils-cfg, 'tokens', 'states', 'custom');
+			ml.$tSTu: map.get(ml.$utils-cfg, 'tokens', 'states', 'this-util');
+			ml.$tSCn: map.get(ml.$utils-cfg, 'tokens', 'states', 'context');
+			ml.$tSRaw: map.get(ml.$utils-cfg, 'tokens', 'states', 'raw');
+			ml.$tSTudv: ml.$tSTu + ml.$tUSv;
+		}
+	}
+}

@@ -1,0 +1,271 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
+@use 'sass:selector';
+@use 'sass:color';
+
+@use '../forward-tools' as ml;
+@use 'value-converters' as converters;
+@use 'value-transformers' as transformers;
+@use 'range-generators';
+@use 'parse-util' as pu;
+
+@forward 'value-converters';
+@forward 'parse-util';
+@forward 'util-apply-selector';
+@forward 'range-generators' as generate-uv-*;
+@forward 'value-transformers' as transform-uv-*;
+
+// Utilities
+//
+// Functions for working with utilities.
+//
+// Styleguide: sass-tools.functions.high.utils
+
+@function convert-util-states($states, $this-util: null, $pre: false) {
+	$prefix: '&';
+	$suffix: '';
+
+	@if $pre {
+		$prefix: '';
+
+		@if string.slice($states, -1) == '.' {
+			$states: string.slice($states, 1, -2);
+		} @else {
+			$suffix: ' ';
+		}
+	}
+
+	$result: $prefix;
+	$or: ', ';
+
+	@each $state in ml.str-split($states, ml.$tSOr) {
+		@each $item in ml.str-split($state, ml.$tSAnd) {
+			$converted: '';
+			$not: string.slice($item, 1, 1) == ml.$tSNot;
+
+			@if $not {
+				$item: string.slice($item, 2);
+			}
+
+			@if map.has-key(ml.$utils-states, $item) {
+				$converted: map.get(ml.$utils-states, $item);
+			} @else if ml.str-starts($item, ml.$tSCs) {
+				$item-name: string.slice($item, string.length(ml.$tSCs) + 1);
+
+				@if map.has-key(ml.$utils-cfg, 'states', 'custom', $item-name) {
+					$converted: map.get(ml.$utils-cfg, 'states', 'custom', $item-name);
+				} @else {
+					@return ml.error('Undefined custom state: `#{$item}`');
+				}
+			} @else if ml.str-starts($item, ml.$tSCn) {
+				$ctx-value: string.slice($item, 2);
+				$converted: '.' + ml.str-escape(
+					ml.$cCtx + util-separated-value($ctx-value)
+				);
+			} @else if ml.str-starts($item, ml.$tSRaw) {
+				$converted: string.slice($item, 2);
+			} @else if ml.str-starts($item, ml.$tSTu) {
+				@if not $this-util {
+					@return ml.error('`#{ml.$tSTu}` cannot be used because $this-util is not passed');
+				}
+
+				@if $item == ml.$tSTu {
+					$converted: ml.str-escape(ml.$tSTu);
+				} @else if $item == ml.$tSTudv {
+					$converted: ml.css-class($this-util);
+				} @else {
+					$converted: ml.css-class($this-util + ml.str-escape(string.slice($item, 2)));
+				}
+			} @else if $item == '' {
+				$converted: ' ';
+			} @else {
+				$converted: $item;
+			}
+
+			@if $not {
+				$converted: ':not(#{$converted})';
+			}
+
+			$result: $result + $converted;
+		}
+
+		$result:  $result + $suffix + $or + $prefix;
+	}
+
+	@return string.slice($result, 1, -(1 + string.length($or) + string.length($prefix)));
+}
+
+@function util-separated-value($value) {
+	@if $value == '' {
+		@return '';
+	}
+
+	@if ml.str2n($value) {
+		@return ml.$tUNv + $value;
+	}
+
+	$str-value: if(
+		meta.type-of($value) == 'string',
+		$value,
+		$value + ''
+	);
+
+	$first-char: string.slice($str-value, 1, 1);
+
+	@if $first-char == '#' {
+		@return ml.$tUHv + $str-value;
+	}
+
+	@return if(
+		$first-char == ml.$tURv,
+		$str-value,
+		ml.$tUSv + $str-value
+	);
+}
+
+@function expand-util-kw-alias($raw-alias, $util) {
+	$alias-data: pu.parse-util($raw-alias);
+	$alias-list: ml.str-split(map.get($alias-data, 'value'), ml.$tUKwc);
+	$length: list.length($alias-list);
+	$values: ();
+
+	$result: if(
+		list.length($alias-data) > 1,
+		('components': map.remove($alias-data, 'value')),
+		()
+	);
+
+	@if $length == 1 {
+		$keywords: map.get(ml.$utils-db, 'utils', 'registry', $util, 'keywords');
+
+		@if meta.type-of($keywords) == 'map' {
+			$values: $keywords;
+		} @else {
+			@each $link in $keywords {
+				@if map.has-key(ml.$utils-db, 'utils', 'keywords', $link) {
+					$values: map.merge($values, map.get(ml.$utils-db, 'utils', 'keywords', $link));
+				}
+			}
+
+			@if $values == () {
+				$values: map.get(ml.$utils-db, 'common', 'keywords', 'css');
+			}
+		}
+	} @else if $length == 2 {
+		$group: list.nth($alias-list, 2);
+
+		@if map.has-key(ml.$utils-db, 'common', 'keywords', $group) {
+			$values: map.get(ml.$utils-db, 'common', 'keywords', $group);
+		} @else if $group == 'General' {
+			$values: map.merge(
+				map.get(ml.$utils-db, 'common', 'keywords', 'css'),
+				map.get(ml.$utils-db, 'common', 'keywords', 'global'),
+			);
+		} @else if $group == 'All' {
+			$values: map.merge(
+				map.merge(
+					map.get(ml.$utils-db, 'common', 'keywords', 'css'),
+					map.get(ml.$utils-db, 'common', 'keywords', 'global'),
+				),
+				map.get(ml.$utils-db, 'utils', 'registry', $util, 'keywords') or ()
+			);
+		} @else {
+			@return ml.error('Invalid keyword group alias: `#{$group}`');
+		}
+	} @else {
+		$section: list.nth($alias-list, 2);
+		$group: list.nth($alias-list, 3);
+
+		@if not map.has-key(ml.$utils-db, $section, 'keywords', $group) {
+			@return ml.error('Not found keywords on this path: `#{$section}.#{$group}`');
+		}
+
+		$values: map.get(ml.$utils-db, $section, 'keywords', $group);
+	}
+
+	@if map.has-key($values, '') {
+		@if ml.$uv-kw-alias-behavior == 1 {
+			$def-value: map.get($values, '');
+			$kw-def-value-index: list.index(
+				map.values(map.set($values, '', null)), $def-value
+			);
+
+			@if $kw-def-value-index {
+				$values: map.remove(
+					$values, list.nth(list.nth($values, $kw-def-value-index), 1)
+				);
+			}
+		} @else if ml.$uv-kw-alias-behavior == 2 {
+			$values: map.remove($values, '');
+		}
+	}
+
+	@return map.set($result, 'values', $values);
+}
+
+@function uv($util) {
+	@if $util == '' {
+		@return ml.error('Empty string passed');
+	}
+
+	$util-data: ml.parse-abbr($util);
+
+	@return ml.convert-util-value(
+		map.get($util-data, 'value'),
+		map.get($util-data, 'name'),
+	);
+}
+
+// TODO: replace several `map.set()` to one `map.merge`
+$-util-value-converters: ();
+
+$-fn-prefix-length: string.length('convert-uv-');
+
+@each $key, $value in meta.module-functions(converters) {
+	$-util-value-converters: map.set(
+		$-util-value-converters, string.slice($key, $-fn-prefix-length + 1), $value
+	);
+}
+
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg,
+	'converters',
+	map.merge(
+		$-util-value-converters, map.get(ml.$utils-cfg, 'converters')
+	)
+);
+
+$-util-range-generators: ();
+
+@each $key, $value in meta.module-functions(range-generators) {
+	$-util-range-generators: map.set(
+		$-util-range-generators, ml.str-replace($key, '-range'), $value
+	);
+}
+
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg,
+	'range-generators',
+	map.merge(
+		$-util-range-generators, map.get(ml.$utils-cfg, 'range-generators')
+	)
+);
+
+$-util-value-transformers: ();
+
+@each $key, $value in meta.module-functions(transformers) {
+	$-util-value-transformers: map.set(
+		$-util-value-transformers, $key, $value
+	);
+}
+
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg,
+	'transformers',
+	map.merge(
+		$-util-value-transformers, map.get(ml.$utils-cfg, 'transformers')
+	)
+);

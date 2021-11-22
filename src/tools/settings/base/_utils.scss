@@ -1,0 +1,300 @@
+@use 'sass:map';
+@use 'sass:list';
+
+// Utilities
+//
+// Settings affecting the values and generation of the core utilities.
+//
+// $ml-utils-states-psd-cls - map with abbreviations of pseudo-classes for utilities.
+// $ml-utils-states-psd-elm - map with pseudo-elements abbreviations for utilities.
+// $ml-utils-states - map with abbreviations of utility state names. Maps of pseudo-classes and pseudo-elements merge into it.
+//
+// Styleguide: sass-tools.settings.utils
+
+// Conversion to CSS
+//
+// Settings of conversion utilitie values to CSS values. All variables below are maps.
+//
+// $util-value-types - value types and lists of utilities that belong to this type.
+// $util-unit-aliases - utility unit aliases and corresponding CSS units.
+// $util-custom-units - [custom unit](section-concepts.html#kssref-concepts-su) names and their number values.
+// $util-css-keywords - keyword aliases and corresponding CSS global keywords.
+//
+// Styleguide: sass-tools.settings.utils.conversion
+
+// Maps with utilities states
+//
+// ```scss
+//$ml-utils-states-psd-cls: (
+//		'h': hover,
+//		'f': focus,
+//		'fw': focus-within,
+//		'h-f': (hover, focus),
+//		'a': active,
+//		'vl': valid,
+//		'iv': invalid,
+//);
+//
+//$ml-utils-states-psd-elm: (
+//		'bf': before,
+//		'af': after,
+//		'fln': first-line,
+//		'flt': first-letter,
+//);
+//
+//$ml-utils-states: (
+//		'noJs': null,
+//);
+// ```
+//
+// Styleguide: sass-tools.settings.utils.states
+
+$cCtx: '-Ctx' !default;
+$kSsVCP: 'Pl' !default;
+$kSsUMCS: 'core' !default;
+$uv-type-base: ('global-kw', 'cust-prop',) !default;
+$uv-type-default: list.join(('keyword', 'number'), $uv-type-base);
+$uv-kw-alias-behavior: 0 !default;
+$utils-up-specificity: false !default;
+$utils-config: () !default;
+$utils-config-ext: () !default;
+
+//stylelint-disable
+$utils-cfg: (
+	'gg-fallback-list': (
+		T, R, B, L, -X, -Y, -I,
+		P, Pt, Pr, Pb, Pl, -Px, -Py,
+		M, Mt, Mr, Mb, Ml, -Mx, -My,
+		Bdw, Bdtw, Bdrw, Bdbw, Bdlw, -Bdxw, -Bdyw,
+		Bd, Bdt, Bdr, Bdb, Bdl, -Bdx, -Bdy,
+		Mxw, Mnw, Mxh, Mnh,
+		Fns, -Fns, Txi, Lnh, Lts, Txs, Va, Txd, Fn,
+		Bxsd, Bdrd, Bgs, Bgp, Ol, Olw, Olo,
+		Stw, Fl, Flb, Tfo, -Gdl, -Gdrl,
+	),
+
+	'conversion-types': (
+		'default': $uv-type-default,
+		'num-length': list.join('num-length', $uv-type-base),
+		'kw-num-length': list.set-nth($uv-type-default, 2, 'num-length'),
+		'num-percent': list.join('num-percent', $uv-type-base),
+		'angle': list.join('angle', $uv-type-base),
+		'color': list.join('color', $uv-type-base),
+		'abbr-kw': list.join('abbr', $uv-type-default),
+		'grid-tpl': list.join('grid-tracks', $uv-type-default),
+		'grid-span': list.join(('grid-span', 'num-length'), $uv-type-base),
+		'resolution': list.set-nth($uv-type-default, 2, 'resolution'),
+		'outline': list.join(
+			('keyword', 'color', 'number'), $uv-type-base
+		),
+		'gradient': (
+			'keyword', 'color', 'cust-prop', $kSsVCP, 'number', 'angle', 'global-kw'
+		)
+	),
+
+	'abbr-separators': (),
+
+	'converters': (),
+
+	'transformers': (),
+
+	'range-generators': (),
+
+	'units': (
+		'default': (
+			'': 1px,
+			'e': 1em,
+			'p': 1%,
+			'r': 1rem,
+		),
+		'num-length': (
+			'e': 1em,
+			'p': 1%,
+			'r': 1rem,
+		),
+		'resolution': (
+			'i': 1dpi,
+			'c': 1dpcm,
+			'x': 1dppx,
+		),
+		'num-percent': (
+			'p': 0.01,
+		),
+		'angle': (
+			'd': 1deg,
+			'g': 1grad,
+			'r': 1rad,
+			'ra': 1rad,
+			't': 1turn,
+		),
+	),
+
+	'tokens': (
+		'util': (
+			'str-value': '-',
+			'raw-value': '=',
+			'num-value': '',
+			'hash-value': '',
+			'fallback-value': '?',
+			'color-alpha': '*',
+			'space': ';',
+			'custom-property': '$',
+			'global-keyword': 'g',
+			'keyword-chain': '.',
+			'important': '!',
+			'no-list-separator': '  ',
+			'list-separator1': ',',
+			'list-separator2': '/',
+			'component': '_',
+		),
+		'states': (
+			'or': ',',
+			'and': ':',
+			'not': '!',
+			'custom': '-',
+			'this-util': '&',
+			'context': '^',
+			'raw': '=',
+		),
+		'generation': (
+			'states-pseudo-classes': 'StPC',
+			'states-pseudo-elements': 'StPE',
+			'states-only': 'StOl',
+			'states-combine': 'StCb',
+			'uv-keywords-alias': 'KW',
+		),
+	),
+
+	'states': (
+		'pseudo-cls': (
+			'a': ':active',
+			'c': ':checked',
+			'd': ':disabled',
+			'df': ':default',
+			'de': ':defined',
+			'e': ':empty',
+			'en': ':enabled',
+			'f': ':focus',
+			'fw': ':focus-within',
+			'fv': ':focus-visible',
+			'frc': ':first-child',
+			'frot': ':first-of-type',
+			'h': ':hover',
+			'i': ':invalid',
+			'id': ':indeterminate',
+			'inr': ':in-range',
+			'lc': ':last-child',
+			'lot': ':last-of-type',
+			'ln': ':link',
+			'oc': ':only-child',
+			'oot': ':only-of-type',
+			'ot': ':optional',
+			'ouor': ':out-of-range',
+			'phs': ':placeholder-shown',
+			'r': ':required',
+			'rt': ':root',
+			'rdo': ':read-only',
+			'rdw': ':read-write',
+			't': ':target',
+			'v': ':visited',
+			'vl': ':valid',
+		),
+		'pseudo-elm': (
+			'af': '::after',
+			'b': '::before',
+			'frl': '::first-line',
+			'frlt': '::first-letter',
+			'flsb': '::file-selector-button',
+			'm': '::marker',
+			'ph': '::placeholder',
+			's': '::selection',
+		),
+		'custom': (
+			'btc': '>*+*',
+			'evc': ':nth-child(2n)',
+			'evot': ':nth-of-type(2n)',
+			'odc': ':nth-child(odd)',
+			'odot': ':nth-of-type(odd)',
+			'op': '[open]',
+			'tif': '[tabindex="0"]',
+			'nojs': '.no-js',
+		),
+	),
+) !default;
+
+$utils-cfg: map.deep-merge($utils-cfg, $utils-config);
+$utils-cfg: map.deep-merge($utils-cfg, $utils-config-ext);
+
+$tUSv: map.get($utils-cfg, 'tokens', 'util', 'str-value');
+$tUNv: map.get($utils-cfg, 'tokens', 'util', 'num-value');
+$tURv: map.get($utils-cfg, 'tokens', 'util', 'raw-value');
+$tUHv: map.get($utils-cfg, 'tokens', 'util', 'hash-value');
+$tUFv: map.get($utils-cfg, 'tokens', 'util', 'fallback-value');
+$tUCla: map.get($utils-cfg, 'tokens', 'util', 'color-alpha');
+$tUGkw: map.get($utils-cfg, 'tokens', 'util', 'global-keyword');
+$tUCp: map.get($utils-cfg, 'tokens', 'util', 'custom-property');
+$tUIm: map.get($utils-cfg, 'tokens', 'util', 'important');
+$tUCm: map.get($utils-cfg, 'tokens', 'util', 'component');
+$tUSp: map.get($utils-cfg, 'tokens', 'util', 'space');
+$tUKwc: map.get($utils-cfg, 'tokens', 'util', 'keyword-chain');
+$tUNls: map.get($utils-cfg, 'tokens', 'util', 'no-list-separator');
+$tULs1: map.get($utils-cfg, 'tokens', 'util', 'list-separator1');
+$tULs2: map.get($utils-cfg, 'tokens', 'util', 'list-separator2');
+
+$tSOr: map.get($utils-cfg, 'tokens', 'states', 'or');
+$tSAnd: map.get($utils-cfg, 'tokens', 'states', 'and');
+$tSNot: map.get($utils-cfg, 'tokens', 'states', 'not');
+$tSCs: map.get($utils-cfg, 'tokens', 'states', 'custom');
+$tSTu: map.get($utils-cfg, 'tokens', 'states', 'this-util');
+$tSCn: map.get($utils-cfg, 'tokens', 'states', 'context');
+$tSRaw: map.get($utils-cfg, 'tokens', 'states', 'raw');
+$tSTudv: $tSTu + $tUSv;
+
+$kUvKA: map.get($utils-cfg, 'tokens', 'generation', 'uv-keywords-alias');
+$kStPC: map.get($utils-cfg, 'tokens', 'generation', 'states-pseudo-classes');
+$kStPE: map.get($utils-cfg, 'tokens', 'generation', 'states-pseudo-elements');
+$kStCb: map.get($utils-cfg, 'tokens', 'generation', 'states-combine');
+$kStOl: map.get($utils-cfg, 'tokens', 'generation', 'states-only');
+$kCfOv: '/override' !default;
+$kCfBan: '/ban' !default;
+$kCfAl: '/allow' !default;
+
+$utils-cfg: map.set(
+	$utils-cfg,
+	'states',
+	'keywords',
+	map.merge(
+		(
+			$kStPC: 'pseudo-cls',
+			$kStPE: 'pseudo-elm',
+			$kStCb: null,
+			$kStOl: null,
+		),
+		map.get($utils-cfg, 'states', 'keywords') or ()
+	)
+);
+
+$utils-cfg: map.merge(
+	$utils-cfg,
+	(
+		'tokens-values': (
+			$tUNls: space,
+			$tULs1: comma,
+			$tULs2: slash,
+		),
+		'abbr-separators': list.join(
+			(
+				$tUSv,
+				$tUNv,
+				$tURv,
+				$tUHv,
+			),
+			map.get($utils-cfg, 'abbr-separators') or ()
+		)
+	)
+);
+
+$utils-states: map.merge(
+	map.get($utils-cfg, 'states', 'pseudo-cls'),
+	map.get($utils-cfg, 'states', 'pseudo-elm'),
+);

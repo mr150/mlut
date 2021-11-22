@@ -1,0 +1,306 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
+
+@use '../forward-tools' as ml;
+
+// Value converters
+//
+// Available converters:
+// ```scss
+//@debug ml.convert-uv-number(10); // 10px
+//@debug ml.convert-uv-unitless(10); // 10
+//@debug ml.convert-uv-resolution(2x); // 2dppx
+//@debug ml.convert-uv-global-kw('a'); // auto
+//@debug ml.convert-uv-abbr('bgc'); // background-color
+// ```
+//
+// $value - value for converting
+// $data = () - map with data required for converting
+//
+// Styleguide: sass-tools.functions.high.utils.value_converters
+
+@function convert-uv-number($value, $data: ()) {
+	$val-number: ml.str2n($value, true);
+	$units-key: map.get($data, 'units-key');
+
+	@if meta.type-of($val-number) == 'number' {
+		$unit-number: 0;
+		$unit: math.unit($val-number);
+
+		@if (
+			not $units-key and $unit == '' and
+			($val-number - math.floor($val-number)) != 0
+		) {
+			// TODO: add setting for changing unit
+			$unit-number: 1rem;
+		} @else {
+			$unit-number: map.get(
+				ml.$utils-cfg, 'units', $units-key or 'default', $unit
+			);
+		}
+
+		@if $unit-number {
+			@return math.div($val-number, map.get(ml.$units-all, $unit)) * $unit-number;
+		}
+
+		@if (
+			map.has-key(ml.$general-cfg, 'custom-unit-values', $unit) and
+			meta.function-exists($unit, ml)
+		) {
+			$section: map.get($data, 'section');
+			$name: map.get($data, 'name');
+			$unit-converter: meta.get-function($unit, false, ml);
+
+			@if (
+				($unit == 'su' or $unit == 'gg') and
+				map.get(ml.$utils-db, $section, 'registry', $name, 'directions') and
+				map.get($data, 'one-value')
+			) {
+				@return (
+					meta.call($unit-converter, $val-number, ('unit': 'rem'))
+					meta.call($unit-converter, $val-number)
+				);
+			}
+
+			@return meta.call(
+				$unit-converter,
+				$val-number,
+				(
+					'util': $name,
+					'unit': map.get(ml.$utils-db, $section, 'registry', $name, 'default-unit'),
+				)
+			);
+		}
+
+		@return $val-number;
+	}
+
+	@if not $units-key and meta.type-of($value) == 'string' {
+		$fraction: ml.str-split($value, '/');
+
+		@if list.length($fraction) > 1 {
+			$dividend: list.nth($fraction, 1);
+
+			@if map.get($data, 'negative') {
+				$dividend: '-' + $dividend;
+			}
+
+			@return calc(
+				ml.apply-value-converter($dividend, 'O')
+				/ ml.apply-value-converter(list.nth($fraction, 2), 'O')
+				* 100%
+			);
+		}
+	}
+
+	@return $value;
+}
+
+@function convert-uv-keyword($value, $data: ()) {
+	$name: map.get($data, 'name');
+	$section: map.get($data, 'section');
+
+	@if not map.has-key(ml.$utils-db, $section, 'registry', $name, 'keywords') {
+		@return $value;
+	}
+
+	@if map.has-key(
+		ml.$utils-db, $section, 'registry', $name, 'keywords', $value
+	) {
+		@return map.get(
+			ml.$utils-db, $section, 'registry', $name, 'keywords', $value
+		);
+	}
+
+	@if map.has-key(
+		ml.$utils-db, $section, 'registry', $name, 'custom-keywords', $value
+	) {
+		@return map.get(
+			ml.$utils-db, $section, 'registry', $name, 'custom-keywords', $value
+		);
+	}
+
+	$links: map.get(
+		ml.$utils-db, $section, 'registry', $name, 'keywords'
+	);
+
+	@each $item in $links {
+		@if map.has-key(ml.$utils-db, $section, 'keywords', $item, $value) {
+			@return map.get(ml.$utils-db, $section, 'keywords', $item, $value);
+		} @else if map.has-key(
+			ml.$utils-db, $section, 'registry', $item, 'keywords', $value
+		) {
+			@return map.get(
+				ml.$utils-db, $section, 'registry', $item, 'keywords', $value
+			);
+		}
+	}
+
+	@return (
+		map.get(ml.$utils-db, 'common', 'keywords', $links, $value) or
+		$value
+	);
+}
+
+@function convert-uv-resolution($value, $data: ()) {
+	@return convert-uv-number(
+		$value, ('units-key': 'resolution')
+	);
+}
+
+@function convert-uv-num-percent($value, $data: ()) {
+	@return convert-uv-number(
+		$value, map.set($data, 'units-key', 'num-percent')
+	);
+}
+
+@function convert-uv-angle($value, $data: ()) {
+	@return convert-uv-number(
+		$value, map.set($data, 'units-key', 'angle')
+	);
+}
+
+@function convert-uv-num-length($value, $data: ()) {
+	@return convert-uv-number(
+		$value, map.set($data, 'units-key', 'num-length')
+	);
+}
+
+@function convert-uv-global-kw($value, $data: ()) {
+	@if map.has-key(
+		ml.$utils-db, 'common', 'keywords', 'css-oft', $value
+	) {
+		@return map.get(
+			ml.$utils-db, 'common', 'keywords', 'css-oft', $value
+		);
+	}
+
+	@return (
+		map.get(ml.$utils-db, 'common', 'keywords', 'global', $value) or $value
+	);
+}
+
+@function convert-uv-abbr($value, $data: ()) {
+	@return (
+		ml.util-prop(
+			ml.str-ucfirst($value), map.get($data, 'section'), false, true
+		) or
+		// maybe in the future, the keys of utils in the registry will be unified
+		ml.util-prop($value, map.get($data, 'section'), false, true) or
+		$value
+	);
+}
+
+$-tUCp-length: string.length(ml.$tUCp);
+
+@function convert-uv-cust-prop($value, $data: ()) {
+	@if (
+		meta.type-of($value) != 'string' or
+		string.slice($value, 1, $-tUCp-length) != ml.$tUCp
+	) {
+		@return $value;
+	}
+
+	$fallback-pos: string.index($value, ml.$tUFv);
+	$result: '';
+
+	// TODO: change stylelint rules to allow this code
+	//stylelint-disable
+	@if $fallback-pos {
+		$result: var(
+			#{
+				'--' + ml.$uv-css-var-prefix + string.slice(
+					$value, $-tUCp-length + 1, $fallback-pos - 1
+				)
+			},
+			#{
+				ml.apply-value-converter(
+					string.slice($value, $fallback-pos + 1),
+					map.remove($data, 'negative')...
+				)
+			}
+		);
+	} @else {
+		$result: var(#{
+			'--' + ml.$uv-css-var-prefix + string.slice(
+				$value, $-tUCp-length + 1
+			)
+		});
+	}
+	//stylelint-enable
+
+	@return if(
+		map.get($data, 'negative'),
+		calc($result * -1),
+		$result
+	);
+}
+
+@function convert-uv-color($value, $data: ()) {
+	@if map.has-key(
+		ml.$utils-db, 'common', 'keywords', 'colors', $value
+	) {
+		@return map.get(
+			ml.$utils-db, 'common', 'keywords', 'colors', $value
+		);
+	}
+
+	@if meta.type-of($value) == 'string' {
+		$mod-color-list: ml.str-split($value, ml.$tUCla);
+
+		@if list.length($mod-color-list) > 1 {
+			//stylelint-disable
+			$part-color: list.nth($mod-color-list, 1);
+			$converted-part: ml.apply-value-converter(
+				$part-color, map.remove($data, 'negative')...
+			);
+			$color: ml.str-hex2color($converted-part);
+			//stylelint-enable
+
+			@if $color or ml.is-css-var($converted-part) {
+				$part-alpha: list.nth($mod-color-list, 2);
+				$alpha: ml.apply-value-converter($part-alpha, 'O');
+
+				@if ml.is-css-var($alpha) and not string.index($part-alpha, ml.$tUFv) {
+					$alpha: string.insert($alpha, ', 1', -2);
+				}
+
+				@return rgba($color or $converted-part, $alpha);
+			}
+		}
+	}
+
+	@return $value;
+}
+
+@function -is-kw-with-num($value, $str-part, $str-length: 1) {
+	@return (
+		meta.type-of($value) == 'string' and
+		string.slice($value, 1, $str-length) == $str-part and
+		ml.str-digit-index($value) == $str-length + 1
+	);
+}
+
+@function convert-uv-grid-tracks($value, $data: ()) {
+	@return if(
+		-is-kw-with-num($value, 't'),
+		repeat(
+			string.unquote(string.slice($value, 2)), minmax(0, 1fr)
+		),
+		$value
+	);
+}
+
+@function convert-uv-grid-span($value, $data: ()) {
+	@if not -is-kw-with-num($value, 's') {
+		@return $value;
+	}
+
+	// string is not converted to the number because it is unlikely to use this value in the future
+	$number: string.unquote(string.slice($value, 2));
+
+	@return span $number / span $number;
+}

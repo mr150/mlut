@@ -1,0 +1,245 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
+ml.$utils-db: map.deep-merge(
+	ml.$utils-db,
+	('utils':
+	(
+		'registry': (
+			'Txt': (
+				'components': 'Txt_af',
+			),
+		),
+	)
+	)
+);
+
+@include describe('tools/mixins/high/utils') {
+	@include describe('apply') {
+		@include it('apply utils to rule') {
+			@include assert() {
+				@include output(false) {
+					.card {
+						display: block;
+
+						@include ml.apply(
+							'P2su Fns1r'
+						);
+					}
+				}
+
+				@include expect(false) {
+					.card {
+						display: block;
+					}
+
+					.card {
+						padding: 0.5rem 8px;
+					}
+
+					.card {
+						font-size: 1rem;
+					}
+				}
+			}
+		}
+
+		@include it('apply utils with states and at-rules') {
+			@include assert() {
+				@include output(false) {
+					.card {
+						@include ml.apply(
+							'Fns1r_h ^one_Bgc-$bgColor?#c06_h'
+						);
+					}
+				}
+
+				@include expect(false) {
+					.card:hover {
+						font-size: 1rem;
+					}
+
+					.-Ctx-one .card:hover {
+						background-color: var(--ml-bgColor, #c06);
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					.card {
+						@include ml.apply(
+							'xl_P2su'
+							'xl_C#fff!_h,f'
+							'@m:pr_^new_O80p_h',
+							(),
+							true
+						);
+					}
+				}
+
+				@include expect(false) {
+					@media (min-width: ml.bp(xl)) {
+						.card {
+							padding: 0.5rem 8px;
+						}
+					}
+
+					@media (min-width: ml.bp(xl)) {
+						.card:hover,
+						.card:focus {
+							color: #fff !important;
+						}
+					}
+
+					@media print {
+						.-Ctx-new .card:hover {
+							opacity: 0.8;
+						}
+					}
+				}
+			}
+		}
+
+		@include it('use utils components from arguments') {
+			@include assert() {
+				@include output(false) {
+					.card {
+						@include ml.apply(
+							'xl_P2su'
+							'Lnh2_af'
+							Fns1r,
+							('important': true, 'post-states': null),
+							true
+						);
+					}
+				}
+
+				@include expect(false) {
+					@media (min-width: ml.bp(xl)) {
+						.card {
+							padding: 0.5rem 8px !important;
+						}
+					}
+
+					.card {
+						line-height: 2 !important;
+					}
+
+					.card {
+						font-size: 1rem !important;
+					}
+				}
+			}
+		}
+
+		@include it('top-level apply') {
+			// double quotes are used in `Ct` value because the test runner always use
+			// such quotes in expected CSS
+			$-tmp-chars: ml.$spec-chars;
+			ml.$spec-chars: list.append(ml.$spec-chars, '"');
+
+			@include assert() {
+				@include output(false) {
+					@include ml.apply(
+						'xl_P2su Lnh2r!_af Ct-"id:";attr(id)_b'
+					);
+				}
+
+				@include expect(false) {
+					@media (min-width: ml.bp(xl)) {
+						.xl_P2su {
+							padding: 0.5rem 8px;
+						}
+					}
+
+					.Lnh2r\!_af::after {
+						line-height: 2rem !important;
+					}
+
+					.Ct-\"id\:\"\;attr\(id\)_b::before {
+						content: "id:" attr(id);
+					}
+				}
+			}
+
+			ml.$spec-chars: $-tmp-chars;
+		}
+
+		@include it('apply util with bound components') {
+			@include assert() {
+				@include output(false) {
+					.testou {
+						@include ml.apply(
+							'Txt-c Txt_h'
+						);
+					}
+				}
+
+				@include expect(false) {
+					.testou {
+						text-transform: capitalize;
+					}
+
+					.testou:hover {
+						text-transform: uppercase;
+					}
+				}
+			}
+		}
+
+		@include it('make util with raw states by default') {
+			@include assert() {
+				@include output(false) {
+					@include ml.apply(
+						(
+							'.js:h:>* _D',
+							'D_[href]:f',
+							'D-f_.nojs',
+							'D_![tabindex]',
+						),
+						(), true
+					);
+				}
+
+				@include expect(false) {
+					.js:hover > * .\.js\:h\:\>\*_D {
+						display: block;
+					}
+
+					.D_\[href\]\:f[href]:focus {
+						display: block;
+					}
+
+					.D-f_\.nojs.nojs {
+						display: flex;
+					}
+
+					.D_\!\[tabindex\]:not([tabindex]) {
+						display: block;
+					}
+				}
+			}
+		}
+
+		@include it('apply util with `selector` option') {
+			@include assert() {
+				@include output(false) {
+					.testou {
+						@include ml.apply('-Cl');
+					}
+				}
+
+				@include expect(false) {
+					.testou::after {
+						display: table;
+						content: '';
+						clear: both;
+					}
+				}
+			}
+		}
+	}
+}

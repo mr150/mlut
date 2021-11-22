@@ -1,0 +1,175 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
+
+// General
+//
+// Settings that affect the work of the mixins, functions and all toolkit.
+//
+// $mlu-browser-font-size = 16px - font size for converting [px to rem](section-sass-tools.html#kssref-sass-tools-functions-px2rem). 16px used because is default font size in settings of most browsers.
+// $mlu-su-cf = 4 - value of [space unit](section-concepts.html#kssref-concepts-su). Use this factor to change su and for calculations.
+// $mlu-su = 4px - space unit in px. Depends on `$mlu-su-cf`. Use this variable to set the values in px.
+// $mlu-main-directions - Map with directions for css properties and values generation. The keys are the first letters of the directions, and the values are directions. <br> Example: `('t': top)`.
+// $is-test-env = false - indicating the test environment
+// $css-vars-fallback = true - add fallback for values in `grid-gutters` units
+// $ml-css-transition-time = 0.3s - default [transition](section-core-utils.html#kssref-core-utils-anim) duration.
+//
+// Styleguide: sass-tools.settings.general
+
+// CSS variables
+//
+// Settings of global [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) which used in MLUT.
+//
+// Styleguide: sass-tools.settings.css_vars
+
+// Names
+//
+// In addition to variables, the names of custom properties are contained in the map `$mlu-css-vars`.
+// Below are the names of the variables, the corresponding keys in the map and names of custom properties.
+//
+// $var-gg = --mlu-gg - `gg`.
+// $var-gg-rem = --mlu-gg-rem - `gg-rem`.
+// $var-grid-cols = --mlu-grid-cols - `grid-cols`.
+//
+// Styleguide: sass-tools.settings.css_vars.names
+
+$ratio-box-flex: false !default;
+$browser-font-size: 16px !default;
+$css-transition-time: 0.3s !default;
+$wrapper-max-width: 1200px !default;
+
+$su-cf: 4 !default;
+
+$is-test-env: false !default;
+
+$css-var-prefix: 'ml-' !default;
+$css-vars-fallback: true !default;
+
+$class-prefix: '' !default;
+
+$hex-digits: (
+	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+);
+
+$dec-digits: (
+	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+);
+
+$spec-chars: (
+	' ', '!', '#', '$', '%', '&', '(', ')', '*', '+', ',', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '`', '{', '|', '}', '~', "'",
+) !default;
+
+$number-max: 2e9 !default;
+
+$general-cfg: (
+	'main-directions': (
+		't': top,
+		'r': right,
+		'b': bottom,
+		'l': left,
+	),
+	'custom-unit-values': (
+		'su': (
+			'px': $su-cf * 1px,
+			'rem': math.div(1px, $browser-font-size) * $su-cf * 1rem,
+		),
+	),
+	'units': (
+		'css': (
+			'px': 1px,
+			'cm': 1cm,
+			'mm': 1mm,
+			'q': 1q,
+			'rem': 1rem,
+			'%': 1%,
+			'fr': 1fr,
+			'ch': 1ch,
+			'pc': 1pc,
+			'in': 1in,
+			'em': 1em,
+			'pt': 1pt,
+			'ex': 1ex,
+			'vw': 1vw,
+			'vh': 1vh,
+			'vmin': 1vmin,
+			'vmax': 1vmax,
+			'deg': 1deg,
+			'turn': 1turn,
+			'grad': 1grad,
+			'rad': 1rad,
+			's': 1s,
+			'ms': 1ms,
+			'hz': 1hz,
+			'khz': 1khz,
+			'dpi': 1dpi,
+			'dpcm': 1dpcm,
+			'dppx': 1dppx,
+			'x': 1x,
+		),
+		'custom': (
+			'': 1,
+			'gg': 1gg,
+			'gc': 1gc,
+			'su': 1su,
+			'd': 1d,
+			'e': 1e,
+			'g': 1g,
+			'i': 1i,
+			'p': 1p,
+			'r': 1r,
+			'ra': 1ra,
+			't': 1t,
+		),
+	),
+	'generic-css': (
+		'border-box': true,
+		'sup-sub-no-v-align': true,
+		'embeds-v-align': true,
+		'embeds-aspect-ratio': true,
+		'forms-normalize': true,
+		'embeds-block': false,
+		'svg-fill-cur-color': false,
+		'default-reduce-motion': false,
+		'reset-border': false,
+		'reset': false,
+	),
+	'css-vars': (
+		'gg': 'gg',
+		'gg-rem': 'gg-rem',
+		'gs-formula-diff': 'gsfd',
+		'gs-columns-count': 'gscc',
+	),
+) !default;
+
+$general-config: () !default;
+$general-config-ext: () !default;
+
+$general-cfg: map.deep-merge($general-cfg, $general-config);
+$general-cfg: map.deep-merge($general-cfg, $general-config-ext);
+
+$su: map.get($general-cfg, 'custom-unit-values', 'su', 'px');
+$su-rem: map.get($general-cfg, 'custom-unit-values', 'su', 'rem');
+
+$main-directions: map.get($general-cfg, 'main-directions');
+
+$units-all: map.merge(
+	map.get($general-cfg, 'units', 'css'),
+	map.get($general-cfg, 'units', 'custom'),
+);
+
+$-prefixed-vars: ();
+
+@each $key, $value in map.get($general-cfg, 'css-vars') {
+	$-prefixed-vars: map.set(
+		$-prefixed-vars, $key, string.unquote('--#{$css-var-prefix}#{$value}')
+	);
+}
+
+$general-cfg: map.set($general-cfg, 'css-vars', $-prefixed-vars);
+
+$var-gg: map.get($general-cfg, 'css-vars', 'gg');
+$var-gg-rem: map.get($general-cfg, 'css-vars', 'gg-rem');
+$var-gsfd: map.get($general-cfg, 'css-vars', 'gs-formula-diff');
+$var-gscc: map.get($general-cfg, 'css-vars', 'gs-columns-count');
+
+$base-border-box: map.get($general-cfg, 'generic-css', 'border-box');

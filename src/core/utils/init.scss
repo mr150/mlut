@@ -1,0 +1,107 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:string';
+
+@use '../../tools/functions/base' as bf;
+@use '../../tools/' as ml;
+
+$utils: () !default;
+$filter-mod: null;
+$-all-utils-map: ();
+
+@function -list2map($list) {
+	$map: ();
+
+	@each $item in $list {
+		$map: map.set($map, $item, null);
+	}
+
+	@return $map;
+}
+
+@each $section, $map in ml.$utils-map {
+	@each $util in map.keys($map) {
+		@if map.has-key($-all-utils-map, $util) {
+			$exist-values: map.get($-all-utils-map, $util);
+			$new-values: map.get($map, $util);
+			$exist-val-type: meta.type-of($exist-values);
+			$new-val-type: meta.type-of($new-values);
+
+			@if $exist-val-type != 'map' and $new-val-type != 'map' {
+				$map: map.set($map, $util, list.join($exist-values, $new-values));
+			} @else if $exist-val-type == 'map' and $new-val-type == 'map' {
+				// Here should be a @break, but it is not yet implemented in Sass
+			} @else if $exist-val-type == 'map' and $new-val-type != 'map' {
+				$map: map.set($map, $util, map.merge($exist-values, -list2map($new-values)));
+			} @else {
+				$map: map.set($map, $util, map.merge(-list2map($exist-values), $new-values));
+			}
+		}
+	}
+
+	$-all-utils-map: map.deep-merge($-all-utils-map, $map);
+}
+
+ml.$utils-map: $-all-utils-map;
+
+$-utils-list: map.keys(ml.$utils-map);
+$-all-groups: map.keys(ml.$utils-groups-db);
+$-override-map: map.get($utils, ml.$kCfOv);
+$-filter-keys: ();
+
+@if map.has-key($utils, ml.$kCfAl) {
+	$filter-mod: ml.$kCfAl;
+} @else if map.has-key($utils, ml.$kCfBan) {
+	$filter-mod: ml.$kCfBan;
+}
+
+@if $filter-mod {
+	$utils-filtered: ();
+
+	// not used `ls-find`, because the utils can be repeated in the map
+	// and we need to go through almost all elements
+	// TODO: optimize the search to remove extra check
+	@each $util in map.get($utils, $filter-mod) {
+		@each $item in $-utils-list {
+			@if (
+				string.index($item, $util) and (
+					$item == $util or
+					list.index(bf.str-split($item, ml.$tUCm), $util)
+				)
+			) {
+				$-filter-keys: list.append($-filter-keys, $item);
+			}
+		}
+	}
+
+	@if $filter-mod ==  ml.$kCfAl {
+		@each $item in $-filter-keys {
+			$utils-filtered: map.set(
+				$utils-filtered, $item, map.get(ml.$utils-map, $item)
+			);
+		}
+
+		ml.$utils-map: $utils-filtered;
+	} @else {
+		ml.$utils-map: map.remove(ml.$utils-map, $-filter-keys...);
+	}
+}
+
+@if $-override-map != null {
+	ml.$utils-map: map.merge(ml.$utils-map, $-override-map);
+} @else if map.has-key($utils, ml.$kCfOv) {
+	ml.$utils-map: ();
+}
+
+@each $util, $values in list.join(
+	ml.$utils-map, map.remove($utils, ml.$kCfOv, ml.$kCfAl, ml.$kCfBan)
+) {
+	@if bf.ls-find(
+		$-all-groups, meta.get-function('str-contains-item', false, bf), $util
+	) {
+		@include ml.mk-utils-group($util, $values);
+	} @else {
+		@include ml.mk-util($util, $values);
+	}
+}

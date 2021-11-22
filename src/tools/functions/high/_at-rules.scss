@@ -1,0 +1,249 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+@use 'sass:math';
+@use 'sass:meta';
+
+@use 'forward-tools' as ml;
+
+// At-rules
+//
+// Functions for working with at-rules.
+//
+// Styleguide: sass-tools.functions.high.at_rules
+
+$-tALs-length: string.length(ml.$tALs);
+$-tACs-length: string.length(ml.$tACs);
+
+@function convert-bp-list($bp-list) {
+	$from: list.nth($bp-list, 1);
+	$is-max: ml.str-starts($from, ml.$tALs);
+
+	@if $is-max {
+		$from: string.slice($from, $-tALs-length + 1);
+	}
+
+	$from-value: map.get(ml.$bp-map, $from);
+
+	@if not $from-value {
+		@return ml.error(
+			'Invalid breakpoint name: `#{$from}`',
+		);
+	}
+
+	$media-str: '(min-width: #{$from-value})';
+
+	@if $is-max {
+		$media-str: '(max-width: #{$from-value - 1px})';
+	} @else if list.length($bp-list) >= 2 {
+		$media-str:
+			$media-str + ' and (max-width: #{ml.bp(list.nth($bp-list, 2)) - 1px})';
+	}
+
+	@return $media-str;
+}
+
+@function convert-feature-abbr($abbr, $section: 'utils') {
+	@if $abbr == '' {
+		@return ml.error('Passed empty string');
+	}
+
+	$result: '';
+	$abbr-data: ml.parse-abbr($abbr);
+	$abbr-feature: map.get($abbr-data, 'name');
+	$abbr-value: map.get($abbr-data, 'value');
+	$separator: map.get($abbr-data, 'separator');
+	$feat-prefix: '';
+	$feature: ml.util-prop($abbr-feature, $section, false, true);
+
+	@if not $feature {
+		@return ml.error(
+			'Invalid feature abbreviation: `#{$abbr}`. `#{$abbr}` is not defined in `#{$section}` section of $utils-db map'
+		);
+	}
+
+	@if (
+		$abbr-value == '' and
+		not map.has-key(ml.$utils-db, $section, 'registry', $abbr-feature, 'keywords')
+	) {
+		@return '(#{$feature})';
+	}
+
+	@if $separator {
+		@if string.index($separator, ml.$tALs) {
+			$feat-prefix: 'max-';
+		} @else if string.index($separator, ml.$tAGt) {
+			$feat-prefix: 'min-';
+		}
+	}
+
+	$feat-value: ml.convert-util-value($abbr-value, $abbr-feature, $section);
+
+	@if meta.type-of($feat-value) == 'number' {
+		$value-unit: math.unit($feat-value);
+
+		@if $value-unit == 'su' {
+			$feat-value: ml.su($feat-value);
+		}
+
+		@if $separator == ml.$tALs or $separator == ml.$tAGt {
+			$value-diff: bp-value-diff($feat-value, $value-unit);
+
+			@if $separator == ml.$tALs {
+				$value-diff: $value-diff * -1;
+			}
+
+			$feat-value: $feat-value + $value-diff;
+		}
+	}
+
+	@return '(#{$feat-prefix + $feature}: #{$feat-value})';
+}
+
+@function bp-value-diff($value, $computed-unit: null) {
+	$unit: $computed-unit or math.unit($value);
+	$diff: map.get(ml.$general-cfg, 'units', 'css', $unit) or 1;
+
+	@if $unit == 'rem' or $unit == 'em' {
+		$diff: $diff * 0.06; // 1px = 0.062rem
+	} @else if $unit != 'px' and $unit != '' {
+		// TODO: add calculations for other units
+		$diff: $diff * 0.01;
+	}
+
+	@return $diff;
+}
+
+// Converters
+//
+// Converts abbreviations to at-rules. The name of the converter begins with `convert-ar-` and ends with the name of the at-rule, which it corresponds. The exception is the breakpoint converter. All converters take the same arguments, see below.
+//
+// Converter is bind to the at-rule that contains in the `$at-rules-db` map. It is recorded on the 'converter' key in the map of the relevant rule.
+//
+// Available converters:
+// ```scss
+//@debug ml.convert-ar-bp('<sm,xl'); // '(max-width: 519px), (min-width: 1168px)'
+//@debug ml.convert-ar-media('scr:fc'); // 'screen and (forced-colors)'
+//@debug ml.convert-ar-supports('!&', 'D-ig'); // '(not (display: inline-grid))'
+// ```
+//
+// $ar - string with abbreviations
+// $this-util = null - utility for which the at-rules will be generated
+//
+// Styleguide: sass-tools.functions.high.at_rules.converters
+
+@function convert-ar-bp($ar, $this-util: null) {
+	$result: '';
+	$queries: ml.str-split($ar, ml.$tAOr);
+
+	@each $queary in $queries {
+		$result: $result + convert-bp-list(ml.str-split($queary, ml.$tAAnd)) + ', ';
+	}
+
+	@return string.slice($result, 1, -3);
+}
+
+@function convert-ar-media($ar, $this-util: null) {
+	$result: '';
+	$queries: ml.str-split($ar, ml.$tAOr);
+	$and: ' and ';
+	$or: ', ';
+
+	@each $queary in $queries {
+		$queary-list: ml.str-split($queary, ml.$tAAnd);
+
+		@each $item in $queary-list {
+			@if map.has-key(ml.$at-rules-db, 'media', 'types', $item) {
+				$result: $result + map.get(ml.$at-rules-db, 'media', 'types', $item);
+			} @else if ml.str-starts($item, ml.$tACs) {
+				$item-name: string.slice($item, $-tACs-length + 1);
+
+				@if map.has-key(ml.$at-rules-db, 'media', 'custom', $item-name) {
+					$result: $result + map.get(ml.$at-rules-db, 'media', 'custom', $item-name);
+				} @else {
+					@return ml.error('Undefined custom media query: `#{$item}`');
+				}
+			} @else {
+				$result: $result + convert-feature-abbr($item, 'media');
+			}
+
+			$result: $result + $and;
+		}
+
+		$result: string.slice($result, 1, -(1 + string.length($and))) + $or;
+	}
+
+	@return string.slice($result, 1, -(1 + string.length($or)));
+}
+
+@function convert-ar-supports($ar, $this-util: null) {
+	@if $ar == '' and $this-util {
+		@return convert-feature-abbr(
+			map.get($this-util, 'name') + map.get($this-util, 'value')
+		);
+	}
+
+	$result: '';
+	$separator: ml.$tAAnd;
+	$operator: ' and ';
+
+	@if string.index($ar, ml.$tAOr) {
+		@if string.index($ar, ml.$tAAnd) {
+			@return ml.error('Different operators are not allowed in one abbreviations list');
+		}
+
+		$separator: ml.$tAOr;
+		$operator: ' or ';
+	}
+
+	@each $item in ml.str-split($ar, $separator) {
+		$converted: '';
+		$not: string.slice($item, 1, 1) == ml.$tANot;
+
+		@if $not {
+			$item: string.slice($item, 2);
+		}
+
+		@if ml.str-starts($item, ml.$tACs) {
+			$item-name: string.slice($item, 2);
+
+			@if map.has-key(ml.$at-rules-db, 'supports', 'custom', $item-name) {
+				$converted: map.get(ml.$at-rules-db, 'supports', 'custom', $item-name);
+			} @else {
+				@return ml.error('Undefined custom supports condition: `#{$item}`');
+			}
+		} @else if ml.str-starts($item, ml.$tSTu) {
+			@if not $this-util {
+				@return ml.error('`#{ml.$tSTu}` cannot be used because $this-util is not passed');
+			}
+
+			$value: map.get($this-util, 'value');
+
+			@if $item == ml.$tSTu + ml.$tUSv {
+				$value: ml.$tUSv + 'ini';
+			} @else if $item != ml.$tSTu {
+				$value: string.slice($item, 2);
+			}
+
+			$converted: convert-feature-abbr(map.get($this-util, 'name') + $value);
+		} @else {
+			$converted: convert-feature-abbr(ml.str-ucfirst($item));
+		}
+
+		@if $not {
+			$converted: '(not #{$converted})';
+		}
+
+		$result: $result + $converted + $operator;
+	}
+
+	@return string.slice($result, 1, -(1 + string.length($operator)));
+}
+
+@each $key, $value in ml.$at-rules-db {
+	@if meta.function-exists('convert-ar-#{$key}') {
+		ml.$at-rules-db: map.set(
+			ml.$at-rules-db, $key, 'converter', meta.get-function('convert-ar-#{$key}')
+		);
+	}
+}

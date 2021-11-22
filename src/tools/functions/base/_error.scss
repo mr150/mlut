@@ -1,0 +1,9 @@
+@use '../../settings/base/general' as ml;
+
+@function error($message, $catch: ml.$is-test-env) {
+	@if $catch {
+		@return 'ERROR: #{$message}';
+	}
+
+	@error '#{$message}';
+}

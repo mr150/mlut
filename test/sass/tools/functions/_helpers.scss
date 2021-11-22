@@ -1,0 +1,35 @@
+@use 'sass:meta';
+@use 'sass:string';
+@use 'sass-true' as *;
+@use 'tools/functions/common/helpers' as ml;
+
+@include describe('tools/functions/common/helpers') {
+	@include describe('is-css-var') {
+		$tests: (
+			'checks if value is a CSS variable': (
+				(var(--bgColor)): true,
+				('--bgColor'): false,
+			),
+			'checks CSS variable in a color': (
+				(rgba(var(--ml-bgColor), 0.6), true): true,
+				(hsla(var(--ml-bgColor), 0.6), true): true,
+				(rgb(var(--ml-bgColor)), true): true,
+				(hsl(var(--ml-bgColor)), true): true,
+				(rgb(var(--ml-bgColor))): false,
+				(rgba(24, 0, 102, var(--ml-bgAlpha)), true): false,
+
+			),
+		);
+
+		@each $test, $data in $tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						ml.is-css-var($args...),
+						$expect,
+					);
+				}
+			}
+		}
+	}
+}

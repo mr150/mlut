@@ -1,11 +1,10 @@
 test/**/*.map
-
 test/**/*.html
-
-test/js/scripts.js
-
 test/libs/**/*
+test/css/index.css
+test/css/mlut.min.css
 
 docs/styleguide
+docs/content/generate.css
 
 node_modules

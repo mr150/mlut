@@ -1,0 +1,1400 @@
+@use 'sass-true' as *;
+@use 'tools' as ml;
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg, 'states', 'keywords', 'st1', ('iv' 'vl')
+);
+
+ml.$utils-db: map.deep-merge(
+	ml.$utils-db,
+	('utils':
+	(
+		'registry': (
+			'-I': (
+				'components': 'Stretched',
+		),
+			'-AltPos': (
+				'components': '',
+				'properties': position,
+			),
+			'Mxw': (
+				'keywords': 'maw-kws',
+			),
+			'-Posed': (
+				'preset-properties': (
+					'position': absolute,
+				),
+				'properties': (
+					top,
+					z-index,
+				),
+				'conversion': 'num-length',
+				'repeat-prop-values': false,
+			),
+			'Gx': (
+				'properties': margin-left,
+				'selector': '.my-& >*+*',
+			),
+			'Txt': (
+				'components': 'Txt_af',
+			),
+	),
+	)
+	)
+);
+
+
+@include describe('tools/mixins/high/utils') {
+	@include describe('mk-util') {
+		@include it('make util from map of values') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'D', (
+						'ib': inline-block,
+						'': block,
+						150: 150q,
+					));
+				}
+
+				@include expect(false) {
+					.D-ib {
+						display: inline-block;
+					}
+
+					.D {
+						display: block;
+					}
+
+					.D150 {
+						display: 150q;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'xl_D_+:h', (
+						'sm@s:&_^:h_f_af f': flex,
+						'_h,f': block,
+						'ib': inline-block,
+					));
+				}
+
+				@include expect(false) {
+					.D-f {
+						display: flex;
+					}
+
+					.-Ctx:hover .\^\:h_D-f {
+						display: flex;
+					}
+
+					.D-f_af::after {
+						display: flex;
+					}
+
+					.D-f_f:focus {
+						display: flex;
+					}
+
+					@media (min-width: ml.bp(sm)) {
+						@supports (display: flex) {
+							.sm\@s\:\&_D-f {
+								display: flex;
+							}
+						}
+					}
+
+					.D {
+						display: block;
+					}
+
+					.D_h\,f:hover,
+					.D_h\,f:focus {
+						display: block;
+					}
+
+					.D-ib {
+						display: inline-block;
+					}
+
+					.D-ib_\+\:h+:hover {
+						display: inline-block;
+					}
+
+					@media (min-width: ml.bp(xl)) {
+						.xl_D-ib {
+							display: inline-block;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Mxw', (
+						500: false,
+						'n': null,
+						[5e, 7]: null,
+						'sm0': 560px,
+					));
+				}
+
+				@include expect(false) {
+					.Mxw500 {
+						max-width: 500;
+					}
+
+					.Mxw-n {
+						max-width: none;
+					}
+
+					@for $i from 5 through 7 {
+						.Mxw#{$i}e {
+							max-width: $i * 1em;
+						}
+					}
+
+					.Mxw-sm0 {
+						max-width: 560px;
+					}
+				}
+			}
+		}
+
+		@include it('make util from list of values') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Mxw', (
+						10, 4vw, 'a', 2su, 5gg
+					));
+				}
+
+				@include expect(false) {
+					.Mxw10 {
+						max-width: 10px;
+					}
+
+					.Mxw4vw {
+						max-width: 4vw;
+					}
+
+					.Mxw-a {
+						max-width: auto;
+					}
+
+					.Mxw2su {
+						max-width: ml.su(2);
+					}
+
+					.Mxw5gg {
+						max-width: 80px;
+						max-width: calc(var(#{ml.$var-gg}) * 5);
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Mxw', (
+						':f_100_+:h',
+						'xl @m:w>=gSm:o_32p_vl',
+					));
+				}
+
+				@include expect(false) {
+					.Mxw100 {
+						max-width: 100px;
+					}
+
+					:focus .\:f_Mxw100 {
+						max-width: 100px;
+					}
+
+					.Mxw100_\+\:h+:hover {
+						max-width: 100px;
+					}
+
+					.Mxw32p {
+						max-width: 32%;
+					}
+
+					.Mxw32p_vl:valid {
+						max-width: 32%;
+					}
+
+					@media (min-width: ml.bp(xl)) {
+						.xl_Mxw32p {
+							max-width: 32%;
+						}
+					}
+
+					@media (min-width: ml.bp(sm)) and (orientation: landscape) {
+						.\@m\:w\>\=gSm\:o_Mxw32p {
+							max-width: 32%;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'M', (
+						2gg,
+					));
+				}
+
+				@include expect(false) {
+					.M2gg {
+						margin: 2rem 32px;
+						margin: ml.ggr(2) ml.gg(2);
+					}
+				}
+			}
+		}
+
+		@include it('make util from list of ranges') {
+			@include assert() {
+				$step: 2;
+
+				@include output(false) {
+					@include ml.mk-util(
+						'Bdw', (
+						[2, 4],
+						5,
+						[2su, 4, $step],
+					));
+				}
+
+				@include expect(false) {
+					@for $i from 2 through 4 {
+						.Bdw#{$i} {
+							border-width: $i * 1px;
+						}
+					}
+
+					.Bdw5 {
+						border-width: 5px;
+					}
+
+					$i: 2;
+
+					@while $i <= 4 {
+						.Bdw#{$i * 1su} {
+							border-width: ml.su($i);
+						}
+
+						$i: $i + $step;
+					}
+				}
+			}
+
+			@include assert() {
+				$start: 0.5;
+				$end: 2;
+				$step: 0.7;
+
+				@include output(false) {
+					@include ml.mk-util(
+						'Bdw', (
+						['lg_#{$start}r_h', $end, $step],
+					));
+				}
+
+				@include expect(false) {
+					$i: $start;
+
+					@while $i <= $end {
+						$value: ml.str-escape($i * 1r);
+						$css-value: $i * 1rem;
+
+						.Bdw#{$value} {
+							border-width: $css-value;
+						}
+
+						.Bdw#{$value}_h:hover {
+							border-width: $css-value;
+						}
+
+						@media (min-width: ml.bp(lg)) {
+							.lg_Bdw#{$value} {
+								border-width: $css-value;
+							}
+						}
+
+						$i: $i + $step;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'sm ArOl_Mt', (
+						[10, 20, 10],
+						['@m:pr ArOl_40', 45, 5],
+					));
+				}
+
+				@include expect(false) {
+					@media (min-width: ml.bp(sm)) {
+						.sm_Mt10 {
+							margin-top: 10px;
+						}
+					}
+
+					@media (min-width: ml.bp(sm)) {
+						.sm_Mt20 {
+							margin-top: 20px;
+						}
+					}
+
+					@media print {
+						.\@m\:pr_Mt40 {
+							margin-top: 40px;
+						}
+					}
+
+					@media print {
+						.\@m\:pr_Mt45 {
+							margin-top: 45px;
+						}
+					}
+				}
+			}
+		}
+
+		@include it('make util from range of custom units') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Bdw', (
+						[1gg, 2],
+					));
+				}
+
+				@include expect(false) {
+					.Bdw1gg {
+						border-width: 16px;
+						border-width: ml.gg(1);
+					}
+
+					.Bdw2gg {
+						border-width: 32px;
+						border-width: ml.gg(2);
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'M', (
+						[1gg, 2],
+					));
+				}
+
+				@include expect(false) {
+					.M1gg {
+						margin: 1rem 16px;
+						margin: ml.ggr(1) ml.gg(1);
+					}
+
+					.M2gg {
+						margin: 2rem 32px;
+						margin: ml.ggr(2) ml.gg(2);
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'M', (
+						[1su, 2],
+					));
+				}
+
+				@include expect(false) {
+					.M1su {
+						margin: ml.sur(1) ml.su(1);
+					}
+
+					.M2su {
+						margin: ml.sur(2) ml.su(2);
+					}
+				}
+			}
+		}
+
+		@include it('make util from mixin arguments') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Ovcm', (5, 'ih_f'),
+						(
+							'post-states': 'h',
+						),
+						(
+							'properties': overflow-clip-margin,
+							'conversion': 'num-length',
+						)
+					);
+				}
+
+				@include expect(false) {
+					.Ovcm5 {
+						overflow-clip-margin: 5;
+					}
+
+					.Ovcm5_h:hover {
+						overflow-clip-margin: 5;
+					}
+
+					.Ovcm-ih {
+						overflow-clip-margin: inherit;
+					}
+
+					.Ovcm-ih_f:focus {
+						overflow-clip-margin: inherit;
+					}
+				}
+			}
+
+		}
+
+		@include it('make util at-rules and states taking into account keywords') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Mxw', (
+						'@m:pr_100_+:h ' + ml.$kStOl,
+						ml.$kArOl + ' @m:pr_32p_+:h',
+						'#{ml.$kArOl} @m:pr_50p_vl #{ml.$kStOl}',
+					));
+				}
+
+				@include expect(false) {
+					.Mxw100_\+\:h+:hover {
+						max-width: 100px;
+					}
+
+					@media print {
+						.\@m\:pr_Mxw100 {
+							max-width: 100px;
+						}
+					}
+
+					@media print {
+						.\@m\:pr_Mxw32p {
+							max-width: 32%;
+						}
+					}
+
+					@media print {
+						.\@m\:pr_Mxw50p {
+							max-width: 50%;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Mxw', (
+						ml.$kArSt + ' @m:pr_200_+:h',
+						'#{ml.$kArSt} #{ml.$kArOl} @m:pr_a_vl',
+					));
+				}
+
+				@include expect(false) {
+					.Mxw200 {
+						max-width: 200px;
+					}
+
+					.Mxw200_\+\:h+:hover {
+						max-width: 200px;
+					}
+
+					@media print {
+						.\@m\:pr_Mxw200 {
+							max-width: 200px;
+						}
+
+						.\@m\:pr_Mxw200_\+\:h+:hover {
+							max-width: 200px;
+						}
+					}
+
+					@media print {
+						.\@m\:pr_Mxw-a {
+							max-width: auto;
+						}
+
+						.\@m\:pr_Mxw-a_vl:valid {
+							max-width: auto;
+						}
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Mxw', (
+						'#{ml.$kArSt} @m:pr_300_+:h #{ml.$kStOl}',
+						ml.$kArSO + ' @m:pr_n_vl',
+					));
+				}
+
+				@include expect(false) {
+					.Mxw300_\+\:h+:hover {
+						max-width: 300px;
+					}
+
+					@media print {
+						.\@m\:pr_Mxw300 {
+							max-width: 300px;
+						}
+
+						.\@m\:pr_Mxw300_\+\:h+:hover {
+							max-width: 300px;
+						}
+					}
+
+					@media print {
+						.\@m\:pr_Mxw-n_vl:valid {
+							max-width: none;
+						}
+					}
+				}
+			}
+		}
+
+		@include it('make utils with multiple properties') {
+			@include assert('properties list and custom util class name') {
+				@include output(false) {
+					@include ml.mk-util(
+						'-I', (
+						0: null,
+						1gg: null,
+						'sm0;xs0_h': (1rem, 20px),
+						'1r;10;2r': null,
+						'md0': (2rem, 20px, 1rem, 12px),
+					));
+				}
+
+				@include expect(false) {
+					.Stretched0 {
+						@each $key, $value in ml.$main-directions { #{$value}: 0px; }
+					}
+
+					.Stretched1gg {
+						@each $key, $value in ml.$main-directions { #{$value}: ml.$gs-default-gtr; }
+
+						@each $key, $value in ml.$main-directions { #{$value}: ml.gg(1); }
+					}
+
+					.Stretched-sm0\;xs0 {
+						top: 1rem;
+						right: 20px;
+						bottom: 1rem;
+						left: 20px;
+
+						&_h:hover {
+							top: 1rem;
+							right: 20px;
+							bottom: 1rem;
+							left: 20px;
+						}
+					}
+
+					.Stretched1r\;10\;2r {
+						top: 1rem;
+						right: 10px;
+						bottom: 2rem;
+						left: 1rem;
+					}
+
+					.Stretched-md0 {
+						top: 2rem;
+						right: 20px;
+						bottom: 1rem;
+						left: 12px;
+					}
+
+				}
+			}
+
+			@include assert('properties map with one static item and no repeating values') {
+				@include output(false) {
+					@include ml.mk-util(
+						'-Posed', (
+						0: null,
+						'sm0': (1rem, 2),
+						'lg1': (null, 5),
+						'lg_a;-1': null,
+					));
+				}
+
+				@include expect(false) {
+					.-Posed0 {
+						position: absolute;
+						top: 0;
+					}
+
+					.-Posed-sm0 {
+						position: absolute;
+						top: 1rem;
+						z-index: 2;
+					}
+
+					.-Posed-lg1 {
+						position: absolute;
+						z-index: 5;
+					}
+
+					.-Posed-a\;-1 {
+						position: absolute;
+						top: auto;
+						z-index: -1;
+					}
+
+					@media (min-width: ml.bp(lg)) {
+						.lg_-Posed-a\;-1 {
+							position: absolute;
+							top: auto;
+							z-index: -1;
+						}
+					}
+				}
+			}
+		}
+
+		@include it('make util with empty class name') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'-AltPos', (
+						'ArOl @s_sticky': null,
+						':h_abs': absolute,
+					));
+				}
+
+				@include expect(false) {
+					@supports (position: sticky) {
+						.\@s_sticky {
+							position: sticky;
+						}
+					}
+
+					.abs {
+						position: absolute;
+					}
+
+					:hover .\:h_abs {
+						position: absolute;
+					}
+				}
+			}
+		}
+
+		@include it('make util with multiple values for one property') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Bdrd', (
+						'^:+_5;10': null,
+						'50p;50p;12;12': null,
+						'xs0': 0 8px 50%,
+					));
+				}
+
+				@include expect(false) {
+					.Bdrd5\;10 {
+						border-radius: 5px 10px;
+					}
+
+					.-Ctx+.\^\:\+_Bdrd5\;10 {
+						border-radius: 5px 10px;
+					}
+
+					.Bdrd50p\;50p\;12\;12 {
+						border-radius: 50% 50% 12px 12px;
+					}
+
+					.Bdrd-xs0 {
+						border-radius: 0 8px 50%;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Bdrd', (
+						'=50;1r_h StOl',
+						'12;=20'
+					));
+				}
+
+				@include expect(false) {
+					.Bdrd\=50\;1r_h:hover {
+						border-radius: 50 1rem;
+					}
+
+					.Bdrd12\;\=20 {
+						border-radius: 12px 20;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Bdrd', (
+						'13;1gg_a StOl',
+						'1gg;25/1.5gg',
+					));
+				}
+
+				@include expect(false) {
+					.Bdrd13\;1gg_a:active {
+						border-radius: 13px ml.$gs-default-gtr;
+						border-radius: 13px ml.gg(1);
+					}
+
+					.Bdrd1gg\;25\/1\.5gg {
+						border-radius: list.slash((ml.$gs-default-gtr * 1) 25px, ml.$gs-default-gtr * 1.5);
+						border-radius: list.slash(ml.gg(1) 25px, ml.gg(1.5));
+					}
+				}
+			}
+		}
+
+		@include it('make util with name as a property') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Width', (
+						5.3su,
+					));
+				}
+
+				@include expect(false) {
+					.Width5\.3su {
+						width: ml.su(5.3);
+					}
+				}
+			}
+		}
+
+		@include it('make util with CSS !important') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'M', (
+						'!': auto,
+						 '25!_af StOl': null,
+						 '2r;12!': null,
+					));
+				}
+
+				@include expect(false) {
+					.M\! {
+						margin: auto !important;
+					}
+
+					.M25\!_af::after {
+						margin: 25px !important;
+					}
+
+					.M2r\;12\! {
+						margin: 2rem 12px !important;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'-I', (
+						'2r;12!',
+					));
+				}
+
+				@include expect(false) {
+					.Stretched2r\;12\! {
+						top: 2rem !important;
+						right: 12px !important;
+						bottom: 2rem !important;
+						left: 12px !important;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Bdw', (
+						['1r!', 2],
+					));
+				}
+
+				@include expect(false) {
+					.Bdw1r\! {
+						border-width: 1rem !important;
+					}
+
+					.Bdw2r\! {
+						border-width: 2rem !important;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Fns!', (3su, 3gg)
+					);
+				}
+
+				@include expect(false) {
+					.Fns3su\! {
+						font-size: ml.sur(3) !important;
+					}
+
+					.Fns3gg\! {
+						font-size: 3rem !important;
+						font-size: calc(var(#{ml.$var-gg-rem}) * 3) !important;
+					}
+				}
+			}
+
+			@include assert() {
+				ml.$utils-up-specificity: true;
+
+				@include output(false) {
+					@include ml.mk-util(
+						'Bdw', (5)
+					);
+
+					@include ml.mk-util(
+						'-Posed', ('10%;3')
+					);
+				}
+
+				@include expect(false) {
+					.Bdw5 {
+						border-width: 5px !important;
+					}
+
+					.-Posed10\%\;3 {
+						position: absolute !important;
+						top: 10% !important;
+						z-index: 3 !important;
+					}
+				}
+
+				ml.$utils-up-specificity: false;
+			}
+		}
+
+		@include it('increased specificity with selector') {
+			@include assert() {
+				ml.$utils-up-specificity: '#super .app';
+
+				@include output(false) {
+					@include ml.mk-util(
+						'Bdw', (5)
+					);
+
+					@include ml.mk-util(
+						'Gx', ('StOl StCb ^_20_ StCb h,f',)
+					);
+				}
+
+				@include expect(false) {
+					#super .app .Bdw5 {
+						border-width: 5px;
+					}
+
+					#super .app .-Ctx .my-\^_Gx20_h\,f:hover >*+*,
+					#super .app .-Ctx .my-\^_Gx20_h\,f:focus >*+* {
+						margin-left: 20px;
+					}
+				}
+
+				ml.$utils-up-specificity: false;
+			}
+		}
+
+		@include it('make util with custom selector') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Gx', ('^ StCb ^_20_h h,f StCb :^0',));
+				}
+
+				@include expect(false) {
+					.my-Gx20 >*+* {
+						margin-left: 20px;
+					}
+
+					.-Ctx .my-\^_Gx20 >*+* {
+						margin-left: 20px;
+					}
+
+					.my-Gx20_h:hover >*+* {
+						margin-left: 20px;
+					}
+
+					.my-Gx20_h\,f:hover >*+*,
+					.my-Gx20_h\,f:focus >*+* {
+						margin-left: 20px;
+					}
+
+					.-Ctx .my-\^_Gx20_\:\^0 .-Ctx0 >*+* {
+						margin-left: 20px;
+					}
+				}
+			}
+		}
+
+		@include it('make util with global keywords and CSS variables in value') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Mxw', ('gLg_af', '$card-sm'));
+				}
+
+				@include expect(false) {
+					.Mxw-gLg {
+						max-width: map.get(ml.$utils-db, 'common', 'keywords', 'global', 'gLg');
+					}
+
+					.Mxw-gLg_af::after {
+						max-width: map.get(ml.$utils-db, 'common', 'keywords', 'global', 'gLg');
+					}
+
+					.Mxw-\$card-sm {
+						max-width: var(--ml-card-sm);
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Ml', '-gLg'
+					);
+				}
+
+				@include expect(false) {
+					.Ml--gLg {
+						margin-left: -(map.get(ml.$utils-db, 'common', 'keywords', 'global', 'gLg'));
+					}
+				}
+			}
+		}
+
+		@include it('make util with color in value') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'C', (
+						#f06,
+						'#f0d_f StOl',
+						'#60c*$txtAlpha',
+						'$txtColor?#333',
+					));
+				}
+
+				@include expect(false) {
+					.C\#f06 {
+						color: #f06;
+					}
+
+					.C\#f0d_f:focus {
+						color: #f0d;
+					}
+
+					.C\#60c\*\$txtAlpha {
+						color: rgba(102, 0, 204, var(--ml-txtAlpha, 1));
+					}
+
+					.C-\$txtColor\?\#333 {
+						color: var(--ml-txtColor, #333);
+					}
+				}
+			}
+		}
+
+		@include it('make util from color range') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'C', (
+						[('prm0', '$txtColor'), '2_h StOl', ('alpha': 0.2, 'green': 30)],
+					));
+				}
+
+				@include expect(false) {
+					.C-prm0_h:hover {
+						color: #c06;
+					}
+
+					.C-prm0\*80p_h:hover {
+						color: rgba(204, 0, 102, 0.8);
+					}
+
+					.C-prm50_h:hover {
+						color: #cc1e66;
+					}
+
+					.C-prm50\*80p_h:hover {
+						color: rgba(204, 30, 102, 0.8);
+					}
+
+					.C-\$txtColor_h:hover {
+						color: var(--ml-txtColor);
+					}
+
+					.C-\$txtColor\*80p_h:hover {
+						color: rgba(var(--ml-txtColor), 0.8);
+					}
+				}
+			}
+		}
+
+		@include it('use the value generated above from the map as keywords') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'D', (
+						'ib_af', '', '150_h StOl'
+					));
+				}
+
+				@include expect(false) {
+					.D-ib {
+						display: inline-block;
+					}
+
+					.D-ib_af::after {
+						display: inline-block;
+					}
+
+					.D {
+						display: block;
+					}
+
+					.D150_h:hover {
+						display: 150q;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Mxw', 'sm0'
+					);
+				}
+
+				@include expect(false) {
+					.Mxw-sm0 {
+						max-width: 560px;
+					}
+				}
+			}
+		}
+
+		@include it('saving colors when creating them from a map') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'C', (
+						'main0': #c06,
+						'minor0': #150,
+					));
+
+					@include ml.mk-util(
+						'Bgc', (
+						'main0_h StOl',
+						'minor0',
+					));
+				}
+
+				@include expect(false) {
+					.C-main0 {
+						color: #c06;
+					}
+
+					.C-minor0 {
+						color: #150;
+					}
+
+					.Bgc-main0_h:hover {
+						background-color: #c06;
+					}
+
+					.Bgc-minor0 {
+						background-color: #150;
+					}
+				}
+			}
+		}
+
+		@include it('make utils with global class prefix') {
+			ml.$class-prefix: 'ml-';
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'D', (
+						'', 'StOl ^:h_ib'
+					));
+				}
+
+				@include expect(false) {
+					.ml-D {
+						display: block;
+					}
+
+					.-Ctx:hover .\^\:h_ml-D-ib {
+						display: inline-block;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Gx', (
+						'12', 'StOl ^_12'
+					));
+				}
+
+				@include expect(false) {
+					.my-ml-Gx12 >*+* {
+						margin-left: 12px;
+					}
+
+					.-Ctx .my-\^_ml-Gx12 >*+* {
+						margin-left: 12px;
+					}
+				}
+			}
+
+			ml.$class-prefix: '';
+		}
+
+		@include it('make util using keywords aliases') {
+			ml.$utils-db: map.set(
+				ml.$utils-db, 'common', 'keywords', 'colors', (
+					'tp': transparent,
+					'cc': currentColor,
+				)
+			);
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Bgc', (
+						'KW.colors_h', #ccc
+					));
+				}
+
+				@include expect(false) {
+					.Bgc-tp {
+						background-color: transparent;
+					}
+
+					.Bgc-tp_h:hover {
+						background-color: transparent;
+					}
+
+					.Bgc-cc {
+						background-color: currentColor;
+					}
+
+					.Bgc-cc_h:hover {
+						background-color: currentColor;
+					}
+
+					.Bgc\#ccc {
+						background-color: #ccc;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Bgs_f StOl', (
+						'KW.colors', 'KW_af StOl'
+					));
+				}
+
+				@include expect(false) {
+					.Bgs-tp_f:focus {
+						background-size: transparent;
+					}
+
+					.Bgs-cc_f:focus {
+						background-size: currentColor;
+					}
+
+					.Bgs-ct_af::after {
+						background-size: contain;
+					}
+
+					.Bgs-cv_af::after {
+						background-size: cover;
+					}
+				}
+			}
+		}
+
+		@include it('make util with bound components') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Txt', (
+						'', 'c_h StOl',
+					));
+				}
+
+				@include expect(false) {
+					.Txt {
+						text-transform: uppercase;
+					}
+
+					.Txt_af::after {
+						text-transform: uppercase;
+					}
+
+					.Txt-c {
+						text-transform: capitalize;
+					}
+
+					.Txt-c_af::after {
+						text-transform: capitalize;
+					}
+				}
+			}
+
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'Txt_f StOl', (
+						'n',
+					));
+
+					@include ml.mk-util(
+						'Txt', 'l', ('post-states': 'fw StOl')
+					);
+				}
+
+				@include expect(false) {
+					.Txt-n {
+						text-transform: none;
+					}
+
+					.Txt-n_af::after {
+						text-transform: none;
+					}
+
+					.Txt-l {
+						text-transform: lowercase;
+					}
+
+					.Txt-l_af::after {
+						text-transform: lowercase;
+					}
+				}
+			}
+
+			@include assert('generate other states for util with bound components') {
+				@include output(false) {
+					@include ml.mk-util(
+						'Txt_f StOl', 'n', (), ('components': null)
+					);
+				}
+
+				@include expect(false) {
+					.Txt-n_f:focus {
+						text-transform: none;
+					}
+				}
+			}
+		}
+
+		@include it('util with native CSS function as a value') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'W', '=max(15vw,150px)',
+					);
+				}
+
+				@include expect(false) {
+					.W\=max\(15vw\,150px\) {
+						// used unquoted string because the compiler
+						// add a space after comma in arguments
+						width: string.unquote('max(15vw,150px)');
+					}
+				}
+			}
+		}
+
+		@include it('make util with custom property as a name') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util(
+						'-BgAlpha', ('50p_h', 'n'),
+					);
+				}
+
+				@include expect(false) {
+					.-BgAlpha50p {
+						--ml-bgAlpha: 50%;
+					}
+
+					.-BgAlpha50p_h:hover {
+						--ml-bgAlpha: 50%;
+					}
+
+					.-BgAlpha-n {
+						--ml-bgAlpha: none;
+					}
+				}
+			}
+		}
+
+		@include it('make util with fraction value') {
+			@include assert() {
+				@include output(false) {
+					@include ml.mk-util('Mr', '2/-8');
+				}
+
+				@include expect(false) {
+					.Mr2\/-8 {
+						margin-right: -25%;
+					}
+				}
+			}
+		}
+	}
+}

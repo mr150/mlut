@@ -1,0 +1,45 @@
+@use 'sass-true' as *;
+@use 'sass:map';
+
+@use 'tools/settings/common/at-rules' as ml with (
+	$breakpoints: (
+		'xmd': 640px,
+		'xxl': 1400px,
+	),
+	$breakpoints-ext: (
+		'xsm': 480px,
+	)
+);
+
+@use 'tools/settings/high/grid' with (
+	$legacy-grid-system: true,
+);
+
+@include describe('tools/settings/common/at-rules') {
+	@include it('change breakpoints') {
+		@include assert-equal(
+			map.get(ml.$at-rules-cfg, 'breakpoints'),
+			(
+				'xsm': 480px,
+				'sm': 520px,
+				'xmd': 640px,
+				'md': 768px,
+				'lg': 992px,
+				'xl': 1200px,
+				'xxl': 1400px,
+			),
+			$inspect: true,
+		);
+	}
+
+	ml.$bp-map: (
+		'sm': 520px,
+		'md': 768px,
+		'lg': 992px,
+		'xl': 1200px,
+	);
+
+	ml.$at-rules-cfg: map.set(
+		ml.$at-rules-cfg, 'breakpoints', ml.$bp-map
+	);
+}

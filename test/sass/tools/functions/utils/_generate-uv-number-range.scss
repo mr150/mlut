@@ -1,0 +1,136 @@
+@use 'sass:map';
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
+@include describe('tools/functions/high/utils/range-generators') {
+	@include describe('number-range') {
+		@include it('generate simple range') {
+			@include assert-equal(
+				ml.generate-uv-number-range([2, 4], 'Bdw'),
+				(
+					'values': (2: 2px, 3: 3px, 4: 4px),
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.generate-uv-number-range([2su, 4], 'Fns'),
+				(
+					'values': (
+						2su: ml.sur(2),
+						3su: ml.sur(3),
+						4su: ml.sur(4),
+					)
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.generate-uv-number-range([-2, 1], 'Zi'),
+				(
+					'values': (
+						-2: -2,
+						-1: -1,
+						0: 0,
+						1: 1,
+					)
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.generate-uv-number-range([0.5, 3], 'Zi'),
+				(
+					'values': (
+						0.5: 0.5,
+						1.5: 1.5,
+						2.5: 2.5,
+					)
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.generate-uv-number-range([-2, -4], 'Bdw'),
+				(
+					'values': ()
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('invalid values or syntax') {
+			@include assert-equal(
+				ml.generate-uv-number-range([8], 'W'),
+				'ERROR: Invalid range syntax: `[8]`. Expected 2 or 3 arguments'
+			);
+
+			@include assert-equal(
+				ml.generate-uv-number-range(['a', 5], 'W'),
+				'ERROR: Invalid $start value in range: `a`'
+			);
+
+			@include assert-equal(
+				ml.generate-uv-number-range(['1no1', 5], 'W'),
+				'ERROR: Unknown unit in $start value in range: `1no1`'
+			);
+		}
+
+		@include it('generate range with step') {
+			@include assert-equal(
+				ml.generate-uv-number-range([2su, 6, 2], 'W'),
+				(
+					'values': (
+						2su: ml.su(2),
+						4su: ml.su(4),
+						6su: ml.su(6),
+					)
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.generate-uv-number-range([0.5, 1.5, 0.5], 'Zi'),
+				(
+					'values': (
+						0.5: 0.5,
+						1: 1,
+						1.5: 1.5,
+					)
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.generate-uv-number-range([25p, 75, 25], 'O'),
+				(
+					'values': (
+						25p: 0.25,
+						50p: 0.5,
+						75p: 0.75,
+					)
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('generate range with util components') {
+			@include assert-equal(
+				ml.generate-uv-number-range(['<sm_:f:>_1r_h::^sub', 7, 3], 'W'),
+				(
+					'components': (
+					'at-rules': '<sm',
+					'pre-states': ':f:>',
+					'post-states': 'h::^sub',
+				),
+					'values': (
+						1r: 1rem,
+						4r: 4rem,
+						7r: 7rem,
+					),
+				),
+				$inspect: true,
+			);
+		}
+	}
+}

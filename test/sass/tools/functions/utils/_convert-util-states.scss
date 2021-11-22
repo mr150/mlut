@@ -1,0 +1,97 @@
+@use 'sass:map';
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg, 'states', 'custom', 'testou', '.pa.ro.voz'
+);
+
+@include describe('tools/functions/high/utils/') {
+	@include describe('convert-util-states') {
+		@include it('converts simple state') {
+			@include assert-equal(
+				ml.convert-util-states('h'),
+				('&:hover'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('^', '', true),
+				('.-Ctx '),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('af'),
+				('&::after'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('-testou'),
+				('&.pa.ro.voz'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('-NO'),
+				('ERROR: Undefined custom state: `-NO`'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('&'),
+				('ERROR: `&` cannot be used because $this-util is not passed'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('>*'),
+				('&>*'),
+			);
+		}
+
+		@include it('converts complex state') {
+			@include assert-equal(
+				ml.convert-util-states('h:b'),
+				('&:hover::before'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('!h'),
+				('&:not(:hover)'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('~:*'),
+				('&~*'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('+:h'),
+				('&+:hover'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('&:&', 'D'),
+				('&\\&\\&'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states(':^:&-::^2:+a.link:h', 'D'),
+				('& .-Ctx.D .-Ctx2+a.link:hover'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('^ct0:=>*:h:!&-sec0', 'Bgc', true),
+				('.-Ctx-ct0>*:hover:not(.Bgc-sec0) '),
+			);
+		}
+
+		@include it('converts states list') {
+			@include assert-equal(
+				ml.convert-util-states('h,f'),
+				('&:hover, &:focus'),
+			);
+
+			@include assert-equal(
+				ml.convert-util-states('h:a:b,-nojs:a,:^:!-testou:!=h2'),
+				('&:hover:active::before, &.no-js:active, & .-Ctx:not(.pa.ro.voz):not(h2)'),
+			);
+		}
+	}
+}

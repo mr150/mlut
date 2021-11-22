@@ -1,0 +1,174 @@
+// At-rules
+//
+// Settings for media queries and other CSS at-rules.
+//
+// $at-rules - main map with settings.
+//
+// Styleguide: sass-tools.settings.at_rules
+
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:math';
+@use '../base' as ml;
+@use 'utils' as ud;
+
+// Breakpoints
+//
+// Breakpoint names and values.
+//
+// $ml-bp-xs = 0 - `xs`
+// $ml-bp-sm = 520px - `sm`
+// $ml-bp-md = 760px - `md`
+// $ml-bp-lg = 960px - `lg`
+// $ml-bp-xl = 1168px - `xl`
+//
+// Styleguide: sass-tools.settings.at_rules.breakpoints
+
+$at-rules-db: (
+	'media': (
+		'alias': 'm',
+		'default': true,
+		'types': (
+			'pr': print,
+			's': screen,
+		),
+	),
+	'supports': (
+		'alias': 's',
+	),
+) !default;
+
+$at-rules-cfg: (
+	'tokens': (
+		'syntax': (
+			'or': ml.$tSOr,
+			'and': ml.$tSAnd,
+			'custom': ml.$tSCs,
+			'not': ml.$tSNot,
+			'ar': '@',
+			'greater-equal': '>=',
+			'less-equal': '<=',
+			'greater': '>',
+			'less': '<',
+		),
+		'generation': (
+			'all-breakpoints': 'BpAll',
+			'at-rules-only': 'ArOl',
+			'at-rules-states': 'ArSt',
+			'at-rules-states-only': 'ArSO',
+		),
+	),
+	'breakpoints': (
+		'sm': 520px,
+		'md': 768px,
+		'lg': 992px,
+		'xl': 1200px,
+	),
+) !default;
+
+$at-rules-data: () !default;
+$at-rules-data-ext: () !default;
+$at-rules-config: () !default;
+$at-rules-config-ext: () !default;
+$breakpoints: () !default;
+$breakpoints-ext: () !default;
+
+$at-rules-db: map.deep-merge($at-rules-db, $at-rules-data);
+$at-rules-db: map.deep-merge($at-rules-db, $at-rules-data-ext);
+$at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-config);
+$at-rules-cfg: map.deep-merge($at-rules-cfg, $at-rules-config-ext);
+$at-rules-cfg: map.merge($at-rules-cfg, 'breakpoints', $breakpoints);
+$at-rules-cfg: map.merge($at-rules-cfg, 'breakpoints', $breakpoints-ext);
+
+$bp-map: map.get($at-rules-cfg, 'breakpoints');
+$-bp-values: map.values($bp-map);
+$bp-keys: map.keys($bp-map);
+$bp-map: ();
+
+@for $i from 1 through list.length($-bp-values) {
+	$min-bp: math.min($-bp-values...);
+	$min-index: list.index($-bp-values, $min-bp);
+	$-bp-values: list.set-nth($-bp-values, $min-index, ml.$number-max);
+	$bp-map: map.set($bp-map, list.nth($bp-keys, $min-index), $min-bp);
+}
+
+$at-rules-cfg: map.set($at-rules-cfg, 'breakpoints', $bp-map);
+$-custom-global-kw: map.get(ud.$utils-db, 'common', 'keywords', 'global');
+$-bp-kw-map: ();
+
+@each $key, $value in $bp-map {
+	$-bp-kw-map: map.set(
+		$-bp-kw-map,
+		(
+			ml.$tUGkw +
+			string.to-upper-case(string.slice($key, 1, 1)) +
+			string.slice($key, 2)
+		),
+		$value
+	);
+}
+
+$global-kw-bp: map.keys($-bp-kw-map);
+
+@if $-custom-global-kw {
+	$-bp-kw-map: map.merge($-bp-kw-map, $-custom-global-kw);
+}
+
+ud.$utils-db: map.set(
+	ud.$utils-db, 'common', 'keywords', 'global', $-bp-kw-map
+);
+
+$tAOr: map.get($at-rules-cfg, 'tokens', 'syntax', 'or');
+$tAAnd: map.get($at-rules-cfg, 'tokens', 'syntax', 'and');
+$tANot: map.get($at-rules-cfg, 'tokens', 'syntax', 'not');
+$tACs: map.get($at-rules-cfg, 'tokens', 'syntax', 'custom');
+$tAAr: map.get($at-rules-cfg, 'tokens', 'syntax', 'ar');
+$tAGte: map.get($at-rules-cfg, 'tokens', 'syntax', 'greater-equal');
+$tALse: map.get($at-rules-cfg, 'tokens', 'syntax', 'less-equal');
+$tAGt: map.get($at-rules-cfg, 'tokens', 'syntax', 'greater');
+$tALs: map.get($at-rules-cfg, 'tokens', 'syntax', 'less');
+
+$kBpAll: map.get($at-rules-cfg, 'tokens', 'generation', 'all-breakpoints');
+$kArOl: map.get($at-rules-cfg, 'tokens', 'generation', 'at-rules-only');
+$kArSt: map.get($at-rules-cfg, 'tokens', 'generation', 'at-rules-states');
+$kArSO: map.get($at-rules-cfg, 'tokens', 'generation', 'at-rules-states-only');
+
+$cBpAllCp: $kBpAll + ' _';
+$cArOlBp: '#{$kBpAll} #{$kArOl} _';
+$cArStBp: '#{$kBpAll} #{$kArSt} _';
+
+$at-rules-cfg: map.merge(
+	$at-rules-cfg,
+	(
+		'keywords': map.merge(
+			(
+				$kBpAll: 'breakpoints',
+				$kArOl: null,
+				$kArSO: null,
+				$kArSt: null,
+			),
+			map.get($at-rules-cfg, 'keywords') or ()
+		),
+		'abbr-separators': list.join(
+			(
+				$tAGte,
+				$tALse,
+				$tAGt,
+				$tALs,
+			),
+			map.get($at-rules-cfg, 'abbr-separators') or ()
+		)
+	)
+);
+
+$abbr-separators: ();
+
+@each $item in list.join(
+	map.get($at-rules-cfg, 'abbr-separators'),
+	map.get(ml.$utils-cfg, 'abbr-separators'),
+) {
+	@if $item != '' {
+		$abbr-separators: list.append($abbr-separators, $item);
+	}
+}

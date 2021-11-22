@@ -1,0 +1,107 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
+
+@use '../forward-tools' as ml;
+
+$-ar-keywords: list.join(
+	map.keys(ml.$bp-map),
+	map.keys(map.get(ml.$at-rules-cfg, 'keywords')),
+);
+$-states-tokens: (ml.$tSCn, ml.$tSAnd, ml.$tSTu);
+
+// parse-util
+//
+// Parse utility value or name. Return map with passed value components:
+// - `value` - pure value or name
+// - `mq` - breakpoint or any mediaquery
+// ```scss
+//parse-util('1su_md') => ('value': '1su', 'mq': 'md')
+// ```
+//
+// $raw-value - utility value or name. Type string.
+//
+// Styleguide: sass-tools.functions.high.utils.parse_util
+
+@function parse-util($raw-value) {
+	$raw-value-parts: ml.str-split($raw-value + '', ml.$tUCm);
+	$result: ();
+	$at-rules: null;
+	$value: null;
+	$states: ();
+	$comp-indexes: ();
+	$i: 1;
+
+	@if list.length($raw-value-parts) > 1 {
+		@each $component in $raw-value-parts {
+			$component-trimmed: ml.str-trim($component);
+			$component-item: list.nth(ml.str-split($component-trimmed, ' '), 1);
+
+			@if string.slice($component-item, 1, 1) == ml.$tSNot {
+				$component-item: string.slice($component-item, 2);
+			}
+
+			$part: list.nth(ml.str-split(
+				list.nth(ml.str-split($component-item, ml.$tSOr), 1),
+				ml.$tSAnd
+			), 1);
+
+			@if not $at-rules and (
+				string.index($part, ml.$tAAr) or
+				list.index($-ar-keywords, $part) or
+				ml.str-starts($part, ml.$tALs)
+			) {
+				$at-rules: $component-trimmed;
+				$comp-indexes: map.set($comp-indexes, 'ar', $i);
+			} @else if (
+				not $value and not string.index($component, ' ') and
+				not list.index($-states-tokens, string.slice($component-item, 1, 1))
+			) {
+				$value: $component-trimmed;
+				$comp-indexes: map.set($comp-indexes, 'value', $i);
+			} @else {
+				$states: list.append($states, $component-trimmed);
+				$comp-indexes: map.set(
+					$comp-indexes, 'state' + list.length($states), $i
+				);
+			}
+
+			$i: $i + 1;
+		}
+	} @else {
+		$value: $raw-value;
+	}
+
+	@if not $value {
+		$value: $at-rules;
+		$comp-indexes: map.set($comp-indexes, 'value', map.get($comp-indexes, 'ar'));
+	} @else if $at-rules {
+		$result: map.set($result, 'at-rules', $at-rules);
+	}
+
+	@if not $value {
+		@return ml.error('Not specified value or name in string `#{$raw-value}`');
+	}
+
+	$i: 1;
+
+	@each $item in $states {
+		@if map.get($comp-indexes, 'state' + $i) < map.get($comp-indexes, 'value') {
+			$result: map.set($result, 'pre-states', $item);
+		} @else {
+			$result: map.set($result, 'post-states', $item);
+		}
+
+		$i: $i + 1;
+	}
+
+	@if meta.type-of($value) == 'string' and (
+		string.slice($value, -(string.length(ml.$tUIm))) == ml.$tUIm
+	) {
+		$value: string.slice($value, 1, -(1 + string.length(ml.$tUIm)));
+		$result: map.set($result, 'important', true);
+	}
+
+	@return map.set($result, 'value', $value);
+}

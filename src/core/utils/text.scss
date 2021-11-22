@@ -1,0 +1,33 @@
+@use 'sass:map';
+@use '../../tools/settings' as ml;
+
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	ml.$kSsUMCS,
+	(
+		'Fn': ('ih'),
+		'Fnf': ml.$kUvKA,
+		'Fnw': ([100, 900, 100], 'b', 'n'),
+		ml.$cArOlBp + 'Fnw': (400, 700),
+		'Fnst': ml.$kUvKA,
+		'Fns': ('ih'),
+		ml.$cBpAllCp + 'Txa': ('', 'l', 'r', 'j'),
+		'^:h_Txd_h f fw': ('', 'n', 'u', 'lt', 'o'),
+		'Txdst': ('n', 'd', 'dh', 'db', 'w'),
+		ml.$cBpAllCp + 'Txt': ml.$kUvKA,
+		'-Txo': (''),
+		ml.$cBpAllCp + 'Txo': ml.$kUvKA,
+		ml.$cBpAllCp + 'Txs': ('n'),
+		ml.$cBpAllCp + 'Va': ml.$kUvKA,
+		'C': ('ih'),
+		'Hp': ('n', 'a', 'm'),
+		'Lss': ('n'),
+		'Lsst': ml.$kUvKA,
+		'Lssp': ml.$kUvKA,
+		ml.$cBpAllCp + 'Lnh': ('n', '1'),
+		'Tas': (2, 4),
+		'Whs': ml.$kUvKA,
+		'Wrb': ml.$kUvKA,
+		'Ovw': ml.$kUvKA,
+	)
+);

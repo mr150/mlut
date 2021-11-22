@@ -1,8 +1,8 @@
 > 0.1%
 last 3 versions
-ios 9-12
+ios 10-12
 firefox esr
-ie 9-11
+ie 11
 not < 0.1%
 android 4.4.4
-not ie < 9
+not ie < 11

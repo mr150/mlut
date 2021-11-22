@@ -1,0 +1,18 @@
+@use 'sass:map';
+@use 'tools' as ml;
+
+ml.$utils-map: map.set(
+	ml.$utils-map,
+	'core',
+	(
+		'M': (5gg, 10gg, -8x),
+		'Bxs': ('bb', 'cb'),
+		'D': ('i': inline),
+		ml.$kBpAll + '_Bgs': (100p, ml.$kUvKA),
+		'H': ('max': 800px),
+		'Txs_h,f a': 'n',
+		'Overflows': ('', 'a', 's', 'v'),
+		'Borders': ml.$kBpAll + '_',
+		'BdStyle': ('d', 'ds', '#{ml.$kBpAll} #{ml.$kArOl}_s'),
+	)
+);

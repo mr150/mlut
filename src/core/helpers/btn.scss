@@ -1,0 +1,27 @@
+@use '../../tools' as ml;
+
+/*
+Btn
+
+Helper for creating buttons. Prepares any element to styling as a button.
+
+Markup: ../../../docs/examples/core-helpers/btn/btn.html
+
+Styleguide: core-helpers.btn
+*/
+
+.btn {
+	display: inline-block;
+	margin: 0;
+	line-height: inherit;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	background: none;
+	border: 0;
+	cursor: pointer;
+
+	@if not ml.$base-border-box {
+		box-sizing: border-box;
+	}
+}

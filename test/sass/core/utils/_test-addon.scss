@@ -1,0 +1,15 @@
+@use 'sass:map';
+@use 'tools' as ml;
+
+ml.$utils-map: map.set(
+	ml.$utils-map,
+	'test-addon',
+	(
+		'F': 'r',
+		'reputation': (100, 150),
+		'Bxs': ('pb': padding-box),
+		'D': ('g': grid),
+		'H': (240, 5r),
+		'Txs_h,f a': ('-defTxs', 'rv'),
+	)
+);

@@ -1,0 +1,65 @@
+@use 'sass:map';
+@use 'sass:string';
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
+@forward 'parse-util';
+@forward 'parse-abbr';
+@forward 'generate-uv-number-range';
+@forward 'convert-util-value';
+@forward 'convert-util-states';
+@forward 'util-apply-selector';
+@forward 'generate-uv-color-range';
+@forward 'expand-util-kw-alias';
+
+@include describe('tools/functions/high/utils') {
+	@include describe('util-separated-value') {
+		@include it('returns the util value with separator') {
+			@include assert-equal(
+				ml.util-separated-value(3),
+				'3'
+			);
+
+			@include assert-equal(
+				ml.util-separated-value('3'),
+				'3'
+			);
+
+			@include assert-equal(
+				ml.util-separated-value(''),
+				''
+			);
+
+			@include assert-equal(
+				ml.util-separated-value('a'),
+				'-a'
+			);
+		}
+	}
+
+	// utils config was filled in `convert-util-value` test
+	@include describe('uv') {
+		$tests: (
+			'get CSS value of util': (
+				('C-prm0'): #c06,
+				('O-gOpDef'): 0.64,
+				('D-f'): flex,
+				('Apcr4/3'): string.unquote('4/3'),
+				('M3gg;a;gSm'): ml.gg(3) auto ml.bp(sm),
+				(''): 'ERROR: Empty string passed',
+			),
+		);
+
+		@each $test, $data in $tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						ml.uv($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
+}

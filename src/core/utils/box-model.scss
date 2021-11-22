@@ -1,0 +1,47 @@
+@use 'sass:list';
+@use 'sass:map';
+@use '../../tools' as ml;
+
+$-W-list: ('a', ml.$kUvKA, [20p, 100, 20]);
+
+@if not ml.$legacy-grid-system {
+	$-W-list: list.join(
+		$-W-list,
+		(25p, 50p, 75p, '1/12', '1/6', '1/3', '2/3', '5/12', '7/12', '5/6', '11/12',),
+	);
+}
+
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	ml.$kSsUMCS,
+	(
+		// display
+		'D': ml.$kUvKA,
+		ml.$cArOlBp + 'D': (
+			'', 'b', 'i', 'ib', 'f', 'if', 'g', 'ig', 'n', 't', 'it', 'c', 'flr', 'tc', 'tr',
+		),
+		ml.$cBpAllCp + '-D': (
+			'mf', 'mif', 'vh', '#{ml.$kBpAll} #{ml.$kArSt} _v_ f fw'
+		),
+		// sizes
+		ml.$cBpAllCp + 'Mnw': (100p, ml.$kUvKA),
+		ml.$cBpAllCp + 'Mxw': list.join((100p, ml.$kUvKA, 'n'), ml.$global-kw-bp),
+		ml.$cBpAllCp + 'W': $-W-list,
+		ml.$cBpAllCp + 'H': (100p, 100vh, 0, ml.$cArOlBp + 'a'),
+		ml.$cBpAllCp + 'Mnh': (100p, 100vh, 0),
+		ml.$cBpAllCp + 'Mxh': (100p, 100vh, 'n'),
+		// other
+		'Bxs': (ml.$kUvKA),
+		ml.$cBpAllCp + 'F': (ml.$kUvKA, 'n'),
+		ml.$cBpAllCp + 'Cl': (ml.$kUvKA, 'n'),
+		'-Cl': '',
+		ml.$cBpAllCp + 'Tbl': ('f', 'n'),
+		ml.$cBpAllCp + 'Overflows': (ml.$kUvKA),
+		// spacing
+		ml.$cBpAllCp + 'Margins': (0, 1, 'a', [1su, 6]),
+		ml.$cBpAllCp + 'MarginsNoR': ([-6su, -1], [-2gg, -1], [1gg, 4]),
+		ml.$cBpAllCp + 'Paddings': (0, 1, [1su, 7], [1gg, 6]),
+		// for ratio-box
+		'Pt_b StOl': (100p, 75p),
+	)
+);

@@ -1,0 +1,37 @@
+@use 'sass:map';
+@use 'sass:list';
+@use '../../tools/settings' as ml;
+
+$-templates: ('n');
+$-spans: ('a', '1/-1', 's1');
+$-col-lines: ('a', -1, 1);
+$-row-lines: $-col-lines;
+$-auto-tracks: ('mc', 'mnc', 'a', 't1', 1fr);
+
+@for $i from 2 through ml.$gs-columns {
+	$-templates: list.append($-templates, 't' + $i);
+	$-spans: list.append($-spans, 's' + $i);
+	$-col-lines: list.append($-col-lines, $i);
+}
+
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	ml.$kSsUMCS,
+	(
+		// columns
+		ml.$cBpAllCp + 'Gtc': ($-templates),
+		ml.$cBpAllCp + 'Gc': ($-spans),
+		ml.$cBpAllCp + 'Gcs': ($-col-lines),
+		ml.$cBpAllCp + 'Gce': ($-col-lines),
+		ml.$cBpAllCp + 'Gatc': ($-auto-tracks),
+		// rows
+		ml.$cBpAllCp + 'Gtr': ('n'),
+		ml.$cBpAllCp + 'Gr': ('a', '1/-1'),
+		ml.$cBpAllCp + 'Grs': ($-row-lines),
+		ml.$cBpAllCp + 'Gre': ($-row-lines),
+		ml.$cBpAllCp + 'Gatr': ($-auto-tracks),
+		// other
+		ml.$cBpAllCp + 'Gatf': ('r', 'c', 'd', 'r;d', 'c;d'),
+		ml.$cBpAllCp + 'AllGaps': ([1gg, 4], [1su, 8]),
+	)
+);

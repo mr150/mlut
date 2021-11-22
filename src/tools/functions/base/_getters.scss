@@ -1,0 +1,119 @@
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:map';
+@use 'sass:meta';
+
+@use '../../settings' as ml;
+
+// Getters
+//
+// Functions-getters from settings maps and more.
+//
+// Styleguide: sass-tools.functions.base.getters
+
+@function bp($name, $error-handler: 1) {
+	@if map.has-key(ml.$bp-map, $name) or $error-handler == 0 {
+		@return map.get(ml.$bp-map, $name);
+	}
+
+	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-breakpoints';
+}
+
+@function bp-next($bp: 0, $data-type: 'value') {
+	@if $bp == 0 or map.has-key(ml.$bp-map, $bp) {
+		$bp-keys: map.keys(ml.$bp-map);
+		$bp-index: if($bp != 0, list.index($bp-keys, $bp), 0);
+
+		@if $data-type == 'name' {
+			@return if($bp-index < list.length($bp-keys), list.nth(map.keys(ml.$bp-map), $bp-index + 1), 0);
+		} @else {
+			@return if($bp-index < list.length($bp-keys), list.nth(map.values(ml.$bp-map), $bp-index + 1), 0);
+		}
+	}
+
+	@error 'Invalid breakpoint name: `#{$bp}`. `#{$bp}` is not defined in $ml-breakpoints';
+}
+
+@function bp-next-name($bp: 0) {
+	@return bp-next($bp, 'name');
+}
+
+@function bp-prev($bp: 0, $data-type: 'value') {
+	@if $bp == 0 or map.has-key(ml.$bp-map, $bp) {
+		$bp-keys: map.keys(ml.$bp-map);
+		$bp-index: if($bp != 0, list.index($bp-keys, $bp), list.length($bp-keys) + 1);
+
+		@if $data-type == 'name' {
+			@return if($bp-index > 1, list.nth(map.keys(ml.$bp-map), $bp-index - 1), 0);
+		} @else {
+			@return if($bp-index > 1, list.nth(map.values(ml.$bp-map), $bp-index - 1), 0);
+		}
+	}
+
+	@error 'Invalid breakpoint name: `#{$bp}`. `#{$bp}` is not defined in $ml-breakpoints';
+}
+
+@function bp-prev-name($bp: 0) {
+	@return bp-prev($bp, 'name');
+}
+
+@function grid-gtr($name, $error-handler: 1) {
+	@if map.has-key(ml.$gs-gutters, $name) or $error-handler == 0 {
+		@return map.get(ml.$gs-gutters, $name);
+	}
+
+	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-gs-gutters';
+}
+
+@function css-var($name, $error-handler: 1) {
+	@if map.has-key(ml.$general-cfg, 'css-vars', $name) or $error-handler == 0 {
+		@return map.get(ml.$general-cfg, 'css-vars', $name);
+	}
+
+	@error 'Invalid custom property name. `#{$name}` is not defined in $ml-css-vars';
+}
+
+// util-prop
+//
+// Get the CSS property, which corresponds to the utility from [$ml-utils-map](section-sass-tools.html#kssref-sass-tools-settings-utils).
+// ```scss
+//ml-util-prop('D') => 'display'
+//```
+//
+// $name - utility name. Type: string.
+// $section = 'utils' - section in the registry in which utility was defined
+// $name-as-prop = false - return the utility name as a property if it was not found
+// $single = false - return one property of the utility, even if there are several
+//
+// Styleguide: sass-tools.functions.base.getters.util_prop
+
+@function util-prop(
+	$name, $section: 'utils', $name-as-prop: false, $single: false
+) {
+	$options: map.get(ml.$utils-db, $section, 'registry', $name);
+	$prop: null;
+
+	@if meta.type-of($options) == 'map' {
+		$prop-list: map.get($options, 'properties');
+
+		@if $single {
+			$prop: list.nth($prop-list, 1);
+		} @else {
+			$prop: $prop-list;
+		}
+	} @else {
+		$prop: $options;
+	}
+
+	@return $prop or (
+		$name-as-prop and if(
+			string.slice($name, 1, 1) == '-',
+			(
+				'--' + ml.$uv-css-var-prefix +
+				// TODO: replace with str-lcfirst function
+				string.to-lower-case(string.slice($name, 2, 2)) + string.slice($name, 3)
+			),
+			string.to-lower-case($name)
+		)
+	);
+}

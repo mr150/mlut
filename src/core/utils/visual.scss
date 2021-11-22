@@ -1,0 +1,32 @@
+@use 'sass:map';
+@use '../../tools' as ml;
+
+ml.$utils-map: map.merge(
+	ml.$utils-map,
+	ml.$kSsUMCS,
+	(
+		// transform
+		ml.$cBpAllCp + 'Tf': (ml.$kUvKA, 'n'),
+		'Tfo': (ml.$kUvKA, 'r;t', 'r;b', 'l;b', 'l;t'),
+		ml.$cBpAllCp + 'Translates': (-50p, 50p),
+		ml.$cBpAllCp + '-Trx': -100p,
+		ml.$cBpAllCp + '-Try': -100p,
+		ml.$cBpAllCp + '-Rt': (-90d, 90d, 180d),
+		// filter
+		'Ft': ('', 'n'),
+		'Bcf': ('', 'n'),
+		'-Bcf': '',
+		// other
+		'Bfv': ('h', 'v'),
+		'Bxdb': ml.$kUvKA,
+		ml.$cBpAllCp + 'Bxsd': 'n',
+		'Cs': ('', 'a', 'd', 'wt', 't', 'm', 'h', 'nta'),
+		'Is': ('i', 'a'),
+		ml.$cBpAllCp + 'O': (0, 1),
+		'Ol': 0,
+		'Ols': ('d', 'dh', 'db', 's'),
+		ml.$cBpAllCp + 'Ojf': ml.$kUvKA,
+		'Ojp': ml.$kUvKA,
+		ml.$cBpAllCp + 'Vs': ml.$kUvKA,
+	)
+);

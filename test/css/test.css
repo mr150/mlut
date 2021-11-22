@@ -1,16 +1,19 @@
 .kss-style,
 #kss-node {
+	-moz-tab-size: 2;
+	-o-tab-size: 2;
+	tab-size: 2;
 	font-family:
 	-apple-system,
 	BlinkMacSystemFont,
-	"Segoe UI",
+	'Segoe UI',
 	Roboto,
 	Oxygen,
 	Cantarell,
 	Ubuntu,
-	"Fira Sans",
-	"Droid Sans",
-	"Helvetica Neue",
+	'Fira Sans',
+	'Droid Sans',
+	'Helvetica Neue',
 	Arial,
 	sans-serif;
 }
@@ -26,24 +29,24 @@
 	background-color: #c9c;
 }
 
-.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) {
+.kss-modifier__wrapper [class*='row__']:not(.row):not([class*='test']) {
 	background-clip: content-box;
 }
 
-.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > * {
+.kss-modifier__wrapper [class*='row__']:not(.row):not([class*='test']) > * {
 	padding: 0px 12px;
 }
 
-.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > :first-child {
+.kss-modifier__wrapper [class*='row__']:not(.row):not([class*='test']) > :first-child {
 	padding-top: 4px;
 }
 
-.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) > :last-child {
+.kss-modifier__wrapper [class*='row__']:not(.row):not([class*='test']) > :last-child {
 	padding-bottom: 4px;
 }
 
 .test-cell,
-.kss-modifier__wrapper [class*="row__"]:not(.row):not([class*="test"]) {
+.kss-modifier__wrapper [class*='row__']:not(.row):not([class*='test']) {
 	color: #306;
 	font-size: 1.1rem;
 	background-color: #c9c;
@@ -74,6 +77,47 @@
 }
 
 .kss-description,
+.kss-overview,
 .kss-parameters {
-	max-width: 872px;
+	max-width: 78ch;
+	overflow: auto;
+}
+
+.kss-description code:not([class]),
+.kss-parameters__description code:not([class]) {
+	font-size: 90%;
+	padding: .2em .4em;
+	background-color: rgb(239, 241, 243);
+}
+
+/* because selector list in :not() not well supported enough */
+.kss-description table code:not([class]),
+.kss-parameters__default-value code:not([class]) {
+	font-size: 100%;
+	padding: 0;
+	background: none;
+}
+
+.kss-description table:not([class]) td,
+.kss-description table:not([class]) th {
+	padding: 6px;
+	border: 1px solid #dfe2e5;
+  margin-bottom: 24px;
+}
+
+@media (min-width:520px) {
+	.kss-description table:not([class]) td,
+	.kss-description table:not([class]) th {
+		padding: 8px 12px;
+	}
+}
+
+.kss-description table:not([class]) {
+  margin-bottom: 24px;
+}
+
+@media (max-width:519px) {
+	.kss-style h1 {
+		font-size: 32px;
+	}
 }

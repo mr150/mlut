@@ -1,0 +1,341 @@
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
+@include describe('tools/functions/high/utils/parse-util') {
+	@include describe('parse-util') {
+		@include it('simple value') {
+			@include assert-equal(
+				ml.parse-util(1gg),
+				('value': 1gg),
+			);
+
+			@include assert-equal(
+				ml.parse-util('xl'),
+				('value': 'xl'),
+			);
+
+			@include assert-equal(
+				ml.parse-util(''),
+				('value': ''),
+			);
+
+			@include assert-equal(
+				ml.parse-util(null),
+				'ERROR: Not specified value or name in string ``',
+			);
+		}
+
+		@include it('value with only at-rule') {
+			@include assert-equal(
+				ml.parse-util('xl_1gg'),
+				(
+					'at-rules': 'xl',
+					'value': '1gg',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('md_'),
+				(
+					'at-rules': 'md',
+					'value': '',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('<sm,lg_1gg'),
+				(
+					'at-rules': '<sm,lg',
+					'value': '1gg',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('@:md:ori-l,print:-myMq_1gg'),
+				(
+					'at-rules': '@:md:ori-l,print:-myMq',
+					'value': '1gg',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('md xl_Spaces'),
+				(
+					'at-rules': 'md xl',
+					'value': 'Spaces',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('lg_lg'),
+				(
+					'at-rules': 'lg',
+					'value': 'lg',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with only pre-states') {
+			@include assert-equal(
+				ml.parse-util('^ctx_D'),
+				(
+					'pre-states': '^ctx',
+					'value': 'D',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('!=p _!'),
+				(
+					'pre-states': '!=p',
+					'important': true,
+					'value': '',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('=[href]> _=54px'),
+				(
+					'pre-states': '=[href]>',
+					'value': '=54px',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('#{ml.$kStPC} _#{ml.$kStPC}'),
+				(
+					'pre-states': '#{ml.$kStPC}',
+					'value': '#{ml.$kStPC}',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('^_^'),
+				'ERROR: Not specified value or name in string `^_^`',
+			);
+
+			@include assert-equal(
+				ml.parse-util('^ctx =a>_2su'),
+				(
+					'pre-states': '^ctx =a>',
+					'value': '2su',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util(':h:a_h:a'),
+				(
+					'pre-states': ':h:a',
+					'value': 'h:a',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with only post-states') {
+			@include assert-equal(
+				ml.parse-util('a_h'),
+				(
+					'post-states': 'h',
+					'value': 'a',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('inh_ :fw:^'),
+				(
+					'post-states': ':fw:^',
+					'value': 'inh',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('!_!f'),
+				(
+					'post-states': '!f',
+					'important': true,
+					'value': '',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('a_h f'),
+				(
+					'post-states': 'h f',
+					'value': 'a',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('md_af,bf '),
+				(
+					'post-states': 'af,bf',
+					'value': 'md',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('_vl'),
+				(
+					'post-states': 'vl',
+					'value': '',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('sm:lg_ h'),
+				(
+					'post-states': 'h',
+					'value': 'sm:lg',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('1gg_&-'),
+				(
+					'post-states': '&-',
+					'value': '1gg',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('=54px_=[tabindex]'),
+				(
+					'post-states': '=[tabindex]',
+					'value': '=54px',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with at-rule and pre state') {
+			@include assert-equal(
+				ml.parse-util('xl_^:h_50p'),
+				(
+					'at-rules': 'xl',
+					'pre-states': '^:h',
+					'value': '50p',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('md_^1:f_md'),
+				(
+					'at-rules': 'md',
+					'pre-states': '^1:f',
+					'value': 'md',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with at-rule and post state') {
+			@include assert-equal(
+				ml.parse-util('BpAll_n_f,a'),
+				(
+					'at-rules': 'BpAll',
+					'post-states': 'f,a',
+					'value': 'n',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util(ml.$kArSO + ' @:prn_f_vl'),
+				(
+					'at-rules': ml.$kArSO + ' @:prn',
+					'post-states': 'vl',
+					'value': 'f',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('sm@s:&-_f_f'),
+				(
+					'at-rules': 'sm@s:&-',
+					'post-states': 'f',
+					'value': 'f',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('xl_xl_h:af'),
+				(
+					'at-rules': 'xl',
+					'post-states': 'h:af',
+					'value': 'xl',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with post and pre states') {
+			@include assert-equal(
+				ml.parse-util('=a> _=cc_=>*:f:bf'),
+				(
+					'pre-states': '=a>',
+					'post-states': '=>*:f:bf',
+					'value': '=cc',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('#{ml.$kStCb} ^:f_f_#{ml.$kStCb} af'),
+				(
+					'pre-states': '#{ml.$kStCb} ^:f',
+					'post-states': '#{ml.$kStCb} af',
+					'value': 'f',
+				),
+				$inspect: true,
+			);
+		}
+
+		@include it('value with all components') {
+			@include assert-equal(
+				ml.parse-util('<sm_:f:>_0_h::^sub'),
+				(
+					'at-rules': '<sm',
+					'pre-states': ':f:>',
+					'post-states': 'h::^sub',
+					'value': '0',
+				),
+				$inspect: true,
+			);
+
+			@include assert-equal(
+				ml.parse-util('<sm_:f:>__noJs:h'),
+				(
+					'at-rules': '<sm',
+					'pre-states': ':f:>',
+					'post-states': 'noJs:h',
+					'value': '',
+				),
+				$inspect: true,
+			);
+
+		}
+	}
+}

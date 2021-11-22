@@ -1,0 +1,56 @@
+@use 'sass-true' as *;
+@use 'tools/functions' as ml;
+
+@include describe('tools/functions/high/at-rules') {
+	@include describe('convert-ar-bp') {
+		@include it('converts single breakpoint') {
+			@include assert-equal(
+				ml.convert-ar-bp('md'),
+				'(min-width: #{ml.bp(md)})',
+			);
+
+			@include assert-equal(
+				ml.convert-ar-bp('NO'),
+				'ERROR: Invalid breakpoint name: `NO`',
+			);
+		}
+
+		@include it('converts max-width breakpoint') {
+			@include assert-equal(
+				ml.convert-ar-bp('<sm'),
+				'(max-width: #{ml.bp(sm) - 1px})',
+			);
+		}
+
+		@include it('converts breakpoints range') {
+			@include assert-equal(
+				ml.convert-ar-bp('sm:lg'),
+				'(min-width: #{ml.bp(sm)}) and (max-width: #{ml.bp(lg) - 1px})',
+			);
+		}
+
+		@include it('converts comma-separated max-width breakpoint and single breakpoint') {
+			@include assert-equal(
+				ml.convert-ar-bp('<md,xl'),
+				'(max-width: #{ml.bp(md) - 1px}), (min-width: #{ml.bp(xl)})',
+			);
+		}
+
+		@include it('converts comma-separated ranges and breakpoints') {
+			@include assert-equal(
+				ml.convert-ar-bp('sm:md,xl'),
+				'(min-width: #{ml.bp(sm)}) and (max-width: #{ml.bp(md) - 1px}), (min-width: #{ml.bp(xl)})',
+			);
+
+			@include assert-equal(
+				ml.convert-ar-bp('sm:md,lg:xl'),
+				'(min-width: #{ml.bp(sm)}) and (max-width: #{ml.bp(md) - 1px}), (min-width: #{ml.bp(lg)}) and (max-width: #{ml.bp(xl) - 1px})',
+			);
+
+			@include assert-equal(
+				ml.convert-ar-bp('<sm,md:lg,xl'),
+				'(max-width: #{ml.bp(sm) - 1px}), (min-width: #{ml.bp(md)}) and (max-width: #{ml.bp(lg) - 1px}), (min-width: #{ml.bp(xl)})',
+			);
+		}
+	}
+}

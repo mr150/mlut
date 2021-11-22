@@ -1,0 +1,218 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:meta';
+@use 'sass-true' as *;
+@use 'tools' as ml;
+
+ml.$utils-cfg: map.deep-merge(
+	ml.$utils-cfg,
+	('conversion-types': (
+		'red-ppl': ('number', ml.$kSsVCP, 'cust-prop', 'cp-suffix'),
+		'tst-ppl': ('cust-prop', ml.$kSsVCP, 'cp-suffix'),
+	)
+	)
+);
+
+@function bdrd-modify($value, $data: ()) {
+	@return list.append(($value,), 15px 30px, slash);
+}
+
+ml.$utils-db: map.deep-merge(
+	ml.$utils-db,
+	('utils':
+	(
+		'registry': (
+			'Red': (
+				'properties': --reputation,
+				'conversion': 'red-ppl',
+			),
+			'-Tst': (
+				'properties': --testou,
+				'conversion': 'tst-ppl',
+			),
+			'Ai': (
+				'keywords': (
+					'e': end,
+					'b': baseline,
+					'c': center,
+				),
+			),
+			'Antf': (
+				'keywords': 'timing-functions',
+			),
+			'Ts': (
+				'keywords': 'timing-functions',
+			),
+			'-Bdrd': (
+				'properties': border-radius,
+				'transformer': 'bdrd-modify',
+			),
+		),
+		'keywords': (
+			'timing-functions': (
+				'e': ease,
+				'ei': ease-in,
+				'eo': ease-out,
+			),
+			'gradients': (
+				'brand0': (black 40%, yellow)
+			),
+		),
+	),
+	'common': (
+		'keywords': (
+			// other colors are defined in the module config
+			'colors': (
+				'varFb': (204, 0, 102),
+			),
+			'global': (
+				'gCPrm0': #60c,
+				'gOpDef': 0.64,
+				'gTsdDef': 0.3s,
+			),
+		),
+	),
+	),
+);
+
+@function cp-suffix($value, $data: ()) {
+	@return string.insert($value + '', '-suf', -2);
+}
+
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg,
+	'converters',
+	'cp-suffix',
+	meta.get-function('cp-suffix')
+);
+
+ml.$utils-cfg: map.set(
+	ml.$utils-cfg,
+	'transformers',
+	'bdrd-modify',
+	meta.get-function('bdrd-modify')
+);
+
+@include describe('tools/functions/common/utils/') {
+	@include describe('convert-util-value') {
+		$-tests: (
+			'converts number': (
+				(200, 'W'): 200px,
+				('=200', 'W'): 200,
+				('20vw', 'W'): 20vw,
+				(300, 'Fnw'): 300,
+				(2su, 'Fns'): ml.sur(2),
+				(2su, 'P'): ml.sur(2) ml.su(2),
+				('16/9', 'Apcr'): string.unquote('16/9'),
+				('-1/3', 'Apcr'): string.unquote('-1/3'),
+				(70p, 'O'): 0.7,
+				('-50p', 'O'): -0.5,
+				('0.8', 'O'): 0.8,
+				(1.5, 'W'): 1.5rem,
+				(-0.7, 'Ml'): -0.7rem,
+				('-3jj', 'Ml'): string.unquote('-3jj'),
+				('-2', 'Zi'): -2,
+				(2, 'Tas'): 2,
+				(1r, 'Tas'): 1rem,
+				('-2gg', 'Ml'): calc(var(--ml-gg) * -2),
+			),
+			'converts fractions': (
+				('1/3', 'W'): 33.3333333333%,
+				('-1/4', 'Ml'): -25%,
+				('2/2.5', 'T'): 80%,
+				('1/$div', 'W'): calc(1 / var(--ml-div) * 100%),
+				('-$div/5', 'L'): calc(calc(var(--ml-div) * -1) / 5 * 100%),
+				('2/-$div', 'L'): calc(2 / calc(var(--ml-div) * -1) * 100%),
+			),
+			'converts global keyword': (
+				('a', 'W'): auto,
+				// this behavior is useless now because it may change in the future
+				('-a', 'W'): auto,
+				('gSm', 'W'): ml.bp(sm),
+				('=a', 'W'): a,
+			),
+			'converts custom properties': (
+				('$myCard?200', 'W'): var(--ml-myCard, 200px),
+				('$myCard?a', 'W'): var(--ml-myCard, auto),
+				('$cardFnw?500', 'Fnw'): var(--ml-cardFnw, 500),
+				('$myVar?=200', 'W'): var(--ml-myVar, 200),
+				('$myCard?$defWd?150', 'W'): var(--ml-myCard, var(--ml-defWd, 150px)),
+				('-$myVar', 'W'): calc(var(--ml-myVar) * -1),
+				('-$myVar?-$secVar?5r', 'W'):
+					calc(var(--ml-myVar, calc(var(--ml-secVar, 5rem) * -1)) * -1),
+			),
+			'applys several converters as pipeline': (
+				('$cssVar', 'Red'): var(--ml-cssVar-suf),
+				(22, 'Red'): 22px,
+				('$cssVar', '-Tst'): var(--ml-cssVar),
+			),
+			'converts property abbreviation': (
+				('bgc', 'Ts'): background-color,
+				('tf', 'Tsp'): transform,
+				('=bgc', 'Ts'): bgc,
+			),
+			'converts utility keyword': (
+				('c', 'Ai'): center,
+				('ei', 'Antf'): ease-in,
+				('', 'Bd'): (1px solid,),
+			),
+			'converts colors': (
+				('tp', 'C'): transparent,
+				('gCPrm0*20p', 'C'): rgba(102, 0, 204, 0.2),
+				('#60c*20p', 'C'): rgba(102, 0, 204, 0.2),
+				('prm0*gOpDef', 'C'): rgba(204, 0, 102, 0.64),
+				('prm0*$co', 'C'): rgba(204, 0, 102, var(--ml-co, 1)),
+				('$co?varFb*$al?70p', 'C'): rgba(var(--ml-co, 204, 0, 102), var(--ml-al, 0.7)),
+				('#c06*20', 'C'): rgba(204, 0, 102, 20),
+				('prm10*$co', 'C'): string.unquote('prm10*$co'),
+				('$color*20p', 'C'): rgba(var(--ml-color), 0.2),
+			),
+			'converts grid values': (
+				// used `string.unquote` because tests compiler add parentheses and remove some spaces. Because of this, the test falls
+				('s2/3/4', 'Ga'): string.unquote('(span 2/span 2) / 3 / 4'),
+				('t3/af;d;15r', 'G'): list.slash(
+					repeat(3, minmax(0, 1fr)), auto-flow dense 15rem
+				)
+			),
+			'converts values list': (
+				('1r;2;5p', 'Bdrd'): 1rem 2px 5%,
+				('1r;=10x', 'M'): 1rem 10x,
+				('3su;-16;a', 'M'): ml.su(3) -16px auto,
+				('c;$trsdu;ei', 'Ts'): color var(--ml-trsdu) ease-in,
+				('cc;prm0*5p', 'C'): currentColor rgba(204, 0, 102, 0.05),
+				('3;sec0;d', 'Bd'): 3px #0c6 dotted,
+			),
+			'converts values multi list': (
+				('1r;2/5p', 'Bdrd'): list.slash(1rem 2px, 5%),
+				('bdc;3s,c;gTsdDef', 'Ts'): (border-color 3s, color 0.3s),
+				('3/5', 'Gc'): list.slash(3, 5),
+			),
+			'transform after conversion': (
+				('2e', '-Bdrd'): list.slash(2em, 15px 30px),
+				('10;1r', '-Bdrd'): list.slash(10px 1rem, 15px 30px),
+			),
+			'converts gradient': (
+				('b;r,red,#ff0', '-Gdl'): linear-gradient(to bottom right, red, #ff0),
+				('l,brand0', '-Gdl'): linear-gradient(to left, black 40%, yellow),
+				('50d,prm0;3r,sec0;80p', '-Gdl'): linear-gradient(50deg, #c06 3rem, #0c6 80%),
+				('$gdlf;30p,sec0*80p;70p', '-Gdl'):
+					linear-gradient(var(--ml-gdlf) 30%, rgba(0, 204, 102, 0.8) 70%),
+				('t,#007,cc', '-Gdrl'):
+					repeating-linear-gradient(to top, #007, currentColor),
+			),
+		);
+
+		@each $test, $data in $-tests {
+			@include it($test) {
+				@each $args, $expect in $data {
+					@include assert-equal(
+						ml.convert-util-value($args...),
+						$expect,
+						$inspect: true,
+					);
+				}
+			}
+		}
+	}
+}
