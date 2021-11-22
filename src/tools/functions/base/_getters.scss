@@ -11,18 +11,6 @@
 //
 // Styleguide: sass-tools.functions.base.getters
 
-// ml-bp
-//
-// Get breakpoint value from [$ml-breakpoints](section-sass-tools.html#kssref-sass-tools-settings-grid-breakpoints) map.
-// ```scss
-//ml-bp('md') => 760px
-//```
-//
-// $name - breakpoint name. Type: string.
-// $error-handler = 1 - bool flag for enable strict error handling. If it is enabled, then when an invalid breakpoint name is passed, the compiler will generate an error.
-//
-// Styleguide: sass-tools.functions.base.getters.bp
-
 @function bp($name, $error-handler: 1) {
 	@if map.has-key(ml.$bp-map, $name) or $error-handler == 0 {
 		@return map.get(ml.$bp-map, $name);
@@ -30,19 +18,6 @@
 
 	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-breakpoints';
 }
-
-// ml-bp-next
-//
-// Get next breakpoint value.
-// ```scss
-//ml-bp-next('md') => 960px
-//```
-//
-// $bp = 0 - breakpoint name.
-// If pass last breakpoint, function return 0. With default value, function return first breakpoint. Type: string.
-// $data-type = 'value' - service parameter for functions-wrappers. Type: string.
-//
-// Styleguide: sass-tools.functions.base.getters.bp_next
 
 @function bp-next($bp: 0, $data-type: 'value') {
 	@if $bp == 0 or map.has-key(ml.$bp-map, $bp) {
@@ -59,33 +34,9 @@
 	@error 'Invalid breakpoint name: `#{$bp}`. `#{$bp}` is not defined in $ml-breakpoints';
 }
 
-// ml-bp-next-name
-//
-// Wrapper on [ml-bp-next](#kssref-sass-tools-functions-bp_next) for get breakpoint's name. Works similarly.
-// ```scss
-//ml-bp-next-name('md') => 'lg'
-//```
-//
-// $bp = 0 - breakpoint name. Type: string.
-//
-// Styleguide: sass-tools.functions.base.getters.bp_next_name
-
 @function bp-next-name($bp: 0) {
 	@return bp-next($bp, 'name');
 }
-
-// ml-bp-prev
-//
-// Get previous breakpoint value.
-// ```scss
-//ml-bp-prev('md') => 520px
-//```
-//
-// $bp = 0 - breakpoint name.
-// If pass firts breakpoint, function return 0. With default value, function return last breakpoint. Type: string.
-// $data-type = 'value' - service parameter for functions-wrappers. Type: string.
-//
-// Styleguide: sass-tools.functions.base.getters.bp_prev
 
 @function bp-prev($bp: 0, $data-type: 'value') {
 	@if $bp == 0 or map.has-key(ml.$bp-map, $bp) {
@@ -102,32 +53,9 @@
 	@error 'Invalid breakpoint name: `#{$bp}`. `#{$bp}` is not defined in $ml-breakpoints';
 }
 
-// ml-bp-prev-name
-//
-// Wrapper on [ml-bp-prev](#kssref-sass-tools-functions-bp_prev) for get breakpoint's name. Works similarly.
-// ```scss
-//ml-bp-prev-name('md') => 'sm'
-//```
-//
-// $bp = 0 - breakpoint name. Type: string.
-//
-// Styleguide: sass-tools.functions.base.getters.bp_prev_name
-
 @function bp-prev-name($bp: 0) {
 	@return bp-prev($bp, 'name');
 }
-
-// ml-grid-gtr
-//
-// Get grid gutter on breakpoint from [$ml-grid-gutters](section-sass-tools.html#kssref-sass-tools-settings-grid-gutters) map.
-// ```scss
-//ml-grid-gtr('md') => 12px
-//```
-//
-// $name - breakpoint name. Type: string.
-// $error-handler = 1 - works similarly like [here](#kssref-sass-tools-functions-bp).
-//
-// Styleguide: sass-tools.functions.base.getters.grid_gtr
 
 @function grid-gtr($name, $error-handler: 1) {
 	@if map.has-key(ml.$gs-gutters, $name) or $error-handler == 0 {
@@ -136,18 +64,6 @@
 
 	@error 'Invalid breakpoint name: `#{$name}`. `#{$name}` is not defined in $ml-gs-gutters';
 }
-
-// ml-css-var
-//
-// Get name of CSS custom property from [$ml-css-vars](section-sass-tools.html#kssref-sass-tools-settings-css_vars-names) map.
-// ```scss
-//ml-css-var('gg') => '--ml-gg'
-//```
-//
-// $name - custom property name. Type: string.
-// $error-handler = 1 - works similarly like [here](#kssref-sass-tools-functions-bp).
-//
-// Styleguide: sass-tools.functions.base.getters.css_var
 
 @function css-var($name, $error-handler: 1) {
 	@if map.has-key(ml.$general-cfg, 'css-vars', $name) or $error-handler == 0 {

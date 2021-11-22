@@ -12,20 +12,6 @@
 //
 // Styleguide: sass-tools.functions.common.helpers
 
-// ml-css-class
-//
-// Checks for a dot in the CSS class name depending on the flag.
-// ```scss
-//ml-css-class('.block') => '.block'
-//ml-css-class('block') => '.block'
-//ml-css-class('.block', 1) => 'block'
-// ```
-//
-// $name - class name string.
-// $only-name = false - bool flag. In you want to get class name without dot pass 1. Else, a value with a dot will be returned.
-//
-// Styleguide: sass-tools.functions.common.helpers.css_class
-
 @function css-class($name, $only-name: false) {
 	$name: $name + '';
 

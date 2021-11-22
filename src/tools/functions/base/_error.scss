@@ -1,12 +1,3 @@
-// error
-//
-// Shows the error text in the test environment or throws an exception in the production.
-//
-// $message - error message
-// $catch = $is-test-env - bool flag. Catch the error if `true` else throws an exception
-//
-// Styleguide: sass-tools.functions.base.error
-
 @use '../../settings/base/general' as ml;
 
 @function error($message, $catch: ml.$is-test-env) {

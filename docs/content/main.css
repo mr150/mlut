@@ -790,7 +790,7 @@ How to
 
 Ways to solve standard tasks
 
-Weight: 4
+Weight: 2
 
 Styleguide: how_to
 */
@@ -1042,7 +1042,7 @@ General reference
 
 Reference of the utils groups, at-rule etc.
 
-Weight: 2
+Weight: 6
 
 Styleguide: general_reference
 */
@@ -1072,109 +1072,63 @@ Styleguide: general_reference.kw
 */
 
 /*
-Core blocks
-
-Set of universal [blocks](section-concepts.html#kssref-concepts-block) for using on any project. Some blocks contain [elements](section-concepts.html#kssref-concepts-element) and [modifiers](section-concepts.html#kssref-concepts-modifier).
-
-Core blocks don't contain, or almost don't contain styles such as colors, backgrounds, etc. Such styles are set on the theme or 'design' layer. To style blocks or their elements, use utilities or modifiers such as `block--mod`.
-
-Weight: 2
-
-Styleguide: core-blocks
-*/
-
-/*
-Utils reference
-
-Set of utilities that can be used on any project.
-
-Utilities are grouped by sections. The description of each section lists the values of the utilities that relate to it and are included in the MLUT core. Custom utilities, utilities with more values and non-standard values are allocated in subsections. Values of common utilities correspond to [Emmet](https://docs.emmet.io/cheat-sheet/) abbreviations([pdf](https://yadi.sk/i/VcKfz5u7DBHrLA)). If written that all values are available in the utility, you can see them in the Emmet cheat sheet from the link above.
-
-In the description of the utilities, there may be a '**Parameters**' item in which the available values are listed. Instead of the utility value, the '`initial`' keyword may be specified. We will get this effect when using the utility with no value. The range of values can be specified as `0..3`.
-
-If the property does not have a special value 'i' then 'i' value means `inherit`.
-
-Some utilities responsive by design or have only responsive values. It will be indicated in the description like this: *Responsive*.
-
-For some utilities, there is a description for non-developers.
-
-In the examples of the work of some utilities for demonstration, other utilities may be used like this: '`Util1.Util2`'. In the markup, instead of a dot, you need to use a space to separate utilities, like this: '`Util1 Util2`'
-
-Weight: 3
-
-Styleguide: utils-reference
-*/
-
-/*
 Core styles
 
-You can find their in `sass/core/`.
+Base styles for Mlut library.
 
-Weight: 4
+Weight: 3
 
 Styleguide: core-styles
 */
 
 /*
+Core helpers
+
+Set of universal helpers for using on any project.
+
+Weight: 4
+
+Styleguide: core-helpers
+*/
+
+/*
+Utils reference
+
+All utilities that available in the registry.
+
+Weight: 5
+
+Styleguide: utils-reference
+*/
+
+/*
 Sass tools
 
-Available when using MLUT as a [toolkit](section-start.html#kssref-start-usage). Names of tools that are associated with custom utilities begin with 'c' prefix. Examples: [$cGg-range](#kssref-sass-tools-settings-utils), [cCl](#kssref-sass-tools-mixins-general--cl) mixin.
+**DOCUMENTATION IN PROGRESS**
 
-Weight: 6
+Available when using Mlut as a [toolkit](section-start.html#kssref-start-usage).
+
+Weight: 7
 
 Styleguide: sass-tools
 */
 
 /*
-Sass modules
+Settings
 
-Modules include themes, tools, utility sets, and more. Now there are not many modules included in MLUT, so their documentation will be in this section.
+Settings based on which the everything works.
 
-Names of variables, mixins, and sass functions in modules must have prefixes `m#{abbreviated module name}`. For themes, this prefix should look like: `mt#{theme name}`. The names of common CSS classes in modules must comply with [BEM](https://ru.bem.info/) naming rules.
-
-## Themes
-
-Design theme can be used on different sites. They may contain utilities, styles with BEM naming, tools and more. Theme example see [here](section-sass_modules.html#kssref-sass_modules-demo_theme).
-
-Each theme consists of at least 2 parts: *config* and *init*.
-- the config contains data on the basis of which the theme is created: variables, maps with utility values, etc.
-- in the init file all parts of the theme and, if necessary, other modules are included. After including all required parts, the theme is generated.
-
-Themes can be imported to the MLUT assembly for make a single bundle or builded as separate files. To add a theme to your styles, just import an int file. You can also use only the theme config to make it custom build.
-
-The theme documentation is up to you. At a minimum, you should specify:
-- main colors
-- dependencies
-- gzipped size
-- info about unusual parts of the theme, such as mixins, additional styles, etc.
-
-Following these rules you can create your own module. Your module can be added to MLUT. To do this, send a issue, pull-request or contact the maintainer in any other way. Also you can create your own modules collection in a separate repository.
-
-Weight: 7
-
-Styleguide: sass_modules
+Styleguide: sass-tools.settings
 */
 
 /*
-Examples
+Addons
 
-Additional examples of core blocks, utilities, tools and ready-made components. If in the markup you meet the `{{modifier_class}}` construct, then substitute the necessary classes from the examples instead of it, or just erase
+**DOCUMENTATION IN PROGRESS**
+
+Addons include styles, tools, utility sets, and more.
 
 Weight: 8
 
-Styleguide: examples
-*/
-
-/*
-Other
-
-Styleguide: examples.other
-*/
-
-/*
-Settings
-
-Grid settings, compilation flags, constants and more. All core settings are in the `sass/tools/settings/`.
-
-Styleguide: sass-tools.settings
+Styleguide: addons
 */
