@@ -1,7 +1,7 @@
 /*
 Getting started
 
-There are 2 ways to start using MLUT:
+There are 2 ways to start using Mlut:
 
 - assembled distributive
 - developer toolkit
@@ -14,11 +14,6 @@ Styleguide: start
 /*
 Installation
 
-### [Git](https://github.com/mr150/mlut) ###
-```
-git clone https://github.com/mr150/mlut.git
-```
-
 ### NPM ###
 ```
 npm i mlut -D
@@ -28,11 +23,6 @@ npm i mlut -D
 ```html
 <link href="https://unpkg.com/mlut@latest/dist/css/mlut.min.css" rel="stylesheet">
 ```
-```html
-<script src="https://unpkg.com/mlut@latest/dist/js/mlut.min.js"></script>
-```
-### Download ###
-Download assembled files: [CSS](https://unpkg.com/mlut@latest/dist/css/mlut.min.css), [JS](https://unpkg.com/mlut@latest/dist/js/mlut.min.js)
 
 Weight: 0
 
@@ -53,67 +43,61 @@ and the responsive viewport meta tag:
 ```
 
 ### Distributive ###
-You can get assembled MLUT code and include it to your project. There are some ways to get a distributive.
+You can get assembled Mlut code and include it to your project. There are some ways to get a distributive.
 
 - just plug in with CDN
-- if used `git clone`, files are located in the `dist/` folder
 - if used `npm`, files are in `node_modules/mlut/dist/`
 
 Add the file to your page like here:
 ```html
 <link href="css/mlut.min.css" rel="stylesheet">
-<script src="js/mlut.min.js"></script>
 ```
-And just add MLUT classes to markup:
+And just add Mlut classes to markup:
 ```html
-<div class="row D-f">
-	<div class="row__col W3c_md">
+<div class="D-g Gtc-t3">
+	<div class="Bd P2su">
 		<h3>Simple text</h3>
 ```
-Try [examples](section-examples.html) with ready HTML.
 
 ### Toolkit ###
-To use all MLUT features you need an assembly. There are 3 ways:
+To use all Mlut features you need an assembly. You will need to install a package via NPM and:
 
-- Use [MLUT project template](https://github.com/mr150/mlut-project)
-- Use [npm](#kssref-start-install), import tools from `node_modules/mlut/src/` and setup assembly based on [technologies list](./)
-- [Clone](#kssref-start-install) MLUT repo and use configured assembly from it
+- [Dart Sass](https://github.com/sass/sass)
+- CSS minifier or PostCSS plugin that can group media queries. For example: [CSSO](https://github.com/css/csso) or [this](https://github.com/SassNinja/postcss-combine-media-query) plugin
+- [PurgeCSS](https://github.com/FullHuman/purgecss) is recommended for removing unused CSS
 
-#### Assembly ####
-If you cloned git repo:
-```
-npm i
-```
-Run dev server with live reload, code linting and documentation building:
-```
-npm run dev
-```
-or
-```
-gulp
-```
-Build without dev server:
-```
-npm run build
-```
-
-#### Styles ####
-Once the assembly is configured, import sass tools and settings to your `style.scss`
+Once the assembly is configured, just import Mlut to your stylesheet, and configure it as you need:
 ```scss
-@import 'tools/settings';
-@import 'tools/functions';
-@import 'tools/mixins';
+@use '../../node_modules/mlut' as ml with (
+	$su-cf: 5,
+	$breakpoints: (
+		'xxl': 1400px
+	),
+	$colors: (
+		'red0': #f20,
+	),
+	$utils: (
+		'^_D': ('', 'n', 'f'),
+	),
+);
 ```
-Then you can import blocks and utilities how it is done in the [src/sass/mlut.scss](https://github.com/mr150/mlut/blob/master/src/sass/mlut.scss) to get the standard build. Or you can import only what you need:
+Also now you can use Sass tools for writing CSS manually:
 ```scss
-@import 'core/blocks/wrapper';
-@import 'core/utils/display';
+.my-card {
+	display: block;
 
-@include mlu-bpm('md') {
-	.inp--common {
-		padding: mlu-px2em(16px) 16px;
+	@include ml.apply(
+		'P2su Fns1r'
+	);
+
+	@include ml.bp('md') {
+		font-size: calc(ml.px2rem(20px) + 1vw);
 	}
 }
+```
+Probably you want to set the Sass [load path](https://sass-lang.com/documentation/js-api/interfaces/LegacyFileOptions#includePaths) for easier import:
+```scss
+@use 'mlut' as ml with (
 ```
 
 Weight: 1
@@ -944,7 +928,7 @@ If you want to create only a few utilities with specific values or components, y
 
 Weight: 5
 
-Styleguide: how_to.mk_utils.kw
+Styleguide: how_to.mk_utils.apply
 */
 
 /*
@@ -1035,6 +1019,26 @@ BpAll - all breakpoints. Generate values with all breakpoints
 Weight: 3
 
 Styleguide: how_to.mk_utils.kw_cp
+*/
+
+/*
+Work with library
+
+**DOCUMENTATION IN PROGRESS**
+
+Weight: 2
+
+Styleguide: how_to.core_utils
+*/
+
+/*
+Configuration basics
+
+**DOCUMENTATION IN PROGRESS**
+
+Weight: 3
+
+Styleguide: how_to.config
 */
 
 /*
