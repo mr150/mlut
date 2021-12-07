@@ -4,10 +4,10 @@
 @use 'sass:math';
 @use 'sass:string';
 
+@forward 'mk-util';
+
 @use '../forward-tools' as ml;
 @use 'mk-util' as mu;
-
-@forward 'mk-util';
 
 // Utilities
 //
