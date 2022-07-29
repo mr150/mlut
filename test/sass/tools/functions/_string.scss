@@ -248,9 +248,9 @@
 		$tests: (
 			'converts hex string to color': (
 				(red): red,
-				('#c06'): #cc0066,
-				('#6600cc'): #6600cc,
-				('#FAB'): #ffaabb,
+				('#c06'): rgb(204, 0, 102),
+				('#6600cc'): rgb(102, 0, 204),
+				('#FAB'): rgb(255, 170, 187),
 			),
 			'returns `null` if conversion is not possible': (
 				(22): null,
