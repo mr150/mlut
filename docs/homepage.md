@@ -4,6 +4,8 @@ Full-featured and hackable toolkit for writing standards-based Atomic CSS. Get a
 [![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
 
+<img alt="Logo" src="kss-assets/logo-full.png" style="display:block; margin:auto; max-width:415px"/>
+
 ## Mission ##
 - Maximum realize the potential of the Atomic CSS methodology
 - Destroy the myth that Atomic CSS for those who don't know or don't like CSS
