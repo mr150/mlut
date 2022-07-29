@@ -164,7 +164,7 @@ ml.$utils-cfg: map.set(
 				('prm0*gOpDef', 'C'): rgba(204, 0, 102, 0.64),
 				('prm0*$co', 'C'): rgba(204, 0, 102, var(--ml-co, 1)),
 				('$co?varFb*$al?70p', 'C'): rgba(var(--ml-co, 204, 0, 102), var(--ml-al, 0.7)),
-				('#c06*20', 'C'): rgba(204, 0, 102, 20),
+				('#c06*20', 'C'): #cc0066,
 				('prm10*$co', 'C'): string.unquote('prm10*$co'),
 				('$color*20p', 'C'): rgba(var(--ml-color), 0.2),
 			),
