@@ -4,17 +4,19 @@ Full-featured and hackable toolkit for writing standards-based Atomic CSS. Get a
 [![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
 
+<img alt="Logo" src="kss-assets/logo-full.png" style="display:block; margin:auto; max-width:415px"/>
+
 ## Mission ##
 - Maximum realize the potential of the Atomic CSS methodology
 - Destroy the myth that Atomic CSS for those who don't know or don't like CSS
 
 ## Features ##
-- Strong naming convention: [one algorithm](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-naming) for all. If you know CSS, you almost know Mlut
-- Constructable and almost arbitrary [values](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-values), [states](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states) and [at-rules](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-at_rules) by design
-- Fully customizable: change tokens, utils names and any settings
-- Configuration with great DX. All in one config: add utils, states, change settings and more with few lines of code
-- Easiest utilities generation: [range](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range) and [components](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-util-components) syntaxes, utils [groups](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-groups), [top-level](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-apply) `apply` and not only
-- Well compatible with CSS conceptually. Designed for organic growing together with CSS.
+- **Strong naming** convention: [one algorithm](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-naming) for all. If you know CSS, you almost know Mlut
+- Constructable and **almost arbitrary** [values](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-values), [states](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states) and [at-rules](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-at_rules) by design
+- **Fully customizable**: change tokens, utilities names and any settings
+- Configuration with great DX: add utilities, states and change settings with few lines of code
+- **Easiest utils generation**: [range](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range) and [components](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-util-components) syntaxes, [groups](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-groups), [top-level apply](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-apply) and more
+- Well **compatible with CSS** conceptually. Designed for organic growing together with CSS.
 - Easy to use in existing project
 - Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
 
