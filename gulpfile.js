@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-		sass = require('gulp-sass')(require('sass')),
+		sass = require('gulp-sass')(require('sass-embedded')),
 		pug = require('gulp-pug'),
 		browserSync = require('browser-sync'),
 		csso = require('gulp-csso'),
