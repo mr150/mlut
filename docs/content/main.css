@@ -1024,21 +1024,306 @@ Styleguide: how_to.mk_utils.kw_cp
 /*
 Work with library
 
-**DOCUMENTATION IN PROGRESS**
+As you remember, the library part of Mlut contains [basic styles](section-core-styles.html), [helpers](section-core-helpers.html) and utilities. By default, they are all included:
+```scss
+@use 'mlut/tools' as ml;
+@use 'mlut/src/core';
+```
+But you can include only the necessary parts of the core:
+```scss
+@use 'mlut/tools' as ml;
+@use 'mlut/src/core/styles';
+@use 'mlut/src/core/utils';
+```
+*Note*: for convenience, in the examples we will include Mlut as if we specified a Sass load path, so that each time we do not write `../../node_modules/mlut`.
 
 Weight: 2
 
-Styleguide: how_to.core_utils
+Styleguide: how_to.lib
+*/
+
+/*
+Core utilities
+
+This section contains modules with ready-made utilities and a module for initialization. To get all utilities, just include `core/utils`. If you want to load only certain sets, then include them, and then include the initialization module:
+```scss
+@use 'mlut/src/core/utils/box-model';
+@use 'mlut/src/core/utils/text';
+@use 'mlut/src/core/utils/init';
+```
+To load core utils without generating them, include the `core/utils/load` module. This may be needed when using [addons](section-addons.html).
+
+All utilities are sets to `$utils-map` by the key `core`.
+
+Styleguide: how_to.lib.utils
+*/
+
+/*
+Utilities configuration
+
+When including libraries and addons, you can include, exclude or overwrite only certain utilities. To do this, use the special fields in the `$utils` map:
+- `/allow` - include only these utilities, `list`
+- `/ban` - exclude these utilities, `list`
+- `/override` - `map` with utilities and values, which will be merged into `$utils-map` with overwriting. Passing `null` will clear `$utils-map`.
+```scss
+@use 'mlut/src/core/utils' with (
+	$utils: (
+		'C': red,
+
+		'/override': (
+			'M': (1su, 2r)
+		),
+
+		'/allow': (
+			'M', 'C',
+		),
+	),
+);
+
+// CSS
+.C-ih {
+  color: inherit;
+}
+
+.M1su {
+  margin: 0.25rem 4px;
+}
+
+.M2r {
+  margin: 2rem;
+}
+
+.C-red {
+  color: red;
+}
+```
+
+Styleguide: how_to.lib.utils_config
 */
 
 /*
 Configuration basics
 
-**DOCUMENTATION IN PROGRESS**
+Information about the most frequently used settings.
 
 Weight: 3
 
 Styleguide: how_to.config
+*/
+
+/*
+Generic CSS
+
+Generic CSS includes resetting styles, setting `box-sizing` etc. You can customize or completely remove these styles. Their configuration is in `$general-config`, by the key `generic-css`.
+The configuration is a `map`, each element of which is a boolean flag. If set to `true`, the specified CSS will be generated. To disable these styles, pass `null` instead of a map.
+```scss
+@use 'mlut' with (
+	$general-config: (
+		'generic-css': (
+			'svg-fill-cur-color': true,
+			'reset-border': true,
+		)
+	),
+);
+```
+All available settings and their defaults can be viewed in the corresponding [section](section-sass-tools.html#kssref-sass-tools-settings-general-generic_css). The final CSS with comments is available [here](https://github.com/mr150/mlut/blob/master/src/core/styles/generic.scss).
+
+Weight: 3
+
+Styleguide: how_to.config.generic_css
+*/
+
+/*
+Colors
+
+There are 2 ways to add colors:
+
+<div>1. with <code>$colors</code> map</div>
+
+```scss
+@use 'mlut/tools' as ml with (
+	$colors: (
+		'red22': #c00,
+	),
+);
+
+@include ml.apply('Bdc-red22');
+
+// CSS
+.Bdc-red22 {
+  border-color: #c00;
+}
+```
+
+<div>2. when generating any utility or utility group, which has a <code>color</code> type of conversion. If you specify a map with colors as values, then they will be added to the settings and they can be used below in other values of utilities</div>
+
+```scss
+@use 'mlut' as ml with (
+	$utils: (
+		'C': (
+			'red100': #911
+		),
+		'/override': null,
+	),
+);
+
+@include ml.apply('Bgc-red100');
+
+// CSS
+...
+.C-red100 {
+  color: #911;
+}
+
+.Bgc-red100 {
+  background-color: #911;
+}
+```
+
+Styleguide: how_to.config.colors
+*/
+
+/*
+Breakpoints
+
+To add or change breakpoints, use the `$breakpoints` map.
+```scss
+@use 'mlut/tools' as ml with (
+	$breakpoints: (
+		'xxl': 1400px,
+		'sm': 480px,
+	),
+);
+
+@include ml.apply('<sm_W15 xxl_W150');
+
+// CSS
+@media (max-width: 479px) {
+  .\<sm_W15 {
+    width: 15px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .xxl_W150 {
+    width: 150px;
+  }
+}
+```
+The order of adding does not matter, the breakpoints will be sorted by increasing. How to completely rewrite the breakpoints, see the settings.
+
+Styleguide: how_to.config.bp
+*/
+
+/*
+Create new utils
+
+To create a new utility, add it to the registry during configuration. As a value, you can specify CSS property or map with options.
+```scss
+@use 'mlut/tools' as ml with (
+	$utils-data: (
+		'utils': (
+			'registry': (
+				'Mil': margin-inline,
+				'Ir': (
+					'properties': image-rendering,
+					'keywords': (
+						'ce': crisp-edges,
+						'p': pixelated,
+					),
+				),
+			),
+		),
+	),
+);
+
+@include ml.apply('Mil-15 Ir-p');
+
+// CSS
+.Mil-15 {
+  margin-inline: -15px;
+}
+
+.Ir-p {
+  image-rendering: pixelated;
+}
+```
+You can create a utility for changing one property even without registration <s>and SMS</s>. Just indicate the name and values. If the name of the utility begins with `-`, then it will control the custom property.
+```scss
+@use 'mlut' with (
+	$utils: (
+		'display': (flex, 5r),
+		'/override': null,
+	),
+);
+
+@include mlut.apply('-MySize-a');
+
+// CSS
+.display-flex {
+  display: flex;
+}
+
+.display5r {
+  display: 5rem;
+}
+
+.-MySize-a {
+  --ml-mySize: auto;
+}
+```
+This works for any method of generating utilities. Please note that the default conversion type will be used for the values of such utilities.
+
+Styleguide: how_to.config.new_utils
+*/
+
+/*
+Media features and queries
+
+For long media queries, you can create a short alias. Such alias is called custom media query. Use `$at-rures-data` map in the configuration. *Note* when using custom media query, a hyphen is added to their names.
+```scss
+@use 'mlut/tools' as ml with (
+	$at-rules-data: (
+		'media': (
+			'custom': (
+				'myMq': '(orientation: landscape) and (min-height: 20rem)',
+			),
+		),
+	),
+);
+
+@include ml.apply('@:-myMq_D-f');
+
+// CSS
+@media (orientation: landscape) and (min-height: 20rem) {
+  .\@\:-myMq_D-f {
+    display: flex;
+  }
+}
+```
+You can also add a new media feature. They are stored in the same registry as the utilities, in the `media` section. Added as well as utilities.
+```scss
+@use 'mlut/tools' as ml with (
+	$utils-data: (
+		'media': (
+			'registry': (
+				'st': scripting,
+			),
+		),
+	),
+);
+
+@include ml.apply('@:st-n_D');
+
+// CSS
+@media (scripting: none) {
+  .\@\:st-n_D {
+    display: block;
+  }
+}
+```
+
+Styleguide: how_to.config.media
 */
 
 /*
