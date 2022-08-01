@@ -160,7 +160,7 @@ gulp.task('sass-compile-doc', () => {
 			outputStyle: 'expanded',
 			indentWidth: 1
 		}))
-		.pipe(gulp.dest(dirs.docs + 'src/'))
+		.pipe(gulp.dest(dirs.docs + 'content/'))
 		.pipe(csso({
 			forceMediaMerge: true
 		}))
