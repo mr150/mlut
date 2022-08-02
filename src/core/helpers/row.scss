@@ -3,8 +3,6 @@
 /*
 Row
 
-**DOCUMENTATION IN PROGRESS**
-
 Helper for creating layouts. Suitable for columns, cards and horizontal lists. By default, [flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox) technology is used for layouts.
 
 Parts of the layout within a `row` are created using the elements:
@@ -15,7 +13,7 @@ Parts of the layout within a `row` are created using the elements:
 
 `Row` contains CSS counter named `ml-row-item`.
 
-It **not included** in the default MLUT distributive.
+It **not included** in the default MLUT distributive because partially based on the legacy grid system. It is recommended to use the [CSS grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) utilities instead.
 
 Markup: ../../../docs/examples/core-helpers/row/row.html
 
@@ -30,25 +28,20 @@ The main element for creating columns in layout. By default, it stretches the en
 The gutters are implemented using the `margin` and [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars).
 If `var()` is not supported by the browser, then fallback are provided:
 ```scss
-margin-right: 16px;
-margin-left: 16px;
-margin-right: var(--ml.gg);
-margin-left: var(--ml.gg);
-margin-bottom: 2rem;
-margin-bottom: calc(var(--ml.gg-rem) * 2);
+margin: 0px 16px 32px;
+margin: 0px calc(var(--ml-gg) * 1) calc(var(--ml-gg) * 2);
 ```
-The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$grid-default-gtr`.
+The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$gs-default-gtr`.
 
-Column width is set using [W utility](section-core-utils.html#kssref-core-utils-bxz-w). See example [above](#kssref-core-helpers-row). The formulas for calculating the width and offset for the column are stored in the custom properties. In `--gc-rule` for W and `--mgc-rule` for [Ml utility](section-core-utils.html#kssref-core-utils-margin-ml). These formulas:
+Column width is set using [W utility](section-utils-reference.html#kssref-utils-reference-w). See example [above](#kssref-core-helpers-row). The formulas for calculating the width and offset for the column are stored in the custom properties. In `--ml-gscf` for W and `--ml-gsof` for [Ml utility](section-utils-reference.html#kssref-utils-reference-ml). These formulas:
 ```scss
---gc-rule: calc((var(--gc) - 0.0001) / var(--ml.grid-cols) * 100% - var(--gc-diff) * 2);
---mgc-rule: calc((var(--mgc) - 0.0001) / var(--ml.grid-cols) * 100% + var(--gc-diff));
+--ml-gscf: calc(var(--ml-gsc) / var(--ml-gscc) * 100% - var(--ml-gsfd, var(--ml-gg)) * 2);
+--ml-gsof: calc(var(--ml-gso) / var(--ml-gscc) * 100% + var(--ml-gsfd, var(--ml-gg)));
 ```
-`--gc` or `--mgc` is the value of the width or offset in the grid columns. This is a custom property of the utility.<br>
-`(var(--gc) - 0.0001)` - fix for calc() [bug](https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/15637241/) in Edge 16-18.<br>
-`--ml.grid-cols` - the number of columns in the grid system. This is a [global](section-core-styles.html#kssref-core-styles-css_vars) custom property that can be changed on any DOM node.<br>
-`--gc-diff` - variable is equal to the gutter if the gutter at the columns is created using margin. In `row__col` is equal 1gg.<br>
-Some of these variables can be changed using [custom utilities](section-core-utils.html#kssref-core-utils-custom).
+`--ml-gsc` or `--ml-gso` is the value of the width or offset in the grid columns. This is a custom property of the utility.<br>
+`--ml-gscc` - the number of columns in the grid system. This is a [global](section-core-styles.html#kssref-core-styles-css_vars) custom property that can be changed on any DOM node.<br>
+`--ml-gsfd` - variable is equal to the gutter if the gutter at the columns is created using margin. In `row__col` is equal `1gg`.<br>
+Some of these variables can be changed using [custom utilities](section-utils-reference.html#kssref-utils-reference--gscc).
 
 You can create nested layouts with a mix of `row` and `row__col` on the same DOM node. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
 
@@ -66,7 +59,7 @@ Element for creating parts of the layout. By default, it stretches across the wi
 
 The sizes and offsets are set with help of utilities.
 
-Like a `row__col`, an element contains formulas for calculating width and offset. But `gc-diff` here is equal 0px.
+Like a `row__col`, an element contains formulas for calculating width and offset. But `--ml-gsfd` here is equal 0px.
 
 Markup: ../../../docs/examples/core-helpers/row/row__item.html
 
