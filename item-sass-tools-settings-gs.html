@@ -96,7 +96,7 @@
 
 
           <div class="kss-description">
-            <p>Settings that affect the work of grid system.</p>
+            <p>Settings that affect the work of grid system both modern and legacy.</p>
 
           </div>
 
@@ -104,7 +104,16 @@
           <div class="kss-parameters__title">Parameters:</div>
           <ul class="kss-parameters">
             <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>$ml-gs-default-gtr</code></div>
+              <div class="kss-parameters__name"><code>$legacy-grid-system</code></div>
+              <div class="kss-parameters__description">
+                enable legacy grid system and generate some CSS for it
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>false</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$gs-default-gtr</code></div>
               <div class="kss-parameters__description">
                 default gutter on large width screen. Used as fallback for <a href="section-core-styles.html#kssref-core-styles-css_vars">--ml-gg</a>.
                   <div class="kss-parameters__default-value">
@@ -113,13 +122,16 @@
               </div>
             </li>
             <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>$ml-gs-columns</code></div>
+              <div class="kss-parameters__name"><code>$gs-columns</code></div>
               <div class="kss-parameters__description">
                 columls count.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>12</code>
+                  </div>
               </div>
             </li>
             <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>$ml-gs-gutters</code></div>
+              <div class="kss-parameters__name"><code>$gs-gutters</code></div>
               <div class="kss-parameters__description">
                 map with grid gutters on breakpoints.
               </div>

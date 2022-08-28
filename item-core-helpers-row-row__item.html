@@ -128,7 +128,7 @@
           <div class="kss-description">
             <p>Element for creating parts of the layout. By default, it stretches across the width of the content.</p>
 <p>The sizes and offsets are set with help of utilities.</p>
-<p>Like a <code>row__col</code>, an element contains formulas for calculating width and offset. But <code>gc-diff</code> here is equal 0px.</p>
+<p>Like a <code>row__col</code>, an element contains formulas for calculating width and offset. But <code>--ml-gsfd</code> here is equal 0px.</p>
 
           </div>
 
@@ -142,8 +142,8 @@
 
 
           <div class="kss-modifier__example">
-            <div class="row">
-	<div class="row__item W2c_sm W2c_md">
+            <div class="row -Mx0">
+	<div class="row__item">
 		<h3>Элемент 0</h3>
 		<p>элемент без отступов</p>
 	</div>
@@ -151,11 +151,11 @@
 		<h3>Элемент 1</h3>
 		<p>с внутренними отступами</p>
 	</div>
-	<div class="row__item W2c_sm W2c_md">
+	<div class="row__item sm_W2gc md_W2gc">
 		<h3>Элемент 2</h3>
 		<p>элемент без отступов</p>
 	</div>
-	<div class="row__item W2c_sm W3c_md Ml1gg">
+	<div class="row__item Ml1gg">
 		<h3>Последний элемент</h3>
 		<p>с внешним отступом</p>
 	</div>
@@ -170,8 +170,8 @@
             <summary>
                 Markup: <code>../examples/core-helpers/row/row__item.html</code>
             </summary>
-            <pre class="hljs"><code class="language-handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__item W2c_sm W2c_md"</span>&gt;</span>
+            <pre class="hljs"><code class="language-handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row -Mx0"</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__item"</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Элемент 0<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>элемент без отступов<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -179,11 +179,11 @@
 		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Элемент 1<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>с внутренними отступами<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__item W2c_sm W2c_md"</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__item sm_W2gc md_W2gc"</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Элемент 2<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>элемент без отступов<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__item W2c_sm W3c_md Ml1gg"</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__item Ml1gg"</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Последний элемент<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>с внешним отступом<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -192,7 +192,7 @@
           </details>
 
         <div class="kss-source kss-style">
-          Source: <code>../src/core/helpers/row.scss</code>, line 62
+          Source: <code>../src/core/helpers/row.scss</code>, line 55
         </div>
 
     </div>

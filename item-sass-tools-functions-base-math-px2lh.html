@@ -90,15 +90,15 @@
                   #sass-tools.functions.base.math.px2lh
               </span>
             </span>
-            ml-px2lh
+            px2lh
           </a>
         </h5>
 
 
           <div class="kss-description">
-            <p>Wrapper on <a href="#kssref-sass-tools-functions-px2em">ml-px2em</a> for converting to <code>line-height</code> units. Works similarly.</p>
-<pre class="hljs"><code class="language-scss">ml-px2lh(24px, 14px) =&gt; 1<span class="hljs-selector-class">.71</span>
-ml-px2lh(24px) =&gt; 1<span class="hljs-selector-class">.5</span>
+            <p>Wrapper on <a href="#kssref-sass-tools-functions-px2em">px2em</a> for converting to <code>line-height</code> units. Works similarly.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@debug</span> ml.px2lh(<span class="hljs-number">24px</span>, <span class="hljs-number">14px</span>); <span class="hljs-comment">// 1.71</span>
+<span class="hljs-keyword">@debug</span> ml.px2lh(<span class="hljs-number">24px</span>); <span class="hljs-comment">// 1.5</span>
 </code></pre>
 
           </div>
@@ -117,7 +117,7 @@ ml-px2lh(24px) =&gt; 1<span class="hljs-selector-class">.5</span>
               <div class="kss-parameters__description">
                 parent font size in <code>px</code>.
                   <div class="kss-parameters__default-value">
-                    Defaults to: <code>$ml-browser-font-size</code>
+                    Defaults to: <code>$browser-font-size</code>
                   </div>
               </div>
             </li>

@@ -96,7 +96,15 @@
 
 
           <div class="kss-description">
-            <p><strong>DOCUMENTATION IN PROGRESS</strong></p>
+            <p>As you remember, the library part of Mlut contains <a href="section-core-styles.html">basic styles</a>, <a href="section-core-helpers.html">helpers</a> and utilities. By default, they are all included:</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut/tools'</span> as ml;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut/core'</span>;
+</code></pre>
+<p>But you can include only the necessary parts of the core:</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut/tools'</span> as ml;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut/core/styles'</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut/core/utils'</span>;
+</code></pre>
 
           </div>
 

@@ -96,18 +96,20 @@
 
 
           <div class="kss-description">
-            <p>Generate at-rules from the string with space separated abbreviations.</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@include</span> ml.mk-ar(<span class="hljs-string">'@s'</span>, <span class="hljs-string">'D-ig'</span>) {
- <span class="hljs-selector-class">.D-ig</span> {
-    <span class="hljs-attribute">display</span>: inline-grid;
- }
+            <p>Generate at-rules from the string with space separated abbreviations. Used <a href="section-concepts.html#kssref-concepts-at_rules">syntax</a> for at-rules from utilities.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@include</span> ml.mk-ar(<span class="hljs-string">'@s:apcr4/3@:dm'</span>) using (<span class="hljs-variable">$ar</span>) {
+	<span class="hljs-selector-class">.block</span> {
+		<span class="hljs-attribute">display</span>: inline-grid;
+	}
 }
-</code></pre>
-<p>CSS</p>
-<pre class="hljs"><code class="language-css"><span class="hljs-keyword">@supports</span> (<span class="hljs-attribute">display:</span> inline-grid) {
- <span class="hljs-selector-class">.D-ig</span> {
-  <span class="hljs-attribute">display</span>: inline-grid;
- }
+
+<span class="hljs-comment">// CSS</span>
+<span class="hljs-keyword">@supports</span> (aspect-ratio: <span class="hljs-number">4</span>/<span class="hljs-number">3</span>) {
+	<span class="hljs-keyword">@media</span> (display-mode: fullscreen) {
+		<span class="hljs-selector-class">.block</span> {
+			<span class="hljs-attribute">display</span>: inline-grid;
+		}
+	}
 }
 </code></pre>
 
@@ -125,10 +127,16 @@
             <li class="kss-parameters__item">
               <div class="kss-parameters__name"><code>$this-util</code></div>
               <div class="kss-parameters__description">
-                utility for which the at-rules will be generated
+                utility for which the at-rules will be generated.<br> This is a map in format <code>('name': '', 'value': '')</code>
                   <div class="kss-parameters__default-value">
                     Defaults to: <code>null</code>
                   </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>@content</code></div>
+              <div class="kss-parameters__description">
+                CSS rules that will be placed into at-rules
               </div>
             </li>
           </ul>

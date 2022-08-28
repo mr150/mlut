@@ -90,16 +90,16 @@
                   #sass-tools.functions.base.math.px2em
               </span>
             </span>
-            ml-px2em
+            px2em
           </a>
         </h5>
 
 
           <div class="kss-description">
-            <p>Convert pixels to <code>ems</code>.
+            <p>Convert pixels to <code>em</code>.
 Final value in ems rounded because accuracy more than two decimal places does not make sense.</p>
-<pre class="hljs"><code class="language-scss">ml-px2em(24px, 18px) =&gt; 1<span class="hljs-selector-class">.33em</span>
-ml-px2em(24px) =&gt; 1<span class="hljs-selector-class">.5em</span>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@debug</span> ml.px2em(<span class="hljs-number">24px</span>, <span class="hljs-number">18px</span>); <span class="hljs-comment">// 1.33em</span>
+<span class="hljs-keyword">@debug</span> ml.px2em(<span class="hljs-number">24px</span>); <span class="hljs-comment">// 1.5em</span>
 </code></pre>
 
           </div>
@@ -118,7 +118,7 @@ ml-px2em(24px) =&gt; 1<span class="hljs-selector-class">.5em</span>
               <div class="kss-parameters__description">
                 parent font size in <code>px</code>.
                   <div class="kss-parameters__default-value">
-                    Defaults to: <code>$ml-browser-font-size</code>
+                    Defaults to: <code>$browser-font-size</code>
                   </div>
               </div>
             </li>

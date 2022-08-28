@@ -129,23 +129,18 @@
             <p>The main element for creating columns in layout. By default, it stretches the entire width of the container. The columns have gutters on the sides and bottom.</p>
 <p>The gutters are implemented using the <code>margin</code> and <a href="section-core-styles.html#kssref-core-styles-css_vars">CSS custom properties</a>.
 If <code>var()</code> is not supported by the browser, then fallback are provided:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-attribute">margin-right</span>: <span class="hljs-number">16px</span>;
-<span class="hljs-attribute">margin-left</span>: <span class="hljs-number">16px</span>;
-<span class="hljs-attribute">margin-right</span>: var(--ml.gg);
-<span class="hljs-attribute">margin-left</span>: var(--ml.gg);
-<span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">2rem</span>;
-<span class="hljs-attribute">margin-bottom</span>: calc(var(--ml.gg-rem) * <span class="hljs-number">2</span>);
+<pre class="hljs"><code class="language-scss"><span class="hljs-attribute">margin</span>: <span class="hljs-number">0px</span> <span class="hljs-number">16px</span> <span class="hljs-number">32px</span>;
+<span class="hljs-attribute">margin</span>: <span class="hljs-number">0px</span> calc(var(--ml-gg) * <span class="hljs-number">1</span>) calc(var(--ml-gg) * <span class="hljs-number">2</span>);
 </code></pre>
-<p>The size of gutter fallback you can find in the <a href="section-sass-tools.html#kssref-sass-tools-settings-general">settings</a> in <code>$grid-default-gtr</code>.</p>
-<p>Column width is set using <a href="section-core-utils.html#kssref-core-utils-bxz-w">W utility</a>. See example <a href="#kssref-core-helpers-row">above</a>. The formulas for calculating the width and offset for the column are stored in the custom properties. In <code>--gc-rule</code> for W and <code>--mgc-rule</code> for <a href="section-core-utils.html#kssref-core-utils-margin-ml">Ml utility</a>. These formulas:</p>
-<pre class="hljs"><code class="language-scss">--gc-rule: calc((var(--gc) - <span class="hljs-number">0.0001</span>) / var(--ml.grid-cols) * <span class="hljs-number">100%</span> - var(--gc-diff) * <span class="hljs-number">2</span>);
---mgc-rule: calc((var(--mgc) - <span class="hljs-number">0.0001</span>) / var(--ml.grid-cols) * <span class="hljs-number">100%</span> + var(--gc-diff));
+<p>The size of gutter fallback you can find in the <a href="section-sass-tools.html#kssref-sass-tools-settings-general">settings</a> in <code>$gs-default-gtr</code>.</p>
+<p>Column width is set using <a href="section-utils-reference.html#kssref-utils-reference-w">W utility</a>. See example <a href="#kssref-core-helpers-row">above</a>. The formulas for calculating the width and offset for the column are stored in the custom properties. In <code>--ml-gscf</code> for W and <code>--ml-gsof</code> for <a href="section-utils-reference.html#kssref-utils-reference-ml">Ml utility</a>. These formulas:</p>
+<pre class="hljs"><code class="language-scss">--ml-gscf: calc(var(--ml-gsc) / var(--ml-gscc) * <span class="hljs-number">100%</span> - var(--ml-gsfd, var(--ml-gg)) * <span class="hljs-number">2</span>);
+--ml-gsof: calc(var(--ml-gso) / var(--ml-gscc) * <span class="hljs-number">100%</span> + var(--ml-gsfd, var(--ml-gg)));
 </code></pre>
-<p><code>--gc</code> or <code>--mgc</code> is the value of the width or offset in the grid columns. This is a custom property of the utility.<br>
-<code>(var(--gc) - 0.0001)</code> - fix for calc() <a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/15637241/">bug</a> in Edge 16-18.<br>
-<code>--ml.grid-cols</code> - the number of columns in the grid system. This is a <a href="section-core-styles.html#kssref-core-styles-css_vars">global</a> custom property that can be changed on any DOM node.<br>
-<code>--gc-diff</code> - variable is equal to the gutter if the gutter at the columns is created using margin. In <code>row__col</code> is equal 1gg.<br>
-Some of these variables can be changed using <a href="section-core-utils.html#kssref-core-utils-custom">custom utilities</a>.</p>
+<p><code>--ml-gsc</code> or <code>--ml-gso</code> is the value of the width or offset in the grid columns. This is a custom property of the utility.<br>
+<code>--ml-gscc</code> - the number of columns in the grid system. This is a <a href="section-core-styles.html#kssref-core-styles-css_vars">global</a> custom property that can be changed on any DOM node.<br>
+<code>--ml-gsfd</code> - variable is equal to the gutter if the gutter at the columns is created using margin. In <code>row__col</code> is equal <code>1gg</code>.<br>
+Some of these variables can be changed using <a href="section-utils-reference.html#kssref-utils-reference--gscc">custom utilities</a>.</p>
 <p>You can create nested layouts with a mix of <code>row</code> and <code>row__col</code> on the same DOM node. If you don't need double fields in the nested row, use the mix with the <code>row__item</code>. See example below.</p>
 <p>All examples of the work of nested layouts are <a href="section-examples.html#kssref-examples-nested_layouts">here</a>.</p>
 
@@ -162,42 +157,42 @@ Some of these variables can be changed using <a href="section-core-utils.html#ks
 
           <div class="kss-modifier__example">
             <div class="row">
-	<div class="row__col row test-row W4c_sm W9c_md">
-		<div class="row__col W2c_sm W3c_md">
-			<h3>Parent .W9c_md</h3>
-			<p>this .W3c_md</p>
+	<div class="row__col row test-row sm_W4gc md_W9gc">
+		<div class="row__col sm_W2gc md_W3gc">
+			<h3>Parent .md_W9gc</h3>
+			<p>this .md_W3gc</p>
 		</div>
-		<div class="row__col W2c_sm W4c_md">
-			<h3>Parent .W9c_md</h3>
-			<p>this .W4c_md</p>
+		<div class="row__col sm_W2gc md_W4gc">
+			<h3>Parent .md_W9gc</h3>
+			<p>this .md_W4gc</p>
 		</div>
-		<div class="row__col W2c_sm W5c_md">
+		<div class="row__col sm_W2gc md_W5gc">
 			<h3>Parent have double gutter</h3>
-			<p>this .W5c_md</p>
+			<p>this .md_W5gc</p>
 		</div>
 	</div>
-	<div class="row__col W2c_sm W3c_md">
-		<h3>.W3c_md</h3>
+	<div class="row__col sm_W2gc md_W3gc">
+		<h3>.md_W3gc</h3>
 	</div>
 </div>
 <p><b>Similar mix with row__item:</b></p>
-<div class="row">
-	<div class="row__item row test-row W4c_sm W9c_md">
-		<div class="row__col W2c_sm W3c_md">
-			<h3>Parent .W9c_md</h3>
-			<p>this .W3c_md</p>
+<div class="row -Mx0">
+	<div class="row__item row -Mx0 test-row sm_W4gc md_W9gc">
+		<div class="row__col sm_W2gc md_W3gc">
+			<h3>Parent .md_W9gc</h3>
+			<p>this .md_W3gc</p>
 		</div>
-		<div class="row__col W2c_sm W4c_md">
-			<h3>Parent .W9c_md</h3>
-			<p>this .W4c_md</p>
+		<div class="row__col sm_W2gc md_W4gc">
+			<h3>Parent .md_W9gc</h3>
+			<p>this .md_W4gc</p>
 		</div>
-		<div class="row__col W2c_sm W5c_md">
+		<div class="row__col sm_W2gc md_W5gc">
 			<h3>Parent without double gutter</h3>
-			<p>this .W5c_md</p>
+			<p>this .md_W5gc</p>
 		</div>
 	</div>
-	<div class="row__col W2c_sm W3c_md">
-		<h3>.W3c_md</h3>
+	<div class="row__col sm_W2gc md_W3gc">
+		<h3>.md_W3gc</h3>
 	</div>
 </div>
 
@@ -211,49 +206,49 @@ Some of these variables can be changed using <a href="section-core-utils.html#ks
                 Markup: <code>../examples/core-helpers/row/row__col.html</code>
             </summary>
             <pre class="hljs"><code class="language-handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col row test-row W4c_sm W9c_md"</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W3c_md"</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Parent .W9c_md<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .W3c_md<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col row test-row sm_W4gc md_W9gc"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col sm_W2gc md_W3gc"</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Parent .md_W9gc<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .md_W3gc<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W4c_md"</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Parent .W9c_md<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .W4c_md<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col sm_W2gc md_W4gc"</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Parent .md_W9gc<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .md_W4gc<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W5c_md"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col sm_W2gc md_W5gc"</span>&gt;</span>
 			<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Parent have double gutter<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .W5c_md<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .md_W5gc<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W3c_md"</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>.W3c_md<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col sm_W2gc md_W3gc"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>.md_W3gc<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>Similar mix with row__item:<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__item row test-row W4c_sm W9c_md"</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W3c_md"</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Parent .W9c_md<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .W3c_md<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row -Mx0"</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__item row -Mx0 test-row sm_W4gc md_W9gc"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col sm_W2gc md_W3gc"</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Parent .md_W9gc<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .md_W3gc<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W4c_md"</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Parent .W9c_md<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .W4c_md<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col sm_W2gc md_W4gc"</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Parent .md_W9gc<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .md_W4gc<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W5c_md"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col sm_W2gc md_W5gc"</span>&gt;</span>
 			<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Parent without double gutter<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .W5c_md<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>this .md_W5gc<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 		<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W3c_md"</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>.W3c_md<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col sm_W2gc md_W3gc"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>.md_W3gc<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </span></code></pre>
           </details>
 
         <div class="kss-source kss-style">
-          Source: <code>../src/core/helpers/row.scss</code>, line 25
+          Source: <code>../src/core/helpers/row.scss</code>, line 23
         </div>
 
     </div>

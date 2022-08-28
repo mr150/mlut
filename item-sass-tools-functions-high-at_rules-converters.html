@@ -90,46 +90,18 @@
                   #sass-tools.functions.high.at_rules.converters
               </span>
             </span>
-            Converters
+            sass-tools.functions.high.at_rules.converters
           </a>
         </h5>
 
 
-          <div class="kss-description">
-            <p>Converts abbreviations to at-rules. The name of the converter begins with <code>convert-ar-</code> and ends with the name of the at-rule, which it corresponds. The exception is the breakpoint converter. All converters take the same arguments, see below.</p>
-<p>Converter is bind to the at-rule that contains in the <code>$at-rules-db</code> map. It is recorded on the 'converter' key in the map of the relevant rule.</p>
-<p>Available converters:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@debug</span> ml.convert-ar-bp(<span class="hljs-string">'&lt;sm,xl'</span>); <span class="hljs-comment">// '(max-width: 519px), (min-width: 1168px)'</span>
-<span class="hljs-keyword">@debug</span> ml.convert-ar-media(<span class="hljs-string">'scr:fc'</span>); <span class="hljs-comment">// 'screen and (forced-colors)'</span>
-<span class="hljs-keyword">@debug</span> ml.convert-ar-supports(<span class="hljs-string">'!&amp;'</span>, <span class="hljs-string">'D-ig'</span>); <span class="hljs-comment">// '(not (display: inline-grid))'</span>
-</code></pre>
-
-          </div>
 
 
-          <div class="kss-parameters__title">Parameters:</div>
-          <ul class="kss-parameters">
-            <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>$ar</code></div>
-              <div class="kss-parameters__description">
-                string with abbreviations
-              </div>
-            </li>
-            <li class="kss-parameters__item">
-              <div class="kss-parameters__name"><code>$this-util</code></div>
-              <div class="kss-parameters__description">
-                utility for which the at-rules will be generated
-                  <div class="kss-parameters__default-value">
-                    Defaults to: <code>null</code>
-                  </div>
-              </div>
-            </li>
-          </ul>
       </div>
 
 
         <div class="kss-source kss-style">
-          Source: <code>../src/tools/functions/high/_at-rules.scss</code>, line 117
+          Source: <code>../src/tools/functions/high/_at-rules.scss</code>, line 135
         </div>
 
     </div>

@@ -126,8 +126,7 @@
           </p>
 
           <div class="kss-description">
-            <p><strong>DOCUMENTATION IN PROGRESS</strong></p>
-<p>Helper for creating layouts. Suitable for columns, cards and horizontal lists. By default, <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox">flexbox</a> technology is used for layouts.</p>
+            <p>Helper for creating layouts. Suitable for columns, cards and horizontal lists. By default, <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox">flexbox</a> technology is used for layouts.</p>
 <p>Parts of the layout within a <code>row</code> are created using the elements:</p>
 <ul>
 <li><a href="#kssref-core-helpers-row-row__col">row__col</a></li>
@@ -135,7 +134,7 @@
 </ul>
 <p><code>Rows</code> can be put into each other an unlimited number of times.</p>
 <p><code>Row</code> contains CSS counter named <code>ml-row-item</code>.</p>
-<p>It <strong>not included</strong> in the default MLUT distributive.</p>
+<p>It <strong>not included</strong> in the default MLUT distributive because partially based on the legacy grid system. It is recommended to use the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout">CSS grid</a> utilities instead.</p>
 
           </div>
 
@@ -150,16 +149,16 @@
 
           <div class="kss-modifier__example">
             <div class="row">
-	<div class="row__col W2c_sm W3c_md">
-		<h3>W2c_sm W3c_md</h3>
+	<div class="row__col sm_W2gc md_W3gc">
+		<h3>sm_W2gc md_W3gc</h3>
 		<p>Et molestie ac, massa, eget egestas purus viverra?</p>
 	</div>
-	<div class="row__col W2c_sm W4c_md">
-		<h3>W2c_sm W4c_md</h3>
+	<div class="row__col sm_W2gc md_W4gc">
+		<h3>sm_W2gc md_W4gc</h3>
 		<p>Et molestie ac, ullamcorper morbi tincidunt ornare massa, eget egestas purus viverra?</p>
 	</div>
-	<div class="row__col W2c_sm W5c_md">
-		<h3>W2c_sm W5c_md</h3>
+	<div class="row__col sm_W2gc md_W5gc">
+		<h3>sm_W2gc md_W5gc</h3>
 		<p>Et molestie ac, feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa, eget egestas purus viverra?</p>
 	</div>
 </div>
@@ -174,16 +173,16 @@
                 Markup: <code>../examples/core-helpers/row/row.html</code>
             </summary>
             <pre class="hljs"><code class="language-handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row"</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W3c_md"</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>W2c_sm W3c_md<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col sm_W2gc md_W3gc"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>sm_W2gc md_W3gc<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Et molestie ac, massa, eget egestas purus viverra?<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W4c_md"</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>W2c_sm W4c_md<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col sm_W2gc md_W4gc"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>sm_W2gc md_W4gc<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Et molestie ac, ullamcorper morbi tincidunt ornare massa, eget egestas purus viverra?<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col W2c_sm W5c_md"</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>W2c_sm W5c_md<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"row__col sm_W2gc md_W5gc"</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>sm_W2gc md_W5gc<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Et molestie ac, feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa, eget egestas purus viverra?<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>

@@ -96,7 +96,37 @@
 
 
           <div class="kss-description">
-            <p>Settings based on which the everything works.</p>
+            <p>Part of the settings is stored in large maps, which are called depending on the area: <code>utils</code>, <code>at-rules</code> etc. To add or change the settings in such a map, use <code>$*mapname*-config</code> or <code>$*mapname*-data</code>. For example:</p>
+<ul>
+<li><code>$utils-config</code></li>
+<li><code>$at-rules-data</code></li>
+<li><code>$general-config</code></li>
+</ul>
+<p>If you want to completely overwrite map or one of its fields, specify <code>null</code>. Below in the configuration use <code>*mapname*-ext</code> and then your values.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut/tools'</span> as ml with (
+	<span class="hljs-variable">$utils-data</span>: (
+		<span class="hljs-string">'utils'</span>: (
+			<span class="hljs-string">'registry'</span>: (
+				<span class="hljs-string">'Ps'</span>: null,
+			),
+		),
+	),
+	<span class="hljs-variable">$utils-data-ext</span>: (
+		<span class="hljs-string">'utils'</span>: (
+			<span class="hljs-string">'registry'</span>: (
+				<span class="hljs-string">'Ps'</span>: (
+					<span class="hljs-string">'properties'</span>: position,
+					<span class="hljs-string">'keywords'</span>: (<span class="hljs-string">'sc'</span>: sticky),
+				),
+			)
+		),
+	),
+);
+
+<span class="hljs-keyword">@debug</span> ml.uv(<span class="hljs-string">'Ps-sc'</span>); <span class="hljs-comment">// sticky</span>
+<span class="hljs-keyword">@debug</span> ml.uv(<span class="hljs-string">'Ps-a'</span>); <span class="hljs-comment">// a</span>
+</code></pre>
+<p>It is relevant for <code>$breakpoints</code> map too.</p>
 
           </div>
 
@@ -105,7 +135,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1120
+          Source: <code>content/main.css</code>, line 1405
         </div>
 
     </div>
