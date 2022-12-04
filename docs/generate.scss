@@ -8,6 +8,13 @@
 
 $url-map: (
 	'keywords': 'section-general_reference.html#kssref-general_reference-kw',
+	'conversion': 'section-settings.html#kssref-settings-utils-config-conversion',
+);
+
+$states-section-name: (
+	'pseudo-cls': 'pseudo classes',
+	'pseudo-elm': 'pseudo elements',
+	'custom': 'custom',
 );
 
 @function format-map-value($key, $value, $util) {
@@ -75,7 +82,7 @@ $url-map: (
 	@each $key, $value in $map {
 		$result: $result + '<tr> \
 <td class="#{$cell-css}">#{if($key == '', "<i>default</i>", $key)}</td> \
-<td class="#{$cell-css} Pl2gg Mxw-gSm">#{format-map-value($key, $value, $util)}</td> \
+<td class="#{$cell-css} Pl3gg Mxw-gSm">#{format-map-value($key, $value, $util)}</td> \
 </tr>'
 	}
 
@@ -132,7 +139,7 @@ Styleguide: utils-reference.#{string.to-lower-case($util)}
 /*
 #{$group}
 
-<code class>#{meta.inspect(map.get($members, 'members'))}`</class>
+<code class>#{meta.inspect(map.get($members, 'members'))}</code>
 
 Styleguide: general_reference.groups.#{string.to-lower-case($group)}
 */
@@ -157,5 +164,15 @@ Styleguide: general_reference.media.#{$feature}
 #{map2html($keywords, null, null)}
 
 Styleguide: general_reference.kw.#{$group-name}
+*/
+}
+
+@each $group-name, $states in map.remove(map.get(ml.$utils-cfg, 'states'), 'keywords') {
+/*
+#{map.get($states-section-name, $group-name)}
+
+#{map2html($states, null, null)}
+
+Styleguide: settings.utils.config.states.#{$group-name}
 */
 }
