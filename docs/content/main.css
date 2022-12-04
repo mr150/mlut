@@ -63,7 +63,7 @@ And just add Mlut classes to markup:
 To use all Mlut features you need an assembly. You will need to install a package via NPM and:
 
 - [Dart Sass](https://github.com/sass/sass)
-- CSS minifier or PostCSS plugin that can group media queries. For example: [CSSO](https://github.com/css/csso) or [this](https://github.com/SassNinja/postcss-combine-media-query) plugin
+- CSS minifier or PostCSS plugin that can group media queries is recommended.<br> For example: [CSSO](https://github.com/css/csso) or [this](https://github.com/SassNinja/postcss-combine-media-query) plugin
 - [PurgeCSS](https://github.com/FullHuman/purgecss) is recommended for removing unused CSS
 
 Once the assembly is configured, just import Mlut to your stylesheet, and configure it as you need:
@@ -1405,9 +1405,60 @@ Styleguide: sass-tools
 /*
 Settings
 
-Settings based on which the everything works.
+Most of the settings are stored in large maps, which are called depending on the area: `utils`, `at-aules` etc. Such settings are divided into two types, depending on the contents: data and configurations. Next, we will call their *databases* and *configures*, accordingly.
 
-Styleguide: sass-tools.settings
+For user settings, separate maps are provided, which differ in the suffix. It is in them that you add changes in the configuration and they also merge into the original maps.
+* maps with data: source suffix \- `db`, user's \- `data`
+* maps with configs: source suffix \- `cfg`, user's \- `config`
+```scss
+@use 'mlut/tools' with (
+	$utils-config: (
+		'states': (
+			'custom': (
+				'are': '[aria-expanded=“true”]',
+			),
+		),
+	),
+	$at-rules-data: (
+		'container': (
+			'alias': 'c',
+		),
+	),
+);
+```
+
+If you want to completely overwrite map or one of its fields, specify `null`. Below in the configuration use `*mapname*-ext` and then your values.
+```scss
+@use 'mlut/tools' as ml with (
+	$utils-data: (
+		'utils': (
+			'registry': (
+				'Ps': null,
+			),
+		),
+	),
+	$utils-data-ext: (
+		'utils': (
+			'registry': (
+				'Ps': (
+					'properties': position,
+					'keywords': ('sc': sticky),
+				),
+			)
+		),
+	),
+);
+
+@debug ml.uv('Ps-sc'); // sticky
+@debug ml.uv('Ps-a'); // a
+```
+This is relevant for some smaller maps like a `$breakpoints`. In the specific settings will specified which maps have the possibility of rewriting using `ext`.
+
+For the time being, you can look at the structure of maps with the settings in the code, but later it will be described in the documentation.
+
+Weight: 8
+
+Styleguide: settings
 */
 
 /*
@@ -1417,7 +1468,7 @@ Addons
 
 Addons include styles, tools, utility sets, and more.
 
-Weight: 8
+Weight: 9
 
 Styleguide: addons
 */
