@@ -7,6 +7,78 @@
 //
 // Styleguide: settings.utils
 
+// Other
+//
+// Other settings that are not contained in main large maps
+//
+// Styleguide: settings.utils.other
+
+// $utils-up-specificity
+//
+// `boolean | string`<br>Increase the specificity of all utilities at once. When `true` - to each utility property will be added `!important`. A string with a CSS selector is also acceptable. It will be added before the utility selector. <br>Defaults to: `false`
+//
+// ```scss
+//	@use 'mlut/tools' as ml with (
+//		$utils-up-specificity: true,
+//	);
+//
+//	@include ml.apply('Mt2r');
+//
+//	// CSS
+//	.Mt2r {
+//		margin-top: 2rem !important;
+//	}
+// ```
+//
+// Styleguide: settings.utils.other.up_specificity
+
+// Utils groups
+//
+// Groups are stored in a separate database `$utils-groups-db`. To modify or add groups, use `$utils-groups`. When specifying utilities in the group, you can use Components Syntax. In this case, utilities with components will be generated for each value.
+//
+// ```scss
+//	@use 'mlut' as ml with (
+//		$utils-groups: (
+//			'MPSpaces': (
+//				'M_ frc', Mt, Mr, Mb, Ml, -Mx, -My,
+//				P, Pt, Pr, Pb, Pl, -Px, -Py,
+//			),
+//		),
+//		$utils: (
+//			'MPSpaces': (
+//				100, '$myOffset'
+//			),
+//		),
+//	);
+//
+//	// CSS
+//	// some utils from standard library before
+//
+//	.M100 {
+//	  margin: 100px;
+//	}
+//
+//	.M100_frc:first-child {
+//	  margin: 100px;
+//	}
+//
+//	.M-\$myOffset {
+//	  margin: var(--ml-myOffset);
+//	}
+//
+//	.M-\$myOffset_frc:first-child {
+//	  margin: var(--ml-myOffset);
+//	}
+//
+//	.Mt100 {
+//	  margin-top: 100px;
+//	}
+//
+//	// etc
+// ```
+//
+// Styleguide: settings.utils.other.groups
+
 // Config
 //
 // Most of the settings are stored here, on the basis of which utilities work. Below are some sections that may be useful during customization.
@@ -34,9 +106,9 @@
 //		),
 //	);
 //
-//	@include ml.apply(('-rtl _Mr5su'), (), true);
+//	@include ml.apply(('-rtl _Mr2r'), (), true);
 //
-//	//CSS
+//	// CSS
 //	[dir=“rtl”] .-rtl_Mr2r {
 //		margin-right: 2rem;
 //	}
