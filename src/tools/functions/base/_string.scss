@@ -11,9 +11,9 @@
 //
 // Functions to manipulate strings.
 //
-// Styleguide: sass-tools.functions.base.string
+// Styleguide: sass-tools.functions.string
 
-// ml-str2n
+// str2n
 //
 // Convert string to number. Returns null if conversion is not possible.
 // ```scss
@@ -26,7 +26,7 @@
 // $str - string to be converted
 // $skip-unknown = false - bool flag. If it on and the string contains an unknown sequence of characters after the number, then the it is returned as is
 //
-// Styleguide: sass-tools.functions.base.string.str2n
+// Styleguide: sass-tools.functions.string.str2n
 
 @function str2n($str, $skip-unknown: false) {
 	$value-type: meta.type-of($str);
@@ -84,7 +84,7 @@
 //
 // $str - string for search
 //
-// Styleguide: sass-tools.functions.base.string.str_digit_index
+// Styleguide: sass-tools.functions.string.str_digit_index
 
 @function str-digit-index($str) {
 	@if meta.type-of($str) != 'string' {
@@ -109,7 +109,7 @@
 //
 // $str - string for converting
 //
-// Styleguide: sass-tools.functions.base.string.str_ucfirst
+// Styleguide: sass-tools.functions.string.str_ucfirst
 
 @function str-ucfirst($str) {
 	@if meta.type-of($str) != 'string' {
@@ -129,7 +129,7 @@
 //
 // $value - value for escaping
 //
-// Styleguide: sass-tools.functions.base.string.str_escape
+// Styleguide: sass-tools.functions.string.str_escape
 
 @function str-escape($value) {
 	$str: $value + '';

@@ -8,19 +8,19 @@
 
 // Value converters
 //
-// Available converters:
+// Simple converters are listed here, and more complex ones are made in separate sections on this page. Available converters:
 // ```scss
-//@debug ml.convert-uv-number(10); // 10px
-//@debug ml.convert-uv-unitless(10); // 10
-//@debug ml.convert-uv-resolution(2x); // 2dppx
-//@debug ml.convert-uv-global-kw('a'); // auto
-//@debug ml.convert-uv-abbr('bgc'); // background-color
+//@debug ml.unitless(10); // 10
+//@debug ml.resolution(2x); // 2dppx
+//@debug ml.global-kw('a'); // auto
+//@debug ml.abbr('bgc'); // background-color
 // ```
 //
 // $value - value for converting
 // $data = () - map with data required for converting
 //
-// Styleguide: sass-tools.functions.high.utils.value_converters
+/// Styleguide: sass-tools.functions.utils.value_converters
+
 
 @function convert-uv-number($value, $data: ()) {
 	$val-number: ml.str2n($value, true);

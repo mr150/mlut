@@ -22,7 +22,9 @@
 //
 // Functions for working with utilities.
 //
-// Styleguide: sass-tools.functions.high.utils
+// Styleguide: sass-tools.functions.utils
+
+/// Styleguide: sass-tools.functions.high.utils
 
 @function convert-util-states($states, $this-util: null, $pre: false) {
 	$prefix: '&';
@@ -205,6 +207,21 @@
 
 	@return map.set($result, 'values', $values);
 }
+
+// uv
+//
+// Get CSS value of utility.
+// ```scss
+//@debug ml.uv('D'); // 'block'
+//@debug ml.uv('C#c06*80'); // rgba(204, 0, 102, 0.8)
+//@debug ml.uv('M3gg;a;gSm'); // calc(var(--ml-gg) * 3) auto 520px
+//```
+//
+// $util -  `string` <div> Any utility </div>
+//
+// Styleguide: sass-tools.functions.utils.uv
+
+/// Styleguide: sass-tools.functions.high.utils.uv
 
 @function uv($util) {
 	@if $util == '' {

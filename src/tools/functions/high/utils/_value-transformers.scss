@@ -16,7 +16,7 @@
 // $value - value for transforming
 // $data = () - map with data required for transforming
 //
-// Styleguide: sass-tools.functions.high.utils.value_transformers
+/// Styleguide: sass-tools.functions.high.utils.value_transformers
 
 $-directions: map.values(ml.$main-directions);
 

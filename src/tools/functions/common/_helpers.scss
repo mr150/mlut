@@ -8,9 +8,9 @@
 
 // Helpers
 //
-// Functions-helpers for general tasks.
+// Basically, here are functions for internal needs. Perhaps the documentation will appear later.
 //
-// Styleguide: sass-tools.functions.common.helpers
+/// Styleguide: sass-tools.functions.common.helpers
 
 @function css-class($name, $only-name: false) {
 	$name: $name + '';

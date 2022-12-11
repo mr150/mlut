@@ -9,7 +9,9 @@
 
 // Utils
 //
-// Styleguide: sass-tools.functions.common.utils
+// Basically, here are functions for internal needs. Perhaps the documentation will appear later.
+//
+/// Styleguide: sass-tools.functions.common.utils
 
 // convert-util-value
 //
@@ -23,7 +25,7 @@
 // $name - utility name
 // $section = 'utils' - section in the registry in which utility was defined
 //
-// Styleguide: sass-tools.functions.common.utils.convert_util_value
+/// Styleguide: sass-tools.functions.common.utils.convert_util_value
 
 @function convert-util-value($util-val, $name, $section: 'utils') {
 	$result: null;

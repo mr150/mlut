@@ -22,7 +22,7 @@ $-states-tokens: (ml.$tSCn, ml.$tSAnd, ml.$tSTu);
 //
 // $raw-value - utility value or name. Type string.
 //
-// Styleguide: sass-tools.functions.high.utils.parse_util
+/// Styleguide: sass-tools.functions.high.utils.parse_util
 
 @function parse-util($raw-value) {
 	$raw-value-parts: ml.str-split($raw-value + '', ml.$tUCm);
