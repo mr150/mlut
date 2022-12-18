@@ -12,5 +12,9 @@ sassTrue.runSass(
 			'node_modules',
 		],
 	},
-	{ describe, it }
+	{
+		describe,
+		it,
+		sass: require('sass-embedded'),
+	}
 );
