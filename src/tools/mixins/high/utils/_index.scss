@@ -15,6 +15,39 @@
 //
 // Styleguide: sass-tools.mixins.utils
 
+// mk-utils-group
+//
+// Creates utilities group based on a map or a list with values. Works similarly that [mk-util](section-sass-tools.html#kssref-sass-tools-mixins-utils-mk_util) mixin. You can find existing groups [here](section-general_reference.html#kssref-general_reference-groups).
+//
+// ```scss
+//	@include ml.mk-utils-group(
+//		'Margins', (
+//			'xs0': 100px,
+//			150: null
+//	));
+//
+//	// CSS
+//	.M-xs0 {
+//		margin: 100px;
+//	}
+//
+//	.M150 {
+//		margin: 150px;
+//	}
+//
+//	.Mt-xs0 {
+//		margin-top: 100px;
+//	}
+//
+//	// etc
+// ```
+//
+// $raw-name - `string` <div> name of the group. You can use [components syntax](section-concepts.html#kssref-concepts-util-components) here </div>
+// $values - <div class="Mt3su"> `list | map` </div> You can specify a map with utility values and CSS properties values. Or you can pass a list with only utility values. It will be converted to CSS values depends on conversion type of utility
+// $components = () - <div class="Mt3su"> `map` </div> Contains utility [components](section-concepts.html#kssref-concepts-util-components) in longhand format
+//
+// Styleguide: sass-tools.mixins.utils.mk_utils_group
+
 @mixin mk-utils-group(
 	$raw-name, $values, $components: (), $bound-components: true
 ) {
@@ -59,6 +92,52 @@
 		$i: $i + 1;
 	}
 }
+
+// apply
+//
+// Applies a list of utilities in the form of styles to CSS rule:
+// ```scss
+//	.card {
+//		display: block;
+//
+//		@include ml.apply('P2su Fns1r xl_P5su');
+//	}
+//
+//	// CSS
+//	.card {
+//		display: block;
+//		padding: 0.5rem;
+//		font-size: 1rem;
+//	}
+//
+//	@media (min-width: 1200px) {
+//		.card {
+//			padding: 1.25rem;
+//		}
+//	}
+// ```
+//
+// If a mixin is called outside CSS rule, then creates utilities from the list. See examples [here](section-how_to.html#kssref-how_to-config).
+//
+// Apply has some restrictions. If you try to use a utility with `pre-state` in it without a clear indication that this is a state, you will get an error. This happens because the Parser cannot distinguish `pre-state` from the utility itself. To create such utilities, pass a list of utilities as a list of strings, separating the components of the utility by spaces, as well as in Components Syntax. Next, pass `true` in the third argument:
+// ```scss
+//	@include ml.apply(('.js:h:>* _D', 'Lnh2r!_af'), (), true);
+//
+//	// CSS
+//	.js:hover > * .\.js\:h\:\>\*_D {
+//		display: block;
+//	}
+//
+//	.Lnh2r\!_af::after {
+//		line-height: 2rem !important;
+//	}
+// ```
+//
+// $utils - `string | list` <div> string with space-separated utilities or a list of utils as strings </div>
+// $components = () - <div class="Mt3su"> `map` </div> Contains utility [components](section-concepts.html#kssref-concepts-util-components) in longhand format
+// $ready-list = false - <div class="Mt3su"> `boolean` </div> if `true` than you can pass any utilities as a list
+//
+// Styleguide: sass-tools.mixins.utils.apply
 
 @mixin apply($utils, $components: (), $ready-list: false) {
 	$utils-list: if(

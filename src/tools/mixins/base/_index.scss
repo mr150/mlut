@@ -17,48 +17,50 @@
 
 // bp
 //
-// Mixin for creation media queries with breakpoints
+// Mixin for creation media queries with breakpoints. You can use [syntax](section-concepts.html#kssref-concepts-at_rules-bp) for breakpoints from utilities or one-two arbitrary numbers. When using numbers:
+// - one number: `min-width` query
+// - two from zero: `max-width`
+// - two numbers: range
 // ```scss
-// @include bpm('md') {
+// @include ml.bp('<sm,md:lg') {
 //		.inp--common {
 //			padding-left: 48px;
 //		}
 // }
 //
-// @include bpm($to: 'lg') {
-//		.btn--common {
-//			margin-left: 48px;
+// @include ml.bp(0 600px) {
+//		.btn__icon {
+//			margin-left: 18px;
 //		}
 // }
 //
-// @include bpm('sm', 'lg') {
-//		.btn--common {
-//			margin-top: 48px;
+// @include ml.bp(16em 32em) {
+//		.btn__icon {
+//			margin-top: 8px;
 //		}
 // }
-// ```
-// Compile into:
-// ```css
-// @media (min-width: 760px) {
+//
+// // CSS
+// @media (max-width: 519px), (min-width: 768px) and (max-width: 991px) {
 //		.inp--common {
 //			padding-left: 48px;
 //		}
 // }
 //
-// @media (max-width: 959px) {
-//		.btn--common {
-//			margin-left: 48px;
+// @media (max-width: 599px) {
+//		.btn__icon {
+//			margin-left: 18px;
 //		}
 // }
 //
-// @media (min-width: 520px) and (max-width: 959px) {
-//		.btn--common {
-//			margin-top: 48px;
+// @media (min-width: 16em) and (max-width: 31.94em) {
+//		.btn__icon {
+//			margin-top: 8px;
 //		}
 // }
 // ```
 //
-// $bp - breakpoint. Can be keyword (string) or number. Generate to 'min-width' mediaquery, and `$to` to 'max-width' - 1.
+// $bp - string in syntax for breakpoins or list with numbers.
 // @content - CSS relus that will be placed into mediaquery.
 //
 // Styleguide: sass-tools.mixins.ar.bp
