@@ -217,7 +217,7 @@ Here is an example, as the utility will be parsed to the components:
 ```
 Note that the *order* of components is important.
 
-Utility Components Syntax - the way to describe, with which components we want to generate utilities. It is similar to the syntax utilities in the final code, but has a number of differences:
+**Utility Components Syntax** - the way to describe, with which components we want to generate utilities. It is similar to the syntax utilities in the final code, but has a number of differences:
 - components of the same type are separated by spaces
 - by default, the utilities with the components of each type are generated *separately*. It means that: `xl_^:h_Bdb_h,f` => `xl_Bdb`, `^:h_Bdb` and `Bdb_f`
 - [keywords](section-how_to.html#kssref-how_to-mk_utils-kw_cp) are used, for explicit instructions, with what components we need utilities and not only: `BpAll ArSt _Bdb_h`
@@ -1393,8 +1393,6 @@ Styleguide: utils-reference
 /*
 Sass tools
 
-**DOCUMENTATION IN PROGRESS**
-
 Available when using Mlut as a [toolkit](section-start.html#kssref-start-usage).
 
 Weight: 7
@@ -1464,11 +1462,91 @@ Styleguide: settings
 /*
 Addons
 
-**DOCUMENTATION IN PROGRESS**
-
-Addons include styles, tools, utility sets, and more.
+Addons may include styles, tools, utility sets, and more. For the time being, they are in a main repository, but later they will be moved into separate NPM packages.
 
 Weight: 9
 
 Styleguide: addons
+*/
+
+/*
+How it works
+
+Here you will learn how to include addons, their structure, and also how to create your own addon.
+
+Weight: 0
+
+Styleguide: addons.how_works
+*/
+
+/*
+Import
+
+To import addon that contains utilities, you will need:
+```scss
+@charset "utf-8";
+
+// import tools
+@use "mlut/tools" as ml;
+
+// optional import styles from the core that you need: helpers, utilities, etc
+@use "mlut/src/core/base-setup";
+
+// import addons
+@use "mlut/src/addons/demo-theme";
+
+// import a module that initialize utilities
+@use "mlut/src/core/utils/init";
+```
+You can also cancel the generation of all utilities from the addon, and get only the necessary values from there. To do this, pass the parameter to the config of the addon: `$generate: false`.
+
+If the addon contains only a ready-made SASS/CSS code, it can be included in any order after tools. Addon also may have their own settings. They can be seen in the code or documentation.
+
+Styleguide: addons.how_works.import
+*/
+
+/*
+Structure
+
+To create an addon containing utilities:
+```scss
+// import Mlut tools
+@use '../tools' as ml;
+
+// create a map with the same scheme as map $utils,
+// when creating utilities in the config
+$utils: (
+	'BpAll _W': (5su, 10su, 20su, 25su, 40su, 70su),
+	'BpAll _H': (5su, 10su, 20su, 25su),
+);
+
+// put a map with new utils to the $utils-map from tools
+// as a key, use the unique name of the addon
+ml.$utils-map: map.set(
+	ml.$utils-map,
+	'my-addon',
+	$utils
+);
+
+// you can add the ability to cancel the generation of all utilities
+// to do this, create a setting
+$generate: true !default;
+
+// and hide behind it the writing new utilities to the common map
+@if $generate {
+	ml.$utils-map: map.set(
+...
+```
+
+Styleguide: addons.how_works.structure
+*/
+
+/*
+Catalog
+
+Addons that are delivered with Mlut are described here.
+
+Weight: 1
+
+Styleguide: addons.catalog
 */
