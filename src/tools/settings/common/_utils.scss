@@ -115,11 +115,7 @@ $utils-db: (
 				'conversion': 'num-length',
 			),
 			'-Gsfd': ml.$var-gsfd,
-			'-Gsg': (
-				'properties': (
-					ml.$var-gg,
-				),
-			),
+			'-Gg': ml.$var-gg,
 			'-Gsf': (
 				'properties': (
 					$cv-pref + 'gscf',
