@@ -1126,7 +1126,7 @@ The configuration is a `map`, each element of which is a boolean flag. If set to
 	),
 );
 ```
-All available settings and their defaults can be viewed in the corresponding [section](section-sass-tools.html#kssref-sass-tools-settings-general-generic_css). The final CSS with comments is available [here](https://github.com/mr150/mlut/blob/master/src/core/styles/generic.scss).
+For the time being, available settings can be viewed only in the [code](https://github.com/mr150/mlut/blob/master/src/tools/settings/base/_general.scss#L124), but later they will appear in this documentation. You can find [here](https://github.com/mr150/mlut/blob/master/src/core/styles/generic.scss) The final CSS with comments.
 
 Weight: 3
 
