@@ -217,18 +217,24 @@ Here is an example, as the utility will be parsed to the components:
 ```
 Note that the *order* of components is important.
 
-**Utility Components Syntax** - the way to describe, with which components we want to generate utilities. It is similar to the syntax utilities in the final code, but has a number of differences:
+Most of the components in the Mlut is convertible. This means that if the component or part of it correspond the rules of conversion, it will unfold into some CSS value. How to convert different components, you can read below in the relevant sections. If the Mlut does not know how to convert the component, the behavior will depend on its type.
+
+Weight: 2
+
+Styleguide: concepts.util.components
+*/
+
+/*
+Components Syntax
+
+**Utility Components Syntax** - is the way to describe, with which components we want to generate utilities. It is similar to the syntax utilities in the final code, but has a number of differences:
 - components of the same type are separated by spaces
 - by default, the utilities with the components of each type are generated *separately*. It means that: `xl_^:h_Bdb_h,f` => `xl_Bdb`, `^:h_Bdb` and `Bdb_f`
 - [keywords](section-how_to.html#kssref-how_to-mk_utils-kw_cp) are used, for explicit instructions, with what components we need utilities and not only: `BpAll ArSt _Bdb_h`
 
 This syntax is used in all places where utilities, utils groups, ranges, etc. are generated.
 
-Most of the components in the Mlut is convertible. This means that if the component or part of it correspond the rules of conversion, it will unfold into some CSS value. How to convert different components, you can read below in the relevant sections. If the Mlut does not know how to convert the component, the behavior will depend on its type.
-
-Weight: 2
-
-Styleguide: concepts.util.components
+Styleguide: concepts.util.components.syntax
 */
 
 /*
@@ -302,7 +308,7 @@ Styleguide: concepts.values.type.css_var
 /*
 Color
 
-You can use both HEX colors and color names set by the user. Read more about adding your colors here. With colors, you can specify the opacity modifier `*`. This converter is used to convert opacity. With modifier, you can use CSS variables or global keywords in any position:
+You can use both HEX colors and color names set by the user. Read more about adding your colors [here](section-how_to.html#kssref-how_to-config-colors). With colors, you can specify the opacity modifier `*`. This converter is used to convert opacity. With modifier, you can use CSS variables or global keywords in any position:
 ```scss
 @debug ml.uv('C#60c*20p'); // rgba(102, 0, 204, 0.2)
 @debug ml.uv('C-red0*$co'); // rgba(204, 0, 102, var(--ml-co, 1))
@@ -1339,7 +1345,7 @@ Styleguide: general_reference
 /*
 Utilities groups
 
-In the description of each group are specified the included utilities. When specifying utilities, [Components Syntax](section-concepts.html#kssref-concepts-util-components) can be used. After the utilities list, the values of the group that are contained **in the Core** library may be writted. In this values also may be used the Components Syntax.
+In the description of each group are specified the included utilities. When specifying utilities, [Components Syntax](section-concepts.html#kssref-concepts-util-components-syntax) can be used. After the utilities list, the values of the group that are contained **in the Core** library may be writted. In this values also may be used the Components Syntax.
 
 Styleguide: general_reference.groups
 */
@@ -1395,7 +1401,7 @@ This reference is generated on the basis of settings in the code. In the left co
 }
 ```
 
-After the options, the values of utility that are contained **in the Core** library may be specified. The values are written in [Components Syntax](section-concepts.html#kssref-concepts-util-components). Remember that Core contains only those values that can be used across projects. If you are looking for ready-made utilities for stylization, such as the colors and sizes, then check out of [Demo theme](section-addons.html#kssref-addons-catalog-demo_theme) in built-in addons.
+After the options, the values of utility that are contained **in the Core** library may be specified. The values are written in [Components Syntax](section-concepts.html#kssref-concepts-util-components-syntax). Remember that Core contains only those values that can be used across projects. If you are looking for ready-made utilities for stylization, such as the colors and sizes, then check out of [Demo theme](section-addons.html#kssref-addons-catalog-demo_theme) in built-in addons.
 
 Weight: 5
 
