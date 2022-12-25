@@ -1,5 +1,5 @@
 # My Little UI Toolkit #
-Full-featured and hackable Atomic CSS toolkit. Get almost all power of CSS in one utility!
+Full-featured and hackable atomic CSS toolkit with unique syntax. Get almost all power of CSS in one utility!
 
 [![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
@@ -12,10 +12,10 @@ Full-featured and hackable Atomic CSS toolkit. Get almost all power of CSS in on
 Import and configure Mlut:
 ```scss
 @use 'mlut' as ml with (
-	$utils: (
-		'Fnw': ('bd', 200),
-		'xl_P': 10r,
-	)
+  $utils: (
+    'Fnw': ('bd', 200),
+    'xl_P': 10r,
+  )
 );
 
 @include ml.apply('P30;$gutter?1r_!frc');
@@ -33,13 +33,13 @@ Get CSS like this:
 }
 
 .P10r {
-	padding: 10rem;
+  padding: 10rem;
 }
 
 @media (min-width: 1200px) {
-	.xl_P10r {
-		padding: 10rem;
-	}
+  .xl_P10r {
+    padding: 10rem;
+  }
 }
 
 .P30\;\$gutter\?1r_\!frc:not(:first-child) {
@@ -167,8 +167,7 @@ Probably you want to set the Sass [load path](https://sass-lang.com/documentatio
 Available [here](https://mr150.github.io/mlut/) or can be run locally. Documentation is included in this repo and is generated using [KSS-node](https://github.com/kss-node/kss-node) from the comments in the sources.
 
 ## What's next? ##
-- complete the documentation and add more examples
-- more utilities
+- CLI
 - JIT mode
 - first class CSS functions in utils values
 - and much more!
