@@ -117,10 +117,8 @@ $utils-db: (
 			'-Gsfd': ml.$var-gsfd,
 			'-Gsg': (
 				'properties': (
-					ml.$var-gg-rem,
 					ml.$var-gg,
 				),
-				'directions': true,
 			),
 			'-Gsf': (
 				'properties': (
@@ -147,15 +145,9 @@ $utils-db: (
 					'sk': sticky,
 				),
 			),
-			'T': (
-				'properties': top,
-				'default-unit': 'rem',
-			),
+			'T': top,
 			'R': right,
-			'B': (
-				'properties': bottom,
-				'default-unit': 'rem',
-			),
+			'B': bottom,
 			'L': left,
 			'-X': (
 				'properties': (
@@ -166,7 +158,6 @@ $utils-db: (
 				'properties': (
 					top, bottom,
 				),
-				'default-unit': 'rem',
 			),
 			'-I': (
 				'properties': (
@@ -375,14 +366,8 @@ $utils-db: (
 					'r': row,
 				),
 			),
-			'Gap': (
-				'properties': gap,
-				'directions': true,
-			),
-			'Rwg': (
-				'properties': row-gap,
-				'default-unit': 'rem',
-			),
+			'Gap': gap,
+			'Rwg': row-gap,
 			'Clmg': column-gap,
 
 			'F': (
@@ -431,12 +416,10 @@ $utils-db: (
 			),
 			'Mnh': (
 				'properties': min-height,
-				'default-unit': 'rem',
 				'keywords': 'sizing',
 			),
 			'Mxh': (
 				'properties': max-height,
-				'default-unit': 'rem',
 				'keywords': 'sizing',
 			),
 			'Tbl': (
@@ -446,19 +429,10 @@ $utils-db: (
 				),
 			),
 
-			'M': (
-				'properties': margin,
-				'directions': true,
-			),
-			'Mt': (
-				'properties': margin-top,
-				'default-unit': 'rem',
-			),
+			'M': margin,
+			'Mt': margin-top,
 			'Mr': margin-right,
-			'Mb': (
-				'properties': margin-bottom,
-				'default-unit': 'rem',
-			),
+			'Mb': margin-bottom,
 			'Ml': margin-left,
 			'-Mx': (
 				'properties': (
@@ -469,22 +443,12 @@ $utils-db: (
 				'properties': (
 					margin-top, margin-bottom
 				),
-				'default-unit': 'rem',
 			),
 
-			'P': (
-				'properties': padding,
-				'directions': true,
-			),
-			'Pt': (
-				'properties': padding-top,
-				'default-unit': 'rem',
-			),
+			'P': padding,
+			'Pt': padding-top,
 			'Pr': padding-right,
-			'Pb': (
-				'properties': padding-bottom,
-				'default-unit': 'rem',
-			),
+			'Pb': padding-bottom,
 			'Pl': padding-left,
 			'-Px': (
 				'properties': (
@@ -495,7 +459,6 @@ $utils-db: (
 				'properties': (
 					padding-top, padding-bottom
 				),
-				'default-unit': 'rem',
 			),
 
 			'Ov': (
@@ -530,7 +493,6 @@ $utils-db: (
 			),
 			'Fns': (
 				'properties': font-size,
-				'default-unit': 'rem',
 				'keywords': 'font-size',
 			),
 			'-Fns': (
@@ -540,7 +502,6 @@ $utils-db: (
 					letter-spacing,
 				),
 				'repeat-prop-values': false,
-				'default-unit': 'rem',
 				'keywords': 'font-size',
 			),
 			'Fnf': (
@@ -563,7 +524,6 @@ $utils-db: (
 			'Lnh': (
 				'properties': line-height,
 				'conversion': 'kw-num-length',
-				'default-unit': 'rem',
 				'keywords': (
 					'n': normal,
 				),
@@ -866,9 +826,6 @@ $utils-db: (
 				),
 			),
 			'-Trx': $cv-pref + 'trx',
-			'-Try': (
-				'default-unit': 'rem',
-			),
 			'-S': (
 				'properties': (
 					$cv-pref + 'sx',
@@ -1259,7 +1216,6 @@ $utils-db: (
 				'properties': border-color,
 				'range-generator': 'color',
 				'conversion': 'color',
-				'directions': true,
 			),
 			'Bdtc': (
 				'properties': border-top-color,
@@ -1769,7 +1725,6 @@ $utils-db: (
 		'registry': (
 			'H': (
 				'properties': height,
-				'default-unit': 'rem',
 				'keywords': 'sizing',
 			),
 			'W': (

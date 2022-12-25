@@ -12,14 +12,12 @@
 //
 // Styleguide: sass-tools.functions.custom_units
 
-// Space unit converters
+// su
 //
-// Converts space units to CSS value. Available converters:
-// - `su()` - `su` to `px`
-// - `sur()` - `su` to `rem`
+// Converts space units to CSS value.
 // ```scss
-//@debug ml.su(3); // 12px
-//@debug ml.sur(3su); // 0.75rem
+//@debug ml.su(3su); // 0.75rem
+//@debug ml.su(4); // 1rem
 // ```
 //
 // $n - unitless number or number with `su` unit
@@ -34,32 +32,19 @@
 		);
 	}
 
-	$unit: map.get($data, 'unit');
-	$init-value: map.get(ml.$general-cfg, 'custom-unit-values', 'su', $unit or 'px');
-
-	@if not $init-value {
-		@return ml.error('No initial value for converting to `#{$unit}` unit');
-	}
-
 	@if math.unit($n) == 'su' {
 		$n: math.div($n, 1su);
 	}
 
-	@return $init-value * $n;
+	@return ml.$su * $n;
 }
 
-@function sur($n) {
-	@return su($n, ('unit': 'rem'));
-}
-
-// Grid gutter converters
+// gg
 //
-// Converts grid gutter to CSS value. Available converters:
-// - `gg()` - `gg` to `px`
-// - `ggr()` - `gg` to `rem`
+// Converts grid gutter to CSS value.
 // ```scss
-//@debug ml.gg(5gg); // calc(var(--ml-gg) * 5)
-//@debug ml.ggr(5); // calc(var(--ml-gg-rem) * 5)
+//@debug ml.gg(5); // calc(var(--ml-gg) * 5)
+//@debug ml.gg(1gg); // var(--ml-gg)
 // ```
 //
 // $n - unitless number or number with `gg` unit
@@ -78,24 +63,9 @@
 		$n: math.div($n, 1gg);
 	}
 
-	$unit: map.get($data, 'unit');
-	$var-name: if(
-		$unit,
-		'gg-' + $unit,
-		'gg'
-	);
-
-	@if not map.has-key(ml.$general-cfg, 'css-vars', $var-name) {
-		@return ml.error('No CSS variable for converting to `#{$unit}` unit');
-	}
-
 	@return string.unquote(
-		'calc(var(#{map.get(ml.$general-cfg, "css-vars", $var-name)}) * #{$n})'
+		'calc(var(#{map.get(ml.$general-cfg, "css-vars", "gg")}) * #{$n})'
 	);
-}
-
-@function ggr($n) {
-	@return gg($n, ('unit': 'rem'));
 }
 
 ml.$general-cfg: map.set(
@@ -104,6 +74,7 @@ ml.$general-cfg: map.set(
 
 $-gtr-fallback-rem: ml.px2rem(ml.$gs-default-gtr);
 
+// TODO: remove unused code
 @function gg-fallback($util, $util-value, $css-value, $important) {
 	$value-part-init: 'calc(var(#{ml.css-var("gg")}';
 

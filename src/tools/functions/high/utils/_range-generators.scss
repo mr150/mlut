@@ -38,69 +38,43 @@
 	$unit-name: math.unit($start-number);
 	$unit: map.get(ml.$units-all, $unit-name);
 	$converted-start: ml.convert-util-value($start-number, $util);
-	$css-unit-map: ();
+	$css-unit-name: null;
+	$css-unit: null;
 
-	@if list.length($converted-start) == 1 {
-		$css-unit-name: map.get(ml.$utils-db, 'utils', 'registry', $util, 'default-unit');
-		$css-unit: null;
-
-		@if meta.type-of($converted-start) == 'number' {
-			$css-unit-name: math.unit($converted-start);
-			$css-unit: (
-				map.get(
-					ml.$utils-cfg,
-					'units',
-					map.get(ml.$utils-db, 'utils', 'registry', $util, 'conversion'),
-					$unit-name
-				) or
-				map.get(ml.$units-all, $css-unit-name)
-			);
-		}
-
-		@if map.has-key(ml.$general-cfg, 'custom-unit-values', $unit-name) {
-			$css-unit: map.get(
-				ml.$general-cfg, 'custom-unit-values', $unit-name, $css-unit-name
-			) or map.get(ml.$general-cfg, 'custom-unit-values', $unit-name);
-		}
-
-		$css-unit-map: map.set($css-unit-map, $css-unit-name, $css-unit);
-	} @else {
-		$css-unit-map: (
-			'rem': meta.get-function($unit-name, false, ml),
-			null: meta.get-function($unit-name, false, ml),
+	@if meta.type-of($converted-start) == 'number' {
+		$css-unit-name: math.unit($converted-start);
+		$css-unit: (
+			map.get(
+				ml.$utils-cfg,
+				'units',
+				map.get(ml.$utils-db, 'utils', 'registry', $util, 'conversion'),
+				$unit-name
+			) or
+			map.get(ml.$units-all, $css-unit-name)
 		);
+	}
+
+	@if map.has-key(ml.$general-cfg, 'custom-unit-values', $unit-name) {
+		$css-unit: map.get(ml.$general-cfg, 'custom-unit-values', $unit-name);
 	}
 
 	$step: if(($range-args-count > 2), list.nth($range, 3), 1);
 	$values: ();
-	$is-css-unit-fn: meta.type-of(
-		list.nth(list.nth($css-unit-map, 1), 2)
-	) == 'function';
+	$is-css-unit-fn: meta.type-of($css-unit) == 'function';
 	$i: math.div($start-number, $unit);
 
 	@while $i <= $end {
-		$css-value: ();
-
-		@each $css-unit-name, $css-unit in $css-unit-map {
-			$css-value: list.append(
-				$css-value,
-				if(
-					$is-css-unit-fn,
-					meta.call(
-						$css-unit, $i, ('unit': $css-unit-name, 'util': $util)
-					),
-					$i * $css-unit
-				)
-			);
-		}
+		$css-value: if(
+			$is-css-unit-fn,
+			meta.call($css-unit, $i, ('util': $util)),
+			$i * $css-unit
+		);
 
 		$values: map.set($values, $i * $unit, $css-value);
 		$i: $i + $step;
 	}
 
-	$result: map.set($result, 'values', $values);
-
-	@return $result;
+	@return map.set($result, 'values', $values);
 }
 
 $-color-adjust-fn: meta.get-function('adjust', false, color);

@@ -46,33 +46,21 @@
 			@return math.div($val-number, map.get(ml.$units-all, $unit)) * $unit-number;
 		}
 
-		@if (
-			map.has-key(ml.$general-cfg, 'custom-unit-values', $unit) and
-			meta.function-exists($unit, ml)
-		) {
-			$section: map.get($data, 'section');
-			$name: map.get($data, 'name');
-			$unit-converter: meta.get-function($unit, false, ml);
+		@if map.has-key(ml.$general-cfg, 'custom-unit-values', $unit) {
+			$custom-unit-value: map.get(ml.$general-cfg, 'custom-unit-values', $unit);
+			$custom-unit-val-type: meta.type-of($custom-unit-value);
 
-			@if (
-				($unit == 'su' or $unit == 'gg') and
-				map.get(ml.$utils-db, $section, 'registry', $name, 'directions') and
-				map.get($data, 'one-value')
-			) {
+			@if $custom-unit-val-type == 'function' {
+				@return meta.call(
+					$custom-unit-value,
+					$val-number,
+					('util': map.get($data, 'name'))
+				);
+			} @else if $custom-unit-val-type == 'number' {
 				@return (
-					meta.call($unit-converter, $val-number, ('unit': 'rem'))
-					meta.call($unit-converter, $val-number)
+					math.div($val-number, map.get(ml.$units-all, $unit)) * $custom-unit-value
 				);
 			}
-
-			@return meta.call(
-				$unit-converter,
-				$val-number,
-				(
-					'util': $name,
-					'unit': map.get(ml.$utils-db, $section, 'registry', $name, 'default-unit'),
-				)
-			);
 		}
 
 		@return $val-number;

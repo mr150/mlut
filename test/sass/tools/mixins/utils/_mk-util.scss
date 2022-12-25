@@ -195,7 +195,7 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					.Mxw5gg {
-						max-width: 80px;
+						max-width: 5rem;
 						max-width: calc(var(#{ml.$var-gg}) * 5);
 					}
 				}
@@ -241,22 +241,6 @@ ml.$utils-db: map.deep-merge(
 						.\@m\:w\>\=gSm\:o_Mxw32p {
 							max-width: 32%;
 						}
-					}
-				}
-			}
-
-			@include assert() {
-				@include output(false) {
-					@include ml.mk-util(
-						'M', (
-						2gg,
-					));
-				}
-
-				@include expect(false) {
-					.M2gg {
-						margin: 2rem 32px;
-						margin: ml.ggr(2) ml.gg(2);
 					}
 				}
 			}
@@ -384,34 +368,13 @@ ml.$utils-db: map.deep-merge(
 
 				@include expect(false) {
 					.Bdw1gg {
-						border-width: 16px;
+						border-width: 1rem;
 						border-width: ml.gg(1);
 					}
 
 					.Bdw2gg {
-						border-width: 32px;
+						border-width: 2rem;
 						border-width: ml.gg(2);
-					}
-				}
-			}
-
-			@include assert() {
-				@include output(false) {
-					@include ml.mk-util(
-						'M', (
-						[1gg, 2],
-					));
-				}
-
-				@include expect(false) {
-					.M1gg {
-						margin: 1rem 16px;
-						margin: ml.ggr(1) ml.gg(1);
-					}
-
-					.M2gg {
-						margin: 2rem 32px;
-						margin: ml.ggr(2) ml.gg(2);
 					}
 				}
 			}
@@ -426,11 +389,11 @@ ml.$utils-db: map.deep-merge(
 
 				@include expect(false) {
 					.M1su {
-						margin: ml.sur(1) ml.su(1);
+						margin: ml.su(1);
 					}
 
 					.M2su {
-						margin: ml.sur(2) ml.su(2);
+						margin: ml.su(2);
 					}
 				}
 			}
@@ -871,12 +834,12 @@ ml.$utils-db: map.deep-merge(
 
 				@include expect(false) {
 					.Fns3su\! {
-						font-size: ml.sur(3) !important;
+						font-size: ml.su(3) !important;
 					}
 
 					.Fns3gg\! {
 						font-size: 3rem !important;
-						font-size: calc(var(#{ml.$var-gg-rem}) * 3) !important;
+						font-size: calc(var(#{ml.$var-gg}) * 3) !important;
 					}
 				}
 			}
