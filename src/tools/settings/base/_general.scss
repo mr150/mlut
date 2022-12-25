@@ -9,7 +9,7 @@
 // $browser-font-size = 16px - font size for converting [px to rem](section-sass-tools.html#kssref-sass-tools-functions-px2rem). 16px used because is default font size in settings of most browsers.
 // $su-cf = 4 - value of [space unit](section-concepts.html#kssref-concepts-su). Use this factor to change su and for calculations.
 // $su = 4px - space unit in px. Depends on `$su-cf`. Use this variable to set the values in px.
-// $css-vars-fallback = true - add fallback for values in `grid-gutters` units
+// $css-vars-fallback = false - add fallback for values in `grid-gutters` units
 // $css-transition-time = 0.3s - default transition duration.
 // $ratio-box-flex = false - adds a more advanced version of [Ratio-box](section-core-helpers.html#kssref-core-helpers-ratio-box) helper with an arbitrary height \- `ratio-box-flex`
 // $wrapper-max-width = 1200px - max width of the [Wraper](section-core-helpers.html#kssref-core-helpers-wrapper) helper
@@ -53,7 +53,7 @@ $su-cf: 4 !default;
 $is-test-env: false !default;
 
 $css-var-prefix: 'ml-' !default;
-$css-vars-fallback: true !default;
+$css-vars-fallback: false !default;
 
 $class-prefix: '' !default;
 
