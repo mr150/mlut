@@ -9,7 +9,9 @@
 //
 // Functions-getters from settings maps and more.
 //
-// Styleguide: sass-tools.functions.base.getters
+/// Styleguide: sass-tools.functions.getters
+
+/// Styleguide: sass-tools.functions.base.getters
 
 @function bp($name, $error-handler: 1) {
 	@if map.has-key(ml.$bp-map, $name) or $error-handler == 0 {
@@ -75,17 +77,20 @@
 
 // util-prop
 //
-// Get the CSS property, which corresponds to the utility from [$ml-utils-map](section-sass-tools.html#kssref-sass-tools-settings-utils).
+// Get the CSS property, which corresponds to the utility from registry.
 // ```scss
-//ml-util-prop('D') => 'display'
+//@debug ml.util-prop('D'); // 'display'
 //```
 //
-// $name - utility name. Type: string.
+// $name - utility name
 // $section = 'utils' - section in the registry in which utility was defined
 // $name-as-prop = false - return the utility name as a property if it was not found
 // $single = false - return one property of the utility, even if there are several
 //
-// Styleguide: sass-tools.functions.base.getters.util_prop
+// Styleguide: sass-tools.functions.utils.util_prop
+
+/// Styleguide: sass-tools.functions.getters.util_prop
+/// Styleguide: sass-tools.functions.base.getters.util_prop
 
 @function util-prop(
 	$name, $section: 'utils', $name-as-prop: false, $single: false

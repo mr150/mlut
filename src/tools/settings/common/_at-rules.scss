@@ -1,11 +1,3 @@
-// At-rules
-//
-// Settings for media queries and other CSS at-rules.
-//
-// $at-rules - main map with settings.
-//
-// Styleguide: sass-tools.settings.at_rules
-
 @use 'sass:map';
 @use 'sass:list';
 @use 'sass:string';
@@ -13,17 +5,56 @@
 @use '../base' as ml;
 @use 'utils' as ud;
 
+// At-rules
+//
+// Settings for media queries and other CSS at-rules. There is a small database and several configs.
+//
+// Styleguide: settings.at_rules
+
+// Data
+//
+// `$at-rules-db` \- map, the keys in which are the names of the at-rules, and the values are map with options. In the options of each at-rule there is a custom map, to which you can add alias for custom expressions. See example [here](section-how_to.html#kssref-how_to-config-media).
+//
+// Below are the at-rule options
+//
+// alias - `string` <div>the abbreviation that will be used in the utils components. It will be converted into at-crule name. For example: `@s` => `@supports`</div>
+// default = false - <div class="Mt3su"> `boolean` </div> It can be `true`, only in one at-rule. Sets at-rule by default. This means that this at-rule will be used, without an indication of alias after the `@` symbol. By default, `media` is default at-rule
+// custom - <div class="Mt3su"> `map` </div> Here you can set alias for custom expressions. See the example above
+//
+// Styleguide: settings.at_rules.data
+
 // Breakpoints
 //
-// Breakpoint names and values.
+// Breakpoints are stored in the config `$at-rules-cfg`, in the `breakpoints` section. For convenience, they are configured in a separate map `$breakpoints`. You can see an example of simple use [here](section-how_to.html#kssref-how_to-config-bp).
 //
-// $ml-bp-xs = 0 - `xs`
-// $ml-bp-sm = 520px - `sm`
-// $ml-bp-md = 760px - `md`
-// $ml-bp-lg = 960px - `lg`
-// $ml-bp-xl = 1168px - `xl`
+// Name | Value
+// :---:  | :---:
+// <sm | 0px
+// sm | 520px
+// md | 768px
+// lg | 992px
+// xl | 1200px
 //
-// Styleguide: sass-tools.settings.at_rules.breakpoints
+// To fully rewrite breakpoints, use `$breakpoints-ext` map:
+// ```scss
+//	@use 'mlut/tools' as ml with (
+//		$breakpoints: null,
+//		$breakpoints-ext: (
+//			'sm': 768px,
+//			'md': 1200px,
+//			'lg': 1440px,
+//		),
+//	);
+//
+//	@debug map.get(ml.$at-rules-cfg, 'breakpoints');
+//	// (
+//	//   'sm': 768px,
+//	//   'md': 1200px,
+//	//   'lg': 1440px,
+//	// )
+// ```
+//
+// Styleguide: settings.at_rules.breakpoints
 
 $at-rules-db: (
 	'media': (

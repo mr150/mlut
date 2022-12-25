@@ -7,20 +7,20 @@
 //
 // Functions for calculations.
 //
-// Styleguide: sass-tools.functions.base.math
+// Styleguide: sass-tools.functions.math
 
-// ml-decimal-round
+// decimal-round
 //
 // Decimal rounding.
 // ```scss
-//ml-decimal-round(33.33333%, 2) => 33.33%
+//@debug ml.decimal-round(33.33333%, 2); // 33.33%
 //```
 //
 // $number - decimal to be rounded. Type: number.
 // $pos - the number of decimal places.
 // $type = 'round' - service parameter for functions-wrappers.
 //
-// Styleguide: sass-tools.functions.base.math.decimal_round
+// Styleguide: sass-tools.functions.math.decimal_round
 
 @function decimal-round($number, $pos, $type: 'round') {
 	$n: 1;
@@ -48,53 +48,53 @@
 	}
 }
 
-// ml-decimal-ceil
+// decimal-ceil
 //
-// Wrapper on [ml-decimal-round](#kssref-sass-tools-functions-decimal_round) for ceil round.
+// Wrapper on [decimal-round](#kssref-sass-tools-functions-math-decimal_round) for ceil round.
 // ```scss
-//ml-decimal-ceil(33.33333%, 2) => 33.34%
+//@debug ml.decimal-ceil(33.33333%, 2); // 33.34%
 //```
 //
 // $number - decimal to be rounded. Type: number.
 // $pos - the number of decimal places.
 //
-// Styleguide: sass-tools.functions.base.math.decimal_ceil
+// Styleguide: sass-tools.functions.math.decimal_ceil
 
 @function decimal-ceil($number, $pos) {
 	@return decimal-round($number, $pos, 'ceil');
 }
 
 
-// ml-decimal-floor
+// decimal-floor
 //
-// Wrapper on [ml-decimal-round](#kssref-sass-tools-functions-decimal_round) for floor round.
+// Wrapper on [decimal-round](#kssref-sass-tools-functions-decimal_round) for floor round.
 // ```scss
-//ml-decimal-floor(33.33333%, 2) => 33.33%
+//@debug ml.decimal-floor(33.33999%, 2); // 33.33%
 //```
 //
 // $number - decimal to be rounded. Type: number.
 // $pos - the number of decimal places.
 //
-// Styleguide: sass-tools.functions.base.math.decimal_floor
+// Styleguide: sass-tools.functions.math.decimal_floor
 
 @function decimal-floor($number, $pos) {
 	@return decimal-round($number, $pos, 'floor');
 }
 
-// ml-px2em
+// px2em
 //
-// Convert pixels to `ems`.
+// Convert pixels to `em`.
 // Final value in ems rounded because accuracy more than two decimal places does not make sense.
 // ```scss
-//ml-px2em(24px, 18px) => 1.33em
-//ml-px2em(24px) => 1.5em
+//@debug ml.px2em(24px, 18px); // 1.33em
+//@debug ml.px2em(24px); // 1.5em
 // ```
 //
 // $number - number in `px` that will be converted.
-// $divider = $ml-browser-font-size - parent font size in `px`.
+// $divider = $browser-font-size - parent font size in `px`.
 // $unit = 'em' - service parameter for functions-wrappers.
 //
-// Styleguide: sass-tools.functions.base.math.px2em
+// Styleguide: sass-tools.functions.math.px2em
 
 @function px2em($number, $divider: ml.$browser-font-size, $unit: 'em') {
 	@if math.is-unitless($number) {
@@ -114,35 +114,35 @@
 	@return decimal-round(math.div($number, $divider), 2) * 1em;
 }
 
-// ml-px2rem
+// px2rem
 //
-// Wrapper on [ml-px2em](#kssref-sass-tools-functions-px2em) for converting to `rems`. Works similarly.
+// Wrapper on [px2em](#kssref-sass-tools-functions-px2em) for converting to `rem`. Works similarly.
 // ```scss
-//ml-px2rem(24px) => 1.5rem
+//@debug ml.px2rem(24px); // 1.5rem
 // ```
 //
 // $number - number in `px` that will be converted.
-// $divider = $ml-browser-font-size - browser default font size in `px`.
+// $divider = $browser-font-size - browser default font size in `px`.
 //
-// Styleguide: sass-tools.functions.base.math.px2rem
+// Styleguide: sass-tools.functions.math.px2rem
 
 @function px2rem($number, $divider: ml.$browser-font-size) {
 	@return px2em($number, $divider, 'rem');
 }
 
 
-// ml-px2lh
+// px2lh
 //
-// Wrapper on [ml-px2em](#kssref-sass-tools-functions-px2em) for converting to `line-height` units. Works similarly.
+// Wrapper on [px2em](#kssref-sass-tools-functions-px2em) for converting to `line-height` units. Works similarly.
 // ```scss
-//ml-px2lh(24px, 14px) => 1.71
-//ml-px2lh(24px) => 1.5
+//@debug ml.px2lh(24px, 14px); // 1.71
+//@debug ml.px2lh(24px); // 1.5
 // ```
 //
 // $number - number in `px` that will be converted.
-// $divider = $ml-browser-font-size - parent font size in `px`.
+// $divider = $browser-font-size - parent font size in `px`.
 //
-// Styleguide: sass-tools.functions.base.math.px2lh
+// Styleguide: sass-tools.functions.math.px2lh
 
 @function px2lh($number, $divider: ml.$browser-font-size) {
 	@return px2em($number, $divider, '');

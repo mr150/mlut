@@ -11,8 +11,8 @@ Like in [row__col](#kssref-core-helpers-row-row__col), in wrapper is used `var()
 ```scss
 padding-right: 16px;
 padding-left: 16px;
-padding-right: var(--mlu.gg);
-padding-left: var(--mlu.gg);
+padding-right: var(--mlu-gg);
+padding-left: var(--mlu-gg);
 ```
 
 Markup: ../../../docs/examples/core-helpers/wrapper/wrapper.html

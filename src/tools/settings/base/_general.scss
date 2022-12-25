@@ -4,34 +4,44 @@
 
 // General
 //
-// Settings that affect the work of the mixins, functions and all toolkit.
+// Settings that affect the work of the all toolkit.
 //
-// $mlu-browser-font-size = 16px - font size for converting [px to rem](section-sass-tools.html#kssref-sass-tools-functions-px2rem). 16px used because is default font size in settings of most browsers.
-// $mlu-su-cf = 4 - value of [space unit](section-concepts.html#kssref-concepts-su). Use this factor to change su and for calculations.
-// $mlu-su = 4px - space unit in px. Depends on `$mlu-su-cf`. Use this variable to set the values in px.
-// $mlu-main-directions - Map with directions for css properties and values generation. The keys are the first letters of the directions, and the values are directions. <br> Example: `('t': top)`.
-// $is-test-env = false - indicating the test environment
+// $browser-font-size = 16px - font size for converting [px to rem](section-sass-tools.html#kssref-sass-tools-functions-px2rem). 16px used because is default font size in settings of most browsers.
+// $su-cf = 4 - value of [space unit](section-concepts.html#kssref-concepts-su). Use this factor to change su and for calculations.
+// $su = 4px - space unit in px. Depends on `$su-cf`. Use this variable to set the values in px.
 // $css-vars-fallback = true - add fallback for values in `grid-gutters` units
-// $ml-css-transition-time = 0.3s - default [transition](section-core-utils.html#kssref-core-utils-anim) duration.
+// $css-transition-time = 0.3s - default transition duration.
+// $ratio-box-flex = false - adds a more advanced version of [Ratio-box](section-core-helpers.html#kssref-core-helpers-ratio-box) helper with an arbitrary height \- `ratio-box-flex`
+// $wrapper-max-width = 1200px - max width of the [Wraper](section-core-helpers.html#kssref-core-helpers-wrapper) helper
+// $css-var-prefix = 'ml-' - prefix for the CSS custom properties, which are generated in the values of utilities. For example, value of `W-$myCard` with prefix: `var(--ml-myCard)`, and without:  `var(--myCard)`
+// $class-prefix - prefix, which will be added to CSS classes of all utilities. This can be useful when using Mlut on top of the existing CSS
 //
-// Styleguide: sass-tools.settings.general
+// Styleguide: settings.general
 
+// TODO: add docs
+// Generic CSS
+//
+// Generic styles like a reset/normalize, setting `box-sizing` etc. See example here.
+//
+/// Styleguide: settings.general.generic_css
+
+// TODO: add docs for css vars
 // CSS variables
 //
 // Settings of global [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) which used in MLUT.
 //
-// Styleguide: sass-tools.settings.css_vars
+/// Styleguide: settings.general.css_vars
 
 // Names
 //
-// In addition to variables, the names of custom properties are contained in the map `$mlu-css-vars`.
+// In addition to variables, the names of custom properties are contained in the map `$css-vars`.
 // Below are the names of the variables, the corresponding keys in the map and names of custom properties.
 //
-// $var-gg = --mlu-gg - `gg`.
-// $var-gg-rem = --mlu-gg-rem - `gg-rem`.
-// $var-grid-cols = --mlu-grid-cols - `grid-cols`.
+// $var-gg = --gg - `gg`.
+// $var-gg-rem = --gg-rem - `gg-rem`.
+// $var-grid-cols = --grid-cols - `grid-cols`.
 //
-// Styleguide: sass-tools.settings.css_vars.names
+/// Styleguide: settings.general.css_vars.names
 
 $ratio-box-flex: false !default;
 $browser-font-size: 16px !default;

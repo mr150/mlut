@@ -10,7 +10,7 @@
 //
 // Functions for working with at-rules.
 //
-// Styleguide: sass-tools.functions.high.at_rules
+/// Styleguide: sass-tools.functions.high.at_rules
 
 $-tALs-length: string.length(ml.$tALs);
 $-tACs-length: string.length(ml.$tACs);
@@ -123,14 +123,14 @@ $-tACs-length: string.length(ml.$tACs);
 // Available converters:
 // ```scss
 //@debug ml.convert-ar-bp('<sm,xl'); // '(max-width: 519px), (min-width: 1168px)'
-//@debug ml.convert-ar-media('scr:fc'); // 'screen and (forced-colors)'
+//@debug ml.convert-ar-media('s:fc'); // 'screen and (forced-colors)'
 //@debug ml.convert-ar-supports('!&', 'D-ig'); // '(not (display: inline-grid))'
 // ```
 //
 // $ar - string with abbreviations
 // $this-util = null - utility for which the at-rules will be generated
 //
-// Styleguide: sass-tools.functions.high.at_rules.converters
+/// Styleguide: sass-tools.functions.high.at_rules.converters
 
 @function convert-ar-bp($ar, $this-util: null) {
 	$result: '';

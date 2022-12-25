@@ -63,7 +63,7 @@ And just add Mlut classes to markup:
 To use all Mlut features you need an assembly. You will need to install a package via NPM and:
 
 - [Dart Sass](https://github.com/sass/sass)
-- CSS minifier or PostCSS plugin that can group media queries. For example: [CSSO](https://github.com/css/csso) or [this](https://github.com/SassNinja/postcss-combine-media-query) plugin
+- CSS minifier or PostCSS plugin that can group media queries is recommended.<br> For example: [CSSO](https://github.com/css/csso) or [this](https://github.com/SassNinja/postcss-combine-media-query) plugin
 - [PurgeCSS](https://github.com/FullHuman/purgecss) is recommended for removing unused CSS
 
 Once the assembly is configured, just import Mlut to your stylesheet, and configure it as you need:
@@ -217,18 +217,24 @@ Here is an example, as the utility will be parsed to the components:
 ```
 Note that the *order* of components is important.
 
-Utility Components Syntax - the way to describe, with which components we want to generate utilities. It is similar to the syntax utilities in the final code, but has a number of differences:
+Most of the components in the Mlut is convertible. This means that if the component or part of it correspond the rules of conversion, it will unfold into some CSS value. How to convert different components, you can read below in the relevant sections. If the Mlut does not know how to convert the component, the behavior will depend on its type.
+
+Weight: 2
+
+Styleguide: concepts.util.components
+*/
+
+/*
+Components Syntax
+
+**Utility Components Syntax** - is the way to describe, with which components we want to generate utilities. It is similar to the syntax utilities in the final code, but has a number of differences:
 - components of the same type are separated by spaces
 - by default, the utilities with the components of each type are generated *separately*. It means that: `xl_^:h_Bdb_h,f` => `xl_Bdb`, `^:h_Bdb` and `Bdb_f`
 - [keywords](section-how_to.html#kssref-how_to-mk_utils-kw_cp) are used, for explicit instructions, with what components we need utilities and not only: `BpAll ArSt _Bdb_h`
 
 This syntax is used in all places where utilities, utils groups, ranges, etc. are generated.
 
-Most of the components in the Mlut is convertible. This means that if the component or part of it correspond the rules of conversion, it will unfold into some CSS value. How to convert different components, you can read below in the relevant sections. If the Mlut does not know how to convert the component, the behavior will depend on its type.
-
-Weight: 2
-
-Styleguide: concepts.util.components
+Styleguide: concepts.util.components.syntax
 */
 
 /*
@@ -302,7 +308,7 @@ Styleguide: concepts.values.type.css_var
 /*
 Color
 
-You can use both HEX colors and color names set by the user. Read more about adding your colors here. With colors, you can specify the opacity modifier `*`. This converter is used to convert opacity. With modifier, you can use CSS variables or global keywords in any position:
+You can use both HEX colors and color names set by the user. Read more about adding your colors [here](section-how_to.html#kssref-how_to-config-colors). With colors, you can specify the opacity modifier `*`. This converter is used to convert opacity. With modifier, you can use CSS variables or global keywords in any position:
 ```scss
 @debug ml.uv('C#60c*20p'); // rgba(102, 0, 204, 0.2)
 @debug ml.uv('C-red0*$co'); // rgba(204, 0, 102, var(--ml-co, 1))
@@ -1024,17 +1030,87 @@ Styleguide: how_to.mk_utils.kw_cp
 /*
 Work with library
 
-**DOCUMENTATION IN PROGRESS**
+As you remember, the library part of Mlut contains [basic styles](section-core-styles.html), [helpers](section-core-helpers.html) and utilities. By default, they are all included:
+```scss
+@use 'mlut/tools' as ml;
+@use 'mlut/src/core';
+```
+But you can include only the necessary parts of the core:
+```scss
+@use 'mlut/tools' as ml;
+@use 'mlut/src/core/styles';
+@use 'mlut/src/core/utils';
+```
+*Note*: for convenience, in the examples we will include Mlut as if we specified a Sass load path, so that each time we do not write `../../node_modules/mlut`.
 
 Weight: 2
 
-Styleguide: how_to.core_utils
+Styleguide: how_to.lib
+*/
+
+/*
+Core utilities
+
+This section contains modules with ready-made utilities and a module for initialization. To get all utilities, just include `core/utils`. If you want to load only certain sets, then include them, and then include the initialization module:
+```scss
+@use 'mlut/src/core/utils/box-model';
+@use 'mlut/src/core/utils/text';
+@use 'mlut/src/core/utils/init';
+```
+To load core utils without generating them, include the `core/utils/load` module. This may be needed when using [addons](section-addons.html).
+
+All utilities are sets to `$utils-map` by the key `core`.
+
+Styleguide: how_to.lib.utils
+*/
+
+/*
+Utilities configuration
+
+When including libraries and addons, you can include, exclude or overwrite only certain utilities. To do this, use the special fields in the `$utils` map:
+- `/allow` - include only these utilities, `list`
+- `/ban` - exclude these utilities, `list`
+- `/override` - `map` with utilities and values, which will be merged into `$utils-map` with overwriting. Passing `null` will clear `$utils-map`.
+```scss
+@use 'mlut/src/core/utils' with (
+	$utils: (
+		'C': red,
+
+		'/override': (
+			'M': (1su, 2r)
+		),
+
+		'/allow': (
+			'M', 'C',
+		),
+	),
+);
+
+// CSS
+.C-ih {
+  color: inherit;
+}
+
+.M1su {
+  margin: 0.25rem 4px;
+}
+
+.M2r {
+  margin: 2rem;
+}
+
+.C-red {
+  color: red;
+}
+```
+
+Styleguide: how_to.lib.utils_config
 */
 
 /*
 Configuration basics
 
-**DOCUMENTATION IN PROGRESS**
+Information about the most frequently used settings.
 
 Weight: 3
 
@@ -1042,9 +1118,224 @@ Styleguide: how_to.config
 */
 
 /*
+Generic CSS
+
+Generic CSS includes resetting styles, setting `box-sizing` etc. You can customize or completely remove these styles. Their configuration is in `$general-config`, by the key `generic-css`.
+The configuration is a `map`, each element of which is a boolean flag. If set to `true`, the specified CSS will be generated. To disable these styles, pass `null` instead of a map.
+```scss
+@use 'mlut' with (
+	$general-config: (
+		'generic-css': (
+			'svg-fill-cur-color': true,
+			'reset-border': true,
+		)
+	),
+);
+```
+For the time being, available settings can be viewed only in the [code](https://github.com/mr150/mlut/blob/master/src/tools/settings/base/_general.scss#L124), but later they will appear in this documentation. You can find [here](https://github.com/mr150/mlut/blob/master/src/core/styles/generic.scss) The final CSS with comments.
+
+Weight: 3
+
+Styleguide: how_to.config.generic_css
+*/
+
+/*
+Colors
+
+There are 2 ways to add colors:
+
+<div>1. with <code>$colors</code> map</div>
+
+```scss
+@use 'mlut/tools' as ml with (
+	$colors: (
+		'red22': #c00,
+	),
+);
+
+@include ml.apply('Bdc-red22');
+
+// CSS
+.Bdc-red22 {
+  border-color: #c00;
+}
+```
+
+<div>2. when generating any utility or utility group, which has a <code>color</code> type of conversion. If you specify a map with colors as values, then they will be added to the settings and they can be used below in other values of utilities</div>
+
+```scss
+@use 'mlut' as ml with (
+	$utils: (
+		'C': (
+			'red100': #911
+		),
+		'/override': null,
+	),
+);
+
+@include ml.apply('Bgc-red100');
+
+// CSS
+...
+.C-red100 {
+  color: #911;
+}
+
+.Bgc-red100 {
+  background-color: #911;
+}
+```
+
+Styleguide: how_to.config.colors
+*/
+
+/*
+Breakpoints
+
+To add or change breakpoints, use the `$breakpoints` map.
+```scss
+@use 'mlut/tools' as ml with (
+	$breakpoints: (
+		'xxl': 1400px,
+		'sm': 480px,
+	),
+);
+
+@include ml.apply('<sm_W15 xxl_W150');
+
+// CSS
+@media (max-width: 479px) {
+  .\<sm_W15 {
+    width: 15px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .xxl_W150 {
+    width: 150px;
+  }
+}
+```
+The order of adding does not matter, the breakpoints will be sorted by increasing. How to completely rewrite the breakpoints, see the settings.
+
+Styleguide: how_to.config.bp
+*/
+
+/*
+Create new utils
+
+To create a new utility, add it to the registry during configuration. As a value, you can specify CSS property or map with options.
+```scss
+@use 'mlut/tools' as ml with (
+	$utils-data: (
+		'utils': (
+			'registry': (
+				'Mil': margin-inline,
+				'Ir': (
+					'properties': image-rendering,
+					'keywords': (
+						'ce': crisp-edges,
+						'p': pixelated,
+					),
+				),
+			),
+		),
+	),
+);
+
+@include ml.apply('Mil-15 Ir-p');
+
+// CSS
+.Mil-15 {
+  margin-inline: -15px;
+}
+
+.Ir-p {
+  image-rendering: pixelated;
+}
+```
+You can create a utility for changing one property even without registration <s>and SMS</s>. Just indicate the name and values. If the name of the utility begins with `-`, then it will control the custom property.
+```scss
+@use 'mlut' with (
+	$utils: (
+		'display': (flex, 5r),
+		'/override': null,
+	),
+);
+
+@include mlut.apply('-MySize-a');
+
+// CSS
+.display-flex {
+  display: flex;
+}
+
+.display5r {
+  display: 5rem;
+}
+
+.-MySize-a {
+  --ml-mySize: auto;
+}
+```
+This works for any method of generating utilities. Please note that the default conversion type will be used for the values of such utilities.
+
+Styleguide: how_to.config.new_utils
+*/
+
+/*
+Media features and queries
+
+For long media queries, you can create a short alias. Such alias is called custom media query. Use `$at-rures-data` map in the configuration. *Note* when using custom media query, a hyphen is added to their names.
+```scss
+@use 'mlut/tools' as ml with (
+	$at-rules-data: (
+		'media': (
+			'custom': (
+				'myMq': '(orientation: landscape) and (min-height: 20rem)',
+			),
+		),
+	),
+);
+
+@include ml.apply('@:-myMq_D-f');
+
+// CSS
+@media (orientation: landscape) and (min-height: 20rem) {
+  .\@\:-myMq_D-f {
+    display: flex;
+  }
+}
+```
+You can also add a new media feature. They are stored in the same registry as the utilities, in the `media` section. Added as well as utilities.
+```scss
+@use 'mlut/tools' as ml with (
+	$utils-data: (
+		'media': (
+			'registry': (
+				'st': scripting,
+			),
+		),
+	),
+);
+
+@include ml.apply('@:st-n_D');
+
+// CSS
+@media (scripting: none) {
+  .\@\:st-n_D {
+    display: block;
+  }
+}
+```
+
+Styleguide: how_to.config.media
+*/
+
+/*
 General reference
 
-Reference of the utils groups, at-rule etc.
+Reference of the utils groups, at-rule etc. Much of this reference has been made according to the same rules as in [utilites reference](section-utils-reference.html). Recommends to check it out before.
 
 Weight: 6
 
@@ -1054,7 +1345,7 @@ Styleguide: general_reference
 /*
 Utilities groups
 
-Reference of the utils groups.
+In the description of each group are specified the included utilities. When specifying utilities, [Components Syntax](section-concepts.html#kssref-concepts-util-components-syntax) can be used. After the utilities list, the values of the group that are contained **in the Core** library may be writted. In this values also may be used the Components Syntax.
 
 Styleguide: general_reference.groups
 */
@@ -1100,6 +1391,18 @@ Utils reference
 
 All utilities that available in the registry.
 
+This reference is generated on the basis of settings in the code. In the left column, the [options](section-settings.html#kssref-settings-utils-data-options) of the utility are specified, and in the right - their values. In maps with values, the *default* is the CSS value that will be used without specifying the utility value. Speaking more accurately, *default* is a `''`(empty string) in the utility value:
+```scss
+@include ml.mk-util('D', '');
+
+// CSS
+.D {
+	display: block;
+}
+```
+
+After the options, the values of utility that are contained **in the Core** library may be specified. The values are written in [Components Syntax](section-concepts.html#kssref-concepts-util-components-syntax). Remember that Core contains only those values that can be used across projects. If you are looking for ready-made utilities for stylization, such as the colors and sizes, then check out of [Demo theme](section-addons.html#kssref-addons-catalog-demo_theme) in built-in addons.
+
 Weight: 5
 
 Styleguide: utils-reference
@@ -1107,8 +1410,6 @@ Styleguide: utils-reference
 
 /*
 Sass tools
-
-**DOCUMENTATION IN PROGRESS**
 
 Available when using Mlut as a [toolkit](section-start.html#kssref-start-usage).
 
@@ -1120,19 +1421,150 @@ Styleguide: sass-tools
 /*
 Settings
 
-Settings based on which the everything works.
+Most of the settings are stored in large maps, which are called depending on the area: `utils`, `at-aules` etc. Such settings are divided into two types, depending on the contents: data and configurations. Next, we will call their *databases* and *configures*, accordingly.
 
-Styleguide: sass-tools.settings
+For user settings, separate maps are provided, which differ in the suffix. It is in them that you add changes in the configuration and they also merge into the original maps.
+* maps with data: source suffix \- `db`, user's \- `data`
+* maps with configs: source suffix \- `cfg`, user's \- `config`
+```scss
+@use 'mlut/tools' with (
+	$utils-config: (
+		'states': (
+			'custom': (
+				'are': '[aria-expanded=“true”]',
+			),
+		),
+	),
+	$at-rules-data: (
+		'container': (
+			'alias': 'c',
+		),
+	),
+);
+```
+
+If you want to completely overwrite map or one of its fields, specify `null`. Below in the configuration use `*mapname*-ext` and then your values.
+```scss
+@use 'mlut/tools' as ml with (
+	$utils-data: (
+		'utils': (
+			'registry': (
+				'Ps': null,
+			),
+		),
+	),
+	$utils-data-ext: (
+		'utils': (
+			'registry': (
+				'Ps': (
+					'properties': position,
+					'keywords': ('sc': sticky),
+				),
+			)
+		),
+	),
+);
+
+@debug ml.uv('Ps-sc'); // sticky
+@debug ml.uv('Ps-a'); // a
+```
+This is relevant for some smaller maps like a `$breakpoints`. In the specific settings will specified which maps have the possibility of rewriting using `ext`.
+
+For the time being, you can look at the structure of maps with the settings in the code, but later it will be described in the documentation.
+
+Weight: 8
+
+Styleguide: settings
 */
 
 /*
 Addons
 
-**DOCUMENTATION IN PROGRESS**
+Addons may include styles, tools, utility sets, and more. For the time being, they are in a main repository, but later they will be moved into separate NPM packages.
 
-Addons include styles, tools, utility sets, and more.
-
-Weight: 8
+Weight: 9
 
 Styleguide: addons
+*/
+
+/*
+How it works
+
+Here you will learn how to include addons, their structure, and also how to create your own addon.
+
+Weight: 0
+
+Styleguide: addons.how_works
+*/
+
+/*
+Import
+
+To import addon that contains utilities, you will need:
+```scss
+@charset "utf-8";
+
+// import tools
+@use "mlut/tools" as ml;
+
+// optional import styles from the core that you need: helpers, utilities, etc
+@use "mlut/src/core/base-setup";
+
+// import addons
+@use "mlut/src/addons/demo-theme";
+
+// import a module that initialize utilities
+@use "mlut/src/core/utils/init";
+```
+You can also cancel the generation of all utilities from the addon, and get only the necessary values from there. To do this, pass the parameter to the config of the addon: `$generate: false`.
+
+If the addon contains only a ready-made SASS/CSS code, it can be included in any order after tools. Addon also may have their own settings. They can be seen in the code or documentation.
+
+Styleguide: addons.how_works.import
+*/
+
+/*
+Structure
+
+To create an addon containing utilities:
+```scss
+// import Mlut tools
+@use '../tools' as ml;
+
+// create a map with the same scheme as map $utils,
+// when creating utilities in the config
+$utils: (
+	'BpAll _W': (5su, 10su, 20su, 25su, 40su, 70su),
+	'BpAll _H': (5su, 10su, 20su, 25su),
+);
+
+// put a map with new utils to the $utils-map from tools
+// as a key, use the unique name of the addon
+ml.$utils-map: map.set(
+	ml.$utils-map,
+	'my-addon',
+	$utils
+);
+
+// you can add the ability to cancel the generation of all utilities
+// to do this, create a setting
+$generate: true !default;
+
+// and hide behind it the writing new utilities to the common map
+@if $generate {
+	ml.$utils-map: map.set(
+...
+```
+
+Styleguide: addons.how_works.structure
+*/
+
+/*
+Catalog
+
+Addons that are delivered with Mlut are described here.
+
+Weight: 1
+
+Styleguide: addons.catalog
 */

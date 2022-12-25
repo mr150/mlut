@@ -10,9 +10,9 @@
 //
 // Functions for working with custom units.
 //
-// Styleguide: sass-tools.functions.common.custom_units
+// Styleguide: sass-tools.functions.custom_units
 
-// space unit converters
+// Space unit converters
 //
 // Converts space units to CSS value. Available converters:
 // - `su()` - `su` to `px`
@@ -23,9 +23,9 @@
 // ```
 //
 // $n - unitless number or number with `su` unit
-// $unit = 'px' - `su` will be converted to that units. Service argument in `su()` for create converters for any units
+// $data = () - service argument for provide any data
 //
-// Styleguide: sass-tools.functions.common.custom_units.su
+// Styleguide: sass-tools.functions.custom_units.su
 
 @function su($n, $data: ()) {
 	@if meta.type-of($n) != 'number' {
@@ -51,6 +51,21 @@
 @function sur($n) {
 	@return su($n, ('unit': 'rem'));
 }
+
+// Grid gutter converters
+//
+// Converts grid gutter to CSS value. Available converters:
+// - `gg()` - `gg` to `px`
+// - `ggr()` - `gg` to `rem`
+// ```scss
+//@debug ml.gg(5gg); // calc(var(--ml-gg) * 5)
+//@debug ml.ggr(5); // calc(var(--ml-gg-rem) * 5)
+// ```
+//
+// $n - unitless number or number with `gg` unit
+// $data = () - service argument for provide any data
+//
+// Styleguide: sass-tools.functions.custom_units.gg
 
 @function gg($n, $data: ()) {
 	@if meta.type-of($n) != 'number' {

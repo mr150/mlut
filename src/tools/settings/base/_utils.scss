@@ -3,54 +3,331 @@
 
 // Utilities
 //
-// Settings affecting the values and generation of the core utilities.
+// In the settings of utilities, there are both data and configs.
 //
-// $ml-utils-states-psd-cls - map with abbreviations of pseudo-classes for utilities.
-// $ml-utils-states-psd-elm - map with pseudo-elements abbreviations for utilities.
-// $ml-utils-states - map with abbreviations of utility state names. Maps of pseudo-classes and pseudo-elements merge into it.
-//
-// Styleguide: sass-tools.settings.utils
+// Styleguide: settings.utils
 
-// Conversion to CSS
+// Other
 //
-// Settings of conversion utilitie values to CSS values. All variables below are maps.
+// Other settings that are not contained in main large maps
 //
-// $util-value-types - value types and lists of utilities that belong to this type.
-// $util-unit-aliases - utility unit aliases and corresponding CSS units.
-// $util-custom-units - [custom unit](section-concepts.html#kssref-concepts-su) names and their number values.
-// $util-css-keywords - keyword aliases and corresponding CSS global keywords.
-//
-// Styleguide: sass-tools.settings.utils.conversion
+// Styleguide: settings.utils.other
 
-// Maps with utilities states
+// $utils-up-specificity
+//
+// `boolean | string`<br>Increase the specificity of all utilities at once. When `true` - to each utility property will be added `!important`. A string with a CSS selector is also acceptable. It will be added before the utility selector. <br>Defaults to: `false`
 //
 // ```scss
-//$ml-utils-states-psd-cls: (
-//		'h': hover,
-//		'f': focus,
-//		'fw': focus-within,
-//		'h-f': (hover, focus),
-//		'a': active,
-//		'vl': valid,
-//		'iv': invalid,
-//);
+//	@use 'mlut/tools' as ml with (
+//		$utils-up-specificity: true,
+//	);
 //
-//$ml-utils-states-psd-elm: (
-//		'bf': before,
-//		'af': after,
-//		'fln': first-line,
-//		'flt': first-letter,
-//);
+//	@include ml.apply('Mt2r');
 //
-//$ml-utils-states: (
-//		'noJs': null,
-//);
+//	// CSS
+//	.Mt2r {
+//		margin-top: 2rem !important;
+//	}
 // ```
 //
-// Styleguide: sass-tools.settings.utils.states
+// Styleguide: settings.utils.other.up_specificity
+
+// Utils groups
+//
+// Groups are stored in a separate database `$utils-groups-db`. To modify or add groups, use `$utils-groups`. When specifying utilities in the group, you can use Components Syntax. In this case, utilities with components will be generated for each value.
+//
+// ```scss
+//	@use 'mlut' as ml with (
+//		$utils-groups: (
+//			'MPSpaces': (
+//				'M_ frc', Mt, Mr, Mb, Ml, -Mx, -My,
+//				P, Pt, Pr, Pb, Pl, -Px, -Py,
+//			),
+//		),
+//		$utils: (
+//			'MPSpaces': (
+//				100, '$myOffset'
+//			),
+//		),
+//	);
+//
+//	// CSS
+//	// some utils from standard library before
+//
+//	.M100 {
+//	  margin: 100px;
+//	}
+//
+//	.M100_frc:first-child {
+//	  margin: 100px;
+//	}
+//
+//	.M-\$myOffset {
+//	  margin: var(--ml-myOffset);
+//	}
+//
+//	.M-\$myOffset_frc:first-child {
+//	  margin: var(--ml-myOffset);
+//	}
+//
+//	.Mt100 {
+//	  margin-top: 100px;
+//	}
+//
+//	// etc
+// ```
+//
+// Styleguide: settings.utils.other.groups
+
+// Config
+//
+// Most of the settings are stored here, on the basis of which utilities work. Below are some sections that may be useful during customization.
+//
+// Styleguide: settings.utils.config
+
+// States
+//
+// States are stored in the `states` section and grouped by type:
+// - `pseudo-cls` - pseudo classes
+// - `pseudo-elm` - pseudo elements
+// - `custom` - all the rest
+//
+// Below is a quick reference of states. Later it will be supplemented by comments and examples.
+//
+// If you want to add a state, it is recommended to do this in the `custom` section. *Please note* that in the code, all custom states begin with a hyphen. This prevents names collision with native states from CSS.
+// ```scss
+//	@use 'mlut/tools' as ml with (
+//		$utils-config: (
+//			'states': (
+//				'custom': (
+//					'rtl': '[dir=“rtl”]',
+//				),
+//			),
+//		),
+//	);
+//
+//	@include ml.apply(('-rtl _Mr2r'), (), true);
+//
+//	// CSS
+//	[dir=“rtl”] .-rtl_Mr2r {
+//		margin-right: 2rem;
+//	}
+// ```
+//
+// Styleguide: settings.utils.config.states
+
+// Conversion type
+//
+// Available on the key `conversion-types`. This is a map, the keys in which are names of types that are used in utility options. The values in a map are a list of converters through which the value of utilities passes.
+// ```scss
+//	$utils-cfg: (
+//		'conversion-types': (
+//			'angle': ('angle', 'global-kw', 'cust-prop'),
+//			'grid-span': ('grid-span', 'num-length', 'global-kw', 'cust-prop'),
+//		),
+//	);
+// ```
+// Each converter is a function that returns, either an converted or initial value. By default, if the value was converted, then the process stops, else the value passes to the next converter from the list. If not a single  converter has no worked, then at the result we get the initial value. But this behavior can be changed when adding a keyword `Pl`(pipeline) to the list. The converters specified after it will be applied regardless of whether the value was converted in one of them. The list of all converters can be viewed in the code, but later they will be added here
+//
+// Below you can find all available types of conversion. In the description of each type there will be a schema: a list of converters and keywords on which the conversion depends. For DRY reason, in the schema used Sass variables containing frequently used converters. They will be presented in the documentation as meta-types. You can use these variables when adding new types of conversion. In addition, the description of the type will have examples of its work.
+//
+// Styleguide: settings.utils.config.conversion
+
+// $uv-type-base
+//
+// The basic meta type on which all other types are based. Schema:
+// ```scss
+//	$uv-type-base: ('global-kw', 'cust-prop');
+// ```
+// Usage:
+// ```scss
+//	// global keywords
+//	@debug ml.uv('C-ih'); // inherit
+//	@debug ml.uv('W-gSm'); // 520px - sm breakpoints
+//
+//	// custom properties
+//	@debug ml.uv('W-$myCard?200'); // var(--ml-myCard, 200px)
+// ```
+//
+// Styleguide: settings.utils.config.conversion.meta_base
+
+// $uv-type-default
+//
+// Meta type that corresponds to the default conversion type. If the type of conversion is not specified for the utility, then this will be used. Schema:
+// ```scss
+//	$uv-type-default: list.join(('keyword', 'number'), $uv-type-base);
+//
+//	// and below in the conversion types
+//	'conversion-types': (
+//		'default': $uv-type-default,
+// ```
+// Usage:
+// ```scss
+//	// keyword
+//	@debug ml.uv('Ai-c'); // center
+//	@debug ml.uv('Bd'); // 1px solid
+//
+//	// number
+//	@debug ml.uv('W200'); // 200px
+//	@debug ml.uv('Ml-0.7'); // -0.7rem
+//	@debug ml.uv('P1r;2e;5p'); // 1rem 2em 5%
+//	@debug ml.uv('Ml-2.5gg'); // calc(var(--ml-gg) * -2.5)
+//	@debug ml.uv('W1/3'); // 33.3333333333%
+//	@debug ml.uv('W2/$div'); // calc(2 / var(--ml-div) * 100%)
+// ```
+//
+// Styleguide: settings.utils.config.conversion.meta_default
+
+// num-length
+//
+// This type converts numbers almost as a default type, except that it does not convert numbers without units of measurement in a pixels. Schema:
+// ```scss
+//	('num-length': list.join('num-length', $uv-type-base))
+// ```
+// Usage:
+// ```scss
+//	@debug ml.uv('Zi5'); // 5
+//	@debug ml.uv('Tas2e'); // 2em
+// ```
+//
+// Styleguide: settings.utils.config.conversion.num-length
+
+// kw-num-length
+//
+// Type works almost as a default type, with the exception of that it does not convert numbers without units of measurement in a pixels. Schema:
+// ```scss
+//	('kw-num-length': list.set-nth($uv-type-default, 2, 'num-length'))
+// ```
+// Usage:
+// ```scss
+//	@debug ml.uv('Fnw300'); // 300
+//	@debug ml.uv('Fnw-bd'); // bolder
+//	@debug ml.uv('Lnh4.5su'); // 1.125rem
+// ```
+//
+// Styleguide: settings.utils.config.conversion.kw-num-length
+
+// num-percent
+//
+// Converts percent to decimal fractions. Schema:
+// ```scss
+//	('num-percent': list.join('num-percent', $uv-type-base))
+// ```
+// Usage:
+// ```scss
+//	@debug ml.uv('O70p'); // 0.7
+//	@debug ml.uv('-S-50p'); // -0.5
+// ```
+//
+// Styleguide: settings.utils.config.conversion.num-percent
+
+// angle
+//
+// Converts angles. Schema:
+// ```scss
+//	('angle': list.join('angle', $uv-type-base))
+// ```
+// Usage:
+// ```scss
+//	@debug ml.uv('-Rt45d'); // 45deg
+//	@debug ml.uv('-Rt-50g'); // -50grad
+//	@debug ml.uv('-Sk3.14r;2r'); // 3.14rad 2rad
+//	@debug ml.uv('-Hur-1.5t'); // -1.5turn
+// ```
+//
+// Styleguide: settings.utils.config.conversion.angle
+
+// color
+//
+// Converts colors. Schema:
+// ```scss
+//	('color': list.join('color', $uv-type-base))
+// ```
+// Usage:
+// ```scss
+//	@debug ml.uv('C-tp'); // transparent
+//	@debug ml.uv('Bgc#c06*$bgAlpha'); // rgba(204, 0, 102, var(--ml-bgAlpha, 1))
+//
+//	// you can use custom color keyword that you added in the database
+//	@debug ml.uv('Bgc-purple50*20p'); // rgba(102, 0, 204, 0.2)
+// ```
+//
+// Styleguide: settings.utils.config.conversion.color
+
+// abbr-kw
+//
+// Expand abbreaviations of utilities. Schema:
+// ```scss
+//	('abbr-kw': list.join('abbr', $uv-type-default))
+// ```
+// Usage:
+// ```scss
+//	@debug ml.uv('Wlc-tf'); // transform
+//	@debug ml.uv('Ts-bdc;2s,c;1s'); // border-color 2s, color 1s
+// ```
+//
+// Styleguide: settings.utils.config.conversion.abbr-kw
+
+// grid-tpl
+//
+// Adds converting of special keywords for grid templates to the default type. Schema:
+// ```scss
+//	('grid-tpl': list.join('grid-tracks', $uv-type-default))
+// ```
+// Usage:
+// ```scss
+//	@debug ml.uv('Gtc-t4'); // repeat(4, minmax(0, 1fr))
+//	@debug ml.uv('G-t3/af;d;15r'); // repeat(3, minmax(0, 1fr)) / auto-flow dense 15rem
+// ```
+//
+// Styleguide: settings.utils.config.conversion.grid-tpl
+
+// grid-span
+//
+// Converts special keywords, to specify the sizes of the grid items in spans. Schema:
+// ```scss
+//	('grid-span': list.join(('grid-span', 'num-length'), $uv-type-base))
+// ```
+// Usage:
+// ```scss
+//	@debug ml.uv('Gc-s3'); // span 3 / span 3
+// ```
+//
+// Styleguide: settings.utils.config.conversion.grid-span
+
+// outline
+//
+// Adds colors conversion to a default converters chain. Schema:
+// ```scss
+//	('outline': list.join(
+//		('keyword', 'color', 'number'), $uv-type-base
+//	))
+// ```
+// Usage:
+// ```scss
+//	@debug ml.uv('Bd3;tp;d'); // 3px transparent dotted
+// ```
+//
+// Styleguide: settings.utils.config.conversion.outline
+
+// gradient
+//
+// Converts values in the gradient functions. Schema:
+// ```scss
+//	('gradient': (
+//		'keyword', 'color', 'cust-prop', 'Pl', 'number', 'angle', 'global-kw'
+//	))
+// ```
+// Usage:
+// ```scss
+//	@debug ml.uv('-Gdrl-b;r,black,#ff0'); // repeating-linear-gradient(to bottom right, black, #ff0)
+//	@debug ml.uv('-Gdl-50d,blue;3r,cc;80p'); // linear-gradient(50deg, blue 3rem, currentColor 80%)
+// ```
+//
+// Styleguide: settings.utils.config.conversion.gradient
 
 $cCtx: '-Ctx' !default;
-$kSsVCP: 'Pl' !default;
+$kSsVCP: 'Pl' !default; // pipeline
 $kSsUMCS: 'core' !default;
 $uv-type-base: ('global-kw', 'cust-prop',) !default;
 $uv-type-default: list.join(('keyword', 'number'), $uv-type-base);
@@ -210,13 +487,13 @@ $utils-cfg: (
 			's': '::selection',
 		),
 		'custom': (
-			'btc': '>*+*',
-			'evc': ':nth-child(2n)',
-			'evot': ':nth-of-type(2n)',
-			'odc': ':nth-child(odd)',
+			'btc': '>*+*', // between children
+			'evc': ':nth-child(2n)', // even child
+			'evot': ':nth-of-type(2n)', // even of type
+			'odc': ':nth-child(odd)', // odd child
 			'odot': ':nth-of-type(odd)',
 			'op': '[open]',
-			'tif': '[tabindex="0"]',
+			'tif': '[tabindex="0"]', // tabindex focus
 			'nojs': '.no-js',
 		),
 	),

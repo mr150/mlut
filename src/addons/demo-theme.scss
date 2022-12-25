@@ -1,6 +1,32 @@
 @use 'sass:map';
 @use '../tools' as ml;
 
+// Demo theme
+//
+// A full -fledged design theme to create an interface. Contains a set of utilities and a colors palette.
+//
+// Styleguide: addons.catalog.demo_theme
+
+// Colors
+//
+// Colors are automatically loaded into the Mlut settings, so you can use them when adding utilities or styles. utilities with colors are generated with [range syntax](section-how_to.html#kssref-how_to-mk_utils-range-color).
+// - step of color shade: **25**
+// - step in the value of utilities: **50**
+// - shades for each color: **8**. This means that for each color there are shades from 0 to 350. For example: `C-red0`, `Bgc-blue150`
+//
+// Name | Base color
+// :---  | :---
+// gray | <span style="background-color: #c5ccd3">#c5ccd3</span>
+// red | <span style="background-color: #ff5c5c"><span style="color: white">#ff5c5c</span></span>
+// orange | <span style="background-color: #ffad5c">#ffad5c</span>
+// yellow | <span style="background-color: #faeb61">#faeb61</span>
+// green | <span style="background-color: #70fa61">#70fa61</span>
+// aqua | <span style="background-color: #5cffbb">#5cffbb</span>
+// blue | <span style="background-color: #62a8f8">#62a8f8</span>
+// purple | <span style="background-color: #d35cff">#d35cff</span>
+//
+// Styleguide: addons.catalog.demo_theme.colors
+
 $colors: (
 	'gray0': #c5ccd3,
 	'red0': #ff5c5c,
@@ -28,7 +54,7 @@ $shade-step: -25 !default;
 
 $colors-at-rules: $colors-at-rules and $colors-at-rules + '_';
 $colors-pre-states: $colors-pre-states and $colors-pre-states + ' _';
-$colors-post-states: $colors-post-states and '_' + $colors-post-states;
+$colors-post-states: $colors-post-states and '_ ' + $colors-post-states;
 
 $-color-names: map.keys($colors);
 $-colors-key: $colors-at-rules + $colors-pre-states + 'Colors' + $colors-post-states;
@@ -49,13 +75,13 @@ $utils: (
 	),
 	ml.$cBpAllCp + 'BdWidth': (1su, 2su),
 	ml.$cBpAllCp + 'BdRadius': (2, [1su, 4]),
-	ml.$kBpAll + ' #{ml.$kArSt}_^:h _O_h f fw': ([10p, 90, 10],),
-	ml.$kBpAll + ' #{ml.$kArSt}_^:h _Bxsd_h f fw': (
+	ml.$kBpAll + ' #{ml.$kArSt}_^:h _O_ h f fw': ([10p, 90, 10],),
+	ml.$kBpAll + ' #{ml.$kArSt}_^:h _Bxsd_ h f fw': (
 		'sm': rgba(0, 0, 0, 0.16) 0px 1px 4px,
 		'md': rgba(0, 0, 0, 0.24) 0px 3px 8px,
 		'lg': rgba(0, 0, 0, 0.35) 0px 5px 15px,
 	),
-	ml.$cArStBp + '-S_h f': (0.8, 0.9, 1.1, 1.2, 1.5),
+	ml.$cArStBp + '-S_ h f': (0.8, 0.9, 1.1, 1.2, 1.5),
 );
 
 @if $generate {

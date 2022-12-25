@@ -1,10 +1,49 @@
 # My Little UI Toolkit #
-Full-featured and hackable toolkit for writing standards-based Atomic CSS. Get almost all power of CSS in one utility.
+Full-featured and hackable atomic CSS toolkit. Get almost all power of CSS in one utility!
 
 [![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
 
 <img alt="Logo" src="kss-assets/logo-full.png" style="display:block; margin:auto; max-width:415px"/>
+
+## TL;DR ##
+Import and configure Mlut:
+```scss
+@use 'mlut' as ml with (
+	$utils: (
+		'Fnw': ('bd', 200),
+		'xl_P': 10r,
+	)
+);
+
+@include ml.apply('P30;$gutter?1r_!frc');
+```
+Get CSS like this:
+```scss
+// some utils from standard library before
+
+.Fnw-bd {
+  font-weight: bolder;
+}
+
+.Fnw200 {
+  font-weight: 200;
+}
+
+.P10r {
+	padding: 10rem;
+}
+
+@media (min-width: 1200px) {
+	.xl_P10r {
+		padding: 10rem;
+	}
+}
+
+.P30\;\$gutter\?1r_\!frc:not(:first-child) {
+  padding: 30px var(--ml-gutter, 1rem);
+}
+```
 
 ## Mission ##
 - Maximum realize the potential of the Atomic CSS methodology

@@ -7,26 +7,28 @@
 
 // mk-ar
 //
-// Generate at-rules from the string with space separated abbreviations.
+// Generate at-rules from the string with space separated abbreviations. Used [syntax](section-concepts.html#kssref-concepts-at_rules) for at-rules from utilities.
 //
 // ```scss
-//@include ml.mk-ar('@s', 'D-ig') {
-//  .D-ig {
-//     display: inline-grid;
-//  }
+//@include ml.mk-ar('@s:apcr4/3@:dm') using ($ar) {
+// 	.block {
+// 		display: inline-grid;
+// 	}
 //}
-// ```
-// CSS
-// ```css
-//@supports (display: inline-grid) {
-//  .D-ig {
-//	  display: inline-grid;
-//  }
+//
+//// CSS
+//@supports (aspect-ratio: 4/3) {
+// 	@media (display-mode: fullscreen) {
+// 		.block {
+// 			display: inline-grid;
+// 		}
+// 	}
 //}
 // ```
 //
 // $at-rules - string with abbreviations
-// $this-util = null - utility for which the at-rules will be generated
+// $this-util = null - utility for which the at-rules will be generated.<br> This is a map in format `('name': '', 'value': '')`
+// @content - CSS rules that will be placed into at-rules
 //
 // Styleguide: sass-tools.mixins.ar.mk_ar
 

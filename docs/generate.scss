@@ -5,9 +5,17 @@
 @use '../src/tools' as ml;
 @use '../src/tools/functions/base' as bf;
 @use '../src/core/utils/load';
+@use '../src/addons/demo-theme';
 
 $url-map: (
 	'keywords': 'section-general_reference.html#kssref-general_reference-kw',
+	'conversion': 'section-settings.html#kssref-settings-utils-config-conversion',
+);
+
+$states-section-name: (
+	'pseudo-cls': 'pseudo classes',
+	'pseudo-elm': 'pseudo elements',
+	'custom': 'custom',
 );
 
 @function format-map-value($key, $value, $util) {
@@ -51,7 +59,7 @@ $url-map: (
 	);
 }
 
-@function map2html($map, $util, $type: 'top') {
+@function map2html($map, $util, $type: 'top', $styled-key: false) {
 	$result: '<table class="W100p Mt5su Mb6su">';
 	$cell-css: 'Bdb -Py2su';
 
@@ -61,7 +69,7 @@ $url-map: (
 			$result: '<div class="Fnw-b Mt6su Mb1su">No options</div> \
 <table class="Mb6su">';
 			$cell-css: '';
-		} @else if not map.has-key($map, 'properties') {
+		} @else if not map.has-key($map, 'properties') and not $util == null {
 			$map: map.set($map, 'properties', ml.util-prop($util, 'utils', true));
 		}
 	} @else if $type == 'sub' {
@@ -73,9 +81,10 @@ $url-map: (
 	}
 
 	@each $key, $value in $map {
+		$final-key: if($styled-key, '<code>"' + $key + '"</code>', $key);
 		$result: $result + '<tr> \
-<td class="#{$cell-css}">#{if($key == '', "<i>default</i>", $key)}</td> \
-<td class="#{$cell-css} Pl2gg Mxw-gSm">#{format-map-value($key, $value, $util)}</td> \
+<td class="#{$cell-css}">#{if($key == '', "<i>default</i>", $final-key)}</td> \
+<td class="#{$cell-css} Pl3gg Mxw-gSm">#{format-map-value($key, $value, $util)}</td> \
 </tr>'
 	}
 
@@ -132,7 +141,9 @@ Styleguide: utils-reference.#{string.to-lower-case($util)}
 /*
 #{$group}
 
-<code class>#{meta.inspect(map.get($members, 'members'))}`</class>
+<code class>#{meta.inspect(map.get($members, 'members'))}</code>
+
+#{core-values($group)}
 
 Styleguide: general_reference.groups.#{string.to-lower-case($group)}
 */
@@ -159,3 +170,23 @@ Styleguide: general_reference.media.#{$feature}
 Styleguide: general_reference.kw.#{$group-name}
 */
 }
+
+@each $group-name, $states in map.remove(map.get(ml.$utils-cfg, 'states'), 'keywords') {
+/*
+#{map.get($states-section-name, $group-name)}
+
+#{map2html($states, null, null)}
+
+Styleguide: settings.utils.config.states.#{$group-name}
+*/
+}
+
+/*
+Utils
+
+Below are the utilities contained in the addon. Names of utilities in Components Syntax are specified in the left column. In the right you can see the available values. In addition to the list, they can be spicified in the [range syntax](section-how_to.html#kssref-how_to-mk_utils-range) or as a map.
+
+#{map2html(map.get(ml.$utils-map, 'demo-theme'), null, 'top', true)}
+
+Styleguide: addons.catalog.demo_theme.utils
+*/
