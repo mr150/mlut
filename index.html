@@ -69,8 +69,13 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-settings.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Settings</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-addons.html">
-          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Addons</span>
+          <span class="kss-nav__ref">10</span><span class="kss-nav__name">Addons</span>
         </a>
       </li>
     </ul>
@@ -80,10 +85,46 @@
   <article>
       <div id="kssref-0" class="kss-section kss-section--depth-0 kss-overview kss-style">
         <h1>My Little UI Toolkit</h1>
-<p>Full-featured and hackable toolkit for writing standards-based Atomic CSS. Get almost all power of CSS in one utility.</p>
+<p>Full-featured and hackable atomic CSS toolkit. Get almost all power of CSS in one utility!</p>
 <p><a href="https://travis-ci.com/mr150/mlut"><img src="https://travis-ci.com/mr150/mlut.svg?branch=master" alt="Build Status"></a>
 <a href="https://www.npmjs.com/package/mlut"><img src="https://img.shields.io/npm/v/mlut.svg" alt=""></a></p>
 <img alt="Logo" src="kss-assets/logo-full.png" style="display:block; margin:auto; max-width:415px"/>
+<h2>TL;DR</h2>
+<p>Import and configure Mlut:</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> as ml with (
+	<span class="hljs-variable">$utils</span>: (
+		<span class="hljs-string">'Fnw'</span>: (<span class="hljs-string">'bd'</span>, <span class="hljs-number">200</span>),
+		<span class="hljs-string">'xl_P'</span>: <span class="hljs-number">10</span>r,
+	)
+);
+
+<span class="hljs-keyword">@include</span> ml.apply(<span class="hljs-string">'P30;$gutter?1r_!frc'</span>);
+</code></pre>
+<p>Get CSS like this:</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-comment">// some utils from standard library before</span>
+
+<span class="hljs-selector-class">.Fnw-bd</span> {
+  <span class="hljs-attribute">font-weight</span>: bolder;
+}
+
+<span class="hljs-selector-class">.Fnw200</span> {
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">200</span>;
+}
+
+<span class="hljs-selector-class">.P10r</span> {
+	<span class="hljs-attribute">padding</span>: <span class="hljs-number">10rem</span>;
+}
+
+<span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">1200px</span>) {
+	<span class="hljs-selector-class">.xl_P10r</span> {
+		<span class="hljs-attribute">padding</span>: <span class="hljs-number">10rem</span>;
+	}
+}
+
+<span class="hljs-selector-class">.P30</span>\;\<span class="hljs-variable">$gutter</span>\?1r_\!frc<span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-pseudo">:first-child</span>) {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">30px</span> var(--ml-gutter, <span class="hljs-number">1rem</span>);
+}
+</code></pre>
 <h2>Mission</h2>
 <ul>
 <li>Maximum realize the potential of the Atomic CSS methodology</li>

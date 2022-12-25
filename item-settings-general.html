@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Mlut documentation</title>
+
+  <meta name="description" content=""/>
+  <meta name="generator" content="kss-node"/>
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="kss-assets/kss.css"/>
+  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+<link rel="stylesheet" href="kss-assets/test.css"/>
+<link rel="stylesheet" href="kss-assets/generate.min.css"/>
+
+</head>
+<body id="kss-node" class="kss-fullscreen-mode">
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">Mlut documentation</h1>
+  </header>
+  <nav class="kss-nav" aria-label="Style Guide">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-start.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Getting started</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-concepts.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Basic concepts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-how_to.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">How to</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-styles.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core styles</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-core-helpers.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core helpers</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-utils-reference.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Utils reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-general_reference.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">General reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass-tools.html">
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass tools</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-settings.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Settings</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-addons.html">
+          <span class="kss-nav__ref">10</span><span class="kss-nav__name">Addons</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<main class="kss-main" aria-label="Content">
+  <article>
+
+    <div id="kssref-settings-general" class="kss-section kss-section--depth-2 is-fullscreen">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-settings-general">
+            <span class="kss-title__ref">
+              9.2
+              <span class="kss-title__permalink-hash">
+                  #settings.general
+              </span>
+            </span>
+            General
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>Settings that affect the work of the all toolkit.</p>
+
+          </div>
+
+
+          <div class="kss-parameters__title">Parameters:</div>
+          <ul class="kss-parameters">
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$browser-font-size</code></div>
+              <div class="kss-parameters__description">
+                font size for converting <a href="section-sass-tools.html#kssref-sass-tools-functions-px2rem">px to rem</a>. 16px used because is default font size in settings of most browsers.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>16px</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$su-cf</code></div>
+              <div class="kss-parameters__description">
+                value of <a href="section-concepts.html#kssref-concepts-su">space unit</a>. Use this factor to change su and for calculations.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>4</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$su</code></div>
+              <div class="kss-parameters__description">
+                space unit in px. Depends on <code>$su-cf</code>. Use this variable to set the values in px.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>4px</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$css-vars-fallback</code></div>
+              <div class="kss-parameters__description">
+                add fallback for values in <code>grid-gutters</code> units
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>true</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$css-transition-time</code></div>
+              <div class="kss-parameters__description">
+                default transition duration.
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>0.3s</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$ratio-box-flex</code></div>
+              <div class="kss-parameters__description">
+                adds a more advanced version of <a href="section-core-helpers.html#kssref-core-helpers-ratio-box">Ratio-box</a> helper with an arbitrary height - <code>ratio-box-flex</code>
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>false</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$wrapper-max-width</code></div>
+              <div class="kss-parameters__description">
+                max width of the <a href="section-core-helpers.html#kssref-core-helpers-wrapper">Wraper</a> helper
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>1200px</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$css-var-prefix</code></div>
+              <div class="kss-parameters__description">
+                prefix for the CSS custom properties, which are generated in the values of utilities. For example, value of <code>W-$myCard</code> with prefix: <code>var(--ml-myCard)</code>, and without:  <code>var(--myCard)</code>
+                  <div class="kss-parameters__default-value">
+                    Defaults to: <code>&#x27;ml-&#x27;</code>
+                  </div>
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>$class-prefix</code></div>
+              <div class="kss-parameters__description">
+                prefix, which will be added to CSS classes of all utilities. This can be useful when using Mlut on top of the existing CSS
+              </div>
+            </li>
+          </ul>
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>../src/tools/settings/base/_general.scss</code>, line 5
+        </div>
+
+    </div>
+</article>
+</main>
+
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
+<script src="kss-assets/mlut.min.js"></script>
+
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>

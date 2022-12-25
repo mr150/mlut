@@ -209,8 +209,13 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-settings.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Settings</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-addons.html">
-          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Addons</span>
+          <span class="kss-nav__ref">10</span><span class="kss-nav__name">Addons</span>
         </a>
       </li>
     </ul>
@@ -449,13 +454,6 @@
 <span class="hljs-comment">// ),</span>
 </code></pre>
 <p>Note that the <em>order</em> of components is important.</p>
-<p>Utility Components Syntax - the way to describe, with which components we want to generate utilities. It is similar to the syntax utilities in the final code, but has a number of differences:</p>
-<ul>
-<li>components of the same type are separated by spaces</li>
-<li>by default, the utilities with the components of each type are generated <em>separately</em>. It means that: <code>xl_^:h_Bdb_h,f</code> =&gt; <code>xl_Bdb</code>, <code>^:h_Bdb</code> and <code>Bdb_f</code></li>
-<li><a href="section-how_to.html#kssref-how_to-mk_utils-kw_cp">keywords</a> are used, for explicit instructions, with what components we need utilities and not only: <code>BpAll ArSt _Bdb_h</code></li>
-</ul>
-<p>This syntax is used in all places where utilities, utils groups, ranges, etc. are generated.</p>
 <p>Most of the components in the Mlut is convertible. This means that if the component or part of it correspond the rules of conversion, it will unfold into some CSS value. How to convert different components, you can read below in the relevant sections. If the Mlut does not know how to convert the component, the behavior will depend on its type.</p>
 
           </div>
@@ -466,6 +464,42 @@
 
         <div class="kss-source kss-style">
           Source: <code>content/main.css</code>, line 197
+        </div>
+
+    </section>
+    <section id="kssref-concepts-util-components-syntax" class="kss-section kss-section--depth-4 ">
+
+      <div class="kss-style">
+        <h4 class="kss-title kss-title--level-4">
+          <a class="kss-title__permalink" href="#kssref-concepts-util-components-syntax">
+            <span class="kss-title__ref">
+              2.2.3.1
+              <span class="kss-title__permalink-hash">
+                  #concepts.util.components.syntax
+              </span>
+            </span>
+            Components Syntax
+          </a>
+        </h4>
+
+
+          <div class="kss-description">
+            <p><strong>Utility Components Syntax</strong> - is the way to describe, with which components we want to generate utilities. It is similar to the syntax utilities in the final code, but has a number of differences:</p>
+<ul>
+<li>components of the same type are separated by spaces</li>
+<li>by default, the utilities with the components of each type are generated <em>separately</em>. It means that: <code>xl_^:h_Bdb_h,f</code> =&gt; <code>xl_Bdb</code>, <code>^:h_Bdb</code> and <code>Bdb_f</code></li>
+<li><a href="section-how_to.html#kssref-how_to-mk_utils-kw_cp">keywords</a> are used, for explicit instructions, with what components we need utilities and not only: <code>BpAll ArSt _Bdb_h</code></li>
+</ul>
+<p>This syntax is used in all places where utilities, utils groups, ranges, etc. are generated.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>content/main.css</code>, line 227
         </div>
 
     </section>
@@ -511,7 +545,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 234
+          Source: <code>content/main.css</code>, line 240
         </div>
 
     </section>
@@ -541,7 +575,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 263
+          Source: <code>content/main.css</code>, line 269
         </div>
 
     </section>
@@ -573,7 +607,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 337
+          Source: <code>content/main.css</code>, line 343
         </div>
 
     </section>
@@ -594,7 +628,7 @@
 
 
           <div class="kss-description">
-            <p>You can use both HEX colors and color names set by the user. Read more about adding your colors here. With colors, you can specify the opacity modifier <code>*</code>. This converter is used to convert opacity. With modifier, you can use CSS variables or global keywords in any position:</p>
+            <p>You can use both HEX colors and color names set by the user. Read more about adding your colors <a href="section-how_to.html#kssref-how_to-config-colors">here</a>. With colors, you can specify the opacity modifier <code>*</code>. This converter is used to convert opacity. With modifier, you can use CSS variables or global keywords in any position:</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@debug</span> ml.uv(<span class="hljs-string">'C#60c*20p'</span>); <span class="hljs-comment">// rgba(102, 0, 204, 0.2)</span>
 <span class="hljs-keyword">@debug</span> ml.uv(<span class="hljs-string">'C-red0*$co'</span>); <span class="hljs-comment">// rgba(204, 0, 102, var(--ml-co, 1))</span>
 </code></pre>
@@ -607,7 +641,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 302
+          Source: <code>content/main.css</code>, line 308
         </div>
 
     </section>
@@ -643,7 +677,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 286
+          Source: <code>content/main.css</code>, line 292
         </div>
 
     </section>
@@ -675,7 +709,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 326
+          Source: <code>content/main.css</code>, line 332
         </div>
 
     </section>
@@ -707,7 +741,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 315
+          Source: <code>content/main.css</code>, line 321
         </div>
 
     </section>
@@ -741,7 +775,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 273
+          Source: <code>content/main.css</code>, line 279
         </div>
 
     </section>
@@ -771,7 +805,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 348
+          Source: <code>content/main.css</code>, line 354
         </div>
 
     </section>
@@ -809,7 +843,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 358
+          Source: <code>content/main.css</code>, line 364
         </div>
 
     </section>
@@ -840,7 +874,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 379
+          Source: <code>content/main.css</code>, line 385
         </div>
 
     </section>
@@ -884,7 +918,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 391
+          Source: <code>content/main.css</code>, line 397
         </div>
 
     </section>
@@ -929,7 +963,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 416
+          Source: <code>content/main.css</code>, line 422
         </div>
 
     </section>
@@ -978,7 +1012,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 442
+          Source: <code>content/main.css</code>, line 448
         </div>
 
     </section>
@@ -1014,7 +1048,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 474
+          Source: <code>content/main.css</code>, line 480
         </div>
 
     </section>
@@ -1058,7 +1092,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 491
+          Source: <code>content/main.css</code>, line 497
         </div>
 
     </section>
@@ -1097,7 +1131,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 513
+          Source: <code>content/main.css</code>, line 519
         </div>
 
     </section>
@@ -1155,7 +1189,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 529
+          Source: <code>content/main.css</code>, line 535
         </div>
 
     </section>
@@ -1185,7 +1219,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 570
+          Source: <code>content/main.css</code>, line 576
         </div>
 
     </section>
@@ -1272,7 +1306,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 580
+          Source: <code>content/main.css</code>, line 586
         </div>
 
     </section>
@@ -1302,7 +1336,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 649
+          Source: <code>content/main.css</code>, line 655
         </div>
 
     </section>
@@ -1346,7 +1380,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 657
+          Source: <code>content/main.css</code>, line 663
         </div>
 
     </section>
@@ -1389,7 +1423,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 681
+          Source: <code>content/main.css</code>, line 687
         </div>
 
     </section>
@@ -1428,7 +1462,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 703
+          Source: <code>content/main.css</code>, line 709
         </div>
 
     </section>
@@ -1458,7 +1492,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 721
+          Source: <code>content/main.css</code>, line 727
         </div>
 
     </section>
@@ -1495,7 +1529,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 731
+          Source: <code>content/main.css</code>, line 737
         </div>
 
     </section>
@@ -1528,7 +1562,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 760
+          Source: <code>content/main.css</code>, line 766
         </div>
 
     </section>
@@ -1561,7 +1595,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 748
+          Source: <code>content/main.css</code>, line 754
         </div>
 
     </section>

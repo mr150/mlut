@@ -1541,8 +1541,13 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-settings.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Settings</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-addons.html">
-          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Addons</span>
+          <span class="kss-nav__ref">10</span><span class="kss-nav__name">Addons</span>
         </a>
       </li>
     </ul>
@@ -1569,6 +1574,15 @@
 
           <div class="kss-description">
             <p>All utilities that available in the registry.</p>
+<p>This reference is generated on the basis of settings in the code. In the left column, the <a href="section-settings.html#kssref-settings-utils-data-options">options</a> of the utility are specified, and in the right - their values. In maps with values, the <em>default</em> is the CSS value that will be used without specifying the utility value. Speaking more accurately, <em>default</em> is a <code>''</code>(empty string) in the utility value:</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@include</span> ml.mk-util(<span class="hljs-string">'D'</span>, <span class="hljs-string">''</span>);
+
+<span class="hljs-comment">// CSS</span>
+<span class="hljs-selector-class">.D</span> {
+	<span class="hljs-attribute">display</span>: block;
+}
+</code></pre>
+<p>After the options, the values of utility that are contained <strong>in the Core</strong> library may be specified. The values are written in <a href="section-concepts.html#kssref-concepts-util-components-syntax">Components Syntax</a>. Remember that Core contains only those values that can be used across projects. If you are looking for ready-made utilities for stylization, such as the colors and sizes, then check out of <a href="section-addons.html#kssref-addons-catalog-demo_theme">Demo theme</a> in built-in addons.</p>
 
           </div>
 
@@ -1577,7 +1591,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1383
+          Source: <code>content/main.css</code>, line 1389
         </div>
 
     </div>
