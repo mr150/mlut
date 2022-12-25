@@ -36,7 +36,7 @@ ml.$utils-db: map.deep-merge(
 					}
 
 					.card {
-						padding: 0.5rem 8px;
+						padding: 0.5rem;
 					}
 
 					.card {
@@ -83,7 +83,7 @@ ml.$utils-db: map.deep-merge(
 				@include expect(false) {
 					@media (min-width: ml.bp(xl)) {
 						.card {
-							padding: 0.5rem 8px;
+							padding: 0.5rem;
 						}
 					}
 
@@ -120,7 +120,7 @@ ml.$utils-db: map.deep-merge(
 				@include expect(false) {
 					@media (min-width: ml.bp(xl)) {
 						.card {
-							padding: 0.5rem 8px !important;
+							padding: 0.5rem !important;
 						}
 					}
 
@@ -151,7 +151,7 @@ ml.$utils-db: map.deep-merge(
 				@include expect(false) {
 					@media (min-width: ml.bp(xl)) {
 						.xl_P2su {
-							padding: 0.5rem 8px;
+							padding: 0.5rem;
 						}
 					}
 

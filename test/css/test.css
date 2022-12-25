@@ -72,7 +72,7 @@
 
 .gs-debug {
   /* autoprefixer: off */
-  padding: calc(var(--ml-gg-rem) * 3) 0px;
+  padding: calc(var(--ml-gg) * 3) 0px;
   background-image: linear-gradient(90deg, #336 var(--ml-gg), #d15 var(--ml-gg), #d15 calc(100% - var(--ml-gg)), #336 0);
   background-size: calc(1 / var(--ml-gscc) * 100%);
 }
@@ -181,46 +181,6 @@
 
 .row__col.row {
   margin-bottom: 0px;
-}
-
-.-Gsg1su {
-  --ml-gg-rem: 0.25rem;
-  --ml-gg: 4px;
-}
-
-.-Gsg2su {
-  --ml-gg-rem: 0.5rem;
-  --ml-gg: 8px;
-}
-
-.-Gsg3su {
-  --ml-gg-rem: 0.75rem;
-  --ml-gg: 12px;
-}
-
-.-Gsg4su {
-  --ml-gg-rem: 1rem;
-  --ml-gg: 16px;
-}
-
-.-Gsg5su {
-  --ml-gg-rem: 1.25rem;
-  --ml-gg: 20px;
-}
-
-.-Gsg6su {
-  --ml-gg-rem: 1.5rem;
-  --ml-gg: 24px;
-}
-
-.-Gsg7su {
-  --ml-gg-rem: 1.75rem;
-  --ml-gg: 28px;
-}
-
-.-Gsg8su {
-  --ml-gg-rem: 2rem;
-  --ml-gg: 32px;
 }
 
 .-Gsfd1gg {

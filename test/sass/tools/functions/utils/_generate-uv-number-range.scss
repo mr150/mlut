@@ -17,9 +17,9 @@
 				ml.generate-uv-number-range([2su, 4], 'Fns'),
 				(
 					'values': (
-						2su: ml.sur(2),
-						3su: ml.sur(3),
-						4su: ml.sur(4),
+						2su: ml.su(2),
+						3su: ml.su(3),
+						4su: ml.su(4),
 					)
 				),
 				$inspect: true,

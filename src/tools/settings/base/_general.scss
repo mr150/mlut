@@ -7,9 +7,8 @@
 // Settings that affect the work of the all toolkit.
 //
 // $browser-font-size = 16px - font size for converting [px to rem](section-sass-tools.html#kssref-sass-tools-functions-px2rem). 16px used because is default font size in settings of most browsers.
-// $su-cf = 4 - value of [space unit](section-concepts.html#kssref-concepts-su). Use this factor to change su and for calculations.
-// $su = 4px - space unit in px. Depends on `$su-cf`. Use this variable to set the values in px.
-// $css-vars-fallback = true - add fallback for values in `grid-gutters` units
+// $su = 0.25rem - space unit value
+// $css-vars-fallback = false - add fallback for values in `grid-gutters` units
 // $css-transition-time = 0.3s - default transition duration.
 // $ratio-box-flex = false - adds a more advanced version of [Ratio-box](section-core-helpers.html#kssref-core-helpers-ratio-box) helper with an arbitrary height \- `ratio-box-flex`
 // $wrapper-max-width = 1200px - max width of the [Wraper](section-core-helpers.html#kssref-core-helpers-wrapper) helper
@@ -38,7 +37,6 @@
 // Below are the names of the variables, the corresponding keys in the map and names of custom properties.
 //
 // $var-gg = --gg - `gg`.
-// $var-gg-rem = --gg-rem - `gg-rem`.
 // $var-grid-cols = --grid-cols - `grid-cols`.
 //
 /// Styleguide: settings.general.css_vars.names
@@ -48,12 +46,12 @@ $browser-font-size: 16px !default;
 $css-transition-time: 0.3s !default;
 $wrapper-max-width: 1200px !default;
 
-$su-cf: 4 !default;
+$su: 0.25rem !default;
 
 $is-test-env: false !default;
 
 $css-var-prefix: 'ml-' !default;
-$css-vars-fallback: true !default;
+$css-vars-fallback: false !default;
 
 $class-prefix: '' !default;
 
@@ -79,10 +77,7 @@ $general-cfg: (
 		'l': left,
 	),
 	'custom-unit-values': (
-		'su': (
-			'px': $su-cf * 1px,
-			'rem': math.div(1px, $browser-font-size) * $su-cf * 1rem,
-		),
+		'su': $su,
 	),
 	'units': (
 		'css': (
@@ -145,7 +140,6 @@ $general-cfg: (
 	),
 	'css-vars': (
 		'gg': 'gg',
-		'gg-rem': 'gg-rem',
 		'gs-formula-diff': 'gsfd',
 		'gs-columns-count': 'gscc',
 	),
@@ -156,9 +150,6 @@ $general-config-ext: () !default;
 
 $general-cfg: map.deep-merge($general-cfg, $general-config);
 $general-cfg: map.deep-merge($general-cfg, $general-config-ext);
-
-$su: map.get($general-cfg, 'custom-unit-values', 'su', 'px');
-$su-rem: map.get($general-cfg, 'custom-unit-values', 'su', 'rem');
 
 $main-directions: map.get($general-cfg, 'main-directions');
 
@@ -178,7 +169,6 @@ $-prefixed-vars: ();
 $general-cfg: map.set($general-cfg, 'css-vars', $-prefixed-vars);
 
 $var-gg: map.get($general-cfg, 'css-vars', 'gg');
-$var-gg-rem: map.get($general-cfg, 'css-vars', 'gg-rem');
 $var-gsfd: map.get($general-cfg, 'css-vars', 'gs-formula-diff');
 $var-gscc: map.get($general-cfg, 'css-vars', 'gs-columns-count');
 

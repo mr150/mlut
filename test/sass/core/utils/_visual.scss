@@ -39,7 +39,7 @@
 		@include assert() {
 			@include output(false) {
 				@include ml.apply(
-					'-Tr-50p -Trx8su -Try8su -Skx40d'
+					'-Tr-50p -Trx8su -Skx40d'
 				);
 			}
 
@@ -50,11 +50,7 @@
 				}
 
 				.-Trx8su {
-					--ml-trx: 32px;
-				}
-
-				.-Try8su {
-					--ml-try: 2rem;
+					--ml-trx: 2rem;
 				}
 
 				.-Skx40d {

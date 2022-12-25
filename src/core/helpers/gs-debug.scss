@@ -16,7 +16,7 @@ Styleguide: core-helpers.gs-debug
 
 .gs-debug {
 	/* autoprefixer: off */
-	padding: calc(var(ml.$var-gg-rem) * 3) 0px;
+	padding: calc(var(ml.$var-gg) * 3) 0px;
 	background-image: linear-gradient(
 		90deg,
 		ml.$gs-debug-gtr-color var(ml.$var-gg),

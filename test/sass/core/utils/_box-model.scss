@@ -16,13 +16,13 @@
 			@include expect(false) {
 				.W6gc {
 					--ml-gsc: 6;
-					width: calc(50% - 32px);
+					width: calc(50% - 2rem);
 					width: var(--ml-gscf, 50%);
 				}
 
 				.W9gc_h:hover {
 					--ml-gsc: 9;
-					width: calc(75% - 32px);
+					width: calc(75% - 2rem);
 					width: var(--ml-gscf, 75%);
 				}
 			}
@@ -39,13 +39,13 @@
 			@include expect(false) {
 				.W9gc {
 					--ml-gsc: 9;
-					width: calc(75% - 32px);
+					width: calc(75% - 2rem);
 					width: var(--ml-gscf, 75%);
 				}
 
 				.W10gc {
 					--ml-gsc: 10;
-					width: calc(83.3333333333% - 32px);
+					width: calc(83.3333333333% - 2rem);
 					width: var(--ml-gscf, 83.3333333333%);
 				}
 			}
@@ -64,19 +64,19 @@
 			@include expect(false) {
 				.Ml6gc {
 					--ml-gso: 6;
-					margin-left: calc(50% + 16px);
+					margin-left: calc(50% + 1rem);
 					margin-left: var(--ml-gsof, 50%);
 				}
 
 				.Ml9gc {
 					--ml-gso: 9;
-					margin-left: calc(75% + 16px);
+					margin-left: calc(75% + 1rem);
 					margin-left: var(--ml-gsof, 75%);
 				}
 
 				.Ml10gc {
 					--ml-gso: 10;
-					margin-left: calc(83.3333333333% + 16px);
+					margin-left: calc(83.3333333333% + 1rem);
 					margin-left: var(--ml-gsof, 83.3333333333%);
 				}
 			}
