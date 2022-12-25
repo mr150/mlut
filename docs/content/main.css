@@ -1329,7 +1329,7 @@ Styleguide: how_to.config.media
 /*
 General reference
 
-Reference of the utils groups, at-rule etc.
+Reference of the utils groups, at-rule etc. Much of this reference has been made according to the same rules as in [utilites reference](section-utils-reference.html). Recommends to check it out before.
 
 Weight: 6
 
@@ -1339,7 +1339,7 @@ Styleguide: general_reference
 /*
 Utilities groups
 
-Reference of the utils groups.
+In the description of each group are specified the included utilities. When specifying utilities, [Components Syntax](section-concepts.html#kssref-concepts-util-components) can be used. After the utilities list, the values of the group that are contained **in the Core** library may be writted. In this values also may be used the Components Syntax.
 
 Styleguide: general_reference.groups
 */
@@ -1384,6 +1384,18 @@ Styleguide: core-helpers
 Utils reference
 
 All utilities that available in the registry.
+
+This reference is generated on the basis of settings in the code. In the left column, the [options](section-settings.html#kssref-settings-utils-data-options) of the utility are specified, and in the right - their values. In maps with values, the *default* is the CSS value that will be used without specifying the utility value. Speaking more accurately, *default* is a `''`(empty string) in the utility value:
+```scss
+@include ml.mk-util('D', '');
+
+// CSS
+.D {
+	display: block;
+}
+```
+
+After the options, the values of utility that are contained **in the Core** library may be specified. The values are written in [Components Syntax](section-concepts.html#kssref-concepts-util-components). Remember that Core contains only those values that can be used across projects. If you are looking for ready-made utilities for stylization, such as the colors and sizes, then check out of [Demo theme](section-addons.html#kssref-addons-catalog-demo_theme) in built-in addons.
 
 Weight: 5
 
