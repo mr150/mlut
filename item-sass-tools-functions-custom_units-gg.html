@@ -95,19 +95,15 @@
                   #sass-tools.functions.custom_units.gg
               </span>
             </span>
-            Grid gutter converters
+            gg
           </a>
         </h4>
 
 
           <div class="kss-description">
-            <p>Converts grid gutter to CSS value. Available converters:</p>
-<ul>
-<li><code>gg()</code> - <code>gg</code> to <code>px</code></li>
-<li><code>ggr()</code> - <code>gg</code> to <code>rem</code></li>
-</ul>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@debug</span> ml.gg(<span class="hljs-number">5</span>gg); <span class="hljs-comment">// calc(var(--ml-gg) * 5)</span>
-<span class="hljs-keyword">@debug</span> ml.ggr(<span class="hljs-number">5</span>); <span class="hljs-comment">// calc(var(--ml-gg-rem) * 5)</span>
+            <p>Converts grid gutter to CSS value.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@debug</span> ml.gg(<span class="hljs-number">5</span>); <span class="hljs-comment">// calc(var(--ml-gg) * 5)</span>
+<span class="hljs-keyword">@debug</span> ml.gg(<span class="hljs-number">1</span>gg); <span class="hljs-comment">// var(--ml-gg)</span>
 </code></pre>
 
           </div>
@@ -135,7 +131,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>../src/tools/functions/common/_custom-units.scss</code>, line 55
+          Source: <code>../src/tools/functions/common/_custom-units.scss</code>, line 42
         </div>
 
     </div>

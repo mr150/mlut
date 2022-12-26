@@ -101,9 +101,8 @@
 
 
           <div class="kss-description">
-            <p>The value of this unit depends on the corresponding CSS variables: <code>--ml-gg</code> and <code>--ml-gg-rem</code>. Due to this, its value can be changed dynamically. By default <code>--ml-gg = 3su</code> but increase to <code>4su</code> on the <code>lg</code> breakpoint.</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@debug</span> ml.uv(<span class="hljs-string">'Ml3su'</span>); <span class="hljs-comment">// 12px</span>
-<span class="hljs-keyword">@debug</span> ml.uv(<span class="hljs-string">'Fns6su'</span>); <span class="hljs-comment">// 1.5rem</span>
+            <p>The value of this unit depends on the CSS variable <code>--ml-gg</code>. Due to this, it value can be changed dynamically. By default <code>--ml-gg = 3su</code> but increase to <code>4su</code> on the <code>lg</code> breakpoint.</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@debug</span> ml.uv(<span class="hljs-string">'Ml-2.5gg'</span>); <span class="hljs-comment">// calc(var(--ml-gg) * -2.5)</span>
 </code></pre>
 
           </div>
@@ -113,7 +112,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 766
+          Source: <code>content/main.css</code>, line 768
         </div>
 
     </div>
