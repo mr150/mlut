@@ -100,11 +100,11 @@ npm i mlut -D
 ### CDN ###
 Only core:
 ```html
-<link href="https://unpkg.com/mlut@latest/dist/css/mlut.min.css" rel="stylesheet">
+<link href="https://unpkg.com/mlut@latest/dist/mlut.min.css" rel="stylesheet">
 ```
 or with Demo theme included:
 ```html
-<link href="https://unpkg.com/mlut@latest/dist/css/mlut-demo-theme.min.css" rel="stylesheet">
+<link href="https://unpkg.com/mlut@latest/dist/mlut-demo-theme.min.css" rel="stylesheet">
 ```
 
 ### Usage ###
