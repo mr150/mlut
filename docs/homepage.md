@@ -83,8 +83,7 @@ Sass tools include:
 Addons may contains any tools, utilities and styles. In the `core/utils/init.scss` module implemented a method to work with sets of utilities from addons. Addons now at the **preview** stage and in the future, may be moved to separate packages
 
 ## What's next? ##
-- complete the documentation and add more examples
-- more utilities
+- CLI
 - JIT mode
 - first class CSS functions in utils values
 - and much more!
