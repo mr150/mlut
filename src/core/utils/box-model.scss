@@ -16,7 +16,7 @@ ml.$utils-map: map.merge(
 	ml.$kSsUMCS,
 	(
 		// display
-		'D': ml.$kUvKA,
+		'D': (ml.$kUvKA, 'n'),
 		ml.$cArOlBp + 'D': (
 			'', 'b', 'i', 'ib', 'f', 'if', 'g', 'ig', 'n', 't', 'it', 'c', 'flr', 'tc', 'tr',
 		),
@@ -39,9 +39,9 @@ ml.$utils-map: map.merge(
 		ml.$cBpAllCp + 'Overflows': (ml.$kUvKA),
 		// spacing
 		ml.$cBpAllCp + '-Gg': ([1su, 8],),
-		ml.$cBpAllCp + 'Margins': (0, 1, 'a', [1su, 6]),
-		ml.$cBpAllCp + 'MarginsNoR': ([-6su, -1], [-2gg, -1], [1gg, 4]),
-		ml.$cBpAllCp + 'Paddings': (0, 1, [1su, 7], [1gg, 6]),
+		ml.$cBpAllCp + 'Margins': (0, 1, 'a', [1su, 8]),
+		ml.$cBpAllCp + 'MarginsNoR': ([-8su, -1], [-2gg, -1], [1gg, 4]),
+		ml.$cBpAllCp + 'Paddings': (0, 1, [1su, 8], [1gg, 6]),
 		// for ratio-box
 		'Pt_b StOl': (100p, 75p),
 	)

@@ -3,6 +3,9 @@
 @use 'sass:meta';
 @use 'sass:string';
 @use '../src/tools' as ml;
+
+$initial-colors: map.get(ml.$utils-db, 'common', 'keywords', 'colors');
+
 @use '../src/tools/functions/base' as bf;
 @use '../src/core/utils/load';
 @use '../src/addons/demo-theme';
@@ -167,7 +170,19 @@ Styleguide: general_reference.media.#{$feature}
 
 #{map2html($keywords, null, null)}
 
-Styleguide: general_reference.kw.#{$group-name}
+Styleguide: general_reference.utils_kw.#{$group-name}
+*/
+}
+
+ml.$utils-db: map.set(ml.$utils-db, 'common', 'keywords', 'colors', $initial-colors);
+
+@each $group-name, $keywords in map.get(ml.$utils-db, 'common', 'keywords') {
+/*
+#{$group-name}
+
+#{map2html($keywords, null, null)}
+
+Styleguide: general_reference.common_kw.#{$group-name}
 */
 }
 

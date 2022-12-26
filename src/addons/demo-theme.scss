@@ -3,7 +3,9 @@
 
 // Demo theme
 //
-// A full -fledged design theme to create an interface. Contains a set of utilities and a colors palette.
+// A full-fledged design theme to create an interface. Contains a set of utilities and a colors palette.
+//
+// For a quick start, you can use ready-made bundle with included Demo theme. It available by path `mlut/src/mlut-demo-theme`. It can be configured as a default bundle, but it is not well tested yet.
 //
 // Styleguide: addons.catalog.demo_theme
 
@@ -27,7 +29,7 @@
 //
 // Styleguide: addons.catalog.demo_theme.colors
 
-$colors: (
+$demo-colors: (
 	'gray0': #c5ccd3,
 	'red0': #ff5c5c,
 	'orange0': #ffad5c,
@@ -41,7 +43,7 @@ $colors: (
 ml.$utils-db: map.merge(
 	ml.$utils-db, 'common', 'keywords', 'colors',
 	map.merge(
-		$colors,
+		$demo-colors,
 		map.get(ml.$utils-db, 'common', 'keywords', 'colors')
 	)
 );
@@ -56,16 +58,16 @@ $colors-at-rules: $colors-at-rules and $colors-at-rules + '_';
 $colors-pre-states: $colors-pre-states and $colors-pre-states + ' _';
 $colors-post-states: $colors-post-states and '_ ' + $colors-post-states;
 
-$-color-names: map.keys($colors);
+$-color-names: map.keys($demo-colors);
 $-colors-key: $colors-at-rules + $colors-pre-states + 'Colors' + $colors-post-states;
 
 //stylelint-disable
-$utils: (
+$demo-utils: (
 	ml.$cBpAllCp + 'W': (5su, 10su, 20su, 25su, 40su, 70su),
 	ml.$cBpAllCp + 'H': (5su, 10su, 20su, 25su),
 	$-colors-key: ([
 		$-color-names, 8, ('rgb': $shade-step)
-	],),
+	], 'white'),
 	ml.$cBpAllCp + 'Fns': ([1su, 8], 3gg, 14su, 4gg, 5gg),
 	ml.$cBpAllCp + 'Lnh': (
 		'md': 1.4,
@@ -73,6 +75,8 @@ $utils: (
 		'xl': 1.8,
 		'xxl': 2,
 	),
+	ml.$cBpAllCp + 'Offsets': ([1su, 8],),
+	ml.$cBpAllCp + 'Translates': ([1su, 8], [-8su, -1]),
 	ml.$cBpAllCp + 'BdWidth': (1su, 2su),
 	ml.$cBpAllCp + 'BdRadius': (2, [1su, 4]),
 	ml.$kBpAll + ' #{ml.$kArSt}_^:h _O_ h f fw': ([10p, 90, 10],),
@@ -88,6 +92,6 @@ $utils: (
 	ml.$utils-map: map.set(
 		ml.$utils-map,
 		'demo-theme',
-		$utils
+		$demo-utils
 	);
 }

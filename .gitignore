@@ -3,6 +3,8 @@ test/**/*.html
 test/libs/**/*
 test/css/index.css
 test/css/mlut.min.css
+test/css/mlut-demo-theme.css
+test/css/mlut-demo-theme.min.css
 
 docs/styleguide
 docs/content/generate.css

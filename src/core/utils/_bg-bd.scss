@@ -18,7 +18,7 @@ ml.$utils-map: map.merge(
 		// border
 		'Bd': '0;s',
 		ml.$cBpAllCp + 'Borders': '',
-		ml.$cBpAllCp + 'BdWidth': (0, 2),
+		ml.$cBpAllCp + 'BdWidth': (0, 2, 3),
 		'BdStyle': ('d', 'h', 'dh', 'db', 's'),
 		ml.$cBpAllCp + 'Bdc': 'tp',
 		'Bdcl': ml.$kUvKA,

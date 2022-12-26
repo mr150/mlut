@@ -20,8 +20,13 @@ npm i mlut -D
 ```
 
 ### CDN ###
+Only core:
 ```html
 <link href="https://unpkg.com/mlut@latest/dist/css/mlut.min.css" rel="stylesheet">
+```
+or with Demo theme included:
+```html
+<link href="https://unpkg.com/mlut@latest/dist/css/mlut-demo-theme.min.css" rel="stylesheet">
 ```
 
 Weight: 0
@@ -62,14 +67,14 @@ And just add Mlut classes to markup:
 ### Toolkit ###
 To use all Mlut features you need an assembly. You will need to install a package via NPM and:
 
-- [Dart Sass](https://github.com/sass/sass)
+- [Dart Sass](https://github.com/sass/sass), and in particular [sass-embedded](https://www.npmjs.com/package/sass-embedded) for better performance
 - CSS minifier or PostCSS plugin that can group media queries is recommended.<br> For example: [CSSO](https://github.com/css/csso) or [this](https://github.com/SassNinja/postcss-combine-media-query) plugin
 - [PurgeCSS](https://github.com/FullHuman/purgecss) is recommended for removing unused CSS
 
 Once the assembly is configured, just import Mlut to your stylesheet, and configure it as you need:
 ```scss
 @use '../../node_modules/mlut' as ml with (
-	$su-cf: 5,
+	$su: 5px,
 	$breakpoints: (
 		'xxl': 1400px
 	),
@@ -321,7 +326,7 @@ Styleguide: concepts.values.type.color
 /*
 Keywords
 
-Keywords \- abbreviations that comply with CSS keywords. They are written Camel Camel Case and may contain numbers. How to add your keywords look here.
+Keywords \- abbreviations that comply with CSS keywords. They are written Camel Camel Case and may contain numbers. How to add your keywords look [here](section-settings.html#kssref-settings-utils-data-kw).
 ```scss
 @debug ml.uv('D-if'); // inline-flex
 ```
@@ -332,7 +337,7 @@ Styleguide: concepts.values.type.kw
 /*
 Global keywords
 
-Similar to ordinary, but differ in that they can be used in any utility. You can add your global keywords in the settings. It is recommended to use the prefix, for example: `gMyKw`. You can find the default Mlut global keywords in the settings.
+Similar to ordinary, but differ in that they can be used in any utility. You can add your global keywords in the settings. It is recommended to use the prefix, for example: `gMyKw`. You can find the default Mlut global keywords [here](section-general_reference.html#kssref-general_reference-common_kw).
 ```scss
 @debug ml.uv('W-ih'); // inherit
 ```
@@ -354,7 +359,7 @@ Styleguide: concepts.values.type.abbr
 /*
 Conversion type
 
-In different utilities, the values will be converted in different ways. Conversion type is a rule by which the value will be converted. It consists of a sequence of converters and keywords. Conversion type is specified in the `conversion` option of utilities. For details on conversion and existing types, see here.
+In different utilities, the values will be converted in different ways. Conversion type is a rule by which the value will be converted. It consists of a sequence of converters and keywords. Conversion type is specified in the `conversion` option of utilities. For details on conversion and existing types, see [here](section-settings.html#kssref-settings-utils-config-conversion).
 
 Weight: 1
 
@@ -480,7 +485,7 @@ Styleguide: concepts.at_rules
 /*
 Breakpoints
 
-The width of the screen on which the styles change. The default mobile-first approach is used, so breakpoints are converted to `min-width` media queries. How to configure breakpoints see here.
+The width of the screen on which the styles change. The default mobile-first approach is used, so breakpoints are converted to `min-width` media queries. How to configure breakpoints see [here](section-settings.html#kssref-settings-at_rules-breakpoints).
 
 If required `max-width`, add the `<` before the breakpoint:
 ```scss
@@ -645,7 +650,7 @@ h1 + .h1\+_D {
 	display: block;
 }
 ```
-Full list of existing states see in the configuration.
+Full list of existing states see in the [configuration](section-settings.html#kssref-settings-utils-config-states).
 
 Weight: 4
 
@@ -742,9 +747,7 @@ In Mlut there are 3 custom units:
 - `gg` \- grid gutter
 - `gc` \- grid column. Used only in the legacy grid-system
 
-*Important note*: in some utilities, `su` and` gg` are converted to `rem`, and not in `px`. About such behavior says the `default-unit` in the value "rem". It helps accessibility, if the user has increased default font in the browser.
-
-You can set the custom units values in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general).
+You can set the custom units values in the [settings](section-settings.html#kssref-settings-general).
 
 Weight: 5
 
@@ -754,9 +757,8 @@ Styleguide: concepts.custom_unit
 /*
 Space unit
 
-Unit of measurement to create a scale of sizes and indents in your design system. By default `1su = 4px`.
+Unit of measurement to create a scale of sizes and indents in your design system. By default `1su = 0.25rem`(4px).
 ```scss
-@debug ml.uv('Ml3su'); // 12px
 @debug ml.uv('Fns6su'); // 1.5rem
 ```
 
@@ -766,10 +768,9 @@ Styleguide: concepts.custom_unit.su
 /*
 Grid gutter
 
-The value of this unit depends on the corresponding CSS variables: `--ml-gg` and `--ml-gg-rem`. Due to this, its value can be changed dynamically. By default `--ml-gg = 3su` but increase to `4su` on the `lg` breakpoint.
+The value of this unit depends on the CSS variable `--ml-gg`. Due to this, it value can be changed dynamically. By default `--ml-gg = 3su` but increase to `4su` on the `lg` breakpoint.
 ```scss
-@debug ml.uv('Ml3su'); // 12px
-@debug ml.uv('Fns6su'); // 1.5rem
+@debug ml.uv('Ml-2.5gg'); // calc(var(--ml-gg) * -2.5)
 ```
 
 Styleguide: concepts.custom_unit.gg
@@ -799,7 +800,7 @@ Styleguide: how_to.mk_utils
 /*
 Standard ways
 
-Standard methods include creating through config and using `mk-` mixins. As the values of utilities, you can use a list or map. The components syntax can be used both in the names of utilities/groups and in the values.
+Standard methods include creating through config and using `mk-` [mixins](section-sass-tools.html#kssref-sass-tools-mixins-utils-mk_util). As the values of utilities, you can use a list or map. The components syntax can be used both in the names of utilities/groups and in the values.
 ```scss
 @include ml.mk-util(
 	'Mxw',
@@ -916,7 +917,7 @@ Styleguide: how_to.mk_utils.kw
 /*
 Top-level apply
 
-If you want to create only a few utilities with specific values or components, you can use the apply mixin. If you call it outside another rule, it will generate the specified utilities:
+If you want to create only a few utilities with specific values or components, you can use the [apply](section-sass-tools.html#kssref-sass-tools-mixins-utils-apply) mixin. If you call it outside another rule, it will generate the specified utilities:
 ```scss
 @include ml.apply(
 	'-Gdl-r,#fff;30p,#00f;80p,red -Drps10;15;#00f,20;2r;5;#0ff'
@@ -1216,7 +1217,7 @@ To add or change breakpoints, use the `$breakpoints` map.
   }
 }
 ```
-The order of adding does not matter, the breakpoints will be sorted by increasing. How to completely rewrite the breakpoints, see the settings.
+The order of adding does not matter, the breakpoints will be sorted by increasing. How to completely rewrite the breakpoints, see the [settings](section-settings.html#kssref-settings-at_rules-breakpoints).
 
 Styleguide: how_to.config.bp
 */
@@ -1254,7 +1255,7 @@ To create a new utility, add it to the registry during configuration. As a value
   image-rendering: pixelated;
 }
 ```
-You can create a utility for changing one property even without registration <s>and SMS</s>. Just indicate the name and values. If the name of the utility begins with `-`, then it will control the custom property.
+You can create a utility for changing one property even without registration <s>and SMS</s>. Just specify the name and values. If the name of the utility begins with `-`, then it will control the custom property.
 ```scss
 @use 'mlut' with (
 	$utils: (
@@ -1363,7 +1364,15 @@ Utilities keywords
 
 Reference of the keywords in the utils values.
 
-Styleguide: general_reference.kw
+Styleguide: general_reference.utils_kw
+*/
+
+/*
+Common keywords
+
+Keywords that can be used both in utilities and in media features
+
+Styleguide: general_reference.common_kw
 */
 
 /*

@@ -1,5 +1,5 @@
 # My Little UI Toolkit #
-Full-featured and hackable atomic CSS toolkit with unique syntax. Get almost all power of CSS in one utility!
+Full-featured and hackable atomic CSS toolkit with unique syntax. <br> Get almost all power of CSS in one utility!
 
 [![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
@@ -98,8 +98,13 @@ npm i mlut -D
 ```
 
 ### CDN ###
+Only core:
 ```html
 <link href="https://unpkg.com/mlut@latest/dist/css/mlut.min.css" rel="stylesheet">
+```
+or with Demo theme included:
+```html
+<link href="https://unpkg.com/mlut@latest/dist/css/mlut-demo-theme.min.css" rel="stylesheet">
 ```
 
 ### Usage ###
@@ -125,14 +130,14 @@ And just add classes to markup:
 #### Toolkit ####
 To use all Mlut features you need an assembly. You will need to install a package via NPM and:
 
-- [Dart Sass](https://github.com/sass/sass)
+- [Dart Sass](https://github.com/sass/sass), and in particular [sass-embedded](https://www.npmjs.com/package/sass-embedded) for better performance
 - CSS minifier or PostCSS plugin that can group media queries. For example: [CSSO](https://github.com/css/csso) or [this](https://github.com/SassNinja/postcss-combine-media-query) plugin
 - [PurgeCSS](https://github.com/FullHuman/purgecss) is recommended for removing unused CSS
 
 Once the assembly is configured, just import Mlut to your stylesheet, and configure it as you need:
 ```scss
 @use '../../node_modules/mlut' as ml with (
-  $su-cf: 5,
+  $su: 5px,
   $breakpoints: (
     'xxl': 1400px
   ),

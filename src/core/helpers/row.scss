@@ -3,7 +3,7 @@
 /*
 Row
 
-Helper for creating layouts. Suitable for columns, cards and horizontal lists. By default, [flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox) technology is used for layouts.
+Helper for creating layouts. Suitable for columns, cards and horizontal lists. By default, flexbox technology is used for layouts.
 
 Parts of the layout within a `row` are created using the elements:
 * [row__col](#kssref-core-helpers-row-row__col)
@@ -26,12 +26,6 @@ row__col
 The main element for creating columns in layout. By default, it stretches the entire width of the container. The columns have gutters on the sides and bottom.
 
 The gutters are implemented using the `margin` and [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars).
-If `var()` is not supported by the browser, then fallback are provided:
-```scss
-margin: 0px 16px 32px;
-margin: 0px calc(var(--ml-gg) * 1) calc(var(--ml-gg) * 2);
-```
-The size of gutter fallback you can find in the [settings](section-sass-tools.html#kssref-sass-tools-settings-general) in `$gs-default-gtr`.
 
 Column width is set using [W utility](section-utils-reference.html#kssref-utils-reference-w). See example [above](#kssref-core-helpers-row). The formulas for calculating the width and offset for the column are stored in the custom properties. In `--ml-gscf` for W and `--ml-gsof` for [Ml utility](section-utils-reference.html#kssref-utils-reference-ml). These formulas:
 ```scss
@@ -44,8 +38,6 @@ Column width is set using [W utility](section-utils-reference.html#kssref-utils-
 Some of these variables can be changed using [custom utilities](section-utils-reference.html#kssref-utils-reference--gscc).
 
 You can create nested layouts with a mix of `row` and `row__col` on the same DOM node. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
-
-All examples of the work of nested layouts are [here](section-examples.html#kssref-examples-nested_layouts).
 
 Markup: ../../../docs/examples/core-helpers/row/row__col.html
 
