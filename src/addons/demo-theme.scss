@@ -65,7 +65,7 @@ $utils: (
 	ml.$cBpAllCp + 'H': (5su, 10su, 20su, 25su),
 	$-colors-key: ([
 		$-color-names, 8, ('rgb': $shade-step)
-	],),
+	], 'white'),
 	ml.$cBpAllCp + 'Fns': ([1su, 8], 3gg, 14su, 4gg, 5gg),
 	ml.$cBpAllCp + 'Lnh': (
 		'md': 1.4,
@@ -73,6 +73,8 @@ $utils: (
 		'xl': 1.8,
 		'xxl': 2,
 	),
+	ml.$cBpAllCp + 'Offsets': ([1su, 8],),
+	ml.$cBpAllCp + 'Translates': ([1su, 8], [-8su, -1]),
 	ml.$cBpAllCp + 'BdWidth': (1su, 2su),
 	ml.$cBpAllCp + 'BdRadius': (2, [1su, 4]),
 	ml.$kBpAll + ' #{ml.$kArSt}_^:h _O_ h f fw': ([10p, 90, 10],),
