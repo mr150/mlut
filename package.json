@@ -1,7 +1,7 @@
 {
 	"name": "mlut",
 	"version": "4.0.1",
-	"description": "Full-featured and hackable toolkit for writing standards-based Atomic CSS.",
+	"description": "Full-featured and hackable atomic CSS toolkit with unique syntax",
 	"author": "mr150",
 	"license": "MIT",
 	"homepage": "https://mr150.github.io/mlut/",
@@ -25,6 +25,7 @@
 	"files": [
 		"src/",
 		"_index.scss",
+		"_tools.scss",
 		"dist/"
 	],
 	"scripts": {
