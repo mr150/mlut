@@ -920,12 +920,12 @@ Top-level apply
 If you want to create only a few utilities with specific values or components, you can use the [apply](section-sass-tools.html#kssref-sass-tools-mixins-utils-apply) mixin. If you call it outside another rule, it will generate the specified utilities:
 ```scss
 @include ml.apply(
-	'-Gdl-r,#fff;30p,#00f;80p,red -Drps10;15;#00f,20;2r;5;#0ff'
+	'-Gdl-r,#0f0;30p,#00f;80p,red -Drps10;15;#00f,20;2r;5;#0ff'
 );
 
 // CSS
-.-Gdl-r\,\#fff\;30p\,\#00f\;80p\,red {
-	background-image: linear-gradient(to right, #fff 30%, #00f 80%, red);
+.-Gdl-r\,\#0f0\;30p\,\#00f\;80p\,red {
+	background-image: linear-gradient(to right, #0f0 30%, #00f 80%, red);
 }
 
 .-Drps10\;15\;\#00f\,20\;2r\;5\;\#0ff {
@@ -959,11 +959,11 @@ Number is default range syntax. You can use it with any utility if another range
 
 // CSS
 .Bdw2su {
-	border-width: 8px;
+	border-width: 0.5rem;
 }
 
 .Bdw3su {
-	border-width: 12px;
+	border-width: 0.75rem;
 }
 
 // etc.
