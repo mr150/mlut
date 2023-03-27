@@ -1,50 +1,15 @@
 # My Little UI Toolkit #
-Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity <br> Get almost all power of CSS in one utility!
+
+<img alt="Logo" src="kss-assets/logo-full.png" style="display:block; margin:16px 0; max-width:350px"/>
 
 [![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
 
-<img alt="Logo" src="kss-assets/logo-full.png" style="display:block; margin:auto; max-width:350px"/>
+Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity <br> Get almost all power of CSS in one utility!
 
-Import and configure mlut:
-```scss
-@use 'mlut' as ml with (
-	$utils: (
-		'Fnw': ('bd', 200),
-		'xl_P': 10r,
-	)
-);
+<img alt="GIF animation with usage example" src="kss-assets/TLDR.gif" style="display:block"/>
 
-@include ml.apply('P30;$gutter?1r_!frc');
-```
-Get CSS like this:
-```scss
-// some utils from standard library before
-
-.Fnw-bd {
-  font-weight: bolder;
-}
-
-.Fnw200 {
-  font-weight: 200;
-}
-
-.P10r {
-	padding: 10rem;
-}
-
-@media (min-width: 1200px) {
-	.xl_P10r {
-		padding: 10rem;
-	}
-}
-
-.P30\;\$gutter\?1r_\!frc:not(:first-child) {
-  padding: 30px var(--ml-gutter, 1rem);
-}
-```
-
-## Features ##
+## Features
 
 ### Strong naming convention
 **Tailwindcss**:
@@ -89,15 +54,31 @@ And one more example:
 ```
 
 ### Easiest utils generation
-**Range syntax**
+
+JIT mode planned but here is what we have now:
+
+#### Range syntax
+
+<table>
+<tr>
+<th>Sass</th>
+<th>CSS</th>
+</tr>
+<tr>
+<td valign="top">
+
 ```scss
 @use 'mlut' with (
   $utils: (
     'Bdw': ([2su, 4],),
   )
 );
+```
 
-// CSS
+</td>
+<td valign="top">
+
+```scss
 .Bdw2su {
   border-width: 0.5rem;
 }
@@ -110,15 +91,32 @@ And one more example:
   border-width: 1rem;
 }
 ```
-**Components syntax**
+
+</td>
+</tr>
+</table>
+
+#### Components syntax
+<table>
+<tr>
+<th>Sass</th>
+<th>CSS</th>
+</tr>
+<tr>
+<td valign="top">
+
 ```scss
 @use 'mlut' with (
   $utils: (
     'D': ('xl _ib_ b af'),
   )
 );
+```
 
-// CSS
+</td>
+<td valign="top">
+
+```scss
 .D-ib {
   display: inline-block;
 }
@@ -137,15 +135,32 @@ And one more example:
   }
 }
 ```
-**Groups**
+
+</td>
+</tr>
+</table>
+
+#### Groups
+<table>
+<tr>
+<th>Sass</th>
+<th>CSS</th>
+</tr>
+<tr>
+<td valign="top">
+
 ```scss
 @use 'mlut' with (
   $utils: (
     'Paddings': (150),
   )
 );
+```
 
-// CSS
+</td>
+<td valign="top">
+
+```scss
 .P150 {
   padding: 150px;
 }
@@ -160,13 +175,31 @@ And one more example:
 
 // etc.
 ```
-**Top-level apply**
+
+</td>
+</tr>
+</table>
+
+#### Top-level apply
+<div class="Ov-a W100p">
+<table>
+<tr>
+<th>Sass</th>
+<th>CSS</th>
+</tr>
+<tr>
+<td valign="top">
+
 ```scss
 @include ml.apply(
   '^0:+_-MyPad1.5;3su -Gdl-r,#0f0;30p,#00f;80p,red'
 );
+```
 
-// CSS
+</td>
+<td valign="top">
+
+```scss
 .-Ctx0 + .\^0\:\+_-MyPad1\.5\;3su {
   --ml-myPad: 1.5rem 0.75rem;
 }
@@ -175,6 +208,11 @@ And one more example:
   background-image: linear-gradient(to right, #0f0 30%, #00f 80%, red);
 }
 ```
+
+</td>
+</tr>
+</table>
+</div>
 
 ### Handy extension
 Add utilities, states and custom at-rules with few lines of code
@@ -221,7 +259,7 @@ Add utilities, states and custom at-rules with few lines of code
 ### And also...
 - Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
 - **Fully customizable**: change tokens, utilities names and any settings
-- Easy to integrate in existing project. No name collisions with your CSS in the most projects. Increasing specificity in [one line](https://mr150.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity) or for [one](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu) utility.
+- **Easy to integrate** in existing project. No name collisions with your CSS in the most projects. Increasing specificity in [one line](https://mr150.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity) or for [one](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu) utility.
 
 ## Structure ##
 - Sass tools
@@ -246,7 +284,7 @@ Sass tools include:
 ### Addons ###
 Addons may contains any tools, utilities and styles. In the `core/utils/init.scss` module implemented a method to work with sets of utilities from addons. Addons now at the **preview** stage and in the future, may be moved to separate packages
 
-## What's next? ##
+## What next? ##
 - CLI
 - JIT mode
 - first class CSS functions in utils values
