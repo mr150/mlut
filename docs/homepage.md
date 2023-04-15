@@ -7,34 +7,43 @@
 
 Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity <br> Get almost all power of CSS in one utility!
 
-<img alt="GIF animation with usage example" src="kss-assets/TLDR.gif" style="display:block"/>
+<img alt="GIF animation with usage example" src="kss-assets/TLDR.gif" class="D Mb4gg"/>
 
 ## Features
 
+<section class="Mb4gg">
+
 ### Strong naming convention
-**Tailwindcss**:
+❌ **Tailwindcss**:
 - `.justify-*`: content, items or self?
 - `.flex` => `display: flex`, but `.flex-auto` => `flex: 1 1 auto;`
 - `.bg-none` - reset all background? Nope, only `background-image`
 
-**Tachyons**:
+❌ **Tachyons**:
 - `.br-0` => `border-right-width: 0`, but `.br1` => `border-radius:.125rem`
 - `.normal`: line-height, font-weight or letter-spacing?
 - `.b`: bottom, border or `display: block`? Nope, it is `font-weight:bold`!
 
-**mlut**:
+✅ **mlut**:
 - `.Jc-c` => `justify-content: center`, `.Js-c` => `justify-self: center`
 - `.Bdr` => `border-right: 1px solid`, `.Bdrd1` => `border-radius: 1px`
 
 [One algorithm](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-naming) for all. If you know CSS, you almost know mlut.
+</section>
+
+<section class="Mb4gg">
 
 ### Almost arbitrary by design
 - [values](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-values): `.Ml-1/7` => `margin-left: -14.3%`
 - [states](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states): `Bgc-red200_h,f` => `.Bgc-red200_h\,f:hover, .Bgc-red200_h\,f:focus {...}`
 - [at-rules](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-at_rules): `@:p-c,w>=80r_D-f` => `@media (pointer: coarse), (min-width: 90rem) {...}`
 
+</section>
+
+<section class="Mb4gg">
+
 ### Great ergonomics
-Shorter class names and convenient syntax for complex values, states and at-rules. It is like Vim for CSS.
+Shorter class names:
 ```html
 <!-- Example from https://www.shopify.com/ -->
 
@@ -44,22 +53,30 @@ Shorter class names and convenient syntax for complex values, states and at-rule
 <!-- mlut -->
 <div class="D-n md_D md_Gc-s1 md_Gcs7 lg_Gc-s5 lg_Gcs8 Pb6su Ps md_Mxh130vh Tf @:pfrm_-Try0 Wlc-tf Tsd1s Tstf-eio Ts-all @:pfrm_O1">...</div>
 ```
-And one more example:
-```html
-<!-- Tailwindcss -->
-<button type="button" class="[@media(any-hover:hover){&:hover}]:opacity-100">...</button>
+Convenient syntax for complex values, states and at-rules. It is like Vim for CSS.
 
-<!-- mlut -->
-<button type="button" class="@:ah_O1_h">...</button>
-```
+**❌ Tailwindcss:**
+
+- `[@media(any-hover:hover){&:hover}]:opacity-100`
+- `text-[color:var(--my-var,#333)]`
+- `supports-[margin:1svw]:ml-[1svw]`
+
+**✅ mlut:**
+- `@:ah_O1_h` => `@media (any-hover) { .\@\:ah_O1_h:hover {...} }`
+- `C-$myVar?#333` => `color: var(--ml-myVar, #333)`
+- `@s_Ml1svw` => `@supports (margin-left: 1svw) { .\@s_Ml1svw {...} }`
+
+</section>
+
+<section class="Mb4gg">
 
 ### Easiest utils generation
 
 JIT mode planned but here is what we have now:
 
-#### Range syntax
+#### Range [syntaxes](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range)
 
-<table>
+<table class="Mt3su Mb3gg M0_:pre">
 <tr>
 <th>Sass</th>
 <th>CSS</th>
@@ -97,7 +114,7 @@ JIT mode planned but here is what we have now:
 </table>
 
 #### Components syntax
-<table>
+<table class="Mt3su Mb3gg M0_:pre">
 <tr>
 <th>Sass</th>
 <th>CSS</th>
@@ -141,7 +158,7 @@ JIT mode planned but here is what we have now:
 </table>
 
 #### Groups
-<table>
+<table class="Mt3su Mb3gg M0_:pre">
 <tr>
 <th>Sass</th>
 <th>CSS</th>
@@ -181,7 +198,7 @@ JIT mode planned but here is what we have now:
 </table>
 
 #### Top-level apply
-<div class="Ov-a W100p">
+<div class="Mt3su M0_:pre Ov-a W100p">
 <table>
 <tr>
 <th>Sass</th>
@@ -213,6 +230,9 @@ JIT mode planned but here is what we have now:
 </tr>
 </table>
 </div>
+</section>
+
+<section class="Mb4gg">
 
 ### Handy extension
 Add utilities, states and custom at-rules with few lines of code
@@ -256,10 +276,18 @@ Add utilities, states and custom at-rules with few lines of code
 }
 ```
 
+</section>
+
+<section class="Mb4gg">
+
 ### And also...
-- Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
-- **Fully customizable**: change tokens, utilities names and any settings
-- **Easy to integrate** in existing project. No name collisions with your CSS in the most projects. Increasing specificity in [one line](https://mr150.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity) or for [one](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu) utility.
+- ⚡️ Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
+- 🔧 **Fully customizable**: change tokens, utilities names and any settings
+- ✨ **Easy to integrate** in existing project. No name collisions with your CSS in the most projects. Increasing specificity in [one line](https://mr150.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity) or for [one](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu) utility.
+
+</section>
+
+<section class="Mb4gg">
 
 ## Structure ##
 - Sass tools
@@ -283,6 +311,9 @@ Sass tools include:
 
 ### Addons ###
 Addons may contains any tools, utilities and styles. In the `core/utils/init.scss` module implemented a method to work with sets of utilities from addons. Addons now at the **preview** stage and in the future, may be moved to separate packages
+</section>
+
+<section class="Mb4gg">
 
 ## What next? ##
 - CLI
@@ -290,12 +321,18 @@ Addons may contains any tools, utilities and styles. In the `core/utils/init.scs
 - first class CSS functions in utils values
 - and much more!
 
+</section>
+
+<section class="Mb4gg">
+
 ## Acknowledgement ##
 - [CSS](https://www.w3.org/Style/CSS/)
 - [Emmet](https://github.com/emmetio)
 - [ACSS](https://acss.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Tachyons](https://tachyons.io/)
+
+</section>
 
 ## License ##
 MIT

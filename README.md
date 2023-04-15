@@ -5,18 +5,16 @@
 [![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
 
-Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity <br> Get almost all power of CSS in one utility!
-
-<img alt="GIF animation with usage example" src="docs/img/TLDR.gif"/>
+Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity. <br> Get almost all power of CSS in one utility!
 
 ## Table of Contents
 - [Features](#features)
-	- [Strong naming convention](#strong-naming-convention)
-	- [Almost arbitrary by design](#almost-arbitrary-by-design)
-	- [Great ergonomics](#great-ergonomics)
-	- [Easiest utils generation](#easiest-utils-generation)
-	- [Handy extension](#handy-extension)
-	- [And also...](#and-also)
+	- 🔠 [Strong naming convention](#strong-naming-convention)
+	- 🎨 [Almost arbitrary by design](#almost-arbitrary-by-design)
+	- ✋ [Great ergonomics](#great-ergonomics)
+	- 🔨 [Easiest utils generation](#easiest-utils-generation)
+	- 🧩 [Handy extension](#handy-extension)
+	- 👀 [And also...](#and-also)
 - [Structure](#structure)
 	- [Library](#library)
 	- [Tools](#tools)
@@ -29,20 +27,22 @@ Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexit
 - [Acknowledgement](#acknowledgement)
 - [License](#license)
 
+<img alt="GIF animation with usage example" src="docs/img/TLDR.gif"/>
+
 ## Features
 
 ### Strong naming convention
-**Tailwindcss**:
+❌ **Tailwindcss**:
 - `.justify-*`: content, items or self?
 - `.flex` => `display: flex`, but `.flex-auto` => `flex: 1 1 auto;`
 - `.bg-none` - reset all background? Nope, only `background-image`
 
-**Tachyons**:
+❌ **Tachyons**:
 - `.br-0` => `border-right-width: 0`, but `.br1` => `border-radius:.125rem`
 - `.normal`: line-height, font-weight or letter-spacing?
 - `.b`: bottom, border or `display: block`? Nope, it is `font-weight:bold`!
 
-**mlut**:
+✅ **mlut**:
 - `.Jc-c` => `justify-content: center`, `.Js-c` => `justify-self: center`
 - `.Bdr` => `border-right: 1px solid`, `.Bdrd1` => `border-radius: 1px`
 
@@ -54,7 +54,7 @@ Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexit
 - [at-rules](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-at_rules): `@:p-c,w>=80r_D-f` => `@media (pointer: coarse), (min-width: 90rem) {...}`
 
 ### Great ergonomics
-Shorter class names and convenient syntax for complex values, states and at-rules. It is like Vim for CSS.
+Shorter class names:
 ```html
 <!-- Example from https://www.shopify.com/ -->
 
@@ -64,20 +64,23 @@ Shorter class names and convenient syntax for complex values, states and at-rule
 <!-- mlut -->
 <div class="D-n md_D md_Gc-s1 md_Gcs7 lg_Gc-s5 lg_Gcs8 Pb6su Ps md_Mxh130vh Tf @:pfrm_-Try0 Wlc-tf Tsd1s Tstf-eio Ts-all @:pfrm_O1">...</div>
 ```
-And one more example:
-```html
-<!-- Tailwindcss -->
-<button type="button" class="[@media(any-hover:hover){&:hover}]:opacity-100">...</button>
+Convenient syntax for complex values, states and at-rules. It is like Vim for CSS.
+#### ❌ Tailwindcss:
+- `[@media(any-hover:hover){&:hover}]:opacity-100`
+- `text-[color:var(--my-var,#333)]`
+- `supports-[margin:1svw]:ml-[1svw]`
 
-<!-- mlut -->
-<button type="button" class="@:ah_O1_h">...</button>
-```
+#### ✅ mlut:
+- `@:ah_O1_h` => `@media (any-hover) { .\@\:ah_O1_h:hover {...} }`
+- `C-$myVar?#333` => `color: var(--ml-myVar, #333)`
+- `@s_Ml1svw` => `@supports (margin-left: 1svw) { .\@s_Ml1svw {...} }`
+
 
 ### Easiest utils generation
 
 JIT mode planned but here is what we have now:
 
-#### Range syntax
+#### Range [syntaxes](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range)
 
 <table>
 <tr>
@@ -277,9 +280,9 @@ Add utilities, states and custom at-rules with few lines of code
 ```
 
 ### And also...
-- Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
-- **Fully customizable**: change tokens, utilities names and any settings
-- **Easy to integrate** in existing project. No name collisions with your CSS in the most projects. Increasing specificity in [one line](https://mr150.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity) or for [one](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu) utility.
+- ⚡️ Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
+- 🔧 **Fully customizable**: change tokens, utilities names and any settings
+- ✨ **Easy to integrate** in existing project. No name collisions with your CSS in the most projects. Increasing specificity in [one line](https://mr150.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity) or for [one](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu) utility.
 
 ## Structure ##
 - Sass tools
@@ -305,7 +308,7 @@ Sass tools include:
 Addons may contains any tools, utilities and styles. In the `core/utils/init.scss` module implemented a method to work with sets of utilities from addons. Addons now at the **preview** stage and in the future, may be moved to separate packages
 
 ## Getting Started ##
-There are 2 ways to start using Mlut:
+There are 2 ways to start using mlut:
 
 - assembled distributive
 - toolkit
@@ -331,7 +334,7 @@ or with Demo theme included:
 
 #### Distributive ####
 
-You can get assembled Mlut code and include it to your project. There are some ways to get a distributive.
+You can get assembled mlut code and include it to your project. There are some ways to get a distributive.
 
 - just plug in with CDN
 - if used `npm`, files are in `node_modules/mlut/dist/`
@@ -348,13 +351,13 @@ And just add classes to markup:
 ```
 
 #### Toolkit ####
-To use all Mlut features you need an assembly. You will need to install a package via NPM and:
+To use all mlut features you need an assembly. You will need to install a package via NPM and:
 
 - [Dart Sass](https://github.com/sass/sass), and in particular [sass-embedded](https://www.npmjs.com/package/sass-embedded) for better performance
 - CSS minifier or PostCSS plugin that can group media queries. For example: [CSSO](https://github.com/css/csso) or [this](https://github.com/SassNinja/postcss-combine-media-query) plugin
 - [PurgeCSS](https://github.com/FullHuman/purgecss) is recommended for removing unused CSS
 
-Once the assembly is configured, just import Mlut to your stylesheet, and configure it as you need:
+Once the assembly is configured, just import mlut to your stylesheet, and configure it as you need:
 ```scss
 @use '../../node_modules/mlut' as ml with (
   $su: 5px,
