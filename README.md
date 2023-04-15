@@ -71,9 +71,9 @@ Convenient syntax for complex values, states and at-rules. It is like Vim for CS
 - `supports-[margin:1svw]:ml-[1svw]`
 
 #### ✅ mlut:
-- `@:ah_O1_h` => `@media (any-hover) { .\@\:ah_O1_h:hover {...} }`
+- `@:ah_O1_h` => `@media (any-hover) { .\@\:ah_O1_h:hover { opacity: 1 } }`
 - `C-$myVar?#333` => `color: var(--ml-myVar, #333)`
-- `@s_Ml1svw` => `@supports (margin-left: 1svw) { .\@s_Ml1svw {...} }`
+- `@s_Ml1svw` => `@supports (margin-left: 1svw) { .\@s_Ml1svw { margin-left: 1svw } }`
 
 
 ### Easiest utils generation
