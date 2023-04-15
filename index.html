@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Mlut documentation</title>
+  <title>mlut documentation</title>
 
   <meta name="description" content=""/>
   <meta name="generator" content="kss-node"/>
@@ -18,7 +18,7 @@
 
 <div class="kss-sidebar kss-style">
   <header class="kss-header">
-    <h1 class="kss-doc-title">Mlut documentation</h1>
+    <h1 class="kss-doc-title">mlut documentation</h1>
   </header>
   <nav class="kss-nav" aria-label="Style Guide">
     <ul class="kss-nav__menu">
@@ -85,62 +85,249 @@
   <article>
       <div id="kssref-0" class="kss-section kss-section--depth-0 kss-overview kss-style">
         <h1>My Little UI Toolkit</h1>
-<p>Full-featured and hackable atomic CSS toolkit with unique syntax. <br> Get almost all power of CSS in one utility!</p>
+<img alt="Logo" src="kss-assets/logo-full.png" style="display:block; margin:16px 0; max-width:350px"/>
 <p><a href="https://travis-ci.com/mr150/mlut"><img src="https://travis-ci.com/mr150/mlut.svg?branch=master" alt="Build Status"></a>
 <a href="https://www.npmjs.com/package/mlut"><img src="https://img.shields.io/npm/v/mlut.svg" alt=""></a></p>
-<img alt="Logo" src="kss-assets/logo-full.png" style="display:block; margin:auto; max-width:415px"/>
-<h2>TL;DR</h2>
-<p>Import and configure Mlut:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> as ml with (
-	<span class="hljs-variable">$utils</span>: (
-		<span class="hljs-string">'Fnw'</span>: (<span class="hljs-string">'bd'</span>, <span class="hljs-number">200</span>),
-		<span class="hljs-string">'xl_P'</span>: <span class="hljs-number">10</span>r,
-	)
-);
+<p>Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity <br> Get almost all power of CSS in one utility!</p>
+<img alt="GIF animation with usage example" src="kss-assets/TLDR.gif" class="D Mb4gg"/>
+<h2>Features</h2>
+<section class="Mb4gg">
+<h3>Strong naming convention</h3>
+<p>❌ <strong>Tailwindcss</strong>:</p>
+<ul>
+<li><code>.justify-*</code>: content, items or self?</li>
+<li><code>.flex</code> =&gt; <code>display: flex</code>, but <code>.flex-auto</code> =&gt; <code>flex: 1 1 auto;</code></li>
+<li><code>.bg-none</code> - reset all background? Nope, only <code>background-image</code></li>
+</ul>
+<p>❌ <strong>Tachyons</strong>:</p>
+<ul>
+<li><code>.br-0</code> =&gt; <code>border-right-width: 0</code>, but <code>.br1</code> =&gt; <code>border-radius:.125rem</code></li>
+<li><code>.normal</code>: line-height, font-weight or letter-spacing?</li>
+<li><code>.b</code>: bottom, border or <code>display: block</code>? Nope, it is <code>font-weight:bold</code>!</li>
+</ul>
+<p>✅ <strong>mlut</strong>:</p>
+<ul>
+<li><code>.Jc-c</code> =&gt; <code>justify-content: center</code>, <code>.Js-c</code> =&gt; <code>justify-self: center</code></li>
+<li><code>.Bdr</code> =&gt; <code>border-right: 1px solid</code>, <code>.Bdrd1</code> =&gt; <code>border-radius: 1px</code></li>
+</ul>
+<p><a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-naming">One algorithm</a> for all. If you know CSS, you almost know mlut.</p>
+</section>
+<section class="Mb4gg">
+<h3>Almost arbitrary by design</h3>
+<ul>
+<li><a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-values">values</a>: <code>.Ml-1/7</code> =&gt; <code>margin-left: -14.3%</code></li>
+<li><a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states">states</a>: <code>Bgc-red200_h,f</code> =&gt; <code>.Bgc-red200_h\,f:hover, .Bgc-red200_h\,f:focus {...}</code></li>
+<li><a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-at_rules">at-rules</a>: <code>@:p-c,w&gt;=80r_D-f</code> =&gt; <code>@media (pointer: coarse), (min-width: 90rem) {...}</code></li>
+</ul>
+</section>
+<section class="Mb4gg">
+<h3>Great ergonomics</h3>
+<p>Shorter class names:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-comment">&lt;!-- Example from https://www.shopify.com/ --&gt;</span>
 
-<span class="hljs-keyword">@include</span> ml.apply(<span class="hljs-string">'P30;$gutter?1r_!frc'</span>);
+<span class="hljs-comment">&lt;!-- Tailwindcss --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hidden md:block md:col-span-6 md:col-start-7 lg:col-span-5 lg:col-start-8 pb-6 relative md:max-h-[130vh] reduced-motion:translate-y-0 will-change-transform duration-1000 ease-in-out transition-all reduced-motion:opacity-100"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- mlut --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"D-n md_D md_Gc-s1 md_Gcs7 lg_Gc-s5 lg_Gcs8 Pb6su Ps md_Mxh130vh Tf @:pfrm_-Try0 Wlc-tf Tsd1s Tstf-eio Ts-all @:pfrm_O1"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
-<p>Get CSS like this:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-comment">// some utils from standard library before</span>
-
-<span class="hljs-selector-class">.Fnw-bd</span> {
-  <span class="hljs-attribute">font-weight</span>: bolder;
+<p>Convenient syntax for complex values, states and at-rules. It is like Vim for CSS.</p>
+<p><strong>❌ Tailwindcss:</strong></p>
+<ul>
+<li><code>[@media(any-hover:hover){&amp;:hover}]:opacity-100</code></li>
+<li><code>text-[color:var(--my-var,#333)]</code></li>
+<li><code>supports-[margin:1svw]:ml-[1svw]</code></li>
+</ul>
+<p><strong>✅ mlut:</strong></p>
+<ul>
+<li><code>@:ah_O1_h</code> =&gt; <code>@media (any-hover) { .\@\:ah_O1_h:hover { opacity: 1 } }</code></li>
+<li><code>C-$myVar?#333</code> =&gt; <code>color: var(--ml-myVar, #333)</code></li>
+<li><code>@s_Ml1svw</code> =&gt; <code>@supports (margin-left: 1svw) { .\@s_Ml1svw { margin-left: 1svw } }</code></li>
+</ul>
+</section>
+<section class="Mb4gg">
+<h3>Easiest utils generation</h3>
+<p>JIT mode planned but here is what we have now:</p>
+<h4>Range <a href="https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range">syntaxes</a></h4>
+<table class="Mt3su Mb3gg M0_:pre">
+<tr>
+<th>Sass</th>
+<th>CSS</th>
+</tr>
+<tr>
+<td valign="top">
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> with (
+  <span class="hljs-variable">$utils</span>: (
+    <span class="hljs-string">'Bdw'</span>: ([<span class="hljs-number">2s</span>u, <span class="hljs-number">4</span>],),
+  )
+);
+</code></pre>
+</td>
+<td valign="top">
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.Bdw2su</span> {
+  <span class="hljs-attribute">border-width</span>: <span class="hljs-number">0.5rem</span>;
 }
 
-<span class="hljs-selector-class">.Fnw200</span> {
-  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">200</span>;
+<span class="hljs-selector-class">.Bdw3su</span> {
+  <span class="hljs-attribute">border-width</span>: <span class="hljs-number">0.75rem</span>;
 }
 
-<span class="hljs-selector-class">.P10r</span> {
-	<span class="hljs-attribute">padding</span>: <span class="hljs-number">10rem</span>;
+<span class="hljs-selector-class">.Bdw4su</span> {
+  <span class="hljs-attribute">border-width</span>: <span class="hljs-number">1rem</span>;
+}
+</code></pre>
+</td>
+</tr>
+</table>
+<h4>Components syntax</h4>
+<table class="Mt3su Mb3gg M0_:pre">
+<tr>
+<th>Sass</th>
+<th>CSS</th>
+</tr>
+<tr>
+<td valign="top">
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> with (
+  <span class="hljs-variable">$utils</span>: (
+    <span class="hljs-string">'D'</span>: (<span class="hljs-string">'xl _ib_ b af'</span>),
+  )
+);
+</code></pre>
+</td>
+<td valign="top">
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.D-ib</span> {
+  <span class="hljs-attribute">display</span>: inline-block;
+}
+
+<span class="hljs-selector-class">.D-ib_b</span><span class="hljs-selector-pseudo">::before</span> {
+  <span class="hljs-attribute">display</span>: inline-block;
+}
+
+<span class="hljs-selector-class">.D-ib_af</span><span class="hljs-selector-pseudo">::after</span> {
+  <span class="hljs-attribute">display</span>: inline-block;
 }
 
 <span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">1200px</span>) {
-	<span class="hljs-selector-class">.xl_P10r</span> {
-		<span class="hljs-attribute">padding</span>: <span class="hljs-number">10rem</span>;
-	}
-}
-
-<span class="hljs-selector-class">.P30</span>\;\<span class="hljs-variable">$gutter</span>\?1r_\!frc<span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-pseudo">:first-child</span>) {
-  <span class="hljs-attribute">padding</span>: <span class="hljs-number">30px</span> var(--ml-gutter, <span class="hljs-number">1rem</span>);
+  <span class="hljs-selector-class">.xl_D-ib</span> {
+    <span class="hljs-attribute">display</span>: inline-block;
+  }
 }
 </code></pre>
-<h2>Mission</h2>
+</td>
+</tr>
+</table>
+<h4>Groups</h4>
+<table class="Mt3su Mb3gg M0_:pre">
+<tr>
+<th>Sass</th>
+<th>CSS</th>
+</tr>
+<tr>
+<td valign="top">
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> with (
+  <span class="hljs-variable">$utils</span>: (
+    <span class="hljs-string">'Paddings'</span>: (<span class="hljs-number">150</span>),
+  )
+);
+</code></pre>
+</td>
+<td valign="top">
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.P150</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">150px</span>;
+}
+
+<span class="hljs-selector-class">.Pt150</span> {
+  <span class="hljs-attribute">padding-top</span>: <span class="hljs-number">150px</span>;
+}
+
+<span class="hljs-selector-class">.Pr150</span> {
+  <span class="hljs-attribute">padding-right</span>: <span class="hljs-number">150px</span>;
+}
+
+<span class="hljs-comment">// etc.</span>
+</code></pre>
+</td>
+</tr>
+</table>
+<h4>Top-level apply</h4>
+<div class="Mt3su M0_:pre Ov-a W100p">
+<table>
+<tr>
+<th>Sass</th>
+<th>CSS</th>
+</tr>
+<tr>
+<td valign="top">
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@include</span> ml.apply(
+  <span class="hljs-string">'^0:+_-MyPad1.5;3su -Gdl-r,#0f0;30p,#00f;80p,red'</span>
+);
+</code></pre>
+</td>
+<td valign="top">
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.-Ctx0</span> + .\^0\:\+_-MyPad1\.<span class="hljs-number">5</span>\;3su {
+  --ml-myPad: <span class="hljs-number">1.5rem</span> <span class="hljs-number">0.75rem</span>;
+}
+
+<span class="hljs-selector-class">.-Gdl-r</span>\,\<span class="hljs-selector-id">#0f0</span>\;30p\,\<span class="hljs-selector-id">#00f</span>\;80p\,red {
+  <span class="hljs-attribute">background-image</span>: linear-gradient(to right, <span class="hljs-number">#0f0</span> <span class="hljs-number">30%</span>, <span class="hljs-number">#00f</span> <span class="hljs-number">80%</span>, red);
+}
+</code></pre>
+</td>
+</tr>
+</table>
+</div>
+</section>
+<section class="Mb4gg">
+<h3>Handy extension</h3>
+<p>Add utilities, states and custom at-rules with few lines of code</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> as ml with (
+  // add utilities
+  <span class="hljs-variable">$utils-data</span>: (
+    <span class="hljs-string">'utils'</span>: (
+      <span class="hljs-string">'registry'</span>: (
+        <span class="hljs-string">'Mil'</span>: margin-inline,
+        <span class="hljs-string">'Ir'</span>: (
+          <span class="hljs-string">'properties'</span>: image-rendering,
+          <span class="hljs-string">'keywords'</span>: (
+            <span class="hljs-string">'p'</span>: pixelated,
+          ),
+        ),
+      ),
+    ),
+  ),
+
+  // add states
+  <span class="hljs-variable">$utils-config</span>: (
+    <span class="hljs-string">'states'</span>: (
+      <span class="hljs-string">'custom'</span>: (
+        <span class="hljs-string">'are'</span>: <span class="hljs-string">'[aria-expanded=“true”]'</span>,
+      ),
+    ),
+  ),
+);
+
+<span class="hljs-keyword">@include</span> ml.apply(<span class="hljs-string">'Mil-15_-are Ir-p'</span>);
+
+<span class="hljs-comment">// CSS</span>
+
+<span class="hljs-selector-class">.Mil-15_-are</span><span class="hljs-selector-attr">[aria-expanded=“true”]</span> {
+  <span class="hljs-attribute">margin</span>-inline: -<span class="hljs-number">15px</span>;
+}
+
+<span class="hljs-selector-class">.Ir-p</span> {
+  <span class="hljs-attribute">image-rendering</span>: pixelated;
+}
+</code></pre>
+</section>
+<section class="Mb4gg">
+<h3>And also...</h3>
 <ul>
-<li>Maximum realize the potential of the Atomic CSS methodology</li>
-<li>Destroy the myth that Atomic CSS for those who don't know or don't like CSS</li>
+<li>⚡️ Written in <a href="https://www.sass-lang.com/">Sass</a> and includes all its benefits</li>
+<li>🔧 <strong>Fully customizable</strong>: change tokens, utilities names and any settings</li>
+<li>✨ <strong>Easy to integrate</strong> in existing project. No name collisions with your CSS in the most projects. Increasing specificity in <a href="https://mr150.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity">one line</a> or for <a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu">one</a> utility.</li>
 </ul>
-<h2>Features</h2>
-<ul>
-<li><strong>Strong naming</strong> convention: <a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-naming">one algorithm</a> for all. If you know CSS, you almost know Mlut</li>
-<li>Constructable and <strong>almost arbitrary</strong> <a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-values">values</a>, <a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states">states</a> and <a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-at_rules">at-rules</a> by design</li>
-<li><strong>Fully customizable</strong>: change tokens, utilities names and any settings</li>
-<li>Configuration with great DX: add utilities, states and change settings with few lines of code</li>
-<li><strong>Easiest utils generation</strong>: <a href="https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range">range</a> and <a href="https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-util-components">components</a> syntaxes, <a href="https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-groups">groups</a>, <a href="https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-apply">top-level apply</a> and more</li>
-<li>Well <strong>compatible with CSS</strong> conceptually. Designed for organic growing together with CSS.</li>
-<li>Easy to use in existing project</li>
-<li>Written in <a href="https://www.sass-lang.com/">Sass</a> and includes all its benefits</li>
-</ul>
+</section>
+<section class="Mb4gg">
 <h2>Structure</h2>
 <ul>
 <li>Sass tools</li>
@@ -163,13 +350,17 @@
 </ul>
 <h3>Addons</h3>
 <p>Addons may contains any tools, utilities and styles. In the <code>core/utils/init.scss</code> module implemented a method to work with sets of utilities from addons. Addons now at the <strong>preview</strong> stage and in the future, may be moved to separate packages</p>
-<h2>What's next?</h2>
+</section>
+<section class="Mb4gg">
+<h2>What next?</h2>
 <ul>
 <li>CLI</li>
 <li>JIT mode</li>
 <li>first class CSS functions in utils values</li>
 <li>and much more!</li>
 </ul>
+</section>
+<section class="Mb4gg">
 <h2>Acknowledgement</h2>
 <ul>
 <li><a href="https://www.w3.org/Style/CSS/">CSS</a></li>
@@ -178,6 +369,7 @@
 <li><a href="https://tailwindcss.com/">Tailwind CSS</a></li>
 <li><a href="https://tachyons.io/">Tachyons</a></li>
 </ul>
+</section>
 <h2>License</h2>
 <p>MIT</p>
 

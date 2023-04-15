@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Mlut documentation</title>
+  <title>mlut documentation</title>
 
   <meta name="description" content=""/>
   <meta name="generator" content="kss-node"/>
@@ -18,7 +18,7 @@
 
 <div class="kss-sidebar kss-style">
   <header class="kss-header">
-    <h1 class="kss-doc-title">Mlut documentation</h1>
+    <h1 class="kss-doc-title">mlut documentation</h1>
   </header>
   <nav class="kss-nav" aria-label="Style Guide">
     <ul class="kss-nav__menu">
@@ -109,7 +109,7 @@
 <pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1"</span>&gt;</span>
 </code></pre>
 <h3>Distributive</h3>
-<p>You can get assembled Mlut code and include it to your project. There are some ways to get a distributive.</p>
+<p>You can get assembled mlut code and include it to your project. There are some ways to get a distributive.</p>
 <ul>
 <li>just plug in with CDN</li>
 <li>if used <code>npm</code>, files are in <code>node_modules/mlut/dist/</code></li>
@@ -117,19 +117,19 @@
 <p>Add the file to your page like here:</p>
 <pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"css/mlut.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
 </code></pre>
-<p>And just add Mlut classes to markup:</p>
+<p>And just add mlut classes to markup:</p>
 <pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"D-g Gtc-t3"</span>&gt;</span>
 	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"Bd P2su"</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Simple text<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 </code></pre>
 <h3>Toolkit</h3>
-<p>To use all Mlut features you need an assembly. You will need to install a package via NPM and:</p>
+<p>To use all mlut features you need an assembly. You will need to install a package via NPM and:</p>
 <ul>
 <li><a href="https://github.com/sass/sass">Dart Sass</a>, and in particular <a href="https://www.npmjs.com/package/sass-embedded">sass-embedded</a> for better performance</li>
 <li>CSS minifier or PostCSS plugin that can group media queries is recommended.<br> For example: <a href="https://github.com/css/csso">CSSO</a> or <a href="https://github.com/SassNinja/postcss-combine-media-query">this</a> plugin</li>
 <li><a href="https://github.com/FullHuman/purgecss">PurgeCSS</a> is recommended for removing unused CSS</li>
 </ul>
-<p>Once the assembly is configured, just import Mlut to your stylesheet, and configure it as you need:</p>
+<p>Once the assembly is configured, just import mlut to your stylesheet, and configure it as you need:</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'../../node_modules/mlut'</span> as ml with (
 	<span class="hljs-variable">$su</span>: <span class="hljs-number">5px</span>,
 	<span class="hljs-variable">$breakpoints</span>: (
