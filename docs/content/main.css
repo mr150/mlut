@@ -1,7 +1,7 @@
 /*
 Getting started
 
-There are 2 ways to start using Mlut:
+There are 2 ways to start using mlut:
 
 - assembled distributive
 - developer toolkit
@@ -48,7 +48,7 @@ and the responsive viewport meta tag:
 ```
 
 ### Distributive ###
-You can get assembled Mlut code and include it to your project. There are some ways to get a distributive.
+You can get assembled mlut code and include it to your project. There are some ways to get a distributive.
 
 - just plug in with CDN
 - if used `npm`, files are in `node_modules/mlut/dist/`
@@ -57,7 +57,7 @@ Add the file to your page like here:
 ```html
 <link href="css/mlut.min.css" rel="stylesheet">
 ```
-And just add Mlut classes to markup:
+And just add mlut classes to markup:
 ```html
 <div class="D-g Gtc-t3">
 	<div class="Bd P2su">
@@ -65,13 +65,13 @@ And just add Mlut classes to markup:
 ```
 
 ### Toolkit ###
-To use all Mlut features you need an assembly. You will need to install a package via NPM and:
+To use all mlut features you need an assembly. You will need to install a package via NPM and:
 
 - [Dart Sass](https://github.com/sass/sass), and in particular [sass-embedded](https://www.npmjs.com/package/sass-embedded) for better performance
 - CSS minifier or PostCSS plugin that can group media queries is recommended.<br> For example: [CSSO](https://github.com/css/csso) or [this](https://github.com/SassNinja/postcss-combine-media-query) plugin
 - [PurgeCSS](https://github.com/FullHuman/purgecss) is recommended for removing unused CSS
 
-Once the assembly is configured, just import Mlut to your stylesheet, and configure it as you need:
+Once the assembly is configured, just import mlut to your stylesheet, and configure it as you need:
 ```scss
 @use '../../node_modules/mlut' as ml with (
 	$su: 5px,
@@ -113,7 +113,7 @@ Styleguide: start.usage
 /*
 Basic concepts
 
-Before reading the documentation, learn Mlut basic concepts.
+Before reading the documentation, learn mlut basic concepts.
 
 Weight: 1
 
@@ -123,7 +123,7 @@ Styleguide: concepts
 /*
 Naming algorithm
 
-Almost all abbreviations in Mlut are compiled by one algorithm. Below will be a simplified algorithm for compiling the abbreviations of the utilities names. Later it will be supplemented
+Almost all abbreviations in mlut are compiled by one algorithm. Below will be a simplified algorithm for compiling the abbreviations of the utilities names. Later it will be supplemented
 
 1. get all CSS properties that starts with one letter
 1. make ranking of them by popularity or alphabet if the popularity is not possible to calculate. Popularity for properties is calculated based on [Chrome platforf statistic](https://chromestatus.com/metrics/css/popularity)
@@ -202,7 +202,7 @@ Styleguide: concepts.util.naming
 /*
 Components
 
-To work with utilities in Mlut, the parsing to parts (components) is used. Most of them correspond to the usual syntax. The utility divides to this components:
+To work with utilities in mlut, the parsing to parts (components) is used. Most of them correspond to the usual syntax. The utility divides to this components:
 - at-rules
 - pre-states
 - post-states
@@ -222,7 +222,7 @@ Here is an example, as the utility will be parsed to the components:
 ```
 Note that the *order* of components is important.
 
-Most of the components in the Mlut is convertible. This means that if the component or part of it correspond the rules of conversion, it will unfold into some CSS value. How to convert different components, you can read below in the relevant sections. If the Mlut does not know how to convert the component, the behavior will depend on its type.
+Most of the components in the mlut is convertible. This means that if the component or part of it correspond the rules of conversion, it will unfold into some CSS value. How to convert different components, you can read below in the relevant sections. If the mlut does not know how to convert the component, the behavior will depend on its type.
 
 Weight: 2
 
@@ -274,7 +274,7 @@ Styleguide: concepts.values
 /*
 Types
 
-Mlut has the following types of values that partially intersect with [CSS data types](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Types). In the examples below will use a function that get a CSS value of the utility.
+mlut has the following types of values that partially intersect with [CSS data types](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Types). In the examples below will use a function that get a CSS value of the utility.
 
 Weight: 0
 
@@ -337,7 +337,7 @@ Styleguide: concepts.values.type.kw
 /*
 Global keywords
 
-Similar to ordinary, but differ in that they can be used in any utility. You can add your global keywords in the settings. It is recommended to use the prefix, for example: `gMyKw`. You can find the default Mlut global keywords [here](section-general_reference.html#kssref-general_reference-common_kw).
+Similar to ordinary, but differ in that they can be used in any utility. You can add your global keywords in the settings. It is recommended to use the prefix, for example: `gMyKw`. You can find the default mlut global keywords [here](section-general_reference.html#kssref-general_reference-common_kw).
 ```scss
 @debug ml.uv('W-ih'); // inherit
 ```
@@ -742,7 +742,7 @@ Styleguide: concepts.states.custom
 /*
 Custom units of measure
 
-In Mlut there are 3 custom units:
+In mlut there are 3 custom units:
 - `su` \- space unit
 - `gg` \- grid gutter
 - `gc` \- grid column. Used only in the legacy grid-system
@@ -789,7 +789,7 @@ Styleguide: how_to
 /*
 Utils Generation
 
-Mlut has 3 methods for generating utility classes:
+mlut has 3 methods for generating utility classes:
 1. in the configuration when importing
 1. with special mixins
 1. with top-level `apply` mixin
@@ -920,12 +920,12 @@ Top-level apply
 If you want to create only a few utilities with specific values or components, you can use the [apply](section-sass-tools.html#kssref-sass-tools-mixins-utils-apply) mixin. If you call it outside another rule, it will generate the specified utilities:
 ```scss
 @include ml.apply(
-	'-Gdl-r,#fff;30p,#00f;80p,red -Drps10;15;#00f,20;2r;5;#0ff'
+	'-Gdl-r,#0f0;30p,#00f;80p,red -Drps10;15;#00f,20;2r;5;#0ff'
 );
 
 // CSS
-.-Gdl-r\,\#fff\;30p\,\#00f\;80p\,red {
-	background-image: linear-gradient(to right, #fff 30%, #00f 80%, red);
+.-Gdl-r\,\#0f0\;30p\,\#00f\;80p\,red {
+	background-image: linear-gradient(to right, #0f0 30%, #00f 80%, red);
 }
 
 .-Drps10\;15\;\#00f\,20\;2r\;5\;\#0ff {
@@ -941,7 +941,7 @@ Styleguide: how_to.mk_utils.apply
 /*
 Range syntax
 
-To generate a range of values, Mlut has range syntaxes. Now there are 2 types of such syntaxes: `number` and `color`. Range syntax is written in square brackets in the list or map of values. Range syntax depends on `range-generator` utility option.
+To generate a range of values, mlut has range syntaxes. Now there are 2 types of such syntaxes: `number` and `color`. Range syntax is written in square brackets in the list or map of values. Range syntax depends on `range-generator` utility option.
 
 *Note*: if only one range is specified in the list of values, after it you need to put a comma:<br> `([-1, 5],)`. Otherwise, the program will take the range for the list of values.
 
@@ -959,11 +959,11 @@ Number is default range syntax. You can use it with any utility if another range
 
 // CSS
 .Bdw2su {
-	border-width: 8px;
+	border-width: 0.5rem;
 }
 
 .Bdw3su {
-	border-width: 12px;
+	border-width: 0.75rem;
 }
 
 // etc.
@@ -1031,7 +1031,7 @@ Styleguide: how_to.mk_utils.kw_cp
 /*
 Work with library
 
-As you remember, the library part of Mlut contains [basic styles](section-core-styles.html), [helpers](section-core-helpers.html) and utilities. By default, they are all included:
+As you remember, the library part of mlut contains [basic styles](section-core-styles.html), [helpers](section-core-helpers.html) and utilities. By default, they are all included:
 ```scss
 @use 'mlut/tools' as ml;
 @use 'mlut/src/core';
@@ -1042,7 +1042,7 @@ But you can include only the necessary parts of the core:
 @use 'mlut/src/core/styles';
 @use 'mlut/src/core/utils';
 ```
-*Note*: for convenience, in the examples we will include Mlut as if we specified a Sass load path, so that each time we do not write `../../node_modules/mlut`.
+*Note*: for convenience, in the examples we will include mlut as if we specified a Sass load path, so that each time we do not write `../../node_modules/mlut`.
 
 Weight: 2
 
@@ -1378,7 +1378,7 @@ Styleguide: general_reference.common_kw
 /*
 Core styles
 
-Base styles for Mlut library.
+Base styles for mlut library.
 
 Weight: 3
 
@@ -1420,7 +1420,7 @@ Styleguide: utils-reference
 /*
 Sass tools
 
-Available when using Mlut as a [toolkit](section-start.html#kssref-start-usage).
+Available when using mlut as a [toolkit](section-start.html#kssref-start-usage).
 
 Weight: 7
 
@@ -1537,7 +1537,7 @@ Structure
 
 To create an addon containing utilities:
 ```scss
-// import Mlut tools
+// import mlut tools
 @use '../tools' as ml;
 
 // create a map with the same scheme as map $utils,
@@ -1571,7 +1571,7 @@ Styleguide: addons.how_works.structure
 /*
 Catalog
 
-Addons that are delivered with Mlut are described here.
+Addons that are delivered with mlut are described here.
 
 Weight: 1
 

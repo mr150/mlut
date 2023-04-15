@@ -85,6 +85,7 @@
 }
 
 .kss-description code:not([class]),
+.kss-overview code:not([class]),
 .kss-parameters__description code:not([class]) {
 	font-size: 90%;
 	padding: .2em .4em;
