@@ -18,8 +18,8 @@
 // Below are the at-rule options
 //
 // alias - `string` <div>the abbreviation that will be used in the utils components. It will be converted into at-crule name. For example: `@s` => `@supports`</div>
-// default = false - <div class="Mt3su"> `boolean` </div> It can be `true`, only in one at-rule. Sets at-rule by default. This means that this at-rule will be used, without an indication of alias after the `@` symbol. By default, `media` is default at-rule
-// custom - <div class="Mt3su"> `map` </div> Here you can set alias for custom expressions. See the example above
+// default = false - <div class="Mt3u"> `boolean` </div> It can be `true`, only in one at-rule. Sets at-rule by default. This means that this at-rule will be used, without an indication of alias after the `@` symbol. By default, `media` is default at-rule
+// custom - <div class="Mt3u"> `map` </div> Here you can set alias for custom expressions. See the example above
 //
 // Styleguide: settings.at_rules.data
 

@@ -16,11 +16,11 @@
 //
 // Converts space units to CSS value.
 // ```scss
-//@debug ml.su(3su); // 0.75rem
+//@debug ml.su(3u); // 0.75rem
 //@debug ml.su(4); // 1rem
 // ```
 //
-// $n - unitless number or number with `su` unit
+// $n - unitless number or number with `u` unit
 // $data = () - service argument for provide any data
 //
 // Styleguide: sass-tools.functions.custom_units.su
@@ -32,8 +32,8 @@
 		);
 	}
 
-	@if math.unit($n) == 'su' {
-		$n: math.div($n, 1su);
+	@if math.unit($n) == 'u' {
+		$n: math.div($n, 1u);
 	}
 
 	@return ml.$su * $n;

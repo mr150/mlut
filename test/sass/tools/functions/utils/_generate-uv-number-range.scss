@@ -14,12 +14,12 @@
 			);
 
 			@include assert-equal(
-				ml.generate-uv-number-range([2su, 4], 'Fns'),
+				ml.generate-uv-number-range([2u, 4], 'Fns'),
 				(
 					'values': (
-						2su: ml.su(2),
-						3su: ml.su(3),
-						4su: ml.su(4),
+						2u: ml.su(2),
+						3u: ml.su(3),
+						4u: ml.su(4),
 					)
 				),
 				$inspect: true,
@@ -78,12 +78,12 @@
 
 		@include it('generate range with step') {
 			@include assert-equal(
-				ml.generate-uv-number-range([2su, 6, 2], 'W'),
+				ml.generate-uv-number-range([2u, 6, 2], 'W'),
 				(
 					'values': (
-						2su: ml.su(2),
-						4su: ml.su(4),
-						6su: ml.su(6),
+						2u: ml.su(2),
+						4u: ml.su(4),
+						6u: ml.su(6),
 					)
 				),
 				$inspect: true,

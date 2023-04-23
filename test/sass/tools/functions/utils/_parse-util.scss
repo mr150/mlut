@@ -125,10 +125,10 @@
 			);
 
 			@include assert-equal(
-				ml.parse-util('^ctx =a>_2su'),
+				ml.parse-util('^ctx =a>_2u'),
 				(
 					'pre-states': '^ctx =a>',
-					'value': '2su',
+					'value': '2u',
 				),
 				$inspect: true,
 			);

@@ -62,7 +62,7 @@ Shorter class names:
 <div class="hidden md:block md:col-span-6 md:col-start-7 lg:col-span-5 lg:col-start-8 pb-6 relative md:max-h-[130vh] reduced-motion:translate-y-0 will-change-transform duration-1000 ease-in-out transition-all reduced-motion:opacity-100">...</div>
 
 <!-- mlut -->
-<div class="D-n md_D md_Gc-s1 md_Gcs7 lg_Gc-s5 lg_Gcs8 Pb6su Ps md_Mxh130vh Tf @:pfrm_-Try0 Wlc-tf Tsd1s Tstf-eio Ts-all @:pfrm_O1">...</div>
+<div class="D-n md_D md_Gc-s1 md_Gcs7 lg_Gc-s5 lg_Gcs8 Pb6u Ps md_Mxh130vh Tf @:pfrm_-Try0 Wlc-tf Tsd1s Tstf-eio Ts-all @:pfrm_O1">...</div>
 ```
 Convenient syntax for complex values, states and at-rules. It is like Vim for CSS.
 #### ❌ Tailwindcss:
@@ -93,7 +93,7 @@ JIT mode planned but here is what we have now:
 ```scss
 @use 'mlut' with (
   $utils: (
-    'Bdw': ([2su, 4],),
+    'Bdw': ([2u, 4],),
   )
 );
 ```
@@ -102,15 +102,15 @@ JIT mode planned but here is what we have now:
 <td valign="top">
 
 ```scss
-.Bdw2su {
+.Bdw2u {
   border-width: 0.5rem;
 }
 
-.Bdw3su {
+.Bdw3u {
   border-width: 0.75rem;
 }
 
-.Bdw4su {
+.Bdw4u {
   border-width: 1rem;
 }
 ```
@@ -215,7 +215,7 @@ JIT mode planned but here is what we have now:
 
 ```scss
 @include ml.apply(
-  '^0:+_-MyPad1.5;3su -Gdl-r,#0f0;30p,#00f;80p,red'
+  '^0:+_-MyPad1.5;3u -Gdl-r,#0f0;30p,#00f;80p,red'
 );
 ```
 
@@ -223,7 +223,7 @@ JIT mode planned but here is what we have now:
 <td valign="top">
 
 ```scss
-.-Ctx0 + .\^0\:\+_-MyPad1\.5\;3su {
+.-Ctx0 + .\^0\:\+_-MyPad1\.5\;3u {
   --ml-myPad: 1.5rem 0.75rem;
 }
 
@@ -346,7 +346,7 @@ Add the files to your page like here:
 And just add classes to markup:
 ```html
 <div class="D-g Gtc-t3">
-  <div class="Bd P2su">
+  <div class="Bd P2u">
     <h3>Simple text</h3>
 ```
 
@@ -378,7 +378,7 @@ Also now you can use Sass tools for writing CSS manually:
   display: block;
 
   @include ml.apply(
-    'P2su Fns1r'
+    'P2u Fns1r'
   );
 
   @include ml.bp('md') {

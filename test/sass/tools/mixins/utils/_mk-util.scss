@@ -173,7 +173,7 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'Mxw', (
-						10, 4vw, 'a', 2su, 5gg
+						10, 4vw, 'a', 2u, 5gg
 					));
 				}
 
@@ -190,7 +190,7 @@ ml.$utils-db: map.deep-merge(
 						max-width: auto;
 					}
 
-					.Mxw2su {
+					.Mxw2u {
 						max-width: ml.su(2);
 					}
 
@@ -255,7 +255,7 @@ ml.$utils-db: map.deep-merge(
 						'Bdw', (
 						[2, 4],
 						5,
-						[2su, 4, $step],
+						[2u, 4, $step],
 					));
 				}
 
@@ -273,7 +273,7 @@ ml.$utils-db: map.deep-merge(
 					$i: 2;
 
 					@while $i <= 4 {
-						.Bdw#{$i * 1su} {
+						.Bdw#{$i * 1u} {
 							border-width: ml.su($i);
 						}
 
@@ -383,16 +383,16 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'M', (
-						[1su, 2],
+						[1u, 2],
 					));
 				}
 
 				@include expect(false) {
-					.M1su {
+					.M1u {
 						margin: ml.su(1);
 					}
 
-					.M2su {
+					.M2u {
 						margin: ml.su(2);
 					}
 				}
@@ -750,12 +750,12 @@ ml.$utils-db: map.deep-merge(
 				@include output(false) {
 					@include ml.mk-util(
 						'Width', (
-						5.3su,
+						5.3u,
 					));
 				}
 
 				@include expect(false) {
-					.Width5\.3su {
+					.Width5\.3u {
 						width: ml.su(5.3);
 					}
 				}
@@ -828,12 +828,12 @@ ml.$utils-db: map.deep-merge(
 			@include assert() {
 				@include output(false) {
 					@include ml.mk-util(
-						'Fns!', (3su, 3gg)
+						'Fns!', (3u, 3gg)
 					);
 				}
 
 				@include expect(false) {
-					.Fns3su\! {
+					.Fns3u\! {
 						font-size: ml.su(3) !important;
 					}
 
