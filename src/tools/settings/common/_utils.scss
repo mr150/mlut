@@ -1467,6 +1467,12 @@ $utils-db: (
 					'c': contain,
 				)
 			),
+			'Scb': (
+				'properties': scroll-behavior,
+				'keywords': (
+					's': smooth,
+				),
+			),
 			'Ovsb': (
 				'properties': overscroll-behavior,
 				'keywords': 'overscroll',
