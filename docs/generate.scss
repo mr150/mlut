@@ -63,23 +63,23 @@ $states-section-name: (
 }
 
 @function map2html($map, $util, $type: 'top', $styled-key: false) {
-	$result: '<table class="W100p Mt5su Mb6su">';
-	$cell-css: 'Bdb -Py2su';
+	$result: '<table class="W100p Mt5u Mb6u">';
+	$cell-css: 'Bdb -Py2u';
 
 	@if $type == 'top' {
 		@if meta.type-of($map) != "map" {
 			$map: ('property': $map);
-			$result: '<div class="Fnw-b Mt6su Mb1su">No options</div> \
-<table class="Mb6su">';
+			$result: '<div class="Fnw-b Mt6u Mb1u">No options</div> \
+<table class="Mb6u">';
 			$cell-css: '';
 		} @else if not map.has-key($map, 'properties') and not $util == null {
 			$map: map.set($map, 'properties', ml.util-prop($util, 'utils', true));
 		}
 	} @else if $type == 'sub' {
 		$result: '<table class="Bdb-;#ccc_:tr:!lc:td">';
-		$cell-css: '-Py1su';
+		$cell-css: '-Py1u';
 	} @else {
-		$result: '<table class="Bdb-;#ccc_:tr:!lc:td -Py2su_:tr:!oc:td -My5su">';
+		$result: '<table class="Bdb-;#ccc_:tr:!lc:td -Py2u_:tr:!oc:td -My5u">';
 		$cell-css: '';
 	}
 
@@ -109,7 +109,7 @@ $states-section-name: (
 	}
 
 	@if list.length($util-map) > 0 {
-		$result: '<div class="Fnw-b Mt6su Mb1su">In the Core</div><ul class="-All-sr_& Mb6su_&">';
+		$result: '<div class="Fnw-b Mt6u Mb1u">In the Core</div><ul class="-All-sr_& Mb6u_&">';
 
 		@each $utility, $values in $util-map {
 			$inspected: meta.inspect($values);
@@ -126,7 +126,7 @@ $states-section-name: (
 	@return null;
 }
 
-@include ml.apply('-All-sr_& Mb6su_& Bdb-;#ccc_:tr:!lc:td -Py2su_:tr:!oc:td M0_:pre');
+@include ml.apply('-All-sr_& Mb6u_& Bdb-;#ccc_:tr:!lc:td -Py2u_:tr:!oc:td M0_:pre');
 
 @each $util, $options in map.get(ml.$utils-db, 'utils', 'registry') {
 /*

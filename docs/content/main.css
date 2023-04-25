@@ -60,7 +60,7 @@ Add the file to your page like here:
 And just add mlut classes to markup:
 ```html
 <div class="D-g Gtc-t3">
-	<div class="Bd P2su">
+	<div class="Bd P2u">
 		<h3>Simple text</h3>
 ```
 
@@ -92,7 +92,7 @@ Also now you can use Sass tools for writing CSS manually:
 	display: block;
 
 	@include ml.apply(
-		'P2su Fns1r'
+		'P2u Fns1r'
 	);
 
 	@include ml.bp('md') {
@@ -743,7 +743,7 @@ Styleguide: concepts.states.custom
 Custom units of measure
 
 In mlut there are 3 custom units:
-- `su` \- space unit
+- `u` \- space unit
 - `gg` \- grid gutter
 - `gc` \- grid column. Used only in the legacy grid-system
 
@@ -757,9 +757,9 @@ Styleguide: concepts.custom_unit
 /*
 Space unit
 
-Unit of measurement to create a scale of sizes and indents in your design system. By default `1su = 0.25rem`(4px).
+Unit of measurement to create a scale of sizes and indents in your design system. By default `1u = 0.25rem`(4px).
 ```scss
-@debug ml.uv('Fns6su'); // 1.5rem
+@debug ml.uv('Fns6u'); // 1.5rem
 ```
 
 Styleguide: concepts.custom_unit.su
@@ -768,7 +768,7 @@ Styleguide: concepts.custom_unit.su
 /*
 Grid gutter
 
-The value of this unit depends on the CSS variable `--ml-gg`. Due to this, it value can be changed dynamically. By default `--ml-gg = 3su` but increase to `4su` on the `lg` breakpoint.
+The value of this unit depends on the CSS variable `--ml-gg`. Due to this, it value can be changed dynamically. By default `--ml-gg = 3u` but increase to `4u` on the `lg` breakpoint.
 ```scss
 @debug ml.uv('Ml-2.5gg'); // calc(var(--ml-gg) * -2.5)
 ```
@@ -955,14 +955,14 @@ Number
 
 Number is default range syntax. You can use it with any utility if another range generator is not specified in its options. May consist of 2 or 3 arguments. General form: <br>`[$start, $end, $step: 1]`.<br> In the `$start` value, and only in it, you can specify a measurement unit, as well as the utility components.
 ```scss
-@include ml.mk-util('Bdw', ([2su, 4],));
+@include ml.mk-util('Bdw', ([2u, 4],));
 
 // CSS
-.Bdw2su {
+.Bdw2u {
 	border-width: 0.5rem;
 }
 
-.Bdw3su {
+.Bdw3u {
 	border-width: 0.75rem;
 }
 
@@ -1078,7 +1078,7 @@ When including libraries and addons, you can include, exclude or overwrite only 
 		'C': red,
 
 		'/override': (
-			'M': (1su, 2r)
+			'M': (1u, 2r)
 		),
 
 		'/allow': (
@@ -1092,7 +1092,7 @@ When including libraries and addons, you can include, exclude or overwrite only 
   color: inherit;
 }
 
-.M1su {
+.M1u {
   margin: 0.25rem 4px;
 }
 
@@ -1543,8 +1543,8 @@ To create an addon containing utilities:
 // create a map with the same scheme as map $utils,
 // when creating utilities in the config
 $utils: (
-	'BpAll _W': (5su, 10su, 20su, 25su, 40su, 70su),
-	'BpAll _H': (5su, 10su, 20su, 25su),
+	'BpAll _W': (5u, 10u, 20u, 25u, 40u, 70u),
+	'BpAll _H': (5u, 10u, 20u, 25u),
 );
 
 // put a map with new utils to the $utils-map from tools

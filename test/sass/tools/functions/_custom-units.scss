@@ -3,14 +3,14 @@
 
 @include describe('tools/functions/base/custom_units') {
 	@include describe('space unit converters') {
-		@include it('converts su to px') {
+		@include it('converts u to px') {
 			@include assert-equal(
 				ml.su(3),
 				0.75rem,
 			);
 
 			@include assert-equal(
-				ml.su(4su),
+				ml.su(4u),
 				ml.$su * 4,
 			);
 		}

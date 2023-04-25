@@ -63,22 +63,22 @@ $-colors-key: $colors-at-rules + $colors-pre-states + 'Colors' + $colors-post-st
 
 //stylelint-disable
 $demo-utils: (
-	ml.$cBpAllCp + 'W': (5su, 10su, 20su, 25su, 40su, 70su),
-	ml.$cBpAllCp + 'H': (5su, 10su, 20su, 25su),
+	ml.$cBpAllCp + 'W': (5u, 10u, 20u, 25u, 40u, 70u),
+	ml.$cBpAllCp + 'H': (5u, 10u, 20u, 25u),
 	$-colors-key: ([
 		$-color-names, 8, ('rgb': $shade-step)
 	], 'white'),
-	ml.$cBpAllCp + 'Fns': ([1su, 8], 3gg, 14su, 4gg, 5gg),
+	ml.$cBpAllCp + 'Fns': ([1u, 8], 3gg, 14u, 4gg, 5gg),
 	ml.$cBpAllCp + 'Lnh': (
 		'md': 1.4,
 		'lg': 1.6,
 		'xl': 1.8,
 		'xxl': 2,
 	),
-	ml.$cBpAllCp + 'Offsets': ([1su, 8],),
-	ml.$cBpAllCp + 'Translates': ([1su, 8], [-8su, -1]),
-	ml.$cBpAllCp + 'BdWidth': (1su, 2su),
-	ml.$cBpAllCp + 'BdRadius': (2, [1su, 4]),
+	ml.$cBpAllCp + 'Offsets': ([1u, 8],),
+	ml.$cBpAllCp + 'Translates': ([1u, 8], [-8u, -1]),
+	ml.$cBpAllCp + 'BdWidth': (1u, 2u),
+	ml.$cBpAllCp + 'BdRadius': (2, [1u, 4]),
 	ml.$kBpAll + ' #{ml.$kArSt}_^:h _O_ h f fw': ([10p, 90, 10],),
 	ml.$kBpAll + ' #{ml.$kArSt}_^:h _Bxsd_ h f fw': (
 		'sm': rgba(0, 0, 0, 0.16) 0px 1px 4px,

@@ -43,8 +43,8 @@
 // ```
 //
 // $raw-name - `string` <div> name of the group. You can use [components syntax](section-concepts.html#kssref-concepts-util-components-syntax) here </div>
-// $values - <div class="Mt3su"> `list | map` </div> You can specify a map with utility values and CSS properties values. Or you can pass a list with only utility values. It will be converted to CSS values depends on conversion type of utility
-// $components = () - <div class="Mt3su"> `map` </div> Contains utility [components](section-concepts.html#kssref-concepts-util-components) in longhand format
+// $values - <div class="Mt3u"> `list | map` </div> You can specify a map with utility values and CSS properties values. Or you can pass a list with only utility values. It will be converted to CSS values depends on conversion type of utility
+// $components = () - <div class="Mt3u"> `map` </div> Contains utility [components](section-concepts.html#kssref-concepts-util-components) in longhand format
 //
 // Styleguide: sass-tools.mixins.utils.mk_utils_group
 
@@ -100,7 +100,7 @@
 //	.card {
 //		display: block;
 //
-//		@include ml.apply('P2su Fns1r xl_P5su');
+//		@include ml.apply('P2u Fns1r xl_P5u');
 //	}
 //
 //	// CSS
@@ -134,8 +134,8 @@
 // ```
 //
 // $utils - `string | list` <div> string with space-separated utilities or a list of utils as strings </div>
-// $components = () - <div class="Mt3su"> `map` </div> Contains utility [components](section-concepts.html#kssref-concepts-util-components) in longhand format
-// $ready-list = false - <div class="Mt3su"> `boolean` </div> if `true` than you can pass any utilities as a list
+// $components = () - <div class="Mt3u"> `map` </div> Contains utility [components](section-concepts.html#kssref-concepts-util-components) in longhand format
+// $ready-list = false - <div class="Mt3u"> `boolean` </div> if `true` than you can pass any utilities as a list
 //
 // Styleguide: sass-tools.mixins.utils.apply
 

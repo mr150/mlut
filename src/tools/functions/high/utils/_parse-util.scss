@@ -17,7 +17,7 @@ $-states-tokens: (ml.$tSCn, ml.$tSAnd, ml.$tSTu);
 // - `value` - pure value or name
 // - `mq` - breakpoint or any mediaquery
 // ```scss
-//parse-util('1su_md') => ('value': '1su', 'mq': 'md')
+//parse-util('1u_md') => ('value': '1u', 'mq': 'md')
 // ```
 //
 // $raw-value - utility value or name. Type string.

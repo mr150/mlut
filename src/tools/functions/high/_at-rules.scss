@@ -82,7 +82,7 @@ $-tACs-length: string.length(ml.$tACs);
 	@if meta.type-of($feat-value) == 'number' {
 		$value-unit: math.unit($feat-value);
 
-		@if $value-unit == 'su' {
+		@if $value-unit == 'u' {
 			$feat-value: ml.su($feat-value);
 		}
 
