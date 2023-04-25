@@ -51,7 +51,7 @@ Shorter class names:
 <div class="hidden md:block md:col-span-6 md:col-start-7 lg:col-span-5 lg:col-start-8 pb-6 relative md:max-h-[130vh] reduced-motion:translate-y-0 will-change-transform duration-1000 ease-in-out transition-all reduced-motion:opacity-100">...</div>
 
 <!-- mlut -->
-<div class="D-n md_D md_Gc-s1 md_Gcs7 lg_Gc-s5 lg_Gcs8 Pb6su Ps md_Mxh130vh Tf @:pfrm_-Try0 Wlc-tf Tsd1s Tstf-eio Ts-all @:pfrm_O1">...</div>
+<div class="D-n md_D md_Gc-s1 md_Gcs7 lg_Gc-s5 lg_Gcs8 Pb6u Ps md_Mxh130vh Tf @:pfrm_-Try0 Wlc-tf Tsd1s Tstf-eio Ts-all @:pfrm_O1">...</div>
 ```
 Convenient syntax for complex values, states and at-rules. It is like Vim for CSS.
 
@@ -76,7 +76,7 @@ JIT mode planned but here is what we have now:
 
 #### Range [syntaxes](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range)
 
-<table class="Mt3su Mb3gg M0_:pre">
+<table class="Mt3u Mb3gg M0_:pre">
 <tr>
 <th>Sass</th>
 <th>CSS</th>
@@ -87,7 +87,7 @@ JIT mode planned but here is what we have now:
 ```scss
 @use 'mlut' with (
   $utils: (
-    'Bdw': ([2su, 4],),
+    'Bdw': ([2u, 4],),
   )
 );
 ```
@@ -96,15 +96,15 @@ JIT mode planned but here is what we have now:
 <td valign="top">
 
 ```scss
-.Bdw2su {
+.Bdw2u {
   border-width: 0.5rem;
 }
 
-.Bdw3su {
+.Bdw3u {
   border-width: 0.75rem;
 }
 
-.Bdw4su {
+.Bdw4u {
   border-width: 1rem;
 }
 ```
@@ -114,7 +114,7 @@ JIT mode planned but here is what we have now:
 </table>
 
 #### Components syntax
-<table class="Mt3su Mb3gg M0_:pre">
+<table class="Mt3u Mb3gg M0_:pre">
 <tr>
 <th>Sass</th>
 <th>CSS</th>
@@ -158,7 +158,7 @@ JIT mode planned but here is what we have now:
 </table>
 
 #### Groups
-<table class="Mt3su Mb3gg M0_:pre">
+<table class="Mt3u Mb3gg M0_:pre">
 <tr>
 <th>Sass</th>
 <th>CSS</th>
@@ -198,7 +198,7 @@ JIT mode planned but here is what we have now:
 </table>
 
 #### Top-level apply
-<div class="Mt3su M0_:pre Ov-a W100p">
+<div class="Mt3u M0_:pre Ov-a W100p">
 <table>
 <tr>
 <th>Sass</th>
@@ -209,7 +209,7 @@ JIT mode planned but here is what we have now:
 
 ```scss
 @include ml.apply(
-  '^0:+_-MyPad1.5;3su -Gdl-r,#0f0;30p,#00f;80p,red'
+  '^0:+_-MyPad1.5;3u -Gdl-r,#0f0;30p,#00f;80p,red'
 );
 ```
 
@@ -217,7 +217,7 @@ JIT mode planned but here is what we have now:
 <td valign="top">
 
 ```scss
-.-Ctx0 + .\^0\:\+_-MyPad1\.5\;3su {
+.-Ctx0 + .\^0\:\+_-MyPad1\.5\;3u {
   --ml-myPad: 1.5rem 0.75rem;
 }
 
