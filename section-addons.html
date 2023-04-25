@@ -194,19 +194,19 @@
 
           <div class="kss-description">
             <p>To import addon that contains utilities, you will need:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@charset</span> <span class="hljs-string">"utf-8"</span>;
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@charset</span> <span class="hljs-string">&quot;utf-8&quot;</span>;
 
 <span class="hljs-comment">// import tools</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">"mlut/tools"</span> as ml;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/tools&quot;</span> as ml;
 
 <span class="hljs-comment">// optional import styles from the core that you need: helpers, utilities, etc</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">"mlut/src/core/base-setup"</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/src/core/base-setup&quot;</span>;
 
 <span class="hljs-comment">// import addons</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">"mlut/src/addons/demo-theme"</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/src/addons/demo-theme&quot;</span>;
 
 <span class="hljs-comment">// import a module that initialize utilities</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">"mlut/src/core/utils/init"</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/src/core/utils/init&quot;</span>;
 </code></pre>
 <p>You can also cancel the generation of all utilities from the addon, and get only the necessary values from there. To do this, pass the parameter to the config of the addon: <code>$generate: false</code>.</p>
 <p>If the addon contains only a ready-made SASS/CSS code, it can be included in any order after tools. Addon also may have their own settings. They can be seen in the code or documentation.</p>
@@ -241,20 +241,20 @@
           <div class="kss-description">
             <p>To create an addon containing utilities:</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-comment">// import mlut tools</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">'../tools'</span> as ml;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;../tools&#x27;</span> as ml;
 
 <span class="hljs-comment">// create a map with the same scheme as map $utils,</span>
 <span class="hljs-comment">// when creating utilities in the config</span>
 <span class="hljs-variable">$utils</span>: (
-	<span class="hljs-string">'BpAll _W'</span>: (<span class="hljs-number">5s</span>u, <span class="hljs-number">10s</span>u, <span class="hljs-number">20s</span>u, <span class="hljs-number">25s</span>u, <span class="hljs-number">40s</span>u, <span class="hljs-number">70s</span>u),
-	<span class="hljs-string">'BpAll _H'</span>: (<span class="hljs-number">5s</span>u, <span class="hljs-number">10s</span>u, <span class="hljs-number">20s</span>u, <span class="hljs-number">25s</span>u),
+	<span class="hljs-string">&#x27;BpAll _W&#x27;</span>: (<span class="hljs-number">5</span>u, <span class="hljs-number">10</span>u, <span class="hljs-number">20</span>u, <span class="hljs-number">25</span>u, <span class="hljs-number">40</span>u, <span class="hljs-number">70</span>u),
+	<span class="hljs-string">&#x27;BpAll _H&#x27;</span>: (<span class="hljs-number">5</span>u, <span class="hljs-number">10</span>u, <span class="hljs-number">20</span>u, <span class="hljs-number">25</span>u),
 );
 
 <span class="hljs-comment">// put a map with new utils to the $utils-map from tools</span>
 <span class="hljs-comment">// as a key, use the unique name of the addon</span>
 ml.<span class="hljs-variable">$utils-map</span>: map.set(
 	ml.<span class="hljs-variable">$utils-map</span>,
-	<span class="hljs-string">'my-addon'</span>,
+	<span class="hljs-string">&#x27;my-addon&#x27;</span>,
 	<span class="hljs-variable">$utils</span>
 );
 
@@ -435,7 +435,7 @@ ml.<span class="hljs-variable">$utils-map</span>: map.set(
 
           <div class="kss-description">
             <p>Below are the utilities contained in the addon. Names of utilities in Components Syntax are specified in the left column. In the right you can see the available values. In addition to the list, they can be spicified in the <a href="section-how_to.html#kssref-how_to-mk_utils-range">range syntax</a> or as a map.</p>
-<table class="W100p Mt5su Mb6su"><tr> <td class="Bdb -Py2su"><code>"BpAll _W"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>5su</code><li><code>10su</code><li><code>20su</code><li><code>25su</code><li><code>40su</code><li><code>70su</code></ul></td> </tr><tr> <td class="Bdb -Py2su"><code>"BpAll _H"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>5su</code><li><code>10su</code><li><code>20su</code><li><code>25su</code></ul></td> </tr><tr> <td class="Bdb -Py2su"><code>"BpAll_^:h _Colors_ h f fw ph"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>[("gray0", "red0", "orange0", "yellow0", "green0", "aqua0", "blue0", "purple0"), 8, ("rgb": -25)]</code><li><code>"white"</code></ul></td> </tr><tr> <td class="Bdb -Py2su"><code>"BpAll _Fns"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>[1su, 8]</code><li><code>3gg</code><li><code>14su</code><li><code>4gg</code><li><code>5gg</code></ul></td> </tr><tr> <td class="Bdb -Py2su"><code>"BpAll _Lnh"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><table class="Bdb-;#ccc_:tr:!lc:td"><tr> <td class="-Py1su">md</td> <td class="-Py1su Pl3gg Mxw-gSm"><code>1.4</code></td> </tr><tr> <td class="-Py1su">lg</td> <td class="-Py1su Pl3gg Mxw-gSm"><code>1.6</code></td> </tr><tr> <td class="-Py1su">xl</td> <td class="-Py1su Pl3gg Mxw-gSm"><code>1.8</code></td> </tr><tr> <td class="-Py1su">xxl</td> <td class="-Py1su Pl3gg Mxw-gSm"><code>2</code></td> </tr></table></td> </tr><tr> <td class="Bdb -Py2su"><code>"BpAll _Offsets"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>[1su, 8]</code></ul></td> </tr><tr> <td class="Bdb -Py2su"><code>"BpAll _Translates"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>[1su, 8]</code><li><code>[-8su, -1]</code></ul></td> </tr><tr> <td class="Bdb -Py2su"><code>"BpAll _BdWidth"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>1su</code><li><code>2su</code></ul></td> </tr><tr> <td class="Bdb -Py2su"><code>"BpAll _BdRadius"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>2</code><li><code>[1su, 4]</code></ul></td> </tr><tr> <td class="Bdb -Py2su"><code>"BpAll ArSt_^:h _O_ h f fw"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>[10p, 90, 10]</code></ul></td> </tr><tr> <td class="Bdb -Py2su"><code>"BpAll ArSt_^:h _Bxsd_ h f fw"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><table class="Bdb-;#ccc_:tr:!lc:td"><tr> <td class="-Py1su">sm</td> <td class="-Py1su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>rgba(0, 0, 0, 0.16)</code><li><code>0px</code><li><code>1px</code><li><code>4px</code></ul></td> </tr><tr> <td class="-Py1su">md</td> <td class="-Py1su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>rgba(0, 0, 0, 0.24)</code><li><code>0px</code><li><code>3px</code><li><code>8px</code></ul></td> </tr><tr> <td class="-Py1su">lg</td> <td class="-Py1su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>rgba(0, 0, 0, 0.35)</code><li><code>0px</code><li><code>5px</code><li><code>15px</code></ul></td> </tr></table></td> </tr><tr> <td class="Bdb -Py2su"><code>"BpAll ArSt _-S_ h f"</code></td> <td class="Bdb -Py2su Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>0.8</code><li><code>0.9</code><li><code>1.1</code><li><code>1.2</code><li><code>1.5</code></ul></td> </tr></table>
+<table class="W100p Mt5u Mb6u"><tr> <td class="Bdb -Py2u"><code>"BpAll _W"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>5u</code><li><code>10u</code><li><code>20u</code><li><code>25u</code><li><code>40u</code><li><code>70u</code></ul></td> </tr><tr> <td class="Bdb -Py2u"><code>"BpAll _H"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>5u</code><li><code>10u</code><li><code>20u</code><li><code>25u</code></ul></td> </tr><tr> <td class="Bdb -Py2u"><code>"BpAll_^:h _Colors_ h f fw ph"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>[("gray0", "red0", "orange0", "yellow0", "green0", "aqua0", "blue0", "purple0"), 8, ("rgb": -25)]</code><li><code>"white"</code></ul></td> </tr><tr> <td class="Bdb -Py2u"><code>"BpAll _Fns"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>[1u, 8]</code><li><code>3gg</code><li><code>14u</code><li><code>4gg</code><li><code>5gg</code></ul></td> </tr><tr> <td class="Bdb -Py2u"><code>"BpAll _Lnh"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><table class="Bdb-;#ccc_:tr:!lc:td"><tr> <td class="-Py1u">md</td> <td class="-Py1u Pl3gg Mxw-gSm"><code>1.4</code></td> </tr><tr> <td class="-Py1u">lg</td> <td class="-Py1u Pl3gg Mxw-gSm"><code>1.6</code></td> </tr><tr> <td class="-Py1u">xl</td> <td class="-Py1u Pl3gg Mxw-gSm"><code>1.8</code></td> </tr><tr> <td class="-Py1u">xxl</td> <td class="-Py1u Pl3gg Mxw-gSm"><code>2</code></td> </tr></table></td> </tr><tr> <td class="Bdb -Py2u"><code>"BpAll _Offsets"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>[1u, 8]</code></ul></td> </tr><tr> <td class="Bdb -Py2u"><code>"BpAll _Translates"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>[1u, 8]</code><li><code>[-8u, -1]</code></ul></td> </tr><tr> <td class="Bdb -Py2u"><code>"BpAll _BdWidth"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>1u</code><li><code>2u</code></ul></td> </tr><tr> <td class="Bdb -Py2u"><code>"BpAll _BdRadius"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>2</code><li><code>[1u, 4]</code></ul></td> </tr><tr> <td class="Bdb -Py2u"><code>"BpAll ArSt_^:h _O_ h f fw"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>[10p, 90, 10]</code></ul></td> </tr><tr> <td class="Bdb -Py2u"><code>"BpAll ArSt_^:h _Bxsd_ h f fw"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><table class="Bdb-;#ccc_:tr:!lc:td"><tr> <td class="-Py1u">sm</td> <td class="-Py1u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>rgba(0, 0, 0, 0.16)</code><li><code>0px</code><li><code>1px</code><li><code>4px</code></ul></td> </tr><tr> <td class="-Py1u">md</td> <td class="-Py1u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>rgba(0, 0, 0, 0.24)</code><li><code>0px</code><li><code>3px</code><li><code>8px</code></ul></td> </tr><tr> <td class="-Py1u">lg</td> <td class="-Py1u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>rgba(0, 0, 0, 0.35)</code><li><code>0px</code><li><code>5px</code><li><code>15px</code></ul></td> </tr></table></td> </tr><tr> <td class="Bdb -Py2u"><code>"BpAll ArSt _-S_ h f"</code></td> <td class="Bdb -Py2u Pl3gg Mxw-gSm"><ul class="-All-sr_&"><li><code>0.8</code><li><code>0.9</code><li><code>1.1</code><li><code>1.2</code><li><code>1.5</code></ul></td> </tr></table>
           </div>
 
 
@@ -443,7 +443,7 @@ ml.<span class="hljs-variable">$utils-map</span>: map.set(
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/generate.css</code>, line 2728
+          Source: <code>content/generate.css</code>, line 2737
         </div>
 
     </section>

@@ -102,19 +102,19 @@
 
           <div class="kss-description">
             <p>To import addon that contains utilities, you will need:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@charset</span> <span class="hljs-string">"utf-8"</span>;
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@charset</span> <span class="hljs-string">&quot;utf-8&quot;</span>;
 
 <span class="hljs-comment">// import tools</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">"mlut/tools"</span> as ml;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/tools&quot;</span> as ml;
 
 <span class="hljs-comment">// optional import styles from the core that you need: helpers, utilities, etc</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">"mlut/src/core/base-setup"</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/src/core/base-setup&quot;</span>;
 
 <span class="hljs-comment">// import addons</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">"mlut/src/addons/demo-theme"</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/src/addons/demo-theme&quot;</span>;
 
 <span class="hljs-comment">// import a module that initialize utilities</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">"mlut/src/core/utils/init"</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/src/core/utils/init&quot;</span>;
 </code></pre>
 <p>You can also cancel the generation of all utilities from the addon, and get only the necessary values from there. To do this, pass the parameter to the config of the addon: <code>$generate: false</code>.</p>
 <p>If the addon contains only a ready-made SASS/CSS code, it can be included in any order after tools. Addon also may have their own settings. They can be seen in the code or documentation.</p>

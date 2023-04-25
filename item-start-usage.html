@@ -106,7 +106,7 @@
 <pre class="hljs"><code class="language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
 </code></pre>
 <p>and the responsive viewport meta tag:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1"</span>&gt;</span>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1&quot;</span>&gt;</span>
 </code></pre>
 <h3>Distributive</h3>
 <p>You can get assembled mlut code and include it to your project. There are some ways to get a distributive.</p>
@@ -115,11 +115,11 @@
 <li>if used <code>npm</code>, files are in <code>node_modules/mlut/dist/</code></li>
 </ul>
 <p>Add the file to your page like here:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"css/mlut.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;css/mlut.min.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
 </code></pre>
 <p>And just add mlut classes to markup:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"D-g Gtc-t3"</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"Bd P2su"</span>&gt;</span>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;D-g Gtc-t3&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;Bd P2u&quot;</span>&gt;</span>
 		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Simple text<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 </code></pre>
 <h3>Toolkit</h3>
@@ -130,16 +130,16 @@
 <li><a href="https://github.com/FullHuman/purgecss">PurgeCSS</a> is recommended for removing unused CSS</li>
 </ul>
 <p>Once the assembly is configured, just import mlut to your stylesheet, and configure it as you need:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'../../node_modules/mlut'</span> as ml with (
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;../../node_modules/mlut&#x27;</span> as ml with (
 	<span class="hljs-variable">$su</span>: <span class="hljs-number">5px</span>,
 	<span class="hljs-variable">$breakpoints</span>: (
-		<span class="hljs-string">'xxl'</span>: <span class="hljs-number">1400px</span>
+		<span class="hljs-string">&#x27;xxl&#x27;</span>: <span class="hljs-number">1400px</span>
 	),
 	<span class="hljs-variable">$colors</span>: (
-		<span class="hljs-string">'red0'</span>: <span class="hljs-number">#f20</span>,
+		<span class="hljs-string">&#x27;red0&#x27;</span>: <span class="hljs-number">#f20</span>,
 	),
 	<span class="hljs-variable">$utils</span>: (
-		<span class="hljs-string">'^_D'</span>: (<span class="hljs-string">''</span>, <span class="hljs-string">'n'</span>, <span class="hljs-string">'f'</span>),
+		<span class="hljs-string">&#x27;^_D&#x27;</span>: (<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;n&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>),
 	),
 );
 </code></pre>
@@ -148,16 +148,16 @@
 	<span class="hljs-attribute">display</span>: block;
 
 	<span class="hljs-keyword">@include</span> ml.apply(
-		<span class="hljs-string">'P2su Fns1r'</span>
+		<span class="hljs-string">&#x27;P2u Fns1r&#x27;</span>
 	);
 
-	<span class="hljs-keyword">@include</span> ml.bp(<span class="hljs-string">'md'</span>) {
+	<span class="hljs-keyword">@include</span> ml.bp(<span class="hljs-string">&#x27;md&#x27;</span>) {
 		<span class="hljs-attribute">font-size</span>: calc(ml.px2rem(<span class="hljs-number">20px</span>) + <span class="hljs-number">1vw</span>);
 	}
 }
 </code></pre>
 <p>Probably you want to set the Sass <a href="https://sass-lang.com/documentation/js-api/interfaces/LegacyFileOptions#includePaths">load path</a> for easier import:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> as ml with (
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut&#x27;</span> as ml with (
 </code></pre>
 
           </div>

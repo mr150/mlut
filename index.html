@@ -126,10 +126,10 @@
 <pre class="hljs"><code class="language-html"><span class="hljs-comment">&lt;!-- Example from https://www.shopify.com/ --&gt;</span>
 
 <span class="hljs-comment">&lt;!-- Tailwindcss --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"hidden md:block md:col-span-6 md:col-start-7 lg:col-span-5 lg:col-start-8 pb-6 relative md:max-h-[130vh] reduced-motion:translate-y-0 will-change-transform duration-1000 ease-in-out transition-all reduced-motion:opacity-100"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;hidden md:block md:col-span-6 md:col-start-7 lg:col-span-5 lg:col-start-8 pb-6 relative md:max-h-[130vh] reduced-motion:translate-y-0 will-change-transform duration-1000 ease-in-out transition-all reduced-motion:opacity-100&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
 <span class="hljs-comment">&lt;!-- mlut --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"D-n md_D md_Gc-s1 md_Gcs7 lg_Gc-s5 lg_Gcs8 Pb6su Ps md_Mxh130vh Tf @:pfrm_-Try0 Wlc-tf Tsd1s Tstf-eio Ts-all @:pfrm_O1"</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;D-n md_D md_Gc-s1 md_Gcs7 lg_Gc-s5 lg_Gcs8 Pb6u Ps md_Mxh130vh Tf @:pfrm_-Try0 Wlc-tf Tsd1s Tstf-eio Ts-all @:pfrm_O1&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
 <p>Convenient syntax for complex values, states and at-rules. It is like Vim for CSS.</p>
 <p><strong>❌ Tailwindcss:</strong></p>
@@ -149,30 +149,30 @@
 <h3>Easiest utils generation</h3>
 <p>JIT mode planned but here is what we have now:</p>
 <h4>Range <a href="https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range">syntaxes</a></h4>
-<table class="Mt3su Mb3gg M0_:pre">
+<table class="Mt3u Mb3gg M0_:pre">
 <tr>
 <th>Sass</th>
 <th>CSS</th>
 </tr>
 <tr>
 <td valign="top">
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> with (
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut&#x27;</span> with (
   <span class="hljs-variable">$utils</span>: (
-    <span class="hljs-string">'Bdw'</span>: ([<span class="hljs-number">2s</span>u, <span class="hljs-number">4</span>],),
+    <span class="hljs-string">&#x27;Bdw&#x27;</span>: ([<span class="hljs-number">2</span>u, <span class="hljs-number">4</span>],),
   )
 );
 </code></pre>
 </td>
 <td valign="top">
-<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.Bdw2su</span> {
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.Bdw2u</span> {
   <span class="hljs-attribute">border-width</span>: <span class="hljs-number">0.5rem</span>;
 }
 
-<span class="hljs-selector-class">.Bdw3su</span> {
+<span class="hljs-selector-class">.Bdw3u</span> {
   <span class="hljs-attribute">border-width</span>: <span class="hljs-number">0.75rem</span>;
 }
 
-<span class="hljs-selector-class">.Bdw4su</span> {
+<span class="hljs-selector-class">.Bdw4u</span> {
   <span class="hljs-attribute">border-width</span>: <span class="hljs-number">1rem</span>;
 }
 </code></pre>
@@ -180,16 +180,16 @@
 </tr>
 </table>
 <h4>Components syntax</h4>
-<table class="Mt3su Mb3gg M0_:pre">
+<table class="Mt3u Mb3gg M0_:pre">
 <tr>
 <th>Sass</th>
 <th>CSS</th>
 </tr>
 <tr>
 <td valign="top">
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> with (
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut&#x27;</span> with (
   <span class="hljs-variable">$utils</span>: (
-    <span class="hljs-string">'D'</span>: (<span class="hljs-string">'xl _ib_ b af'</span>),
+    <span class="hljs-string">&#x27;D&#x27;</span>: (<span class="hljs-string">&#x27;xl _ib_ b af&#x27;</span>),
   )
 );
 </code></pre>
@@ -207,7 +207,7 @@
   <span class="hljs-attribute">display</span>: inline-block;
 }
 
-<span class="hljs-keyword">@media</span> (min-width: <span class="hljs-number">1200px</span>) {
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">1200px</span>) {
   <span class="hljs-selector-class">.xl_D-ib</span> {
     <span class="hljs-attribute">display</span>: inline-block;
   }
@@ -217,16 +217,16 @@
 </tr>
 </table>
 <h4>Groups</h4>
-<table class="Mt3su Mb3gg M0_:pre">
+<table class="Mt3u Mb3gg M0_:pre">
 <tr>
 <th>Sass</th>
 <th>CSS</th>
 </tr>
 <tr>
 <td valign="top">
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> with (
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut&#x27;</span> with (
   <span class="hljs-variable">$utils</span>: (
-    <span class="hljs-string">'Paddings'</span>: (<span class="hljs-number">150</span>),
+    <span class="hljs-string">&#x27;Paddings&#x27;</span>: (<span class="hljs-number">150</span>),
   )
 );
 </code></pre>
@@ -250,7 +250,7 @@
 </tr>
 </table>
 <h4>Top-level apply</h4>
-<div class="Mt3su M0_:pre Ov-a W100p">
+<div class="Mt3u M0_:pre Ov-a W100p">
 <table>
 <tr>
 <th>Sass</th>
@@ -259,12 +259,12 @@
 <tr>
 <td valign="top">
 <pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@include</span> ml.apply(
-  <span class="hljs-string">'^0:+_-MyPad1.5;3su -Gdl-r,#0f0;30p,#00f;80p,red'</span>
+  <span class="hljs-string">&#x27;^0:+_-MyPad1.5;3u -Gdl-r,#0f0;30p,#00f;80p,red&#x27;</span>
 );
 </code></pre>
 </td>
 <td valign="top">
-<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.-Ctx0</span> + .\^0\:\+_-MyPad1\.<span class="hljs-number">5</span>\;3su {
+<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.-Ctx0</span> + .\^0\:\+_-MyPad1\.<span class="hljs-number">5</span>\;3u {
   --ml-myPad: <span class="hljs-number">1.5rem</span> <span class="hljs-number">0.75rem</span>;
 }
 
@@ -280,16 +280,16 @@
 <section class="Mb4gg">
 <h3>Handy extension</h3>
 <p>Add utilities, states and custom at-rules with few lines of code</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">'mlut'</span> as ml with (
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut&#x27;</span> as ml with (
   // add utilities
   <span class="hljs-variable">$utils-data</span>: (
-    <span class="hljs-string">'utils'</span>: (
-      <span class="hljs-string">'registry'</span>: (
-        <span class="hljs-string">'Mil'</span>: margin-inline,
-        <span class="hljs-string">'Ir'</span>: (
-          <span class="hljs-string">'properties'</span>: image-rendering,
-          <span class="hljs-string">'keywords'</span>: (
-            <span class="hljs-string">'p'</span>: pixelated,
+    <span class="hljs-string">&#x27;utils&#x27;</span>: (
+      <span class="hljs-string">&#x27;registry&#x27;</span>: (
+        <span class="hljs-string">&#x27;Mil&#x27;</span>: margin-inline,
+        <span class="hljs-string">&#x27;Ir&#x27;</span>: (
+          <span class="hljs-string">&#x27;properties&#x27;</span>: image-rendering,
+          <span class="hljs-string">&#x27;keywords&#x27;</span>: (
+            <span class="hljs-string">&#x27;p&#x27;</span>: pixelated,
           ),
         ),
       ),
@@ -298,15 +298,15 @@
 
   // add states
   <span class="hljs-variable">$utils-config</span>: (
-    <span class="hljs-string">'states'</span>: (
-      <span class="hljs-string">'custom'</span>: (
-        <span class="hljs-string">'are'</span>: <span class="hljs-string">'[aria-expanded=“true”]'</span>,
+    <span class="hljs-string">&#x27;states&#x27;</span>: (
+      <span class="hljs-string">&#x27;custom&#x27;</span>: (
+        <span class="hljs-string">&#x27;are&#x27;</span>: <span class="hljs-string">&#x27;[aria-expanded=“true”]&#x27;</span>,
       ),
     ),
   ),
 );
 
-<span class="hljs-keyword">@include</span> ml.apply(<span class="hljs-string">'Mil-15_-are Ir-p'</span>);
+<span class="hljs-keyword">@include</span> ml.apply(<span class="hljs-string">&#x27;Mil-15_-are Ir-p&#x27;</span>);
 
 <span class="hljs-comment">// CSS</span>
 

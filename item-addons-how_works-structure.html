@@ -103,20 +103,20 @@
           <div class="kss-description">
             <p>To create an addon containing utilities:</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-comment">// import mlut tools</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">'../tools'</span> as ml;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;../tools&#x27;</span> as ml;
 
 <span class="hljs-comment">// create a map with the same scheme as map $utils,</span>
 <span class="hljs-comment">// when creating utilities in the config</span>
 <span class="hljs-variable">$utils</span>: (
-	<span class="hljs-string">'BpAll _W'</span>: (<span class="hljs-number">5s</span>u, <span class="hljs-number">10s</span>u, <span class="hljs-number">20s</span>u, <span class="hljs-number">25s</span>u, <span class="hljs-number">40s</span>u, <span class="hljs-number">70s</span>u),
-	<span class="hljs-string">'BpAll _H'</span>: (<span class="hljs-number">5s</span>u, <span class="hljs-number">10s</span>u, <span class="hljs-number">20s</span>u, <span class="hljs-number">25s</span>u),
+	<span class="hljs-string">&#x27;BpAll _W&#x27;</span>: (<span class="hljs-number">5</span>u, <span class="hljs-number">10</span>u, <span class="hljs-number">20</span>u, <span class="hljs-number">25</span>u, <span class="hljs-number">40</span>u, <span class="hljs-number">70</span>u),
+	<span class="hljs-string">&#x27;BpAll _H&#x27;</span>: (<span class="hljs-number">5</span>u, <span class="hljs-number">10</span>u, <span class="hljs-number">20</span>u, <span class="hljs-number">25</span>u),
 );
 
 <span class="hljs-comment">// put a map with new utils to the $utils-map from tools</span>
 <span class="hljs-comment">// as a key, use the unique name of the addon</span>
 ml.<span class="hljs-variable">$utils-map</span>: map.set(
 	ml.<span class="hljs-variable">$utils-map</span>,
-	<span class="hljs-string">'my-addon'</span>,
+	<span class="hljs-string">&#x27;my-addon&#x27;</span>,
 	<span class="hljs-variable">$utils</span>
 );
 
