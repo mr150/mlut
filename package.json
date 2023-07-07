@@ -54,7 +54,7 @@
 		"sass-embedded": "^1.57.1",
 		"sass-migrator": "^1.5.2",
 		"sass-true": "^6.0.1",
-		"stylelint": "^13.13.1",
+		"stylelint": "^15.10.1",
 		"stylelint-order": "^4.0.0",
 		"vinyl-ftp": "^0.6.1"
 	}
