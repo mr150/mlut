@@ -1,0 +1,243 @@
+root: true
+env:
+  browser: true
+  es2021: true
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:@typescript-eslint/recommended-requiring-type-checking
+  - plugin:@typescript-eslint/strict
+parser: "@typescript-eslint/parser"
+parserOptions:
+  ecmaVersion: latest
+  sourceType: module
+  tsconfigRootDir: "./"
+  project:
+    - "./tsconfig.json"
+plugins:
+  - "@typescript-eslint"
+rules:
+  block-spacing:
+    - error
+  comma-spacing:
+    - error
+  comma-style:
+    - error
+    - last
+  func-call-spacing:
+    - error
+    - never
+  no-dupe-args:
+    - error
+  no-dupe-keys:
+    - error
+  no-duplicate-case:
+    - error
+  no-else-return:
+    - error
+  no-func-assign:
+    - error
+  no-global-assign:
+    - error
+  no-implicit-globals:
+    - error
+  no-inner-declarations:
+    - warn
+  no-invalid-regexp:
+    - error
+  no-invalid-this:
+    - error
+  no-irregular-whitespace:
+    - error
+  no-negated-in-lhs:
+    -  error
+  no-lonely-if:
+    - error
+  no-trailing-spaces:
+    - error
+  no-new-wrappers:
+    - error
+  no-mixed-spaces-and-tabs:
+    - error
+  no-multi-spaces:
+    - error
+  no-obj-calls:
+    - error
+  no-param-reassign:
+    - warn
+  no-proto:
+    - error
+  no-self-compare:
+    - error
+  no-self-assign:
+    - error
+  no-spaced-func:
+    - error
+  no-sparse-arrays:
+    - error
+  no-unneeded-ternary:
+    - error
+  no-unreachable:
+    - error
+  no-unsafe-negation:
+    - error
+  no-unused-expressions:
+    - error
+  no-unused-vars:
+    - error
+    - args: none
+      caughtErrors: none
+      ignoreRestSiblings: true
+  no-useless-call:
+    - error
+  no-useless-computed-key:
+    - error
+  no-useless-escape:
+    - error
+  no-useless-rename:
+    - error
+  no-use-before-define:
+    - warn
+    - functions: false
+      variables: false
+  no-var:
+    - warn
+  no-with:
+    - error
+  no-whitespace-before-property:
+    - error
+  object-curly-newline:
+    - error
+    - multiline: true
+      consistent: true
+  one-var-declaration-per-line:
+    - error
+  operator-assignment:
+    - error
+    - always
+  prefer-const:
+    -  warn
+  prefer-rest-params:
+    - error
+  prefer-spread:
+    - error
+  no-useless-concat:
+    - error
+  space-before-blocks:
+    - error
+  space-before-function-paren:
+    - error
+    - anonymous: never
+      named: never
+      asyncArrow: always
+  space-infix-ops:
+    - error
+  use-isnan:
+    - error
+  valid-typeof:
+    - error
+  yield-star-spacing:
+    - error
+    - both
+  keyword-spacing:
+    - 2
+    - before: true
+      after: true
+      overrides: {}
+  no-multiple-empty-lines:
+    - error
+    - max: 1
+  brace-style:
+    - error
+    - 1tbs
+  indent:
+    - error
+    - tab
+  linebreak-style:
+    - error
+    - unix
+  semi:
+    - error
+    - always
+  object-curly-spacing:
+    - error
+    - always
+  key-spacing:
+    - error
+  arrow-spacing:
+    - error
+  no-fallthrough:
+    - error
+    - allowEmptyCase: true
+  quotes:
+    - error
+    - single
+  padding-line-between-statements:
+    - error
+    - blankLine: always
+      prev: "*"
+      next: return
+    - blankLine: any
+      prev: expression
+      next: return
+    - blankLine: always
+      prev: "multiline-expression"
+      next: return
+    - blankLine: always
+      prev:
+        - multiline-const
+        - multiline-let
+        - multiline-var
+      next: "*"
+    - blankLine: always
+      prev: "*"
+      next:
+        - multiline-const
+        - multiline-let
+        - multiline-var
+    - blankLine: any
+      prev:
+        - const
+        - let
+        - var
+      next:
+        - const
+        - let
+        - var
+    - blankLine: always
+      prev: "*"
+      next: "block-like"
+    - blankLine: always
+      prev: "block-like"
+      next: "*"
+  curly:
+    - error
+  arrow-parens:
+    - error
+  "@typescript-eslint/type-annotation-spacing":
+    - error
+  "@typescript-eslint/array-type":
+    - off
+  "@typescript-eslint/ban-ts-comment":
+    - off
+  "@typescript-eslint/restrict-template-expressions":
+    - error
+    - allowNumber: true
+      allowBoolean: true
+      allowAny: true
+  "@typescript-eslint/class-literal-property-style":
+    - warn
+    - fields
+  "@typescript-eslint/consistent-type-assertions":
+    - warn
+    - assertionStyle: "as"
+  "@typescript-eslint/consistent-type-definitions":
+    - off
+  "@typescript-eslint/non-nullable-type-assertion-style":
+    - off
+  "@typescript-eslint/require-await":
+    - off
+  "@typescript-eslint/no-misused-promises":
+    - error
+    - checksVoidReturn:
+        arguments: false

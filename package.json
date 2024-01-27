@@ -3,8 +3,10 @@
 	"version": "5.0.0",
 	"description": "Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity",
 	"author": "mr150",
+	"type": "module",
 	"license": "MIT",
 	"homepage": "https://mr150.github.io/mlut/",
+  "types": "./dist/index.d.ts",
 	"keywords": [
 		"mlut",
 		"sass",
@@ -23,6 +25,9 @@
 	"bugs": {
 		"url": "https://github.com/mr150/mlut/issues"
 	},
+	"bin": {
+		"mlut": "dist/cli/cli.js"
+  },
 	"files": [
 		"src/",
 		"_index.scss",
@@ -31,11 +36,17 @@
 	],
 	"scripts": {
 		"dev": "./node_modules/gulp/bin/gulp.js",
-		"build": "export NODE_ENV=production && ./node_modules/gulp/bin/gulp.js build"
+		"build": "export NODE_ENV=production && ./node_modules/gulp/bin/gulp.js build && tsc -p tsconfig.build.json",
+		"tsc": "rm -rf dist && tsc -p tsconfig.build.json"
 	},
 	"devDependencies": {
-		"browser-sync": "^2.27.7",
+		"@types/csso": "^5.0.4",
+		"@types/node": "^20.10.5",
+		"@typescript-eslint/eslint-plugin": "^6.16.0",
+		"@typescript-eslint/parser": "^6.16.0",
+		"browser-sync": "^2.29.0",
 		"del": "^6.0.0",
+		"eslint": "^8.56.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
 		"gulp-csso": "^4.0.1",
@@ -51,11 +62,20 @@
 		"kss": "^3.0.1",
 		"mocha": "^10.0.0",
 		"mocha-clean": "^1.0.0",
-		"sass-embedded": "^1.57.1",
-		"sass-migrator": "^1.5.2",
-		"sass-true": "^6.0.1",
+		"sass-migrator": "^1.8.0",
+		"sass-true": "^6.1.0",
 		"stylelint": "^13.13.1",
 		"stylelint-order": "^4.0.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.3.3",
 		"vinyl-ftp": "^0.6.1"
+	},
+	"dependencies": {
+		"arg": "^5.0.2",
+		"fast-glob": "^3.3.2",
+		"sass-embedded": "^1.69.7",
+		"csso": "^5.0.5",
+		"purgecss": "^5.0.0",
+		"watcher": "^2.3.0"
 	}
 }
