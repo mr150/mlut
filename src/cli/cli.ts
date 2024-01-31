@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'node:fs';
+import path from 'node:path';
 import { PurgeCSS } from 'purgecss';
 import * as sass from 'sass-embedded';
 import arg from 'arg';
@@ -21,13 +22,39 @@ const args = arg({
 
 	'-i': '--input',
 	'-o': '--output',
-	'-c': '--content',
 	'-w': '--watch',
+	'-h': '--help',
+	'-m': '--minify',
 });
 
+type ArgsNames = keyof typeof args;
+
 if (args['--help'] !== undefined) {
-	logger.info('help');
+	console.log(
+		`Usage:
+  mlut [-i input.scss] [-o output.css] [--watch] [options...]
+
+Options:
+  -h, --help            Print this help message
+  -i, --input           Input sass file
+  -o, --output          Output css file
+  -w, --watch           Watch for changes and rebuild as needed
+  -m, --minify          Generate minified css file
+      --content         Paths to content with markup
+      --no-merge-mq     Prevent merging of CSS media queries during minification`
+	);
 	process.exit(0);
+}
+
+const cwd = process.cwd();
+const config = await import(path.join(cwd, 'mlut.config.mjs'))
+	.then((r: { default: object }) => r.default)
+	.catch(() => ({})) as typeof args;
+
+// TODO: add runtime type checking of values from the config
+for (const [key, value] of Object.entries<typeof args[ArgsNames]>(config)) {
+	const argKey = '--' + key as ArgsNames;
+	(args[argKey] as typeof value) = value;
 }
 
 const inputPath = args['--input'] as string;
