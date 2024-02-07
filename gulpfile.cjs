@@ -22,7 +22,7 @@ var dirs = {
 };
 
 var path = {
-	src: 'src/',
+	src: 'src/sass/',
 	build: 'dist/',
 	docs: {
 		assets: dirs.docs + 'styleguide/kss-assets/',
@@ -96,7 +96,7 @@ gulp.task('css-lint', function(){
 });
 
 gulp.task('sass-test', shell.task(
-	`node_modules/.bin/mocha ${path.test.sass}index.js`,
+	`npx mocha ${path.test.sass}index.js`,
 	{ignoreErrors: process.env.NODE_ENV !== 'production'}
 ));
 

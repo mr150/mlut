@@ -6,7 +6,7 @@
 	"type": "module",
 	"license": "MIT",
 	"homepage": "https://mr150.github.io/mlut/",
-  "types": "./dist/index.d.ts",
+	"types": "./dist/index.d.ts",
 	"keywords": [
 		"mlut",
 		"sass",
@@ -27,7 +27,7 @@
 	},
 	"bin": {
 		"mlut": "dist/cli/cli.js"
-  },
+	},
 	"files": [
 		"src/",
 		"_index.scss",
@@ -35,16 +35,20 @@
 		"dist/"
 	],
 	"scripts": {
-		"dev": "./node_modules/gulp/bin/gulp.js",
-		"build": "export NODE_ENV=production && ./node_modules/gulp/bin/gulp.js build && tsc -p tsconfig.build.json",
-		"tsc": "rm -rf dist && tsc -p tsconfig.build.json"
+		"dev": "npx gulp -f gulpfile.cjs",
+		"build": "export NODE_ENV=production && npx gulp -f gulpfile.cjs build && tsc -p tsconfig.build.json && chmod +x dist/cli/cli.js && cp src/sass dist/ -r",
+		"tsc": "rm -rf dist && tsc -p tsconfig.build.json && chmod +x dist/cli/cli.js && cp src/sass dist/ -r",
+		"test": "mocha test/sass/index.js && mocha"
 	},
 	"devDependencies": {
+		"@types/chai": "^4.3.11",
 		"@types/csso": "^5.0.4",
+		"@types/mocha": "^10.0.6",
 		"@types/node": "^20.10.5",
 		"@typescript-eslint/eslint-plugin": "^6.16.0",
 		"@typescript-eslint/parser": "^6.16.0",
 		"browser-sync": "^2.29.0",
+		"chai": "^5.0.3",
 		"del": "^6.0.0",
 		"eslint": "^8.56.0",
 		"gulp": "^4.0.2",
@@ -72,9 +76,9 @@
 	},
 	"dependencies": {
 		"arg": "^5.0.2",
+		"csso": "^5.0.5",
 		"fast-glob": "^3.3.2",
 		"sass-embedded": "^1.69.7",
-		"csso": "^5.0.5",
 		"purgecss": "^5.0.0",
 		"watcher": "^2.3.0"
 	}
