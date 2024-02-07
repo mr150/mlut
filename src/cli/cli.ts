@@ -2,14 +2,13 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { PurgeCSS } from 'purgecss';
-import * as sass from 'sass-embedded';
 import arg from 'arg';
 import { minify } from 'csso';
 import fg from 'fast-glob';
 import Watcher from 'watcher';
 
-import { logger } from './logger.js';
+import { logger } from '../utils/index.js';
+import { jitEngine } from '../jit/JitEngine.js';
 
 const args = arg({
 	'--help': Boolean,
@@ -41,7 +40,7 @@ Options:
   -w, --watch           Watch for changes and rebuild as needed
   -m, --minify          Generate minified css file
       --content         Paths to content with markup
-      --no-merge-mq     Prevent merging of CSS media queries during minification`
+      --no-merge-mq     Prevent merging of css media queries during minification`
 	);
 	process.exit(0);
 }
@@ -51,19 +50,15 @@ const config = await import(path.join(cwd, 'mlut.config.mjs'))
 	.then((r: { default: object }) => r.default)
 	.catch(() => ({})) as typeof args;
 
-// TODO: add runtime type checking of values from the config
 for (const [key, value] of Object.entries<typeof args[ArgsNames]>(config)) {
 	const argKey = '--' + key as ArgsNames;
-	(args[argKey] as typeof value) = value;
+
+	if (!(argKey in args)) {
+		(args[argKey] as typeof value) = value;
+	}
 }
 
-const inputPath = args['--input'] as string;
-
-if (!inputPath) {
-	logger.error('Input path not specified!');
-	process.exit(1);
-}
-
+const inputPath = args['--input'];
 const outputPath = args['--output'] as string;
 
 if (!outputPath) {
@@ -71,36 +66,29 @@ if (!outputPath) {
 	process.exit(1);
 }
 
-const purgedContent = args['--content'] ?? [] as string[];
+const targetContent = args['--content'] ?? [] as string[];
 const isWatch = args['--watch'];
 const isMinify = args['--minify'];
 const isMergeMq = !args['--no-merge-mq'];
 
-if (purgedContent.length === 0) {
+if (targetContent.length === 0) {
 	logger.error('Content path not specified!');
 	process.exit(1);
 }
 
+await jitEngine.init(inputPath);
+const targetFiles = await fg(targetContent, { absolute: true, dot: true });
+
 if (isWatch) {
-	void watch();
+	watch();
 }
 
-void buildStyles();
+void buildStyles(targetFiles);
 
-async function buildStyles() {
+async function buildStyles(files: string[]) {
 	logger.info('Rebuilding styles...');
 	const startTime = Date.now();
-
-	// `compileAsync` is almost always faster than `compile`
-	const { css: compiledCss } = (await sass.compileAsync(
-		inputPath,
-		{ loadPaths: ['node_modules'] }
-	));
-
-	const purgedCss = await new PurgeCSS().purge({
-		content: purgedContent,
-		css: [{ raw: compiledCss }]
-	}).then(([{ css }]) => {
+	const css = await jitEngine.generateFrom(files).then((css) => {
 		if (isMinify) {
 			return minify(css, { forceMediaMerge: isMergeMq }).css;
 		}
@@ -108,22 +96,22 @@ async function buildStyles() {
 		return css;
 	});
 
-	fs.promises.writeFile(outputPath, purgedCss)
+	fs.promises.writeFile(outputPath, css)
 		.then(() => logger.info('Completed in', formatTime(Date.now() - startTime)))
 		.catch((e) => logger.error('Error when write output file.', e));
 }
 
-async function watch() {
+function watch() {
 	logger.info('Start watching');
 
-	const watchedFiles = (await fg(purgedContent, { dot: true })).concat(inputPath);
+	const watchedFiles = inputPath ? targetFiles.concat(inputPath) : targetFiles;
 	const watcher = new Watcher(
 		watchedFiles,
-		{ debounce: 1000, ignoreInitial: true, },
+		{ ignoreInitial: true, },
 	);
 
-	watcher.on('all', () => {
-		buildStyles()
+	watcher.on('all', (_event, targetPath: string) => {
+		buildStyles([targetPath])
 			.catch((e) => logger.error('Error when rebuilding styles.', e));
 	});
 }

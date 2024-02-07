@@ -79,7 +79,6 @@
 		"csso": "^5.0.5",
 		"fast-glob": "^3.3.2",
 		"sass-embedded": "^1.69.7",
-		"purgecss": "^5.0.0",
 		"watcher": "^2.3.0"
 	}
 }

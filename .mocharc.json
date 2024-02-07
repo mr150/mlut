@@ -1,4 +1,8 @@
 {
-	"require": ["mocha-clean"],
-  "reporter": "min"
+	"require": ["mocha-clean", "ts-node/register"],
+	"extension": ["ts"],
+	"watch-files": ["src/**/*.ts", "test/**/*.ts"],
+	"node-option": ["loader=ts-node/esm"],
+	"recursive": true,
+	"reporter": "min"
 }
