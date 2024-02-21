@@ -34,7 +34,7 @@
 		"build": "export NODE_ENV=production && ./node_modules/gulp/bin/gulp.js build"
 	},
 	"devDependencies": {
-		"browser-sync": "^2.27.7",
+		"browser-sync": "^3.0.2",
 		"del": "^6.0.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
