@@ -33,18 +33,18 @@ Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexit
 
 ### Strong naming convention
 ❌ **Tailwindcss**:
-- `.justify-*`: content, items or self?
-- `.flex` => `display: flex`, but `.flex-auto` => `flex: 1 1 auto;`
-- `.bg-none` - reset all background? Nope, only `background-image`
+- `justify-*`: content, items or self?
+- `flex` => `display: flex`, but `flex-auto` => `flex: 1 1 auto;`
+- `bg-none` - reset all background? Nope, only `background-image`
 
 ❌ **Tachyons**:
-- `.br-0` => `border-right-width: 0`, but `.br1` => `border-radius:.125rem`
-- `.normal`: line-height, font-weight or letter-spacing?
-- `.b`: bottom, border or `display: block`? Nope, it is `font-weight:bold`!
+- `br-0` => `border-right-width: 0`, but `br1` => `border-radius:.125rem`
+- `normal`: line-height, font-weight or letter-spacing?
+- `b`: bottom, border or `display: block`? Nope, it is `font-weight:bold`!
 
 ✅ **mlut**:
-- `.Jc-c` => `justify-content: center`, `.Js-c` => `justify-self: center`
-- `.Bdr` => `border-right: 1px solid`, `.Bdrd1` => `border-radius: 1px`
+- `Jc-c` => `justify-content: center`, `Js-c` => `justify-self: center`
+- `Bdr` => `border-right: 1px solid`, `Bdrd1` => `border-radius: 1px`
 
 [One algorithm](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-naming) for all. If you know CSS, you almost know mlut.
 
@@ -78,7 +78,7 @@ Convenient syntax for complex values, states and at-rules. It is like Vim for CS
 
 ### Easiest utils generation
 
-JIT mode planned but here is what we have now:
+JIT mode is already in development, but here's what we have now:
 
 #### Range [syntaxes](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range)
 
@@ -395,8 +395,8 @@ Probably you want to set the Sass [load path](https://sass-lang.com/documentatio
 Available [here](https://mr150.github.io/mlut/) or can be run locally. Documentation is included in this repo and is generated using [KSS-node](https://github.com/kss-node/kss-node) from the comments in the sources.
 
 ## What next? ##
-- CLI
-- JIT mode
+- CLI (almost done)
+- JIT mode ([WIP](https://github.com/mr150/mlut/tree/feat/jit))
 - first class CSS functions in utils values
 - and much more!
 
