@@ -20,18 +20,30 @@ export class JitEngine {
 	};
 
 	async init(inputFile = '') {
-		const sassSettingsPath = path.join(__dirname, '../sass/tools/settings/common/');
-		const utilsConfig = await fs.promises.readFile(
-			sassSettingsPath + '_utils.scss',
-		).then((content) => (
-			content.toString() +
-			'\n a { all: map.keys(map.get($utils-db, "utils", "registry")); }'
-		));
+		let utilsConfig = '@use "sass:map";\n @use "../sass/tools/settings" as ml;';
+
+		if (inputFile) {
+			this.inputFilePath = path.join(process.cwd(), inputFile);
+			this.inputFileDir = path.dirname(this.inputFilePath);
+			this.inputFileCache = await fs.promises.readFile(inputFile).then((r) => {
+				const content = r.toString();
+				const userSettings = content.match(
+					/@use ['"][^'"]*(tools|mlut)['"].*with\s*\(([^;]+)\);/s
+				)?.at(-1);
+
+				if (userSettings != null) {
+					utilsConfig = utilsConfig.slice(0, -1) + ` with (${userSettings});`;
+				}
+
+				return content;
+			});
+		}
+
 		const { css } = (await sass.compileStringAsync(
-			utilsConfig,
+			utilsConfig + '\n a{ all: map.keys(map.get(ml.$utils-db, "utils", "registry")); }',
 			{
 				style: 'compressed',
-				loadPaths: [ sassSettingsPath ],
+				loadPaths: [ __dirname ],
 			}
 		));
 
@@ -39,13 +51,6 @@ export class JitEngine {
 		this.utils = new Set(
 			JSON.parse('[' + css.split('all:')[1].slice(0, strEnd) + ']') as string[]
 		);
-
-		if (inputFile) {
-			this.inputFilePath = path.join(process.cwd(), inputFile);
-			this.inputFileDir = path.dirname(this.inputFilePath);
-			this.inputFileCache = await fs.promises.readFile(inputFile)
-				.then((r) => r.toString(), () => '');
-		}
 	}
 
 	async generateFrom(files: string[]): Promise<string> {
