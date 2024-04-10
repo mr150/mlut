@@ -11,6 +11,8 @@ export class JitEngine {
 	private inputFilePath = '';
 	private inputFileDir = __dirname;
 	private inputFileCache = '@use "../sass/tools";';
+	private readonly defaultSassConfig =
+		'@use "sass:map";\n @use "../sass/tools/settings" as ml;';
 	private readonly utilsByFile = new Map<string, string[]>();
 	private readonly utilsRegexps = {
 		quotedContent: /"\n?[^"]*?[A-Z][^"\n]*\n?"/g,
@@ -20,37 +22,20 @@ export class JitEngine {
 	};
 
 	async init(inputFile = '') {
-		let utilsConfig = '@use "sass:map";\n @use "../sass/tools/settings" as ml;';
+		let sassConfig: string | undefined = this.defaultSassConfig;
 
 		if (inputFile) {
 			this.inputFilePath = path.join(process.cwd(), inputFile);
 			this.inputFileDir = path.dirname(this.inputFilePath);
 			this.inputFileCache = await fs.promises.readFile(inputFile).then((r) => {
 				const content = r.toString();
-				const userSettings = content.match(
-					/@use ['"][^'"]*(tools|mlut)['"].*with\s*\(([^;]+)\);/s
-				)?.at(-1);
-
-				if (userSettings != null) {
-					utilsConfig = utilsConfig.slice(0, -1) + ` with (${userSettings});`;
-				}
+				sassConfig = this.extractUserSassConfig(content);
 
 				return content;
 			});
 		}
 
-		const { css } = (await sass.compileStringAsync(
-			utilsConfig + '\n a{ all: map.keys(map.get(ml.$utils-db, "utils", "registry")); }',
-			{
-				style: 'compressed',
-				loadPaths: [ __dirname ],
-			}
-		));
-
-		const strEnd = css.lastIndexOf('"') - css.length + 1;
-		this.utils = new Set(
-			JSON.parse('[' + css.split('all:')[1].slice(0, strEnd) + ']') as string[]
-		);
+		await this.loadUtils(sassConfig);
 	}
 
 	async generateFrom(files: string[]): Promise<string> {
@@ -64,7 +49,9 @@ export class JitEngine {
 				.then((data) => {
 					if (path === this.inputFilePath) {
 						this.inputFileCache = data.toString();
-						return;
+						const sassConfig = this.extractUserSassConfig(this.inputFileCache);
+
+						return !sassConfig ? undefined : this.loadUtils(sassConfig);
 					}
 
 					this.utilsByFile.set(path, this.extractUtils(data.toString()));
@@ -130,6 +117,31 @@ export class JitEngine {
 
 	private normalizeClassNameStr(str: string) {
 		return str.replace(this.utilsRegexps.tooMoreSpaces, ' ').slice(1, -1);
+	}
+
+	private extractUserSassConfig(content: string): string | undefined {
+		const userSettings = content.match(
+			/@use ['"][^'"]*(tools|mlut)['"].*with\s*\(([^;]+)\);/s
+		)?.at(-1);
+
+		if (userSettings != null) {
+			return this.defaultSassConfig.slice(0, -1) + ` with (${userSettings});`;
+		}
+	}
+
+	private async loadUtils(userConfig = this.defaultSassConfig) {
+		const { css } = (await sass.compileStringAsync(
+			userConfig + '\n a{ all: map.keys(map.get(ml.$utils-db, "utils", "registry")); }',
+			{
+				style: 'compressed',
+				loadPaths: [ __dirname ],
+			}
+		));
+
+		const strEnd = css.lastIndexOf('"') - css.length + 1;
+		this.utils = new Set(
+			JSON.parse('[' + css.split('all:')[1].slice(0, strEnd) + ']') as string[]
+		);
 	}
 }
 
