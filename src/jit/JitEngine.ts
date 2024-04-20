@@ -10,6 +10,7 @@ export class JitEngine {
 	private utils = new Set<string>();
 	private inputFilePath = '';
 	private inputFileDir = __dirname;
+	private sassModuleName = 'tools';
 	private inputFileCache = '@use "../sass/tools";';
 	private readonly defaultSassConfig =
 		'@use "sass:map";\n @use "../sass/tools/settings" as ml;';
@@ -64,7 +65,7 @@ export class JitEngine {
 
 		const allUniqueUtils = [...new Set([...this.utilsByFile.values()].flat())];
 		const applyStr =
-			`\n@include tools.apply(${JSON.stringify(allUniqueUtils)}, (), true);`;
+			`\n@include ${this.sassModuleName}.apply(${JSON.stringify(allUniqueUtils)},(),true);`;
 
 		// `compileStringAsync` is almost always faster than `compile` in sass-embedded
 		const css = await sass.compileStringAsync(
@@ -120,11 +121,16 @@ export class JitEngine {
 	}
 
 	private extractUserSassConfig(content: string): string | undefined {
-		const userSettings = content.match(
-			/@use ['"][^'"]*(tools|mlut)['"].*with\s*\(([^;]+)\);/s
-		)?.at(-1);
+		const matchResult = content.match(
+			/@use ['"][^'"]*(tools|mlut)['"](\s*as\s+[\w]+)?\s+with\s*\(([^;]+)\);/s
+		);
 
-		if (userSettings != null) {
+		if (matchResult != null) {
+			const userSettings = matchResult.at(-1) as string;
+			this.sassModuleName = matchResult[2] ?
+				matchResult[2].replace(/\s*as\s*/, '') :
+				matchResult[1];
+
 			return this.defaultSassConfig.slice(0, -1) + ` with (${userSettings});`;
 		}
 	}

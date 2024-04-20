@@ -15,7 +15,7 @@ describe('JitEngine', () => {
 
 	const sassInputContent = `
 @use 'sass:list';
-@use "${path.join(__dirname, '../../tools')}" with (
+@use "${path.join(__dirname, '../../tools')}" as testou with (
 	$utils-data: (
 		'utils': (
 			'registry': (
@@ -30,7 +30,7 @@ describe('JitEngine', () => {
 );
 @use 'sass:meta';
 
-@include tools.apply('C-ih');
+@include testou.apply('C-ih');
 `;
 
 	const extractUtilsContent = `
