@@ -2,5 +2,7 @@
 
 @forward 'tools';
 @forward 'core/base-setup';
-@forward 'addons/demo-theme';
+@forward 'addons/demo-theme' with (
+	$is-aot: true,
+);
 @forward 'core/utils/init';
