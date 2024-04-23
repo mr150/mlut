@@ -1,4 +1,3 @@
-import fs from 'node:fs';
 import path from 'node:path';
 import { assert } from 'chai';
 import { JitEngine } from '../../src/jit/JitEngine.js';
@@ -49,14 +48,6 @@ const wrapperCss = "M1u	 -Myvar12 Ps d-g";
 <MyComponent className={cn('D-f Gap5u', wrapperCss)}/>
 `;
 
-	before(async () => {
-		await Promise.all([
-			fs.promises.writeFile(sassInputPath, sassInputContent),
-			fs.promises.writeFile(htmlPath0, htmlContent0),
-			fs.promises.writeFile(htmlPath1, htmlContent1),
-		]);
-	});
-
 	it('extract utils from content', async () => {
 		const jit = new JitEngine();
 		await jit.init();
@@ -85,7 +76,7 @@ const wrapperCss = "M1u	 -Myvar12 Ps d-g";
 
 	it('generate CSS from the file', async () => {
 		const jit = new JitEngine();
-		await jit.init(sassInputPath);
+		await jit.init([sassInputPath, sassInputContent]);
 
 		/* eslint-disable */
 		const cssOutput = `.C-ih {
@@ -105,8 +96,10 @@ const wrapperCss = "M1u	 -Myvar12 Ps d-g";
 }`;
 		/* eslint-enable */
 
+		void jit.putAndGenerateCss(htmlPath0, htmlContent0);
+
 		assert.equal(
-			await jit.generateFrom([htmlPath0, htmlPath1]),
+			await jit.putAndGenerateCss(htmlPath1, htmlContent1),
 			cssOutput,
 		);
 	});

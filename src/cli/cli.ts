@@ -27,6 +27,7 @@ const args = arg({
 });
 
 type ArgsNames = keyof typeof args;
+type TargetEvent = 'add' | 'addDir' | 'change' | 'rename' | 'renameDir' | 'unlink' | 'unlinkDir';
 
 if (args['--help'] !== undefined) {
 	console.log(
@@ -58,12 +59,20 @@ for (const [key, value] of Object.entries<typeof args[ArgsNames]>(config)) {
 	}
 }
 
-const inputPath = args['--input'];
 const outputPath = args['--output'] as string;
 
 if (!outputPath) {
 	logger.error('Output path not specified!');
 	process.exit(1);
+}
+
+const inputPath = args['--input'];
+let inputContent = '';
+
+if (inputPath) {
+	inputContent = await fs.promises.readFile(inputPath)
+		.then((r) => r.toString())
+		.catch((e) => (logger.warn('Failed to read the input file.', e), ''));
 }
 
 const targetContent = args['--content'] ?? [] as string[];
@@ -76,29 +85,45 @@ if (targetContent.length === 0) {
 	process.exit(1);
 }
 
-await jitEngine.init(inputPath);
+await jitEngine.init([inputPath, inputContent]);
 const targetFiles = await fg(targetContent, { absolute: true, dot: true });
 
 if (isWatch) {
 	watch();
 }
 
-void buildStyles(targetFiles);
+void buildStyles(targetFiles, 'add');
 
-async function buildStyles(files: string[]) {
-	logger.info('Rebuilding styles...');
-	const startTime = Date.now();
-	const css = await jitEngine.generateFrom(files).then((css) => {
-		if (isMinify) {
+async function generateStyles(path: string, content: string) {
+	const css = await jitEngine.putAndGenerateCss(path, content).then((css) => {
+		if (isMinify && css) {
 			return minify(css, { forceMediaMerge: isMergeMq }).css;
 		}
 
 		return css;
 	});
 
-	fs.promises.writeFile(outputPath, css)
-		.then(() => logger.info('Completed in', formatTime(Date.now() - startTime)))
-		.catch((e) => logger.error('Error when write output file.', e));
+	if (css !== undefined) {
+		return fs.promises.writeFile(outputPath, css)
+			.catch((e) => logger.error('Failed to write the output file.', e));
+	}
+}
+
+async function buildStyles(files: string[], event: TargetEvent) {
+	logger.info('Rebuilding styles...');
+	const startTime = Date.now();
+
+	await Promise.all(files.map(async (path) => {
+		if (event === 'unlink') {
+			return generateStyles(path, '');
+		}
+
+		return fs.promises.readFile(path)
+			.then((data) => generateStyles(path, data.toString()))
+			.catch((e) => logger.error('Failed to read a content file.', e));
+	}));
+
+	logger.info('Completed in', formatTime(Date.now() - startTime));
 }
 
 function watch() {
@@ -110,9 +135,9 @@ function watch() {
 		{ ignoreInitial: true, },
 	);
 
-	watcher.on('all', (_event, targetPath: string) => {
-		buildStyles([targetPath])
-			.catch((e) => logger.error('Error when rebuilding styles.', e));
+	watcher.on('all', (e: TargetEvent, targetPath: string) => {
+		buildStyles([targetPath], e)
+			.catch((e) => logger.error('Failed to rebuild styles.', e));
 	});
 }
 

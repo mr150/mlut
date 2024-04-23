@@ -1,5 +1,4 @@
 import path from 'node:path';
-import fs from 'node:fs';
 import * as sass from 'sass-embedded';
 
 import { logger } from '../utils/index.js';
@@ -12,6 +11,7 @@ export class JitEngine {
 	private inputFileDir = __dirname;
 	private sassModuleName = 'tools';
 	private inputFileCache = '@use "../sass/tools";';
+	private generationDebounce: NodeJS.Timeout | undefined;
 	private readonly defaultSassConfig =
 		'@use "sass:map";\n @use "../sass/tools/settings" as ml;';
 	private readonly utilsByFile = new Map<string, string[]>();
@@ -22,61 +22,65 @@ export class JitEngine {
 		utilName: /^-?[A-Z]{1}[a-zA-Z]*/,
 	};
 
-	async init(inputFile = '') {
+	async init(
+		[inputPath, inputContent]: [string | undefined, string | undefined] = ['', '']
+	) {
 		let sassConfig: string | undefined = this.defaultSassConfig;
 
-		if (inputFile) {
-			this.inputFilePath = path.join(process.cwd(), inputFile);
+		if (inputPath && inputContent) {
+			this.inputFilePath = path.join(process.cwd(), inputPath);
 			this.inputFileDir = path.dirname(this.inputFilePath);
-			this.inputFileCache = await fs.promises.readFile(inputFile).then((r) => {
-				const content = r.toString();
-				sassConfig = this.extractUserSassConfig(content);
-
-				return content;
-			});
+			this.inputFileCache = inputContent;
+			sassConfig = this.extractUserSassConfig(inputContent);
 		}
 
 		await this.loadUtils(sassConfig);
 	}
 
-	async generateFrom(files: string[]): Promise<string> {
+	async putAndGenerateCss(id: string, content: string): Promise<string | undefined> {
 		if (this.utils.size === 0) {
 			logger.warn('Config with utilities is not loaded!');
 			return '';
 		}
 
-		await Promise.all(files.map(async (path) => (
-			fs.promises.readFile(path)
-				.then((data) => {
-					if (path === this.inputFilePath) {
-						this.inputFileCache = data.toString();
-						const sassConfig = this.extractUserSassConfig(this.inputFileCache);
+		if (id === this.inputFilePath) {
+			this.inputFileCache = content;
+			const sassConfig = this.extractUserSassConfig(content);
 
-						return !sassConfig ? undefined : this.loadUtils(sassConfig);
-					}
+			if (sassConfig) {
+				await this.loadUtils(sassConfig);
+			}
+		} else if (content) {
+			this.utilsByFile.set(id, this.extractUtils(content));
+		} else {
+			this.utilsByFile.delete(id);
+		}
 
-					this.utilsByFile.set(path, this.extractUtils(data.toString()));
-				})
-				.catch((e) => {
-					logger.error('Error while reading a content file.', e);
-					this.utilsByFile.delete(path);
-				})
-		)));
+		return new Promise((resolve) => {
+			//eslint-disable-next-line
+			let timeout: NodeJS.Timeout | undefined;
+			clearTimeout(this.generationDebounce);
 
-		const allUniqueUtils = [...new Set([...this.utilsByFile.values()].flat())];
-		const applyStr =
-			`\n@include ${this.sassModuleName}.apply(${JSON.stringify(allUniqueUtils)},(),true);`;
+			this.generationDebounce = setTimeout(async () => {
+				clearTimeout(timeout);
+				const allUniqueUtils = [...new Set([...this.utilsByFile.values()].flat())];
+				const applyStr =
+					`\n@include ${this.sassModuleName}.apply(${JSON.stringify(allUniqueUtils)},(),true);`;
 
-		// `compileStringAsync` is almost always faster than `compile` in sass-embedded
-		const css = await sass.compileStringAsync(
-			this.inputFileCache + applyStr,
-			{ loadPaths: [ this.inputFileDir ] }
-		).then(
-			({ css }) => css,
-			(e) => (logger.error('Sass compilation error.', e), ''),
-		);
+				// `compileStringAsync` is almost always faster than `compile` in sass-embedded
+				const css = await sass.compileStringAsync(
+					this.inputFileCache + applyStr,
+					{ loadPaths: [ this.inputFileDir ] }
+				).then(
+					({ css }) => css,
+					(e) => (logger.error('Sass compilation error.', e), undefined),
+				);
 
-		return css;
+				resolve(css);
+			}, 100);
+
+			timeout = setTimeout(() => resolve(undefined), 300);
+		});
 	}
 
 	private extractUtils(content: string): string[] {
