@@ -240,6 +240,10 @@ $-tACs-length: string.length(ml.$tACs);
 	@return string.slice($result, 1, -(1 + string.length($operator)));
 }
 
+@function convert-ar-container($ar, $this-util: null) {
+	@return convert-ar-supports($ar);
+}
+
 @each $key, $value in ml.$at-rules-db {
 	@if meta.function-exists('convert-ar-#{$key}') {
 		ml.$at-rules-db: map.set(

@@ -1556,6 +1556,30 @@ $utils-db: (
 					'pnz': pinch-zoom,
 				),
 			),
+			'Ctnt': (
+				'properties': container-type,
+				'keywords': (
+					'is': inline-size,
+					's': size,
+					'n': normal,
+				),
+			),
+			'Ctnn': (
+				'properties': container-name,
+				'keywords': (
+					'n': none,
+				),
+			),
+			'Ctn': (
+				'properties': container,
+				'multi-list-separator': ml.$tULs2,
+				'keywords': (
+					'is': inline-size,
+					's': size,
+					'n': normal,
+					'nn': none,
+				),
+			),
 
 			// SVG
 			'Fi': (
