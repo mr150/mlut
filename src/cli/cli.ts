@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import fs from 'node:fs';
-import path from 'node:path';
 import arg from 'arg';
 import { minify } from 'csso';
 import fg from 'fast-glob';
@@ -46,16 +45,33 @@ Options:
 	process.exit(0);
 }
 
-const cwd = process.cwd();
-const config = await import(path.join(cwd, 'mlut.config.mjs'))
-	.then((r: { default: object }) => r.default)
-	.catch(() => ({})) as typeof args;
+const inputPath = args['--input'];
+let inputContent = '';
 
-for (const [key, value] of Object.entries<typeof args[ArgsNames]>(config)) {
-	const argKey = '--' + key as ArgsNames;
+if (inputPath) {
+	inputContent = await fs.promises.readFile(inputPath)
+		.then((r) => r.toString())
+		.catch((e) => (logger.warn('Failed to read the input file.', e), ''));
+}
 
-	if (!(argKey in args)) {
-		(args[argKey] as typeof value) = value;
+const cfgMatchResult = inputContent.match(/\$jit:\s*\(([^)]+)/);
+
+if (cfgMatchResult != null) {
+	try {
+		const config = JSON.parse(
+			//eslint-disable-next-line
+			`{${cfgMatchResult[1].replaceAll("'", '"')}}`
+		) as typeof args;
+
+		for (const [key, value] of Object.entries<typeof args[ArgsNames]>(config)) {
+			const argKey = '--' + key as ArgsNames;
+
+			if (!(argKey in args)) {
+				(args[argKey] as typeof value) = value;
+			}
+		}
+	} catch (e) {
+		logger.error('Failed to load the JIT config from the input file.', e);
 	}
 }
 
@@ -64,15 +80,6 @@ const outputPath = args['--output'] as string;
 if (!outputPath) {
 	logger.error('Output path not specified!');
 	process.exit(1);
-}
-
-const inputPath = args['--input'];
-let inputContent = '';
-
-if (inputPath) {
-	inputContent = await fs.promises.readFile(inputPath)
-		.then((r) => r.toString())
-		.catch((e) => (logger.warn('Failed to read the input file.', e), ''));
 }
 
 const targetContent = args['--content'] ?? [] as string[];
