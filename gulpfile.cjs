@@ -207,4 +207,4 @@ gulp.task('img', () => {
 		.pipe(gulp.dest(path.docs.assets));
 });
 
-gulp.task('build', gulp.series('clear', 'style', 'sass-test', 'pug', 'kss', 'img'));
+gulp.task('build', gulp.series('clear', 'style', 'pug', 'kss', 'img'));

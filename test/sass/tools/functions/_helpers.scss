@@ -1,7 +1,7 @@
 @use 'sass:meta';
 @use 'sass:string';
 @use 'sass-true' as *;
-@use 'tools/functions/common/helpers' as ml;
+@use 'src/sass/tools/functions/common/helpers' as ml;
 
 @include describe('tools/functions/common/helpers') {
 	@include describe('is-css-var') {

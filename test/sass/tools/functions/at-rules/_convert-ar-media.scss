@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use 'sass-true' as *;
-@use 'tools' as ml;
+@use 'src/sass/tools' as ml;
 
 ml.$at-rules-db: map.set(
 	ml.$at-rules-db, 'media', 'custom', 'testou', '(orientation: landscape) and (min-height: 20rem)'

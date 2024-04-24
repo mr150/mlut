@@ -29,7 +29,6 @@
 		"mlut": "dist/cli/cli.js"
 	},
 	"files": [
-		"src/",
 		"_index.scss",
 		"_tools.scss",
 		"dist/"
