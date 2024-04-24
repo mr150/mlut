@@ -76,7 +76,7 @@ Once the assembly is configured, just import mlut to your stylesheet, and config
 @use '../../node_modules/mlut' as ml with (
 	$su: 5px,
 	$breakpoints: (
-		'xxl': 1400px
+		'xxxl': 1600px
 	),
 	$colors: (
 		'red0': #f20,
@@ -1197,12 +1197,12 @@ To add or change breakpoints, use the `$breakpoints` map.
 ```scss
 @use 'mlut/tools' as ml with (
 	$breakpoints: (
-		'xxl': 1400px,
+		'xxxl': 1600px,
 		'sm': 480px,
 	),
 );
 
-@include ml.apply('<sm_W15 xxl_W150');
+@include ml.apply('<sm_W15 xxxl_W150');
 
 // CSS
 @media (max-width: 479px) {
@@ -1211,8 +1211,8 @@ To add or change breakpoints, use the `$breakpoints` map.
   }
 }
 
-@media (min-width: 1400px) {
-  .xxl_W150 {
+@media (min-width: 1600px) {
+  .xxxl_W150 {
     width: 150px;
   }
 }
