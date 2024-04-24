@@ -418,6 +418,10 @@ $utils-db: (
 				'properties': max-height,
 				'keywords': 'sizing',
 			),
+			'-Sz': (
+				'properties': (width, height),
+				'keywords': 'sizing',
+			),
 			'Tbl': (
 				'properties': table-layout,
 				'keywords': (
