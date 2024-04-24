@@ -291,17 +291,17 @@ $utils-db: (
 				'properties': grid,
 				'conversion': 'grid-tpl',
 				'multi-list-separator': ml.$tULs2,
-				'keywords': ('grid', 'sizing'),
+				'keywords': ('grid', 'sizing', 'grid-type'),
 			),
 			'Gt': (
 				'properties': grid-template,
 				'conversion': 'grid-tpl',
-				'keywords': 'sizing',
+				'keywords': ('sizing', 'grid-type'),
 			),
 			'Gtc': (
 				'properties': grid-template-columns,
 				'conversion': 'grid-tpl',
-				'keywords': 'sizing',
+				'keywords': ('sizing', 'grid-type'),
 			),
 			'Gc': (
 				'properties': grid-column,
@@ -322,7 +322,7 @@ $utils-db: (
 			'Gtr': (
 				'properties': grid-template-rows,
 				'conversion': 'grid-tpl',
-				'keywords': 'sizing',
+				'keywords': ('sizing', 'grid-type'),
 			),
 			'Gr': (
 				'properties': grid-row,
@@ -1696,6 +1696,9 @@ $utils-db: (
 			),
 			'grid-area': (
 				's': span,
+			),
+			'grid-type': (
+				'sg': subgrid,
 			),
 			'grid': (
 				'af': auto-flow,
