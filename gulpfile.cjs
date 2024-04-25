@@ -101,7 +101,7 @@ gulp.task('sass-test', shell.task(
 ));
 
 gulp.task('style', gulp.series('css-lint', function(){
-	return gulp.src(path.src + '*.scss')
+	return gulp.src(path.src + 'mlut-demo-theme.scss')
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sass({
