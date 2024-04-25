@@ -21,6 +21,10 @@ export class JitEngine {
 		tooMoreSpaces: /\s{2,}|\n/g,
 		utilName: /^-?[A-Z]{1}[a-zA-Z]*/,
 	};
+	private readonly configRegexps = {
+		userSettings: /@use ['"][^'"]*(tools|mlut)['"](\s*as\s+[\w]+)?\s+with\s*\(([^;]+)\);/s,
+		sassModuleName: /@use ['"][^'"]*(tools|mlut)['"]\s*;/s,
+	};
 
 	async init(
 		[inputPath, inputContent]: [string | undefined, string | undefined] = ['', '']
@@ -70,7 +74,7 @@ export class JitEngine {
 				// `compileStringAsync` is almost always faster than `compile` in sass-embedded
 				const css = await sass.compileStringAsync(
 					this.inputFileCache + applyStr,
-					{ loadPaths: [ this.inputFileDir ] }
+					{ loadPaths: [ this.inputFileDir, 'node_modules' ] }
 				).then(
 					({ css }) => css,
 					(e) => (logger.error('Sass compilation error.', e), undefined),
@@ -125,9 +129,7 @@ export class JitEngine {
 	}
 
 	private extractUserSassConfig(content: string): string | undefined {
-		const matchResult = content.match(
-			/@use ['"][^'"]*(tools|mlut)['"](\s*as\s+[\w]+)?\s+with\s*\(([^;]+)\);/s
-		);
+		let matchResult = content.match(this.configRegexps.userSettings);
 
 		if (matchResult != null) {
 			const userSettings = matchResult.at(-1) as string;
@@ -137,6 +139,12 @@ export class JitEngine {
 
 			return this.defaultSassConfig.slice(0, -1) + ` with (${userSettings});`;
 		}
+
+		matchResult = content.match(this.configRegexps.sassModuleName);
+
+		if (matchResult != null) {
+			this.sassModuleName = matchResult[1];
+		}
 	}
 
 	private async loadUtils(userConfig = this.defaultSassConfig) {
@@ -144,7 +152,7 @@ export class JitEngine {
 			userConfig + '\n a{ all: map.keys(map.get(ml.$utils-db, "utils", "registry")); }',
 			{
 				style: 'compressed',
-				loadPaths: [ __dirname ],
+				loadPaths: [ __dirname, 'node_modules' ],
 			}
 		));
 
