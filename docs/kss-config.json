@@ -2,7 +2,7 @@
   "//": "The source and destination paths are relative to this file.",
   "source": [
 		"content",
-		"../src"
+		"../src/sass"
 	],
   "destination": "styleguide",
   "homepage": "../docs/homepage.md",
@@ -10,7 +10,7 @@
 
   "//": "The css and js paths are URLs relative to the style guide destination.",
   "css": [
-    "kss-assets/mlut.min.css",
+    "kss-assets/docs.min.css",
     "kss-assets/test.css",
     "kss-assets/generate.min.css"
   ],

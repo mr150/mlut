@@ -1,17 +1,17 @@
 @use 'sass-true' as *;
 @use 'sass:map';
 
-@use 'tools/settings/common/at-rules' as ml with (
+@use 'src/sass/tools/settings/common/at-rules' as ml with (
 	$breakpoints: (
 		'xmd': 640px,
-		'xxl': 1400px,
+		'xxl': 1600px,
 	),
 	$breakpoints-ext: (
 		'xsm': 480px,
 	)
 );
 
-@use 'tools/settings/high/grid' with (
+@use 'src/sass/tools/settings/high/grid' with (
 	$legacy-grid-system: true,
 );
 
@@ -26,7 +26,7 @@
 				'md': 768px,
 				'lg': 992px,
 				'xl': 1200px,
-				'xxl': 1400px,
+				'xxl': 1600px,
 			),
 			$inspect: true,
 		);
@@ -37,6 +37,7 @@
 		'md': 768px,
 		'lg': 992px,
 		'xl': 1200px,
+		'xxl': 1400px,
 	);
 
 	ml.$at-rules-cfg: map.set(

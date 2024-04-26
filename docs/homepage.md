@@ -7,7 +7,7 @@
 
 Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity <br> Get almost all power of CSS in one utility!
 
-<img alt="GIF animation with usage example" src="kss-assets/TLDR.gif" class="D Mb4gg"/>
+<img class="D Mb4gg" alt="GIF animation with usage example" src="kss-assets/jit-demo.gif"/>
 
 ## Features
 
@@ -70,170 +70,6 @@ Convenient syntax for complex values, states and at-rules. It is like Vim for CS
 
 <section class="Mb4gg">
 
-### Easiest utils generation
-
-JIT mode planned but here is what we have now:
-
-#### Range [syntaxes](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range)
-
-<table class="Mt3u Mb3gg M0_:pre">
-<tr>
-<th>Sass</th>
-<th>CSS</th>
-</tr>
-<tr>
-<td valign="top">
-
-```scss
-@use 'mlut' with (
-  $utils: (
-    'Bdw': ([2u, 4],),
-  )
-);
-```
-
-</td>
-<td valign="top">
-
-```scss
-.Bdw2u {
-  border-width: 0.5rem;
-}
-
-.Bdw3u {
-  border-width: 0.75rem;
-}
-
-.Bdw4u {
-  border-width: 1rem;
-}
-```
-
-</td>
-</tr>
-</table>
-
-#### Components syntax
-<table class="Mt3u Mb3gg M0_:pre">
-<tr>
-<th>Sass</th>
-<th>CSS</th>
-</tr>
-<tr>
-<td valign="top">
-
-```scss
-@use 'mlut' with (
-  $utils: (
-    'D': ('xl _ib_ b af'),
-  )
-);
-```
-
-</td>
-<td valign="top">
-
-```scss
-.D-ib {
-  display: inline-block;
-}
-
-.D-ib_b::before {
-  display: inline-block;
-}
-
-.D-ib_af::after {
-  display: inline-block;
-}
-
-@media (min-width: 1200px) {
-  .xl_D-ib {
-    display: inline-block;
-  }
-}
-```
-
-</td>
-</tr>
-</table>
-
-#### Groups
-<table class="Mt3u Mb3gg M0_:pre">
-<tr>
-<th>Sass</th>
-<th>CSS</th>
-</tr>
-<tr>
-<td valign="top">
-
-```scss
-@use 'mlut' with (
-  $utils: (
-    'Paddings': (150),
-  )
-);
-```
-
-</td>
-<td valign="top">
-
-```scss
-.P150 {
-  padding: 150px;
-}
-
-.Pt150 {
-  padding-top: 150px;
-}
-
-.Pr150 {
-  padding-right: 150px;
-}
-
-// etc.
-```
-
-</td>
-</tr>
-</table>
-
-#### Top-level apply
-<div class="Mt3u M0_:pre Ov-a W100p">
-<table>
-<tr>
-<th>Sass</th>
-<th>CSS</th>
-</tr>
-<tr>
-<td valign="top">
-
-```scss
-@include ml.apply(
-  '^0:+_-MyPad1.5;3u -Gdl-r,#0f0;30p,#00f;80p,red'
-);
-```
-
-</td>
-<td valign="top">
-
-```scss
-.-Ctx0 + .\^0\:\+_-MyPad1\.5\;3u {
-  --ml-myPad: 1.5rem 0.75rem;
-}
-
-.-Gdl-r\,\#0f0\;30p\,\#00f\;80p\,red {
-  background-image: linear-gradient(to right, #0f0 30%, #00f 80%, red);
-}
-```
-
-</td>
-</tr>
-</table>
-</div>
-</section>
-
-<section class="Mb4gg">
-
 ### Handy extension
 Add utilities, states and custom at-rules with few lines of code
 ```scss
@@ -281,7 +117,8 @@ Add utilities, states and custom at-rules with few lines of code
 <section class="Mb4gg">
 
 ### And also...
-- ⚡️ Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
+- 💅️ Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
+- ⚡ JIT (on-demand) and AOT mods are available
 - 🔧 **Fully customizable**: change tokens, utilities names and any settings
 - ✨ **Easy to integrate** in existing project. No name collisions with your CSS in the most projects. Increasing specificity in [one line](https://mr150.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity) or for [one](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu) utility.
 
@@ -292,14 +129,14 @@ Add utilities, states and custom at-rules with few lines of code
 ## Structure ##
 - Sass tools
 - opt-in CSS library
-- addons
+- Sass addons
+- JIT engine
 
 ### Library ###
-The library part of toolkit named `Core` and consists of:
+The library part of toolkit consists of:
 
 - base styles - variables and generic CSS like reset, normalize etc.
 - helpers - similar to utilities: the same universal, but more complex and can consist of several CSS rules
-- utilities - such that can be used in any project, regardless of design: no colors, typography, etc. Theme utils you can find in addons
 
 The library is **modular** and you can include only what you need
 
@@ -310,15 +147,14 @@ Sass tools include:
 - mixins and functions with which you can generate utilities and write styles
 
 ### Addons ###
-Addons may contains any tools, utilities and styles. In the `core/utils/init.scss` module implemented a method to work with sets of utilities from addons. Addons now at the **preview** stage and in the future, may be moved to separate packages
+Addons may contains any tools, settings and styles. Addons now at the **preview** stage and in the future be moved to separate packages
 </section>
 
 <section class="Mb4gg">
 
 ## What next? ##
-- CLI
-- JIT mode
-- first class CSS functions in utils values
+- plugins for popular bundlers and frameworks
+- first class CSS functions in utilities values
 - and much more!
 
 </section>

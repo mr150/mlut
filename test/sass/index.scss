@@ -3,12 +3,12 @@
 	$terminal-output: false,
 );
 
-@use 'tools/settings/base/general' with (
+@use 'src/sass/tools/settings/base/general' with (
 	$is-test-env: true,
 	$css-vars-fallback: true,
 );
 
-@use 'tools/settings/common/utils' as cu with (
+@use 'src/sass/tools/settings/common/utils' as cu with (
 	$utils-data: (
 		'utils': (
 			'registry': (

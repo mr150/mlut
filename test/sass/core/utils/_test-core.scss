@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use 'tools' as ml;
+@use 'src/sass/tools' as ml;
 
 ml.$utils-map: map.set(
 	ml.$utils-map,

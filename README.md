@@ -12,7 +12,6 @@ Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexit
 	- 🔠 [Strong naming convention](#strong-naming-convention)
 	- 🎨 [Almost arbitrary by design](#almost-arbitrary-by-design)
 	- ✋ [Great ergonomics](#great-ergonomics)
-	- 🔨 [Easiest utils generation](#easiest-utils-generation)
 	- 🧩 [Handy extension](#handy-extension)
 	- 👀 [And also...](#and-also)
 - [Structure](#structure)
@@ -27,7 +26,7 @@ Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexit
 - [Acknowledgement](#acknowledgement)
 - [License](#license)
 
-<img alt="GIF animation with usage example" src="docs/img/TLDR.gif"/>
+<img alt="GIF animation with usage example" src="docs/img/jit-demo.gif"/>
 
 ## Features
 
@@ -75,168 +74,6 @@ Convenient syntax for complex values, states and at-rules. It is like Vim for CS
 - `C-$myVar?#333` => `color: var(--ml-myVar, #333)`
 - `@s_Ml1svw` => `@supports (margin-left: 1svw) { .\@s_Ml1svw { margin-left: 1svw } }`
 
-
-### Easiest utils generation
-
-JIT mode is already in development, but here's what we have now:
-
-#### Range [syntaxes](https://mr150.github.io/mlut/section-how_to.html#kssref-how_to-mk_utils-range)
-
-<table>
-<tr>
-<th>Sass</th>
-<th>CSS</th>
-</tr>
-<tr>
-<td valign="top">
-
-```scss
-@use 'mlut' with (
-  $utils: (
-    'Bdw': ([2u, 4],),
-  )
-);
-```
-
-</td>
-<td valign="top">
-
-```scss
-.Bdw2u {
-  border-width: 0.5rem;
-}
-
-.Bdw3u {
-  border-width: 0.75rem;
-}
-
-.Bdw4u {
-  border-width: 1rem;
-}
-```
-
-</td>
-</tr>
-</table>
-
-#### Components syntax
-<table>
-<tr>
-<th>Sass</th>
-<th>CSS</th>
-</tr>
-<tr>
-<td valign="top">
-
-```scss
-@use 'mlut' with (
-  $utils: (
-    'D': ('xl _ib_ b af'),
-  )
-);
-```
-
-</td>
-<td valign="top">
-
-```scss
-.D-ib {
-  display: inline-block;
-}
-
-.D-ib_b::before {
-  display: inline-block;
-}
-
-.D-ib_af::after {
-  display: inline-block;
-}
-
-@media (min-width: 1200px) {
-  .xl_D-ib {
-    display: inline-block;
-  }
-}
-```
-
-</td>
-</tr>
-</table>
-
-#### Groups
-<table>
-<tr>
-<th>Sass</th>
-<th>CSS</th>
-</tr>
-<tr>
-<td valign="top">
-
-```scss
-@use 'mlut' with (
-  $utils: (
-    'Paddings': (150),
-  )
-);
-```
-
-</td>
-<td valign="top">
-
-```scss
-.P150 {
-  padding: 150px;
-}
-
-.Pt150 {
-  padding-top: 150px;
-}
-
-.Pr150 {
-  padding-right: 150px;
-}
-
-// etc.
-```
-
-</td>
-</tr>
-</table>
-
-#### Top-level apply
-<div class="Ov-a W100p">
-<table>
-<tr>
-<th>Sass</th>
-<th>CSS</th>
-</tr>
-<tr>
-<td valign="top">
-
-```scss
-@include ml.apply(
-  '^0:+_-MyPad1.5;3u -Gdl-r,#0f0;30p,#00f;80p,red'
-);
-```
-
-</td>
-<td valign="top">
-
-```scss
-.-Ctx0 + .\^0\:\+_-MyPad1\.5\;3u {
-  --ml-myPad: 1.5rem 0.75rem;
-}
-
-.-Gdl-r\,\#0f0\;30p\,\#00f\;80p\,red {
-  background-image: linear-gradient(to right, #0f0 30%, #00f 80%, red);
-}
-```
-
-</td>
-</tr>
-</table>
-</div>
-
 ### Handy extension
 Add utilities, states and custom at-rules with few lines of code
 ```scss
@@ -280,21 +117,22 @@ Add utilities, states and custom at-rules with few lines of code
 ```
 
 ### And also...
-- ⚡️ Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
+- 💅️ Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
+- ⚡ JIT (on-demand) and AOT mods are available
 - 🔧 **Fully customizable**: change tokens, utilities names and any settings
 - ✨ **Easy to integrate** in existing project. No name collisions with your CSS in the most projects. Increasing specificity in [one line](https://mr150.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity) or for [one](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu) utility.
 
 ## Structure ##
 - Sass tools
 - opt-in CSS library
-- addons
+- Sass addons
+- JIT engine
 
 ### Library ###
-The library part of toolkit named `Core` and consists of:
+The library part of toolkit consists of:
 
 - base styles - variables and generic CSS like reset, normalize etc.
 - helpers - similar to utilities: the same universal, but more complex and can consist of several CSS rules
-- utilities - such that can be used in any project, regardless of design: no colors, typography, etc. Theme utils you can find in addons
 
 The library is **modular** and you can include only what you need
 
@@ -305,7 +143,7 @@ Sass tools include:
 - mixins and functions with which you can generate utilities and write styles
 
 ### Addons ###
-Addons may contains any tools, utilities and styles. In the `core/utils/init.scss` module implemented a method to work with sets of utilities from addons. Addons now at the **preview** stage and in the future, may be moved to separate packages
+Addons may contains any tools, settings and styles. Addons now at the **preview** stage and in the future be moved to separate packages
 
 ## Getting Started ##
 There are 2 ways to start using mlut:
@@ -321,11 +159,7 @@ npm i mlut -D
 ```
 
 #### CDN ####
-Only core:
-```html
-<link href="https://unpkg.com/mlut@latest/dist/mlut.min.css" rel="stylesheet">
-```
-or with Demo theme included:
+With Demo theme:
 ```html
 <link href="https://unpkg.com/mlut@latest/dist/mlut-demo-theme.min.css" rel="stylesheet">
 ```
@@ -341,9 +175,9 @@ You can get assembled mlut code and include it to your project. There are some w
 
 Add the files to your page like here:
 ```html
-<link href="css/mlut.min.css" rel="stylesheet">
+<link href="css/mlut-demo-theme.min.css" rel="stylesheet">
 ```
-And just add classes to markup:
+And just use classes in the markup:
 ```html
 <div class="D-g Gtc-t3">
   <div class="Bd P2u">
@@ -351,53 +185,74 @@ And just add classes to markup:
 ```
 
 #### Toolkit ####
-To use all mlut features you need an assembly. You will need to install a package via NPM and:
+mlut has a CLI:
+```
+Usage:
+  mlut [-i input.scss] [-o output.css] [--watch] [options...]
 
-- [Dart Sass](https://github.com/sass/sass), and in particular [sass-embedded](https://www.npmjs.com/package/sass-embedded) for better performance
-- CSS minifier or PostCSS plugin that can group media queries. For example: [CSSO](https://github.com/css/csso) or [this](https://github.com/SassNinja/postcss-combine-media-query) plugin
-- [PurgeCSS](https://github.com/FullHuman/purgecss) is recommended for removing unused CSS
+Options:
+  -h, --help            Print this help message
+  -i, --input           Input sass file
+  -o, --output          Output css file
+  -w, --watch           Watch for changes and rebuild as needed
+  -m, --minify          Generate minified css file
+      --content         Paths to content with markup
+      --no-merge-mq     Prevent merging of css media queries during minification
+```
 
-Once the assembly is configured, just import mlut to your stylesheet, and configure it as you need:
+In the input sass file, you can customize mlut and write your own styles. Input file is optional, but if you use it, you must import mlut
 ```scss
-@use '../../node_modules/mlut' as ml with (
-  $su: 5px,
+@use 'mlut' with (
   $breakpoints: (
-    'xxl': 1400px
+    'xxl': 1600px,
   ),
   $colors: (
     'red0': #f20,
   ),
-  $utils: (
-    '^_D': ('', 'n', 'f'),
+);
+
+.complex-block {
+  // CSS
+}
+```
+You can add the JIT options here too. Options must be a **valid JSON**, but single quotes is allowed. Paths will be resolved relative to the JIT engine working directory
+```scss
+@use 'mlut' with (
+  $jit: (
+    'output': 'src/assets/css/style.css',
+    'content': [
+      'src/**/*.ejs', 'src/assets/js/*.js'
+    ]
   ),
 );
 ```
-Also now you can use Sass tools for writing CSS manually:
-```scss
-.my-card {
-  display: block;
-
-  @include ml.apply(
-    'P2u Fns1r'
-  );
-
-  @include ml.bp('md') {
-    font-size: calc(ml.px2rem(20px) + 1vw);
-  }
-}
+To start the build process:
 ```
-Probably you want to set the Sass [load path](https://sass-lang.com/documentation/js-api/interfaces/LegacyFileOptions#includePaths) for easier import:
-```scss
-@use 'mlut' as ml with (
+npx mlut -i src/assets/sass/style.scss -w
+```
+Add the compiled CSS to your page and use mlut utils!
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/assets/css/style.css" rel="stylesheet">
+  </head>
+  <body class="M0">
+    <h1 class="C-red Fnw800 P2u">
+      Lorem Ipsum
+    </h1>
+  </body>
+</html>
 ```
 
 ## Documentation ##
-Available [here](https://mr150.github.io/mlut/) or can be run locally. Documentation is included in this repo and is generated using [KSS-node](https://github.com/kss-node/kss-node) from the comments in the sources.
+Available [here](https://mr150.github.io/mlut/) or can be run locally. Documentation is included in this repo and is generated using [KSS-node](https://github.com/kss-node/kss-node) from the comments in the sources
 
 ## What next? ##
-- CLI (almost done)
-- JIT mode ([WIP](https://github.com/mr150/mlut/tree/feat/jit))
-- first class CSS functions in utils values
+- plugins for popular bundlers and frameworks
+- first class CSS functions in utilities values
 - and much more!
 
 ## Acknowledgement ##
