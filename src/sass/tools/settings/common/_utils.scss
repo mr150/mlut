@@ -105,6 +105,12 @@ $-css-wide-kw: (
 	'rvrl': revert-layer,
 	'ust': unset,
 );
+$-sizing-kw: (
+	'fc': fit-content,
+	'mc': max-content,
+	'mnc': min-content,
+);
+
 $-bd-kw-links: ('border', 'line-style', 'line-width');
 
 //stylelint-disable
@@ -1747,6 +1753,7 @@ $utils-db: (
 					fill, outline-color, stroke,
 				),
 			),
+			'sizing': $-sizing-kw,
 		),
 	),
 
@@ -1786,11 +1793,7 @@ $utils-db: (
 				'tp': transparent,
 				'cc': currentColor,
 			),
-			'sizing': (
-				'fc': fit-content,
-				'mc': max-content,
-				'mnc': min-content,
-			),
+			'sizing': $-sizing-kw,
 		),
 	),
 ) !default;
