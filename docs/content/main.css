@@ -78,7 +78,7 @@ In the input sass file, you can customize mlut and write your own styles. Input 
 );
 
 .complex-block {
-	// CSS
+  // CSS
 }
 ```
 You can add the JIT options here too. Options must be a **valid JSON**, but single quotes is allowed. Paths will be resolved relative to the JIT engine working directory
