@@ -40,7 +40,7 @@
 //
 //	// etc
 // ```
-// Do not forget that you can use Components Syntax for any utility value. This is available, both in a map of values and in the list.
+// Do not forget that you can use Generation Syntax for any utility value. This is available, both in a map of values and in the list.
 // ```scss
 //	@include ml.mk-util(
 //		'Mxw', (
@@ -54,7 +54,7 @@
 //	));
 // ```
 //
-// $raw-name - `string` <div> name of the utility. You can use [components syntax](section-concepts.html#kssref-concepts-util-components-syntax) here </div>
+// $raw-name - `string` <div> name of the utility. You can use [generation syntax](section-concepts.html#kssref-concepts-util-components-syntax) here </div>
 // $values - <div class="Mt3u"> `list | map` </div> You can specify a map with utility values and CSS properties values. Or you can pass a list with only utility values. It will be converted to CSS values depends on conversion type of utility
 // $components = () - <div class="Mt3u"> `map` </div> Contains utility [components](section-concepts.html#kssref-concepts-util-components) in longhand format
 // $options = () - <div class="Mt3u"> `map` </div> Options of utilities, similarly to [those](section-settings.html#kssref-settings-utils-data-options) that are in the utility registry. Here you can change the options for a specific set of values without changing the main utility options. Also, you can create a new utility in-place, without registration ~~and SMS~~

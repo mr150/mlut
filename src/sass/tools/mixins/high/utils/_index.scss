@@ -42,7 +42,7 @@
 //	// etc
 // ```
 //
-// $raw-name - `string` <div> name of the group. You can use [components syntax](section-concepts.html#kssref-concepts-util-components-syntax) here </div>
+// $raw-name - `string` <div> name of the group. You can use [generation syntax](section-concepts.html#kssref-concepts-util-components-syntax) here </div>
 // $values - <div class="Mt3u"> `list | map` </div> You can specify a map with utility values and CSS properties values. Or you can pass a list with only utility values. It will be converted to CSS values depends on conversion type of utility
 // $components = () - <div class="Mt3u"> `map` </div> Contains utility [components](section-concepts.html#kssref-concepts-util-components) in longhand format
 //
@@ -119,7 +119,7 @@
 //
 // If a mixin is called outside CSS rule, then creates utilities from the list. See examples [here](section-how_to.html#kssref-how_to-config).
 //
-// Apply has some restrictions. If you try to use a utility with `pre-state` in it without a clear indication that this is a state, you will get an error. This happens because the Parser cannot distinguish `pre-state` from the utility itself. To create such utilities, pass a list of utilities as a list of strings, separating the components of the utility by spaces, as well as in Components Syntax. Next, pass `true` in the third argument:
+// Apply has some restrictions. If you try to use a utility with `pre-state` in it without a clear indication that this is a state, you will get an error. This happens because the Parser cannot distinguish `pre-state` from the utility itself. To create such utilities, pass a list of utilities as a list of strings, separating the components of the utility by spaces, as well as in Generation Syntax. Next, pass `true` in the third argument:
 // ```scss
 //	@include ml.apply(('.js:h:>* _D', 'Lnh2r!_af'), (), true);
 //
