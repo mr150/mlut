@@ -7,7 +7,7 @@
 
 Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity <br> Get almost all power of CSS in one utility!
 
-<img class="D Mb4gg" alt="GIF animation with usage example" width="100%" src="kss-assets/jit-demo.gif"/>
+<img class="D Mb4gg" alt="GIF animation with usage example" src="kss-assets/jit-demo.gif"/>
 
 ## Features
 

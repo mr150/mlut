@@ -26,7 +26,7 @@ Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexit
 - [Acknowledgement](#acknowledgement)
 - [License](#license)
 
-<img alt="GIF animation with usage example" width="100%" src="docs/img/jit-demo.gif"/>
+<img alt="GIF animation with usage example" src="docs/img/jit-demo.gif"/>
 
 ## Features
 
@@ -218,12 +218,12 @@ In the input sass file, you can customize mlut and write your own styles. Input 
 You can add the JIT options here too. Options must be a **valid JSON**, but single quotes is allowed. Paths will be resolved relative to the JIT engine working directory
 ```scss
 @use 'mlut' with (
-	$jit: (
-		'output': 'src/assets/css/style.css',
-		'content': [
-			'src/**/*.ejs', 'src/assets/js/*.js'
-		]
-	),
+  $jit: (
+    'output': 'src/assets/css/style.css',
+    'content': [
+      'src/**/*.ejs', 'src/assets/js/*.js'
+    ]
+  ),
 );
 ```
 To start the build process:
@@ -236,14 +236,14 @@ Add the compiled CSS to your page and use mlut utils!
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="/assets/css/style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/assets/css/style.css" rel="stylesheet">
   </head>
   <body class="M0">
-		<h1 class="C-red Fnw800 P2u">
-			Lorem Ipsum
-		</h1>
-	</body>
+    <h1 class="C-red Fnw800 P2u">
+      Lorem Ipsum
+    </h1>
+  </body>
 </html>
 ```
 
