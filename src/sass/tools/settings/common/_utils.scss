@@ -1675,11 +1675,6 @@ $utils-db: (
 				's': scroll,
 				'v': visible
 			),
-			'sizing': (
-				'fc': fit-content,
-				'mc': max-content,
-				'mnc': min-content,
-			),
 			'box-alignment': (
 				'b': baseline,
 				'c': center,
@@ -1769,6 +1764,14 @@ $utils-db: (
 				'properties': aspect-ratio,
 				'conversion': 'num-length',
 			),
+			'Bls': (
+				'properties': block-size,
+				'keywords': 'sizing',
+			),
+			'Ils': (
+				'properties': inline-size,
+				'keywords': 'sizing',
+			),
 		),
 		'keywords': (
 			'css': $-css-wide-kw,
@@ -1782,6 +1785,11 @@ $utils-db: (
 			'colors': (
 				'tp': transparent,
 				'cc': currentColor,
+			),
+			'sizing': (
+				'fc': fit-content,
+				'mc': max-content,
+				'mnc': min-content,
 			),
 		),
 	),
@@ -1877,6 +1885,26 @@ $utils-db: map.set(
 					'conversion': 'resolution',
 					'keywords': (
 						'i': infinite,
+					),
+				),
+			),
+		),
+	),
+);
+
+$utils-db: map.set(
+	$utils-db,
+	'container',
+	(
+		'registry': map.deep-merge(
+			$-common-registry,
+			(
+				'o': (
+					'properties': orientation,
+					'keywords': (
+						'': landscape,
+						'l': landscape,
+						'p': portrait,
 					),
 				),
 			),

@@ -84,12 +84,12 @@ In the input sass file, you can customize mlut and write your own styles. Input 
 You can add the JIT options here too. Options must be a **valid JSON**, but single quotes is allowed. Paths will be resolved relative to the JIT engine working directory
 ```scss
 @use 'mlut' with (
-	$jit: (
-		'output': 'src/assets/css/style.css',
-		'content': [
-			'src/*.ejs', 'src/assets/js/*.js'
-		]
-	),
+  $jit: (
+    'output': 'src/assets/css/style.css',
+    'content': [
+      'src/*.ejs', 'src/assets/js/*.js'
+    ]
+  ),
 );
 ```
 To start the build process:
@@ -102,14 +102,14 @@ Add the compiled CSS to your page and use mlut utils!
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="/assets/css/style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/assets/css/style.css" rel="stylesheet">
   </head>
   <body class="M0">
-		<h1 class="C-red Fnw800 P2u">
-			Lorem Ipsum
-		</h1>
-	</body>
+    <h1 class="C-red Fnw800 P2u">
+      Lorem Ipsum
+    </h1>
+  </body>
 </html>
 ```
 
@@ -608,7 +608,25 @@ Styleguide: concepts.at_rules.layer
 /*
 @container
 
-WIP
+With the @container rule you can use both generic and named container queries
+
+```scss
+@include tools.apply('@c:w>600_C-red');
+@include tools.apply('@c:box:h>20r_P5u');
+
+// CSS
+@container (min-width: 601px) {
+  .\@c\:w\>600_C-red {
+    color: red;
+  }
+}
+
+@container box (max-height: 20rem) {
+  .\@c\:box\:h\<\=20r_P5u {
+    padding: 1.25rem;
+  }
+}
+```
 
 Styleguide: concepts.at_rules.container
 */

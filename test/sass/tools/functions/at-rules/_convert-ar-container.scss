@@ -1,0 +1,52 @@
+@use 'sass:map';
+@use 'sass-true' as *;
+@use 'src/sass/tools' as ml;
+
+ml.$at-rules-db: map.set(
+	ml.$at-rules-db, 'container', 'custom', 'testou', '(height > 20rem) and style(color: red)'
+);
+
+@include describe('tools/functions/high/at-rules/') {
+	@include describe('convert-ar-container') {
+		@include it('converts custom condition') {
+			@include assert-equal(
+				ml.convert-ar-container('-testou'),
+				 '(height > 20rem) and style(color: red)',
+			);
+
+			@include assert-equal(
+				ml.convert-ar-container('-myCond'),
+				'ERROR: Undefined custom container condition: `-myCond`',
+			);
+		}
+
+		@include it('converts single expression') {
+			@include assert-equal(
+				ml.convert-ar-container('w>500'),
+				'(min-width: 501px)',
+			);
+
+			@include assert-equal(
+				ml.convert-ar-container('apcr1/1'),
+				'(aspect-ratio: 1/1)',
+			);
+		}
+
+		@include it('converts complex condition') {
+			@include assert-equal(
+				ml.convert-ar-container('bls-mc,h100vh'),
+				'(block-size: max-content), (height: 100vh)',
+			);
+
+			@include assert-equal(
+				ml.convert-ar-container('ils30r:o'),
+				'(inline-size: 30rem) and (orientation: landscape)',
+			);
+
+			@include assert-equal(
+				ml.convert-ar-container('box:w>400'),
+				'box (min-width: 401px)',
+			);
+		}
+	}
+}
