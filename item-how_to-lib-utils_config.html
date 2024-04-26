@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width"/>
 
   <link rel="stylesheet" href="kss-assets/kss.css"/>
-  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+  <link rel="stylesheet" href="kss-assets/docs.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
 <link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
@@ -95,7 +95,7 @@
                   #how_to.lib.utils_config
               </span>
             </span>
-            Utilities configuration
+            Utilities configuration (AOT)
           </a>
         </h3>
 
@@ -107,7 +107,7 @@
 <li><code>/ban</code> - exclude these utilities, <code>list</code></li>
 <li><code>/override</code> - <code>map</code> with utilities and values, which will be merged into <code>$utils-map</code> with overwriting. Passing <code>null</code> will clear <code>$utils-map</code>.</li>
 </ul>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/src/core/utils&#x27;</span> with (
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/dist/core/utils&#x27;</span> with (
 	<span class="hljs-variable">$utils</span>: (
 		<span class="hljs-string">&#x27;C&#x27;</span>: red,
 
@@ -146,7 +146,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1068
+          Source: <code>content/main.css</code>, line 1120
         </div>
 
     </div>

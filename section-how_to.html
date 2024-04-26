@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width"/>
 
   <link rel="stylesheet" href="kss-assets/kss.css"/>
-  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+  <link rel="stylesheet" href="kss-assets/docs.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
 <link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
@@ -46,7 +46,7 @@
               <li class="kss-nav__menu-item">
                 <a class="kss-nav__menu-link" href="section-how_to.html#kssref-how_to-mk_utils">
                   <span class="kss-nav__ref ">3.1</span
-                  ><span class="kss-nav__name">Utils Generation</span>
+                  ><span class="kss-nav__name">Utils Generation (AOT)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
@@ -94,13 +94,13 @@
               <li class="kss-nav__menu-item">
                 <a class="kss-nav__menu-link" href="section-how_to.html#kssref-how_to-lib-utils">
                   <span class="kss-nav__ref kss-nav__ref-child">3.2.1</span
-                  ><span class="kss-nav__name">Core utilities</span>
+                  ><span class="kss-nav__name">Core utilities (AOT)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
                 <a class="kss-nav__menu-link" href="section-how_to.html#kssref-how_to-lib-utils_config">
                   <span class="kss-nav__ref kss-nav__ref-child">3.2.2</span
-                  ><span class="kss-nav__name">Utilities configuration</span>
+                  ><span class="kss-nav__name">Utilities configuration (AOT)</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
@@ -208,7 +208,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 779
+          Source: <code>content/main.css</code>, line 832
         </div>
 
     </div>
@@ -223,7 +223,7 @@
                   #how_to.mk_utils
               </span>
             </span>
-            Utils Generation
+            Utils Generation (AOT)
           </a>
         </h2>
 
@@ -243,7 +243,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 789
+          Source: <code>content/main.css</code>, line 842
         </div>
 
     </section>
@@ -264,7 +264,7 @@
 
 
           <div class="kss-description">
-            <p>Standard methods include creating through config and using <code>mk-</code> <a href="section-sass-tools.html#kssref-sass-tools-mixins-utils-mk_util">mixins</a>. As the values of utilities, you can use a list or map. The components syntax can be used both in the names of utilities/groups and in the values.</p>
+            <p>Standard methods include creating through config and using <code>mk-</code> <a href="section-sass-tools.html#kssref-sass-tools-mixins-utils-mk_util">mixins</a>. As the values of utilities, you can use a list or map. The generation syntax can be used both in the names of utilities/groups and in the values.</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@include</span> ml.mk-util(
 	<span class="hljs-string">&#x27;Mxw&#x27;</span>,
 	(
@@ -292,7 +292,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 800
+          Source: <code>content/main.css</code>, line 853
         </div>
 
     </section>
@@ -348,7 +348,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 859
+          Source: <code>content/main.css</code>, line 912
         </div>
 
     </section>
@@ -395,7 +395,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 831
+          Source: <code>content/main.css</code>, line 884
         </div>
 
     </section>
@@ -436,7 +436,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 895
+          Source: <code>content/main.css</code>, line 948
         </div>
 
     </section>
@@ -457,7 +457,7 @@
 
 
           <div class="kss-description">
-            <p>In the components syntax, you can use keywords to specified with what components you need to generate utilities. Keywords are written as ordinary components through a space. <em>Note</em> that by default when specifying the components, the value of the utility without components is also generated. This behavior can also be changed.</p>
+            <p>In the generation syntax, you can use keywords to specified with what components you need to generate utilities. Keywords are written as ordinary components through a space. <em>Note</em> that by default when specifying the components, the value of the utility without components is also generated. This behavior can also be changed.</p>
 <p>Also, using one keyword, you can specify several of the same type of components.</p>
 <p>More detailed examples will be added later.</p>
 
@@ -507,7 +507,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1010
+          Source: <code>content/main.css</code>, line 1063
         </div>
 
     </section>
@@ -538,7 +538,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 941
+          Source: <code>content/main.css</code>, line 994
         </div>
 
     </section>
@@ -596,7 +596,7 @@
             <li class="kss-parameters__item">
               <div class="kss-parameters__name"><code>$shades</code></div>
               <div class="kss-parameters__description">
-                the number of shades to generate. <em>Note</em> that alpha shades are generated separately from the other shades. Components syntax is allowed
+                the number of shades to generate. <em>Note</em> that alpha shades are generated separately from the other shades. Generation syntax is allowed
               </div>
             </li>
             <li class="kss-parameters__item">
@@ -619,7 +619,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 975
+          Source: <code>content/main.css</code>, line 1028
         </div>
 
     </section>
@@ -662,7 +662,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 953
+          Source: <code>content/main.css</code>, line 1006
         </div>
 
     </section>
@@ -705,7 +705,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 917
+          Source: <code>content/main.css</code>, line 970
         </div>
 
     </section>
@@ -726,16 +726,15 @@
 
 
           <div class="kss-description">
-            <p>As you remember, the library part of mlut contains <a href="section-core-styles.html">basic styles</a>, <a href="section-core-helpers.html">helpers</a> and utilities. By default, they are all included:</p>
+            <p>As you remember, the library part of mlut contains <a href="section-core-styles.html">basic styles</a>, <a href="section-core-helpers.html">helpers</a> and utilities. By default, only basic styles and helpers are included:</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/tools&#x27;</span> as ml;
-<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/src/core&#x27;</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/dist/core&#x27;</span>;
 </code></pre>
 <p>But you can include only the necessary parts of the core:</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/tools&#x27;</span> as ml;
-<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/src/core/styles&#x27;</span>;
-<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/src/core/utils&#x27;</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/dist/core/helpers&#x27;</span>;
 </code></pre>
-<p><em>Note</em>: for convenience, in the examples we will include mlut as if we specified a Sass load path, so that each time we do not write <code>../../node_modules/mlut</code>.</p>
+<p><em>Note</em>: for convenience, in the examples we will include mlut as if we specified a Sass load path, so that each time we do not write <code>../../node_modules/mlut</code>. It is default behavior with JIT engine</p>
 
           </div>
 
@@ -744,7 +743,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1031
+          Source: <code>content/main.css</code>, line 1084
         </div>
 
     </section>
@@ -759,16 +758,16 @@
                   #how_to.lib.utils
               </span>
             </span>
-            Core utilities
+            Core utilities (AOT)
           </a>
         </h3>
 
 
           <div class="kss-description">
             <p>This section contains modules with ready-made utilities and a module for initialization. To get all utilities, just include <code>core/utils</code>. If you want to load only certain sets, then include them, and then include the initialization module:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/src/core/utils/box-model&#x27;</span>;
-<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/src/core/utils/text&#x27;</span>;
-<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/src/core/utils/init&#x27;</span>;
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/dist/core/utils/box-model&#x27;</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/dist/core/utils/text&#x27;</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/dist/core/utils/init&#x27;</span>;
 </code></pre>
 <p>To load core utils without generating them, include the <code>core/utils/load</code> module. This may be needed when using <a href="section-addons.html">addons</a>.</p>
 <p>All utilities are sets to <code>$utils-map</code> by the key <code>core</code>.</p>
@@ -780,7 +779,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1052
+          Source: <code>content/main.css</code>, line 1104
         </div>
 
     </section>
@@ -795,7 +794,7 @@
                   #how_to.lib.utils_config
               </span>
             </span>
-            Utilities configuration
+            Utilities configuration (AOT)
           </a>
         </h3>
 
@@ -807,7 +806,7 @@
 <li><code>/ban</code> - exclude these utilities, <code>list</code></li>
 <li><code>/override</code> - <code>map</code> with utilities and values, which will be merged into <code>$utils-map</code> with overwriting. Passing <code>null</code> will clear <code>$utils-map</code>.</li>
 </ul>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/src/core/utils&#x27;</span> with (
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/dist/core/utils&#x27;</span> with (
 	<span class="hljs-variable">$utils</span>: (
 		<span class="hljs-string">&#x27;C&#x27;</span>: red,
 
@@ -846,7 +845,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1068
+          Source: <code>content/main.css</code>, line 1120
         </div>
 
     </section>
@@ -876,7 +875,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1111
+          Source: <code>content/main.css</code>, line 1163
         </div>
 
     </section>
@@ -900,12 +899,12 @@
             <p>To add or change breakpoints, use the <code>$breakpoints</code> map.</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/tools&#x27;</span> as ml with (
 	<span class="hljs-variable">$breakpoints</span>: (
-		<span class="hljs-string">&#x27;xxl&#x27;</span>: <span class="hljs-number">1400px</span>,
+		<span class="hljs-string">&#x27;xxxl&#x27;</span>: <span class="hljs-number">1600px</span>,
 		<span class="hljs-string">&#x27;sm&#x27;</span>: <span class="hljs-number">480px</span>,
 	),
 );
 
-<span class="hljs-keyword">@include</span> ml.apply(<span class="hljs-string">&#x27;&lt;sm_W15 xxl_W150&#x27;</span>);
+<span class="hljs-keyword">@include</span> ml.apply(<span class="hljs-string">&#x27;&lt;sm_W15 xxxl_W150&#x27;</span>);
 
 <span class="hljs-comment">// CSS</span>
 <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">479px</span>) {
@@ -914,8 +913,8 @@
   }
 }
 
-<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">1400px</span>) {
-  <span class="hljs-selector-class">.xxl_W150</span> {
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">1600px</span>) {
+  <span class="hljs-selector-class">.xxxl_W150</span> {
     <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
   }
 }
@@ -929,7 +928,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1193
+          Source: <code>content/main.css</code>, line 1245
         </div>
 
     </section>
@@ -995,7 +994,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1143
+          Source: <code>content/main.css</code>, line 1195
         </div>
 
     </section>
@@ -1064,7 +1063,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1287
+          Source: <code>content/main.css</code>, line 1339
         </div>
 
     </section>
@@ -1146,7 +1145,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1225
+          Source: <code>content/main.css</code>, line 1277
         </div>
 
     </section>
@@ -1187,7 +1186,7 @@ The configuration is a <code>map</code>, each element of which is a boolean flag
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1121
+          Source: <code>content/main.css</code>, line 1173
         </div>
 
     </section>

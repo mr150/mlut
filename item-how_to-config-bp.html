@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width"/>
 
   <link rel="stylesheet" href="kss-assets/kss.css"/>
-  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+  <link rel="stylesheet" href="kss-assets/docs.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
 <link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
@@ -104,12 +104,12 @@
             <p>To add or change breakpoints, use the <code>$breakpoints</code> map.</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/tools&#x27;</span> as ml with (
 	<span class="hljs-variable">$breakpoints</span>: (
-		<span class="hljs-string">&#x27;xxl&#x27;</span>: <span class="hljs-number">1400px</span>,
+		<span class="hljs-string">&#x27;xxxl&#x27;</span>: <span class="hljs-number">1600px</span>,
 		<span class="hljs-string">&#x27;sm&#x27;</span>: <span class="hljs-number">480px</span>,
 	),
 );
 
-<span class="hljs-keyword">@include</span> ml.apply(<span class="hljs-string">&#x27;&lt;sm_W15 xxl_W150&#x27;</span>);
+<span class="hljs-keyword">@include</span> ml.apply(<span class="hljs-string">&#x27;&lt;sm_W15 xxxl_W150&#x27;</span>);
 
 <span class="hljs-comment">// CSS</span>
 <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">479px</span>) {
@@ -118,8 +118,8 @@
   }
 }
 
-<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">1400px</span>) {
-  <span class="hljs-selector-class">.xxl_W150</span> {
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">1600px</span>) {
+  <span class="hljs-selector-class">.xxxl_W150</span> {
     <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
   }
 }
@@ -133,7 +133,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1193
+          Source: <code>content/main.css</code>, line 1245
         </div>
 
     </div>

@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width"/>
 
   <link rel="stylesheet" href="kss-assets/kss.css"/>
-  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+  <link rel="stylesheet" href="kss-assets/docs.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
 <link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
@@ -118,7 +118,7 @@
             <p>There are 2 ways to start using mlut:</p>
 <ul>
 <li>assembled distributive</li>
-<li>developer toolkit</li>
+<li>toolkit</li>
 </ul>
 
           </div>
@@ -153,10 +153,7 @@
 <pre class="hljs"><code class="language-">npm i mlut -D
 </code></pre>
 <h3>CDN</h3>
-<p>Only core:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://unpkg.com/mlut@latest/dist/mlut.min.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
-</code></pre>
-<p>or with Demo theme included:</p>
+<p>With Demo theme:</p>
 <pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://unpkg.com/mlut@latest/dist/mlut-demo-theme.min.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
 </code></pre>
 
@@ -188,63 +185,75 @@
 
 
           <div class="kss-description">
-            <h3>HTML</h3>
-<p>Before starting work, make sure you have the correct HTML5 doctype:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
-</code></pre>
-<p>and the responsive viewport meta tag:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1&quot;</span>&gt;</span>
-</code></pre>
-<h3>Distributive</h3>
+            <h3>Distributive</h3>
 <p>You can get assembled mlut code and include it to your project. There are some ways to get a distributive.</p>
 <ul>
 <li>just plug in with CDN</li>
 <li>if used <code>npm</code>, files are in <code>node_modules/mlut/dist/</code></li>
 </ul>
-<p>Add the file to your page like here:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;css/mlut.min.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
+<p>Add the files to your page like here:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;css/mlut-demo-theme.min.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
 </code></pre>
-<p>And just add mlut classes to markup:</p>
+<p>And just use classes in the markup:</p>
 <pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;D-g Gtc-t3&quot;</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;Bd P2u&quot;</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Simple text<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;Bd P2u&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Simple text<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
 </code></pre>
 <h3>Toolkit</h3>
-<p>To use all mlut features you need an assembly. You will need to install a package via NPM and:</p>
-<ul>
-<li><a href="https://github.com/sass/sass">Dart Sass</a>, and in particular <a href="https://www.npmjs.com/package/sass-embedded">sass-embedded</a> for better performance</li>
-<li>CSS minifier or PostCSS plugin that can group media queries is recommended.<br> For example: <a href="https://github.com/css/csso">CSSO</a> or <a href="https://github.com/SassNinja/postcss-combine-media-query">this</a> plugin</li>
-<li><a href="https://github.com/FullHuman/purgecss">PurgeCSS</a> is recommended for removing unused CSS</li>
-</ul>
-<p>Once the assembly is configured, just import mlut to your stylesheet, and configure it as you need:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;../../node_modules/mlut&#x27;</span> as ml with (
-	<span class="hljs-variable">$su</span>: <span class="hljs-number">5px</span>,
-	<span class="hljs-variable">$breakpoints</span>: (
-		<span class="hljs-string">&#x27;xxl&#x27;</span>: <span class="hljs-number">1400px</span>
-	),
-	<span class="hljs-variable">$colors</span>: (
-		<span class="hljs-string">&#x27;red0&#x27;</span>: <span class="hljs-number">#f20</span>,
-	),
-	<span class="hljs-variable">$utils</span>: (
-		<span class="hljs-string">&#x27;^_D&#x27;</span>: (<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;n&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>),
-	),
-);
+<p>mlut has a CLI:</p>
+<pre class="hljs"><code class="language-">Usage:
+  mlut [-i input.scss] [-o output.css] [--watch] [options...]
+
+Options:
+  -h, --help            Print this help message
+  -i, --input           Input sass file
+  -o, --output          Output css file
+  -w, --watch           Watch for changes and rebuild as needed
+  -m, --minify          Generate minified css file
+      --content         Paths to content with markup
+      --no-merge-mq     Prevent merging of css media queries during minification
 </code></pre>
-<p>Also now you can use Sass tools for writing CSS manually:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-selector-class">.my-card</span> {
-	<span class="hljs-attribute">display</span>: block;
+<p>In the input sass file, you can customize mlut and write your own styles. Input file is optional, but if you use it, you must import mlut</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut&#x27;</span> with (
+  <span class="hljs-variable">$breakpoints</span>: (
+    <span class="hljs-string">&#x27;xxl&#x27;</span>: <span class="hljs-number">1600px</span>,
+  ),
+  <span class="hljs-variable">$colors</span>: (
+    <span class="hljs-string">&#x27;red0&#x27;</span>: <span class="hljs-number">#f20</span>,
+  ),
+);
 
-	<span class="hljs-keyword">@include</span> ml.apply(
-		<span class="hljs-string">&#x27;P2u Fns1r&#x27;</span>
-	);
-
-	<span class="hljs-keyword">@include</span> ml.bp(<span class="hljs-string">&#x27;md&#x27;</span>) {
-		<span class="hljs-attribute">font-size</span>: calc(ml.px2rem(<span class="hljs-number">20px</span>) + <span class="hljs-number">1vw</span>);
-	}
+<span class="hljs-selector-class">.complex-block</span> {
+  <span class="hljs-comment">// CSS</span>
 }
 </code></pre>
-<p>Probably you want to set the Sass <a href="https://sass-lang.com/documentation/js-api/interfaces/LegacyFileOptions#includePaths">load path</a> for easier import:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut&#x27;</span> as ml with (
+<p>You can add the JIT options here too. Options must be a <strong>valid JSON</strong>, but single quotes is allowed. Paths will be resolved relative to the JIT engine working directory</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut&#x27;</span> with (
+  <span class="hljs-variable">$jit</span>: (
+    <span class="hljs-string">&#x27;output&#x27;</span>: <span class="hljs-string">&#x27;src/assets/css/style.css&#x27;</span>,
+    <span class="hljs-string">&#x27;content&#x27;</span>: [
+      <span class="hljs-string">&#x27;src/*.ejs&#x27;</span>, <span class="hljs-string">&#x27;src/assets/js/*.js&#x27;</span>
+    ]
+  ),
+);
+</code></pre>
+<p>To start the build process:</p>
+<pre class="hljs"><code class="language-">npx mlut -i src/assets/sass/style.scss -w
+</code></pre>
+<p>Add the compiled CSS to your page and use mlut utils!</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-meta">&lt;!doctype <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/assets/css/style.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;M0&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;C-red Fnw800 P2u&quot;</span>&gt;</span>
+      Lorem Ipsum
+    <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre>
 
           </div>
@@ -254,7 +263,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 37
+          Source: <code>content/main.css</code>, line 33
         </div>
 
     </section>

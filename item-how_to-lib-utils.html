@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width"/>
 
   <link rel="stylesheet" href="kss-assets/kss.css"/>
-  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+  <link rel="stylesheet" href="kss-assets/docs.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
 <link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
@@ -95,16 +95,16 @@
                   #how_to.lib.utils
               </span>
             </span>
-            Core utilities
+            Core utilities (AOT)
           </a>
         </h3>
 
 
           <div class="kss-description">
             <p>This section contains modules with ready-made utilities and a module for initialization. To get all utilities, just include <code>core/utils</code>. If you want to load only certain sets, then include them, and then include the initialization module:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/src/core/utils/box-model&#x27;</span>;
-<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/src/core/utils/text&#x27;</span>;
-<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/src/core/utils/init&#x27;</span>;
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/dist/core/utils/box-model&#x27;</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/dist/core/utils/text&#x27;</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut/dist/core/utils/init&#x27;</span>;
 </code></pre>
 <p>To load core utils without generating them, include the <code>core/utils/load</code> module. This may be needed when using <a href="section-addons.html">addons</a>.</p>
 <p>All utilities are sets to <code>$utils-map</code> by the key <code>core</code>.</p>
@@ -116,7 +116,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1052
+          Source: <code>content/main.css</code>, line 1104
         </div>
 
     </div>

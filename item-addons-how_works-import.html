@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width"/>
 
   <link rel="stylesheet" href="kss-assets/kss.css"/>
-  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+  <link rel="stylesheet" href="kss-assets/docs.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
 <link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
@@ -108,13 +108,13 @@
 <span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/tools&quot;</span> as ml;
 
 <span class="hljs-comment">// optional import styles from the core that you need: helpers, utilities, etc</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/src/core/base-setup&quot;</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/dist/core/base-setup&quot;</span>;
 
 <span class="hljs-comment">// import addons</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/src/addons/demo-theme&quot;</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/dist/addons/demo-theme&quot;</span>;
 
 <span class="hljs-comment">// import a module that initialize utilities</span>
-<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/src/core/utils/init&quot;</span>;
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;mlut/dist/core/utils/init&quot;</span>;
 </code></pre>
 <p>You can also cancel the generation of all utilities from the addon, and get only the necessary values from there. To do this, pass the parameter to the config of the addon: <code>$generate: false</code>.</p>
 <p>If the addon contains only a ready-made SASS/CSS code, it can be included in any order after tools. Addon also may have their own settings. They can be seen in the code or documentation.</p>
@@ -126,7 +126,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 1509
+          Source: <code>content/main.css</code>, line 1561
         </div>
 
     </div>

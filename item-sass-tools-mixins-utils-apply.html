@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width"/>
 
   <link rel="stylesheet" href="kss-assets/kss.css"/>
-  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+  <link rel="stylesheet" href="kss-assets/docs.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
 <link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
@@ -122,7 +122,7 @@
 }
 </code></pre>
 <p>If a mixin is called outside CSS rule, then creates utilities from the list. See examples <a href="section-how_to.html#kssref-how_to-config">here</a>.</p>
-<p>Apply has some restrictions. If you try to use a utility with <code>pre-state</code> in it without a clear indication that this is a state, you will get an error. This happens because the Parser cannot distinguish <code>pre-state</code> from the utility itself. To create such utilities, pass a list of utilities as a list of strings, separating the components of the utility by spaces, as well as in Components Syntax. Next, pass <code>true</code> in the third argument:</p>
+<p>Apply has some restrictions. If you try to use a utility with <code>pre-state</code> in it without a clear indication that this is a state, you will get an error. This happens because the Parser cannot distinguish <code>pre-state</code> from the utility itself. To create such utilities, pass a list of utilities as a list of strings, separating the components of the utility by spaces, as well as in Generation Syntax. Next, pass <code>true</code> in the third argument:</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@include</span> ml.apply((<span class="hljs-string">&#x27;.js:h:&gt;* _D&#x27;</span>, <span class="hljs-string">&#x27;Lnh2r!_af&#x27;</span>), (), true);
 
 <span class="hljs-comment">// CSS</span>
@@ -169,7 +169,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>../src/tools/mixins/high/utils/_index.scss</code>, line 96
+          Source: <code>../src/sass/tools/mixins/high/utils/_index.scss</code>, line 96
         </div>
 
     </div>
