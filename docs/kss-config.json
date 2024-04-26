@@ -10,7 +10,7 @@
 
   "//": "The css and js paths are URLs relative to the style guide destination.",
   "css": [
-    "kss-assets/mlut.min.css",
+    "kss-assets/docs.min.css",
     "kss-assets/test.css",
     "kss-assets/generate.min.css"
   ],

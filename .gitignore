@@ -9,6 +9,7 @@ docs/styleguide
 docs/content/generate.css
 
 dist/sass
+dist/docs.min.css
 dist/**/*.js
 dist/**/*.d.ts
 
