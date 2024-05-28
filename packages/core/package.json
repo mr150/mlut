@@ -1,0 +1,49 @@
+{
+	"name": "@mlut/core",
+	"version": "1.0.0",
+	"description": "Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity",
+	"author": "mr150",
+	"type": "module",
+	"license": "MIT",
+	"homepage": "https://mr150.github.io/mlut/",
+	"types": "dist/index.d.ts",
+	"keywords": [
+		"mlut",
+		"sass",
+		"scss",
+		"css",
+		"atomic css",
+		"functional css",
+		"utility-first",
+		"framework",
+		"toolkit"
+	],
+	"repository": {
+		"type": "git",
+		"directory": "packages/core",
+		"url": "https://github.com/mr150/mlut.git"
+	},
+	"bugs": {
+		"url": "https://github.com/mr150/mlut/issues"
+	},
+	"exports": {
+    ".": {
+      "default": "./dist/index.js"
+    }
+  },
+	"scripts": {
+		"build": "rm -rf dist && tsc && cp src/sass dist/ -r"
+	},
+	"files": [
+		"_index.scss",
+		"_tools.scss",
+		"dist"
+	],
+	"devDependencies": {
+		"@types/node": "^20.10.5",
+		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"sass-embedded": "^1.71.0"
+	}
+}

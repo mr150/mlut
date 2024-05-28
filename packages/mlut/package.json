@@ -1,0 +1,58 @@
+{
+	"name": "mlut",
+	"version": "6.0.0",
+	"description": "Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity",
+	"author": "mr150",
+	"type": "module",
+	"license": "MIT",
+	"homepage": "https://mr150.github.io/mlut/",
+	"types": "dist/index.d.ts",
+	"keywords": [
+		"mlut",
+		"sass",
+		"scss",
+		"css",
+		"atomic css",
+		"functional css",
+		"utility-first",
+		"framework",
+		"toolkit"
+	],
+	"repository": {
+		"type": "git",
+		"directory": "packages/mlut",
+		"url": "https://github.com/mr150/mlut.git"
+	},
+	"bugs": {
+		"url": "https://github.com/mr150/mlut/issues"
+	},
+	"exports": {
+    ".": {
+      "default": "./dist/index.js"
+    }
+  },
+	"bin": {
+		"mlut": "dist/cli.js"
+	},
+	"scripts": {
+		"build": "rm -rf dist && tsc && chmod +x dist/cli.js"
+	},
+	"files": [
+		"_index.scss",
+		"_tools.scss",
+		"dist"
+	],
+	"devDependencies": {
+		"@types/csso": "^5.0.4",
+		"@types/node": "^20.10.5",
+		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"@mlut/core": "^1.0.0",
+		"arg": "^5.0.2",
+		"csso": "^5.0.5",
+		"fast-glob": "^3.3.2",
+		"sass-embedded": "^1.71.0",
+		"watcher": "^2.3.0"
+	}
+}

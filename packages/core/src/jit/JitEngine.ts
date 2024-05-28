@@ -22,8 +22,8 @@ export class JitEngine {
 		utilName: /^-?[A-Z]{1}[a-zA-Z]*/,
 	};
 	private readonly configRegexps = {
-		userSettings: /@use ['"][^'"]*(tools|mlut)['"](\s*as\s+[\w]+)?\s+with\s*\(([^;]+)\);/s,
-		sassModuleName: /@use ['"][^'"]*(tools|mlut)['"]\s*;/s,
+		userSettings: /@use ['"][^'"]*(tools|mlut|core)['"](\s*as\s+[\w]+)?\s+with\s*\(([^;]+)\);/s,
+		sassModuleName: /@use ['"][^'"]*(tools|mlut|core)['"]\s*;/s,
 	};
 
 	async init(

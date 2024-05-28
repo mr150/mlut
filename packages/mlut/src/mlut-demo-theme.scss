@@ -1,0 +1,8 @@
+@charset 'utf-8';
+
+@forward '@mlut/core/tools';
+@forward '@mlut/core/dist/sass/core/base-setup';
+@forward '@mlut/core/dist/sass/addons/demo-theme' with (
+	$is-aot: true,
+);
+@forward '@mlut/core/dist/sass/core/utils/init';

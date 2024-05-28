@@ -1,29 +1,32 @@
-var gulp = require('gulp'),
-		sass = require('gulp-sass')(require('sass-embedded')),
-		pug = require('gulp-pug'),
-		browserSync = require('browser-sync'),
-		csso = require('gulp-csso'),
-		rename = require('gulp-rename'),
-		del = require('del'),
-		plumber = require('gulp-plumber'),
-		stylelint = require('gulp-stylelint'),
-		groupMedia = require('gulp-group-css-media-queries'),
-		sourcemaps = require('gulp-sourcemaps'),
-		fileSize = require('gulp-size'),
-		shell = require('gulp-shell'),
-		ftp = require('vinyl-ftp'),
-		autoprefixer = require('gulp-autoprefixer');
+const gulp = require('gulp'),
+			sass = require('gulp-sass')(require('sass-embedded')),
+			pug = require('gulp-pug'),
+			browserSync = require('browser-sync'),
+			csso = require('gulp-csso'),
+			rename = require('gulp-rename'),
+			plumber = require('gulp-plumber'),
+			stylelint = require('gulp-stylelint'),
+			groupMedia = require('gulp-group-css-media-queries'),
+			sourcemaps = require('gulp-sourcemaps'),
+			fileSize = require('gulp-size'),
+			shell = require('gulp-shell'),
+			ftp = require('vinyl-ftp'),
+			autoprefixer = require('gulp-autoprefixer');
 
-var dirs = {
+const dirs = {
+	pkgCore: 'packages/core/',
+	pkgMlut: 'packages/mlut/',
 	test: 'test/',
 	docs: 'docs/',
-	libs: 'test/libs/',
 	ftp: ''
 };
 
-var path = {
-	src: 'src/sass/',
-	build: 'dist/',
+let path = {
+	src: {
+		core: dirs.pkgCore + 'src/sass/',
+		mlut: dirs.pkgMlut + 'src/',
+	},
+	build: dirs.pkgMlut + 'dist/',
 	docs: {
 		assets: dirs.docs + 'styleguide/kss-assets/',
 		img: dirs.docs + 'img/',
@@ -36,7 +39,7 @@ var path = {
 	}
 };
 
-var files = {
+const files = {
 	styles: '**/*.{scss,css}',
 	js: '**/*.js',
 	pug: '**/*.pug',
@@ -47,8 +50,8 @@ var files = {
 path = Object.assign({
 	watch: {
 		styles: [
-			dirs.libs + files.styles,
-			path.src + files.styles,
+			path.src.core + files.styles,
+			path.src.mlut + files.styles,
 			path.test.sass + files.styles,
 		],
 		pug: dirs.test + files.pug,
@@ -62,31 +65,34 @@ path = Object.assign({
 	}
 }, path);
 
-var servConfig = {
+const servConfig = {
 		server: {
 			baseDir: 'test'
 		},
 		notify: false,
 		open: false
-},
-sizeConfig = {
+};
+
+const sizeConfig = {
 	gzip: true,
 	brotli: true,
 	pretty: false,
 	showFiles: true
-},
-ftpConfig = {
+};
+
+const ftpConfig = {
 	host: '',
 	user: '',
 	password: '',
 	parallel: 10
 };
 
-gulp.task('css-lint', function(){
+gulp.task('css-lint', () => {
 	return gulp.src([
-		path.src + files.styles,
-		`!${path.src}tools/mixins/base/_mk-ar.scss`,
-		`!${path.src}generate.css`,
+		path.src.core + files.styles,
+		path.src.mlut + files.styles,
+		`!${path.src.core}tools/mixins/base/_mk-ar.scss`,
+		`!${path.src.core}generate.css`,
 	])
 		.pipe(stylelint({
 			reporters:[
@@ -100,10 +106,9 @@ gulp.task('sass-test', shell.task(
 	{ignoreErrors: process.env.NODE_ENV !== 'production'}
 ));
 
-gulp.task('style', gulp.series('css-lint', function(){
+gulp.task('sass', gulp.series('css-lint', () => {
 	return gulp.src([
-		path.src + 'mlut-demo-theme.scss',
-		path.src + 'docs.scss',
+		path.src.mlut + 'mlut-demo-theme.scss',
 	])
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
@@ -111,7 +116,7 @@ gulp.task('style', gulp.series('css-lint', function(){
 			indentType: 'tab',
 			includePaths: [
 				'node_modules',
-				path.src,
+				path.src.mlut,
 			],
 			outputStyle: 'expanded',
 			indentWidth: 1
@@ -126,44 +131,52 @@ gulp.task('style', gulp.series('css-lint', function(){
 		.pipe(csso({
 			forceMediaMerge: true
 		}))
-		.pipe(rename(function(path) {
+		.pipe(rename((path) => {
 			if(path.basename === 'index') path.basename = 'mlut';
 			path.basename += '.min';
 		}))
 		.pipe(fileSize(sizeConfig))
 		.pipe(gulp.dest(path.build))
-		.pipe(gulp.dest(path.docs.assets))
 		.pipe(sourcemaps.write(''))
 		.pipe(gulp.dest(path.test.css))
 		.pipe(browserSync.stream());
 }));
 
-gulp.task('pug', function(){
+gulp.task('pug', () => {
 	return gulp.src(path.test.pug + '*.pug', {allowEmpty: true})
 		.pipe(plumber())
 		.pipe(pug({'pretty': '\t'}))
 		.pipe(gulp.dest(dirs.test));
 });
 
-gulp.task('server', function(){
+gulp.task('server', () => {
 	browserSync(servConfig);
 });
 
-gulp.task('html', function(){
+gulp.task('html', () => {
 	return gulp.src(dirs.test + files.html, {allowEmpty: true})
 		.pipe(fileSize(sizeConfig))
 		.pipe(browserSync.stream());
 });
 
 gulp.task('sass-compile-doc', () => {
-	return gulp.src(dirs.docs + 'generate.scss', {allowEmpty: true})
+	return gulp.src([
+		dirs.docs + 'generate.scss',
+		dirs.docs + 'mlut.scss',
+	], {allowEmpty: true})
 		.pipe(plumber())
 		.pipe(sass({
+			includePaths: [
+				'node_modules',
+			],
 			indentType: 'tab',
 			outputStyle: 'expanded',
 			indentWidth: 1
 		}))
-		.pipe(gulp.dest(dirs.docs + 'content/'))
+		.pipe(gulp.dest((file) => (
+			file.basename === "mlut.css" ?
+				path.test.css : dirs.docs + 'content/'
+		)))
 		.pipe(csso({
 			forceMediaMerge: true
 		}))
@@ -176,14 +189,14 @@ gulp.task('kss', shell.task([
 	'cp ' + path.test.css + 'test.css ' + path.docs.assets,
 ]));
 
-gulp.task('default', gulp.parallel('server', 'kss', 'style', 'pug', function(){
-	gulp.watch(path.watch.styles, gulp.series('kss', 'style'));
+gulp.task('default', gulp.parallel('server', 'kss', 'sass', 'pug', () => {
+	gulp.watch(path.watch.styles, gulp.series('kss', 'sass'));
 	gulp.watch(path.watch.pug, gulp.series('pug'));
 	gulp.watch(path.watch.html, gulp.series('html'));
 	gulp.watch(path.watch.docs, gulp.series('kss'));
 }));
 
-gulp.task('watch-test', gulp.parallel('sass-test', 'kss', function(){
+gulp.task('watch-test', gulp.parallel('sass-test', 'kss', () => {
 	gulp.watch(path.watch.styles, gulp.series('kss', 'sass-test'));
 }));
 
@@ -193,16 +206,11 @@ gulp.task('sass-watch-doc', gulp.series('sass-compile-doc', 'kss', () => {
 	gulp.watch(dirs.docs + 'generate.scss', gulp.series('sass-compile-doc', 'kss'));
 }));
 
-gulp.task('ftp', function(){
-	var conn = ftp.create(ftpConfig);
+gulp.task('ftp', () => {
+	const conn = ftp.create(ftpConfig);
 	return gulp.src(dirs.test + files.all, {buffer: false})
 		.pipe(conn.newer(dirs.ftp))
 		.pipe(conn.dest(dirs.ftp));
-});
-
-gulp.task('clear', function(cb){
-	del.sync(path.build);
-	cb();
 });
 
 gulp.task('img', () => {
@@ -210,4 +218,4 @@ gulp.task('img', () => {
 		.pipe(gulp.dest(path.docs.assets));
 });
 
-gulp.task('build', gulp.series('clear', 'style', 'pug', 'kss', 'img'));
+gulp.task('build', gulp.series('sass', 'pug', 'sass-mk-doc', 'img'));

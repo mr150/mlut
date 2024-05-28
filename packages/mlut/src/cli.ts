@@ -5,9 +5,7 @@ import arg from 'arg';
 import { minify } from 'csso';
 import fg from 'fast-glob';
 import Watcher from 'watcher';
-
-import { logger } from '../utils/index.js';
-import { jitEngine } from '../jit/JitEngine.js';
+import { jitEngine, logger } from '@mlut/core';
 
 const args = arg({
 	'--help': Boolean,

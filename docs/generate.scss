@@ -2,16 +2,16 @@
 @use 'sass:list';
 @use 'sass:meta';
 @use 'sass:string';
-@use '../src/tools' as ml;
+@use '../packages/core/src/sass/tools' as ml;
 
 $initial-colors: map.get(ml.$utils-db, 'common', 'keywords', 'colors');
 
-@use '../src/tools/functions/base' as bf;
-@use '../src/core/utils/load';
-@use '../src/addons/demo-theme';
+@use '../packages/core/src/sass/tools/functions/base' as bf;
+@use '../packages/core/src/sass/core/utils/load';
+@use '../packages/core/src/sass/addons/demo-theme';
 
 $url-map: (
-	'keywords': 'section-general_reference.html#kssref-general_reference-kw',
+	'keywords': 'section-general_reference.html#kssref-general_reference-utils_kw',
 	'conversion': 'section-settings.html#kssref-settings-utils-config-conversion',
 );
 
@@ -195,13 +195,3 @@ Styleguide: general_reference.common_kw.#{$group-name}
 Styleguide: settings.utils.config.states.#{$group-name}
 */
 }
-
-/*
-Utils
-
-Below are the utilities contained in the addon. Names of utilities in Generation Syntax are specified in the left column. In the right you can see the available values. In addition to the list, they can be spicified in the [range syntax](section-how_to.html#kssref-how_to-mk_utils-range) or as a map.
-
-#{map2html(map.get(ml.$utils-map, 'demo-theme'), null, 'top', true)}
-
-Styleguide: addons.catalog.demo_theme.utils
-*/

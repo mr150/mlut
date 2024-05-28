@@ -5,7 +5,7 @@
 
 @use 'test-core';
 @use 'test-addon';
-@use 'core/utils/init' with (
+@use 'src/sass/core/utils/init' with (
 	$utils: (
 		'^_D': ('', 'n', 'f'),
 
