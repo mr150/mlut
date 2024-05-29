@@ -10,8 +10,8 @@
 // $su = 0.25rem - space unit value
 // $css-vars-fallback = false - add fallback for values in `grid-gutters` units
 // $css-transition-time = 0.3s - default transition duration.
-// $ratio-box-flex = false - adds a more advanced version of [Ratio-box](section-core-helpers.html#kssref-core-helpers-ratio-box) helper with an arbitrary height \- `ratio-box-flex`
-// $wrapper-max-width = 1200px - max width of the [Wraper](section-core-helpers.html#kssref-core-helpers-wrapper) helper
+// $ratio-box-flex = false - adds a more advanced version of [Ratio-box](section-css_lib.html#kssref-css_lib-helpers-ratio-box) helper with an arbitrary height \- `ratio-box-flex`
+// $wrapper-max-width = 1200px - max width of the [Wraper](section-css_lib.html#kssref-css_lib-helpers-wrapper) helper
 // $css-var-prefix = 'ml-' - prefix for the CSS custom properties, which are generated in the values of utilities. For example, value of `W-$myCard` with prefix: `var(--ml-myCard)`, and without:  `var(--myCard)`
 // $class-prefix - prefix, which will be added to CSS classes of all utilities. This can be useful when using mlut on top of the existing CSS
 //
@@ -27,7 +27,7 @@
 // TODO: add docs for css vars
 // CSS variables
 //
-// Settings of global [CSS custom properties](section-core-styles.html#kssref-core-styles-css_vars) which used in MLUT.
+// Settings of global [CSS custom properties](section-css_lib.html#kssref-css_lib-styles-css_vars) which used in MLUT.
 //
 /// Styleguide: settings.general.css_vars
 

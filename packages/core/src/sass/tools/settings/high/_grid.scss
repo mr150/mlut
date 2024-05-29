@@ -7,7 +7,7 @@
 // Settings that affect the work of grid system both modern and legacy.
 //
 // - **modern** grid is based on [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) and is built using common grid utilities, such as [Gtc](section-utils-reference.html#kssref-utils-reference-gtc), [Gap](section-utils-reference.html#kssref-utils-reference-gap) etc
-// - **legacy** grid system is based on flexbox and works with [helpers](section-core-helpers.html#kssref-core-helpers-row) and custom utilities, such as [-Gscc](section-utils-reference.html#kssref-utils-reference--gscc), [-Gsf](section-utils-reference.html#kssref-utils-reference--gsf) etc.
+// - **legacy** grid system is based on flexbox and works with [helpers](section-css_lib.html#kssref-css_lib-helpers-row) and custom utilities, such as [-Gscc](section-utils-reference.html#kssref-utils-reference--gscc), [-Gsf](section-utils-reference.html#kssref-utils-reference--gsf) etc.
 //
 // $legacy-grid-system = false - enable legacy grid system and generate some CSS for it
 // $gs-default-gtr = 4u - default gutter on large width screen. Used as fallback for `--ml-gg`.

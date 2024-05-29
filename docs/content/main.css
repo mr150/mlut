@@ -1084,7 +1084,7 @@ Styleguide: how_to.mk_utils.kw_cp
 /*
 Work with library
 
-As you remember, the library part of mlut contains [basic styles](section-core-styles.html), [helpers](section-core-helpers.html) and utilities. By default, only basic styles and helpers are included:
+As you remember, the library part of mlut contains [basic styles](section-css_lib.html#kssref-css_lib-styles), [helpers](section-css_lib.html#kssref-css_lib-helpers) and utilities. By default, only basic styles and helpers are included:
 ```scss
 @use 'mlut/tools' as ml;
 @use 'mlut/dist/core';
@@ -1396,7 +1396,7 @@ Styleguide: general_reference
 */
 
 /*
-Utilities groups
+Utilities groups (AOT)
 
 In the description of each group are specified the included utilities. When specifying utilities, [Generation Syntax](section-concepts.html#kssref-concepts-util-components-syntax) can be used. After the utilities list, the values of the group that are contained **in the Core** library may be writted. In this values also may be used the Generation Syntax.
 
@@ -1428,23 +1428,29 @@ Styleguide: general_reference.common_kw
 */
 
 /*
-Core styles
+CSS library
 
-Base styles for mlut library.
+Small and optional CSS library with basic styles and helpers
 
 Weight: 3
 
-Styleguide: core-styles
+Styleguide: css_lib
 */
 
 /*
-Core helpers
+Basic styles
 
-Set of universal helpers for using on any project.
+Styles like reset and normalize
 
-Weight: 4
+Styleguide: css_lib.styles
+*/
 
-Styleguide: core-helpers
+/*
+Helpers
+
+Set of universal helpers for using on any project
+
+Styleguide: css_lib.helpers
 */
 
 /*

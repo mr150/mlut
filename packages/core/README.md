@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
 
-The mlut core contains:
+The [mlut](https://github.com/mr150/mlut) core contains:
 - Sass tools
 - CSS library
 - JIT engine

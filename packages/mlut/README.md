@@ -1,6 +1,6 @@
 # My Little UI Toolkit #
 
-<img alt="Logo" src="docs/img/logo-full.png" width="350"/>
+<img alt="Logo" src="https://github.com/mr150/mlut/raw/master/docs/img/logo-full.png" width="350"/>
 
 [![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
@@ -26,7 +26,7 @@ Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexit
 - [Acknowledgement](#acknowledgement)
 - [License](#license)
 
-<img alt="GIF animation with usage example" src="docs/img/jit-demo.gif"/>
+<img alt="GIF animation with usage example" src="https://github.com/mr150/mlut/raw/master/docs/img/jit-demo.gif"/>
 
 ## Features
 
@@ -118,7 +118,7 @@ Add utilities, states and custom at-rules with few lines of code
 
 ### And also...
 - 💅️ Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
-- ⚡ JIT (on-demand) and AOT mods are available
+- ⚡ **JIT** (on-demand) and **AOT** mods are available
 - 🔧 **Fully customizable**: change tokens, utilities names and any settings
 - ✨ **Easy to integrate** in existing project. No name collisions with your CSS in the most projects. Increasing specificity in [one line](https://mr150.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity) or for [one](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu) utility.
 
