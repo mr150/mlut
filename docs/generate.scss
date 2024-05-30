@@ -7,7 +7,7 @@
 $initial-colors: map.get(ml.$utils-db, 'common', 'keywords', 'colors');
 
 @use '../packages/core/src/sass/tools/functions/base' as bf;
-@use '../packages/core/src/sass/core/utils/load';
+@use '../packages/core/src/sass/css/utils/load';
 @use '../packages/core/src/sass/addons/demo-theme';
 
 $url-map: (

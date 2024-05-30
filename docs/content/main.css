@@ -20,7 +20,7 @@ npm i mlut -D
 ```
 
 ### CDN ###
-With Demo theme:
+CSS only with demo theme:
 ```html
 <link href="https://unpkg.com/mlut@latest/dist/mlut-demo-theme.min.css" rel="stylesheet">
 ```
@@ -37,7 +37,7 @@ Usage
 You can get assembled mlut code and include it to your project. There are some ways to get a distributive.
 
 - just plug in with CDN
-- if used `npm`, files are in `node_modules/mlut/dist/`
+- if used `npm`, files are in `node_modules/@mlut/core/dist/`
 
 Add the files to your page like here:
 ```html
@@ -51,7 +51,12 @@ And just use classes in the markup:
 ```
 
 ### Toolkit ###
-mlut has a CLI:
+You can use the toolkit in 2 modes
+
+- **JIT**: generate utilities on demand. The JIT engine scans your markup and generates only the utilities you use. This is current and recommended mode of working with mlut. Here you can use our CLI or a plugin for bundlers
+- **AOT**: generate utilities using Sass tools only. You specify in the Sass configuration what utilities you want and the generator creates them (usually more than you need). This is legacу mode, but it is still working and supported. We have no plans to deprecate it for now
+
+CLI for the JIT mode:
 ```
 Usage:
   mlut [-i input.scss] [-o output.css] [--watch] [options...]
@@ -611,8 +616,8 @@ Styleguide: concepts.at_rules.layer
 With the @container rule you can use both generic and named container queries
 
 ```scss
-@include tools.apply('@c:w>600_C-red');
-@include tools.apply('@c:box:h>20r_P5u');
+@include ml.apply('@c:w>600_C-red');
+@include ml.apply('@c:box:h>20r_P5u');
 
 // CSS
 @container (min-width: 601px) {
@@ -1086,13 +1091,13 @@ Work with library
 
 As you remember, the library part of mlut contains [basic styles](section-css_lib.html#kssref-css_lib-styles), [helpers](section-css_lib.html#kssref-css_lib-helpers) and utilities. By default, only basic styles and helpers are included:
 ```scss
-@use 'mlut/tools' as ml;
-@use 'mlut/dist/core';
+@use '@mlut/core/tools' as ml;
+@use '@mlut/core/dist/css';
 ```
 But you can include only the necessary parts of the core:
 ```scss
-@use 'mlut/tools' as ml;
-@use 'mlut/dist/core/helpers';
+@use '@mlut/core/tools' as ml;
+@use '@mlut/core/dist/css/helpers';
 ```
 *Note*: for convenience, in the examples we will include mlut as if we specified a Sass load path, so that each time we do not write `../../node_modules/mlut`. It is default behavior with JIT engine
 
@@ -1102,15 +1107,15 @@ Styleguide: how_to.lib
 */
 
 /*
-Core utilities (AOT)
+Basic utilities (AOT)
 
-This section contains modules with ready-made utilities and a module for initialization. To get all utilities, just include `core/utils`. If you want to load only certain sets, then include them, and then include the initialization module:
+This section contains modules with ready-made utilities and a module for initialization. To get all utilities, just include `css/utils`. If you want to load only certain sets, then include them, and then include the initialization module:
 ```scss
-@use 'mlut/dist/core/utils/box-model';
-@use 'mlut/dist/core/utils/text';
-@use 'mlut/dist/core/utils/init';
+@use '@mlut/core/dist/css/utils/box-model';
+@use '@mlut/core/dist/css/utils/text';
+@use '@mlut/core/dist/css/utils/init';
 ```
-To load core utils without generating them, include the `core/utils/load` module. This may be needed when using [addons](section-addons.html).
+To load basic utils without generating them, include the `css/utils/load` module. This may be needed when using [addons](section-addons.html).
 
 All utilities are sets to `$utils-map` by the key `core`.
 
@@ -1125,7 +1130,7 @@ When including libraries and addons, you can include, exclude or overwrite only 
 - `/ban` - exclude these utilities, `list`
 - `/override` - `map` with utilities and values, which will be merged into `$utils-map` with overwriting. Passing `null` will clear `$utils-map`.
 ```scss
-@use 'mlut/dist/core/utils' with (
+@use '@mlut/core/dist/css/utils' with (
 	$utils: (
 		'C': red,
 
@@ -1572,16 +1577,16 @@ To import addon that contains utilities, you will need:
 @charset "utf-8";
 
 // import tools
-@use "mlut/tools" as ml;
+@use "@mlut/core/tools" as ml;
 
 // optional import styles from the core that you need: helpers, utilities, etc
-@use "mlut/dist/core/base-setup";
+@use "@mlut/core/dist/css/base-setup";
 
 // import addons
-@use "mlut/dist/addons/demo-theme";
+@use "@mlut/core/dist/addons/demo-theme";
 
 // import a module that initialize utilities
-@use "mlut/dist/core/utils/init";
+@use "@mlut/core/dist/css/utils/init";
 ```
 You can also cancel the generation of all utilities from the addon, and get only the necessary values from there. To do this, pass the parameter to the config of the addon: `$generate: false`.
 
@@ -1596,7 +1601,7 @@ Structure
 To create an addon containing utilities:
 ```scss
 // import mlut tools
-@use '../tools' as ml;
+@use "@mlut/core/tools" as ml;
 
 // create a map with the same scheme as map $utils,
 // when creating utilities in the config
