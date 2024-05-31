@@ -8,7 +8,9 @@ $initial-colors: map.get(ml.$utils-db, 'common', 'keywords', 'colors');
 
 @use '../packages/core/src/sass/tools/functions/base' as bf;
 @use '../packages/core/src/sass/css/utils/load';
-@use '../packages/core/src/sass/addons/demo-theme';
+@use '../packages/core/src/sass/addons/demo-theme' with (
+	$is-aot: true,
+);
 
 $url-map: (
 	'keywords': 'section-general_reference.html#kssref-general_reference-utils_kw',
@@ -109,7 +111,7 @@ $states-section-name: (
 	}
 
 	@if list.length($util-map) > 0 {
-		$result: '<div class="Fnw-b Mt6u Mb1u">In the Core</div><ul class="-All-sr_& Mb6u_&">';
+		$result: '<div class="Fnw-b Mt6u Mb1u">CSS library</div><ul class="-All-sr_& Mb6u_&">';
 
 		@each $utility, $values in $util-map {
 			$inspected: meta.inspect($values);
@@ -195,3 +197,13 @@ Styleguide: general_reference.common_kw.#{$group-name}
 Styleguide: settings.utils.config.states.#{$group-name}
 */
 }
+
+/*
+Utils (AOT)
+
+Below are the utilities contained in the addon. Names of utilities in Generation Syntax are specified in the left column. In the right you can see the available values. In addition to the list, they can be spicified in the [range syntax](section-how_to.html#kssref-how_to-mk_utils-range) or as a map.
+
+#{map2html(map.get(ml.$utils-map, 'demo-theme'), null, 'top', true)}
+
+Styleguide: addons.catalog.demo_theme.utils
+*/

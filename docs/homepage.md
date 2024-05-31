@@ -150,6 +150,20 @@ Sass tools include:
 Addons may contains any tools, settings and styles. Addons now at the **preview** stage and in the future be moved to separate packages
 </section>
 
+<section class="Mb3gg kss-description">
+
+## Packages ##
+
+<div class="Mt6u">
+
+| Package | Description |
+| ---  | --- |
+| [@mlut/core](https://github.com/mr150/mlut/blob/master/packages/core) | The mlut core that contains Sass tools, CSS library and JIT engine |
+| [mlut](https://github.com/mr150/mlut/blob/master/packages/mlut) | The main package for working with CLI |
+
+</div>
+</section>
+
 <section class="Mb4gg">
 
 ## What next? ##

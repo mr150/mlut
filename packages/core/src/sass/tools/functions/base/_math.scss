@@ -116,7 +116,7 @@
 
 // px2rem
 //
-// Wrapper on [px2em](#kssref-sass-tools-functions-px2em) for converting to `rem`. Works similarly.
+// Wrapper on [px2em](#kssref-sass-tools-functions-math-px2em) for converting to `rem`. Works similarly.
 // ```scss
 //@debug ml.px2rem(24px); // 1.5rem
 // ```
@@ -133,7 +133,7 @@
 
 // px2lh
 //
-// Wrapper on [px2em](#kssref-sass-tools-functions-px2em) for converting to `line-height` units. Works similarly.
+// Wrapper on [px2em](#kssref-sass-tools-functions-math-px2em) for converting to `line-height` units. Works similarly.
 // ```scss
 //@debug ml.px2lh(24px, 14px); // 1.71
 //@debug ml.px2lh(24px); // 1.5

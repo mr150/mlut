@@ -8,6 +8,7 @@
 Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity. <br> Get almost all power of CSS in one utility!
 
 ## Table of Contents
+
 - [Features](#features)
 	- 🔠 [Strong naming convention](#strong-naming-convention)
 	- 🎨 [Almost arbitrary by design](#almost-arbitrary-by-design)
@@ -18,6 +19,7 @@ Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexit
 	- [Library](#library)
 	- [Tools](#tools)
 	- [Addons](#addons)
+- [Packages](#packages)
 - [Getting Started](#getting-started)
 	- [Installation](#installation)
 	- [Usage](#usage)
@@ -145,6 +147,13 @@ Sass tools include:
 ### Addons ###
 Addons may contains any tools, settings and styles. Addons now at the **preview** stage and in the future be moved to separate packages
 
+## Packages ##
+
+| Package | Description |
+| ---  | --- |
+| [@mlut/core](https://github.com/mr150/mlut/blob/master/packages/core) | The mlut core that contains Sass tools, CSS library and JIT engine |
+| [mlut](https://github.com/mr150/mlut/blob/master/packages/mlut) | The main package for working with CLI |
+
 ## Getting Started ##
 There are 2 ways to start using mlut:
 
@@ -159,7 +168,8 @@ npm i mlut -D
 ```
 
 #### CDN ####
-With Demo theme:
+
+CSS only with demo theme:
 ```html
 <link href="https://unpkg.com/mlut@latest/dist/mlut-demo-theme.min.css" rel="stylesheet">
 ```
@@ -185,7 +195,12 @@ And just use classes in the markup:
 ```
 
 #### Toolkit ####
-mlut has a CLI:
+You can use the toolkit in 2 modes
+
+- **JIT**: generate utilities on demand. The JIT engine scans your markup and generates only the utilities you use. This is current and recommended mode of working with mlut. Here you can use our CLI or a plugin for bundlers
+- **AOT**: generate utilities using Sass tools only. You specify in the Sass configuration what utilities you want and the generator creates them (usually more than you need). This is legacу mode, but it is still working and supported. We have no plans to deprecate it for now
+
+CLI for the JIT mode:
 ```
 Usage:
   mlut [-i input.scss] [-o output.css] [--watch] [options...]
