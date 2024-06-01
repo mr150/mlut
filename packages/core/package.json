@@ -41,9 +41,8 @@
 	],
 	"devDependencies": {
 		"@types/node": "^20.10.5",
+		"sass-embedded": "^1.71.0",
+		"sass": "^1.71.0",
 		"typescript": "^5.3.3"
-	},
-	"dependencies": {
-		"sass-embedded": "^1.71.0"
 	}
 }

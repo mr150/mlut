@@ -1,7 +1,14 @@
 import path from 'node:path';
-import * as sass from 'sass-embedded';
 
 import { logger } from '../utils/index.js';
+
+const sass = await import('sass-embedded')
+	.catch(() => import('sass'))
+	.catch(() => {
+		throw new Error(
+			'The Sass package is not installed. You can do this with `npm i -D sass-embedded`'
+		);
+	});
 
 const __dirname = new URL('.', import.meta.url).pathname;
 
