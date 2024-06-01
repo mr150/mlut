@@ -30,7 +30,6 @@
 		"gulp-csso": "^4.0.1",
 		"gulp-group-css-media-queries": "^1.2.2",
 		"gulp-plumber": "^1.2.1",
-		"gulp-pug": "^5.0.0",
 		"gulp-rename": "^2.0.0",
 		"gulp-sass": "^5.0.0",
 		"gulp-shell": "^0.8.0",

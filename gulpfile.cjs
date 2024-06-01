@@ -1,6 +1,5 @@
 const gulp = require('gulp'),
 			sass = require('gulp-sass')(require('sass-embedded')),
-			pug = require('gulp-pug'),
 			browserSync = require('browser-sync'),
 			csso = require('gulp-csso'),
 			rename = require('gulp-rename'),
@@ -34,7 +33,6 @@ let path = {
 	test: {
 		css: dirs.test + 'css/',
 		sass: dirs.test + 'sass/',
-		pug: dirs.test + 'pug/',
 		img: dirs.test + 'img/'
 	}
 };
@@ -42,7 +40,6 @@ let path = {
 const files = {
 	styles: '**/*.{scss,css}',
 	js: '**/*.js',
-	pug: '**/*.pug',
 	html: '**/*.html',
 	all: '**/*'
 };
@@ -54,7 +51,6 @@ path = Object.assign({
 			path.src.mlut + files.styles,
 			path.test.sass + files.styles,
 		],
-		pug: dirs.test + files.pug,
 		html: dirs.test + files.html,
 		docs: [
 			dirs.docs + 'examples/' + files.html,
@@ -80,6 +76,7 @@ const sizeConfig = {
 	showFiles: true
 };
 
+// for test deployment on ftp
 const ftpConfig = {
 	host: '',
 	user: '',
@@ -142,13 +139,6 @@ gulp.task('sass', gulp.series('css-lint', () => {
 		.pipe(browserSync.stream());
 }));
 
-gulp.task('pug', () => {
-	return gulp.src(path.test.pug + '*.pug', {allowEmpty: true})
-		.pipe(plumber())
-		.pipe(pug({'pretty': '\t'}))
-		.pipe(gulp.dest(dirs.test));
-});
-
 gulp.task('server', () => {
 	browserSync(servConfig);
 });
@@ -189,9 +179,8 @@ gulp.task('kss', shell.task([
 	'cp ' + path.test.css + 'test.css ' + path.docs.assets,
 ]));
 
-gulp.task('default', gulp.parallel('server', 'kss', 'sass', 'pug', () => {
+gulp.task('default', gulp.parallel('server', 'kss', 'sass', () => {
 	gulp.watch(path.watch.styles, gulp.series('kss', 'sass'));
-	gulp.watch(path.watch.pug, gulp.series('pug'));
 	gulp.watch(path.watch.html, gulp.series('html'));
 	gulp.watch(path.watch.docs, gulp.series('kss'));
 }));
@@ -199,8 +188,6 @@ gulp.task('default', gulp.parallel('server', 'kss', 'sass', 'pug', () => {
 gulp.task('watch-test', gulp.parallel('sass-test', 'kss', () => {
 	gulp.watch(path.watch.styles, gulp.series('kss', 'sass-test'));
 }));
-
-gulp.task('sass-mk-doc', gulp.series('sass-compile-doc', 'kss'));
 
 gulp.task('sass-watch-doc', gulp.series('sass-compile-doc', 'kss', () => {
 	gulp.watch(dirs.docs + 'generate.scss', gulp.series('sass-compile-doc', 'kss'));
@@ -218,4 +205,6 @@ gulp.task('img', () => {
 		.pipe(gulp.dest(path.docs.assets));
 });
 
-gulp.task('build', gulp.series('sass', 'pug', 'sass-mk-doc', 'img'));
+gulp.task('sass-mk-doc', gulp.series('sass-compile-doc', 'kss', 'img'));
+
+gulp.task('build', gulp.series('sass', 'sass-mk-doc'));
