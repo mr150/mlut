@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>mlut documentation</title>
+
+  <meta name="description" content=""/>
+  <meta name="generator" content="kss-node"/>
+  <meta name="viewport" content="width=device-width"/>
+
+  <link rel="stylesheet" href="kss-assets/kss.css"/>
+  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
+<link rel="stylesheet" href="kss-assets/test.css"/>
+<link rel="stylesheet" href="kss-assets/generate.min.css"/>
+
+</head>
+<body id="kss-node" class="kss-fullscreen-mode">
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">mlut documentation</h1>
+  </header>
+  <nav class="kss-nav" aria-label="Style Guide">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-start.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Getting started</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-concepts.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Basic concepts</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-how_to.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">How to</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-css_lib.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">CSS library</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-utils-reference.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Utils reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-general_reference.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">General reference</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass-tools.html">
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-settings.html">
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Settings</span>
+        </a>
+      </li>
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-addons.html">
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Addons</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<main class="kss-main" aria-label="Content">
+  <article>
+
+    <div id="kssref-addons-how_works-create" class="kss-section kss-section--depth-3 is-fullscreen">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-addons-how_works-create">
+            <span class="kss-title__ref">
+              9.1.1
+              <span class="kss-title__permalink-hash">
+                  #addons.how_works.create
+              </span>
+            </span>
+            Create
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>At the moment, an addon is a regular Sass modules that add functionality to mlut or some CSS. Key point to keep in mind: addon is imported <strong>after</strong> user has configure mlut. This means that you <strong>cannot configure</strong> mlut tools as a Sass module. But you can modify the configuration manually</p>
+<p>That said, it is recommended that you merge your configuration changes so that it does not erase the user's configuration (if hypothetically possible)</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-comment">// import mlut tools</span>
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;@mlut/core/tools&quot;</span> as ml;
+
+<span class="hljs-comment">// add some new features</span>
+<span class="hljs-variable">$new-colors</span>: (
+	<span class="hljs-string">&#x27;red0&#x27;</span>: <span class="hljs-number">#f22</span>,
+	<span class="hljs-string">&#x27;green0&#x27;</span>: <span class="hljs-number">#1f1</span>,
+	<span class="hljs-string">&#x27;blue0&#x27;</span>: <span class="hljs-number">#33f</span>,
+);
+
+<span class="hljs-comment">// neat merge it</span>
+ml.<span class="hljs-variable">$utils-db</span>: map.merge(
+	ml.<span class="hljs-variable">$utils-db</span>, <span class="hljs-string">&#x27;common&#x27;</span>, <span class="hljs-string">&#x27;keywords&#x27;</span>, <span class="hljs-string">&#x27;colors&#x27;</span>,
+	map.merge(
+		<span class="hljs-variable">$new-colors</span>,
+		map.get(ml.<span class="hljs-variable">$utils-db</span>, <span class="hljs-string">&#x27;common&#x27;</span>, <span class="hljs-string">&#x27;keywords&#x27;</span>, <span class="hljs-string">&#x27;colors&#x27;</span>)
+	)
+);
+</code></pre>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>content/main.css</code>, line 1601
+        </div>
+
+    </div>
+</article>
+</main>
+
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
+
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>

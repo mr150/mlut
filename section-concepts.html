@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width"/>
 
   <link rel="stylesheet" href="kss-assets/kss.css"/>
-  <link rel="stylesheet" href="kss-assets/docs.min.css"/>
+  <link rel="stylesheet" href="kss-assets/mlut.min.css"/>
 <link rel="stylesheet" href="kss-assets/test.css"/>
 <link rel="stylesheet" href="kss-assets/generate.min.css"/>
 
@@ -53,7 +53,7 @@
               <li class="kss-nav__menu-item">
                 <a class="kss-nav__menu-link" href="section-concepts.html#kssref-concepts-util-syntax">
                   <span class="kss-nav__ref kss-nav__ref-child">2.2.1</span
-                  ><span class="kss-nav__name">General syntax</span>
+                  ><span class="kss-nav__name">Components syntax</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
@@ -196,38 +196,33 @@
         </a>
       </li>
       <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-styles.html">
-          <span class="kss-nav__ref">4</span><span class="kss-nav__name">Core styles</span>
-        </a>
-      </li>
-      <li class="kss-nav__menu-item">
-        <a class="kss-nav__menu-link" href="section-core-helpers.html">
-          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Core helpers</span>
+        <a class="kss-nav__menu-link" href="section-css_lib.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">CSS library</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-utils-reference.html">
-          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Utils reference</span>
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Utils reference</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-general_reference.html">
-          <span class="kss-nav__ref">7</span><span class="kss-nav__name">General reference</span>
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">General reference</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-sass-tools.html">
-          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Sass tools</span>
+          <span class="kss-nav__ref">7</span><span class="kss-nav__name">Sass tools</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-settings.html">
-          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Settings</span>
+          <span class="kss-nav__ref">8</span><span class="kss-nav__name">Settings</span>
         </a>
       </li>
       <li class="kss-nav__menu-item">
         <a class="kss-nav__menu-link" href="section-addons.html">
-          <span class="kss-nav__ref">10</span><span class="kss-nav__name">Addons</span>
+          <span class="kss-nav__ref">9</span><span class="kss-nav__name">Addons</span>
         </a>
       </li>
     </ul>
@@ -262,7 +257,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 121
+          Source: <code>content/main.css</code>, line 126
         </div>
 
     </div>
@@ -322,7 +317,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 131
+          Source: <code>content/main.css</code>, line 136
         </div>
 
     </section>
@@ -352,7 +347,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 166
+          Source: <code>content/main.css</code>, line 171
         </div>
 
     </section>
@@ -367,16 +362,16 @@
                   #concepts.util.syntax
               </span>
             </span>
-            General syntax
+            Components syntax
           </a>
         </h3>
 
 
           <div class="kss-description">
-            <p>Utilities consist of out:
-<img class="D" src="kss-assets/utils-syntax.jpg" alt="utilities syntax"></p>
+            <p>The idea behind the components syntax is that the utility is divided into <em>components</em>, each of which corresponds to a part of a CSS rule. So the utilities consist of out:
+<img class="D" width="500" src="kss-assets/utils-syntax.svg" alt="utilities syntax"></p>
 <ol>
-<li>CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule">at-rule</a>: breakpoints, <code>@supports</code>, ect</li>
+<li>CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule">at-rule</a>: breakpoints, <code>@supports</code>, etc</li>
 <li>pre-states - part of selector before the utility class name</li>
 <li>name</li>
 <li>value</li>
@@ -391,7 +386,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 176
+          Source: <code>content/main.css</code>, line 181
         </div>
 
     </section>
@@ -426,7 +421,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 195
+          Source: <code>content/main.css</code>, line 200
         </div>
 
     </section>
@@ -447,7 +442,7 @@
 
 
           <div class="kss-description">
-            <p>To work with utilities in mlut, the parsing to parts (components) is used. Most of them correspond to the usual syntax. The utility divides to this components:</p>
+            <p>Under the hood of mlut, utilities are also parsed to components, but in a slightly different way. This is more relevant for working in AOT mode, but it will be useful for general understanding as well. This is how it works:</p>
 <ul>
 <li>at-rules</li>
 <li>pre-states</li>
@@ -475,7 +470,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 210
+          Source: <code>content/main.css</code>, line 215
         </div>
 
     </section>
@@ -511,7 +506,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 240
+          Source: <code>content/main.css</code>, line 246
         </div>
 
     </section>
@@ -557,7 +552,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 253
+          Source: <code>content/main.css</code>, line 259
         </div>
 
     </section>
@@ -587,7 +582,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 282
+          Source: <code>content/main.css</code>, line 288
         </div>
 
     </section>
@@ -619,7 +614,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 356
+          Source: <code>content/main.css</code>, line 362
         </div>
 
     </section>
@@ -653,7 +648,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 321
+          Source: <code>content/main.css</code>, line 327
         </div>
 
     </section>
@@ -689,7 +684,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 305
+          Source: <code>content/main.css</code>, line 311
         </div>
 
     </section>
@@ -721,7 +716,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 345
+          Source: <code>content/main.css</code>, line 351
         </div>
 
     </section>
@@ -753,7 +748,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 334
+          Source: <code>content/main.css</code>, line 340
         </div>
 
     </section>
@@ -787,7 +782,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 292
+          Source: <code>content/main.css</code>, line 298
         </div>
 
     </section>
@@ -817,7 +812,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 367
+          Source: <code>content/main.css</code>, line 373
         </div>
 
     </section>
@@ -855,7 +850,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 377
+          Source: <code>content/main.css</code>, line 383
         </div>
 
     </section>
@@ -886,7 +881,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 398
+          Source: <code>content/main.css</code>, line 404
         </div>
 
     </section>
@@ -930,7 +925,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 410
+          Source: <code>content/main.css</code>, line 416
         </div>
 
     </section>
@@ -975,7 +970,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 435
+          Source: <code>content/main.css</code>, line 441
         </div>
 
     </section>
@@ -1024,7 +1019,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 461
+          Source: <code>content/main.css</code>, line 467
         </div>
 
     </section>
@@ -1060,7 +1055,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 493
+          Source: <code>content/main.css</code>, line 499
         </div>
 
     </section>
@@ -1082,8 +1077,8 @@
 
           <div class="kss-description">
             <p>With the @container rule you can use both generic and named container queries</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@include</span> tools.apply(<span class="hljs-string">&#x27;@c:w&gt;600_C-red&#x27;</span>);
-<span class="hljs-keyword">@include</span> tools.apply(<span class="hljs-string">&#x27;@c:box:h&gt;20r_P5u&#x27;</span>);
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@include</span> ml.apply(<span class="hljs-string">&#x27;@c:w&gt;600_C-red&#x27;</span>);
+<span class="hljs-keyword">@include</span> ml.apply(<span class="hljs-string">&#x27;@c:box:h&gt;20r_P5u&#x27;</span>);
 
 <span class="hljs-comment">// CSS</span>
 <span class="hljs-keyword">@container</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">601px</span>) {
@@ -1106,7 +1101,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 608
+          Source: <code>content/main.css</code>, line 614
         </div>
 
     </section>
@@ -1145,7 +1140,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 589
+          Source: <code>content/main.css</code>, line 595
         </div>
 
     </section>
@@ -1189,7 +1184,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 510
+          Source: <code>content/main.css</code>, line 516
         </div>
 
     </section>
@@ -1228,7 +1223,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 532
+          Source: <code>content/main.css</code>, line 538
         </div>
 
     </section>
@@ -1286,7 +1281,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 548
+          Source: <code>content/main.css</code>, line 554
         </div>
 
     </section>
@@ -1307,7 +1302,7 @@
 
 
           <div class="kss-description">
-            <p>You can add custom expressions to any at-rule. Regardless of the name you specify, custom expressions always begin with <code>-</code>. See in the settings how to add it.</p>
+            <p>You can add custom expressions to any at-rule. Regardless of the name you specify, custom expressions always begin with <code>-</code>. See <a href="section-how_to.html#kssref-how_to-config-media">here</a> how to add it.</p>
 
           </div>
 
@@ -1316,7 +1311,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 634
+          Source: <code>content/main.css</code>, line 640
         </div>
 
     </section>
@@ -1403,7 +1398,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 644
+          Source: <code>content/main.css</code>, line 650
         </div>
 
     </section>
@@ -1433,7 +1428,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 713
+          Source: <code>content/main.css</code>, line 719
         </div>
 
     </section>
@@ -1477,7 +1472,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 721
+          Source: <code>content/main.css</code>, line 727
         </div>
 
     </section>
@@ -1520,7 +1515,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 745
+          Source: <code>content/main.css</code>, line 751
         </div>
 
     </section>
@@ -1559,7 +1554,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 767
+          Source: <code>content/main.css</code>, line 773
         </div>
 
     </section>
@@ -1589,7 +1584,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 785
+          Source: <code>content/main.css</code>, line 791
         </div>
 
     </section>
@@ -1625,7 +1620,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 795
+          Source: <code>content/main.css</code>, line 801
         </div>
 
     </section>
@@ -1657,7 +1652,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 821
+          Source: <code>content/main.css</code>, line 827
         </div>
 
     </section>
@@ -1689,7 +1684,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 810
+          Source: <code>content/main.css</code>, line 816
         </div>
 
     </section>
@@ -1720,7 +1715,6 @@
     detailsClass: 'kss-markup'
   });
 </script>
-<script src="kss-assets/mlut.min.js"></script>
 
 
 
