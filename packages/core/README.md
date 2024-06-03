@@ -16,7 +16,7 @@ The [mlut](https://github.com/mr150/mlut) core contains:
 npm i -D @mlut/core sass-embedded
 ```
 
-When using this package, you will need to install Sass separately. We recommend [sass-embedded](https://www.npmjs.com/package/sass-embedded), but regular [sass](https://www.npmjs.com/package/sass) is also suitable
+When using this package, you will need to install Sass separately. We recommend [sass-embedded](https://www.npmjs.com/package/sass-embedded), but regular [sass](https://www.npmjs.com/package/sass) is also suitable.
 
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 

@@ -13,7 +13,7 @@ Parts of the layout within a `row` are created using the elements:
 
 `Row` contains CSS counter named `ml-row-item`.
 
-It **not included** in the default MLUT distributive because partially based on the legacy grid system. It is recommended to use the [CSS grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) utilities instead.
+It **not included** in the default mlut distributive because partially based on the legacy grid system. It is recommended to use the [CSS grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) utilities instead.
 
 Markup: ../../../docs/examples/css_lib-helpers/row/row.html
 
@@ -76,11 +76,6 @@ Styleguide: css_lib.helpers.row.row__item
 
 	@if not ml.$base-border-box {
 		box-sizing: border-box;
-	}
-
-	@if ml.$gs-flex-fallback {
-		display: inline-block;
-		vertical-align: top;
 	}
 
 	@include ml.apply('-Gsf');
