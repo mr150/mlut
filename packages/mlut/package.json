@@ -1,6 +1,6 @@
 {
 	"name": "mlut",
-	"version": "6.0.0",
+	"version": "7.0.0",
 	"description": "Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity",
 	"author": "mr150",
 	"type": "module",
@@ -27,10 +27,10 @@
 		"url": "https://github.com/mr150/mlut/issues"
 	},
 	"exports": {
-    ".": {
-      "default": "./dist/index.js"
-    }
-  },
+		".": {
+			"default": "./dist/index.js"
+		}
+	},
 	"bin": {
 		"mlut": "dist/cli.js"
 	},
