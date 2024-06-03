@@ -1,0 +1,32 @@
+@use '../../tools' as ml;
+
+/*
+CSS variables
+
+Global CSS custom properties which used in mlut.
+
+--ml-gg = 0.75rem - [grid gutter](section-concepts.html#kssref-concepts-custom_unit-gg).
+--ml-gscc = 12 - number of columns in the grid system. Sets by [$gs-columns](section-settings.html#kssref-settings-gs). Available only with `$legacy-grid-system` flag enabled
+
+Styleguide: css_lib.styles.css_vars
+*/
+
+:root {
+	$prev-value: ml.$gtr-first;
+
+	#{ml.$var-gg}: ml.$gtr-first;
+
+	@if ml.$legacy-grid-system {
+		#{ml.$var-gscc}: ml.$gs-columns;
+	}
+
+	@each $key, $value in ml.$gs-gutters {
+		@if $value != $prev-value {
+			@include ml.bp($key) {
+				#{ml.$var-gg}: $value;
+			}
+		}
+
+		$prev-value: $value;
+	}
+}

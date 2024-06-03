@@ -1,0 +1,55 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'forward-tools' as ml;
+
+// Grid system
+//
+// Settings that affect the work of grid system both modern and legacy.
+//
+// - **modern** grid is based on [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) and is built using common grid utilities, such as [Gtc](section-utils-reference.html#kssref-utils-reference-gtc), [Gap](section-utils-reference.html#kssref-utils-reference-gap) etc
+// - **legacy** grid system is based on flexbox and works with [helpers](section-css_lib.html#kssref-css_lib-helpers-row) and custom utilities, such as [-Gscc](section-utils-reference.html#kssref-utils-reference--gscc), [-Gsf](section-utils-reference.html#kssref-utils-reference--gsf) etc.
+//
+// $legacy-grid-system = false - enable legacy grid system and generate some CSS for it
+// $gs-default-gtr = 4u - default gutter on large width screen. Used as fallback for `--ml-gg`.
+// $gs-columns = 12 - columns count.
+// $gs-gutters - map with grid gutters on breakpoints.
+//
+// Styleguide: settings.gs
+
+// Gutters
+//
+// The gutters are stored in `$gs-gutters` map. The keys in it are the names of the breakpoints, and the values are gutter. It is automatically filled out based on breakpoints. If you want to supplement or change gutters, use `$gs-gutters-ext`. If you want to completely overwrite the initial values, specify them in `$gs-gutters` in the config. Pay attention that this behavior is different from all other settings like a [breakpoints](section-settings.html#kssref-settings-at_rules-breakpoints)
+//
+// Gutters value on breakpoints:
+//
+// Breakpoint | Gutter
+// :---:  | :---:
+// <sm | 3u
+// sm | 3u
+// md | 3u
+// lg | 4u
+// xl | 4u
+// xxl | 4u
+//
+// Styleguide: settings.gs.gtr
+
+$legacy-grid-system: false !default;
+$gs-columns: 12 !default;
+$gs-default-gtr: (ml.$su * 4) !default;
+$gs-gutters: () !default;
+$gs-gutters-ext: () !default;
+$gtr-first: (ml.$su * 3);
+
+$gs-debug-col-color: #d15 !default;
+$gs-debug-gtr-color: #336 !default;
+
+@if $gs-gutters == () {
+	@each $bp, $gtr in list.zip(
+		ml.$bp-keys, ($gtr-first, $gtr-first, $gs-default-gtr, $gs-default-gtr)
+	) {
+		$gs-gutters: map.set($gs-gutters, $bp, $gtr);
+	}
+}
+
+$gs-gutters: map.merge($gs-gutters, $gs-gutters-ext);
+$gtr-first: list.nth(list.nth($gs-gutters, 1), 2);

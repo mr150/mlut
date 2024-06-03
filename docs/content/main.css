@@ -20,7 +20,7 @@ npm i mlut -D
 ```
 
 ### CDN ###
-With Demo theme:
+CSS only with demo theme:
 ```html
 <link href="https://unpkg.com/mlut@latest/dist/mlut-demo-theme.min.css" rel="stylesheet">
 ```
@@ -37,7 +37,7 @@ Usage
 You can get assembled mlut code and include it to your project. There are some ways to get a distributive.
 
 - just plug in with CDN
-- if used `npm`, files are in `node_modules/mlut/dist/`
+- if used `npm`, files are in `node_modules/@mlut/core/dist/`
 
 Add the files to your page like here:
 ```html
@@ -51,7 +51,12 @@ And just use classes in the markup:
 ```
 
 ### Toolkit ###
-mlut has a CLI:
+You can use the toolkit in 2 modes
+
+- **JIT**: generate utilities on demand. The JIT engine scans your markup and generates only the utilities you use. This is current and recommended mode of working with mlut. Here you can use our CLI or a plugin for bundlers
+- **AOT**: generate utilities using Sass tools only. You specify in the Sass configuration what utilities you want and the generator creates them (usually more than you need). This is legacу mode, but it is still working and supported. We have no plans to deprecate it for now
+
+CLI for the JIT mode:
 ```
 Usage:
   mlut [-i input.scss] [-o output.css] [--watch] [options...]
@@ -66,7 +71,7 @@ Options:
       --no-merge-mq     Prevent merging of css media queries during minification
 ```
 
-In the input sass file, you can customize mlut and write your own styles. Input file is optional, but if you use it, you must import mlut
+In the input Sass file, you can customize mlut and write your own styles. Input file is optional, but if you use it, you must import mlut
 ```scss
 @use 'mlut' with (
   $breakpoints: (
@@ -174,12 +179,12 @@ Styleguide: concepts.util
 */
 
 /*
-General syntax
+Components syntax
 
-Utilities consist of out:
-<img class="D" src="kss-assets/utils-syntax.jpg" alt="utilities syntax">
+The idea behind the components syntax is that the utility is divided into *components*, each of which corresponds to a part of a CSS rule. So the utilities consist of out:
+<img class="D" width="500" src="kss-assets/utils-syntax.svg" alt="utilities syntax">
 
-1. CSS [at-rule](https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule): breakpoints, `@supports`, ect
+1. CSS [at-rule](https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule): breakpoints, `@supports`, etc
 1. pre-states \- part of selector before the utility class name
 1. name
 1. value
@@ -210,7 +215,8 @@ Styleguide: concepts.util.naming
 /*
 Components
 
-To work with utilities in mlut, the parsing to parts (components) is used. Most of them correspond to the usual syntax. The utility divides to this components:
+Under the hood of mlut, utilities are also parsed to components, but in a slightly different way. This is more relevant for working in AOT mode, but it will be useful for general understanding as well. This is how it works:
+
 - at-rules
 - pre-states
 - post-states
@@ -611,8 +617,8 @@ Styleguide: concepts.at_rules.layer
 With the @container rule you can use both generic and named container queries
 
 ```scss
-@include tools.apply('@c:w>600_C-red');
-@include tools.apply('@c:box:h>20r_P5u');
+@include ml.apply('@c:w>600_C-red');
+@include ml.apply('@c:box:h>20r_P5u');
 
 // CSS
 @container (min-width: 601px) {
@@ -634,7 +640,7 @@ Styleguide: concepts.at_rules.container
 /*
 Custom expressions
 
-You can add custom expressions to any at-rule. Regardless of the name you specify, custom expressions always begin with `-`. See in the settings how to add it.
+You can add custom expressions to any at-rule. Regardless of the name you specify, custom expressions always begin with `-`. See [here](section-how_to.html#kssref-how_to-config-media) how to add it.
 
 Weight: 1
 
@@ -1084,15 +1090,15 @@ Styleguide: how_to.mk_utils.kw_cp
 /*
 Work with library
 
-As you remember, the library part of mlut contains [basic styles](section-core-styles.html), [helpers](section-core-helpers.html) and utilities. By default, only basic styles and helpers are included:
+As you remember, the library part of mlut contains [basic styles](section-css_lib.html#kssref-css_lib-styles), [helpers](section-css_lib.html#kssref-css_lib-helpers) and utilities. Note that the CSS library is in the [@mlut/core](https://www.npmjs.com/package/@mlut/core) package, so you need to import it from there. This package is installed when mlut is used in any way. By default, only basic styles and helpers are included:
 ```scss
-@use 'mlut/tools' as ml;
-@use 'mlut/dist/core';
+@use '@mlut/core/tools' as ml;
+@use '@mlut/core/dist/css';
 ```
 But you can include only the necessary parts of the core:
 ```scss
-@use 'mlut/tools' as ml;
-@use 'mlut/dist/core/helpers';
+@use '@mlut/core/tools' as ml;
+@use '@mlut/core/dist/css/helpers';
 ```
 *Note*: for convenience, in the examples we will include mlut as if we specified a Sass load path, so that each time we do not write `../../node_modules/mlut`. It is default behavior with JIT engine
 
@@ -1102,15 +1108,15 @@ Styleguide: how_to.lib
 */
 
 /*
-Core utilities (AOT)
+Basic utilities (AOT)
 
-This section contains modules with ready-made utilities and a module for initialization. To get all utilities, just include `core/utils`. If you want to load only certain sets, then include them, and then include the initialization module:
+This section contains modules with ready-made utilities and a module for initialization. To get all utilities, just include `css/utils`. If you want to load only certain sets, then include them, and then include the initialization module:
 ```scss
-@use 'mlut/dist/core/utils/box-model';
-@use 'mlut/dist/core/utils/text';
-@use 'mlut/dist/core/utils/init';
+@use '@mlut/core/dist/css/utils/box-model';
+@use '@mlut/core/dist/css/utils/text';
+@use '@mlut/core/dist/css/utils/init';
 ```
-To load core utils without generating them, include the `core/utils/load` module. This may be needed when using [addons](section-addons.html).
+To load basic utils without generating them, include the `css/utils/load` module. This may be needed when using [addons](section-addons.html).
 
 All utilities are sets to `$utils-map` by the key `core`.
 
@@ -1125,7 +1131,7 @@ When including libraries and addons, you can include, exclude or overwrite only 
 - `/ban` - exclude these utilities, `list`
 - `/override` - `map` with utilities and values, which will be merged into `$utils-map` with overwriting. Passing `null` will clear `$utils-map`.
 ```scss
-@use 'mlut/dist/core/utils' with (
+@use '@mlut/core/dist/css/utils' with (
 	$utils: (
 		'C': red,
 
@@ -1217,7 +1223,8 @@ There are 2 ways to add colors:
 <div>2. when generating any utility or utility group, which has a <code>color</code> type of conversion. If you specify a map with colors as values, then they will be added to the settings and they can be used below in other values of utilities</div>
 
 ```scss
-@use 'mlut' as ml with (
+@use '@mlut/core/tools' as ml;
+@use '@mlut/core/dist/css/utils' with (
 	$utils: (
 		'C': (
 			'red100': #911
@@ -1309,14 +1316,15 @@ To create a new utility, add it to the registry during configuration. As a value
 ```
 You can create a utility for changing one property even without registration <s>and SMS</s>. Just specify the name and values. If the name of the utility begins with `-`, then it will control the custom property.
 ```scss
-@use 'mlut' with (
+@use '@mlut/core/tools' as ml;
+@use '@mlut/core/dist/css/utils' with (
 	$utils: (
 		'display': (flex, 5r),
 		'/override': null,
 	),
 );
 
-@include mlut.apply('-MySize-a');
+@include ml.apply('-MySize-a');
 
 // CSS
 .display-flex {
@@ -1396,9 +1404,9 @@ Styleguide: general_reference
 */
 
 /*
-Utilities groups
+Utilities groups (AOT)
 
-In the description of each group are specified the included utilities. When specifying utilities, [Generation Syntax](section-concepts.html#kssref-concepts-util-components-syntax) can be used. After the utilities list, the values of the group that are contained **in the Core** library may be writted. In this values also may be used the Generation Syntax.
+In the description of each group are specified the included utilities. When specifying utilities, [Generation Syntax](section-concepts.html#kssref-concepts-util-components-syntax) can be used. After the utilities list, the values of the group that are contained in the **CSS library** may be writted. In this values also may be used the Generation Syntax.
 
 Styleguide: general_reference.groups
 */
@@ -1428,23 +1436,29 @@ Styleguide: general_reference.common_kw
 */
 
 /*
-Core styles
+CSS library
 
-Base styles for mlut library.
+Small and optional CSS library with basic styles and helpers. The library is in the [@mlut/core](https://www.npmjs.com/package/@mlut/core) package, so you need to import it from there. This package is installed when mlut is used in any way
 
 Weight: 3
 
-Styleguide: core-styles
+Styleguide: css_lib
 */
 
 /*
-Core helpers
+Basic styles
 
-Set of universal helpers for using on any project.
+Styles like reset and normalize
 
-Weight: 4
+Styleguide: css_lib.styles
+*/
 
-Styleguide: core-helpers
+/*
+Helpers
+
+Set of universal helpers for using on any project
+
+Styleguide: css_lib.helpers
 */
 
 /*
@@ -1462,7 +1476,7 @@ This reference is generated on the basis of settings in the code. In the left co
 }
 ```
 
-After the options, the values of utility that are contained **in the Core** library may be specified. The values are written in [Generation Syntax](section-concepts.html#kssref-concepts-util-components-syntax)
+After the options, the values of utility that are contained in the **CSS library** (AOT) may be specified. The values are written in [Generation Syntax](section-concepts.html#kssref-concepts-util-components-syntax)
 
 Weight: 5
 
@@ -1541,7 +1555,7 @@ Styleguide: settings
 /*
 Addons
 
-Addons may include styles, tools, utility sets, and more. For the time being, they are in a main repository, but later they will be moved into separate NPM packages.
+Addons may include styles, tools, utility sets, and more. For the time being, they are in a [@mlut/core](https://www.npmjs.com/package/@mlut/core) package, but later they will be moved into separate packages
 
 Weight: 9
 
@@ -1551,7 +1565,7 @@ Styleguide: addons
 /*
 How it works
 
-Here you will learn how to include addons, their structure, and also how to create your own addon.
+Here you will learn how to include addons and how to create your own.
 
 Weight: 0
 
@@ -1561,63 +1575,57 @@ Styleguide: addons.how_works
 /*
 Import
 
-To import addon that contains utilities, you will need:
+To import addon that **contains utilities** as CSS (AOT), you will need:
 ```scss
 @charset "utf-8";
 
 // import tools
-@use "mlut/tools" as ml;
+@use "@mlut/core/tools" as ml;
 
 // optional import styles from the core that you need: helpers, utilities, etc
-@use "mlut/dist/core/base-setup";
+@use "@mlut/core/dist/css/base-setup";
 
 // import addons
-@use "mlut/dist/addons/demo-theme";
+@use "@mlut/core/dist/addons/demo-theme";
 
 // import a module that initialize utilities
-@use "mlut/dist/core/utils/init";
+@use "@mlut/core/dist/css/utils/init";
 ```
 You can also cancel the generation of all utilities from the addon, and get only the necessary values from there. To do this, pass the parameter to the config of the addon: `$generate: false`.
 
-If the addon contains only a ready-made SASS/CSS code, it can be included in any order after tools. Addon also may have their own settings. They can be seen in the code or documentation.
+If the addon contains only a ready-made Sass/CSS code, it can be included in any order after tools. Addon also may have their own settings. They can be seen in the code or documentation.
 
 Styleguide: addons.how_works.import
 */
 
 /*
-Structure
+Create
 
-To create an addon containing utilities:
+At the moment, an addon is a regular Sass modules that add functionality to mlut or some CSS. Key point to keep in mind: addon is imported **after** user has configure mlut. This means that you **cannot configure** mlut tools as a Sass module. But you can modify the configuration manually
+
+That said, it is recommended that you merge your configuration changes so that it does not erase the user's configuration (if hypothetically possible)
 ```scss
 // import mlut tools
-@use '../tools' as ml;
+@use "@mlut/core/tools" as ml;
 
-// create a map with the same scheme as map $utils,
-// when creating utilities in the config
-$utils: (
-	'BpAll _W': (5u, 10u, 20u, 25u, 40u, 70u),
-	'BpAll _H': (5u, 10u, 20u, 25u),
+// add some new features
+$new-colors: (
+	'red0': #f22,
+	'green0': #1f1,
+	'blue0': #33f,
 );
 
-// put a map with new utils to the $utils-map from tools
-// as a key, use the unique name of the addon
-ml.$utils-map: map.set(
-	ml.$utils-map,
-	'my-addon',
-	$utils
+// neat merge it
+ml.$utils-db: map.merge(
+	ml.$utils-db, 'common', 'keywords', 'colors',
+	map.merge(
+		$new-colors,
+		map.get(ml.$utils-db, 'common', 'keywords', 'colors')
+	)
 );
-
-// you can add the ability to cancel the generation of all utilities
-// to do this, create a setting
-$generate: true !default;
-
-// and hide behind it the writing new utilities to the common map
-@if $generate {
-	ml.$utils-map: map.set(
-...
 ```
 
-Styleguide: addons.how_works.structure
+Styleguide: addons.how_works.create
 */
 
 /*

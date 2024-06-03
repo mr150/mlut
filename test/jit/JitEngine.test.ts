@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { assert } from 'chai';
-import { JitEngine } from '../../src/jit/JitEngine.js';
+import { JitEngine } from '../../packages/core/src/jit/JitEngine.js';
 
 const __dirname = new URL('.', import.meta.url).pathname;
 
@@ -14,7 +14,7 @@ describe('JitEngine', () => {
 
 	const sassInputContent = `
 @use 'sass:list';
-@use "${path.join(__dirname, '../../tools')}" as testou with (
+@use "${path.join(__dirname, '../../packages/core/tools')}" as testou with (
 	$utils-data: (
 		'utils': (
 			'registry': (

@@ -10,7 +10,7 @@ sassTrue.runSass(
 	{
 		file: sassFile,
 		includePaths: [
-			'src/sass',
+			'packages/core',
 			'node_modules',
 		],
 	},

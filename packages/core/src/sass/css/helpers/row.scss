@@ -1,0 +1,98 @@
+@use '../../tools' as ml;
+
+/*
+Row
+
+Helper for creating layouts. Suitable for columns, cards and horizontal lists. By default, flexbox technology is used for layouts.
+
+Parts of the layout within a `row` are created using the elements:
+* [row__col](#kssref-css_lib-helpers-row-row__col)
+* [row__item](#kssref-css_lib-helpers-row-row__item)
+
+`Rows` can be put into each other an unlimited number of times.
+
+`Row` contains CSS counter named `ml-row-item`.
+
+It **not included** in the default mlut distributive because partially based on the legacy grid system. It is recommended to use the [CSS grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) utilities instead.
+
+Markup: ../../../docs/examples/css_lib-helpers/row/row.html
+
+Styleguide: css_lib.helpers.row
+*/
+
+/*
+row__col
+
+The main element for creating columns in layout. By default, it stretches the entire width of the container. The columns have gutters on the sides and bottom.
+
+The gutters are implemented using the `margin` and [CSS custom properties](section-css_lib.html#kssref-css_lib-styles-css_vars).
+
+Column width is set using [W utility](section-utils-reference.html#kssref-utils-reference-w). See example [above](#kssref-css_lib-helpers-row). The formulas for calculating the width and offset for the column are stored in the custom properties. In `--ml-gscf` for W and `--ml-gsof` for [Ml utility](section-utils-reference.html#kssref-utils-reference-ml). These formulas:
+```scss
+--ml-gscf: calc(var(--ml-gsc) / var(--ml-gscc) * 100% - var(--ml-gsfd, var(--ml-gg)) * 2);
+--ml-gsof: calc(var(--ml-gso) / var(--ml-gscc) * 100% + var(--ml-gsfd, var(--ml-gg)));
+```
+`--ml-gsc` or `--ml-gso` is the value of the width or offset in the grid columns. This is a custom property of the utility.<br>
+`--ml-gscc` - the number of columns in the grid system. This is a [global](section-css_lib.html#kssref-css_lib-styles-css_vars) custom property that can be changed on any DOM node.<br>
+`--ml-gsfd` - variable is equal to the gutter if the gutter at the columns is created using margin. In `row__col` is equal `1gg`.<br>
+Some of these variables can be changed using [custom utilities](section-utils-reference.html#kssref-utils-reference--gscc).
+
+You can create nested layouts with a mix of `row` and `row__col` on the same DOM node. If you don't need double fields in the nested row, use the mix with the `row__item`. See example below.
+
+Markup: ../../../docs/examples/css_lib-helpers/row/row__col.html
+
+Styleguide: css_lib.helpers.row.row__col
+*/
+
+/*
+row__item
+
+Element for creating parts of the layout. By default, it stretches across the width of the content.
+
+The sizes and offsets are set with help of utilities.
+
+Like a `row__col`, an element contains formulas for calculating width and offset. But `--ml-gsfd` here is equal 0px.
+
+Markup: ../../../docs/examples/css_lib-helpers/row/row__item.html
+
+Styleguide: css_lib.helpers.row.row__item
+*/
+
+.row {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0px;
+	list-style: none;
+	counter-reset: ml-row-item;
+
+	@include ml.apply('M0;-1gg');
+}
+
+.row__col,
+.row__item {
+	#{ml.$var-gsfd}: 0px;
+	max-width: 100%;
+
+	@if not ml.$base-border-box {
+		box-sizing: border-box;
+	}
+
+	@include ml.apply('-Gsf');
+
+	& > :first-child:not([class]) {
+		margin-top: 0px;
+	}
+
+	& > :last-child:not([class]) {
+		margin-bottom: 0px;
+	}
+}
+
+.row__col {
+	@include ml.apply('-Gsfd1gg W12gc M0;1gg;2gg');
+
+	&.row {
+		margin-bottom: 0px;
+	}
+}
