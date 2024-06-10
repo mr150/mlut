@@ -1,0 +1,28 @@
+name: Test
+
+on:
+  pull_request:
+    paths:
+      - 'packages'
+      - 'test'
+      - '.github/workflows/test.yml'
+
+jobs:
+  test:
+    name: Check that lint and tests pass
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build:packages
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm test
