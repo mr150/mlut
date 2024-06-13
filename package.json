@@ -11,7 +11,7 @@
 	"scripts": {
 		"dev": "npx gulp -f gulpfile.cjs",
 		"build:packages": "npm run build --workspace=@mlut/core && npm run build --workspace=mlut && npx gulp -f gulpfile.cjs sass",
-		"build:docs": "npx gulp -f gulpfile.cjs sass-mk-doc",
+		"build:docs": "npm run build --workspace=@mlut/core && npx gulp -f gulpfile.cjs sass-mk-doc",
 		"build:mlut": "npm run build --workspace=mlut && npx gulp -f gulpfile.cjs sass",
 		"build:core": "npm run build --workspace=@mlut/core",
 		"lint": "npx eslint packages/*/src/ && npx stylelint packages/core/src/sass --ip packages/core/src/sass/tools/mixins/base/_mk-ar.scss",
