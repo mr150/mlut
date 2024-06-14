@@ -6,6 +6,9 @@ on:
       - 'packages'
       - 'test'
       - '.github/workflows/test.yml'
+  push:
+    branches:
+      - master
 
 jobs:
   test:
