@@ -2,7 +2,7 @@
 
 <img alt="Logo" src="kss-assets/logo-full.png" style="display:block; margin:16px 0; max-width:350px"/>
 
-[![Build Status](https://travis-ci.com/mr150/mlut.svg?branch=master)](https://travis-ci.com/mr150/mlut)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mr150/mlut/test.yml?branch=master)](https://github.com/mr150/mlut/actions/workflows/test.yml)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
 
 Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity <br> Get almost all power of CSS in one utility!
