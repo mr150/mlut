@@ -1,6 +1,6 @@
 {
 	"name": "mlut",
-	"version": "7.0.0",
+	"version": "7.0.1",
 	"description": "Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexity",
 	"author": "mr150",
 	"type": "module",
@@ -45,10 +45,10 @@
 	"devDependencies": {
 		"@types/csso": "^5.0.4",
 		"@types/node": "^20.10.5",
-		"typescript": "^5.3.3"
+		"typescript": "^4.8.0"
 	},
 	"dependencies": {
-		"@mlut/core": "^1.0.0",
+		"@mlut/core": "^2.0.0",
 		"arg": "^5.0.2",
 		"csso": "^5.0.5",
 		"fast-glob": "^3.3.2",

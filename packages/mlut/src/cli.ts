@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'node:fs';
+import path from 'node:path';
 import arg from 'arg';
 import { minify } from 'csso';
 import fg from 'fast-glob';
@@ -43,7 +44,7 @@ Options:
 	process.exit(0);
 }
 
-const inputPath = args['--input'];
+const inputPath = args['--input'] && path.resolve(process.cwd(), args['--input']);
 let inputContent = '';
 
 if (inputPath) {
@@ -99,8 +100,25 @@ if (isWatch) {
 
 void buildStyles(targetFiles, 'add');
 
-async function generateStyles(path: string, content: string) {
-	const css = await jitEngine.putAndGenerateCss(path, content).then((css) => {
+async function buildStyles(files: string[], event: TargetEvent) {
+	logger.info('Rebuilding styles...');
+	const startTime = Date.now();
+
+	await Promise.all(files.map(async (path) => {
+		if (event === 'unlink') {
+			return jitEngine.deleteContent(path);
+		}
+
+		return fs.promises.readFile(path)
+			.then((data) => (
+				path === inputPath ?
+					jitEngine.updateSassConfig(data.toString()) :
+					jitEngine.putContent(path, data.toString())
+			))
+			.catch((e) => logger.error('Failed to read a content file.', e));
+	}));
+
+	const css = await jitEngine.generateCss().then((css) => {
 		if (isMinify && css) {
 			return minify(css, { forceMediaMerge: isMergeMq }).css;
 		}
@@ -108,25 +126,8 @@ async function generateStyles(path: string, content: string) {
 		return css;
 	});
 
-	if (css !== undefined) {
-		return fs.promises.writeFile(outputPath, css)
-			.catch((e) => logger.error('Failed to write the output file.', e));
-	}
-}
-
-async function buildStyles(files: string[], event: TargetEvent) {
-	logger.info('Rebuilding styles...');
-	const startTime = Date.now();
-
-	await Promise.all(files.map(async (path) => {
-		if (event === 'unlink') {
-			return generateStyles(path, '');
-		}
-
-		return fs.promises.readFile(path)
-			.then((data) => generateStyles(path, data.toString()))
-			.catch((e) => logger.error('Failed to read a content file.', e));
-	}));
+	await fs.promises.writeFile(outputPath, css)
+		.catch((e) => logger.error('Failed to write the output file.', e));
 
 	logger.info('Completed in', formatTime(Date.now() - startTime));
 }
