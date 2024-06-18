@@ -14,11 +14,9 @@ const __dirname = new URL('.', import.meta.url).pathname;
 
 export class JitEngine {
 	private utils = new Set<string>();
-	private inputFilePath = '';
 	private inputFileDir = __dirname;
 	private sassModuleName = 'tools';
 	private inputFileCache = '@use "../sass/tools";';
-	private generationDebounce: NodeJS.Timeout | undefined;
 	private readonly defaultSassConfig =
 		'@use "sass:map";\n @use "../sass/tools/settings" as ml;';
 	private readonly utilsByFile = new Map<string, string[]>();
@@ -39,8 +37,7 @@ export class JitEngine {
 		let sassConfig: string | undefined = this.defaultSassConfig;
 
 		if (inputPath && inputContent) {
-			this.inputFilePath = path.join(process.cwd(), inputPath);
-			this.inputFileDir = path.dirname(this.inputFilePath);
+			this.inputFileDir = path.dirname(path.resolve(process.cwd(), inputPath));
 			this.inputFileCache = inputContent;
 			sassConfig = this.extractUserSassConfig(inputContent);
 		}
@@ -48,50 +45,50 @@ export class JitEngine {
 		await this.loadUtils(sassConfig);
 	}
 
-	async putAndGenerateCss(id: string, content: string): Promise<string | undefined> {
+	putContent(id: string, content: string | undefined) {
+		if (!content) {
+			return;
+		}
+
+		this.utilsByFile.set(id, this.extractUtils(content));
+	}
+
+	deleteContent(id: string): boolean {
+		return this.utilsByFile.delete(id);
+	}
+
+	async updateSassConfig(content: string): Promise<void> {
+		this.inputFileCache = content;
+		const sassConfig = this.extractUserSassConfig(content);
+
+		if (sassConfig) {
+			await this.loadUtils(sassConfig);
+		}
+	}
+
+	async generateCss(): Promise<string> {
 		if (this.utils.size === 0) {
 			logger.warn('Config with utilities is not loaded!');
 			return '';
 		}
 
-		if (id === this.inputFilePath) {
-			this.inputFileCache = content;
-			const sassConfig = this.extractUserSassConfig(content);
-
-			if (sassConfig) {
-				await this.loadUtils(sassConfig);
-			}
-		} else if (content) {
-			this.utilsByFile.set(id, this.extractUtils(content));
-		} else {
-			this.utilsByFile.delete(id);
+		if (this.utilsByFile.size === 0) {
+			logger.warn('No content to generate CSS was found!');
+			return '';
 		}
 
-		return new Promise((resolve) => {
-			//eslint-disable-next-line
-			let timeout: NodeJS.Timeout | undefined;
-			clearTimeout(this.generationDebounce);
+		const allUniqueUtils = [...new Set([...this.utilsByFile.values()].flat())];
+		const applyStr =
+			`\n@include ${this.sassModuleName}.apply(${JSON.stringify(allUniqueUtils)},(),true);`;
 
-			this.generationDebounce = setTimeout(async () => {
-				clearTimeout(timeout);
-				const allUniqueUtils = [...new Set([...this.utilsByFile.values()].flat())];
-				const applyStr =
-					`\n@include ${this.sassModuleName}.apply(${JSON.stringify(allUniqueUtils)},(),true);`;
-
-				// `compileStringAsync` is almost always faster than `compile` in sass-embedded
-				const css = await sass.compileStringAsync(
-					this.inputFileCache + applyStr,
-					{ loadPaths: [ this.inputFileDir, 'node_modules' ] }
-				).then(
-					({ css }) => css,
-					(e) => (logger.error('Sass compilation error.', e), undefined),
-				);
-
-				resolve(css);
-			}, 100);
-
-			timeout = setTimeout(() => resolve(undefined), 300);
-		});
+		// `compileStringAsync` is almost always faster than `compile` in sass-embedded
+		return sass.compileStringAsync(
+			this.inputFileCache + applyStr,
+			{ loadPaths: [ this.inputFileDir, 'node_modules' ] }
+		).then(
+			({ css }) => css,
+			(e) => (logger.error('Sass compilation error.', e), ''),
+		);
 	}
 
 	private extractUtils(content: string): string[] {

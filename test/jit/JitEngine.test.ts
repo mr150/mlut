@@ -96,10 +96,11 @@ const wrapperCss = "M1u	 -Myvar12 Ps d-g";
 }`;
 		/* eslint-enable */
 
-		void jit.putAndGenerateCss(htmlPath0, htmlContent0);
+		jit.putContent(htmlPath0, htmlContent0);
+		jit.putContent(htmlPath1, htmlContent1);
 
 		assert.equal(
-			await jit.putAndGenerateCss(htmlPath1, htmlContent1),
+			await jit.generateCss(),
 			cssOutput,
 		);
 	});
