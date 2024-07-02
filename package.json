@@ -14,6 +14,7 @@
 		"build:docs": "npm run build --workspace=@mlut/core && npx gulp -f gulpfile.cjs sass-mk-doc",
 		"build:mlut": "npm run build --workspace=mlut && npx gulp -f gulpfile.cjs sass",
 		"build:core": "npm run build --workspace=@mlut/core",
+		"build:plugins": "npm run build --workspace=@mlut/plugins",
 		"lint": "npx eslint packages/*/src/ && npx stylelint packages/core/src/sass --ip packages/core/src/sass/tools/mixins/base/_mk-ar.scss",
 		"test": "mocha test/sass/index.js && mocha"
 	},
@@ -40,6 +41,7 @@
 		"kss": "^3.0.1",
 		"mocha": "^10.0.0",
 		"mocha-clean": "^1.0.0",
+		"rollup": "^4.18.0",
 		"sass-migrator": "^1.8.0",
 		"sass-true": "^6.1.0",
 		"stylelint": "^13.13.1",
