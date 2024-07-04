@@ -2,9 +2,13 @@ import fs from 'node:fs';
 import { jitEngine, logger } from '@mlut/core';
 import { createUnplugin } from 'unplugin';
 
+import { transformCss } from './transformCss.js';
+
 export interface Options {
 	input?: string,
 	output?: string,
+	minify?: boolean,
+	autoprefixer?: boolean,
 }
 
 export const unplugin = createUnplugin<Options>((opts) => {
@@ -73,10 +77,13 @@ export const unplugin = createUnplugin<Options>((opts) => {
 			const css = await jitEngine.generateCss();
 
 			if (lastCompiledCss !== css) {
-				fs.promises.writeFile(finalOpts.output as string, css)
-					.catch((e) => logger.error('Failed to write the output file.', e));
-
 				lastCompiledCss = css;
+
+				await fs.promises.writeFile(
+					finalOpts.output as string,
+					await transformCss(css, finalOpts),
+				)
+					.catch((e) => logger.error('Failed to write the output file.', e));
 			}
 		},
 	};

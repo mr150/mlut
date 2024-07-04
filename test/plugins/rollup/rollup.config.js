@@ -6,6 +6,8 @@ const __dirname = new URL('.', import.meta.url).pathname;
 const mlut = rollup({
 	input: join(__dirname, 'style.scss'),
 	output: join(__dirname, 'dist/style.css'),
+	minify: true,
+	autoprefixer: true,
 });
 
 export default {
