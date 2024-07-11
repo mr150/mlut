@@ -2,16 +2,16 @@ import { createRequire } from 'node:module';
 import type CleanCSS from 'clean-css';
 import type { Targets } from 'lightningcss';
 
-interface TransformOptions {
+export interface TransformCssOptions {
 	readonly minify?: boolean,
 	readonly autoprefixer?: boolean,
 	readonly noMergeMq?: boolean,
 }
 
-type TransformCss = (css: string, options: TransformOptions) => Promise<string>;
+type TransformCss = (css: string, options: TransformCssOptions) => Promise<string>;
 
 const require = createRequire(import.meta.url);
-let isMinifierCanPrefix = false;
+let isMinifierCanAddPrefixes = false;
 
 const transformByAvailableTool = await import('csso')
 	.then<TransformCss>(({ minify }) => (
@@ -22,7 +22,7 @@ const transformByAvailableTool = await import('csso')
 		const { transform, browserslistToTargets } = (await import('lightningcss'));
 		const browserslist = (await import('browserslist')).default;
 		let targets: undefined | Targets;
-		isMinifierCanPrefix = true;
+		isMinifierCanAddPrefixes = true;
 
 		return (css, { autoprefixer, minify }) => {
 			if (autoprefixer && targets == undefined) {
@@ -74,15 +74,15 @@ const applyAutoprefixer = await import('autoprefixer')
 
 export async function transformCss(
 	css: string,
-	options: TransformOptions,
+	options: TransformCssOptions,
 ): Promise<string> {
 	let result = css;
 
-	if (options.minify || isMinifierCanPrefix) {
+	if (options.minify || isMinifierCanAddPrefixes) {
 		result = await transformByAvailableTool(css, options);
 	}
 
-	if (options.autoprefixer && !isMinifierCanPrefix) {
+	if (options.autoprefixer && !isMinifierCanAddPrefixes) {
 		if (applyAutoprefixer === undefined) {
 			throw new Error('The Autoprefixer package are not installed. You can do this with `npm i -D postcss autoprefixer`');
 		}
