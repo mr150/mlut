@@ -6,10 +6,14 @@
       ),
     ),
   ),
+	$jit: (
+		'output': 'test/plugins/rollup/dist/style.css',
+		'minify': true,
+		'autoprefixer': true
+	),
 );
 
 .block {
 	background-color: #c06;
-	background-image: linear-gradient(#fff, #111);
 	appearance:none;
 }
