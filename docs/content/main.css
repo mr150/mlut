@@ -3,12 +3,20 @@ Getting started
 
 There are 2 ways to start using mlut:
 
-- assembled distributive
-- toolkit
+- toolkit: with CLI or plugin
+- assembled CSS distributive
 
 Weight: 0
 
 Styleguide: start
+*/
+
+/*
+Main package
+
+The main package contains CLI and assembled CSS distributive
+
+Styleguide: start.main
 */
 
 /*
@@ -27,7 +35,7 @@ CSS only with demo theme:
 
 Weight: 0
 
-Styleguide: start.install
+Styleguide: start.main.install
 */
 
 /*
@@ -101,7 +109,7 @@ To start the build process:
 ```
 npx mlut -i src/assets/sass/style.scss -w
 ```
-Add the compiled CSS to your page and use mlut utils!
+Add the compiled CSS to your template, then start adding mlut classes to your markup
 ```html
 <!doctype html>
 <html lang="en">
@@ -120,7 +128,205 @@ Add the compiled CSS to your page and use mlut utils!
 
 Weight: 1
 
-Styleguide: start.usage
+Styleguide: start.main.usage
+*/
+
+/*
+Integrations
+
+mlut has a plugins for Rollup, Vite and Webpack that based on [unplugin](https://unplugin.unjs.io/)
+
+Weight: 1
+
+Styleguide: start.integrations
+*/
+
+/*
+Installation
+
+```
+npm i -D @mlut/plugins sass-embedded
+```
+
+When using this package, you will need to install Sass separately. We recommend [sass-embedded](https://www.npmjs.com/package/sass-embedded), but regular [sass](https://www.npmjs.com/package/sass) is also suitable.
+
+This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
+
+Weight: 0
+
+Styleguide: start.integrations.install
+*/
+
+/*
+Options
+
+The plugin options are similar to the mlut CLI options
+
+```ts
+interface Options {
+  output: string,
+  input?: string,
+  minify?: boolean,
+  autoprefixer?: boolean,
+  noMergeMq?: boolean,
+}
+```
+
+You can add the options in your input Sass file too. Options must be a **valid JSON**, but single quotes is allowed. Paths will be resolved relative to the JIT engine working directory
+```scss
+@use '@mlut/core' with (
+  $jit: (
+    'output': 'dist/assets/style.css',
+    'minify': true,
+    'autoprefixer': true
+  ),
+);
+```
+
+output - output CSS file
+input - input Sass file when you import mlut, configure it and write other CSS
+minify - generate minified CSS. For this option to work, you need 1 of the following minifiers: [csso](https://github.com/css/csso), [lightningcss](https://github.com/parcel-bundler/lightningcss), [clean-css](https://github.com/clean-css/clean-css), [cssnano](https://github.com/cssnano/cssnano) or [esbuild](https://github.com/evanw/esbuild). You may already have it installed
+autoprefixer - whether to add vendor prefixes to CSS properties. You need the [autoprefixer](https://github.com/postcss/autoprefixer) package or lightningcss for this option to work
+noMergeMq - prevent merging of CSS media queries during minification. Relevant only when using the csso minifier
+
+Weight: 1
+
+Styleguide: start.integrations.options
+*/
+
+/*
+Usage
+
+Import the plugin for the appropriate bundler from the `@mlut/plugins` package as in one of the examples below. You can find more detailed examples using dev-server and livereload in the plugin tests [directory](https://github.com/mr150/mlut/tree/master/test/plugins)
+
+Weight: 1
+
+Styleguide: start.integrations.usage
+*/
+
+/*
+Rollup
+
+Update the config:
+```js
+// rollup.config.js
+import { rollup } from '@mlut/plugins';
+
+const mlut = rollup({
+  output: 'dist/style.css',
+  // other options...
+});
+
+export default {
+  // rollup config...
+  plugins: [mlut],
+};
+```
+
+Add the compiled CSS to your `index.html`
+```html
+<link href="assets/style.css" rel="stylesheet">
+```
+
+Start your build process:
+```
+rollup --config rollup.config.js -w
+```
+
+Add the mlut classes to your components:
+```js
+// index.js
+const component = `
+	<div class="wrapper Mm7">
+		<h1 class="Fns5r C-purple">Rollup plugin test!</h1>
+		<p>Lorem about mlut</p>
+	</div>
+`;
+```
+
+Styleguide: start.integrations.usage.rollup
+*/
+
+/*
+Vite
+
+Update the config:
+```js
+// vite.config.js
+import { vite } from '@mlut/plugins';
+
+const mlut = vite({
+  output: 'dist/assets/style.css',
+  // other options...
+});
+
+export default defineConfig(() => {
+  return {
+    // vite config...
+    plugins: [mlut],
+  }
+});
+```
+
+Add the compiled CSS to your `index.html`. Note that the path to it should be the **same as in the production build**:
+```html
+<link href="assets/style.css" rel="stylesheet">
+```
+
+Start your build process:
+```
+vite
+```
+
+Add the mlut classes to your markup:
+```html
+<h1 class="C-red Fnw800 P2u">Lorem Ipsu</h1>
+```
+
+Styleguide: start.integrations.usage.vite
+*/
+
+/*
+Webpack
+
+Update the config:
+```js
+// webpack.config.js
+import { webpack } from '@mlut/plugins';
+
+const mlut = webpack({
+  output: 'dist/style.css',
+  // other options...
+});
+
+export default {
+  // webpack config...
+  plugins: [mlut],
+};
+```
+
+Add the compiled CSS to your `index.html`
+```html
+<link href="assets/style.css" rel="stylesheet">
+```
+
+Start your build process:
+```
+webpack watch
+```
+
+Add the mlut classes to your components:
+```js
+// index.js
+const component = `
+	<div class="wrapper xl_Mm8">
+		<h1 class="Fns5r xl_C-red">Webpack plugin test</h1>
+		<p>Lorem about mlut and Webpack</p>
+	</div>
+`;
+```
+
+Styleguide: start.integrations.usage.webpack
 */
 
 /*
@@ -1486,7 +1692,7 @@ Styleguide: utils-reference
 /*
 Sass tools
 
-Available when using mlut as a [toolkit](section-start.html#kssref-start-usage).
+Available when using mlut as a [toolkit](section-start.html#kssref-start-main-usage).
 
 Weight: 7
 
