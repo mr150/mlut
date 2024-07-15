@@ -1,0 +1,14 @@
+@use '@mlut/core/tools' with (
+	$utils-data: (
+		'utils': (
+      'registry': (
+        'Mm': margin-magick,
+      ),
+    ),
+  ),
+);
+
+.block {
+	background-color: #c06;
+	appearance:none;
+}

@@ -72,6 +72,7 @@ const applyAutoprefixer = await import('autoprefixer')
 	})
 	.catch(() => undefined);
 
+// TODO: rewrite using class
 export async function transformCss(
 	css: string,
 	options: TransformCssOptions,
