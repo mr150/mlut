@@ -151,14 +151,15 @@ Addons may contains any tools, settings and styles. Addons now at the **preview*
 
 | Package | Description |
 | ---  | --- |
-| [@mlut/core](https://github.com/mr150/mlut/blob/master/packages/core) | The mlut core that contains Sass tools, CSS library and JIT engine |
 | [mlut](https://github.com/mr150/mlut/blob/master/packages/mlut) | The main package for working with CLI |
+| [@mlut/core](https://github.com/mr150/mlut/blob/master/packages/core) | The mlut core that contains Sass tools, CSS library and JIT engine |
+| [@mlut/plugins](https://github.com/mr150/mlut/blob/master/packages/plugins) | The mlut plugins for Rollup, Vite and Webpack |
 
 ## Getting Started ##
 There are 2 ways to start using mlut:
 
-- assembled distributive
-- toolkit
+- toolkit: with CLI or plugin
+- assembled CSS distributive
 
 ### Installation ###
 
@@ -194,7 +195,7 @@ And just use classes in the markup:
     <h3>Simple text</h3>
 ```
 
-#### Toolkit ####
+#### CLI ####
 You can use the toolkit in 2 modes
 
 - **JIT**: generate utilities on demand. The JIT engine scans your markup and generates only the utilities you use. This is current and recommended mode of working with mlut. Here you can use our CLI or a plugin for bundlers
@@ -262,12 +263,16 @@ Add the compiled CSS to your page and use mlut utils!
 </html>
 ```
 
+#### Plugins ####
+
+mlut has a plugins for Rollup, Vite and Webpack. See details [here](https://mr150.github.io/mlut/section-start.html#kssref-start-integrations)
+
 ## Documentation ##
 Available [here](https://mr150.github.io/mlut/) or can be run locally. Documentation is included in this repo and is generated using [KSS-node](https://github.com/kss-node/kss-node) from the comments in the sources
 
 ## What next? ##
-- plugins for popular bundlers and frameworks
 - first class CSS functions in utilities values
+- states and at-rules grouping 
 - and much more!
 
 ## Acknowledgement ##

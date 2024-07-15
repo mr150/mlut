@@ -158,8 +158,9 @@ Addons may contains any tools, settings and styles. Addons now at the **preview*
 
 | Package | Description |
 | ---  | --- |
-| [@mlut/core](https://github.com/mr150/mlut/blob/master/packages/core) | The mlut core that contains Sass tools, CSS library and JIT engine |
 | [mlut](https://github.com/mr150/mlut/blob/master/packages/mlut) | The main package for working with CLI |
+| [@mlut/core](https://github.com/mr150/mlut/blob/master/packages/core) | The mlut core that contains Sass tools, CSS library and JIT engine |
+| [@mlut/plugins](https://github.com/mr150/mlut/blob/master/packages/plugins) | The mlut plugins for Rollup, Vite and Webpack |
 
 </div>
 </section>
@@ -167,8 +168,8 @@ Addons may contains any tools, settings and styles. Addons now at the **preview*
 <section class="Mb4gg">
 
 ## What next? ##
-- plugins for popular bundlers and frameworks
 - first class CSS functions in utilities values
+- states and at-rules grouping 
 - and much more!
 
 </section>

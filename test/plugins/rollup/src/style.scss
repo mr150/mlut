@@ -1,0 +1,19 @@
+@use '@mlut/core/tools' with (
+	$utils-data: (
+		'utils': (
+      'registry': (
+        'Mm': margin-magick,
+      ),
+    ),
+  ),
+	$jit: (
+		'output': 'test/plugins/rollup/dist/style.css',
+		'minify': true,
+		'autoprefixer': true
+	),
+);
+
+.block {
+	background-color: #c06;
+	appearance:none;
+}
