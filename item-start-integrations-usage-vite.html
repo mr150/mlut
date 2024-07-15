@@ -79,29 +79,47 @@
 <main class="kss-main" aria-label="Content">
   <article>
 
-    <div id="kssref-concepts-values-type-css_var" class="kss-section kss-section--depth-4 is-fullscreen">
+    <div id="kssref-start-integrations-usage-vite" class="kss-section kss-section--depth-4 is-fullscreen">
 
       <div class="kss-style">
         <h4 class="kss-title kss-title--level-4">
-          <a class="kss-title__permalink" href="#kssref-concepts-values-type-css_var">
+          <a class="kss-title__permalink" href="#kssref-start-integrations-usage-vite">
             <span class="kss-title__ref">
-              2.3.1.3
+              1.2.3.2
               <span class="kss-title__permalink-hash">
-                  #concepts.values.type.css_var
+                  #start.integrations.usage.vite
               </span>
             </span>
-            CSS variables
+            Vite
           </a>
         </h4>
 
 
           <div class="kss-description">
-            <p>Their names begin with <code>$</code> written in lower camelCase and may contain numbers. They can be used almost everywhere, even as part of a complex value, for example in fractions:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@debug</span> ml.uv(<span class="hljs-string">&#x27;W1/$div&#x27;</span>); <span class="hljs-comment">// calc(1 / var(--ml-div) * 100%);</span>
+            <p>Update the config:</p>
+<pre class="hljs"><code class="language-js"><span class="hljs-comment">// vite.config.js</span>
+<span class="hljs-keyword">import</span> { vite } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@mlut/plugins&#x27;</span>;
+
+<span class="hljs-keyword">const</span> mlut = vite({
+  <span class="hljs-attr">output</span>: <span class="hljs-string">&#x27;dist/assets/style.css&#x27;</span>,
+  <span class="hljs-comment">// other options...</span>
+});
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> defineConfig(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-comment">// vite config...</span>
+    <span class="hljs-attr">plugins</span>: [mlut],
+  }
+});
 </code></pre>
-<p>To specify a fallback, use <code>?</code>. In the fallback, you can specify any value, including another variable with fallback:</p>
-<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@debug</span> ml.uv(<span class="hljs-string">&#x27;W-$myCard?200&#x27;</span>); <span class="hljs-comment">// var(--ml-myCard, 200px)</span>
-<span class="hljs-keyword">@debug</span> ml.uv(<span class="hljs-string">&#x27;W-$myCard?$defWd?150&#x27;</span>); <span class="hljs-comment">// var(--ml-myCard, var(--ml-defWd, 150px))</span>
+<p>Add the compiled CSS to your <code>index.html</code>. Note that the path to it should be the <strong>same as in the production build</strong>:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;assets/style.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
+</code></pre>
+<p>Start your build process:</p>
+<pre class="hljs"><code class="language-">vite
+</code></pre>
+<p>Add the mlut classes to your markup:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;C-red Fnw800 P2u&quot;</span>&gt;</span>Lorem Ipsu<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
 </code></pre>
 
           </div>
@@ -111,7 +129,7 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 517
+          Source: <code>content/main.css</code>, line 250
         </div>
 
     </div>

@@ -79,39 +79,83 @@
 <main class="kss-main" aria-label="Content">
   <article>
 
-    <div id="kssref-start-install" class="kss-section kss-section--depth-2 is-fullscreen">
+    <div id="kssref-start-integrations-options" class="kss-section kss-section--depth-3 is-fullscreen">
 
       <div class="kss-style">
-        <h2 class="kss-title kss-title--level-2">
-          <a class="kss-title__permalink" href="#kssref-start-install">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-start-integrations-options">
             <span class="kss-title__ref">
-              1.1
+              1.2.2
               <span class="kss-title__permalink-hash">
-                  #start.install
+                  #start.integrations.options
               </span>
             </span>
-            Installation
+            Options
           </a>
-        </h2>
+        </h3>
 
 
           <div class="kss-description">
-            <h3>NPM</h3>
-<pre class="hljs"><code class="language-">npm i mlut -D
+            <p>The plugin options are similar to the mlut CLI options</p>
+<pre class="hljs"><code class="language-ts"><span class="hljs-keyword">interface</span> Options {
+  <span class="hljs-attr">output</span>: <span class="hljs-built_in">string</span>,
+  input?: <span class="hljs-built_in">string</span>,
+  minify?: <span class="hljs-built_in">boolean</span>,
+  autoprefixer?: <span class="hljs-built_in">boolean</span>,
+  noMergeMq?: <span class="hljs-built_in">boolean</span>,
+}
 </code></pre>
-<h3>CDN</h3>
-<p>CSS only with demo theme:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://unpkg.com/mlut@latest/dist/mlut-demo-theme.min.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
+<p>You can add the options in your input Sass file too. Options must be a <strong>valid JSON</strong>, but single quotes is allowed. Paths will be resolved relative to the JIT engine working directory</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;@mlut/core&#x27;</span> with (
+  <span class="hljs-variable">$jit</span>: (
+    <span class="hljs-string">&#x27;output&#x27;</span>: <span class="hljs-string">&#x27;dist/assets/style.css&#x27;</span>,
+    <span class="hljs-string">&#x27;minify&#x27;</span>: true,
+    <span class="hljs-string">&#x27;autoprefixer&#x27;</span>: true
+  ),
+);
 </code></pre>
 
           </div>
 
 
+          <div class="kss-parameters__title">Parameters:</div>
+          <ul class="kss-parameters">
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>output</code></div>
+              <div class="kss-parameters__description">
+                output CSS file
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>input</code></div>
+              <div class="kss-parameters__description">
+                input Sass file when you import mlut, configure it and write other CSS
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>minify</code></div>
+              <div class="kss-parameters__description">
+                generate minified CSS. For this option to work, you need 1 of the following minifiers: <a href="https://github.com/css/csso">csso</a>, <a href="https://github.com/parcel-bundler/lightningcss">lightningcss</a>, <a href="https://github.com/clean-css/clean-css">clean-css</a>, <a href="https://github.com/cssnano/cssnano">cssnano</a> or <a href="https://github.com/evanw/esbuild">esbuild</a>. You may already have it installed
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>autoprefixer</code></div>
+              <div class="kss-parameters__description">
+                whether to add vendor prefixes to CSS properties. You need the <a href="https://github.com/postcss/autoprefixer">autoprefixer</a> package or lightningcss for this option to work
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>noMergeMq</code></div>
+              <div class="kss-parameters__description">
+                prevent merging of CSS media queries during minification. Relevant only when using the csso minifier
+              </div>
+            </li>
+          </ul>
       </div>
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 14
+          Source: <code>content/main.css</code>, line 160
         </div>
 
     </div>

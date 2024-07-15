@@ -34,14 +34,44 @@
         </a>
             <ul class="kss-nav__menu-child">
               <li class="kss-nav__menu-item">
-                <a class="kss-nav__menu-link" href="section-start.html#kssref-start-install">
+                <a class="kss-nav__menu-link" href="section-start.html#kssref-start-main">
                   <span class="kss-nav__ref ">1.1</span
+                  ><span class="kss-nav__name">Main package</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-start.html#kssref-start-main-install">
+                  <span class="kss-nav__ref kss-nav__ref-child">1.1.1</span
                   ><span class="kss-nav__name">Installation</span>
                 </a>
               </li>
               <li class="kss-nav__menu-item">
-                <a class="kss-nav__menu-link" href="section-start.html#kssref-start-usage">
+                <a class="kss-nav__menu-link" href="section-start.html#kssref-start-main-usage">
+                  <span class="kss-nav__ref kss-nav__ref-child">1.1.2</span
+                  ><span class="kss-nav__name">Usage</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-start.html#kssref-start-integrations">
                   <span class="kss-nav__ref ">1.2</span
+                  ><span class="kss-nav__name">Integrations</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-start.html#kssref-start-integrations-install">
+                  <span class="kss-nav__ref kss-nav__ref-child">1.2.1</span
+                  ><span class="kss-nav__name">Installation</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-start.html#kssref-start-integrations-options">
+                  <span class="kss-nav__ref kss-nav__ref-child">1.2.2</span
+                  ><span class="kss-nav__name">Options</span>
+                </a>
+              </li>
+              <li class="kss-nav__menu-item">
+                <a class="kss-nav__menu-link" href="section-start.html#kssref-start-integrations-usage">
+                  <span class="kss-nav__ref kss-nav__ref-child">1.2.3</span
                   ><span class="kss-nav__name">Usage</span>
                 </a>
               </li>
@@ -112,8 +142,8 @@
           <div class="kss-description">
             <p>There are 2 ways to start using mlut:</p>
 <ul>
-<li>assembled distributive</li>
-<li>toolkit</li>
+<li>toolkit: with CLI or plugin</li>
+<li>assembled CSS distributive</li>
 </ul>
 
           </div>
@@ -127,20 +157,50 @@
         </div>
 
     </div>
-    <section id="kssref-start-install" class="kss-section kss-section--depth-2 ">
+    <section id="kssref-start-main" class="kss-section kss-section--depth-2 ">
 
       <div class="kss-style">
         <h2 class="kss-title kss-title--level-2">
-          <a class="kss-title__permalink" href="#kssref-start-install">
+          <a class="kss-title__permalink" href="#kssref-start-main">
             <span class="kss-title__ref">
               1.1
               <span class="kss-title__permalink-hash">
-                  #start.install
+                  #start.main
+              </span>
+            </span>
+            Main package
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>The main package contains CLI and assembled CSS distributive</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>content/main.css</code>, line 14
+        </div>
+
+    </section>
+    <section id="kssref-start-main-install" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-start-main-install">
+            <span class="kss-title__ref">
+              1.1.1
+              <span class="kss-title__permalink-hash">
+                  #start.main.install
               </span>
             </span>
             Installation
           </a>
-        </h2>
+        </h3>
 
 
           <div class="kss-description">
@@ -159,24 +219,24 @@
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 14
+          Source: <code>content/main.css</code>, line 22
         </div>
 
     </section>
-    <section id="kssref-start-usage" class="kss-section kss-section--depth-2 ">
+    <section id="kssref-start-main-usage" class="kss-section kss-section--depth-3 ">
 
       <div class="kss-style">
-        <h2 class="kss-title kss-title--level-2">
-          <a class="kss-title__permalink" href="#kssref-start-usage">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-start-main-usage">
             <span class="kss-title__ref">
-              1.2
+              1.1.2
               <span class="kss-title__permalink-hash">
-                  #start.usage
+                  #start.main.usage
               </span>
             </span>
             Usage
           </a>
-        </h2>
+        </h3>
 
 
           <div class="kss-description">
@@ -240,7 +300,7 @@ Options:
 <p>To start the build process:</p>
 <pre class="hljs"><code class="language-">npx mlut -i src/assets/sass/style.scss -w
 </code></pre>
-<p>Add the compiled CSS to your page and use mlut utils!</p>
+<p>Add the compiled CSS to your template, then start adding mlut classes to your markup</p>
 <pre class="hljs"><code class="language-html"><span class="hljs-meta">&lt;!doctype <span class="hljs-meta-keyword">html</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
@@ -263,7 +323,350 @@ Options:
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 33
+          Source: <code>content/main.css</code>, line 41
+        </div>
+
+    </section>
+    <section id="kssref-start-integrations" class="kss-section kss-section--depth-2 ">
+
+      <div class="kss-style">
+        <h2 class="kss-title kss-title--level-2">
+          <a class="kss-title__permalink" href="#kssref-start-integrations">
+            <span class="kss-title__ref">
+              1.2
+              <span class="kss-title__permalink-hash">
+                  #start.integrations
+              </span>
+            </span>
+            Integrations
+          </a>
+        </h2>
+
+
+          <div class="kss-description">
+            <p>mlut has a plugins for Rollup, Vite and Webpack that based on <a href="https://unplugin.unjs.io/">unplugin</a></p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>content/main.css</code>, line 134
+        </div>
+
+    </section>
+    <section id="kssref-start-integrations-install" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-start-integrations-install">
+            <span class="kss-title__ref">
+              1.2.1
+              <span class="kss-title__permalink-hash">
+                  #start.integrations.install
+              </span>
+            </span>
+            Installation
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <pre class="hljs"><code class="language-">npm i -D @mlut/plugins sass-embedded
+</code></pre>
+<p>When using this package, you will need to install Sass separately. We recommend <a href="https://www.npmjs.com/package/sass-embedded">sass-embedded</a>, but regular <a href="https://www.npmjs.com/package/sass">sass</a> is also suitable.</p>
+<p>This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.</p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>content/main.css</code>, line 144
+        </div>
+
+    </section>
+    <section id="kssref-start-integrations-options" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-start-integrations-options">
+            <span class="kss-title__ref">
+              1.2.2
+              <span class="kss-title__permalink-hash">
+                  #start.integrations.options
+              </span>
+            </span>
+            Options
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>The plugin options are similar to the mlut CLI options</p>
+<pre class="hljs"><code class="language-ts"><span class="hljs-keyword">interface</span> Options {
+  <span class="hljs-attr">output</span>: <span class="hljs-built_in">string</span>,
+  input?: <span class="hljs-built_in">string</span>,
+  minify?: <span class="hljs-built_in">boolean</span>,
+  autoprefixer?: <span class="hljs-built_in">boolean</span>,
+  noMergeMq?: <span class="hljs-built_in">boolean</span>,
+}
+</code></pre>
+<p>You can add the options in your input Sass file too. Options must be a <strong>valid JSON</strong>, but single quotes is allowed. Paths will be resolved relative to the JIT engine working directory</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;@mlut/core&#x27;</span> with (
+  <span class="hljs-variable">$jit</span>: (
+    <span class="hljs-string">&#x27;output&#x27;</span>: <span class="hljs-string">&#x27;dist/assets/style.css&#x27;</span>,
+    <span class="hljs-string">&#x27;minify&#x27;</span>: true,
+    <span class="hljs-string">&#x27;autoprefixer&#x27;</span>: true
+  ),
+);
+</code></pre>
+
+          </div>
+
+
+          <div class="kss-parameters__title">Parameters:</div>
+          <ul class="kss-parameters">
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>output</code></div>
+              <div class="kss-parameters__description">
+                output CSS file
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>input</code></div>
+              <div class="kss-parameters__description">
+                input Sass file when you import mlut, configure it and write other CSS
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>minify</code></div>
+              <div class="kss-parameters__description">
+                generate minified CSS. For this option to work, you need 1 of the following minifiers: <a href="https://github.com/css/csso">csso</a>, <a href="https://github.com/parcel-bundler/lightningcss">lightningcss</a>, <a href="https://github.com/clean-css/clean-css">clean-css</a>, <a href="https://github.com/cssnano/cssnano">cssnano</a> or <a href="https://github.com/evanw/esbuild">esbuild</a>. You may already have it installed
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>autoprefixer</code></div>
+              <div class="kss-parameters__description">
+                whether to add vendor prefixes to CSS properties. You need the <a href="https://github.com/postcss/autoprefixer">autoprefixer</a> package or lightningcss for this option to work
+              </div>
+            </li>
+            <li class="kss-parameters__item">
+              <div class="kss-parameters__name"><code>noMergeMq</code></div>
+              <div class="kss-parameters__description">
+                prevent merging of CSS media queries during minification. Relevant only when using the csso minifier
+              </div>
+            </li>
+          </ul>
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>content/main.css</code>, line 160
+        </div>
+
+    </section>
+    <section id="kssref-start-integrations-usage" class="kss-section kss-section--depth-3 ">
+
+      <div class="kss-style">
+        <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-start-integrations-usage">
+            <span class="kss-title__ref">
+              1.2.3
+              <span class="kss-title__permalink-hash">
+                  #start.integrations.usage
+              </span>
+            </span>
+            Usage
+          </a>
+        </h3>
+
+
+          <div class="kss-description">
+            <p>Import the plugin for the appropriate bundler from the <code>@mlut/plugins</code> package as in one of the examples below. You can find more detailed examples using dev-server and livereload in the plugin tests <a href="https://github.com/mr150/mlut/tree/master/test/plugins">directory</a></p>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>content/main.css</code>, line 197
+        </div>
+
+    </section>
+    <section id="kssref-start-integrations-usage-rollup" class="kss-section kss-section--depth-4 ">
+
+      <div class="kss-style">
+        <h4 class="kss-title kss-title--level-4">
+          <a class="kss-title__permalink" href="#kssref-start-integrations-usage-rollup">
+            <span class="kss-title__ref">
+              1.2.3.1
+              <span class="kss-title__permalink-hash">
+                  #start.integrations.usage.rollup
+              </span>
+            </span>
+            Rollup
+          </a>
+        </h4>
+
+
+          <div class="kss-description">
+            <p>Update the config:</p>
+<pre class="hljs"><code class="language-js"><span class="hljs-comment">// rollup.config.js</span>
+<span class="hljs-keyword">import</span> { rollup } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@mlut/plugins&#x27;</span>;
+
+<span class="hljs-keyword">const</span> mlut = rollup({
+  <span class="hljs-attr">output</span>: <span class="hljs-string">&#x27;dist/style.css&#x27;</span>,
+  <span class="hljs-comment">// other options...</span>
+});
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-comment">// rollup config...</span>
+  <span class="hljs-attr">plugins</span>: [mlut],
+};
+</code></pre>
+<p>Add the compiled CSS to your <code>index.html</code></p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;assets/style.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
+</code></pre>
+<p>Start your build process:</p>
+<pre class="hljs"><code class="language-">rollup --config rollup.config.js -w
+</code></pre>
+<p>Add the mlut classes to your components:</p>
+<pre class="hljs"><code class="language-js"><span class="hljs-comment">// index.js</span>
+<span class="hljs-keyword">const</span> component = <span class="hljs-string">`
+	&lt;div class=&quot;wrapper Mm7&quot;&gt;
+		&lt;h1 class=&quot;Fns5r C-purple&quot;&gt;Rollup plugin test!&lt;/h1&gt;
+		&lt;p&gt;Lorem about mlut&lt;/p&gt;
+	&lt;/div&gt;
+`</span>;
+</code></pre>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>content/main.css</code>, line 207
+        </div>
+
+    </section>
+    <section id="kssref-start-integrations-usage-vite" class="kss-section kss-section--depth-4 ">
+
+      <div class="kss-style">
+        <h4 class="kss-title kss-title--level-4">
+          <a class="kss-title__permalink" href="#kssref-start-integrations-usage-vite">
+            <span class="kss-title__ref">
+              1.2.3.2
+              <span class="kss-title__permalink-hash">
+                  #start.integrations.usage.vite
+              </span>
+            </span>
+            Vite
+          </a>
+        </h4>
+
+
+          <div class="kss-description">
+            <p>Update the config:</p>
+<pre class="hljs"><code class="language-js"><span class="hljs-comment">// vite.config.js</span>
+<span class="hljs-keyword">import</span> { vite } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@mlut/plugins&#x27;</span>;
+
+<span class="hljs-keyword">const</span> mlut = vite({
+  <span class="hljs-attr">output</span>: <span class="hljs-string">&#x27;dist/assets/style.css&#x27;</span>,
+  <span class="hljs-comment">// other options...</span>
+});
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> defineConfig(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-comment">// vite config...</span>
+    <span class="hljs-attr">plugins</span>: [mlut],
+  }
+});
+</code></pre>
+<p>Add the compiled CSS to your <code>index.html</code>. Note that the path to it should be the <strong>same as in the production build</strong>:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;assets/style.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
+</code></pre>
+<p>Start your build process:</p>
+<pre class="hljs"><code class="language-">vite
+</code></pre>
+<p>Add the mlut classes to your markup:</p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;C-red Fnw800 P2u&quot;</span>&gt;</span>Lorem Ipsu<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+</code></pre>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>content/main.css</code>, line 250
+        </div>
+
+    </section>
+    <section id="kssref-start-integrations-usage-webpack" class="kss-section kss-section--depth-4 ">
+
+      <div class="kss-style">
+        <h4 class="kss-title kss-title--level-4">
+          <a class="kss-title__permalink" href="#kssref-start-integrations-usage-webpack">
+            <span class="kss-title__ref">
+              1.2.3.3
+              <span class="kss-title__permalink-hash">
+                  #start.integrations.usage.webpack
+              </span>
+            </span>
+            Webpack
+          </a>
+        </h4>
+
+
+          <div class="kss-description">
+            <p>Update the config:</p>
+<pre class="hljs"><code class="language-js"><span class="hljs-comment">// webpack.config.js</span>
+<span class="hljs-keyword">import</span> { webpack } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@mlut/plugins&#x27;</span>;
+
+<span class="hljs-keyword">const</span> mlut = webpack({
+  <span class="hljs-attr">output</span>: <span class="hljs-string">&#x27;dist/style.css&#x27;</span>,
+  <span class="hljs-comment">// other options...</span>
+});
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-comment">// webpack config...</span>
+  <span class="hljs-attr">plugins</span>: [mlut],
+};
+</code></pre>
+<p>Add the compiled CSS to your <code>index.html</code></p>
+<pre class="hljs"><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;assets/style.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
+</code></pre>
+<p>Start your build process:</p>
+<pre class="hljs"><code class="language-">webpack watch
+</code></pre>
+<p>Add the mlut classes to your components:</p>
+<pre class="hljs"><code class="language-js"><span class="hljs-comment">// index.js</span>
+<span class="hljs-keyword">const</span> component = <span class="hljs-string">`
+	&lt;div class=&quot;wrapper xl_Mm8&quot;&gt;
+		&lt;h1 class=&quot;Fns5r xl_C-red&quot;&gt;Webpack plugin test&lt;/h1&gt;
+		&lt;p&gt;Lorem about mlut and Webpack&lt;/p&gt;
+	&lt;/div&gt;
+`</span>;
+</code></pre>
+
+          </div>
+
+
+      </div>
+
+
+        <div class="kss-source kss-style">
+          Source: <code>content/main.css</code>, line 289
         </div>
 
     </section>
