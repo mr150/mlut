@@ -16,7 +16,7 @@ function debounce<T>(fn: (...args: T[]) => unknown, timeout: number) {
 	return (...args: T[]) => {
 		clearTimeout(timer);
 		timer = setTimeout(fn, timeout, ...args);
-	}
+	};
 }
 
 export const unplugin = createUnplugin<Options>((options, meta) => {
@@ -74,7 +74,7 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 		}
 
 		await jitEngine.init([inputPath, inputContent]);
-	}
+	};
 
 	return {
 		name: pluginName,
@@ -103,7 +103,7 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 		// TODO: add the Vite types
 		configureServer(server: { watcher: FSWatcher }) {
 			server.watcher.add(finalOptions.output);
-    },
+		},
 
 		// hack because `buildStart` is not async in Webpack yet
 		// https://github.com/unjs/unplugin/issues/293
@@ -155,7 +155,7 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 							attrs: { rel: 'stylesheet', href: finalOptions.output },
 						},
 					],
-				}
+				};
 			} else if (isVite) {
 				await writeCssFile();
 			}
