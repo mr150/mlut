@@ -47,6 +47,10 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 	const debouncedWriteCssFile = debounce(writeCssFile, 500);
 
 	const initPlugin = async () => {
+		if (outputPath) {
+			return;
+		}
+
 		let inputContent = '';
 
 		if (inputPath) {
@@ -76,8 +80,8 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 			throw new Error('Output path not specified!');
 		}
 
-		outputPath = path.resolve(cwd, finalOptions.output);
 		await jitEngine.init([inputPath, inputContent]);
+		outputPath = path.resolve(cwd, finalOptions.output);
 	};
 
 	return {
@@ -160,10 +164,9 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 						},
 					],
 				};
-			} else if (isVite) {
-				await writeCssFile();
 			}
 
+			await writeCssFile();
 			return html;
 		},
 
