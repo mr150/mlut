@@ -1,3 +1,4 @@
+import path from 'node:path';
 import { jitEngine, logger } from '@mlut/core';
 import { createUnplugin } from 'unplugin';
 import fs from 'fs-extra';
@@ -20,9 +21,11 @@ function debounce<T>(fn: (...args: T[]) => unknown, timeout: number) {
 }
 
 export const unplugin = createUnplugin<Options>((options, meta) => {
+	const cwd = process.cwd();
 	const pluginName = 'unplugin-mlut';
 	const finalOptions: Options = { output: '' };
-	const inputPath = options.input;
+	const inputPath = options.input && path.resolve(cwd, options.input);
+	let outputPath = '';
 	let lastCompiledCss = '';
 	const isWebpack = meta.framework === 'webpack';
 	let isVite = false;
@@ -35,7 +38,7 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 			lastCompiledCss = css;
 
 			await fs.outputFile(
-				finalOptions.output,
+				outputPath,
 				await transformCss(css, finalOptions),
 			).catch((e) => logger.error('Failed to write the output file.', e));
 		}
@@ -73,6 +76,7 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 			throw new Error('Output path not specified!');
 		}
 
+		outputPath = path.resolve(cwd, finalOptions.output);
 		await jitEngine.init([inputPath, inputContent]);
 	};
 
@@ -93,7 +97,7 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 			return {
 				server: {
 					watch: {
-						ignored: ['!' + finalOptions.output]
+						ignored: ['!' + outputPath]
 					}
 				},
 			};
@@ -102,7 +106,7 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 		// Vite only hook
 		// TODO: add the Vite types
 		configureServer(server: { watcher: FSWatcher }) {
-			server.watcher.add(finalOptions.output);
+			server.watcher.add(outputPath);
 		},
 
 		// hack because `buildStart` is not async in Webpack yet
@@ -152,7 +156,7 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 					tags: [
 						{
 							tag: 'link',
-							attrs: { rel: 'stylesheet', href: finalOptions.output },
+							attrs: { rel: 'stylesheet', href: outputPath },
 						},
 					],
 				};
