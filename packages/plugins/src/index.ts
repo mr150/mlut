@@ -82,6 +82,10 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 
 		await jitEngine.init([inputPath, inputContent]);
 		outputPath = path.resolve(cwd, finalOptions.output);
+
+		if (isViteWatch) {
+			await fs.outputFile(outputPath, '').catch(() => undefined);
+		}
 	};
 
 	return {
