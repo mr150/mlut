@@ -446,13 +446,13 @@ Options:
             <li class="kss-parameters__item">
               <div class="kss-parameters__name"><code>minify</code></div>
               <div class="kss-parameters__description">
-                generate minified CSS. For this option to work, you need 1 of the following minifiers: <a href="https://github.com/css/csso">csso</a>, <a href="https://github.com/parcel-bundler/lightningcss">lightningcss</a>, <a href="https://github.com/clean-css/clean-css">clean-css</a>, <a href="https://github.com/cssnano/cssnano">cssnano</a> or <a href="https://github.com/evanw/esbuild">esbuild</a>. You may already have it installed
+                generate minified CSS. For this option to work, you need 1 of the following minifiers: <a href="https://github.com/css/csso">csso</a>, <a href="https://github.com/parcel-bundler/lightningcss">lightningcss</a>, <a href="https://github.com/clean-css/clean-css">clean-css</a>, <a href="https://github.com/cssnano/cssnano">cssnano</a> or <a href="https://github.com/evanw/esbuild">esbuild</a>. You may already have it installed. When using <code>lightningcss</code>, you will also need to install <a href="https://github.com/browserslist/browserslist">browserslist</a>
               </div>
             </li>
             <li class="kss-parameters__item">
               <div class="kss-parameters__name"><code>autoprefixer</code></div>
               <div class="kss-parameters__description">
-                whether to add vendor prefixes to CSS properties. You need the <a href="https://github.com/postcss/autoprefixer">autoprefixer</a> package or lightningcss for this option to work
+                whether to add vendor prefixes to CSS properties. You need the <a href="https://github.com/postcss/autoprefixer">autoprefixer</a> package or <a href="https://github.com/parcel-bundler/lightningcss">lightningcss</a> for this option to work
               </div>
             </li>
             <li class="kss-parameters__item">
@@ -488,6 +488,12 @@ Options:
 
           <div class="kss-description">
             <p>Import the plugin for the appropriate bundler from the <code>@mlut/plugins</code> package as in one of the examples below. You can find more detailed examples using dev-server and livereload in the plugin tests <a href="https://github.com/mr150/mlut/tree/master/test/plugins">directory</a></p>
+<p>We also recommend adding the input file right away:</p>
+<pre class="hljs"><code class="language-scss"><span class="hljs-comment">// style.scss</span>
+<span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;@mlut/core&#x27;</span>;
+
+<span class="hljs-comment">// your CSS or mlut config</span>
+</code></pre>
 
           </div>
 
@@ -554,7 +560,7 @@ Options:
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 207
+          Source: <code>content/main.css</code>, line 215
         </div>
 
     </section>
@@ -608,7 +614,7 @@ Options:
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 250
+          Source: <code>content/main.css</code>, line 258
         </div>
 
     </section>
@@ -666,7 +672,7 @@ Options:
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 289
+          Source: <code>content/main.css</code>, line 297
         </div>
 
     </section>
