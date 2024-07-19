@@ -1,6 +1,6 @@
 {
 	"name": "@mlut/plugins",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "mlut plugins for Rollup, Vite and Webpack",
 	"author": "mr150",
 	"type": "module",

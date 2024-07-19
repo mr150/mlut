@@ -15,6 +15,7 @@
 		"build:mlut": "npm run build --workspace=mlut && npx gulp -f gulpfile.cjs sass",
 		"build:core": "npm run build --workspace=@mlut/core",
 		"build:plugins": "npm run build --workspace=@mlut/plugins",
+		"test:plugins": "vite build -c test/plugins/vite/vite.config.js && webpack -c test/plugins/webpack/webpack.config.js && rollup --config test/plugins/rollup/rollup.config.js",
 		"lint": "npx eslint packages/*/src/ && npx stylelint packages/core/src/sass --ip packages/core/src/sass/tools/mixins/base/_mk-ar.scss",
 		"test": "mocha test/sass/index.js && mocha"
 	},
@@ -34,6 +35,7 @@
 		"gulp-plumber": "^1.2.1",
 		"gulp-rename": "^2.0.0",
 		"gulp-sass": "^5.0.0",
+		"fs-extra": "^11.2.0",
 		"gulp-shell": "^0.8.0",
 		"gulp-size": "^4.0.0",
 		"gulp-sourcemaps": "^3.0.0",

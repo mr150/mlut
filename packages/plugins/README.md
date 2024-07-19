@@ -87,8 +87,8 @@ interface Options {
 
 - `output` - output CSS file
 - `input` - input Sass file when you import mlut, configure it and write other CSS
-- `minify` - generate minified CSS. For this option to work, you need 1 of the following minifiers: [csso](https://github.com/css/csso), [lightningcss](https://github.com/parcel-bundler/lightningcss), [clean-css](https://github.com/clean-css/clean-css), [cssnano](https://github.com/cssnano/cssnano) or [esbuild](https://github.com/evanw/esbuild). You may already have it installed
-- `autoprefixer` - whether to add vendor prefixes to CSS properties. You need the [autoprefixer](https://github.com/postcss/autoprefixer) package or lightningcss for this option to work
+- `minify` - generate minified CSS. For this option to work, you need 1 of the following minifiers: [csso](https://github.com/css/csso), [lightningcss](https://github.com/parcel-bundler/lightningcss), [clean-css](https://github.com/clean-css/clean-css), [cssnano](https://github.com/cssnano/cssnano) or [esbuild](https://github.com/evanw/esbuild). You may already have it installed. When using `lightningcss`, you will also need to install [browserslist](https://github.com/browserslist/browserslist)
+- `autoprefixer` - whether to add vendor prefixes to CSS properties. You need the [autoprefixer](https://github.com/postcss/autoprefixer) package or [lightningcss](https://github.com/parcel-bundler/lightningcss) for this option to work
 - `noMergeMq` - prevent merging of CSS media queries during minification. Relevant only when using the csso minifier
 
 You can add the options in your input Sass file too. Options must be a **valid JSON**, but single quotes is allowed. Paths will be resolved relative to the JIT engine working directory
