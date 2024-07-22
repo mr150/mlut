@@ -92,7 +92,7 @@ export class JitEngine {
 	}
 
 	private extractUtils(content: string): string[] {
-		const allClassNames: string[] = [];
+		let allClassNames: string[] = [];
 
 		const quotedClassNames = content
 			.match(this.utilsRegexps.quotedContent)
@@ -107,7 +107,7 @@ export class JitEngine {
 
 		for (const item of [quotedClassNames, singleQuotedClassNames]) {
 			if (item instanceof Array) {
-				allClassNames.push(...item);
+				allClassNames = allClassNames.concat(item);
 			}
 		}
 
