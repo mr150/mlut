@@ -7,6 +7,7 @@ import { minify } from 'csso';
 import fg from 'fast-glob';
 import Watcher from 'watcher';
 import { jitEngine, logger } from '@mlut/core';
+import type { Processor } from 'postcss';
 
 const args = arg({
 	'--help': Boolean,
@@ -16,6 +17,7 @@ const args = arg({
 	'--watch': Boolean,
 	'--minify': Boolean,
 	'--no-merge-mq': Boolean,
+	'--autoprefixer': Boolean,
 
 	'-i': '--input',
 	'-o': '--output',
@@ -34,12 +36,13 @@ if (args['--help'] !== undefined) {
 
 Options:
   -h, --help            Print this help message
-  -i, --input           Input sass file
-  -o, --output          Output css file
+  -i, --input           Input Sass file
+  -o, --output          Output CSS file
   -w, --watch           Watch for changes and rebuild as needed
-  -m, --minify          Generate minified css file
+  -m, --minify          Generate minified CSS file
       --content         Paths to content with markup
-      --no-merge-mq     Prevent merging of css media queries during minification`
+      --autoprefixer    Add vendor prefixes to CSS properties. The 'autoprefixer' is required
+      --no-merge-mq     Prevent merging of CSS media queries during minification`
 	);
 	process.exit(0);
 }
@@ -85,9 +88,26 @@ const targetContent = args['--content'] ?? [] as string[];
 const isWatch = args['--watch'];
 const isMinify = args['--minify'];
 const isMergeMq = !args['--no-merge-mq'];
+const isAutoprefixer = args['--autoprefixer'];
+const postCssOptions = { from: undefined };
 
 if (targetContent.length === 0) {
 	logger.error('Content path not specified!');
+	process.exit(1);
+}
+
+const autoprefixer = await import('autoprefixer')
+	.then(async (autoprefixer) => {
+		const postcss = (await import('postcss')).default;
+
+		return postcss([autoprefixer.default]);
+	})
+	.catch(() => undefined);
+
+if (isAutoprefixer && autoprefixer === undefined) {
+	logger.error(
+		'The Autoprefixer package are not installed. You can do this with `npm i -D postcss autoprefixer`'
+	);
 	process.exit(1);
 }
 
@@ -118,12 +138,22 @@ async function buildStyles(files: string[], event: TargetEvent) {
 			.catch((e) => logger.error('Failed to read a content file.', e));
 	}));
 
-	const css = await jitEngine.generateCss().then((css) => {
-		if (isMinify && css) {
-			return minify(css, { forceMediaMerge: isMergeMq }).css;
+	const css = await jitEngine.generateCss().then(async (css) => {
+		let result = css;
+
+		if (css) {
+			if (isMinify) {
+				result = minify(css, { forceMediaMerge: isMergeMq }).css;
+			}
+
+			if (isAutoprefixer) {
+				result = await (autoprefixer as Processor)
+					.process(result, postCssOptions)
+					.then((r) => r.css);
+			}
 		}
 
-		return css;
+		return result;
 	});
 
 	await fs.promises.writeFile(outputPath, css)
