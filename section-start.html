@@ -266,12 +266,13 @@
 
 Options:
   -h, --help            Print this help message
-  -i, --input           Input sass file
-  -o, --output          Output css file
+  -i, --input           Input Sass file
+  -o, --output          Output CSS file
   -w, --watch           Watch for changes and rebuild as needed
-  -m, --minify          Generate minified css file
+  -m, --minify          Generate minified CSS file
       --content         Paths to content with markup
-      --no-merge-mq     Prevent merging of css media queries during minification
+      --autoprefixer		  Add vendor prefixes to CSS properties. The 'autoprefixer' is required
+      --no-merge-mq     Prevent merging of CSS media queries during minification
 </code></pre>
 <p>In the input Sass file, you can customize mlut and write your own styles. Input file is optional, but if you use it, you must import mlut</p>
 <pre class="hljs"><code class="language-scss"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;mlut&#x27;</span> with (
@@ -353,7 +354,7 @@ Options:
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 134
+          Source: <code>content/main.css</code>, line 135
         </div>
 
     </section>
@@ -386,7 +387,7 @@ Options:
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 144
+          Source: <code>content/main.css</code>, line 145
         </div>
 
     </section>
@@ -466,7 +467,7 @@ Options:
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 160
+          Source: <code>content/main.css</code>, line 161
         </div>
 
     </section>
@@ -502,7 +503,7 @@ Options:
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 197
+          Source: <code>content/main.css</code>, line 198
         </div>
 
     </section>
@@ -560,7 +561,7 @@ Options:
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 215
+          Source: <code>content/main.css</code>, line 216
         </div>
 
     </section>
@@ -614,7 +615,7 @@ Options:
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 258
+          Source: <code>content/main.css</code>, line 259
         </div>
 
     </section>
@@ -672,7 +673,7 @@ Options:
 
 
         <div class="kss-source kss-style">
-          Source: <code>content/main.css</code>, line 297
+          Source: <code>content/main.css</code>, line 298
         </div>
 
     </section>
