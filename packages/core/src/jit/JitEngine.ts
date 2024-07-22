@@ -34,6 +34,10 @@ export class JitEngine {
 	async init(
 		[inputPath, inputContent]: [string | undefined, string | undefined] = ['', '']
 	) {
+		if (this.utils.size) {
+			return;
+		}
+
 		let sassConfig: string | undefined = this.defaultSassConfig;
 
 		if (inputPath && inputContent) {

@@ -77,6 +77,7 @@ const wrapperCss = "M1u	 -Myvar12 Ps d-g";
 	it('generate CSS from the file', async () => {
 		const jit = new JitEngine();
 		await jit.init([sassInputPath, sassInputContent]);
+		await jit.init(['BROKEN/PATH', 'NONE']);
 
 		/* eslint-disable */
 		const cssOutput = `.C-ih {
