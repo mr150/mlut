@@ -3,8 +3,8 @@ name: Test
 on:
   pull_request:
     paths:
-      - 'packages'
-      - 'test'
+      - 'packages/**'
+      - 'test/**'
       - '.github/workflows/test.yml'
     branches:
       - '**'

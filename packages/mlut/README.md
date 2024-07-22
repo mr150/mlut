@@ -208,12 +208,13 @@ Usage:
 
 Options:
   -h, --help            Print this help message
-  -i, --input           Input sass file
-  -o, --output          Output css file
+  -i, --input           Input Sass file
+  -o, --output          Output CSS file
   -w, --watch           Watch for changes and rebuild as needed
-  -m, --minify          Generate minified css file
+  -m, --minify          Generate minified CSS file
       --content         Paths to content with markup
-      --no-merge-mq     Prevent merging of css media queries during minification
+      --autoprefixer    Add vendor prefixes to CSS properties. The 'autoprefixer' is required
+      --no-merge-mq     Prevent merging of CSS media queries during minification
 ```
 
 In the input sass file, you can customize mlut and write your own styles. Input file is optional, but if you use it, you must import mlut
