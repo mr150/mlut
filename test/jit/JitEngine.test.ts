@@ -32,6 +32,7 @@ describe('JitEngine', () => {
 @include testou.apply('C-ih');
 `;
 
+	/* eslint-disable */
 	const extractUtilsContent = `
 <div class="
 D-n
@@ -40,15 +41,17 @@ md_Gc-s1 Pb6u Ps Lol5    md_Mxh130vh Ps
 
 @:pfrm_-Try0 ^one_Bgc-$bgColor?#c06_h Ct-'id:';attr(id)_b
 ">
-Lorem Ipsum
+Lorem \`Ipsum\`
 </div>
 
-const wrapperCss = "M1u	 -Myvar12 Ps d-g";
+const myStr = "simpl'e text" + ' testou' + "" + "hi@150.lv";
+const wrapperCss = "M1u	 -Myvar12 \\"Ps\\" d-g";
 
-<MyComponent className={cn('D-f Gap5u', wrapperCss)}/>
-`;
+<MyComponent className={cn('D-f \\'Gap5u', wrapperCss)}/>
+` + "\n<button className={`D-ib ${flag ? 'Bgc-red' : ''}`}>Clear</div>";
+	/* eslint-enable */
 
-	it('extract utils from content', async () => {
+	it('extract utils from the content', async () => {
 		const jit = new JitEngine();
 		await jit.init();
 
@@ -69,7 +72,9 @@ const wrapperCss = "M1u	 -Myvar12 Ps d-g";
 				'M1u',
 				'-Myvar12',
 				'D-f',
-				'Gap5u'
+				'Gap5u',
+				'Bgc-red',
+				'D-ib',
 			],
 		);
 	});
@@ -77,6 +82,7 @@ const wrapperCss = "M1u	 -Myvar12 Ps d-g";
 	it('generate CSS from the file', async () => {
 		const jit = new JitEngine();
 		await jit.init([sassInputPath, sassInputContent]);
+		await jit.init(['BROKEN/PATH', 'NONE']);
 
 		/* eslint-disable */
 		const cssOutput = `.C-ih {
