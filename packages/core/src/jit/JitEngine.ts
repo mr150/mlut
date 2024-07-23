@@ -21,10 +21,13 @@ export class JitEngine {
 		'@use "sass:map";\n @use "../sass/tools/settings" as ml;';
 	private readonly utilsByFile = new Map<string, string[]>();
 	private readonly utilsRegexps = {
-		quotedContent: /"\n?[^"]*?[A-Z][^"\n]*\n?"/g,
-		singleQuotedContent: /'\n?[^']*?[A-Z][^'\n]*\n?'/g,
+		quotedContent: /"\n?[^"]*[^"\n]*\n?"/g,
+		singleQuotedContent: /'\n?[^']*[^'\n]*\n?'/g,
+		backtickQuotedContent: /`\n?[^`]*[^`\n]*\n?`/g,
 		tooMoreSpaces: /\s{2,}|\n/g,
+		escapedQuotes: /\\['"`]/g,
 		utilName: /^-?[A-Z]{1}[a-zA-Z]*/,
+		uppercaseLetter: /[A-Z]/,
 	};
 	private readonly configRegexps = {
 		userSettings: /@use ['"][^'"]*(tools|mlut|core)['"](\s*as\s+[\w]+)?\s+with\s*\(([^;]+)\);/s,
@@ -96,24 +99,21 @@ export class JitEngine {
 	}
 
 	private extractUtils(content: string): string[] {
-		let allClassNames: string[] = [];
-
-		const quotedClassNames = content
+		let fixedContent = content.replace(this.utilsRegexps.escapedQuotes, '');
+		const allClassNames = fixedContent
 			.match(this.utilsRegexps.quotedContent)
-			//eslint-disable-next-line
-			?.map(this.normalizeClassNameStr, this);
+			?.reduce(this.filterAndProcessClassStr, []) ?? [];
 
-		const singleQuotedClassNames = content
-			.replace(this.utilsRegexps.quotedContent, '')
+		fixedContent = fixedContent.replace(this.utilsRegexps.quotedContent, '');
+
+		fixedContent
 			.match(this.utilsRegexps.singleQuotedContent)
-			//eslint-disable-next-line
-			?.map(this.normalizeClassNameStr, this);
+			?.reduce(this.filterAndProcessClassStr, allClassNames);
 
-		for (const item of [quotedClassNames, singleQuotedClassNames]) {
-			if (item instanceof Array) {
-				allClassNames = allClassNames.concat(item);
-			}
-		}
+		fixedContent
+			.replace(this.utilsRegexps.singleQuotedContent, '')
+			.match(this.utilsRegexps.backtickQuotedContent)
+			?.reduce(this.filterAndProcessClassStr, allClassNames);
 
 		return [...allClassNames.join(' ').split(' ').reduce((acc, cssClass) => {
 			const utility = cssClass.split('_').find((str) => (
@@ -132,9 +132,15 @@ export class JitEngine {
 		}, new Set<string>())];
 	}
 
-	private normalizeClassNameStr(str: string) {
-		return str.replace(this.utilsRegexps.tooMoreSpaces, ' ').slice(1, -1);
-	}
+	private filterAndProcessClassStr = (acc: string[], str: string) => {
+		if (this.utilsRegexps.uppercaseLetter.test(str)) {
+			acc.push(
+				str.replace(this.utilsRegexps.tooMoreSpaces, ' ').slice(1, -1)
+			);
+		}
+
+		return acc;
+	};
 
 	private extractUserSassConfig(content: string): string | undefined {
 		let matchResult = content.match(this.configRegexps.userSettings);
