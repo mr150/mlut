@@ -51,7 +51,7 @@
 		"typescript": "^4.8.0"
 	},
 	"dependencies": {
-		"@mlut/core": "^2.0.0",
+		"@mlut/core": "^2.1.0",
 		"fs-extra": "^11.2.0",
 		"unplugin": "^1.10.1"
 	}
