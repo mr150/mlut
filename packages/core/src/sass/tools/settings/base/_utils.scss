@@ -474,6 +474,8 @@ $utils-cfg: (
 			'rdo': ':read-only',
 			'rdw': ':read-write',
 			't': ':target',
+			'ui': ':user-invalid',
+			'uv': ':user-valid',
 			'v': ':visited',
 			'vl': ':valid',
 		),
