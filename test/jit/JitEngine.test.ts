@@ -38,6 +38,7 @@ describe('JitEngine', () => {
 D-n
 md_D
 md_Gc-s1 Pb6u Ps Lol5    md_Mxh130vh Ps
+-Ctx -Ctx0 -Ctx-one
 
 @:pfrm_-Try0 ^one_Bgc-$bgColor?#c06_h Ct-'id:';attr(id)_b
 ">

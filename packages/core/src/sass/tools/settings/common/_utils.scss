@@ -1591,6 +1591,18 @@ $utils-db: (
 					'nn': none,
 				),
 			),
+			'Coi': (
+				'properties': counter-increment,
+				'conversion': 'num-length',
+			),
+			'Cor': (
+				'properties': counter-reset,
+				'conversion': 'num-length',
+			),
+			'Cos': (
+				'properties': counter-set,
+				'conversion': 'num-length',
+			),
 
 			// SVG
 			'Fi': (

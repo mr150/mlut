@@ -28,6 +28,7 @@ export class JitEngine {
 		escapedQuotes: /\\['"`]/g,
 		utilName: /^-?[A-Z]{1}[a-zA-Z]*/,
 		uppercaseLetter: /[A-Z]/,
+		contextUtil: /-Ctx([\d\-#]|$)/,
 	};
 	private readonly configRegexps = {
 		userSettings: /@use ['"][^'"]*(tools|mlut|core)['"](\s*as\s+[\w]+)?\s+with\s*\(([^;]+)\);/s,
@@ -123,7 +124,10 @@ export class JitEngine {
 			if (utility) {
 				const utilName = utility.match(this.utilsRegexps.utilName)?.[0] as string;
 
-				if (this.utils.has(utilName) || utilName[0] === '-') {
+				if (
+					this.utils.has(utilName) ||
+					(utilName[0] === '-' && !this.utilsRegexps.contextUtil.test(utilName))
+				) {
 					acc.add(cssClass);
 				}
 			}
