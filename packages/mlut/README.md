@@ -25,6 +25,7 @@ Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexit
 	- [Installation](#installation)
 	- [Usage](#usage)
 - [Documentation](#documentation)
+- [Articles](#articles)
 - [What next](#what-next)
 - [Acknowledgement](#acknowledgement)
 - [License](#license)
@@ -271,6 +272,10 @@ mlut has a plugins for Rollup, Vite and Webpack. See details [here](https://mr15
 
 ## Documentation ##
 Available [here](https://mr150.github.io/mlut/) or can be run locally. Documentation is included in this repo and is generated using [KSS-node](https://github.com/kss-node/kss-node) from the comments in the sources
+
+## Articles ##
+- Atomic CSS Deep Dive: [EN](https://dev.to/mr150/atomic-css-deep-dive-1hee), [RU](https://habr.com/ru/articles/833712/)
+- [mlut - a new word in the Utility-First CSS approach](https://dev.to/mr150/mlut-a-new-word-in-the-utility-first-css-approach-gbl)
 
 ## What next? ##
 - first class CSS functions in utilities values
