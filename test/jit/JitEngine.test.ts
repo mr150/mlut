@@ -1,8 +1,9 @@
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { assert } from 'chai';
 import { JitEngine } from '../../packages/core/src/jit/JitEngine.js';
 
-const __dirname = new URL('.', import.meta.url).pathname;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 describe('JitEngine', () => {
 	const htmlContent0 = '<div class="P1r">000</div>';

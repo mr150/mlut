@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { logger } from '../utils/index.js';
 
@@ -10,7 +11,7 @@ const sass = await import('sass-embedded')
 		);
 	});
 
-const __dirname = new URL('.', import.meta.url).pathname;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export class JitEngine {
 	private utils = new Set<string>();
