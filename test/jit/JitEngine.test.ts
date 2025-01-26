@@ -46,11 +46,13 @@ md_Gc-s1 Pb6u Ps Lol5    md_Mxh130vh Ps
 Lorem \`Ipsum\`
 </div>
 
+<style type="text/css" data-vite-dev-id="C:/Users/mister/Documents/web/ptoject/src/App.vue?vue&amp;type=style">
+
 const myStr = "simpl'e text" + ' testou' + "" + "hi@150.lv";
-const wrapperCss = "M1u	 -Myvar12 \\"Ps\\" d-g";
+const wrapperCss = "M1u	 -Myvar=block \\"Ps\\" d-g";
 
 <MyComponent className={cn('D-f \\'Gap5u', wrapperCss)}/>
-` + "\n<button className={`D-ib ${flag ? 'Bgc-red' : ''}`}>Clear</div>";
+` + "\n<button className={`D-ib ${flag ? 'Bgc#f00' : ''}`}>Clear</div>";
 	/* eslint-enable */
 
 	it('extract utils from the content', async () => {
@@ -72,10 +74,10 @@ const wrapperCss = "M1u	 -Myvar12 \\"Ps\\" d-g";
 				//eslint-disable-next-line
 				"Ct-'id:';attr(id)_b",
 				'M1u',
-				'-Myvar12',
+				'-Myvar=block',
 				'D-f',
 				'Gap5u',
-				'Bgc-red',
+				'Bgc#f00',
 				'D-ib',
 			],
 		);

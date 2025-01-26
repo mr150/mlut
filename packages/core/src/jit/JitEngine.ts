@@ -30,6 +30,7 @@ export class JitEngine {
 		utilName: /^-?[A-Z]{1}[a-zA-Z]*/,
 		uppercaseLetter: /[A-Z]/,
 		contextUtil: /-Ctx([\d\-#]|$)/,
+		valueSeparator: /[0-9-#=]/,
 	};
 	private readonly configRegexps = {
 		userSettings: /@use ['"][^'"]*(tools|mlut|core)['"](\s*as\s+[\w]+)?\s+with\s*\(([^;]+)\);/s,
@@ -123,6 +124,12 @@ export class JitEngine {
 			));
 
 			if (utility) {
+				const separator = utility.replace(this.utilsRegexps.utilName, '')[0];
+
+				if (separator && !this.utilsRegexps.valueSeparator.test(separator)) {
+					return acc;
+				}
+
 				const utilName = utility.match(this.utilsRegexps.utilName)?.[0] as string;
 
 				if (
