@@ -276,6 +276,7 @@ Available [here](https://mr150.github.io/mlut/) or can be run locally. Documenta
 ## Articles ##
 - Atomic CSS Deep Dive: [EN](https://dev.to/mr150/atomic-css-deep-dive-1hee), [RU](https://habr.com/ru/articles/833712/)
 - [mlut - a new word in the Utility-First CSS approach](https://dev.to/mr150/mlut-a-new-word-in-the-utility-first-css-approach-gbl)
+- How to make one plugin for all frontend bundlers at once: [RU](https://habr.com/ru/articles/856028/)
 
 ## What next? ##
 - first class CSS functions in utilities values
