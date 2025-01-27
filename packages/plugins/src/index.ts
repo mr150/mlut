@@ -159,6 +159,11 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 
 		transform(code, id) {
 			jitEngine.putContent(id, code);
+
+			if (isViteWatch) {
+				debouncedWriteCssFile();
+			}
+
 			return null;
 		},
 
