@@ -24,10 +24,12 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 	const cwd = process.cwd();
 	const pluginName = 'unplugin-mlut';
 	const finalOptions: Options = { output: '' };
-	const inputPath = options.input && path.resolve(cwd, options.input);
+	let inputPath = options.input && path.resolve(cwd, options.input);
 	let outputPath = '';
+	let viteWatchOutputPath = '';
 	let lastCompiledCss = '';
 	const isWebpack = meta.framework === 'webpack';
+	const isWindows = process.platform === 'win32';
 	let isVite = false;
 	let isViteWatch = false;
 
@@ -84,6 +86,13 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 		outputPath = path.resolve(cwd, finalOptions.output);
 
 		if (isViteWatch) {
+			if (isWindows) {
+				viteWatchOutputPath = path.isAbsolute(finalOptions.output) ?
+					finalOptions.output.replace(cwd, '') : finalOptions.output;
+			} else {
+				viteWatchOutputPath = outputPath;
+			}
+
 			await fs.outputFile(outputPath, '').catch(() => undefined);
 		}
 	};
@@ -95,6 +104,7 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 		// TODO: add the Vite types
 		async config(_config: unknown, { command }: { command: string }) {
 			isVite = true;
+			inputPath = inputPath?.replaceAll('\\', '/');
 
 			if (command === 'serve') {
 				isViteWatch = true;
@@ -149,6 +159,11 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 
 		transform(code, id) {
 			jitEngine.putContent(id, code);
+
+			if (isViteWatch) {
+				debouncedWriteCssFile();
+			}
+
 			return null;
 		},
 
@@ -164,7 +179,7 @@ export const unplugin = createUnplugin<Options>((options, meta) => {
 					tags: [
 						{
 							tag: 'link',
-							attrs: { rel: 'stylesheet', href: outputPath },
+							attrs: { rel: 'stylesheet', href: viteWatchOutputPath },
 						},
 					],
 				};
