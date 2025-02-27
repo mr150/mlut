@@ -15,6 +15,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export class JitEngine {
 	private utils = new Set<string>();
+	private breakpoints: string[] = [];
+	private breakpointsMap: Record<string, number> = {};
 	private inputFileDir = __dirname;
 	private sassModuleName = 'tools';
 	private inputFileCache = '@use "../sass/tools";';
@@ -118,8 +120,11 @@ export class JitEngine {
 			.match(this.utilsRegexps.backtickQuotedContent)
 			?.reduce(this.filterAndProcessClassStr, allClassNames);
 
-		return [...allClassNames.join(' ').split(' ').reduce((acc, cssClass) => {
-			const utility = cssClass.split('_').find((str) => (
+		const utilsWithAtRule = new Set<string>();
+
+		const mainUtils = [...allClassNames.join(' ').split(' ').reduce((acc, cssClass) => {
+			const utilComponents = cssClass.split('_');
+			const utility = utilComponents.find((str) => (
 				this.utilsRegexps.utilName.test(str)
 			));
 
@@ -136,13 +141,57 @@ export class JitEngine {
 					this.utils.has(utilName) ||
 					(utilName[0] === '-' && !this.utilsRegexps.contextUtil.test(utilName))
 				) {
-					acc.add(cssClass);
+					const [atRule] = utilComponents;
+
+					if (
+						utilComponents.length > 1 && !atRule.startsWith(utilName) && (
+							atRule[0] === '@' ||
+							atRule[0] === '<' ||
+							(atRule in this.breakpointsMap) ||
+							this.breakpoints.find((item) => atRule.startsWith(item))
+						)
+					) {
+						utilsWithAtRule.add(cssClass);
+					} else {
+						acc.add(cssClass);
+					}
 				}
 			}
 
 			return acc;
 		}, new Set<string>())];
+
+		return mainUtils.concat(
+			[...utilsWithAtRule].sort(this.compareUtilsWithAtRule)
+		);
 	}
+
+	private compareUtilsWithAtRule = (a: string, b: string): number => {
+		if (a[0] === '@' && b[0] === '@') {
+			return 0;
+		}
+
+		if (a[0] === '@') {
+			return 1;
+		}
+
+		if (b[0] === '@') {
+			return -1;
+		}
+
+		const bpA = a.split('_')[0];
+		const bpB = b.split('_')[0];
+
+		if (!(bpA in this.breakpointsMap)) {
+			return 1;
+		}
+
+		if (!(bpB in this.breakpointsMap)) {
+			return -1;
+		}
+
+		return this.breakpointsMap[bpA] - this.breakpointsMap[bpB];
+	};
 
 	private filterAndProcessClassStr = (acc: string[], str: string) => {
 		if (this.utilsRegexps.uppercaseLetter.test(str)) {
@@ -174,18 +223,35 @@ export class JitEngine {
 	}
 
 	private async loadUtils(userConfig = this.defaultSassConfig) {
+		const placeholderRules = `
+			\n a{ all: map.keys(map.get(ml.$utils-db, "utils", "registry")); }
+			\n b{ all: map.keys(map.get(ml.$at-rules-cfg, "breakpoints")); }
+		`;
 		const { css } = (await sass.compileStringAsync(
-			userConfig + '\n a{ all: map.keys(map.get(ml.$utils-db, "utils", "registry")); }',
+			userConfig + placeholderRules,
 			{
 				style: 'compressed',
 				loadPaths: [ __dirname, 'node_modules' ],
 			}
 		));
 
-		const strEnd = css.lastIndexOf('"') - css.length + 1;
+		const [, rawUtils, rawBreakpoints] = css.split('all:');
+		const rawUtilsStrEnd = rawUtils.lastIndexOf('"') - rawUtils.length + 1;
+		const rawBpsStrEnd = rawBreakpoints.lastIndexOf('"') - rawBreakpoints.length + 1;
+
 		this.utils = new Set(
-			JSON.parse('[' + css.split('all:')[1].slice(0, strEnd) + ']') as string[]
+			JSON.parse('[' + rawUtils.slice(0, rawUtilsStrEnd) + ']') as string[]
 		);
+
+		this.breakpoints =
+			JSON.parse('[' + rawBreakpoints.slice(0, rawBpsStrEnd) + ']') as string[];
+
+		this.breakpointsMap = this.breakpoints.reduce((acc, item, i) => {
+			// add max-width breakpoints ahead of time so we don't have to calculate them every time
+			acc['<' + item] = i - 0.1;
+			acc[item] = i;
+			return acc;
+		}, {} as typeof this.breakpointsMap);
 	}
 }
 

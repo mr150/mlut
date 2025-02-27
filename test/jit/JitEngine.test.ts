@@ -37,11 +37,11 @@ describe('JitEngine', () => {
 	const extractUtilsContent = `
 <div class="
 D-n
-md_D
-md_Gc-s1 Pb6u Ps Lol5    md_Mxh130vh Ps
+xl_D
+@:pfrm_-Try0 Pb6u md:lg_D-t Ps Lol5    md_Mxh130vh Ps
 -Ctx -Ctx0 -Ctx-one
 
-@:pfrm_-Try0 ^one_Bgc-$bgColor?#c06_h Ct-'id:';attr(id)_b
+sm_Gc-s1 ^one_Bgc-$bgColor?#c06_h Ct-'id:';attr(id)_b
 ">
 Lorem \`Ipsum\`
 </div>
@@ -57,6 +57,9 @@ const wrapperCss = "M1u	 -Myvar=block \\"Ps\\" d-g";
 
 	it('extract utils from the content', async () => {
 		const jit = new JitEngine();
+		const utilsWithAtRules =
+			'let a = "lg_D <sm_D @:o_D D Lil xxl_D lg:<xxl_D C-cc_h <xl_D"';
+
 		await jit.init();
 
 		assert.deepEqual(
@@ -64,12 +67,8 @@ const wrapperCss = "M1u	 -Myvar=block \\"Ps\\" d-g";
 			jit.extractUtils(extractUtilsContent),
 			[
 				'D-n',
-				'md_D',
-				'md_Gc-s1',
 				'Pb6u',
 				'Ps',
-				'md_Mxh130vh',
-				'@:pfrm_-Try0',
 				'^one_Bgc-$bgColor?#c06_h',
 				//eslint-disable-next-line
 				"Ct-'id:';attr(id)_b",
@@ -79,6 +78,26 @@ const wrapperCss = "M1u	 -Myvar=block \\"Ps\\" d-g";
 				'Gap5u',
 				'Bgc#f00',
 				'D-ib',
+				'sm_Gc-s1',
+				'md_Mxh130vh',
+				'xl_D',
+				'md:lg_D-t',
+				'@:pfrm_-Try0',
+			],
+		);
+
+		assert.deepEqual(
+			//@ts-expect-error
+			jit.extractUtils(utilsWithAtRules),
+			[
+				'D',
+				'C-cc_h',
+				'<sm_D',
+				'lg_D',
+				'<xl_D',
+				'xxl_D',
+				'lg:<xxl_D',
+				'@:o_D',
 			],
 		);
 	});
