@@ -46,25 +46,23 @@ Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexit
 ### Great ergonomics
 Shorter class names:
 ```html
-<!-- Example from https://www.shopify.com/ -->
-
 <!-- Tailwindcss -->
-<div class="hidden md:block md:col-span-6 md:col-start-7 lg:col-span-5 lg:col-start-8 pb-6 relative md:max-h-[130vh] reduced-motion:translate-y-0 will-change-transform duration-1000 ease-in-out transition-all reduced-motion:opacity-100">...</div>
+<div class="relative -bottom-px col-span-full col-start-1 row-start-2 h-px bg-(--cardBg)"></div>
 
 <!-- mlut -->
-<div class="D-n md_D md_Gc-s1 md_Gcs7 lg_Gc-s5 lg_Gcs8 Pb6u Ps md_Mxh130vh Tf @:pfrm_-Try0 Wlc-tf Tsd1s Tstf-eio Ts-all @:pfrm_O1">...</div>
+<div class="Ps B-1 Gc1/-1 Gcs1 Grs2 H1 Bgc-$cardBg"></div>
 ```
 Convenient syntax for complex values, states and at-rules. It is like Vim for CSS.
 
 **❌ Tailwindcss:**
 
 - `[@media(any-hover:hover){&:hover}]:opacity-100`
-- `text-[color:var(--my-var,#333)]`
+- `text-[length:var(--myVar,1.3rem)]`
 - `supports-[margin:1svw]:ml-[1svw]`
 
 **✅ mlut:**
 - `@:ah_O1_h` => `@media (any-hover) { .\@\:ah_O1_h:hover { opacity: 1 } }`
-- `C-$myVar?#333` => `color: var(--ml-myVar, #333)`
+- `Fns-$myVar?1.3` => `font-size: var(--ml-myVar, 1.3rem);`
 - `@s_Ml1svw` => `@supports (margin-left: 1svw) { .\@s_Ml1svw { margin-left: 1svw } }`
 
 </section>
@@ -172,15 +170,17 @@ Addons may contains any tools, settings and styles. Addons now at the **preview*
 - Atomic CSS Deep Dive: [EN](https://dev.to/mr150/atomic-css-deep-dive-1hee), [RU](https://habr.com/ru/articles/833712/)
 - [mlut - a new word in the Utility-First CSS approach](https://dev.to/mr150/mlut-a-new-word-in-the-utility-first-css-approach-gbl)
 - How to make one plugin for all frontend bundlers at once: [RU](https://habr.com/ru/articles/856028/)
+- Interactive lesson: [RU](https://htmlacademy.ru/demos/183)
 
 </section>
 
 <section class="Mb4gg">
 
 ## What next? ##
-- first class CSS functions in utilities values
-- states and at-rules grouping 
+- ability to run in a browser
+- first-class pseudoselectors with arguments like `has()`
 - performance optimization
+- plugins for editors and IDEs with hints and autocompletion
 - and much more!
 
 </section>
