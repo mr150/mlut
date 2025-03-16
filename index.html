@@ -119,25 +119,23 @@
 <section class="Mb4gg">
 <h3>Great ergonomics</h3>
 <p>Shorter class names:</p>
-<pre class="hljs"><code class="language-html"><span class="hljs-comment">&lt;!-- Example from https://www.shopify.com/ --&gt;</span>
-
-<span class="hljs-comment">&lt;!-- Tailwindcss --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;hidden md:block md:col-span-6 md:col-start-7 lg:col-span-5 lg:col-start-8 pb-6 relative md:max-h-[130vh] reduced-motion:translate-y-0 will-change-transform duration-1000 ease-in-out transition-all reduced-motion:opacity-100&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<pre class="hljs"><code class="language-html"><span class="hljs-comment">&lt;!-- Tailwindcss --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;relative -bottom-px col-span-full col-start-1 row-start-2 h-px bg-(--cardBg)&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
 <span class="hljs-comment">&lt;!-- mlut --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;D-n md_D md_Gc-s1 md_Gcs7 lg_Gc-s5 lg_Gcs8 Pb6u Ps md_Mxh130vh Tf @:pfrm_-Try0 Wlc-tf Tsd1s Tstf-eio Ts-all @:pfrm_O1&quot;</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;Ps B-1 Gc1/-1 Gcs1 Grs2 H1 Bgc-$cardBg&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
 <p>Convenient syntax for complex values, states and at-rules. It is like Vim for CSS.</p>
 <p><strong>❌ Tailwindcss:</strong></p>
 <ul>
 <li><code>[@media(any-hover:hover){&amp;:hover}]:opacity-100</code></li>
-<li><code>text-[color:var(--my-var,#333)]</code></li>
+<li><code>text-[length:var(--myVar,1.3rem)]</code></li>
 <li><code>supports-[margin:1svw]:ml-[1svw]</code></li>
 </ul>
 <p><strong>✅ mlut:</strong></p>
 <ul>
 <li><code>@:ah_O1_h</code> =&gt; <code>@media (any-hover) { .\@\:ah_O1_h:hover { opacity: 1 } }</code></li>
-<li><code>C-$myVar?#333</code> =&gt; <code>color: var(--ml-myVar, #333)</code></li>
+<li><code>Fns-$myVar?1.3</code> =&gt; <code>font-size: var(--ml-myVar, 1.3rem);</code></li>
 <li><code>@s_Ml1svw</code> =&gt; <code>@supports (margin-left: 1svw) { .\@s_Ml1svw { margin-left: 1svw } }</code></li>
 </ul>
 </section>
@@ -249,14 +247,16 @@
 <li>Atomic CSS Deep Dive: <a href="https://dev.to/mr150/atomic-css-deep-dive-1hee">EN</a>, <a href="https://habr.com/ru/articles/833712/">RU</a></li>
 <li><a href="https://dev.to/mr150/mlut-a-new-word-in-the-utility-first-css-approach-gbl">mlut - a new word in the Utility-First CSS approach</a></li>
 <li>How to make one plugin for all frontend bundlers at once: <a href="https://habr.com/ru/articles/856028/">RU</a></li>
+<li>Interactive lesson: <a href="https://htmlacademy.ru/demos/183">RU</a></li>
 </ul>
 </section>
 <section class="Mb4gg">
 <h2>What next?</h2>
 <ul>
-<li>first class CSS functions in utilities values</li>
-<li>states and at-rules grouping</li>
+<li>ability to run in a browser</li>
+<li>first-class pseudoselectors with arguments like <code>has()</code></li>
 <li>performance optimization</li>
+<li>plugins for editors and IDEs with hints and autocompletion</li>
 <li>and much more!</li>
 </ul>
 </section>
