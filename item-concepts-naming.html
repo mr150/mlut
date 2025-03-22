@@ -96,37 +96,7 @@
 
 
           <div class="kss-description">
-            <p>Almost all abbreviations in mlut are compiled by one algorithm. Below will be a simplified algorithm for compiling the abbreviations of the utilities names. Later it will be supplemented</p>
-<ol>
-<li>get all CSS properties that starts with one letter</li>
-<li>make ranking of them by popularity or alphabet if the popularity is not possible to calculate. Popularity for properties is calculated based on <a href="https://chromestatus.com/metrics/css/popularity">Chrome platforf statistic</a></li>
-<li>compose groups of properties that starts with one word. Select a group leader: repeating first word. Leader rating is the max rating of the property from group</li>
-<li>make abbreviations by the scheme below. Important notes:
-<ul>
-<li>in descending order by rating, regardless of the relationship of the property to the group</li>
-<li>abbreviate the property, group leader or the first word property so that it does not intersect with already abbreviated properties</li>
-<li>subsequent abbreviations of all properties of the group and properties with the same initial word should begin with the same abbreviation, which was previously done</li>
-<li>if the group contains 2 or more subgroups (excluding logical: <code>block</code>, <code>inline</code>), its leader is abbreviate by at least 2 letters: <code>Fn</code>, <code>Bd</code></li>
-<li>properties from 3 and less letters do not abbreviate: <code>Gap</code>, <code>All</code></li>
-<li>properties and subproperties with physical directions have fixed abbreviations: <code>T</code>, <code>R</code>, <code>B</code>, <code>L</code>, <code>I</code></li>
-<li>subsequent words in properties are abbreviated by the same rules recursively</li>
-</ul>
-</li>
-</ol>
-<p>The one abbreviation scheme:</p>
-<ul>
-<li>the name must be abbreviate to the first letter of the source word.</li>
-<li>if the name is from several words, then every word is abbreviate to one letter</li>
-<li>if two names have the same first letter, then in the next name, when sorting them by the rating, the letter is added</li>
-<li>if the name is from several words, then the letter is added, depending on the name affiliation to the group</li>
-</ul>
-<p>The order of adding the letter:</p>
-<ol>
-<li>consonant of the next syllable. If the next syllable begins to vowel, then we take the nearest previous consonant from it</li>
-<li>next consonant</li>
-<li>next vowel without a jump through the consonant</li>
-</ol>
-<p>Examples you can see in the <a href="section-utils-reference.html">utils reference</a>. More visual examples here will appear later.</p>
+            <p>Almost all abbreviations in mlut are compiled by one algorithm.</p>
 
           </div>
 
