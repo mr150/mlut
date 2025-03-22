@@ -351,7 +351,27 @@ Styleguide: concepts
 /*
 Naming algorithm
 
-Almost all abbreviations in mlut are compiled by one algorithm. Below will be a simplified algorithm for compiling the abbreviations of the utilities names. Later it will be supplemented
+Almost all abbreviations in mlut are compiled by one algorithm.
+
+Weight: 0
+
+Styleguide: concepts.naming
+*/
+
+/*
+TL;DR
+
+The more popular a CSS property (or value, state, etc) is, the shorter and simpler its abbreviation will be. For example, `D` stands for `display`, and `Ctn` stands for `container`.
+
+Weight: 0
+
+Styleguide: concepts.naming.tldr
+*/
+
+/*
+Full version
+
+Below is a slightly simplified algorithm for composing abbreviations of utility names. It will be supplemented in the future.
 
 1. get all CSS properties that starts with one letter
 1. make ranking of them by popularity or alphabet if the popularity is not possible to calculate. Popularity for properties is calculated based on [Chrome platforf statistic](https://chromestatus.com/metrics/css/popularity)
@@ -378,9 +398,9 @@ The order of adding the letter:
 
 Examples you can see in the [utils reference](section-utils-reference.html). More visual examples here will appear later.
 
-Weight: 0
+Weight: 1
 
-Styleguide: concepts.naming
+Styleguide: concepts.naming.full
 */
 
 /*
