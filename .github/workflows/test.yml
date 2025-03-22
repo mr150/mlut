@@ -6,6 +6,8 @@ on:
       - 'packages/**'
       - 'test/**'
       - '.github/workflows/test.yml'
+      - 'package.json'
+      - 'package-lock.json'
     branches:
       - '**'
   push:
@@ -22,7 +24,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 20
+          node-version: 22
       - name: Install dependencies
         run: npm ci
       - name: Build
