@@ -2,7 +2,7 @@
 
 <img alt="Logo" src="kss-assets/logo-full.png" style="display:block; margin:16px 0; max-width:350px"/>
 
-[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mr150/mlut/test.yml?branch=master)](https://github.com/mr150/mlut/actions/workflows/test.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mlutcss/mlut/test.yml?branch=master)](https://github.com/mlutcss/mlut/actions/workflows/test.yml)
 [![](https://img.shields.io/npm/v/mlut.svg)](https://www.npmjs.com/package/mlut)
 [![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/mlutcss)](https://x.com/mlutcss)
 
@@ -29,15 +29,15 @@ Atomic CSS toolkit with Sass and ergonomics for creating styles of any complexit
 - `.Jc-c` => `justify-content: center`, `.Js-c` => `justify-self: center`
 - `.Bdr` => `border-right: 1px solid`, `.Bdrd1` => `border-radius: 1px`
 
-[One algorithm](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-naming) for all. If you know CSS, you almost know mlut.
+[One algorithm](https://mlutcss.github.io/mlut/section-concepts.html#kssref-concepts-naming) for all. If you know CSS, you almost know mlut.
 </section>
 
 <section class="Mb4gg">
 
 ### Almost arbitrary by design
-- [values](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-values): `.Ml-1/7` => `margin-left: -14.3%`
-- [states](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states): `Bgc-red200_h,f` => `.Bgc-red200_h\,f:hover, .Bgc-red200_h\,f:focus {...}`
-- [at-rules](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-at_rules): `@:p-c,w>=80r_D-f` => `@media (pointer: coarse), (min-width: 90rem) {...}`
+- [values](https://mlutcss.github.io/mlut/section-concepts.html#kssref-concepts-values): `.Ml-1/7` => `margin-left: -14.3%`
+- [states](https://mlutcss.github.io/mlut/section-concepts.html#kssref-concepts-states): `Bgc-red200_h,f` => `.Bgc-red200_h\,f:hover, .Bgc-red200_h\,f:focus {...}`
+- [at-rules](https://mlutcss.github.io/mlut/section-concepts.html#kssref-concepts-at_rules): `@:p-c,w>=80r_D-f` => `@media (pointer: coarse), (min-width: 90rem) {...}`
 
 </section>
 
@@ -119,7 +119,7 @@ Add utilities, states and custom at-rules with few lines of code
 - 💅️ Written in [Sass](https://www.sass-lang.com/) and includes all its benefits
 - ⚡ JIT (on-demand) and AOT mods are available
 - 🔧 **Fully customizable**: change tokens, utilities names and any settings
-- ✨ **Easy to integrate** in existing project. No name collisions with your CSS in the most projects. Increasing specificity in [one line](https://mr150.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity) or for [one](https://mr150.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu) utility.
+- ✨ **Easy to integrate** in existing project. No name collisions with your CSS in the most projects. Increasing specificity in [one line](https://mlutcss.github.io/mlut/section-settings.html#kssref-settings-utils-other-up_specificity) or for [one](https://mlutcss.github.io/mlut/section-concepts.html#kssref-concepts-states-special-tu) utility.
 
 </section>
 
@@ -157,9 +157,9 @@ Addons may contains any tools, settings and styles. Addons now at the **preview*
 
 | Package | Description |
 | ---  | --- |
-| [mlut](https://github.com/mr150/mlut/blob/master/packages/mlut) | The main package for working with CLI |
-| [@mlut/core](https://github.com/mr150/mlut/blob/master/packages/core) | The mlut core that contains Sass tools, CSS library and JIT engine |
-| [@mlut/plugins](https://github.com/mr150/mlut/blob/master/packages/plugins) | The mlut plugins for Rollup, Vite and Webpack |
+| [mlut](https://github.com/mlutcss/mlut/blob/master/packages/mlut) | The main package for working with CLI |
+| [@mlut/core](https://github.com/mlutcss/mlut/blob/master/packages/core) | The mlut core that contains Sass tools, CSS library and JIT engine |
+| [@mlut/plugins](https://github.com/mlutcss/mlut/blob/master/packages/plugins) | The mlut plugins for Rollup, Vite and Webpack |
 
 </div>
 </section>

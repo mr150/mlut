@@ -198,7 +198,7 @@ Styleguide: start.integrations.options
 /*
 Usage
 
-Import the plugin for the appropriate bundler from the `@mlut/plugins` package as in one of the examples below. You can find more detailed examples using dev-server and livereload in the plugin tests [directory](https://github.com/mr150/mlut/tree/master/test/plugins)
+Import the plugin for the appropriate bundler from the `@mlut/plugins` package as in one of the examples below. You can find more detailed examples using dev-server and livereload in the plugin tests [directory](https://github.com/mlutcss/mlut/tree/master/test/plugins)
 
 We also recommend adding the input file right away:
 ```scss
@@ -1426,7 +1426,7 @@ The configuration is a `map`, each element of which is a boolean flag. If set to
 	),
 );
 ```
-For the time being, available settings can be viewed only in the [code](https://github.com/mr150/mlut/blob/master/src/tools/settings/base/_general.scss#L124), but later they will appear in this documentation. You can find [here](https://github.com/mr150/mlut/blob/master/src/core/styles/generic.scss) The final CSS with comments.
+For the time being, available settings can be viewed only in the [code](https://github.com/mlutcss/mlut/blob/master/packages/core/src/sass/tools/settings/base/_general.scss#L129), but later they will appear in this documentation. You can find [here](https://github.com/mlutcss/mlut/blob/master/packages/core/src/sass/css/styles/generic.scss) The final CSS with comments.
 
 Weight: 3
 

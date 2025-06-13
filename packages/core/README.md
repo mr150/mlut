@@ -1,8 +1,8 @@
 # mlut core #
 
-<img alt="Logo" src="https://github.com/mr150/mlut/raw/master/docs/img/logo-full.png" width="350"/>
+<img alt="Logo" src="https://github.com/mlutcss/mlut/raw/master/docs/img/logo-full.png" width="350"/>
 
-The [mlut](https://github.com/mr150/mlut) core contains:
+The [mlut](https://github.com/mlutcss/mlut) core contains:
 - Sass tools
 - CSS library
 - JIT engine
@@ -18,7 +18,7 @@ When using this package, you will need to install Sass separately. We recommend 
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
 
 ## Documentation ##
-Full documentation available [here](https://mr150.github.io/mlut/)
+Full documentation available [here](https://mlutcss.github.io/mlut/)
 
 ## License ##
 MIT

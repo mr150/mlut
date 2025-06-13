@@ -1,8 +1,8 @@
 # mlut plugins #
 
-<img alt="Logo" src="https://github.com/mr150/mlut/raw/master/docs/img/logo-full.png" width="350"/>
+<img alt="Logo" src="https://github.com/mlutcss/mlut/raw/master/docs/img/logo-full.png" width="350"/>
 
-The [mlut](https://github.com/mr150/mlut) plugins for Rollup, Vite and Webpack. Based on [unplugin](https://unplugin.unjs.io/).
+The [mlut](https://github.com/mlutcss/mlut) plugins for Rollup, Vite and Webpack. Based on [unplugin](https://unplugin.unjs.io/).
 
 ## Installation ##
 
@@ -16,7 +16,7 @@ This allows you to control the versions of all your dependencies, and to choose 
 
 ## Usage ##
 
-Import the plugin for the appropriate bundler from the `@mlut/plugins` package as in one of the examples below. You can find more detailed examples using dev-server and livereload in the plugin tests [directory](https://github.com/mr150/mlut/tree/master/test/plugins)
+Import the plugin for the appropriate bundler from the `@mlut/plugins` package as in one of the examples below. You can find more detailed examples using dev-server and livereload in the plugin tests [directory](https://github.com/mlutcss/mlut/tree/master/test/plugins)
 
 ### Rollup ###
 
@@ -103,7 +103,7 @@ You can add the options in your input Sass file too. Options must be a **valid J
 ```
 
 ## Documentation ##
-Full documentation available [here](https://mr150.github.io/mlut/section-start.html#kssref-start-integrations)
+Full documentation available [here](https://mlutcss.github.io/mlut/section-start.html#kssref-start-integrations)
 
 ## License ##
 MIT

@@ -5,7 +5,7 @@
 	"author": "mr150",
 	"type": "module",
 	"license": "MIT",
-	"homepage": "https://mr150.github.io/mlut/",
+	"homepage": "https://mlutcss.github.io/mlut/",
 	"types": "dist/index.d.ts",
 	"keywords": [
 		"mlut",
@@ -21,10 +21,10 @@
 	"repository": {
 		"type": "git",
 		"directory": "packages/core",
-		"url": "https://github.com/mr150/mlut.git"
+		"url": "https://github.com/mlutcss/mlut.git"
 	},
 	"bugs": {
-		"url": "https://github.com/mr150/mlut/issues"
+		"url": "https://github.com/mlutcss/mlut/issues"
 	},
 	"exports": {
 		".": {
